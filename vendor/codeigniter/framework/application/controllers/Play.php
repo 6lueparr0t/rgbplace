@@ -15,7 +15,8 @@ class Play extends CI_Controller {
 	
 	public function minify()
 	{
-		$this->hotpm->view("play/main", "on");
+		$data['minify'] = "on";
+		$this->hotpm->sview("play/main", $data);
 	}
 
 }

@@ -20,11 +20,20 @@ class HotPlaceMaker {
 		$this->CI =& get_instance();
     }
 
-	public function view($path, $minify="off")
+	public function sview($path, $data = ['minify'=>'off'])
+	{
+		//use in 'Controllers !!Dev Mode!!' Only
+		$data['path'] = $path;
+
+		// admin session check
+		$this->sessionChk("admin");
+		$this->CI->load->view($path, $data);
+	}
+
+	public function view($path, $data = ['minify'=>'off'])
 	{
 		//use in 'Controllers' Only
-		$data['path']	= $path;
-		$data['minify']	= $minify;
+		$data['path'] = $path;
 
 		$this->CI->load->view($path, $data);
 	}
@@ -68,7 +77,10 @@ class HotPlaceMaker {
 			$minifier = new Minify\JS(".{$path_min}");
 			$minifier->minify(".{$path_min}");
 
-			redirect(current_url()."/../");
+			/* activate 2 line if you hate 'slash' */
+			$path_arr	= explode('/', current_url());
+			redirect("/{$path_arr[(count($path_arr)-2<0?0:count($path_arr)-2)]}");
+			//redirect(current_url()."/..");
 		} else {
 			echo ("<script src=\"{$path_min}\"></script>");
 		}
@@ -78,6 +90,12 @@ class HotPlaceMaker {
 	{
 		echo (" <script src=\"/module/js/common/react.min.js\">     </script>\n");
 		echo (" <script src=\"/module/js/common/react-dom.min.js\"> </script>\n");
+	}
+
+	function sessionChk($uid) {
+		if($this->CI->session->uid !== $uid) {
+			redirect("/");	
+		}
 	}
 
 }

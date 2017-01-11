@@ -12,7 +12,9 @@ $this->hotpm->script();
 ?>
 </head>
 <body>
+
 <div id="action"></div>
+
 </body>
 </html>
 

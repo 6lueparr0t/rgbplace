@@ -27,57 +27,66 @@ class Dev extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('dev/main');
+		$this->hotpm->sview('dev/main');
 	}
 
-	public function on($pswd="")
+	public function minify()
+	{
+		$data['minify'] = "on";
+		$this->hotpm->sview('dev/main', $data);
+	}
+
+	public function on($pswd)
 	{
 		$data['pswd'] = $pswd;
 
-		if($this->dev->adminPasswdChk($data)) {
-			//admin session add
+		if($this->dev->adminPasswdChk($data) && $this->session->uid !=='admin') {
+			//admin session create
 			$admin = array(
 					'uid'  => 'admin',
 					'logged_in' => TRUE
 			);
 			$this->session->set_userdata($admin);
-			redirect('/dev/start_page', 'refresh');
+			echo ("<script>alert('Dev Switch On');location.href = '/';</script>");
 		} else {
-			redirect('/', 'refresh');
+			redirect('/');
 		}
 	}
 
 	public function off()
 	{
+		$this->hotpm->sessionChk('admin');
+
 		//admin session delete
 		$admin = array('uid');
 		$this->session->unset_userdata($admin);
-		echo ("<script>alert('dev mode off');</script>");
+		echo ("<script>alert('Dev Swicth Off');location.href = '/';</script>");
 	}
 
 	public function start_page()
 	{
-		$this->hotpm->view("dev/example/start_page");
+		$this->hotpm->sview("dev/example/start_page");
 	}
 
 	public function react_practise()
 	{
-		$this->hotpm->view("dev/example/react_practise");
+		$this->hotpm->sview("dev/example/react_practise");
 	}
 
 	public function react_tutorial()
 	{
-		$this->hotpm->view("dev/example/react_tutorial");
+		$this->hotpm->sview("dev/example/react_tutorial");
 	}
 
 	public function generate_hash($string)
 	{
 		$data['string'] = urldecode($string);
-		$this->load->view('dev/example/generate_hash', $data);
+		$this->hotpm->view('dev/example/generate_hash', $data);
 	}
 
 	public function info()
 	{
+		$this->hotpm->sessionChk('admin');
 		phpinfo();
 	}
 
