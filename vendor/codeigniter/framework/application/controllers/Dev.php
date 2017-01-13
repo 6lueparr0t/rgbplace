@@ -48,6 +48,8 @@ class Dev extends CI_Controller {
 			);
 			$this->session->set_userdata($admin);
 			echo ("<script>alert('Dev Switch On');location.href = '/';</script>");
+		} else if ($this->session->uid ==='admin') {
+			echo ("<script>alert('Dev Switch On Already ');location.href = '/';</script>");
 		} else {
 			redirect('/');
 		}
