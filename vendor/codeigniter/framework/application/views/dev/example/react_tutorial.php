@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<title>React - TicTacToe practice</title>
 
 <?php
-    require ("./module/php/react.php");
+$this->hotpm->script();
 ?>
 
 	<style type="text/css">
