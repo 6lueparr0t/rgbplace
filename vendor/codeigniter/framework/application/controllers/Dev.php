@@ -80,6 +80,12 @@ class Dev extends CI_Controller {
 		$this->hotpm->sview("dev/example/react_tutorial");
 	}
 
+	public function react_form($minify = "")
+	{
+		($minify === "minify")? $data['minify'] = "on":$data['minify'] = "off";
+		$this->hotpm->sview("dev/example/react_form", $data);
+	}
+
 	public function generate_hash($string)
 	{
 		$data['string'] = urldecode($string);

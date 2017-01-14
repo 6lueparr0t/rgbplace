@@ -70,16 +70,17 @@ class HotPlaceMaker {
 		$path_min   = "/module/js/{$path}.min.js";
 
 		if($minify === "on") {
-			$babel_script=Babel\Transpiler::transformFile(".{$path_js}", [ 'blacklist' => [ 'useStrict' ] ]);
+			$babel_script = Babel\Transpiler::transformFile(".{$path_js}", [ 'blacklist' => [ 'useStrict' ] ]);
+			$babel_script = str_replace("\"", "\\\"", $babel_script);
 
-			shell_exec("echo '{$babel_script}' > .{$path_min}");
+			shell_exec("echo \"{$babel_script}\" > .{$path_min}");
 
 			$minifier = new Minify\JS(".{$path_min}");
 			$minifier->minify(".{$path_min}");
 
 			/* activate 2 line if you hate 'slash' */
-			$path_arr	= explode('/', current_url());
-			redirect("/{$path_arr[(count($path_arr)-2<0?0:count($path_arr)-2)]}");
+			//$path_arr	= explode('/', current_url());
+			//redirect("/{$path_arr[(count($path_arr)-2<0?0:count($path_arr)-2)]}");
 			//redirect(current_url()."/..");
 		} else {
 			echo ("<script src=\"{$path_min}\"></script>");
