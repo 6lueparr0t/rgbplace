@@ -26,8 +26,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 #$config['base_url'] = 'http://hotplacemaker.gonetis.com:50380';
 #$config['base_url'] = 'http://192.168.219.200:50380';
-$config['base_url'] = 'http://192.168.1.3:50380';
-#$config['base_url'] = '';
+#$config['base_url'] = 'http://192.168.1.3:50380';
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
