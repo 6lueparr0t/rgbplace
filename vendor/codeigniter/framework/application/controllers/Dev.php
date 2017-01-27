@@ -27,7 +27,8 @@ class Dev extends CI_Controller {
 
 	public function index()
 	{
-		$this->hotpm->sview('dev/main');
+		$data['dev_list'] = ["info", "start_page", "react_practise", "react_tutorial", "react_form", "generate_hash"];
+		$this->hotpm->sview('dev/main', $data);
 	}
 
 	public function minify()

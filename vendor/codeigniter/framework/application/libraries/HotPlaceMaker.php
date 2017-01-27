@@ -20,8 +20,10 @@ class HotPlaceMaker {
 		$this->CI =& get_instance();
     }
 
-	public function sview($path, $data = ['minify'=>'off'])
+	public function sview($path, $data)
 	{
+		if(!array_key_exists('minify', $data)) $data['minify'] = "off";
+
 		//use in 'Controllers !!Dev Mode!!' Only
 		$data['path'] = $path;
 
@@ -30,8 +32,10 @@ class HotPlaceMaker {
 		$this->CI->load->view($path, $data);
 	}
 
-	public function view($path, $data = ['minify'=>'off'])
+	public function view($path, $data)
 	{
+		if(!array_key_exists('minify', $data)) $data['minify'] = "off";
+
 		//use in 'Controllers' Only
 		$data['path'] = $path;
 
@@ -89,6 +93,8 @@ class HotPlaceMaker {
 
 	public function script()
 	{
+		echo (" <script src=\"//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.slim.min.js\">     </script>\n");
+
 		echo (" <script src=\"/module/js/common/react.min.js\">     </script>\n");
 		echo (" <script src=\"/module/js/common/react-dom.min.js\"> </script>\n");
 	}
