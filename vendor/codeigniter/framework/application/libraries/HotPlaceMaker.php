@@ -20,7 +20,7 @@ class HotPlaceMaker {
 		$this->CI =& get_instance();
     }
 
-	public function sview($path, $data)
+	public function sview($path, $data = ['minify' => "off"])
 	{
 		if(!array_key_exists('minify', $data)) $data['minify'] = "off";
 
@@ -32,7 +32,7 @@ class HotPlaceMaker {
 		$this->CI->load->view($path, $data);
 	}
 
-	public function view($path, $data)
+	public function view($path, $data = ['minify' => "off"])
 	{
 		if(!array_key_exists('minify', $data)) $data['minify'] = "off";
 

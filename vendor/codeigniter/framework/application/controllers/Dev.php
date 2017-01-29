@@ -27,7 +27,7 @@ class Dev extends CI_Controller {
 
 	public function index()
 	{
-		$data['dev_list'] = ["info", "start_page", "react_practise", "react_tutorial", "react_form", "generate_hash"];
+		$data['dev_list'] = ["info", "start_page", "react_practise", "react_tutorial", "react_jquery", "generate_hash"];
 		$this->hotpm->sview('dev/main', $data);
 	}
 
@@ -81,10 +81,10 @@ class Dev extends CI_Controller {
 		$this->hotpm->sview("dev/example/react_tutorial");
 	}
 
-	public function react_form($minify = "")
+	public function react_jquery($minify = "")
 	{
 		($minify === "minify")? $data['minify'] = "on":$data['minify'] = "off";
-		$this->hotpm->sview("dev/example/react_form", $data);
+		$this->hotpm->sview("dev/example/react_jquery", $data);
 	}
 
 	public function generate_hash($string)

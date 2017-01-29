@@ -24,7 +24,7 @@ class MyComponent extends React.Component {
 
         return (
             <div>
-                Hello, World!!!!
+                Hello, World!
             </div>
         )
     }
