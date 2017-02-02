@@ -48,9 +48,9 @@ class Dev extends CI_Controller {
 					'logged_in' => TRUE
 			);
 			$this->session->set_userdata($admin);
-			echo ("<script>alert('Dev Switch On');location.href = '/';</script>");
+			echo ("<script>alert('Dev Switch On');location.href = '/dev';</script>");
 		} else if ($this->session->uid ==='admin') {
-			echo ("<script>alert('Dev Switch On Already ');location.href = '/';</script>");
+			echo ("<script>alert('Dev Switch On Already ');location.href = '/dev';</script>");
 		} else {
 			redirect('/');
 		}

@@ -91,9 +91,15 @@ class HotPlaceMaker {
 		}
 	}
 
+	public function warning($display = "none") {
+		echo ("<p class='marquee {$display}'>Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning!</p>");
+	}
+
 	public function script()
 	{
-		echo (" <script src=\"//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.slim.min.js\">     </script>\n");
+		echo ("<link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css\">\n");
+
+		echo ("<link rel=\"stylesheet\" href=\"/module/css/style.css\">\n");
 
 		echo (" <script src=\"/module/js/common/react.min.js\">     </script>\n");
 		echo (" <script src=\"/module/js/common/react-dom.min.js\"> </script>\n");
