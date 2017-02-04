@@ -10,13 +10,13 @@ class Play extends CI_Controller {
 
 	public function index()
 	{
-		$this->hotpm->view("play/main");
+		$this->rgb->view("play/main");
 	}
 	
 	public function minify()
 	{
 		$data['minify'] = "on";
-		$this->hotpm->sview("play/main", $data);
+		$this->rgb->sview("play/main", $data);
 	}
 
 }

@@ -28,16 +28,16 @@ class Dev extends CI_Controller {
 	public function index()
 	{
 		$data['dev_list'] = ["info", "start_page", "react_practise", "react_tutorial", "react_jquery", "generate_hash"];
-		$this->hotpm->sview('dev/main', $data);
+		$this->rgb->sview('dev/main', $data);
 	}
 
 	public function minify()
 	{
 		$data['minify'] = "on";
-		$this->hotpm->sview('dev/main', $data);
+		$this->rgb->sview('dev/main', $data);
 	}
 
-	public function on($pswd)
+	public function _on($pswd)
 	{
 		$data['pswd'] = $pswd;
 
@@ -56,9 +56,9 @@ class Dev extends CI_Controller {
 		}
 	}
 
-	public function off()
+	public function _off()
 	{
-		$this->hotpm->sessionChk('admin');
+		$this->rgb->sessionChk('admin');
 
 		//admin session delete
 		$admin = array('uid');
@@ -68,34 +68,34 @@ class Dev extends CI_Controller {
 
 	public function start_page()
 	{
-		$this->hotpm->sview("dev/example/start_page");
+		$this->rgb->sview("dev/example/start_page");
 	}
 
 	public function react_practise()
 	{
-		$this->hotpm->sview("dev/example/react_practise");
+		$this->rgb->sview("dev/example/react_practise");
 	}
 
 	public function react_tutorial()
 	{
-		$this->hotpm->sview("dev/example/react_tutorial");
+		$this->rgb->sview("dev/example/react_tutorial");
 	}
 
 	public function react_jquery($minify = "")
 	{
 		($minify === "minify")? $data['minify'] = "on":$data['minify'] = "off";
-		$this->hotpm->sview("dev/example/react_jquery", $data);
+		$this->rgb->sview("dev/example/react_jquery", $data);
 	}
 
 	public function generate_hash($string)
 	{
 		$data['string'] = urldecode($string);
-		$this->hotpm->view('dev/example/generate_hash', $data);
+		$this->rgb->view('dev/example/generate_hash', $data);
 	}
 
 	public function info()
 	{
-		$this->hotpm->sessionChk('admin');
+		$this->rgb->sessionChk('admin');
 		phpinfo();
 	}
 

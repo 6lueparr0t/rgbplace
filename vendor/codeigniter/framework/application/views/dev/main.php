@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$this->hotpm->start();
+$this->rgb->start();
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,7 @@ $this->hotpm->start();
 	<title>Hot Place maker : playground</title>
 
 <?php
-$this->hotpm->script();
+$this->rgb->script();
 ?>
 
 <style>
@@ -42,5 +42,5 @@ for($i=0; $i<count($dev_list); $i++) {
 </html>
 
 <?php
-$this->hotpm->end($path, $minify);
+$this->rgb->end($path, $minify);
 ?>

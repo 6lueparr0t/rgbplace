@@ -15,7 +15,7 @@ $minifier->minify(".{$path_min}");
 	<title>Welcome to CodeIgniter</title>
 
 <?php
-	$this->hotpm->script();
+	$this->rgb->script();
 ?>
 
 	<style type="text/css">

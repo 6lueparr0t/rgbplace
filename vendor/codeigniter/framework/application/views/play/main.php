@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$this->hotpm->start();
+$this->rgb->start();
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Hot Place maker : playground</title>
+	<title>RGB place : playground</title>
 
 <?php
-$this->hotpm->script();
+$this->rgb->script();
 ?>
 </head>
 <body>
@@ -17,5 +17,5 @@ $this->hotpm->script();
 </html>
 
 <?php
-$this->hotpm->end($path, $minify);
+$this->rgb->end($path, $minify);
 ?>

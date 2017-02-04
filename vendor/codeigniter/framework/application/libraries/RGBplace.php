@@ -5,13 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 |	Used Table : None
 |
-|	Role : common function in HotPlaceMaker (using 'hotpm')
+|	Role : common function in RGB place (using 'rgb')
 |
 */
 
 use MatthiasMullie\Minify;
 
-class HotPlaceMaker {
+class RGBplace {
 
 	protected $CI;
 

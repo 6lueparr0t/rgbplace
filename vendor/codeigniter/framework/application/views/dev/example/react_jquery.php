@@ -1,16 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$this->hotpm->start();
+$this->rgb->start();
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<title>Hot Place maker : playground</title>
 
-<?php $this->hotpm->script(); ?>
+<?php $this->rgb->script(); ?>
 </head>
 <body>
-<?php $this->hotpm->warning(); ?>
+<?php $this->rgb->warning(); ?>
 <style>
 .animate-flicker {
     animation: fadeOutUp 1s 2 alternate;
@@ -24,5 +24,5 @@ $this->hotpm->start();
 </html>
 
 <?php
-$this->hotpm->end($path, $minify);
+$this->rgb->end($path, $minify);
 ?>
