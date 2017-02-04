@@ -20,6 +20,21 @@ class RGBplace {
 		$this->CI =& get_instance();
     }
 
+	function script()
+	{
+		echo ("<link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css\">\n");
+		echo ("<link rel=\"stylesheet\" href=\"/module/css/style.css\">\n");
+
+		echo (" <script src=\"/module/js/common/react.min.js\">     </script>\n");
+		echo (" <script src=\"/module/js/common/react-dom.min.js\"> </script>\n");
+	}
+
+	function sessionChk($uid) {
+		if($this->CI->session->uid !== $uid) {
+			redirect("/");	
+		}
+	}
+
 	public function sview($path, $data = ['minify' => "off"])
 	{
 		if(!array_key_exists('minify', $data)) $data['minify'] = "off";
@@ -64,10 +79,28 @@ class RGBplace {
 		}
 
 		ob_start("output");
+
+		echo('
+			<!DOCTYPE html><html lang="en"><head>
+				<meta charset="utf-8">
+				<title>RGB place playground</title>
+		');
+
+		$this->script();
+
+		echo('</head><body>');
+
+		// setting form
+		echo form_open('sign/login', ['class' => 'navbar', 'name' => 'navbar', 'id' => 'navbar'])
+		.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true'])
+		.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true'])
+		.form_submit('login', 'login')
+		.form_close();
 	}
 
 	public function end($path, $minify) 
 	{
+		echo('</body></html>');
 		ob_end_flush();
 
 		$path_js    = "/module/js/{$path}.js";
@@ -76,6 +109,8 @@ class RGBplace {
 		if($minify === "on") {
 			$babel_script = Babel\Transpiler::transformFile(".{$path_js}", [ 'blacklist' => [ 'useStrict' ] ]);
 			$babel_script = str_replace("\"", "\\\"", $babel_script);
+
+			echo("<p><a href='".current_url()."/..'>뒤로가기</a></p>");
 
 			shell_exec("echo \"{$babel_script}\" > .{$path_min}");
 
@@ -93,22 +128,6 @@ class RGBplace {
 
 	public function warning($display = "none") {
 		echo ("<p class='marquee {$display}'>Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning!</p>");
-	}
-
-	public function script()
-	{
-		echo ("<link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css\">\n");
-
-		echo ("<link rel=\"stylesheet\" href=\"/module/css/style.css\">\n");
-
-		echo (" <script src=\"/module/js/common/react.min.js\">     </script>\n");
-		echo (" <script src=\"/module/js/common/react-dom.min.js\"> </script>\n");
-	}
-
-	function sessionChk($uid) {
-		if($this->CI->session->uid !== $uid) {
-			redirect("/");	
-		}
 	}
 
 }

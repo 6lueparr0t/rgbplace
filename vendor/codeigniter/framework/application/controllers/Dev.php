@@ -37,7 +37,7 @@ class Dev extends CI_Controller {
 		$this->rgb->sview('dev/main', $data);
 	}
 
-	public function _on($pswd)
+	public function on($pswd)
 	{
 		$data['pswd'] = $pswd;
 
@@ -56,7 +56,7 @@ class Dev extends CI_Controller {
 		}
 	}
 
-	public function _off()
+	public function off()
 	{
 		$this->rgb->sessionChk('admin');
 

@@ -1,26 +1,10 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-$this->rgb->start();
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Hot Place maker : playground</title>
-
-<?php
-$this->rgb->script();
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); ?>
 
 <style>
-
 a {
-display: block;
+	display: block;
 }
-
 </style>
-
-</head>
-<body>
 
 <div id="action"></div>
 
@@ -38,9 +22,4 @@ for($i=0; $i<count($dev_list); $i++) {
 
 ?>
 
-</body>
-</html>
-
-<?php
-$this->rgb->end($path, $minify);
-?>
+<?php $this->rgb->end($path, $minify); ?>

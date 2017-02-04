@@ -14,9 +14,11 @@ $minifier->minify(".{$path_min}");
 	<meta charset="utf-8">
 	<title>Welcome to CodeIgniter</title>
 
-<?php
-	$this->rgb->script();
-?>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="/module/css/style.css">
+
+    <script src="/module/js/common/react.min.js"></script>
+    <script src="/module/js/common/react-dom.min.js"></script>
 
 	<style type="text/css">
 

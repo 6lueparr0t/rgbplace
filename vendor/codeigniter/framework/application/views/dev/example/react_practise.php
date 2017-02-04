@@ -3,12 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>React - practise</title>
+    <meta charset="utf-8">
+    <title>React - TicTacToe practice</title>
 
-<?php
-$this->rgb->script();
-?>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="/module/css/style.css">
+
+    <script src="/module/js/common/react.min.js"></script>
+    <script src="/module/js/common/react-dom.min.js"></script>
 
 	<style type="text/css">
 body {
