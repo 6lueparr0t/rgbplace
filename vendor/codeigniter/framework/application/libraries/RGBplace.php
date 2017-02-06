@@ -84,17 +84,19 @@ class RGBplace {
 			<!DOCTYPE html><html lang="en"><head>
 				<meta charset="utf-8">
 				<title>RGB place playground</title>
+				<link rel="icon" type="image/png" href="/assets/images/ci-icon.png" />
 		');
 
 		$this->script();
 
 		echo('</head><body>');
 
+		if($this->CI->session->flashdata('error')) echo $this->CI->session->flashdata('error');
 		// setting form
-		echo form_open('sign/login', ['class' => 'navbar', 'name' => 'navbar', 'id' => 'navbar'])
+		echo form_open('sign/in', ['class' => 'navbar', 'name' => 'navbar', 'id' => 'navbar'])
 		.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true'])
-		.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true'])
-		.form_submit('login', 'login')
+		.form_password('pswd', '', ['placeholder' => 'Password'])
+		.form_submit('signin', 'Sign In')
 		.form_close();
 	}
 

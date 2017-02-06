@@ -17,14 +17,10 @@ class Dev_model extends CI_Model {
 	public function adminPasswdChk($data)
 	{
 		$pswd = $data['pswd'];
-
-		$sql = "SELECT uid, pswd FROM maker_admin WHERE uid = ?";
-		$query = $this->db->query( $sql, array('admin') );
-
-		if ($query->num_rows()!=1) return false;
+		$query = $this->db->get_where('maker_admin', array('uid' => 'admin'),0,1);
 
 		foreach ($query->result() as $row) {
-			if(password_verify($pswd, $row->pswd)) {
+			if(password_verify($pswd, base64_decode($row->pswd))) {
 				return true;
 			}
 		}
