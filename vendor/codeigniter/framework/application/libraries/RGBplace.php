@@ -95,7 +95,7 @@ class RGBplace {
 		// setting form
 		echo form_open('sign/in', ['class' => 'navbar', 'name' => 'navbar', 'id' => 'navbar'])
 		.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true'])
-		.form_password('pswd', '', ['placeholder' => 'Password'])
+		.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true'])
 		.form_submit('signin', 'Sign In')
 		.form_close();
 	}
