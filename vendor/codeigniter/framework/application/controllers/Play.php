@@ -6,13 +6,14 @@ class Play extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->allow=[];
 	}
 
 	public function index()
 	{
 		$this->rgb->view("play/main");
 	}
-	
+
 	public function minify()
 	{
 		$data['minify'] = "on";

@@ -20,21 +20,6 @@ class RGBplace {
 		$this->CI =& get_instance();
     }
 
-	function script()
-	{
-		echo ("<link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css\">\n");
-		echo ("<link rel=\"stylesheet\" href=\"/module/css/style.css\">\n");
-
-		echo (" <script src=\"/module/js/common/react.min.js\">     </script>\n");
-		echo (" <script src=\"/module/js/common/react-dom.min.js\"> </script>\n");
-	}
-
-	function sessionChk($uid) {
-		if($this->CI->session->uid !== $uid) {
-			redirect("/");	
-		}
-	}
-
 	public function sview($path, $data = ['minify' => "off"])
 	{
 		if(!array_key_exists('minify', $data)) $data['minify'] = "off";
@@ -79,30 +64,12 @@ class RGBplace {
 		}
 
 		ob_start("output");
-
-		echo('
-			<!DOCTYPE html><html lang="en"><head>
-				<meta charset="utf-8">
-				<title>RGB place playground</title>
-				<link rel="icon" type="image/png" href="/assets/images/ci-icon.png" />
-		');
-
-		$this->script();
-
-		echo('</head><body>');
-
-		if($this->CI->session->flashdata('error')) echo $this->CI->session->flashdata('error');
-		// setting form
-		echo form_open('sign/in', ['class' => 'navbar', 'name' => 'navbar', 'id' => 'navbar'])
-		.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true'])
-		.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true'])
-		.form_submit('signin', 'Sign In')
-		.form_close();
+		$this->common_top();
 	}
 
 	public function end($path, $minify) 
 	{
-		echo('</body></html>');
+		$this->common_bottom();
 		ob_end_flush();
 
 		$path_js    = "/module/js/{$path}.js";
@@ -131,5 +98,50 @@ class RGBplace {
 	public function warning($display = "none") {
 		echo ("<p class='marquee {$display}'>Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning!</p>");
 	}
+
+	function common_top()
+	{
+		echo("
+			<!DOCTYPE html><html lang='en'><head>
+				<meta charset='utf-8'>
+				<title>RGB place playground</title>
+				<link rel='icon' type='image/png' href='/assets/images/ci-icon.png' />
+
+				<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
+				<link rel='stylesheet' href='/module/css/style.css'>
+
+				<script src='/module/js/common/react.min.js'></script>
+				<script src='/module/js/common/react-dom.min.js'></script>
+
+			</head><body>
+		");
+
+		$this->CI->session->flashdata('status');
+
+		// Sign in check
+		if(!$this->CI->session->userdata('signed_in')) {
+		// setting form
+			echo form_open('sign/in', ['class' => 'navbar', 'name' => 'navbar', 'id' => 'navbar'])
+				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true'])
+				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true'])
+				.form_submit('in', 'Sign In')
+				.form_close();
+		} else {
+			echo $this->CI->session->userdata('uid');
+		}
+	}
+
+	function common_bottom()
+	{
+		echo('</body></html>');
+	}
+
+	function sessionChk($uid)
+	{
+		if($this->CI->session->uid !== $uid) {
+			redirect("/");	
+		}
+	}
+
 
 }

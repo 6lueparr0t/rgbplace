@@ -16,29 +16,37 @@ class Sign_model extends CI_Model {
 
 	public function userCheck($data)
 	{
-		$pswd = $data['pswd'];
-		$query = $this->db->get_where('maker_admin', array('uid' => 'admin'),0,1);
+		$uid = $data['uid'];
+		$pswd= $data['pswd'];
+
+		$query = $this->db->get_where('maker_admin', ['uid' => $uid], 0, 1);
 
 		foreach ($query->result() as $row) {
-			if(password_verify($pswd, base64_decode($row->pswd))) {
+			if(password_verify($pswd, $row->pswd)) {
+				//fail count init
 				return true;
 			}
 		}
 
+		//fail count up
 		return false;
 	}
 
 	public function adminCheck($data)
 	{
-		$pswd = $data['pswd'];
-		$query = $this->db->get_where('maker_admin', array('uid' => 'admin'),0,1);
+		$uid = explode("@", $data['uid']);
+		$pswd= $data['pswd'];
+
+		$query = $this->db->get_where('maker_admin', ['uid' => $uid[0], 'name' => $uid[1]], 0, 1);
 
 		foreach ($query->result() as $row) {
 			if(password_verify($pswd, base64_decode($row->pswd))) {
+				//fail count init
 				return true;
 			}
 		}
 
+		//fail count up
 		return false;
 	}
 

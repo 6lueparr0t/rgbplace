@@ -45,23 +45,26 @@ class Sign extends CI_Controller {
 
 				$user = [
 					'uid'  => $data['uid'],
-					'logged_in' => TRUE
+					'signed_in' => TRUE
 				];
 				$this->session->set_userdata($user);
+				$this->session->set_flashdata('status', '<p>Sign In</p>');
 
 			} elseif (strpos($data['uid'], "@") !== false && $this->sign->adminCheck($data)) {
 
 				$admin = [
+					'admin'=> TRUE,
 					'uid'  => $data['uid'],
-					'logged_in' => TRUE
+					'signed_in' => TRUE
 				];
 				$this->session->set_userdata($admin);
+				$this->session->set_flashdata('status', '<p>Login Success</p>');
 
 			} else {
-				$this->session->set_flashdata('error', '<p>check your ID and Password</p>');
+				$this->session->set_flashdata('status', '<p>check your ID and Password</p>');
 			}
 		} else {
-			$this->session->set_flashdata('error', validation_errors());
+			$this->session->set_flashdata('status', validation_errors());
 		}
 
 		//echo ("<script>setTimeout(function(){history.go(-1);},3000);</script>");
@@ -70,7 +73,12 @@ class Sign extends CI_Controller {
 
 	public function out()
 	{
-		$this->session->unset_userdata();
+		$config = ['admin', 'uid', 'signed_in'];
+		$this->session->unset_userdata($config);
+
+		$this->session->set_flashdata('status', '<p>Sign Out</p>');
+
+		redirect($this->input->server('http_referer'));
 	}
 	
 	public function up()
