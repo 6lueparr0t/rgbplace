@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Board extends CI_Controller {
+class Make extends CI_Controller {
+
+	//make place and maker
 
 	public function __construct()
 	{
