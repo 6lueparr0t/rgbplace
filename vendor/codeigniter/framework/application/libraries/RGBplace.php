@@ -28,7 +28,7 @@ class RGBplace {
 		$data['path'] = $path;
 
 		// admin session check
-		$this->sessionChk("admin");
+		$this->adminCheck();
 		$this->CI->load->view($path, $data);
 	}
 
@@ -65,6 +65,10 @@ class RGBplace {
 
 		ob_start("output");
 		$this->common_top();
+
+		$this->common_left();
+		$this->common_right();
+
 	}
 
 	public function end($path, $minify) 
@@ -72,8 +76,8 @@ class RGBplace {
 		$this->common_bottom();
 		ob_end_flush();
 
-		$path_js    = "/module/js/{$path}.js";
-		$path_min   = "/module/js/{$path}.min.js";
+		$path_js    = "/assets/js/{$path}.js";
+		$path_min   = "/assets/js/{$path}.min.js";
 
 		if($minify === "on") {
 			$babel_script = Babel\Transpiler::transformFile(".{$path_js}", [ 'blacklist' => [ 'useStrict' ] ]);
@@ -101,6 +105,8 @@ class RGBplace {
 
 	function common_top()
 	{
+
+		// Common Head Line
 		echo("
 			<!DOCTYPE html><html lang='en'><head>
 				<meta charset='utf-8'>
@@ -108,37 +114,77 @@ class RGBplace {
 				<link rel='icon' type='image/png' href='/assets/images/ci-icon.png' />
 
 				<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
-				<link rel='stylesheet' href='/module/css/style.css'>
+				<link rel='stylesheet' href='/assets/css/style.css'>
 
-				<script src='/module/js/common/react.min.js'></script>
-				<script src='/module/js/common/react-dom.min.js'></script>
+				<script src='/assets/js/libs/react.min.js'></script>
+				<script src='/assets/js/libs/react-dom.min.js'></script>
 
 			</head><body>
 		");
-
-		$this->CI->session->flashdata('status');
+	}
+	
+	function common_left()
+	{
+		// Sign In, Out, Up
+		echo ("<div id='sidemenu-left'>");
 
 		// Sign in check
 		if(!$this->CI->session->userdata('signed_in')) {
-		// setting form
-			echo form_open('sign/in', ['class' => 'navbar', 'name' => 'navbar', 'id' => 'navbar'])
-				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true'])
-				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true'])
+			// #### setting 'Sign In' Form
+			echo form_open('sign/in', ['class' => '', 'name' => 'sign-in', 'id' => 'sign-in'])
+				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true', 'minlength' => 6])
+				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10])
 				.form_submit('in', 'Sign In')
 				.form_close();
+
+			// #### setting 'Sign Up' Form
+			echo form_open('sign/up', ['class' => '', 'name' => 'sign-up', 'id' => 'sign-up'])
+				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true', 'minlength' => 6, 'pattern' => '[0-9A-Za-z_-]+'])
+				.form_input('name', '', ['placeholder' => 'Nick Name', 'required' => 'true', 'minlength' => 2])
+				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10])
+				.form_password('conf', '', ['placeholder' => 'Confirm Password', 'required' => 'true', 'oninput' => 'a(this)'])
+				.form_submit('up', 'Sign Up')
+				.form_close();
+
+			echo ("<script>");
+			Babel\Transpiler::transform("function a(i) {
+				if (i.value != document.querySelector('#sign-up input[name=\'pswd\']').value) {
+					i.setCustomValidity('패스워드를 확인해주세요.\\nPlease Check your Password.');
+				} else {
+					i.setCustomValidity('');
+				}
+			}");
+			echo ("</script>");
+
 		} else {
-			echo $this->CI->session->userdata('uid');
+			// #### setting 'Sign Out'
+			echo $this->CI->session->userdata('name');
+			echo("<a href='/sign/out'>Sign Out</a>");
 		}
+
+		echo ("</div>");
+	}
+
+	function common_right()
+	{
+		echo ("<div id='sidemenu-right'>");
+		// Chat System
+		echo ("</div>");
 	}
 
 	function common_bottom()
 	{
+		// Push Alert
+		echo ("<div id='notice'>"
+			.$this->CI->session->flashdata('status').
+			"</div>");
+
 		echo('</body></html>');
 	}
 
-	function sessionChk($uid)
+	function adminCheck()
 	{
-		if($this->CI->session->uid !== $uid) {
+		if($this->CI->session->userdata('admin') !== TRUE) {
 			redirect("/");	
 		}
 	}

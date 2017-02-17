@@ -14,10 +14,20 @@ class Play extends CI_Controller {
 		$this->rgb->view("play/main");
 	}
 
-	public function minify()
+	public function _board()
+	{
+		$this->rgb->view("play/board");
+	}
+
+	public function _config()
+	{
+		$this->rgb->view("play/config");
+	}
+
+	public function minify($page = "main")
 	{
 		$data['minify'] = "on";
-		$this->rgb->sview("play/main", $data);
+		$this->rgb->sview("play/{$page}", $data);
 	}
 
 }

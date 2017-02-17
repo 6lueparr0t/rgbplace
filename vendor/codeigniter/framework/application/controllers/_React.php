@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Make extends CI_Controller {
+class React extends CI_Controller {
 
 	//make place and maker
 
@@ -15,7 +15,20 @@ class Make extends CI_Controller {
 		redirect('/', 'refresh');
 	}
 
-	public function api()
+	public function post() {
+
+	}
+
+	public function get() {
+
+	}
+
+	public function update()
+	{
+
+	}
+
+	public function delete()
 	{
 
 	}

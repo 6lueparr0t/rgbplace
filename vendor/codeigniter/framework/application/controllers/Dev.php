@@ -31,39 +31,10 @@ class Dev extends CI_Controller {
 		$this->rgb->sview('dev/main', $data);
 	}
 
-	public function minify()
+	public function minify($page = "main")
 	{
 		$data['minify'] = "on";
-		$this->rgb->sview('dev/main', $data);
-	}
-
-	public function _on($pswd)
-	{
-		$data['pswd'] = $pswd;
-
-		if($this->dev->adminPasswdChk($data) && $this->session->uid !=='admin') {
-			//admin session create
-			$admin = array(
-					'uid'  => 'admin',
-					'logged_in' => TRUE
-			);
-			$this->session->set_userdata($admin);
-			echo ("<script>alert('Dev Switch On');location.href = '/dev';</script>");
-		} else if ($this->session->uid ==='admin') {
-			echo ("<script>alert('Dev Switch On Already ');location.href = '/dev';</script>");
-		} else {
-			redirect('/');
-		}
-	}
-
-	public function _off()
-	{
-		$this->rgb->sessionChk('admin');
-
-		//admin session delete
-		$admin = array('uid');
-		$this->session->unset_userdata($admin);
-		echo ("<script>alert('Dev Swicth Off');location.href = '/';</script>");
+		$this->rgb->sview("dev/{$page}", $data);
 	}
 
 	public function start_page()
@@ -95,7 +66,7 @@ class Dev extends CI_Controller {
 
 	public function info()
 	{
-		$this->rgb->sessionChk('admin');
+		$this->rgb->adminCheck();
 		phpinfo();
 	}
 

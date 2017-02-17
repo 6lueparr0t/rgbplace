@@ -7,10 +7,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>React - TicTacToe practice</title>
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="/module/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
-    <script src="/module/js/common/react.min.js"></script>
-    <script src="/module/js/common/react-dom.min.js"></script>
+    <script src="/assets/js/common/react.min.js"></script>
+    <script src="/assets/js/common/react-dom.min.js"></script>
 
 	<style type="text/css">
 body {
@@ -105,7 +105,7 @@ console.error = (function(old) {
 })(console.error);
 </script>
 <script>
-<?php Babel\Transpiler::transformFile("./module/js/{$path}.js", [ 'blacklist' => [ 'useStrict' ] ]); ?>
+<?php Babel\Transpiler::transformFile("./assets/js/{$path}.js", [ 'blacklist' => [ 'useStrict' ] ]); ?>
 </script>
 
 </body>

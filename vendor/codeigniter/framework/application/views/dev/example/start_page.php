@@ -2,8 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 use MatthiasMullie\Minify;
 
-$path_js    = "/module/js/{$path}.js";
-$path_min   = "/module/js/{$path}.min.js";
+$path_js    = "/assets/js/{$path}.js";
+$path_min   = "/assets/js/{$path}.min.js";
 
 $minifier = new Minify\JS(".{$path_js}");
 $minifier->minify(".{$path_min}");
@@ -15,10 +15,10 @@ $minifier->minify(".{$path_min}");
 	<title>Welcome to CodeIgniter</title>
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="/module/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
-    <script src="/module/js/common/react.min.js"></script>
-    <script src="/module/js/common/react-dom.min.js"></script>
+    <script src="/assets/js/common/react.min.js"></script>
+    <script src="/assets/js/common/react-dom.min.js"></script>
 
 	<style type="text/css">
 
@@ -152,5 +152,5 @@ try {
 /* ## Use php-babel-Transpiler ## */
 
 //$transpiledCode = Babel\Transpiler::transform('class MyClass {  }');
-//$otherTranspiledCode = Babel\Transpiler::transformFile('module/script.js', [ 'blacklist' => [ 'useStrict' ] ]);
+//$otherTranspiledCode = Babel\Transpiler::transformFile('assets/script.js', [ 'blacklist' => [ 'useStrict' ] ]);
 ?>
