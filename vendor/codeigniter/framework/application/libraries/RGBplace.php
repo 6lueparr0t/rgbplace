@@ -159,6 +159,7 @@ class RGBplace {
 		} else {
 			// #### setting 'Sign Out'
 			echo $this->CI->session->userdata('name');
+			echo $this->CI->session->userdata('admin')?"<a href='/Admin'>admin</a>":"";
 			echo("<a href='/sign/out'>Sign Out</a>");
 		}
 

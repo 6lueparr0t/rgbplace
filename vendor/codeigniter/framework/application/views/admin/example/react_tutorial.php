@@ -3,14 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>React - TicTacToe practice</title>
+	<meta charset="utf-8">
+	<title>React - TicTacToe practice</title>
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-
-    <script src="/assets/js/common/react.min.js"></script>
-    <script src="/assets/js/common/react-dom.min.js"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+	
+	<script src="/assets/js/libs/react.min.js"></script>
+	<script src="/assets/js/libs/react-dom.min.js"></script>
 
 	<style type="text/css">
 body {

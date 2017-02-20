@@ -383,7 +383,7 @@ $config['encryption_key'] = 'darkstone_station';
 */
 $config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 's';
-$config['sess_expiration'] = 7200;
+$config['sess_expiration'] = 0;
 $config['sess_save_path'] = 'maker_session';
 #$config['sess_save_path'] = sys_get_temp_dir();
 $config['sess_match_ip'] = TRUE;
