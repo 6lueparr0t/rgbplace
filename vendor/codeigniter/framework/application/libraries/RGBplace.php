@@ -83,18 +83,11 @@ class RGBplace {
 			$babel_script = Babel\Transpiler::transformFile(".{$path_js}", [ 'blacklist' => [ 'useStrict' ] ]);
 			$babel_script = str_replace("\"", "\\\"", $babel_script);
 
-			echo("<p><a href='".current_url()."/..'>뒤로가기</a></p>");
-
 			shell_exec("echo \"{$babel_script}\" > .{$path_min}");
 
 			$minifier = new Minify\JS(".{$path_min}");
 			$minifier->minify(".{$path_min}");
-
-			/* activate 2 line if you hate 'slash' */
-			//$path_arr	= explode('/', current_url());
-			//redirect("/{$path_arr[(count($path_arr)-2<0?0:count($path_arr)-2)]}");
-			//redirect(current_url()."/..");
-		} else {
+		} elseif($minify === "off") {
 			echo ("<script src=\"{$path_min}\"></script>");
 		}
 	}
@@ -120,6 +113,7 @@ class RGBplace {
 				<script src='/assets/js/libs/react-dom.min.js'></script>
 
 			</head><body>
+			<a href='".base_url()."'>Home</a>
 		");
 	}
 	
@@ -175,6 +169,11 @@ class RGBplace {
 
 	function common_bottom()
 	{
+		$path_arr = explode('/', uri_string());
+		if(count($path_arr) >= 2) {
+			echo("<p><a href='".current_url()."/..'>Back</a></p>");
+		}
+
 		// Push Alert
 		echo ("<div id='notice'>"
 			.$this->CI->session->flashdata('status').

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |
-|	Used Table : maker_*
+|	Used Table : pixel_*
 |
 */
 
@@ -19,13 +19,13 @@ class Sign_model extends CI_Model {
 		$uid = $data['uid'];
 		$pswd= $data['pswd'];
 
-		$query = "SELECT * FROM maker_info WHERE uid = ? AND fail < 20 LIMIT 1";
+		$query = "SELECT * FROM pixel_info WHERE uid = ? AND fail < 20 LIMIT 1";
 		$find = $this->db->query($query, $uid);
 
 		foreach ($find->result() as $row) {
 			if(password_verify($pswd,  base64_decode($row->pswd))) {
 				//fail count init
-				$query = "UPDATE maker_info SET fail = 0 WHERE uid = ?";
+				$query = "UPDATE pixel_info SET fail = 0 WHERE uid = ?";
 				$this->db->query($query, $uid);
 
 				return $result = [
@@ -36,7 +36,7 @@ class Sign_model extends CI_Model {
 								];
 			} else {
 				//fail count increase
-				$query = "UPDATE maker_info SET fail = fail + 1 WHERE uid = ?";
+				$query = "UPDATE pixel_info SET fail = fail + 1 WHERE uid = ?";
 				$this->db->query($query, $uid);
 
 				return false;
@@ -51,13 +51,13 @@ class Sign_model extends CI_Model {
 		$uid = explode("@", $data['uid']);
 		$pswd= $data['pswd'];
 
-		$query = "SELECT * FROM maker_admin WHERE uid = ? AND name = ? AND fail < 5 LIMIT 5";
+		$query = "SELECT * FROM pixel_admin WHERE uid = ? AND name = ? AND fail < 5 LIMIT 5";
 		$find = $this->db->query($query, [$uid[0], $uid[1]]);
 
 		foreach ($find->result() as $row) {
 			if(password_verify($pswd, base64_decode($row->pswd))) {
 				//fail count init
-				$query = "UPDATE maker_admin SET fail = 0 WHERE uid = ? AND name = ?";
+				$query = "UPDATE pixel_admin SET fail = 0 WHERE uid = ? AND name = ?";
 				$this->db->query($query, [$uid[0], $uid[1]]);
 
 				return $result = [
@@ -65,7 +65,7 @@ class Sign_model extends CI_Model {
 								];
 			} else {
 				//fail count increase
-				$query = "UPDATE maker_admin SET fail = fail + 1 WHERE uid = ? AND name = ?";
+				$query = "UPDATE pixel_admin SET fail = fail + 1 WHERE uid = ? AND name = ?";
 				$this->db->query($query, [$uid[0], $uid[1]]);
 
 				return false;
@@ -81,16 +81,16 @@ class Sign_model extends CI_Model {
 		$name= $data['name'];
 		$pswd= base64_encode(password_hash($data['pswd'], PASSWORD_DEFAULT, ['cost' => 12]));
 
-		$query = "SELECT uid FROM maker_info WHERE uid = ? LIMIT 1";
+		$query = "SELECT uid FROM pixel_info WHERE uid = ? LIMIT 1";
 		$find = $this->db->query($query, $uid);
 
 		if($find->num_rows() ===0) {
-			// use maker_info, maker_config
+			// use pixel_info, pixel_config
 			
-			$query = "INSERT INTO maker_info (uid, name, pswd) VALUES (?, ?, ?)";
+			$query = "INSERT INTO pixel_info (uid, name, pswd) VALUES (?, ?, ?)";
 			$this->db->query($query, [$uid, $name, $pswd]);
 
-			$query = "INSERT INTO maker_conf (uid) VALUES (?)";
+			$query = "INSERT INTO pixel_conf (uid) VALUES (?)";
 			$this->db->query($query, $uid);
 
 			return true;

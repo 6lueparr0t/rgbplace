@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |
-|	Used Table : maker_admin
+|	Used Table : pixel_admin
 |
 */
 
@@ -17,7 +17,7 @@ class Admin_model extends CI_Model {
 	public function adminPasswdChk($data)
 	{
 		$pswd = $data['pswd'];
-		$query = $this->db->get_where('maker_admin', array('uid' => 'admin'),0,1);
+		$query = $this->db->get_where('pixel_admin', array('uid' => 'admin'),0,1);
 
 		foreach ($query->result() as $row) {
 			if(password_verify($pswd, base64_decode($row->pswd))) {

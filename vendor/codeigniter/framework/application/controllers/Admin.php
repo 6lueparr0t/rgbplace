@@ -27,21 +27,33 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$data['adm_list'] = ["info", "generate_hash"];
-		$data['ex_list'] = ["start_page", "react_tutorial", "react_practise", "react_animation"];
-		$this->rgb->sview('admin/main', $data);
-	}
-
-	public function info()
-	{
-		$this->rgb->adminCheck();
-		phpinfo();
+		$data['adm_list'] = ["pixel", "map", "info"];
+		$data['ex_list'] = ["generate_hash", "start_page", "react_tutorial", "react_practise", "react_animation"];
+		$this->rgb->sview('admin/index', $data);
 	}
 
 	public function minify()
 	{
 		$data['minify'] = "on";
-		$this->rgb->sview("admin/main", $data);
+		$this->rgb->sview("admin/index", $data);
+	}
+
+	public function pixel($minify = "")
+	{
+		($minify === "minify")? $data['minify'] = "on":$data['minify'] = "off";
+		$this->rgb->sview("admin/pixel", $data);
+	}
+
+	public function map($minify = "")
+	{
+		($minify === "minify")? $data['minify'] = "on":$data['minify'] = "off";
+		$this->rgb->sview("admin/map", $data);
+	}
+
+	public function info()
+	{
+		$data['minify'] = "none";
+		$this->rgb->sview("admin/info", $data);
 	}
 
 	public function start_page()
