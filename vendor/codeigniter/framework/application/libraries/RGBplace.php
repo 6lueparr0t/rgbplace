@@ -28,7 +28,9 @@ class RGBplace {
 		$data['path'] = $path;
 
 		// admin session check
-		$this->adminCheck();
+		if($this->CI->session->userdata('admin') !== TRUE) {
+			redirect("/");	
+		}
 		$this->CI->load->view($path, $data);
 	}
 
@@ -92,10 +94,6 @@ class RGBplace {
 		}
 	}
 
-	public function warning($display = "none") {
-		echo ("<p class='marquee {$display}'>Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning!</p>");
-	}
-
 	function common_top()
 	{
 
@@ -153,7 +151,7 @@ class RGBplace {
 		} else {
 			// #### setting 'Sign Out'
 			echo $this->CI->session->userdata('name');
-			echo $this->CI->session->userdata('admin')?"<a href='/Admin'>admin</a>":"";
+			echo $this->CI->session->userdata('admin')?"<a href='/admin'>admin</a>":"";
 			echo("<a href='/sign/out'>Sign Out</a>");
 		}
 
@@ -182,12 +180,8 @@ class RGBplace {
 		echo('</body></html>');
 	}
 
-	function adminCheck()
-	{
-		if($this->CI->session->userdata('admin') !== TRUE) {
-			redirect("/");	
-		}
+	function warning($display = "none") {
+		echo ("<p class='marquee {$display}'>Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning!</p>");
 	}
-
 
 }

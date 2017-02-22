@@ -38,16 +38,34 @@ class Admin extends CI_Controller {
 		$this->rgb->sview("admin/index", $data);
 	}
 
-	public function pixel($minify = "")
+// ####################################################################################################################
+// Admin
+// ####################################################################################################################
+
+	public function pixel($act = "")
 	{
-		($minify === "minify")? $data['minify'] = "on":$data['minify'] = "off";
+		$data['minify'] = ($act === "minify")?"on":"off";
+
+		$this->admin->pixel("select");
 		$this->rgb->sview("admin/pixel", $data);
 	}
 
-	public function map($minify = "")
+	public function pixeller($act)
 	{
-		($minify === "minify")? $data['minify'] = "on":$data['minify'] = "off";
+		$this->admin->pixel($act);
+	}
+
+	public function map($act = "")
+	{
+		$data['minify'] = ($act === "minify")?"on":"off";
+
+		$this->admin->map("select");
 		$this->rgb->sview("admin/map", $data);
+	}
+
+	public function mapper($act)
+	{
+		$this->admin->map($act);
 	}
 
 	public function info()
@@ -55,6 +73,10 @@ class Admin extends CI_Controller {
 		$data['minify'] = "none";
 		$this->rgb->sview("admin/info", $data);
 	}
+
+// ####################################################################################################################
+// Example
+// ####################################################################################################################
 
 	public function start_page()
 	{
@@ -71,9 +93,9 @@ class Admin extends CI_Controller {
 		$this->rgb->sview("admin/example/react_tutorial");
 	}
 
-	public function react_animation($minify = "")
+	public function react_animation($act = "")
 	{
-		($minify === "minify")? $data['minify'] = "on":$data['minify'] = "off";
+		($act === "minify")? $data['minify'] = "on":$data['minify'] = "off";
 		$this->rgb->sview("admin/example/react_animation", $data);
 	}
 

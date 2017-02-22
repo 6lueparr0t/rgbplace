@@ -57,3 +57,13 @@ $route['translate_uri_dashes'] = FALSE;
 /*
 | Hot Place Maer
 */
+
+$route['admin/pixel/select'] = 'admin/pixeller/select';
+$route['admin/pixel/insert'] = 'admin/pixeller/insert';
+$route['admin/pixel/update'] = 'admin/pixeller/update';
+$route['admin/pixel/delete'] = 'admin/pixeller/delete';
+
+$route['admin/map/select'] = 'admin/mapper/select';
+$route['admin/map/insert'] = 'admin/mapper/insert';
+$route['admin/map/update'] = 'admin/mapper/update';
+$route['admin/map/delete'] = 'admin/mapper/delete';

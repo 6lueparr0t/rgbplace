@@ -14,7 +14,43 @@ class Admin_model extends CI_Model {
         parent::__construct();
     }
 
-	public function adminPasswdChk($data)
+	public function pixel ($action = "")
+	{
+
+		switch($action) {
+			case "insert" :
+				echo ("insert:");
+				break;
+			case "update" :
+				echo ("update:");
+				break;
+			case "delete" :
+				echo ("delete:");
+				break;
+			default :
+				echo ("select:");
+		}
+
+	}
+
+	public function map ($action = "")
+	{
+
+		switch($action) {
+			case "insert" :
+				break;
+			case "update" :
+				break;
+			case "delete" :
+				break;
+			default :
+				//select
+				echo ("select:");
+		}
+
+	}
+
+	function adminPasswdChk($data)
 	{
 		$pswd = $data['pswd'];
 		$query = $this->db->get_where('pixel_admin', array('uid' => 'admin'),0,1);
@@ -28,7 +64,7 @@ class Admin_model extends CI_Model {
 		return false;
 	}
 
-	public function adminSessionChk()
+	function adminSessionChk()
 	{
 
 	}
