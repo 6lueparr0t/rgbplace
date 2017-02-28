@@ -42,8 +42,7 @@ class MyComponent extends React.Component {
 }
 
 ReactDOM.render(
-		<MyComponent name="Daihyun99" />,
-		document.getElementById('action')
+		<MyComponent name="Daihyun99" />, document.getElementById('action')
 );
 
 function sleep(milliseconds) {

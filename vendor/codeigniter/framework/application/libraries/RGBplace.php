@@ -104,14 +104,15 @@ class RGBplace {
 				<title>RGB place playground</title>
 				<link rel='icon' type='image/png' href='/assets/images/ci-icon.png' />
 
-				<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
-				<link rel='stylesheet' href='/assets/css/style.css'>
+				<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css' />
+				<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css' />
+				<link rel='stylesheet' href='/assets/css/style.css' />
 
 				<script src='/assets/js/libs/react.min.js'></script>
 				<script src='/assets/js/libs/react-dom.min.js'></script>
 
 			</head><body>
-			<a href='".base_url()."'>Home</a>
+			<a href='".base_url()."play'>Home</a>
 		");
 	}
 	
@@ -151,7 +152,7 @@ class RGBplace {
 		} else {
 			// #### setting 'Sign Out'
 			echo $this->CI->session->userdata('name');
-			echo $this->CI->session->userdata('admin')?"<a href='/admin'>admin</a>":"";
+			echo $this->CI->session->userdata('admin')?"<a href='/admin'>Admin</a> <a href='".current_url()."/minify'>Minify</a> ":"";
 			echo("<a href='/sign/out'>Sign Out</a>");
 		}
 

@@ -1,0 +1,24 @@
+/* Make it a marquee */
+
+.none {
+	display:none;
+}
+
+.marquee {
+	background-color:red;
+	color:yellow;
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	animation: marquee 2s linear infinite;
+}
+
+.marquee:hover {
+	animation-play-state: paused
+}
+
+/* Make it move */
+@keyframes marquee {
+	0%   { text-indent: 0% }
+	100% { text-indent: -64px }
+}
