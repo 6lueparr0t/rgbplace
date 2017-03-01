@@ -82,6 +82,7 @@ class RGBplace {
 		$path_min   = "/assets/js/{$path}.min.js";
 
 		if($minify === "on") {
+			/*
 			$babel_script = Babel\Transpiler::transformFile(".{$path_js}", [ 'blacklist' => [ 'useStrict' ] ]);
 			$babel_script = str_replace("\"", "\\\"", $babel_script);
 
@@ -89,6 +90,27 @@ class RGBplace {
 
 			$minifier = new Minify\JS(".{$path_min}");
 			$minifier->minify(".{$path_min}");
+			*/
+
+			$path_arr= explode('/', $path);
+			$length  = count($path_arr);
+
+			$dir  = ".";
+			$file = $path_arr[$length-1];
+
+			for($i=0; $i<$length-1; $i++) {
+				$dir .= "/".$path_arr[$i];
+			}
+
+			putenv("PATH=/usr/local/bin/");
+			$output = shell_exec("
+				gulp init  --dir={$dir} --file={$file};
+				gulp babel --dir={$dir} --file={$file};
+				gulp merge --dir={$dir} --file={$file};
+				gulp clean --dir={$dir} --file={$file};
+			");
+
+			echo "<pre>{$output}<br/>Complete.</pre>";
 		} elseif($minify === "off") {
 			echo ("<script src=\"{$path_min}\"></script>");
 		}
@@ -102,17 +124,15 @@ class RGBplace {
 			<!DOCTYPE html><html lang='en'><head>
 				<meta charset='utf-8'>
 				<title>RGB place playground</title>
-				<link rel='icon' type='image/png' href='/assets/images/ci-icon.png' />
+				<link rel='icon' type='image/png' href='/assets/img/ci-icon.png' />
 
 				<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css' />
 				<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css' />
 				<link rel='stylesheet' href='/assets/css/style.css' />
 
-				<script src='/assets/js/libs/react.min.js'></script>
-				<script src='/assets/js/libs/react-dom.min.js'></script>
-
 			</head><body>
 			<a href='".base_url()."play'>Home</a>
+			<script src='/assets/js/common/bundle.js'></script>
 		");
 	}
 	
@@ -151,8 +171,10 @@ class RGBplace {
 
 		} else {
 			// #### setting 'Sign Out'
+
+			$minify_url = strpos(current_url(), 'minify')?current_url():current_url()."/minify";
 			echo $this->CI->session->userdata('name');
-			echo $this->CI->session->userdata('admin')?"<a href='/admin'>Admin</a> <a href='".current_url()."/minify'>Minify</a> ":"";
+			echo $this->CI->session->userdata('admin')?"<a href='/admin'>Admin</a> <a href='{$minify_url}'>Minify</a> ":"";
 			echo("<a href='/sign/out'>Sign Out</a>");
 		}
 
