@@ -1,7 +1,7 @@
 var webpack = require("webpack");
 
 module.exports = {
-  entry: './assets/js/common/src/main.js',
+  entry: './assets/js/common/src/_main.js',
   output: { filename: 'bundle.js', path: './assets/js/common/' },
   module: {
     loaders: [

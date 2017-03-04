@@ -4,19 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin extends CI_Controller {
 
 	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 * 
+	 * Comments : ..
+	 * 
 	 */
 
 	public function __construct()
@@ -32,46 +22,23 @@ class Admin extends CI_Controller {
 		$this->rgb->sview('admin/index', $data);
 	}
 
-	public function minify()
-	{
-		$data['minify'] = "on";
-		$this->rgb->sview("admin/index", $data);
-	}
-
 // ####################################################################################################################
 // Admin
 // ####################################################################################################################
 
-	public function pixel($act = "")
+	public function pixel()
 	{
-		$data['minify'] = ($act === "minify")?"on":"off";
-
-		$this->admin->pixel("select");
-		$this->rgb->sview("admin/pixel", $data);
+		$this->rgb->sview("admin/pixel");
 	}
 
-	public function pixeller($act)
+	public function map()
 	{
-		$this->admin->pixel($act);
-	}
-
-	public function map($act = "")
-	{
-		$data['minify'] = ($act === "minify")?"on":"off";
-
-		$this->admin->map("select");
-		$this->rgb->sview("admin/map", $data);
-	}
-
-	public function mapper($act)
-	{
-		$this->admin->map($act);
+		$this->rgb->sview("admin/map");
 	}
 
 	public function info()
 	{
-		$data['minify'] = "none";
-		$this->rgb->sview("admin/info", $data);
+		$this->rgb->sview("admin/info");
 	}
 
 // ####################################################################################################################
@@ -93,10 +60,9 @@ class Admin extends CI_Controller {
 		$this->rgb->sview("admin/example/react_tutorial");
 	}
 
-	public function react_animation($act = "")
+	public function react_animation()
 	{
-		($act === "minify")? $data['minify'] = "on":$data['minify'] = "off";
-		$this->rgb->sview("admin/example/react_animation", $data);
+		$this->rgb->sview("admin/example/react_animation");
 	}
 
 	public function generate_hash()

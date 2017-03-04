@@ -11,14 +11,7 @@ class Play extends CI_Controller {
 
 	public function index()
 	{
-		$data['minify'] = "off";
 		$this->rgb->view("play/main");
-	}
-
-	public function minify()
-	{
-		$data['minify'] = "on";
-		$this->rgb->sview("play/main", $data);
 	}
 
 	public function _board()

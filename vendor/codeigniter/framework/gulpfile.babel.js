@@ -32,48 +32,53 @@ const DEST = {
     CSS: DIR.DEST + 'css/',
 };
 
-const CLEAN = {
-    JS: DIR.DEST + 'js/' + dir + '/' + file + '.js',
+const INIT = {
     JSMIN: DIR.DEST + 'js/' + dir + '/' + file + '.min.js',
     CSS: DIR.DEST + 'css/*.min.css',
 };
 
-gulp.task('default', ['init', 'babel', 'merge', 'clean'], () => {
+gulp.task('js', ['js-init', 'js-babel'], () => {
     gutil.log('Gulp is running');
 });
 
-gulp.task('init', function() {
-    return del.sync([CLEAN.JS, CLEAN.JSMIN, CLEAN.CSS], {force : true});
+gulp.task('js-init', function() {
+    return del.sync([INIT.JSMIN], {force : true});
 });
 
-gulp.task('babel', function(){
+gulp.task('js-babel', function(){
     return gulp.src(SRC.JSX)
         .pipe(babel({
             plugins: ['transform-react-jsx']
         }))
 		.pipe(uglify())
 		.pipe(rename(function (path) {
-             path.extname = ".js"
+             path.extname = ".min.js"
          }))
         .pipe(gulp.dest(DEST.JS));
 });
 
-gulp.task('merge', function(){
-    return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js', SRC.JS])
+gulp.task('react-merge', function(){
+    return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js'])
         .pipe(concat(file + '.min.js'))
+		.pipe(rename(function (path) {
+			path.dirname = 'js/common',
+			path.basename= 'library'
+         }))
 		.pipe(uglify())
-        .pipe(gulp.dest(DEST.JS));
+        .pipe(gulp.dest('./assets'));
 });
 
-gulp.task('clean', function() {
-    return del.sync([CLEAN.JS]);
+gulp.task('css', ['css-init', 'css-merge'], () => {
+    gutil.log('css init and merge..');
 });
 
-gulp.task('css', () => {
-    return gulp.src(SRC.CSS)
-           .pipe(cleanCSS({compatibility: 'ie8'}))
-           .pipe(rename(function (path) {
-               path.extname = ".min.css"
-           }))
-           .pipe(gulp.dest(DEST.CSS));
+gulp.task('css-init', () => {
+    return del.sync([INIT.CSS], {force : true});
+});
+
+gulp.task('css-merge', () => {
+	return gulp.src(SRC.CSS)
+		.pipe(cleanCSS({compatibility: 'ie8'}))
+		.pipe(concat('style.min.css'))
+		.pipe(gulp.dest(DEST.CSS));
 });
