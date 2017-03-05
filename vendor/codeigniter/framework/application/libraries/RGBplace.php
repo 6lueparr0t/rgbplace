@@ -54,8 +54,7 @@ class RGBplace {
 
 </head>
 <body>
-	<a id='home' href='".base_url()."'>Home</a>
-	<script src='/assets/js/common/bundle.js'></script>
+	<a class='none' id='home' href='".base_url()."'>Home</a>
 		");
 	}
 
