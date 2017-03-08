@@ -57,7 +57,6 @@ class RGBplace {
 
 </head>
 <body>
-	<script src='/assets/js/common/frame.js'></script>
 	<a class='none' id='home' href='".base_url()."'>Home</a>
 		");
 	}

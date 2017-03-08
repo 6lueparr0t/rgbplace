@@ -38,8 +38,8 @@ const INIT = {
     CSS: DIR.DEST + 'css/*.min.css',
 };
 
-gulp.task('help', () => {
-	gutil.log("command : gulp react('react-init', 'react-jsx'), react-frame, react-merge --dir=directory --file=filename");
+gulp.task('default', () => {
+	gutil.log("command : gulp [[ react('react-init', 'react-jsx') react-all --dir=directory --file=filename ] | react-common]");
     gutil.log("command : gulp css('css-init', 'css-min')");
 });
 
@@ -63,21 +63,18 @@ gulp.task('react-jsx', () => {
         .pipe(gulp.dest(DEST.JS));
 });
 
-gulp.task('react-frame', () => {
-    return gulp.src(SRC.JSXALL)
-        .pipe(concat(file + '.js'))
-        .pipe(babel({
-            plugins: ['transform-react-jsx']
-        }))
-		.pipe(rename((path) => {
+gulp.task('react-all', () => {
+    return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js', SRC.JS])
+        .pipe(concat(file+'.js'))
+		.pipe(rename(function (path) {
 			path.dirname = 'js/common',
-			path.basename= 'frame'
+			path.basename= file
          }))
 		.pipe(uglify())
         .pipe(gulp.dest(DIR.DEST));
 });
 
-gulp.task('react-merge', () => {
+gulp.task('react-common', () => {
     return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js'])
         .pipe(concat('common.js'))
 		.pipe(rename(function (path) {
