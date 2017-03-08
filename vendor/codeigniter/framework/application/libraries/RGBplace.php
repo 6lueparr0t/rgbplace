@@ -45,15 +45,19 @@ class RGBplace {
 
 		// Common Head Line
 		echo("
-<!DOCTYPE html><html lang='en'><head>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
 	<meta charset='utf-8'>
 	<title>RGB place playground</title>
 	<link rel='icon' type='image/png' href='/assets/img/ci-icon.png' />
 
 	<link rel='stylesheet' href='/assets/css/style.min.css' />
+	<script src='/assets/js/common/common.js'></script>
 
 </head>
 <body>
+	<script src='/assets/js/common/frame.js'></script>
 	<a class='none' id='home' href='".base_url()."'>Home</a>
 		");
 	}
@@ -63,7 +67,6 @@ class RGBplace {
 		$path_min   = "/assets/js/{$path}.min.js";
 
 		echo ("
-	<script src='/assets/js/common/library.js'></script>
 	<script src=\"{$path_min}\"></script>
 </body>
 </html>

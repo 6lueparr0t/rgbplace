@@ -1,14 +1,14 @@
 'use strict';
  
 import gulp from 'gulp';
-import react from 'gulp-react';
 import gutil from 'gulp-util';
+import gulpif from 'gulp-if';
+import react from 'gulp-react';
 import rename from 'gulp-rename';
 import babel from 'gulp-babel';
 import uglify from 'gulp-uglify';
 import concat from 'gulp-concat';
 import cleanCSS from 'gulp-clean-css';
-import gulpif from 'gulp-if';
 import yargs from 'yargs';
 import del from 'del';
 
@@ -23,6 +23,7 @@ const DIR = {
  
 const SRC = {
     JSX: DIR.SRC + 'js/' + dir + '/' + file + '.jsx',
+    JSXALL: DIR.SRC + 'js/common/src/_*.jsx',
     JS: DIR.SRC + 'js/' + dir + '/' + file + '.js',
     CSS: DIR.SRC + 'css/*.css',
 };
@@ -33,50 +34,69 @@ const DEST = {
 };
 
 const INIT = {
-    JSMIN: DIR.DEST + 'js/' + dir + '/' + file + '.min.js',
+    JSMIN: DIR.DEST + 'js/' + dir + '/' + file + '.js',
     CSS: DIR.DEST + 'css/*.min.css',
 };
 
-gulp.task('js', ['js-init', 'js-babel'], () => {
-    gutil.log('Gulp is running');
+gulp.task('help', () => {
+	gutil.log("command : gulp react('react-init', 'react-jsx'), react-frame, react-merge --dir=directory --file=filename");
+    gutil.log("command : gulp css('css-init', 'css-min')");
 });
 
-gulp.task('js-init', function() {
+gulp.task('react', ['react-init', 'react-jsx'], () => {
+    gutil.log('Gulp React Processing is running');
+});
+
+gulp.task('react-init', () => {
     return del.sync([INIT.JSMIN], {force : true});
 });
 
-gulp.task('js-babel', function(){
+gulp.task('react-jsx', () => {
     return gulp.src(SRC.JSX)
         .pipe(babel({
             plugins: ['transform-react-jsx']
         }))
 		.pipe(uglify())
-		.pipe(rename(function (path) {
-             path.extname = ".min.js"
+		.pipe(rename((path) =>  {
+             path.extname = ".js"
          }))
         .pipe(gulp.dest(DEST.JS));
 });
 
-gulp.task('react-merge', function(){
-    return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js'])
-        .pipe(concat(file + '.min.js'))
-		.pipe(rename(function (path) {
+gulp.task('react-frame', () => {
+    return gulp.src(SRC.JSXALL)
+        .pipe(concat(file + '.js'))
+        .pipe(babel({
+            plugins: ['transform-react-jsx']
+        }))
+		.pipe(rename((path) => {
 			path.dirname = 'js/common',
-			path.basename= 'library'
+			path.basename= 'frame'
          }))
 		.pipe(uglify())
-        .pipe(gulp.dest('./assets'));
+        .pipe(gulp.dest(DIR.DEST));
 });
 
-gulp.task('css', ['css-init', 'css-merge'], () => {
-    gutil.log('css init and merge..');
+gulp.task('react-merge', () => {
+    return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js'])
+        .pipe(concat('common.js'))
+		.pipe(rename(function (path) {
+			path.dirname = 'js/common',
+			path.basename= 'common'
+         }))
+		.pipe(uglify())
+        .pipe(gulp.dest(DIR.DEST));
+});
+
+gulp.task('css', ['css-init', 'css-min'], () => {
+    gutil.log('Gulp css Processing is running');
 });
 
 gulp.task('css-init', () => {
     return del.sync([INIT.CSS], {force : true});
 });
 
-gulp.task('css-merge', () => {
+gulp.task('css-min', () => {
 	return gulp.src(SRC.CSS)
 		.pipe(cleanCSS({compatibility: 'ie8'}))
 		.pipe(concat('style.min.css'))
