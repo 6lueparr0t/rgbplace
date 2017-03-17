@@ -2,10 +2,7 @@
  
 import gulp from 'gulp';
 import gutil from 'gulp-util';
-import gulpif from 'gulp-if';
-import react from 'gulp-react';
 import rename from 'gulp-rename';
-import babel from 'gulp-babel';
 import uglify from 'gulp-uglify';
 import concat from 'gulp-concat';
 import cleanCSS from 'gulp-clean-css';
@@ -22,8 +19,6 @@ const DIR = {
 };
  
 const SRC = {
-    JSX: DIR.SRC + 'js/' + dir + '/' + file + '.jsx',
-    JSXALL: DIR.SRC + 'js/common/src/_*.jsx',
     JS: DIR.SRC + 'js/' + dir + '/' + file + '.js',
     CSS: DIR.SRC + 'css/*.css',
 };
@@ -34,55 +29,30 @@ const DEST = {
 };
 
 const INIT = {
-    JSMIN: DIR.DEST + 'js/' + dir + '/' + file + '.js',
+    JS: DIR.DEST + 'js/' + dir + '/' + file + '.min.js',
     CSS: DIR.DEST + 'css/*.min.css',
 };
 
 gulp.task('default', () => {
-	gutil.log("command : gulp [[ react('react-init', 'react-jsx') react-all --dir=directory --file=filename ] | react-common]");
-    gutil.log("command : gulp css('css-init', 'css-min')");
+    gutil.log("command : gulp js[js-init || js-min] --dir=directory --file=filename");
+    gutil.log("command : gulp css[css-init || css-min]");
 });
 
-gulp.task('react', ['react-init', 'react-jsx'], () => {
-    gutil.log('Gulp React Processing is running');
+gulp.task('js', ['js-init', 'js-min'], () => {
+    gutil.log('Gulp js Processing is running');
 });
 
-gulp.task('react-init', () => {
-    return del.sync([INIT.JSMIN], {force : true});
+gulp.task('js-init', () => {
+    return del.sync([INIT.JS], {force : true});
 });
 
-gulp.task('react-jsx', () => {
-    return gulp.src(SRC.JSX)
-        .pipe(babel({
-            plugins: ['transform-react-jsx']
-        }))
+gulp.task('js-min', () => {
+    return gulp.src(SRC.JS)
 		.pipe(uglify())
 		.pipe(rename((path) =>  {
-             path.extname = ".js"
+             path.extname = ".min.js"
          }))
         .pipe(gulp.dest(DEST.JS));
-});
-
-gulp.task('react-all', () => {
-    return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js', SRC.JS])
-        .pipe(concat(file+'.js'))
-		.pipe(rename(function (path) {
-			path.dirname = 'js/common',
-			path.basename= file
-         }))
-		.pipe(uglify())
-        .pipe(gulp.dest(DIR.DEST));
-});
-
-gulp.task('react-common', () => {
-    return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js'])
-        .pipe(concat('common.js'))
-		.pipe(rename(function (path) {
-			path.dirname = 'js/common',
-			path.basename= 'common'
-         }))
-		.pipe(uglify())
-        .pipe(gulp.dest(DIR.DEST));
 });
 
 gulp.task('css', ['css-init', 'css-min'], () => {

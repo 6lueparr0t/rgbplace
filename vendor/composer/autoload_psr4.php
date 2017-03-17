@@ -7,10 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
-    'Mouf\\NodeJsInstaller\\' => array($vendorDir . '/mouf/nodejs-installer/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
-    'MatthiasMullie\\PathConverter\\' => array($vendorDir . '/matthiasmullie/path-converter/src'),
-    'MatthiasMullie\\Minify\\' => array($vendorDir . '/matthiasmullie/minify/src'),
-    'Kwf\\ComposerExtraAssets\\' => array($vendorDir . '/koala-framework/composer-extra-assets/Kwf/ComposerExtraAssets'),
-    'Babel\\' => array($vendorDir . '/talyssonoc/php-babel-transpiler/src'),
 );
