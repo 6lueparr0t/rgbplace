@@ -17,7 +17,7 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$data['adm_list'] = ["pixel", "map", "info"];
+		$data['adm_list'] = ["user", "map", "info"];
 		$data['ex_list'] = ["generate_hash", "start_page", "react_tutorial", "react_practise", "react_animation"];
 		$this->rgb->sview('admin/index', $data);
 	}
@@ -26,9 +26,9 @@ class Admin extends CI_Controller {
 // Admin
 // ####################################################################################################################
 
-	public function pixel()
+	public function user()
 	{
-		$this->rgb->sview("admin/pixel");
+		$this->rgb->sview("admin/user");
 	}
 
 	public function map()

@@ -63,10 +63,11 @@ class RGBplace {
 
 	public function end($path) 
 	{
-		$path_min   = "/assets/js/{$path}.min.js";
+//		$path_min   = "/assets/js/{$path}.min.js";
+//		<script src=\"{$path_min}\"></script>
 
 		echo ("
-	<script src=\"{$path_min}\"></script>
+	<div id='push'>{$this->CI->session->flashdata('status')}</div>
 </body>
 </html>
 		");
