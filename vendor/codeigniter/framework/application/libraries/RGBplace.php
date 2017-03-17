@@ -57,6 +57,7 @@ class RGBplace {
 
 </head>
 <body>
+	<script src='/assets/js/common/frame.js'></script>
 	<a class='none' id='home' href='".base_url()."'>Home</a>
 		");
 	}
@@ -71,9 +72,4 @@ class RGBplace {
 </html>
 		");
 	}
-
-	function warning($display = "none") {
-		echo ("<p class='marquee {$display}'>Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning!</p>");
-	}
-
 }

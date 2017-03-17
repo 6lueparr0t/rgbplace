@@ -4,6 +4,7 @@ import gulp from 'gulp';
 import gutil from 'gulp-util';
 import gulpif from 'gulp-if';
 import react from 'gulp-react';
+import vueify from 'gulp-vueify';
 import rename from 'gulp-rename';
 import babel from 'gulp-babel';
 import uglify from 'gulp-uglify';
@@ -39,7 +40,7 @@ const INIT = {
 };
 
 gulp.task('default', () => {
-	gutil.log("command : gulp [[ react('react-init', 'react-jsx') react-all --dir=directory --file=filename ] | react-common]");
+	gutil.log("command : gulp [[ react('react-init', 'react-jsx') react-frame --dir=directory --file=filename ] | react-common]");
     gutil.log("command : gulp css('css-init', 'css-min')");
 });
 
@@ -63,19 +64,22 @@ gulp.task('react-jsx', () => {
         .pipe(gulp.dest(DEST.JS));
 });
 
-gulp.task('react-all', () => {
-    return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js', SRC.JS])
-        .pipe(concat(file+'.js'))
+gulp.task('react-frame', () => {
+    return gulp.src(SRC.JSXALL)
+        .pipe(babel({
+            plugins: ['transform-react-jsx']
+        }))
+        .pipe(concat('frame.js'))
 		.pipe(rename(function (path) {
-			path.dirname = 'js/common',
-			path.basename= file
+			path.dirname = 'js/common'
+			path.basename= 'frame'
          }))
 		.pipe(uglify())
         .pipe(gulp.dest(DIR.DEST));
 });
 
 gulp.task('react-common', () => {
-    return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js'])
+    return gulp.src(['node_modules/react/dist/react.min.js', 'node_modules/react-dom/dist/react-dom.min.js', 'node_modules/axios/dist/axios.min.js'])
         .pipe(concat('common.js'))
 		.pipe(rename(function (path) {
 			path.dirname = 'js/common',

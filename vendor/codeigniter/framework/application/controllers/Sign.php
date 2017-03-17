@@ -14,6 +14,13 @@ class Sign extends CI_Controller {
 		redirect('/', 'refresh');
 	}
 
+	public function test()
+	{
+		$test['name'] = "daihyun99";
+
+		echo json_encode($test);
+	}
+
 	public function in()
 	{
 		$config = [
