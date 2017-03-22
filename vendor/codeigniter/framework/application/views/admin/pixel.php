@@ -1,7 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); ?>
 
-<div id="action"></div>
-
 <?php
 
 echo form_open('admin/pixel/insert', ['class' => '', 'name' => 'test', 'id' => 'test'])
@@ -12,4 +10,4 @@ echo form_open('admin/pixel/insert', ['class' => '', 'name' => 'test', 'id' => '
 
 ?>
 
-<?php $this->rgb->end($path, $minify); ?>
+<?php $this->rgb->end($path); ?>

@@ -18,7 +18,7 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$data['adm_list'] = ["user", "map", "info"];
-		$data['ex_list'] = ["generate_hash", "start_page", "react_tutorial", "react_practise", "react_animation"];
+		$data['ex_list'] = ["generate_hash", "animation"];
 		$this->rgb->sview('admin/index', $data);
 	}
 
@@ -45,24 +45,9 @@ class Admin extends CI_Controller {
 // Example
 // ####################################################################################################################
 
-	public function start_page()
+	public function animation()
 	{
-		$this->rgb->sview("admin/example/start_page");
-	}
-
-	public function react_practise()
-	{
-		$this->rgb->sview("admin/example/react_practise");
-	}
-
-	public function react_tutorial()
-	{
-		$this->rgb->sview("admin/example/react_tutorial");
-	}
-
-	public function react_animation()
-	{
-		$this->rgb->sview("admin/example/react_animation");
+		$this->rgb->sview("admin/example/animation");
 	}
 
 	public function generate_hash()

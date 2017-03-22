@@ -11,7 +11,7 @@ class Play extends CI_Controller {
 
 	public function index()
 	{
-		$this->rgb->view("play/main");
+		$this->rgb->view("play/index");
 	}
 
 	public function _board()

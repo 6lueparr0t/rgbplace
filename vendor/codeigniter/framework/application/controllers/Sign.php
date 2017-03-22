@@ -52,7 +52,6 @@ class Sign extends CI_Controller {
 					'signed_in' => TRUE
 				];
 				$this->session->set_userdata($user);
-				$this->session->set_flashdata('status', '<p>Sign In</p>');
 
 			} elseif (strpos($data['uid'], "@") !== false && $result=$this->sign->adminCheck($data)) {
 
@@ -63,13 +62,8 @@ class Sign extends CI_Controller {
 					'signed_in' => TRUE
 				];
 				$this->session->set_userdata($admin);
-				$this->session->set_flashdata('status', '<p>Login Success</p>');
 
-			} else {
-				$this->session->set_flashdata('status', '<p>check your ID and Password</p>');
 			}
-		} else {
-			$this->session->set_flashdata('status', validation_errors());
 		}
 
 		//echo ("<script>setTimeout(function(){history.go(-1);},3000);</script>");
@@ -78,10 +72,9 @@ class Sign extends CI_Controller {
 
 	public function out()
 	{
-		$config = ['admin', 'uid', 'signed_in'];
+		$config = ['admin', 'uid', 'name', 'signed_in'];
 		$this->session->unset_userdata($config);
 
-		$this->session->set_flashdata('status', '<p>Sign Out</p>');
 
 		redirect($this->input->server('http_referer'));
 	}
@@ -134,13 +127,8 @@ class Sign extends CI_Controller {
 				];
 
 				$this->session->set_userdata($user);
-				$this->session->set_flashdata('status', '<p>Sign Up Complete !</p>');
 
-			} else {
-				$this->session->set_flashdata('status', '<p>Check your ID</p>');
 			}
-		} else {
-			$this->session->set_flashdata('status', validation_errors());
 		}
 
 		//echo ("<script>setTimeout(function(){history.go(-1);},3000);</script>");
