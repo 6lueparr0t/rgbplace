@@ -25,7 +25,7 @@ class Sign_model extends CI_Model {
 		foreach ($find->result() as $row) {
 			if(password_verify($pswd,  base64_decode($row->pswd))) {
 				//fail count init
-				$query = "UPDATE user_info SET fail = 0 WHERE uid = ?";
+				$query = "UPDATE user_info SET fail = 0, atim=now() WHERE uid = ?";
 				$this->db->query($query, $uid);
 
 				return $result = [
@@ -36,7 +36,7 @@ class Sign_model extends CI_Model {
 								];
 			} else {
 				//fail count increase
-				$query = "UPDATE user_info SET fail = fail + 1 WHERE uid = ?";
+				$query = "UPDATE user_info SET fail = fail + 1, atim=now() WHERE uid = ?";
 				$this->db->query($query, $uid);
 
 				return false;
@@ -51,13 +51,13 @@ class Sign_model extends CI_Model {
 		$uid = explode("@", $data['uid']);
 		$pswd= $data['pswd'];
 
-		$query = "SELECT * FROM user_admin WHERE uid = ? AND name = ? AND fail < 5 LIMIT 5";
+		$query = "SELECT * FROM user_admin WHERE uid = ? AND name = ? AND fail < 5 LIMIT 1";
 		$find = $this->db->query($query, [$uid[0], $uid[1]]);
 
 		foreach ($find->result() as $row) {
 			if(password_verify($pswd, base64_decode($row->pswd))) {
 				//fail count init
-				$query = "UPDATE user_admin SET fail = 0 WHERE uid = ? AND name = ?";
+				$query = "UPDATE user_admin SET fail = 0, atim=now() WHERE uid = ? AND name = ?";
 				$this->db->query($query, [$uid[0], $uid[1]]);
 
 				return $result = [
@@ -65,7 +65,7 @@ class Sign_model extends CI_Model {
 								];
 			} else {
 				//fail count increase
-				$query = "UPDATE user_admin SET fail = fail + 1 WHERE uid = ? AND name = ?";
+				$query = "UPDATE user_admin SET fail = fail + 1, atim=now() WHERE uid = ? AND name = ?";
 				$this->db->query($query, [$uid[0], $uid[1]]);
 
 				return false;
@@ -97,6 +97,50 @@ class Sign_model extends CI_Model {
 		}
 		
 		return false;
+	}
+
+	public function failCount($data)
+	{
+		$result = ['fail' => null, 'atim' => null];
+
+		if(strpos($data['uid'], "@")) {
+			$uid = explode("@", $data['uid']);
+			$query = "SELECT * FROM user_admin WHERE uid = ? AND name = ? LIMIT 1";
+
+			$find = $this->db->query($query, [$uid[0], $uid[1]]);
+
+		} else {
+			$uid = $data['uid'];
+			$query = "SELECT * FROM user_info WHERE uid = ? LIMIT 1";
+
+			$find = $this->db->query($query, $uid);
+
+		}
+
+		if($find->num_rows() === 0 || $find->num_rows() > 1) {
+			return false;
+		}
+
+		foreach ($find->result() as $row) {
+			$result['fail'] = $row->fail;
+			$result['atim'] = $row->atim;
+		}
+
+		return $result;
+	}
+
+	public function uidValid($data)
+	{
+		$uid = $data['uid'];
+
+		$query = "SELECT uid FROM user_info WHERE uid = ? LIMIT 1";
+		$find = $this->db->query($query, $uid);
+
+		if($find->num_rows() === 0) {
+			return true;
+		}
+		
+		return "사용할 수 없는 ID 입니다.";
 	}
 
 	public function sessionChk()

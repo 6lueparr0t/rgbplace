@@ -14,8 +14,10 @@ class Sign extends CI_Controller {
 		redirect('/', 'refresh');
 	}
 
-	public function in()
+	public function in($check="")
 	{
+
+
 		$config = [
 				[
 					'field' => 'uid',
@@ -33,13 +35,32 @@ class Sign extends CI_Controller {
 			];
 
 		$this->form_validation->set_rules($config);
+		$validation = $this->form_validation->run();
 
-		if ($this->form_validation->run() == TRUE) {
-			//uid, pswd 검증 코드
-			//세션 생성 후 종료, front에서 redirect 하여 갱신
+		if ($validation) {
 
 			$data['uid'] = $this->input->post('uid');
 			$data['pswd']= $this->input->post('pswd');
+			$output = ['valid' => false, 'msg' => ""];
+
+			if ($check === "check") {
+				if (strpos($data['uid'], "@") === false && $this->sign->userCheck($data) === false) {
+					$result = $this->sign->failCount($data);
+					$output['msg'] = "로그인에 실패하였습니다.\n\n {$result['atim']}, {$result['fail']}/20번 실패";
+
+				} elseif (strpos($data['uid'], "@") !== false && $this->sign->adminCheck($data) === false) {
+					$result = $this->sign->failCount($data);
+					$output['msg'] = "로그인에 실패하였습니다.\n\n {$result['atim']}, {$result['fail']}/5번 실패";
+
+				} else {
+					$output['valid'] = true;
+					$output['msg'] = "";
+				}
+
+					echo json_encode($output);
+
+					return true;
+			} 
 
 			if (strpos($data['uid'], "@") === false && $result=$this->sign->userCheck($data)) {
 
@@ -64,7 +85,16 @@ class Sign extends CI_Controller {
 				$this->session->set_userdata($admin);
 
 			}
+		//validation === false
+		} else if($check === "check") { 
+			$output['valid'] = false;
+			$output['msg'] = "잘못된 정보입니다.";
+
+			echo json_encode($output);
+
+			return false;
 		}
+
 
 		//echo ("<script>setTimeout(function(){history.go(-1);},3000);</script>");
 		redirect($this->input->server('http_referer'));
@@ -79,7 +109,7 @@ class Sign extends CI_Controller {
 		redirect($this->input->server('http_referer'));
 	}
 	
-	public function up()
+	public function up($check="")
 	{
 		$config = [
 				[
@@ -90,7 +120,7 @@ class Sign extends CI_Controller {
 				[
 					'field' => 'name',
 					'label' => 'Nick Name',
-					'rules' => 'trim|min_length[2]|max_length[20]|required'
+					'rules' => 'trim|callback_is_space|min_length[2]|max_length[20]|required'
 				],
 				[
 					'field' => 'pswd',
@@ -107,18 +137,32 @@ class Sign extends CI_Controller {
 				]
 			];
 
+		//uid, pswd 검증 코드
 		$this->form_validation->set_rules($config);
+		$validation = $this->form_validation->run();
 
-		if ($this->form_validation->run() == TRUE) {
-			//uid, pswd 검증 코드
-			//세션 생성 후 종료, front에서 redirect 하여 갱신
+		if ($validation) {
 
 			$data['uid'] = $this->input->post('uid');
 			$data['name']= $this->input->post('name');
 			$data['pswd']= $this->input->post('pswd');
 			$data['conf']= $this->input->post('conf');
 
-			if ($this->sign->userMake($data)) {
+			if ($check === "check") {
+				if($this->sign->uidValid($data)) {
+					$output['valid'] = true;
+					$output['msg'] = "";
+				} else {
+					$output['valid'] = false;
+					$output['msg'] = "사용할 수 없는 아이디입니다.";
+				}
+
+				echo json_encode($output);
+
+				return true;
+			} 
+
+			if ($check === "" && $this->sign->userMake($data)) {
 
 				$user = [
 					'uid'  => $data['uid'],
@@ -127,12 +171,25 @@ class Sign extends CI_Controller {
 				];
 
 				$this->session->set_userdata($user);
-
 			}
+		//validation === false
+		} else if($check === "check") {
+			$output['valid'] = false;
+			$output['msg'] = "잘못된 정보입니다.";
+
+			echo json_encode($output);
+
+			return false;
 		}
 
+		//세션 생성 후 종료, front에서 redirect 하여 갱신
 		//echo ("<script>setTimeout(function(){history.go(-1);},3000);</script>");
 		redirect($this->input->server('http_referer'));
 	}
+
+	function is_space($str)
+	{
+		return ( preg_match("/[^\S]/i", $str)) ? FALSE : TRUE;
+	} 
 
 }

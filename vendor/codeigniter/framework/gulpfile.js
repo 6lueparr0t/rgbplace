@@ -8,6 +8,7 @@ const gutil = require('gulp-util');
 const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
+const plumber = require('gulp-plumber');
 const gcache = require('gulp-file-cache');
 const cleanCSS = require('gulp-clean-css');
 const sassGlob = require('gulp-sass-glob');
@@ -53,16 +54,26 @@ const INIT = {
     CSS: DIR.DEST + 'css/dest/*.min.css',
 };
 
-gulp.task('default', ['common', 'adm', 'ex', 'play', 'css'], function () {
+gulp.task('default', ['common', 'adm', 'ex', 'play', 'css', 'watch'], function () {
     //gutil.log("command : gulp css[css-init || css-min]");
 });
 
-gulp.task('watch', function() {
-	gulp.watch(SRC.COMMON, ['common']);
-	gulp.watch(SRC.ADM, ['adm']);
-	gulp.watch(SRC.EX,  ['ex']);
-	gulp.watch(SRC.PLAY,['play']);
-	gulp.watch(SRC.CSS, ['css']);
+gulp.task('watch', function () {
+    const watcher = {
+		common : gulp.watch(SRC.COMMON, ['common']),
+		play : gulp.watch(SRC.PLAY,['play']),
+		adm : gulp.watch(SRC.ADM, ['adm']),
+		ex : gulp.watch(SRC.EX,  ['ex']),
+		css : gulp.watch(SRC.CSS, ['css'])
+	};
+ 
+    var notify = function (event) {
+        gutil.log('File', gutil.colors.yellow(event.path), 'was', gutil.colors.magenta(event.type));
+    };
+ 
+    for(var key in watcher) {
+        watcher[key].on('change', notify);
+    }
 });
 
 /* TASK */
@@ -103,6 +114,7 @@ gulp.task('play-init', function () {
 gulp.task('common-min', function () {
 	return gulp.src(SRC.COMMON)
 		.pipe(cache.filter())
+		.pipe(plumber())
 		.pipe(uglify())
 		.pipe(concat('common.min.js'))
 		.pipe(gulp.dest(DEST.COMMON));
@@ -111,6 +123,7 @@ gulp.task('common-min', function () {
 gulp.task('adm-min', function () {
 	return gulp.src(SRC.ADM)
 		.pipe(cache.filter())
+		.pipe(plumber())
 		.pipe(uglify())
 		.pipe(rename((path) =>  {
 			 path.extname = ".min.js"
@@ -121,6 +134,7 @@ gulp.task('adm-min', function () {
 gulp.task('ex-min', function () {
 	return gulp.src(SRC.EX)
 		.pipe(cache.filter())
+		.pipe(plumber())
 		.pipe(uglify())
 		.pipe(rename((path) =>  {
 			 path.extname = ".min.js"
@@ -131,6 +145,7 @@ gulp.task('ex-min', function () {
 gulp.task('play-min', function () {
 	return gulp.src(SRC.PLAY)
 		.pipe(cache.filter())
+		.pipe(plumber())
 		.pipe(uglify())
 		.pipe(rename(function (path) {
 			 path.extname = ".min.js"
@@ -151,6 +166,8 @@ gulp.task('css-init', function () {
 
 gulp.task('css-sass', function () {
 	return gulp.src(SRC.SCSS)
+		.pipe(cache.filter())
+		.pipe(plumber())
 		.pipe(sassGlob())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(rename({
@@ -162,6 +179,7 @@ gulp.task('css-sass', function () {
 gulp.task('css-min', function () {
 	return gulp.src(SRC.CSS)
 		.pipe(cache.filter())
+		.pipe(plumber())
 		.pipe(cleanCSS({compatibility: 'ie8'}))
 		.pipe(concat('style.min.css'))
 		.pipe(gulp.dest(DEST.CSS));
