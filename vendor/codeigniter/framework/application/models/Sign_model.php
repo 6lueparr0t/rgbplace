@@ -29,11 +29,11 @@ class Sign_model extends CI_Model {
 				$this->db->query($query, $uid);
 
 				return $result = [
-									'name' => $row->name,
-									'score' => $row->score,
-									'code' => $row->code,
-									'atim' => $row->atim
-								];
+					'name' => $row->name,
+					'score' => $row->score,
+					'code' => $row->code,
+					'atim' => $row->atim
+				];
 			} else {
 				//fail count increase
 				$query = "UPDATE user_info SET fail = fail + 1, atim=now() WHERE uid = ?";
@@ -61,8 +61,8 @@ class Sign_model extends CI_Model {
 				$this->db->query($query, [$uid[0], $uid[1]]);
 
 				return $result = [
-									'name' => $row->name
-								];
+					'name' => $row->name
+				];
 			} else {
 				//fail count increase
 				$query = "UPDATE user_admin SET fail = fail + 1, atim=now() WHERE uid = ? AND name = ?";
@@ -140,7 +140,7 @@ class Sign_model extends CI_Model {
 			return true;
 		}
 		
-		return "사용할 수 없는 ID 입니다.";
+		return false;
 	}
 
 	public function sessionChk()

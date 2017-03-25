@@ -96,9 +96,11 @@ class ImportLdi extends AbstractImportCsv
      */
     public function doImport(&$sql_data = array())
     {
-        global $finished, $import_file, $compression, $charset_conversion, $table;
+        global $finished, $import_file, $charset_conversion, $table;
         global $ldi_local_option, $ldi_replace, $ldi_ignore, $ldi_terminated,
                $ldi_enclosed, $ldi_escaped, $ldi_new_line, $skip_queries, $ldi_columns;
+
+        $compression = $GLOBALS['import_handle']->getCompression();
 
         if ($import_file == 'none'
             || $compression != 'none'
@@ -117,7 +119,7 @@ class ImportLdi extends AbstractImportCsv
         if (isset($ldi_local_option)) {
             $sql .= ' LOCAL';
         }
-        $sql .= ' INFILE \'' . PMA\libraries\Util::sqlAddSlashes($import_file)
+        $sql .= ' INFILE \'' . $GLOBALS['dbi']->escapeString($import_file)
             . '\'';
         if (isset($ldi_replace)) {
             $sql .= ' REPLACE';
@@ -131,16 +133,16 @@ class ImportLdi extends AbstractImportCsv
         }
         if (strlen($ldi_enclosed) > 0) {
             $sql .= ' ENCLOSED BY \''
-                . PMA\libraries\Util::sqlAddSlashes($ldi_enclosed) . '\'';
+                . $GLOBALS['dbi']->escapeString($ldi_enclosed) . '\'';
         }
         if (strlen($ldi_escaped) > 0) {
             $sql .= ' ESCAPED BY \''
-                . PMA\libraries\Util::sqlAddSlashes($ldi_escaped) . '\'';
+                . $GLOBALS['dbi']->escapeString($ldi_escaped) . '\'';
         }
         if (strlen($ldi_new_line) > 0) {
             if ($ldi_new_line == 'auto') {
                 $ldi_new_line
-                    = (PMA\libraries\Util::whichCrlf() == "\n")
+                    = (PHP_EOL == "\n")
                     ? '\n'
                     : '\r\n';
             }

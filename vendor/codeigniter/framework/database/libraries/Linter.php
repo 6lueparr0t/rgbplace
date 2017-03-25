@@ -7,10 +7,10 @@
  */
 namespace PMA\libraries;
 
-use SqlParser\Lexer;
-use SqlParser\Parser;
-use SqlParser\UtfString;
-use SqlParser\Utils\Error as ParserError;
+use PhpMyAdmin\SqlParser\Lexer;
+use PhpMyAdmin\SqlParser\Parser;
+use PhpMyAdmin\SqlParser\UtfString;
+use PhpMyAdmin\SqlParser\Utils\Error as ParserError;
 
 /**
  * The linter itself.
@@ -51,7 +51,7 @@ class Linter
         // (which is actually a new line) aren't going to be processed at
         // all.
         $len = ($str instanceof UtfString) ?
-            $str->length() : strlen($len);
+            $str->length() : strlen($str);
 
         $lines = array(0);
         for ($i = 0; $i < $len; ++$i) {

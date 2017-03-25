@@ -84,9 +84,15 @@ var PMA_commonParams = (function () {
          * @return string
          */
         getUrlQuery: function () {
+            var common = this.get('common_query');
+            var separator = '?';
+            if (common.length > 0) {
+                separator = '&';
+            }
             return PMA_sprintf(
-                '%s&server=%s&db=%s&table=%s',
+                '%s%sserver=%s&db=%s&table=%s',
                 this.get('common_query'),
+                separator,
                 encodeURIComponent(this.get('server')),
                 encodeURIComponent(this.get('db')),
                 encodeURIComponent(this.get('table'))
@@ -298,6 +304,13 @@ PMA_DROP_IMPORT = {
      * @return void
      */
     _dragenter : function (event) {
+
+        // We don't want to prevent users from using
+        // browser's default drag-drop feature on some page(s)
+        if ($(".noDragDrop").length !== 0) {
+            return;
+        }
+
         event.stopPropagation();
         event.preventDefault();
         if (!PMA_DROP_IMPORT._hasFiles(event)) {
@@ -333,6 +346,12 @@ PMA_DROP_IMPORT = {
      * @return void
      */
     _dragover: function (event) {
+        // We don't want to prevent users from using
+        // browser's default drag-drop feature on some page(s)
+        if ($(".noDragDrop").length !== 0) {
+            return;
+        }
+
         event.stopPropagation();
         event.preventDefault();
         if (!PMA_DROP_IMPORT._hasFiles(event)) {
@@ -348,6 +367,11 @@ PMA_DROP_IMPORT = {
      * @return void
      */
     _dragleave: function (event) {
+        // We don't want to prevent users from using
+        // browser's default drag-drop feature on some page(s)
+        if ($(".noDragDrop").length !== 0) {
+            return;
+        }
         event.stopPropagation();
         event.preventDefault();
         var $pma_drop_handler = $(".pma_drop_handler");
@@ -408,6 +432,12 @@ PMA_DROP_IMPORT = {
      * @return void
      */
     _drop: function (event) {
+        // We don't want to prevent users from using
+        // browser's default drag-drop feature on some page(s)
+        if ($(".noDragDrop").length !== 0) {
+            return;
+        }
+
         var dbname = PMA_commonParams.get('db');
         var server = PMA_commonParams.get('server');
 

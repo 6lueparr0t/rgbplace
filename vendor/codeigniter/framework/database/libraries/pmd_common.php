@@ -39,13 +39,15 @@ function PMA_getTablesInfo()
         $GLOBALS['PMD']['TABLE_NAME'][$i]
             = $GLOBALS['db'] . "." . $one_table['TABLE_NAME'];
         $GLOBALS['PMD']['OWNER'][$i] = $GLOBALS['db'];
-        $GLOBALS['PMD']['TABLE_NAME_SMALL'][$i] = $one_table['TABLE_NAME'];
+        $GLOBALS['PMD']['TABLE_NAME_SMALL'][$i] = htmlspecialchars(
+            $one_table['TABLE_NAME'], ENT_QUOTES
+        );
 
         $GLOBALS['PMD_URL']['TABLE_NAME'][$i]
-            = urlencode($GLOBALS['db'] . "." . $one_table['TABLE_NAME']);
-        $GLOBALS['PMD_URL']['OWNER'][$i] = urlencode($GLOBALS['db']);
+            = $GLOBALS['db'] . "." . $one_table['TABLE_NAME'];
+        $GLOBALS['PMD_URL']['OWNER'][$i] = $GLOBALS['db'];
         $GLOBALS['PMD_URL']['TABLE_NAME_SMALL'][$i]
-            = urlencode($one_table['TABLE_NAME']);
+            = $one_table['TABLE_NAME'];
 
         $GLOBALS['PMD_OUT']['TABLE_NAME'][$i] = htmlspecialchars(
             $GLOBALS['db'] . "." . $one_table['TABLE_NAME'], ENT_QUOTES
@@ -63,7 +65,7 @@ function PMA_getTablesInfo()
 
         $DF = PMA_getDisplayField($GLOBALS['db'], $one_table['TABLE_NAME']);
         if ($DF != '') {
-            $retval[$GLOBALS['PMD_URL']["TABLE_NAME_SMALL"][$i]] = urlencode($DF);
+            $retval[$GLOBALS['PMD_URL']["TABLE_NAME_SMALL"][$i]] = $DF;
         }
 
         $i++;
@@ -123,8 +125,7 @@ function PMA_getScriptContr()
     );
     while ($val = @$GLOBALS['dbi']->fetchRow($alltab_rs)) {
         $row = PMA_getForeigners($GLOBALS['db'], $val[0], '', 'internal');
-        //echo "<br> internal ".$GLOBALS['db']." - ".$val[0]." - ";
-        //print_r($row);
+
         if ($row !== false) {
             foreach ($row as $field => $value) {
                 $con['C_NAME'][$i] = '';
@@ -138,12 +139,11 @@ function PMA_getScriptContr()
             }
         }
         $row = PMA_getForeigners($GLOBALS['db'], $val[0], '', 'foreign');
-        //echo "<br> INNO ";
-        //print_r($row);
+
         if ($row !== false) {
             foreach ($row['foreign_keys_data'] as $one_key) {
                 foreach ($one_key['index_list'] as $index => $one_field) {
-                    $con['C_NAME'][$i] = '';
+                    $con['C_NAME'][$i] = $one_key['constraint'];
                     $con['DTN'][$i]    = urlencode($GLOBALS['db'] . "." . $val[0]);
                     $con['DCN'][$i]    = urlencode($one_field);
                     $con['STN'][$i]    = urlencode(
@@ -352,8 +352,8 @@ function PMA_getDefaultPage($db)
     $query = "SELECT `page_nr`"
         . " FROM " . PMA\libraries\Util::backquote($cfgRelation['db'])
         . "." . PMA\libraries\Util::backquote($cfgRelation['pdf_pages'])
-        . " WHERE `db_name` = '" . PMA\libraries\Util::sqlAddSlashes($db) . "'"
-        . " AND `page_descr` = '" .  PMA\libraries\Util::sqlAddSlashes($db) . "'";
+        . " WHERE `db_name` = '" . $GLOBALS['dbi']->escapeString($db) . "'"
+        . " AND `page_descr` = '" .  $GLOBALS['dbi']->escapeString($db) . "'";
 
     $default_page_no = $GLOBALS['dbi']->fetchResult(
         $query,
@@ -393,7 +393,7 @@ function PMA_getLoadingPage($db)
         $query = "SELECT MIN(`page_nr`)"
             . " FROM " . PMA\libraries\Util::backquote($cfgRelation['db'])
             . "." . PMA\libraries\Util::backquote($cfgRelation['pdf_pages'])
-            . " WHERE `db_name` = '" . PMA\libraries\Util::sqlAddSlashes($db) . "'";
+            . " WHERE `db_name` = '" . $GLOBALS['dbi']->escapeString($db) . "'";
 
         $min_page_no = $GLOBALS['dbi']->fetchResult(
             $query,
@@ -450,9 +450,9 @@ function PMA_saveTablePositions($pg)
         . "." . PMA\libraries\Util::backquote(
             $GLOBALS['cfgRelation']['table_coords']
         )
-        . " WHERE `db_name` = '" . PMA\libraries\Util::sqlAddSlashes($_REQUEST['db'])
+        . " WHERE `db_name` = '" . $GLOBALS['dbi']->escapeString($_REQUEST['db'])
         . "'"
-        . " AND `pdf_page_number` = '" . PMA\libraries\Util::sqlAddSlashes($pg)
+        . " AND `pdf_page_number` = '" . $GLOBALS['dbi']->escapeString($pg)
         . "'";
 
     $res = PMA_queryAsControlUser(
@@ -476,11 +476,11 @@ function PMA_saveTablePositions($pg)
             . PMA\libraries\Util::backquote($GLOBALS['cfgRelation']['table_coords'])
             . " (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`)"
             . " VALUES ("
-            . "'" . PMA\libraries\Util::sqlAddSlashes($DB) . "', "
-            . "'" . PMA\libraries\Util::sqlAddSlashes($TAB) . "', "
-            . "'" . PMA\libraries\Util::sqlAddSlashes($pg) . "', "
-            . "'" . PMA\libraries\Util::sqlAddSlashes($_REQUEST['t_x'][$key]) . "', "
-            . "'" . PMA\libraries\Util::sqlAddSlashes($_REQUEST['t_y'][$key]) . "')";
+            . "'" . $GLOBALS['dbi']->escapeString($DB) . "', "
+            . "'" . $GLOBALS['dbi']->escapeString($TAB) . "', "
+            . "'" . $GLOBALS['dbi']->escapeString($pg) . "', "
+            . "'" . $GLOBALS['dbi']->escapeString($_REQUEST['t_x'][$key]) . "', "
+            . "'" . $GLOBALS['dbi']->escapeString($_REQUEST['t_y'][$key]) . "')";
 
         $res = PMA_queryAsControlUser(
             $query,  true, PMA\libraries\DatabaseInterface::QUERY_STORE
@@ -548,7 +548,7 @@ function PMA_addNewRelation($db, $T1, $F1, $T2, $F2, $on_delete, $on_update)
         if ($foreigner
             && isset($foreigner['constraint'])
         ) {
-            return array(false, __('Error: relation already exists.'));
+            return array(false, __('Error: relationship already exists.'));
         }
         // note: in InnoDB, the index does not requires to be on a PRIMARY
         // or UNIQUE key
@@ -594,13 +594,13 @@ function PMA_addNewRelation($db, $T1, $F1, $T2, $F2, $on_delete, $on_update)
             }
             $upd_query .= ';';
             if ($GLOBALS['dbi']->tryQuery($upd_query)) {
-                return array(true, __('FOREIGN KEY relation has been added.'));
+                return array(true, __('FOREIGN KEY relationship has been added.'));
             }
 
             $error = $GLOBALS['dbi']->getError();
             return array(
                 false,
-                __('Error: FOREIGN KEY relation could not be added!')
+                __('Error: FOREIGN KEY relationship could not be added!')
                 . "<br/>" . $error
             );
         }
@@ -623,22 +623,22 @@ function PMA_addNewRelation($db, $T1, $F1, $T2, $F2, $on_delete, $on_update)
         . "(master_db, master_table, master_field, "
         . "foreign_db, foreign_table, foreign_field)"
         . " values("
-        . "'" . PMA\libraries\Util::sqlAddSlashes($db) . "', "
-        . "'" . PMA\libraries\Util::sqlAddSlashes($T2) . "', "
-        . "'" . PMA\libraries\Util::sqlAddSlashes($F2) . "', "
-        . "'" . PMA\libraries\Util::sqlAddSlashes($db) . "', "
-        . "'" . PMA\libraries\Util::sqlAddSlashes($T1) . "', "
-        . "'" . PMA\libraries\Util::sqlAddSlashes($F1) . "')";
+        . "'" . $GLOBALS['dbi']->escapeString($db) . "', "
+        . "'" . $GLOBALS['dbi']->escapeString($T2) . "', "
+        . "'" . $GLOBALS['dbi']->escapeString($F2) . "', "
+        . "'" . $GLOBALS['dbi']->escapeString($db) . "', "
+        . "'" . $GLOBALS['dbi']->escapeString($T1) . "', "
+        . "'" . $GLOBALS['dbi']->escapeString($F1) . "')";
 
     if (PMA_queryAsControlUser($q, false, PMA\libraries\DatabaseInterface::QUERY_STORE)
     ) {
-        return array(true, __('Internal relation has been added.'));
+        return array(true, __('Internal relationship has been added.'));
     }
 
     $error = $GLOBALS['dbi']->getError($GLOBALS['controllink']);
     return array(
         false,
-        __('Error: Internal relation could not be added!')
+        __('Error: Internal relationship could not be added!')
         . "<br/>" . $error
     );
 }
@@ -676,13 +676,13 @@ function PMA_removeRelation($T1, $F1, $T2, $F2)
                 . '.' . PMA\libraries\Util::backquote($T2) . ' DROP FOREIGN KEY '
                 . PMA\libraries\Util::backquote($foreigner['constraint']) . ';';
             if ($GLOBALS['dbi']->query($upd_query)) {
-                return array(true, __('FOREIGN KEY relation has been removed.'));
+                return array(true, __('FOREIGN KEY relationship has been removed.'));
             }
 
             $error = $GLOBALS['dbi']->getError();
             return array(
                 false,
-                __('Error: FOREIGN KEY relation could not be removed!')
+                __('Error: FOREIGN KEY relationship could not be removed!')
                 . "<br/>" . $error
             );
         }
@@ -692,12 +692,12 @@ function PMA_removeRelation($T1, $F1, $T2, $F2)
     $delete_query = "DELETE FROM "
         . PMA\libraries\Util::backquote($GLOBALS['cfgRelation']['db']) . "."
         . $GLOBALS['cfgRelation']['relation'] . " WHERE "
-        . "master_db = '" . PMA\libraries\Util::sqlAddSlashes($DB2) . "'"
-        . " AND master_table = '" . PMA\libraries\Util::sqlAddSlashes($T2) . "'"
-        . " AND master_field = '" . PMA\libraries\Util::sqlAddSlashes($F2) . "'"
-        . " AND foreign_db = '" . PMA\libraries\Util::sqlAddSlashes($DB1) . "'"
-        . " AND foreign_table = '" . PMA\libraries\Util::sqlAddSlashes($T1) . "'"
-        . " AND foreign_field = '" . PMA\libraries\Util::sqlAddSlashes($F1) . "'";
+        . "master_db = '" . $GLOBALS['dbi']->escapeString($DB2) . "'"
+        . " AND master_table = '" . $GLOBALS['dbi']->escapeString($T2) . "'"
+        . " AND master_field = '" . $GLOBALS['dbi']->escapeString($F2) . "'"
+        . " AND foreign_db = '" . $GLOBALS['dbi']->escapeString($DB1) . "'"
+        . " AND foreign_table = '" . $GLOBALS['dbi']->escapeString($T1) . "'"
+        . " AND foreign_field = '" . $GLOBALS['dbi']->escapeString($F1) . "'";
 
     $result = PMA_queryAsControlUser(
         $delete_query,
@@ -709,11 +709,11 @@ function PMA_removeRelation($T1, $F1, $T2, $F2)
         $error = $GLOBALS['dbi']->getError($GLOBALS['controllink']);
         return array(
             false,
-            __('Error: Internal relation could not be removed!') . "<br/>" . $error
+            __('Error: Internal relationship could not be removed!') . "<br/>" . $error
         );
     }
 
-    return array(true, __('Internal relation has been removed.'));
+    return array(true, __('Internal relationship has been removed.'));
 }
 
 /**
@@ -740,7 +740,7 @@ function PMA_saveDesignerSetting($index, $value)
             . " FROM " . PMA\libraries\Util::backquote($cfgDesigner['db'])
             . "." . PMA\libraries\Util::backquote($cfgDesigner['table'])
             . " WHERE username = '"
-            . PMA\libraries\Util::sqlAddSlashes($cfgDesigner['user']) . "';";
+            . $GLOBALS['dbi']->escapeString($cfgDesigner['user']) . "';";
 
         $orig_data = $GLOBALS['dbi']->fetchSingleRow(
             $orig_data_query, 'ASSOC', $GLOBALS['controllink']
@@ -756,7 +756,7 @@ function PMA_saveDesignerSetting($index, $value)
                 . "." . PMA\libraries\Util::backquote($cfgDesigner['table'])
                 . " SET settings_data = '" . $orig_data . "'"
                 . " WHERE username = '"
-                . PMA\libraries\Util::sqlAddSlashes($cfgDesigner['user']) . "';";
+                . $GLOBALS['dbi']->escapeString($cfgDesigner['user']) . "';";
 
             $success = PMA_queryAsControlUser($save_query);
         } else {

@@ -7,6 +7,8 @@
  */
 namespace PMA\libraries;
 
+use PMA\libraries\URL;
+
 /**
  * Handles the recently used and favorite tables.
  *
@@ -96,7 +98,7 @@ class RecentFavoriteTable
         // Read from phpMyAdmin database, if recent tables is not in session
         $sql_query
             = " SELECT `tables` FROM " . $this->_getPmaTable() .
-            " WHERE `username` = '" . Util::sqlAddSlashes($GLOBALS['cfg']['Server']['user']) . "'";
+            " WHERE `username` = '" . $GLOBALS['dbi']->escapeString($GLOBALS['cfg']['Server']['user']) . "'";
 
         $return = array();
         $result = PMA_queryAsControlUser($sql_query, false);
@@ -119,8 +121,8 @@ class RecentFavoriteTable
         $username = $GLOBALS['cfg']['Server']['user'];
         $sql_query
             = " REPLACE INTO " . $this->_getPmaTable() . " (`username`, `tables`)" .
-                " VALUES ('" . Util::sqlAddSlashes($username) . "', '"
-                . Util::sqlAddSlashes(
+                " VALUES ('" . $GLOBALS['dbi']->escapeString($username) . "', '"
+                . $GLOBALS['dbi']->escapeString(
                     json_encode($this->_tables)
                 ) . "')";
 
@@ -138,11 +140,11 @@ class RecentFavoriteTable
                 break;
             }
             $message = Message::error($error_msg);
-            $message->addMessage('<br /><br />');
             $message->addMessage(
                 Message::rawError(
                     $GLOBALS['dbi']->getError($GLOBALS['controllink'])
-                )
+                ),
+                '<br /><br />'
             );
             return $message;
         }
@@ -184,7 +186,7 @@ class RecentFavoriteTable
                         'table' => $table['table']
                     );
                     $recent_url = 'tbl_recent_favorite.php'
-                        . PMA_URL_getCommon($recent_params);
+                        . URL::getCommon($recent_params);
                     $html .= '<a href="' . $recent_url . '">`'
                           . htmlspecialchars($table['db']) . '`.`'
                           . htmlspecialchars($table['table']) . '`</a>';
@@ -202,7 +204,7 @@ class RecentFavoriteTable
                         'remove_favorite' => true
                     );
                     $fav_rm_url = 'db_structure.php'
-                        . PMA_URL_getCommon($fav_params);
+                        . URL::getCommon($fav_params);
                     $html .= 'href="' . $fav_rm_url
                         . '" title="' . __("Remove from Favorites")
                         . '" data-favtargetn="'
@@ -216,7 +218,7 @@ class RecentFavoriteTable
                         'table' => $table['table']
                     );
                     $table_url = 'tbl_recent_favorite.php'
-                        . PMA_URL_getCommon($fav_params);
+                        . URL::getCommon($fav_params);
                     $html .= '<a href="' . $table_url . '">`'
                         . htmlspecialchars($table['db']) . '`.`'
                         . htmlspecialchars($table['table']) . '`</a>';
@@ -350,7 +352,7 @@ class RecentFavoriteTable
         if (!$is_synced) {
             $params  = array('ajax_request' => true, 'favorite_table' => true,
                 'sync_favorite_tables' => true);
-            $url     = 'db_structure.php' . PMA_URL_getCommon($params);
+            $url     = 'db_structure.php' . URL::getCommon($params);
             $retval  = '<a class="hide" id="sync_favorite_tables"';
             $retval .= ' href="' . $url . '"></a>';
         }
@@ -365,7 +367,7 @@ class RecentFavoriteTable
     public static function getHtmlUpdateRecentTables()
     {
         $params  = array('ajax_request' => true, 'recent_table' => true);
-        $url     = 'index.php' . PMA_URL_getCommon($params);
+        $url     = 'index.php' . URL::getCommon($params);
         $retval  = '<a class="hide" id="update_recent_tables"';
         $retval .= ' href="' . $url . '"></a>';
         return $retval;

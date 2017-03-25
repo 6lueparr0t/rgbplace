@@ -8,6 +8,7 @@
 namespace PMA\libraries;
 
 use PMA\libraries\Language;
+use PMA\libraries\URL;
 
 /**
  * Language selection manager
@@ -202,6 +203,13 @@ class LanguageManager
             'fi|finnish',
             'fi_FI',
         ),
+        'fil' => array(
+            'fil',
+            'Filipino',
+            'Pilipino',
+            'fil|filipino',
+            '',
+        ),
         'fr' => array(
             'fr',
             'French',
@@ -279,6 +287,13 @@ class LanguageManager
             'id|indonesian',
             'id_ID',
         ),
+        'ig' => array(
+            'ig',
+            'Igbo',
+            'Asụsụ Igbo',
+            'ig|igbo',
+            '',
+        ),
         'it' => array(
             'it',
             'Italian',
@@ -305,6 +320,13 @@ class LanguageManager
             'Georgian',
             '&#4325;&#4304;&#4320;&#4311;&#4323;&#4314;&#4312;',
             'ka|georgian',
+            '',
+        ),
+        'kab' => array(
+            'kab',
+            'Kabylian',
+            'Taqbaylit',
+            'kab|kabylian',
             '',
         ),
         'kk' => array(
@@ -693,6 +715,16 @@ class LanguageManager
     }
 
     /**
+     * Checks whether there are some languages available
+     *
+     * @return boolean
+     */
+    public function hasChoice()
+    {
+        return count($this->availableLanguages()) > 1;
+    }
+
+    /**
      * Returns (cached) list of all available languages
      *
      * @return array of Language objects
@@ -819,9 +851,8 @@ class LanguageManager
         $langs = $this->availableLanguages();
 
         // try to find out user's language by checking its HTTP_ACCEPT_LANGUAGE variable;
-        // prevent XSS
         $accepted_languages = PMA_getenv('HTTP_ACCEPT_LANGUAGE');
-        if ($accepted_languages && false === mb_strpos($accepted_languages, '<')) {
+        if ($accepted_languages) {
             foreach (explode(',', $accepted_languages) as $header) {
                 foreach ($langs as $language) {
                     if ($language->matchesAcceptLanguage($header)) {
@@ -868,5 +899,44 @@ class LanguageManager
                 E_USER_ERROR
             );
         }
+    }
+
+
+    /**
+     * Returns HTML code for the language selector
+     *
+     * @param boolean $use_fieldset whether to use fieldset for selection
+     * @param boolean $show_doc     whether to show documentation links
+     *
+     * @return string
+     *
+     * @access  public
+     */
+    public function getSelectorDisplay($use_fieldset = false, $show_doc = true)
+    {
+        $_form_params = array(
+            'db' => $GLOBALS['db'],
+            'table' => $GLOBALS['table'],
+        );
+
+        // For non-English, display "Language" with emphasis because it's
+        // not a proper word in the current language; we show it to help
+        // people recognize the dialog
+        $language_title = __('Language')
+            . (__('Language') != 'Language' ? ' - <em>Language</em>' : '');
+        if ($show_doc) {
+            $language_title .= Util::showDocu('faq', 'faq7-2');
+        }
+
+        $available_languages = $this->sortedLanguages();
+
+        return Template::get('select_lang')->render(
+            array(
+                'language_title' => $language_title,
+                'use_fieldset' => $use_fieldset,
+                'available_languages' => $available_languages,
+                '_form_params' => $_form_params,
+            )
+        );
     }
 }

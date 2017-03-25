@@ -7,6 +7,8 @@
  */
 namespace PMA\libraries\plugins;
 
+use PMA\libraries\Sanitize;
+
 /**
  * Provides a common interface that will have to be implemented by all of the
  * authentication plugins.
@@ -114,7 +116,7 @@ abstract class AuthenticationPlugin
         } else {
             $dbi_error = $GLOBALS['dbi']->getError();
             if (!empty($dbi_error)) {
-                return PMA_sanitize($dbi_error);
+                return htmlspecialchars($dbi_error);
             } elseif (isset($GLOBALS['errno'])) {
                 return '#' . $GLOBALS['errno'] . ' '
                 . __('Cannot log in to the MySQL server');
@@ -134,4 +136,32 @@ abstract class AuthenticationPlugin
     public function handlePasswordChange($password)
     {
     }
+
+    /**
+     * Store session access time in session.
+     *
+     * Tries to workaround PHP 5 session garbage collection which
+     * looks at the session file's last modified time
+     *
+     * @return void
+     */
+    public function setSessionAccessTime()
+    {
+        if (isset($_REQUEST['guid'])) {
+            $guid = (string)$_REQUEST['guid'];
+        } else {
+            $guid = 'default';
+        }
+        if (isset($_REQUEST['access_time'])) {
+            // Ensure access_time is in range <0, LoginCookieValidity + 1>
+            // to avoid excessive extension of validity.
+            //
+            // Negative values can cause session expiry extension
+            // Too big values can cause overflow and lead to same
+            $time = time() - min(max(0, intval($_REQUEST['access_time'])), $GLOBALS['cfg']['LoginCookieValidity'] + 1);
+        } else {
+            $time = time();
+        }
+        $_SESSION['browser_access_time'][$guid] = $time;
+     }
 }

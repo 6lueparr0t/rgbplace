@@ -258,22 +258,17 @@ button.mult_submit {
 }
 
 /* odd items 1,3,5,7,... */
-table tr.odd th,
-.odd {
-    background: <?php echo $GLOBALS['cfg']['BgOne']; ?>;
+table tr:nth-child(odd) {
+        background: <?php echo $GLOBALS['cfg']['BgOne']; ?>; 
 }
 
 /* even items 2,4,6,8,... */
-table tr.even th,
-.even {
-    background: <?php echo $GLOBALS['cfg']['BgTwo']; ?>;
+table tr:nth-child(even) {
+        background: <?php echo $GLOBALS['cfg']['BgTwo']; ?>;
 }
 
-/* odd table rows 1,3,5,7,... */
-table tr.odd th,
-table tr.odd,
-table tr.even th,
-table tr.even {
+table tr th,
+table tr {
     text-align:         <?php echo $left; ?>;
 }
 
@@ -287,16 +282,13 @@ table tr.marked:not(.nomarker) {
 }
 
 /* hovered items */
-.odd:not(.nopointer):hover,
-.even:not(.nopointer):hover,
+table tr:not(.nopointer):hover,
 .hover:not(.nopointer) {
     background: <?php echo $GLOBALS['cfg']['BrowsePointerBackground']; ?>;
     color: <?php echo $GLOBALS['cfg']['BrowsePointerColor']; ?>;
 }
 
 /* hovered table rows */
-table tr.odd:not(.nopointer):hover th,
-table tr.even:not(.nopointer):hover th,
 table tr.hover:not(.nopointer) th {
     background:   <?php echo $GLOBALS['cfg']['BrowsePointerBackground']; ?>;
     color:   <?php echo $GLOBALS['cfg']['BrowsePointerColor']; ?>;
@@ -315,7 +307,7 @@ th.condition {
  */
 td.null {
     font-style: italic;
-    text-align: <?php echo $right; ?>;
+    color: #7d7d7d;
 }
 
 table .valueHeader {
@@ -502,6 +494,9 @@ fieldset.confirmation legend {
 }
 /* end messageboxes */
 
+.new_central_col{
+    width:              100%;
+}
 
 .tblcomment {
     font-size:          70%;
@@ -969,7 +964,7 @@ h3#serverstatusqueries span {
 
 /* Also used for the variables page */
 fieldset#tableFilter {
-    margin-bottom:1em;
+    padding: 0.1em 1em;
 }
 
 div#serverStatusTabs {
@@ -1355,6 +1350,16 @@ label.desc sup {
     position: absolute;
 }
 
+code.php {
+    display: block;
+    padding-left: 0.3em;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-height: 10em;
+    overflow: auto;
+    direction: ltr;
+}
+
 code.sql,
 div.sqlvalidate {
     display:            block;
@@ -1633,6 +1638,10 @@ input#input_import_file {
 
 .formelementrow {
     margin: 5px 0 5px 0;
+}
+
+#filterText {
+    vertical-align: baseline;
 }
 
 #popup_background {
@@ -2321,7 +2330,8 @@ fieldset .disabled-field td {
 }
 
 .cEdit .edit_box {
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     padding: 0;
 }
 
@@ -2655,10 +2665,6 @@ div.jqplot-noData-container {
 
 div#page_content div#tableslistcontainer table.data {
     border-top: 0.1px solid #EEEEEE;
-}
-
-div#page_content form#db_search_form.ajax fieldset {
-    margin-top: -0.3em;
 }
 
 div#page_content div#tableslistcontainer, div#page_content div.notice, div#page_content div.result_query {
@@ -3041,9 +3047,6 @@ html.ie7 #pma_console .query_input {
     width: 100%;
     min-height: initial;
     max-height: initial;
-}
-.firefox .cm-s-pma.CodeMirror {
-    font-size: 120%;
 }
 .cm-s-pma .CodeMirror-scroll {
     cursor: text;

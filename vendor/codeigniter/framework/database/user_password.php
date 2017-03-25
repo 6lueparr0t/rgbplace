@@ -6,6 +6,8 @@
  *
  * @package PhpMyAdmin
  */
+use PMA\libraries\URL;
+use PMA\libraries\Response;
 
 /**
  * Gets some core libraries
@@ -17,10 +19,11 @@ require_once './libraries/common.inc.php';
  */
 require_once './libraries/server_privileges.lib.php';
 
-$response = PMA\libraries\Response::getInstance();
+$response = Response::getInstance();
 $header   = $response->getHeader();
 $scripts  = $header->getScripts();
 $scripts->addFile('server_privileges.js');
+$scripts->addFile('zxcvbn.js');
 
 /**
  * Displays an error message and exits if the user isn't allowed to use this
@@ -81,11 +84,11 @@ exit;
  */
 function PMA_getChangePassMessage($change_password_message, $sql_query = '')
 {
-    if ($GLOBALS['is_ajax_request'] == true) {
+    if ($response->isAjax()) {
         /**
          * If in an Ajax request, we don't need to show the rest of the page
          */
-        $response = PMA\libraries\Response::getInstance();
+        $response = Response::getInstance();
         if ($change_password_message['error']) {
             $response->addJSON('message', $change_password_message['msg']);
             $response->setRequestStatus(false);
@@ -112,10 +115,10 @@ function PMA_setChangePasswordMsg()
     $message = PMA\libraries\Message::success(__('The profile has been updated.'));
 
     if (($_REQUEST['nopass'] != '1')) {
-        if (empty($_REQUEST['pma_pw']) || empty($_REQUEST['pma_pw2'])) {
+        if (strlen($_REQUEST['pma_pw']) === 0 || strlen($_REQUEST['pma_pw2']) === 0) {
             $message = PMA\libraries\Message::error(__('The password is empty!'));
             $error = true;
-        } elseif ($_REQUEST['pma_pw'] != $_REQUEST['pma_pw2']) {
+        } elseif ($_REQUEST['pma_pw'] !== $_REQUEST['pma_pw2']) {
             $message = PMA\libraries\Message::error(
                 __('The passwords aren\'t the same!')
             );
@@ -143,9 +146,7 @@ function PMA_changePassword($password, $message, $change_password_message)
 
     $hashing_function = PMA_changePassHashingFunction();
 
-    $row = $GLOBALS['dbi']->fetchSingleRow('SELECT CURRENT_USER() as user');
-    $curr_user = $row['user'];
-    list($username, $hostname) = explode('@', $curr_user);
+    list($username, $hostname) = $GLOBALS['dbi']->getCurrentUserAndHost();
 
     $serverType = PMA\libraries\Util::getServerType();
 
@@ -227,7 +228,7 @@ function PMA_changePassHashingFunction()
 function PMA_changePassUrlParamsAndSubmitQuery(
     $username, $hostname, $password, $sql_query, $hashing_function, $orig_auth_plugin
 ) {
-    $err_url = 'user_password.php' . PMA_URL_getCommon();
+    $err_url = 'user_password.php' . URL::getCommon();
 
     $serverType = PMA\libraries\Util::getServerType();
 
@@ -236,7 +237,7 @@ function PMA_changePassUrlParamsAndSubmitQuery(
             . ' IDENTIFIED with ' . $orig_auth_plugin . ' BY '
             . (($password == '')
             ? '\'\''
-            : '\'' . PMA\libraries\Util::sqlAddSlashes($password) . '\'');
+            : '\'' . $GLOBALS['dbi']->escapeString($password) . '\'');
     } else if ($serverType == 'MariaDB'
         && PMA_MYSQL_INT_VERSION >= 50200
         && PMA_MYSQL_INT_VERSION < 100100
@@ -264,7 +265,7 @@ function PMA_changePassUrlParamsAndSubmitQuery(
         $local_query = 'SET password = ' . (($password == '')
             ? '\'\''
             : $hashing_function . '(\''
-                . PMA\libraries\Util::sqlAddSlashes($password) . '\')');
+                . $GLOBALS['dbi']->escapeString($password) . '\')');
     }
     if (! @$GLOBALS['dbi']->tryQuery($local_query)) {
         PMA\libraries\Util::mysqlDie(
@@ -293,7 +294,7 @@ function PMA_changePassDisplayPage($message, $sql_query)
     echo PMA\libraries\Util::getMessage(
         $message, $sql_query, 'success'
     );
-    echo '<a href="index.php' , PMA_URL_getCommon()
+    echo '<a href="index.php' , URL::getCommon()
         , ' target="_parent">' , "\n"
         , '<strong>' , __('Back') , '</strong></a>';
     exit;

@@ -7,6 +7,9 @@
  */
 namespace PMA\libraries;
 
+use PMA\libraries\URL;
+use PMA\libraries\Sanitize;
+
 /**
  * Class to handle database search
  *
@@ -139,8 +142,8 @@ class DbSearch
         ) {
             unset($this->_criteriaColumnName);
         } else {
-            $this->_criteriaColumnName = Util::sqlAddSlashes(
-                $_REQUEST['criteriaColumnName'], true
+            $this->_criteriaColumnName = $GLOBALS['dbi']->escapeString(
+                $_REQUEST['criteriaColumnName']
             );
         }
     }
@@ -203,9 +206,8 @@ class DbSearch
         // For "as regular expression" (search option 4), LIKE won't be used
         // Usage example: If user is searching for a literal $ in a regexp search,
         // he should enter \$ as the value.
-        $criteriaSearchStringEscaped = Util::sqlAddSlashes(
-            $this->_criteriaSearchString,
-            ($this->_criteriaSearchType == 4 ? false : true)
+        $criteriaSearchStringEscaped = $GLOBALS['dbi']->escapeString(
+            $this->_criteriaSearchString
         );
         // Extract search words or pattern
         $search_words = (($this->_criteriaSearchType > 2)
@@ -214,14 +216,14 @@ class DbSearch
 
         foreach ($search_words as $search_word) {
             // Eliminates empty values
-            if (mb_strlen($search_word) === 0) {
+            if (strlen($search_word) === 0) {
                 continue;
             }
             $likeClausesPerColumn = array();
             // for each column in the table
             foreach ($allColumns as $column) {
                 if (! isset($this->_criteriaColumnName)
-                    || mb_strlen($this->_criteriaColumnName) == 0
+                    || strlen($this->_criteriaColumnName) === 0
                     || $column['Field'] == $this->_criteriaColumnName
                 ) {
                     $column = 'CONVERT(' . Util::backquote($column['Field'])
@@ -270,19 +272,17 @@ class DbSearch
             . '</caption>';
 
         $num_search_result_total = 0;
-        $odd_row = true;
         // For each table selected as search criteria
         foreach ($this->_criteriaTables as $each_table) {
             // Gets the SQL statements
             $newsearchsqls = $this->_getSearchSqls($each_table);
             // Executes the "COUNT" statement
-            $res_cnt = $GLOBALS['dbi']->fetchValue($newsearchsqls['select_count']);
+            $res_cnt = intval($GLOBALS['dbi']->fetchValue($newsearchsqls['select_count']));
             $num_search_result_total += $res_cnt;
             // Gets the result row's HTML for a table
             $html_output .= $this->_getResultsRow(
-                $each_table, $newsearchsqls, $odd_row, $res_cnt
+                $each_table, $newsearchsqls, $res_cnt
             );
-            $odd_row = ! $odd_row;
         } // end for
         $html_output .= '</table>';
         // Displays total number of matches
@@ -307,12 +307,11 @@ class DbSearch
      *
      * @param string  $each_table    One of the tables on which search was performed
      * @param array   $newsearchsqls Contains SQL queries
-     * @param bool    $odd_row       For displaying contrasting table rows
      * @param integer $res_cnt       Number of results found
      *
      * @return string HTML row
      */
-    private function _getResultsRow($each_table, $newsearchsqls, $odd_row, $res_cnt)
+    private function _getResultsRow($each_table, $newsearchsqls, $res_cnt)
     {
         $this_url_params = array(
             'db'    => $GLOBALS['db'],
@@ -322,7 +321,7 @@ class DbSearch
             'is_js_confirmed' => 0,
         );
         // Start forming search results row
-        $html_output = '<tr class="noclick ' . ($odd_row ? 'odd' : 'even') . '">';
+        $html_output = '<tr class="noclick">';
         // Displays results count for a table
         $html_output .= '<td>';
         $html_output .= sprintf(
@@ -335,29 +334,22 @@ class DbSearch
         $html_output .= '</td>';
         // Displays browse/delete link if result count > 0
         if ($res_cnt > 0) {
-            $this_url_params['sql_query'] = $newsearchsqls['select_columns'];
-            $browse_result_path = 'sql.php' . PMA_URL_getCommon($this_url_params);
-            $html_output .= '<td><a name="browse_search" class="ajax" href="'
-                . $browse_result_path . '" onclick="loadResult(\''
-                . $browse_result_path . '\',\''
-                . PMA_escapeJsString(htmlspecialchars($each_table)) . '\',\''
-                . PMA_URL_getCommon(
-                    array(
-                        'db' => $GLOBALS['db'], 'table' => $each_table
-                    )
-                ) . '\''
-                . ');return false;" >'
+            $this_url_params['db'] = htmlspecialchars($GLOBALS['db']);
+            $this_url_params['table'] = htmlspecialchars($each_table);
+            $browse_result_path = 'sql.php' . URL::getCommon($this_url_params);
+            $html_output .= '<td><a name="browse_search" '
+                . ' class="ajax browse_results" href="'
+                . $browse_result_path . '" '
+                . 'data-browse-sql="'
+                . htmlspecialchars($newsearchsqls['select_columns']). '" '
+                . 'data-table-name="' . htmlspecialchars($each_table) . '" >'
                 . __('Browse') . '</a></td>';
-            $this_url_params['sql_query'] = $newsearchsqls['delete'];
-            $delete_result_path = 'sql.php' . PMA_URL_getCommon($this_url_params);
-            $html_output .= '<td><a name="delete_search" class="ajax" href="'
-                . $delete_result_path . '" onclick="deleteResult(\''
-                . $delete_result_path . '\' , \''
-                . PMA_escapeJsString(sprintf(
-                    __('Delete the matches for the %s table?'),
-                    htmlspecialchars($each_table)
-                ))
-                . '\');return false;">'
+
+            $delete_result_path = $browse_result_path;
+            $html_output .= '<td><a name="delete_search" class="ajax delete_results"'
+                . ' href="' . $delete_result_path . '"'
+                . ' data-delete-sql="' . htmlspecialchars($newsearchsqls['delete']) . '"'
+                . ' data-table-name="' . htmlspecialchars($each_table) . '" >'
                 . __('Delete') . '</a></td>';
         } else {
             $html_output .= '<td>&nbsp;</td>'
@@ -378,7 +370,7 @@ class DbSearch
         $html_output .= '<form id="db_search_form"'
             . ' class="ajax lock-page"'
             . ' method="post" action="db_search.php" name="db_search">';
-        $html_output .= PMA_URL_getHiddenInputs($GLOBALS['db']);
+        $html_output .= URL::getHiddenInputs($GLOBALS['db']);
         $html_output .= '<fieldset>';
         // set legend caption
         $html_output .= '<legend>' . __('Search in database') . '</legend>';

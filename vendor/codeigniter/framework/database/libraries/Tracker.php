@@ -123,17 +123,13 @@ class Tracker
         }
 
         $sql_query = " SELECT tracking_active FROM " . self::_getTrackingTable() .
-        " WHERE db_name = '" . Util::sqlAddSlashes($dbname) . "' " .
-        " AND table_name = '" . Util::sqlAddSlashes($tablename) . "' " .
-        " ORDER BY version DESC";
+        " WHERE db_name = '" . $GLOBALS['dbi']->escapeString($dbname) . "' " .
+        " AND table_name = '" . $GLOBALS['dbi']->escapeString($tablename) . "' " .
+        " ORDER BY version DESC LIMIT 1";
 
-        $row = $GLOBALS['dbi']->fetchArray(PMA_queryAsControlUser($sql_query));
+        $result = $GLOBALS['dbi']->fetchValue($sql_query);
 
-        if (isset($row['tracking_active']) && $row['tracking_active'] == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($result == 1);
     }
 
     /**
@@ -144,8 +140,9 @@ class Tracker
     static public function getLogComment()
     {
         $date = date('Y-m-d H:i:s');
+        $user = preg_replace('/\s+/', ' ', $GLOBALS['cfg']['Server']['user']);
 
-        return "# log " . $date . " " . $GLOBALS['cfg']['Server']['user'] . "\n";
+        return "# log " . $date . " " . $user . "\n";
     }
 
     /**
@@ -242,15 +239,15 @@ class Tracker
         "tracking " .
         ") " .
         "values (
-        '" . Util::sqlAddSlashes($dbname) . "',
-        '" . Util::sqlAddSlashes($tablename) . "',
-        '" . Util::sqlAddSlashes($version) . "',
-        '" . Util::sqlAddSlashes($date) . "',
-        '" . Util::sqlAddSlashes($date) . "',
-        '" . Util::sqlAddSlashes($snapshot) . "',
-        '" . Util::sqlAddSlashes($create_sql) . "',
-        '" . Util::sqlAddSlashes("\n") . "',
-        '" . Util::sqlAddSlashes($tracking_set)
+        '" . $GLOBALS['dbi']->escapeString($dbname) . "',
+        '" . $GLOBALS['dbi']->escapeString($tablename) . "',
+        '" . $GLOBALS['dbi']->escapeString($version) . "',
+        '" . $GLOBALS['dbi']->escapeString($date) . "',
+        '" . $GLOBALS['dbi']->escapeString($date) . "',
+        '" . $GLOBALS['dbi']->escapeString($snapshot) . "',
+        '" . $GLOBALS['dbi']->escapeString($create_sql) . "',
+        '" . $GLOBALS['dbi']->escapeString("\n") . "',
+        '" . $GLOBALS['dbi']->escapeString($tracking_set)
         . "' )";
 
         $result = PMA_queryAsControlUser($sql_query);
@@ -280,12 +277,12 @@ class Tracker
         $sql_query = "/*NOTRACK*/\n"
             . "DELETE FROM " . self::_getTrackingTable()
             . " WHERE `db_name` = '"
-            . Util::sqlAddSlashes($dbname) . "'"
+            . $GLOBALS['dbi']->escapeString($dbname) . "'"
             . " AND `table_name` = '"
-            . Util::sqlAddSlashes($tablename) . "'";
+            . $GLOBALS['dbi']->escapeString($tablename) . "'";
         if ($version) {
             $sql_query .= " AND `version` = '"
-                . Util::sqlAddSlashes($version) . "'";
+                . $GLOBALS['dbi']->escapeString($version) . "'";
         }
         $result = PMA_queryAsControlUser($sql_query);
 
@@ -338,15 +335,15 @@ class Tracker
         "tracking " .
         ") " .
         "values (
-        '" . Util::sqlAddSlashes($dbname) . "',
-        '" . Util::sqlAddSlashes('') . "',
-        '" . Util::sqlAddSlashes($version) . "',
-        '" . Util::sqlAddSlashes($date) . "',
-        '" . Util::sqlAddSlashes($date) . "',
-        '" . Util::sqlAddSlashes('') . "',
-        '" . Util::sqlAddSlashes($create_sql) . "',
-        '" . Util::sqlAddSlashes("\n") . "',
-        '" . Util::sqlAddSlashes($tracking_set)
+        '" . $GLOBALS['dbi']->escapeString($dbname) . "',
+        '" . $GLOBALS['dbi']->escapeString('') . "',
+        '" . $GLOBALS['dbi']->escapeString($version) . "',
+        '" . $GLOBALS['dbi']->escapeString($date) . "',
+        '" . $GLOBALS['dbi']->escapeString($date) . "',
+        '" . $GLOBALS['dbi']->escapeString('') . "',
+        '" . $GLOBALS['dbi']->escapeString($create_sql) . "',
+        '" . $GLOBALS['dbi']->escapeString("\n") . "',
+        '" . $GLOBALS['dbi']->escapeString($tracking_set)
         . "' )";
 
         $result = PMA_queryAsControlUser($sql_query);
@@ -374,9 +371,9 @@ class Tracker
 
         $sql_query = " UPDATE " . self::_getTrackingTable() .
         " SET `tracking_active` = '" . $new_state . "' " .
-        " WHERE `db_name` = '" . Util::sqlAddSlashes($dbname) . "' " .
-        " AND `table_name` = '" . Util::sqlAddSlashes($tablename) . "' " .
-        " AND `version` = '" . Util::sqlAddSlashes($version) . "' ";
+        " WHERE `db_name` = '" . $GLOBALS['dbi']->escapeString($dbname) . "' " .
+        " AND `table_name` = '" . $GLOBALS['dbi']->escapeString($tablename) . "' " .
+        " AND `version` = '" . $GLOBALS['dbi']->escapeString($version) . "' ";
 
         $result = PMA_queryAsControlUser($sql_query);
 
@@ -412,7 +409,7 @@ class Tracker
         if (is_array($new_data)) {
             foreach ($new_data as $data) {
                 $new_data_processed .= '# log ' . $date . ' ' . $data['username']
-                    . Util::sqlAddSlashes($data['statement']) . "\n";
+                    . $GLOBALS['dbi']->escapeString($data['statement']) . "\n";
             }
         } else {
             $new_data_processed = $new_data;
@@ -420,9 +417,9 @@ class Tracker
 
         $sql_query = " UPDATE " . self::_getTrackingTable() .
         " SET `" . $save_to . "` = '" . $new_data_processed . "' " .
-        " WHERE `db_name` = '" . Util::sqlAddSlashes($dbname) . "' " .
-        " AND `table_name` = '" . Util::sqlAddSlashes($tablename) . "' " .
-        " AND `version` = '" . Util::sqlAddSlashes($version) . "' ";
+        " WHERE `db_name` = '" . $GLOBALS['dbi']->escapeString($dbname) . "' " .
+        " AND `table_name` = '" . $GLOBALS['dbi']->escapeString($tablename) . "' " .
+        " AND `version` = '" . $GLOBALS['dbi']->escapeString($version) . "' ";
 
         $result = PMA_queryAsControlUser($sql_query);
 
@@ -478,8 +475,8 @@ class Tracker
     static public function getVersion($dbname, $tablename, $statement = null)
     {
         $sql_query = " SELECT MAX(version) FROM " . self::_getTrackingTable() .
-        " WHERE `db_name` = '" . Util::sqlAddSlashes($dbname) . "' " .
-        " AND `table_name` = '" . Util::sqlAddSlashes($tablename) . "' ";
+        " WHERE `db_name` = '" . $GLOBALS['dbi']->escapeString($dbname) . "' " .
+        " AND `table_name` = '" . $GLOBALS['dbi']->escapeString($tablename) . "' ";
 
         if ($statement != "") {
             $sql_query .= " AND FIND_IN_SET('"
@@ -507,12 +504,12 @@ class Tracker
     static public function getTrackedData($dbname, $tablename, $version)
     {
         $sql_query = " SELECT * FROM " . self::_getTrackingTable() .
-            " WHERE `db_name` = '" . Util::sqlAddSlashes($dbname) . "' ";
+            " WHERE `db_name` = '" . $GLOBALS['dbi']->escapeString($dbname) . "' ";
         if (! empty($tablename)) {
             $sql_query .= " AND `table_name` = '"
-                . Util::sqlAddSlashes($tablename) . "' ";
+                . $GLOBALS['dbi']->escapeString($tablename) . "' ";
         }
-        $sql_query .= " AND `version` = '" . Util::sqlAddSlashes($version)
+        $sql_query .= " AND `version` = '" . $GLOBALS['dbi']->escapeString($version)
             . "' " . " ORDER BY `version` DESC LIMIT 1";
 
         $mixed = $GLOBALS['dbi']->fetchAssoc(PMA_queryAsControlUser($sql_query));
@@ -620,212 +617,130 @@ class Tracker
         // $parsed_sql = PMA_SQP_parse($query);
         // $sql_info = PMA_SQP_analyze($parsed_sql);
 
-        $query = str_replace("\n", " ", $query);
-        $query = str_replace("\r", " ", $query);
+        $parser = new \PhpMyAdmin\SqlParser\Parser($query);
 
-        $query = trim($query);
-        $query = trim($query, ' -');
-
-        $tokens = explode(" ", $query);
-        foreach ($tokens as $key => $value) {
-            $tokens[$key] = mb_strtoupper($value);
-        }
+        $tokens = $parser->list->tokens;
 
         // Parse USE statement, need it for SQL dump imports
-        if (mb_substr($query, 0, 4) == 'USE ') {
-            $prefix = explode('USE ', $query);
-            $GLOBALS['db'] = self::getTableName($prefix[1]);
+        if ($tokens[0]->value == 'USE') {
+            $GLOBALS['db'] = $tokens[2]->value;
         }
 
-        /*
-         * DDL statements
-         */
+        $result = array();
 
-        $result         = array();
-        $result['type'] = 'DDL';
+        if (!empty($parser->statements)) {
+            $statement = $parser->statements[0];
+            $options   = isset($statement->options) ? $statement->options->options : null;
 
-        // Parse CREATE VIEW statement
-        if (in_array('CREATE', $tokens) == true
-            && in_array('VIEW', $tokens) == true
-            && in_array('AS', $tokens) == true
-        ) {
-            $result['identifier'] = 'CREATE VIEW';
+            /*
+             * DDL statements
+             */
+            $result['type'] = 'DDL';
 
-            $index = array_search('VIEW', $tokens);
+            // Parse CREATE statement
+            if ($statement instanceof \PhpMyAdmin\SqlParser\Statements\CreateStatement) {
+                if (empty($options) || !isset($options[6])) {
+                    return $result;
+                }
 
-            $result['tablename'] = mb_strtolower(
-                self::getTableName($tokens[$index + 1])
-            );
-        }
+                if ($options[6] == 'VIEW' || $options[6] == 'TABLE') {
+                    $result['identifier'] = 'CREATE ' . $options[6];
+                    $result['tablename']  = $statement->name->table ;
+                } elseif ($options[6] == 'DATABASE') {
+                    $result['identifier'] = 'CREATE DATABASE' ;
+                    $result['tablename']  = '' ;
 
-        // Parse ALTER VIEW statement
-        if (in_array('ALTER', $tokens) == true
-            && in_array('VIEW', $tokens) == true
-            && in_array('AS', $tokens) == true
-            && ! isset($result['identifier'])
-        ) {
-            $result['identifier'] = 'ALTER VIEW';
+                    // In case of CREATE DATABASE, table field of the CreateStatement is actually name of the database
+                    $GLOBALS['db']        = $statement->name->table;
+                } elseif ($options[6] == 'INDEX'
+                          || $options[6] == 'UNIQUE INDEX'
+                          || $options[6] == 'FULLTEXT INDEX'
+                          || $options[6] == 'SPATIAL INDEX'
+                ){
+                    $result['identifier'] = 'CREATE INDEX';
 
-            $index = array_search('VIEW', $tokens);
+                    // In case of CREATE INDEX, we have to get the table name from body of the statement
+                    $result['tablename']  = $statement->body[3]->value == '.' ? $statement->body[4]->value
+                                                                              : $statement->body[2]->value ;
+                }
+            }
 
-            $result['tablename'] = mb_strtolower(
-                self::getTableName($tokens[$index + 1])
-            );
-        }
+            // Parse ALTER statement
+            elseif ($statement instanceof \PhpMyAdmin\SqlParser\Statements\AlterStatement) {
+                if (empty($options) || !isset($options[3])) {
+                    return $result;
+                }
 
-        // Parse DROP VIEW statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 10) == 'DROP VIEW '
-        ) {
-            $result['identifier'] = 'DROP VIEW';
+                if ($options[3] == 'VIEW' || $options[3] == 'TABLE') {
+                    $result['identifier']   = 'ALTER ' . $options[3] ;
+                    $result['tablename']    = $statement->table->table ;
+                } elseif ($options[3] == 'DATABASE') {
+                    $result['identifier']   = 'ALTER DATABASE' ;
+                    $result['tablename']    = '' ;
 
-            $prefix  = explode('DROP VIEW ', $query);
-            $str = str_replace('IF EXISTS', '', $prefix[1]);
-            $result['tablename'] = self::getTableName($str);
-        }
+                    $GLOBALS['db']          = $statement->table->table ;
+                }
+            }
 
-        // Parse CREATE DATABASE statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 15) == 'CREATE DATABASE'
-        ) {
-            $result['identifier'] = 'CREATE DATABASE';
-            $str = str_replace('CREATE DATABASE', '', $query);
-            $str = str_replace('IF NOT EXISTS', '', $str);
+            // Parse DROP statement
+            elseif ($statement instanceof \PhpMyAdmin\SqlParser\Statements\DropStatement) {
+                if (empty($options) || !isset($options[1])) {
+                    return $result;
+                }
 
-            $prefix = explode('DEFAULT ', $str);
+                if ($options[1] == 'VIEW' || $options[1] == 'TABLE') {
+                    $result['identifier'] = 'DROP ' . $options[1] ;
+                    $result['tablename']  = $statement->fields[0]->table;
+                } elseif ($options[1] == 'DATABASE') {
+                    $result['identifier'] = 'DROP DATABASE' ;
+                    $result['tablename']  = '';
 
-            $result['tablename'] = '';
-            $GLOBALS['db'] = self::getTableName($prefix[0]);
-        }
+                    $GLOBALS['db']        = $statement->fields[0]->table;
+                } elseif ($options[1] == 'INDEX') {
+                    $result['identifier']   = 'DROP INDEX' ;
+                    $result['tablename']    = $statement->table->table;
+                }
+            }
 
-        // Parse ALTER DATABASE statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 14) == 'ALTER DATABASE'
-        ) {
-            $result['identifier'] = 'ALTER DATABASE';
-            $result['tablename'] = '';
-        }
+            // Prase RENAME statement
+            elseif ($statement instanceof \PhpMyAdmin\SqlParser\Statements\RenameStatement) {
+                $result['identifier']               = 'RENAME TABLE';
+                $result['tablename']                = $statement->renames[0]->old->table;
+                $result['tablename_after_rename']   = $statement->renames[0]->new->table;
+            }
 
-        // Parse DROP DATABASE statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 13) == 'DROP DATABASE'
-        ) {
-            $result['identifier'] = 'DROP DATABASE';
-            $str = str_replace('DROP DATABASE', '', $query);
-            $str = str_replace('IF EXISTS', '', $str);
-            $GLOBALS['db'] = self::getTableName($str);
-            $result['tablename'] = '';
-        }
+            if (isset($result['identifier'])) {
+                return $result ;
+            }
 
-        // Parse CREATE TABLE statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 12) == 'CREATE TABLE'
-        ) {
-            $result['identifier'] = 'CREATE TABLE';
-            $query   = str_replace('IF NOT EXISTS', '', $query);
-            $prefix  = explode('CREATE TABLE ', $query);
-            $suffix  = explode('(', $prefix[1]);
-            $result['tablename'] = self::getTableName($suffix[0]);
-        }
+            /*
+             * DML statements
+             */
+            $result['type'] = 'DML';
 
-        // Parse ALTER TABLE statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 12) == 'ALTER TABLE '
-        ) {
-            $result['identifier'] = 'ALTER TABLE';
+            // Parse UPDATE statement
+            if ($statement instanceof \PhpMyAdmin\SqlParser\Statements\UpdateStatement) {
+                $result['identifier']   = 'UPDATE';
+                $result['tablename']    = $statement->tables[0]->table;
+            }
 
-            $prefix  = explode('ALTER TABLE ', $query);
-            $suffix  = explode(' ', $prefix[1]);
-            $result['tablename']  = self::getTableName($suffix[0]);
-        }
+            // Parse INSERT INTO statement
+            if ($statement instanceof \PhpMyAdmin\SqlParser\Statements\InsertStatement) {
+                $result['identifier']   = 'INSERT';
+                $result['tablename']    = $statement->into->dest->table;
+            }
 
-        // Parse DROP TABLE statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 11) == 'DROP TABLE '
-        ) {
-            $result['identifier'] = 'DROP TABLE';
+            // Parse DELETE statement
+            if ($statement instanceof \PhpMyAdmin\SqlParser\Statements\DeleteStatement) {
+                $result['identifier']   = 'DELETE';
+                $result['tablename']    = $statement->from[0]->table;
+            }
 
-            $prefix  = explode('DROP TABLE ', $query);
-            $str = str_replace('IF EXISTS', '', $prefix[1]);
-            $result['tablename'] = self::getTableName($str);
-        }
-
-        // Parse CREATE INDEX statement
-        if (! isset($result['identifier'])
-            && (substr($query, 0, 12) == 'CREATE INDEX'
-            || substr($query, 0, 19) == 'CREATE UNIQUE INDEX'
-            || substr($query, 0, 20) == 'CREATE SPATIAL INDEX')
-        ) {
-             $result['identifier'] = 'CREATE INDEX';
-             $prefix = explode('ON ', $query);
-             $suffix = explode('(', $prefix[1]);
-             $result['tablename'] = self::getTableName($suffix[0]);
-        }
-
-        // Parse DROP INDEX statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 10) == 'DROP INDEX'
-        ) {
-             $result['identifier'] = 'DROP INDEX';
-             $prefix = explode('ON ', $query);
-             $result['tablename'] = self::getTableName($prefix[1]);
-        }
-
-        // Parse RENAME TABLE statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 13) == 'RENAME TABLE '
-        ) {
-            $result['identifier'] = 'RENAME TABLE';
-            $prefix = explode('RENAME TABLE ', $query);
-            $names  = explode(' TO ', $prefix[1]);
-            $result['tablename']      = self::getTableName($names[0]);
-            $result["tablename_after_rename"]  = self::getTableName($names[1]);
-        }
-
-        /*
-         * DML statements
-         */
-
-        if (! isset($result['identifier'])) {
-            $result["type"]       = 'DML';
-        }
-        // Parse UPDATE statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 6) == 'UPDATE'
-        ) {
-            $result['identifier'] = 'UPDATE';
-            $prefix  = explode('UPDATE ', $query);
-            $suffix  = explode(' ', $prefix[1]);
-            $result['tablename'] = self::getTableName($suffix[0]);
-        }
-
-        // Parse INSERT INTO statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 11) == 'INSERT INTO'
-        ) {
-            $result['identifier'] = 'INSERT';
-            $prefix  = explode('INSERT INTO', $query);
-            $suffix  = explode('(', $prefix[1]);
-            $result['tablename'] = self::getTableName($suffix[0]);
-        }
-
-        // Parse DELETE statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 6) == 'DELETE'
-        ) {
-            $result['identifier'] = 'DELETE';
-            $prefix  = explode('FROM ', $query);
-            $suffix  = explode(' ', $prefix[1]);
-            $result['tablename'] = self::getTableName($suffix[0]);
-        }
-
-        // Parse TRUNCATE statement
-        if (! isset($result['identifier'])
-            && substr($query, 0, 8) == 'TRUNCATE'
-        ) {
-            $result['identifier'] = 'TRUNCATE';
-            $prefix  = explode('TRUNCATE', $query);
-            $result['tablename'] = self::getTableName($prefix[1]);
+            // Parse TRUNCATE statement
+            if ($statement instanceof \PhpMyAdmin\SqlParser\Statements\TruncateStatement) {
+                $result['identifier']   = 'TRUNCATE' ;
+                $result['tablename']    = $statement->table->table;
+            }
         }
 
         return $result;
@@ -916,14 +831,14 @@ class Tracker
                     . " UPDATE " . self::_getTrackingTable()
                     . " SET " . Util::backquote($save_to)
                     . " = CONCAT( " . Util::backquote($save_to) . ",'\n"
-                    . Util::sqlAddSlashes($query) . "') ,"
+                    . $GLOBALS['dbi']->escapeString($query) . "') ,"
                     . " `date_updated` = '" . $date . "' ";
 
                 // If table was renamed we have to change
                 // the tablename attribute in pma_tracking too
                 if ($result['identifier'] == 'RENAME TABLE') {
                     $sql_query .= ', `table_name` = \''
-                        . Util::sqlAddSlashes($result['tablename_after_rename'])
+                        . $GLOBALS['dbi']->escapeString($result['tablename_after_rename'])
                         . '\' ';
                 }
 
@@ -934,10 +849,10 @@ class Tracker
                 // we want to track
                 $sql_query .=
                 " WHERE FIND_IN_SET('" . $result['identifier'] . "',tracking) > 0" .
-                " AND `db_name` = '" . Util::sqlAddSlashes($dbname) . "' " .
+                " AND `db_name` = '" . $GLOBALS['dbi']->escapeString($dbname) . "' " .
                 " AND `table_name` = '"
-                . Util::sqlAddSlashes($result['tablename']) . "' " .
-                " AND `version` = '" . Util::sqlAddSlashes($version) . "' ";
+                . $GLOBALS['dbi']->escapeString($result['tablename']) . "' " .
+                " AND `version` = '" . $GLOBALS['dbi']->escapeString($version) . "' ";
 
                 PMA_queryAsControlUser($sql_query);
             }
