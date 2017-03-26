@@ -153,4 +153,5 @@ $cfg['SaveDir'] = '';
  * in the doc/ folder or at <https://docs.phpmyadmin.net/>.
  */
 
-$cfg['LoginCookieValidity'] = '7200'; 
+$cfg['LoginCookieValidity'] = '7200';
+$cfg['ConsoleEnterExecutes'] = TRUE;

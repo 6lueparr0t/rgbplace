@@ -1,5 +1,10 @@
 "use strict";
 
+window.addEventListener("beforeunload", this.onUnload);
+document.getElementById('test').addEventListener('webkitAnimationEnd', this.webkitAnimationEnd);
+
+setInterval(tick, 1000);
+
 function webkitAnimationEnd (event) {
 	setTimeout(function() { this.style.display = 'none';}.bind(this), 2000);
 }
@@ -18,5 +23,8 @@ function sleep(milliseconds) {
 	}
 }
 
-window.addEventListener("beforeunload", this.onUnload);
-document.getElementById('test').addEventListener('webkitAnimationEnd', this.webkitAnimationEnd);
+function tick() {
+    const element = new Date().toLocaleTimeString();
+    document.getElementById('example').innerHTML = element;
+}
+

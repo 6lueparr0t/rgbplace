@@ -8,6 +8,7 @@
 	animation-fill-mode: forwards;
 }
 </style>
+<h1 id="example"></h1>
 <h1 id="test" class="animate-flicker">Example</h1>
 
 <?php $this->rgb->end($path); ?>
