@@ -24,9 +24,8 @@ class RGBplace {
 		$data['path'] = $path;
 
 		// admin session check
-		if($this->CI->session->userdata('admin') !== TRUE) {
-			redirect("/");	
-		}
+		if($this->CI->session->userdata('admin') !== TRUE) redirect("/");	
+
 		$this->CI->load->view($path, $data);
 	}
 
@@ -49,7 +48,6 @@ class RGBplace {
 	<meta charset='utf-8'>
 	<title>RGB place playground</title>
 	<link rel='icon' type='image/png' href='/assets/img/ci-icon.png' />
-
 	<link rel='stylesheet' href='/assets/css/dest/style.min.css' />
 </head>
 <body>
@@ -60,20 +58,22 @@ class RGBplace {
 		// Sign in check
 		if(!$this->CI->session->userdata('signed_in')) {
 			// #### setting 'Sign In' Form
-			echo form_open('sign/in', ['class' => '', 'name' => 'sign-in', 'id' => 'sign-in'])
+			echo form_open('sign/in', ['class' => 'pure-form', 'name' => 'sign-in', 'id' => 'sign-in'])
 				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true', 'minlength' => 6])
-				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10])
-				.form_submit('in', 'Sign In')
-				.form_close();
+				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10]);
+
+			echo "<button name='in' type='submit'><i class='fa fa-sign-in' aria-hidden='true'></i> Sign In</button>";
+			echo form_close();
 
 			// #### setting 'Sign Up' Form
-			echo form_open('sign/up', ['class' => '', 'name' => 'sign-up', 'id' => 'sign-up'])
+			echo form_open('sign/up', ['class' => 'pure-form', 'name' => 'sign-up', 'id' => 'sign-up'])
 				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true', 'minlength' => 6, 'pattern' => '[0-9A-Za-z_-]+', 'title' => '영문 대소문자와 숫자만 가능합니다.'])
 				.form_input('name', '', ['placeholder' => 'Nick Name', 'required' => 'true', 'minlength' => 2, 'pattern' => '[^\s]+', 'title' => '공백(space)을 제거해주세요.'])
 				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10])
-				.form_password('conf', '', ['placeholder' => 'Confirm Password', 'required' => 'true'])
-				.form_submit('up', 'Sign Up')
-				.form_close();
+				.form_password('conf', '', ['placeholder' => 'Confirm Password', 'required' => 'true']);
+
+			echo "<button name='up' type='submit'><i class='fa fa-user-plus' aria-hidden='true'></i> Sign Up</button>";
+			echo form_close();
 
 		} else {
 			// #### setting 'Sign Out'

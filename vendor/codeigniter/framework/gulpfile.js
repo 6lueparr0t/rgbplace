@@ -20,38 +20,43 @@ let argv = yargs.argv;
 let dir  = argv.dir;
 let file = argv.file;
 
-const DIR = {
-	SRC : './assets/',
-	DEST: './assets/',
-};
+const DIR = './assets/';
  
 const SRC = {
-    //JS: DIR.SRC + 'js/src/' + dir + '/' + file + '.js',
-    COMMON: DIR.SRC + 'js/src/common/**/*.js',
-    ADM: DIR.SRC + 'js/src/admin/*.js',
-    EX: DIR.SRC + 'js/src/admin/example/*.js',
-    PLAY: DIR.SRC + 'js/src/play/*.js',
-    CSS: DIR.SRC + 'css/src/*.css',
-    SCSS: DIR.SRC + 'css/src/style.scss',
+    //JS: DIR + 'js/src/' + dir + '/' + file + '.js',
+    COMMON: DIR + 'js/src/common/**/*.js',
+    ADM: DIR + 'js/src/admin/*.js',
+    EX: DIR + 'js/src/admin/example/*.js',
+    PLAY: DIR + 'js/src/play/*.js',
+    CSS: DIR + 'css/src/*.css',
+    SCSS: DIR + 'css/src/style.scss',
 };
  
 const DEST = {
-    //JS: DIR.DEST + 'js/dest/' + dir,
-    COMMON: DIR.SRC + 'js/dest',
-    ADM: DIR.SRC + 'js/dest/admin',
-    EX: DIR.SRC + 'js/dest/admin/example',
-    PLAY: DIR.SRC + 'js/dest/play',
-    CSS: DIR.DEST + 'css/dest',
-    SCSS: DIR.SRC + 'css/src',
+    //JS: DIR + 'js/dest/' + dir,
+    COMMON: DIR + 'js/dest',
+    ADM: DIR + 'js/dest/admin',
+    EX: DIR + 'js/dest/admin/example',
+    PLAY: DIR + 'js/dest/play',
+    CSS: DIR + 'css/dest',
+    SCSS: DIR + 'css/src',
 };
 
+const WATCH = {
+    COMMON: DIR + 'js/src/common/**/*.js',
+    ADM: DIR + 'js/src/admin/*.js',
+    EX: DIR + 'js/src/admin/example/*.js',
+    PLAY: DIR + 'js/src/play/*.js',
+	CSS: DIR + 'css/src/**/*'
+}
+
 const INIT = {
-    //JS: DIR.DEST + 'js/dest/' + dir + '/' + file + '.min.js',
-    COMMON: DIR.SRC + 'js/dest/*.*',
-    ADM: DIR.SRC + 'js/dest/admin/*.*',
-    EX: DIR.SRC + 'js/dest/admin/example/*.*',
-    PLAY: DIR.SRC + 'js/dest/play/*.*',
-    CSS: DIR.DEST + 'css/dest/*.min.css',
+    //JS: DIR + 'js/dest/' + dir + '/' + file + '.min.js',
+    COMMON: DIR + 'js/dest/*.*',
+    ADM: DIR + 'js/dest/admin/*.*',
+    EX: DIR + 'js/dest/admin/example/*.*',
+    PLAY: DIR + 'js/dest/play/*.*',
+    CSS: DIR + 'css/dest/*.min.css',
 };
 
 gulp.task('default', ['common', 'adm', 'ex', 'play', 'css', 'watch'], function () {
@@ -60,11 +65,11 @@ gulp.task('default', ['common', 'adm', 'ex', 'play', 'css', 'watch'], function (
 
 gulp.task('watch', function () {
     const watcher = {
-		common : gulp.watch(SRC.COMMON, ['common']),
-		play : gulp.watch(SRC.PLAY,['play']),
-		adm : gulp.watch(SRC.ADM, ['adm']),
-		ex : gulp.watch(SRC.EX,  ['ex']),
-		css : gulp.watch(SRC.CSS, ['css'])
+		common : gulp.watch(WATCH.COMMON, ['common']),
+		play : gulp.watch(WATCH.PLAY,['play']),
+		adm : gulp.watch(WATCH.ADM, ['adm']),
+		ex : gulp.watch(WATCH.EX,  ['ex']),
+		css : gulp.watch(WATCH.CSS, ['css'])
 	};
  
     var notify = function (event) {

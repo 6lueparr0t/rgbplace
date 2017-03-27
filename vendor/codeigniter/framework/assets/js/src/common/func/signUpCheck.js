@@ -1,4 +1,5 @@
 function signUpCheck(recv) {
+	window.addEventListener("beforeunload", onUnload);
 	var form = new FormData(recv);
 
 	var request = new XMLHttpRequest();
