@@ -2350,6 +2350,9 @@
   100% {
     text-indent: -64px; } }
 
+button {
+  padding: 0.5em 1em; }
+
 a {
   color: #228ae6;
   text-decoration: none !important; }
