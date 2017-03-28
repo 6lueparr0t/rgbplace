@@ -17,14 +17,13 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$data['adm_list'] = ["info", "user", "map"];
-		$data['ex_list'] = ["generate_hash", "animation"];
-		$this->rgb->sview('admin/index', $data);
+
+		$this->rgb->sview('admin/index');
 	}
 
-/* ############################################
-					Admin
-############################################ */
+/* ########################################
+				Admin [admin]
+######################################## */
 
 	public function info()
 	{
@@ -41,9 +40,9 @@ class Admin extends CI_Controller {
 		$this->rgb->sview("admin/map");
 	}
 
-/* ############################################
-					Example	
-############################################ */
+/* ########################################
+				Example	[exam]
+######################################## */
 
 	public function animation()
 	{

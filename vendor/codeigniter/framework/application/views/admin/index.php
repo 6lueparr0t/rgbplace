@@ -1,22 +1,3 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); ?>
-
-<div id="action"></div>
-
-<?php
-//------------------------
-//output 'Admin' page list
-$current_url = current_url();
-	
-for($i=0; $i<count($adm_list); $i++) {
-	echo "<a href='{$current_url}/{$adm_list[$i]}' style='display:block;'>{$adm_list[$i]}</a>";
-}
-
-echo br(1);
-
-for($i=0; $i<count($ex_list); $i++) {
-	echo "<a href='{$current_url}/{$ex_list[$i]}' style='display:block;'>{$ex_list[$i]}</a>";
-}
-//------------------------
-?>
-
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); $this->rgb->menu(); ?>
+<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 <?php $this->rgb->end($path); ?>

@@ -23,5 +23,4 @@ class Play extends CI_Controller {
 	{
 		$this->rgb->view("play/config");
 	}
-
 }

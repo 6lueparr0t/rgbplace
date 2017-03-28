@@ -79,7 +79,6 @@ class RGBplace {
 			// #### setting 'Sign Out'
 
 			echo $this->CI->session->userdata('name');
-			echo $this->CI->session->userdata('admin')?"<a href='/admin'>Admin</a> ":"";
 			echo("<a href='/sign/out'>Sign Out</a>");
 		}
 
@@ -103,7 +102,36 @@ class RGBplace {
 /* ---------------------------------------------------------------------- */
 	}
 
-	function warning($display = "none") {
+
+	public function menu()
+	{
+		echo "<div class='user-menu'>";
+
+		echo "</div>";
+		if($this->CI->session->userdata('admin')) {
+			
+			echo "<div class='admin-menu'><ul>Admin";
+			$admin = $this->CI->base->getAdminMenu('admin');
+			$exam = $this->CI->base->getAdminMenu('exam');
+
+			$base_url = base_url()."admin";
+
+			for($i=0; $i<count($admin); $i++) {
+				echo "<li><a href='{$base_url}/{$admin[$i]}' style='display:block;'>{$admin[$i]}</a></li>";
+			}
+			echo "</ul>";
+
+			echo "<ul>Exam";
+			for($i=0; $i<count($exam); $i++) {
+				echo "<li><a href='{$base_url}/{$exam[$i]}' style='display:block;'>{$exam[$i]}</a></li>";
+			}
+			echo "</ul></div>";
+		}
+
+	}
+
+	function warning($display = "none")
+	{
 		echo ("<p class='marquee {$display}'>Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning!</p>");
 	}
 

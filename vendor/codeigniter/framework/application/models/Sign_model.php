@@ -51,13 +51,13 @@ class Sign_model extends CI_Model {
 		$uid = explode("@", $data['uid']);
 		$pswd= $data['pswd'];
 
-		$query = "SELECT * FROM user_admin WHERE uid = ? AND name = ? AND fail < 5 LIMIT 1";
+		$query = "SELECT * FROM admin_info WHERE uid = ? AND name = ? AND fail < 5 LIMIT 1";
 		$find = $this->db->query($query, [$uid[0], $uid[1]]);
 
 		foreach ($find->result() as $row) {
 			if(password_verify($pswd, base64_decode($row->pswd))) {
 				//fail count init
-				$query = "UPDATE user_admin SET fail = 0, atim=now() WHERE uid = ? AND name = ?";
+				$query = "UPDATE admin_info SET fail = 0, atim=now() WHERE uid = ? AND name = ?";
 				$this->db->query($query, [$uid[0], $uid[1]]);
 
 				return $result = [
@@ -65,7 +65,7 @@ class Sign_model extends CI_Model {
 				];
 			} else {
 				//fail count increase
-				$query = "UPDATE user_admin SET fail = fail + 1, atim=now() WHERE uid = ? AND name = ?";
+				$query = "UPDATE admin_info SET fail = fail + 1, atim=now() WHERE uid = ? AND name = ?";
 				$this->db->query($query, [$uid[0], $uid[1]]);
 
 				return false;
@@ -105,7 +105,7 @@ class Sign_model extends CI_Model {
 
 		if(strpos($data['uid'], "@")) {
 			$uid = explode("@", $data['uid']);
-			$query = "SELECT * FROM user_admin WHERE uid = ? AND name = ? LIMIT 1";
+			$query = "SELECT * FROM admin_info WHERE uid = ? AND name = ? LIMIT 1";
 
 			$find = $this->db->query($query, [$uid[0], $uid[1]]);
 
