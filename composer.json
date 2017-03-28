@@ -1,6 +1,7 @@
 {
     "require": {
         "codeigniter/framework": "^3.1",
-        "monolog/monolog": "^1.22"
+        "monolog/monolog": "^1.22",
+        "nette/mail": "^2.4"
     }
 }
