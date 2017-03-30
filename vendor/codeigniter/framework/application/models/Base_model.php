@@ -24,6 +24,7 @@ class Base_model extends CI_Model {
 	function getUserMenu($type)
 	{
 	}
+
 	function getAdminMenu($type)
 	{
 

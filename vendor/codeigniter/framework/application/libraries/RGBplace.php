@@ -46,12 +46,12 @@ class RGBplace {
 <html lang='en'>
 <head>
 	<meta charset='utf-8'>
-	<title>RGB place playground</title>
+	<title>RGB place</title>
 	<link rel='icon' type='image/png' href='/assets/img/ci-icon.png' />
-	<link rel='stylesheet' href='/assets/css/dest/style.min.css' />
+	<link rel='stylesheet' href='/assets/css/dist/style.min.css' />
 </head>
 <body>
-	<a class='' id='home' href='".base_url()."play'>Home</a>
+	<a class='' id='home' href='".base_url()."'>Home</a>
 		");
 /* ---------------------------------------------------------------------- */
 
@@ -94,8 +94,8 @@ class RGBplace {
 /* ---------------------------------------------------------------------- */
 		echo ("
 	<div id='push'></div>
-	<script src='/assets/js/dest/common.min.js'></script>
-	<script src='/assets/js/dest/{$path}.min.js'></script>
+	<script src='/assets/js/comm/common.min.js'></script>
+	<script src='/assets/js/dist/{$path}.min.js'></script>
 </body>
 </html>
 		");
@@ -110,11 +110,11 @@ class RGBplace {
 		echo "</div>";
 		if($this->CI->session->userdata('admin')) {
 			
-			echo "<div class='admin-menu'><ul>Admin";
+			$base_url = base_url()."admin";
+			echo "<div class='admin-menu'><ul><a href='{$base_url}'>Admin</a>";
 			$admin = $this->CI->base->getAdminMenu('admin');
 			$exam = $this->CI->base->getAdminMenu('exam');
 
-			$base_url = base_url()."admin";
 
 			for($i=0; $i<count($admin); $i++) {
 				echo "<li><a href='{$base_url}/{$admin[$i]}' style='display:block;'>{$admin[$i]}</a></li>";
