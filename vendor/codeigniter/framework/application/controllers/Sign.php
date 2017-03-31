@@ -7,12 +7,11 @@ class Sign extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Sign_model','sign');
-		$this->allow=[];
 	}
 
 	public function index()
 	{
-		redirect('/', 'refresh');
+		redirect("/");
 	}
 
 	public function in($check="")

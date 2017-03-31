@@ -2360,3 +2360,9 @@ a {
     color: #a3daff; }
   a:active {
     color: #1c7cd6; }
+
+.menu-user ul li {
+  list-style-type: none; }
+
+.menu-admin ul li {
+  list-style-type: none; }

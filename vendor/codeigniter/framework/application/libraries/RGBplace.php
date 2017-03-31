@@ -105,13 +105,13 @@ class RGBplace {
 
 	public function menu()
 	{
-		echo "<div class='user-menu'>";
+		echo "<div class='menu-user'>";
 
 		echo "</div>";
 		if($this->CI->session->userdata('admin')) {
 			
 			$base_url = base_url()."admin";
-			echo "<div class='admin-menu'><ul><a href='{$base_url}'>Admin</a>";
+			echo "<div class='menu-admin'><ul><a href='{$base_url}'>Admin</a>";
 			$admin = $this->CI->base->getAdminMenu('admin');
 			$exam = $this->CI->base->getAdminMenu('exam');
 

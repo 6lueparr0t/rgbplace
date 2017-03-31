@@ -3,16 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
 
-	/**
-	 * 
-	 * Comments : ..
-	 * 
-	 */
-
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Admin_model', 'admin');
 	}
 
 	public function index()
