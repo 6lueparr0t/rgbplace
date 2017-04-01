@@ -1,4 +1,4 @@
-function signInCheck(recv) {
+function signInCheck (recv) {
 	var form = new FormData(recv);
 
 	var request = new XMLHttpRequest();
@@ -35,3 +35,6 @@ function signInCheck(recv) {
 
 	request.send(form);
 }
+
+var signin = document.querySelector("#sign-in");
+if (signin) signin.addEventListener("submit", function () { event.preventDefault(); signInCheck(signin); });

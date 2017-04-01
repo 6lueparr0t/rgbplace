@@ -1,0 +1,33 @@
+.grid {
+	background-color: $oc-gray-0;
+	color: $oc-gray-7;
+	margin: 3rem;
+	transition: all 0.2s ease 0s;
+
+	&:hover {
+		background-color: $oc-gray-2;
+		color: $oc-gray-7;
+		transition: all 0.2s ease 0s;
+	}
+}
+
+.selected {
+	background-color: $oc-gray-7;
+	color: $oc-gray-0;
+}
+
+.row {
+	display: flex;
+}
+
+@for $i from 1 through 10 {
+	.col#{$i} {
+		display: flex;
+		-webkit-flex-grow: $i; /* Safari 6.1+ */
+		flex-grow: $i;
+		border: 1px solid $oc-gray-5;
+		justify-content: center;
+		padding: 0.5rem;
+	}
+}
+

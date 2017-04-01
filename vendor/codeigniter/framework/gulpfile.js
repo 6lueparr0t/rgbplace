@@ -20,7 +20,7 @@ let argv = yargs.argv;
 let dir  = argv.dir;
 let file = argv.file;
 
-const DIR = './assets/';
+const DIR = 'assets/';
  
 const SRC = {
     //JS: DIR + 'js/src/' + dir + '/' + file + '.js',
@@ -46,7 +46,7 @@ const WATCH = {
 
 const INIT = {
     //JS: DIR + 'js/dist/' + dir + '/' + file + '.min.js',
-    COMM: DIR + 'js/comm/*.min.js',
+    COMM: DIR + 'js/comm/common.min.js',
     JS: DIR + 'js/dist/**/*.min.js',
     CSS: DIR + 'css/dist/*.min.css',
 };

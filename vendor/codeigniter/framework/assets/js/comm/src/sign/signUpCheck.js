@@ -1,10 +1,10 @@
-function signUpCheck(recv) {
-	window.addEventListener("beforeunload", onUnload);
+function signUpCheck (recv) {
 	var form = new FormData(recv);
 
 	var request = new XMLHttpRequest();
 	var data = "";
 
+	window.addEventListener("beforeunload", onUnload);
 	request.open('post', '/sign/up/check', true);
 
 	request.onload = function() {
@@ -36,3 +36,6 @@ function signUpCheck(recv) {
 
 	request.send(form);
 }
+
+var signup = document.querySelector("#sign-up");
+if (signup) signup.addEventListener("submit", function () { event.preventDefault(); signUpCheck(signup); });

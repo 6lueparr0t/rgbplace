@@ -111,7 +111,7 @@ class RGBplace {
 		if($this->CI->session->userdata('admin')) {
 			
 			$base_url = base_url()."admin";
-			echo "<div class='menu-admin'><ul><a href='{$base_url}'>Admin</a>";
+			echo "<div class='menu-admin'><ul>Admin";
 			$admin = $this->CI->base->getAdminMenu('admin');
 			$exam = $this->CI->base->getAdminMenu('exam');
 

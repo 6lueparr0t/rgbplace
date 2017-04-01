@@ -14,10 +14,18 @@ class Api extends CI_Controller {
 		redirect("/");
 	}
 
-	public function admin($request, $table = "", $id = "", $data1 = "", $data2 = "")
+	public function test()
 	{
+		$data = ['request' => $this->input->server('REQUEST_METHOD')];
 
-		$data = ['request' => $request, 'table' => $table, 'id' => $id, 'data1' => $data1, 'data2' => $data2];
+		echo json_encode($data);
+
+		return true;
+	}
+
+	public function admin($target = "", $data1 = "", $data2 = "", $data3 = "", $data4 = "")
+	{
+		$data = ['request' => $this->input->server('REQUEST_METHOD'), 'target' => $target, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3 , 'data4' => $data4];
 
 		if($this->session->userdata('admin') !== FALSE) redirect("/");
 		switch($request) {
@@ -27,7 +35,7 @@ class Api extends CI_Controller {
 			case "post"		:
 				echo $this->api->post($data);
 				break;
-			case "update"	:
+			case "patch"	:
 			case "put"		:
 				echo $this->api->put($data);
 				break;

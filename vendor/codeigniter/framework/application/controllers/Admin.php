@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$this->rgb->sview('admin/main');
+		redirect("/");
 	}
 
 /* ########################################
@@ -46,6 +46,11 @@ class Admin extends CI_Controller {
 		$data["pswd"] = $this->input->post("pswd")?:"null";
 		$data["hash"] = base64_encode(password_hash($data["pswd"], PASSWORD_DEFAULT, ['cost'=>12]));
 		$this->rgb->view('admin/example/generate_hash', $data);
+	}
+
+	public function restful()
+	{
+		$this->rgb->sview("admin/example/restful");
 	}
 
 }
