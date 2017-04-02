@@ -16,26 +16,28 @@ class Api extends CI_Controller {
 
 	public function test()
 	{
-		//$realm = 'test';
+		$realm = 'test';
 
-		////user => password
-		//$users = array('admin' => 'mypass', 'guest' => 'guest');
+		//user => password
+		$users = array('admin' => 'mypass', 'guest' => 'guest');
 
+		//$this->output->set_header('Authorization: Digest username="admin", realm="test", nonce="123", uri="/api/test", response="2e0b46304cec4cab8e29205c15070803", opaque="123"');
+		//$this->output->set_header('Cache-Control: no-cache');
 
-		//if (empty($_SERVER['PHP_AUTH_DIGEST'])) {
-		//	$this->output->set_header('HTTP/1.1 401 Unauthorized');
-		//	$this->output->set_header('WWW-Authenticate: Digest realm="'.$realm.
-		//			'",qop="auth",nonce="'.uniqid().'",opaque="'.md5($realm).'"');
+		if (empty($_SERVER['PHP_AUTH_DIGEST'])) {
+			$this->output->set_header('HTTP/1.1 401 Unauthorized');
+			$this->output->set_header('WWW-Authenticate: Digest realm="'.$realm.
+					'",qop="auth",nonce="'.uniqid().'",opaque="'.md5($realm).'"');
 
-		//	die('사용자가 취소 버튼을 눌렀을 때 보내지는 텍스트');
-		//}
+			die('사용자가 취소 버튼을 눌렀을 때 보내지는 텍스트');
+		}
 
-		//// PHP_AUTH_DIGEST 변수 조사
-		//if (!($data = $this->_http_digest_parse($_SERVER['PHP_AUTH_DIGEST'])) || !array_key_exists(trim($data['username'], '"'), $users))
-		//	die('Wrong Credentials!');
+		// PHP_AUTH_DIGEST 변수 조사
+		if (!($data = $this->_http_digest_parse($_SERVER['PHP_AUTH_DIGEST'])) || !array_key_exists(trim($data['username'], '"'), $users))
+			die('Wrong Credentials!');
 
-		//// ok, 유효한 username & password
-		//echo $data['username'] . '으로 로그인 되었습니다.';
+		// ok, 유효한 username & password
+		echo $data['username'] . '으로 로그인 되었습니다.';
 
 
 		//$data = ['request' => $this->input->server('REQUEST_METHOD')];
