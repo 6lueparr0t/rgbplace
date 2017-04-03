@@ -21,8 +21,10 @@ class Api extends CI_Controller {
 		//user => password
 		$users = array('admin' => 'mypass', 'guest' => 'guest');
 
-		//$this->output->set_header('Authorization: Digest username="admin", realm="test", nonce="123", uri="/api/test", response="2e0b46304cec4cab8e29205c15070803", opaque="123"');
-		//$this->output->set_header('Cache-Control: no-cache');
+		$this->output->set_header('Authorization: Digest username="admin", realm="test", nonce="123", uri="/api/test", response="2e0b46304cec4cab8e29205c15070803", opaque="123"');
+		$this->output->set_header('Cache-Control: no-cache');
+
+		//echo $this->output->get_header('Authorization');
 
 		if (empty($_SERVER['PHP_AUTH_DIGEST'])) {
 			$this->output->set_header('HTTP/1.1 401 Unauthorized');
