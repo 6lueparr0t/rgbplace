@@ -5,6 +5,7 @@ const gulp = require('gulp');
 const yargs = require('yargs');
 const sass = require('gulp-sass');
 const gutil = require('gulp-util');
+const babel = require('gulp-babel');
 const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
@@ -94,6 +95,9 @@ gulp.task('comm-min', function () {
 	return gulp.src(SRC.COMM)
 		.pipe(cache.filter())
 		.pipe(plumber())
+		.pipe(babel({
+			presets: ['es2015']
+		}))
 		.pipe(uglify())
 		.pipe(concat('common.min.js'))
 		.pipe(gulp.dest(DIST.COMM));
@@ -103,6 +107,9 @@ gulp.task('js-min', function () {
 	return gulp.src(SRC.JS)
 		.pipe(cache.filter())
 		.pipe(plumber())
+		.pipe(babel({
+			presets: ['es2015']
+		}))
 		.pipe(uglify())
 		.pipe(rename( function (path) {
 			 path.extname = ".min.js"

@@ -6,5 +6,5 @@ function passwordCheck () {
     }
 }
 
-var signUpConf = document.querySelector("#sign-up input[name='conf']");
+let signUpConf = document.querySelector("#sign-up input[name='conf']");
 if (signUpConf) signUpConf.addEventListener("input", passwordCheck);
