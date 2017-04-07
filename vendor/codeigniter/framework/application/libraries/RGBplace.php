@@ -24,7 +24,7 @@ class RGBplace {
 		$data['path'] = $path;
 
 		// admin session check
-		if($this->CI->session->userdata('admin') !== TRUE) redirect("/");	
+		if($this->CI->session->userdata('admin') !== TRUE) redirect("/");
 
 		$this->CI->load->view($path, $data);
 	}
@@ -109,7 +109,10 @@ class RGBplace {
 
 		echo "</div>";
 		if($this->CI->session->userdata('admin')) {
-			
+		
+			//set apikey	
+			$this->CI->output->set_header("Authorization: test-apikey");
+
 			$base_url = base_url()."admin";
 			echo "<div class='menu-admin'><ul>Admin";
 			$admin = $this->CI->base->getAdminMenu('admin');
