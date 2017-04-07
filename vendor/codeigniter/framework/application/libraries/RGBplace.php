@@ -103,18 +103,20 @@ class RGBplace {
 	}
 
 
-	public function menu()
+	public function common()
 	{
-		echo "<div class='menu-user'>";
+		echo "<div class='menu'>";
 
-		echo "</div>";
+
 		if($this->CI->session->userdata('admin')) {
 		
-			//set apikey	
-			$this->CI->output->set_header("Authorization: test-apikey");
+			//set apikey
+			$name = $this->CI->session->userdata('name');
+			$apikey = $this->CI->base->getAdminApiKey($name);
+			$this->CI->output->set_header("Authorization: {$apikey}");
 
 			$base_url = base_url()."admin";
-			echo "<div class='menu-admin'><ul>Admin";
+			echo "<ul>Admin";
 			$admin = $this->CI->base->getAdminMenu('admin');
 			$exam = $this->CI->base->getAdminMenu('exam');
 
@@ -128,9 +130,10 @@ class RGBplace {
 			for($i=0; $i<count($exam); $i++) {
 				echo "<li><a href='{$base_url}/{$exam[$i]}' style='display:block;'>{$exam[$i]}</a></li>";
 			}
-			echo "</ul></div>";
+			echo "</ul>";
 		}
 
+		echo "</div>";
 	}
 
 	function warning($display = "none")

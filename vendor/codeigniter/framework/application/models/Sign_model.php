@@ -25,7 +25,8 @@ class Sign_model extends CI_Model {
 		foreach ($find->result() as $row) {
 			if(password_verify($pswd,  base64_decode($row->pswd))) {
 				//fail count init
-				$query = "UPDATE user_info SET fail = 0, atim=now() WHERE uid = ?";
+				$atim = date("Y-m-d H:i:s");
+				$query = "UPDATE user_info SET fail = 0, atim='{$atim}' WHERE uid = ?";
 				$this->db->query($query, $uid);
 
 				return $result = [
@@ -57,15 +58,17 @@ class Sign_model extends CI_Model {
 		foreach ($find->result() as $row) {
 			if(password_verify($pswd, base64_decode($row->pswd))) {
 				//fail count init
-				$query = "UPDATE admin_info SET fail = 0, atim=now() WHERE uid = ? AND name = ?";
+				$atim = date("Y-m-d H:i:s");
+				$query = "UPDATE admin_info SET fail = 0, atim='{$atim}' WHERE uid = ? AND name = ?";
 				$this->db->query($query, [$uid[0], $uid[1]]);
 
 				return $result = [
-					'name' => $row->name
+					'name' => $row->name,
 				];
 			} else {
 				//fail count increase
-				$query = "UPDATE admin_info SET fail = fail + 1, atim=now() WHERE uid = ? AND name = ?";
+				$atim = date("Y-m-d H:i:s");
+				$query = "UPDATE admin_info SET fail = fail + 1, atim='{$atim}' WHERE uid = ? AND name = ?";
 				$this->db->query($query, [$uid[0], $uid[1]]);
 
 				return false;

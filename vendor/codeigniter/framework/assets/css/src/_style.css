@@ -2468,8 +2468,5 @@ a {
   justify-content: center;
   padding: 0.5rem; }
 
-.menu-user ul li {
-  list-style-type: none; }
-
-.menu-admin ul li {
+.menu ul li {
   list-style-type: none; }
