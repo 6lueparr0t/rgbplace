@@ -78,8 +78,14 @@ class RGBplace {
 		} else {
 			// #### setting 'Sign Out'
 
-			echo $this->CI->session->userdata('name');
+			$name = $this->CI->session->userdata('name');
+
+			echo $name;
 			echo("<a href='/sign/out'>Sign Out</a>");
+			if($this->CI->session->userdata('admin')) {
+				$apikey = $this->CI->base->getAdminApiKey($name);
+				echo "<span id='apikey' style='display:none'>{$apikey}</span>";
+			}
 		}
 
 	}
@@ -110,11 +116,6 @@ class RGBplace {
 
 		if($this->CI->session->userdata('admin')) {
 		
-			//set apikey
-			$name = $this->CI->session->userdata('name');
-			$apikey = $this->CI->base->getAdminApiKey($name);
-			$this->CI->output->set_header("Authorization: {$apikey}");
-
 			$base_url = base_url()."admin";
 			echo "<ul>Admin";
 			$admin = $this->CI->base->getAdminMenu('admin');
@@ -132,7 +133,6 @@ class RGBplace {
 			}
 			echo "</ul>";
 		}
-
 		echo "</div>";
 	}
 

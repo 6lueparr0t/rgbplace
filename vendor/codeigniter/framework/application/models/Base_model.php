@@ -42,14 +42,16 @@ class Base_model extends CI_Model {
 
 	public function getAdminApiKey($name)
 	{
+		$data = "";
+
 		$query = "SELECT no, apikey FROM admin_info WHERE name = '{$name}' and apikey is not null and exp > atim LIMIT 1";
 		$find = $this->db->query($query);
 
 		if($find->num_rows() !== 1) {
 			$apikey = $this->generateKey();
-			$exp = date("Y-m-d H:i:s", time()+(60*60));
+			$exp = date("Y-m-d H:i:s", time()+(12*60*60));
 
-			$this->db->query("UPDATE admin_info SET apikey='{$apikey}' exp='{$exp}' WHERE AND name = '{$name}'");
+			$this->db->query("UPDATE admin_info SET apikey='{$apikey}', exp='{$exp}' WHERE name = '{$name}'");
 		}
 
 		foreach ($find->result() as $key => $row) {
