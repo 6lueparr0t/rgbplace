@@ -1,14 +1,15 @@
 "use strict";
 
-var row = document.querySelectorAll(".grid .row");
+let col = document.querySelectorAll(".grid .row span");
 
-var isMouseDown = false;
-var isSelected;
-var className = "selected";
+let isMouseDown = false;
+let isShiftDown = false;
+let isSelected;
+let className = "selected";
 
-for (var i = 0; i < row.length; i++) {
-	row[i].addEventListener("mousedown", select);
-	row[i].addEventListener("mouseover", selectToggle);
+for (let i = 0; i < col.length; i++) {
+	col[i].addEventListener("mousedown", select);
+	col[i].addEventListener("mouseover", selectToggle);
 }
 
 document.onmouseup = function() {
@@ -16,10 +17,15 @@ document.onmouseup = function() {
 };
 
 function select () {
+	event.preventDefault();
+	
+	for (let i = 0; i < col.length; i++) {
+		if(this!==col[i]) col[i].classList.remove(className);
+	}
+
 	isMouseDown = true;
 	isSelected = this.classList.contains(className);
 	this.classList.toggle(className);
-	event.preventDefault();
 };
 
 function selectToggle () {
