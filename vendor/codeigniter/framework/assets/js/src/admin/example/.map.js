@@ -1,5 +1,6 @@
 "use strict";
 
+let row = document.querySelectorAll(".grid .row");
 let col = document.querySelectorAll(".grid .row span");
 
 let isMouseDown = false;

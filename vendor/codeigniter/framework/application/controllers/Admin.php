@@ -22,16 +22,6 @@ class Admin extends CI_Controller {
 		$this->rgb->sview("admin/info");
 	}
 
-	public function user()
-	{
-		$this->rgb->sview("admin/user");
-	}
-
-	public function map()
-	{
-		$this->rgb->sview("admin/map");
-	}
-
 /* ########################################
 				Example	[exam]
 ######################################## */
