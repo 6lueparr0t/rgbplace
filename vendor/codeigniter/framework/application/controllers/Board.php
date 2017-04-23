@@ -12,4 +12,8 @@ class Board extends CI_Controller {
 	{
 		$this->rgb->view("board/main");
 	}
+
+	public function view($map, $num) {
+		//echo "{$map}, {$num}";
+	}
 }
