@@ -47,11 +47,13 @@ class RGBplace {
 <head>
 	<meta charset='utf-8'>
 	<title>RGB place</title>
-	<link rel='icon' type='image/png' href='/assets/img/ci-icon.png' />
+	<link rel='icon' href='data:;base64,iVBORw0KGgo='>
 	<link rel='stylesheet' href='/assets/css/dist/style.min.css' />
 </head>
 <body>
-	<a class='' id='home' href='".base_url()."'>Home</a>
+	<div id='title'>
+		<a href='".base_url()."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span> place</a>
+	</div>
 		");
 /* ---------------------------------------------------------------------- */
 
@@ -111,7 +113,7 @@ class RGBplace {
 
 	public function common()
 	{
-		echo "<div class='menu'>";
+		echo "<div id='menu'>";
 
 
 		if($this->CI->session->userdata('admin')) {
