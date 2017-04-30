@@ -1,0 +1,74 @@
+@mixin keyframes($animation-name) {
+	@-webkit-keyframes #{$animation-name} {
+		@content;
+	}
+	@-moz-keyframes #{$animation-name} {
+		@content;
+	}  
+	@-ms-keyframes #{$animation-name} {
+		@content;
+	}
+	@-o-keyframes #{$animation-name} {
+		@content;
+	}  
+	@keyframes #{$animation-name} {
+		@content;
+	}
+}
+
+@mixin animation($str) {
+	-webkit-animation			: #{$str};
+	-webkit-animation-fill-mode : forwards;
+	-moz-animation				: #{$str};
+	-moz-animation-fill-mode	: forwards;
+	-ms-animation				: #{$str};
+	-ms-animation-fill-mode		: forwards;
+	-o-animation				: #{$str};
+	-o-animation-fill-mode		: forwards;
+	animation					: #{$str};      
+	animation-fill-mode			: forwards;
+}
+
+// ------------------------------------------
+
+@include keyframes(fadeIn) {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@include keyframes(fadeInDown) {
+	0% {
+		opacity: 0;
+		bottom:1rem;
+	}
+
+	100% {
+		opacity: 1;
+		bottom:0rem;
+	}
+}
+
+@include keyframes(fadeInLeft) {
+	0% {
+		opacity: 0;
+		left:1rem;
+	}
+
+	100% {
+		opacity: 1;
+		left:0rem;
+	}
+}
+
+@include keyframes(tada) {
+	0% {transform: scale(1);} 
+	10%, 20% {transform: scale(0.9) rotate(-3deg);} 
+	30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);} 
+	40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);} 
+	100% {transform: scale(1) rotate(0);} 
+}

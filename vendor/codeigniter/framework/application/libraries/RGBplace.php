@@ -40,6 +40,7 @@ class RGBplace {
 	public function start()
 	{
 
+		$sign=$this->CI->session->userdata('signed_in');
 /* ---------------------------------------------------------------------- */
 		echo("
 <!DOCTYPE html>
@@ -51,30 +52,27 @@ class RGBplace {
 	<link rel='stylesheet' href='/assets/css/dist/style.min.css' />
 </head>
 <body>
-	<div id='title'>
-		<a href='".base_url()."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span> place</a>
-	</div>
 		");
 /* ---------------------------------------------------------------------- */
 
 		// Sign in check
-		if(!$this->CI->session->userdata('signed_in')) {
+		if(!$sign) {
 			// #### setting 'Sign In' Form
-			echo form_open('sign/in', ['class' => 'pure-form', 'name' => 'sign-in', 'id' => 'sign-in'])
+			echo form_open('sign/in', ['class' => 'sign', 'name' => 'sign-in', 'id' => 'sign-in'])
 				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true', 'minlength' => 6])
 				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10]);
 
-			echo "<button name='in' type='submit'><i class='fa fa-sign-in' aria-hidden='true'></i> Sign In</button>";
+			echo "<button type='submit'><i class='fa fa-sign-in' aria-hidden='true'></i> Sign In</button>";
 			echo form_close();
 
 			// #### setting 'Sign Up' Form
-			echo form_open('sign/up', ['class' => 'pure-form', 'name' => 'sign-up', 'id' => 'sign-up'])
+			echo form_open('sign/up', ['class' => 'sign', 'name' => 'sign-up', 'id' => 'sign-up'])
 				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true', 'minlength' => 6, 'pattern' => '[0-9A-Za-z_-]+', 'title' => '영문 대소문자와 숫자만 가능합니다.'])
 				.form_input('name', '', ['placeholder' => 'Nick Name', 'required' => 'true', 'minlength' => 2, 'pattern' => '[^\s]+', 'title' => '공백(space)을 제거해주세요.'])
 				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10])
 				.form_password('conf', '', ['placeholder' => 'Confirm Password', 'required' => 'true']);
 
-			echo "<button name='up' type='submit'><i class='fa fa-user-plus' aria-hidden='true'></i> Sign Up</button>";
+			echo "<button type='submit'><i class='fa fa-user-plus' aria-hidden='true'></i> Sign Up</button>";
 			echo form_close();
 
 		} else {
@@ -82,14 +80,19 @@ class RGBplace {
 
 			$name = $this->CI->session->userdata('name');
 
-			echo $name;
-			echo("<a href='/sign/out'>Sign Out</a>");
+			echo ("<div class='status'>{$name} <a href='/#'>Modify</a> <a href='/sign/out'>Sign Out</a></div>");
+
 			if($this->CI->session->userdata('admin')) {
 				$apikey = $this->CI->base->getAdminApiKey($name);
 				echo "<span id='apikey' style='display:none'>{$apikey}</span>";
 			}
 		}
 
+		echo("
+	<div id='title'>
+		<a href='".base_url()."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> place</span></a>
+	</div>
+		");
 	}
 
 	public function end($path) 

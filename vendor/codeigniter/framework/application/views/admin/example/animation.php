@@ -7,6 +7,20 @@
 	animation-delay: 2s;
 	animation-fill-mode: forwards;
 }
+
+
+/* Safari 4.0 - 8.0 */
+/*
+@-webkit-keyframes mymove {
+    from {top: 0px;}
+    to {top: 200px;}
+}
+
+@keyframes mymove {
+    from {top: 0px;}
+    to {top: 200px;}
+}
+*/
 </style>
 <h1 id="example"></h1>
 <h1 id="test" class="animate-flicker">Example</h1>
