@@ -1,9 +1,11 @@
 'use strict';
  
+const fs = require('fs');
 const del = require('del');
 const gulp = require('gulp');
 const yargs = require('yargs');
 const sass = require('gulp-sass');
+const wait = require('gulp-wait2');
 const gutil = require('gulp-util');
 const babel = require('gulp-babel');
 const rename = require('gulp-rename');
@@ -51,6 +53,16 @@ const INIT = {
     JS: DIR + 'js/dist/**/*.min.js',
     CSS: DIR + 'css/dist/*.min.css',
 };
+
+function doesFileExist(filePath) {
+	fs.stat(filePath, function(err, stat) {
+		if(err == null) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+}
 
 gulp.task('default', ['comm', 'js', 'css', 'watch'], function () {
     //gutil.log("command : gulp css[css-init || css-min]");
@@ -144,6 +156,7 @@ gulp.task('css-min', function () {
 		.pipe(cache.filter())
 		.pipe(plumber())
 		.pipe(cleanCSS({compatibility: 'ie8'}))
+		.pipe(wait(doesFileExist(INIT.CSS)))
 		.pipe(concat('style.min.css'))
 		.pipe(gulp.dest(DIST.CSS));
 });

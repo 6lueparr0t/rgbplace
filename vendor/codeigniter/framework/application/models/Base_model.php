@@ -2,6 +2,25 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Base_model extends CI_Model {
 
+	public function menu($type)
+	{
+		$data = [];
+
+		$query = "SELECT * FROM common_menu WHERE type = ?";
+		$find = $this->db->query($query, $type);
+
+		foreach ($find->result() as $key => $row) {
+			$data[$key] = $row->name;
+		}
+
+		return $data;
+	}
+
+	public function map()
+	{
+
+	}
+
 	public function getInfo($uid)
 	{
 		$query = "SELECT * FROM user_info WHERE uid = ? LIMIT 1";
@@ -19,25 +38,6 @@ class Base_model extends CI_Model {
 		if(date("Y-m-d H:i:s") > $btim && $btim) return false;
 
 		return true;
-	}
-
-	public function getUserMenu($type)
-	{
-	}
-
-	public function getAdminMenu($type)
-	{
-
-		$data = [];
-
-		$query = "SELECT * FROM common_menu WHERE type = ?";
-		$find = $this->db->query($query, $type);
-
-		foreach ($find->result() as $key => $row) {
-			$data[$key] = $row->name;
-		}
-
-		return $data;
 	}
 
 	public function getAdminApiKey($name)

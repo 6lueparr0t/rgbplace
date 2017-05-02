@@ -22,9 +22,10 @@ class RGBplace {
 	{
 		//use in 'Controllers !!Dev Mode!!' Only
 		$data['path'] = $path;
+		$admin=$this->CI->session->userdata('admin');
 
 		// admin session check
-		if($this->CI->session->userdata('admin') !== TRUE) redirect("/");
+		if($admin !== TRUE) redirect("/");
 
 		$this->CI->load->view($path, $data);
 	}
@@ -41,6 +42,7 @@ class RGBplace {
 	{
 
 		$sign=$this->CI->session->userdata('signed_in');
+		$admin=$this->CI->session->userdata('admin');
 /* ---------------------------------------------------------------------- */
 		echo("
 <!DOCTYPE html>
@@ -82,7 +84,7 @@ class RGBplace {
 
 			echo ("<div class='status'>{$name} <a href='/#'>Modify</a> <a href='/sign/out'>Sign Out</a></div>");
 
-			if($this->CI->session->userdata('admin')) {
+			if($admin === TRUE) {
 				$apikey = $this->CI->base->getAdminApiKey($name);
 				echo "<span id='apikey' style='display:none'>{$apikey}</span>";
 			}
@@ -116,29 +118,39 @@ class RGBplace {
 
 	public function common()
 	{
-		echo "<div id='menu'>";
+		$sign=$this->CI->session->userdata('signed_in');
+		$admin=$this->CI->session->userdata('admin');
+		$base_url = base_url();
 
+		//setting Common Menu
+		echo ("<div id='menu'>");
 
-		if($this->CI->session->userdata('admin')) {
-		
-			$base_url = base_url()."admin";
-			echo "<ul>Admin";
-			$admin = $this->CI->base->getAdminMenu('admin');
-			$exam = $this->CI->base->getAdminMenu('exam');
-
-
-			for($i=0; $i<count($admin); $i++) {
-				echo "<li><a href='{$base_url}/{$admin[$i]}' style='display:block;'>{$admin[$i]}</a></li>";
-			}
-			echo "</ul>";
-
-			echo "<ul>Exam";
-			for($i=0; $i<count($exam); $i++) {
-				echo "<li><a href='{$base_url}/{$exam[$i]}' style='display:block;'>{$exam[$i]}</a></li>";
-			}
-			echo "</ul>";
+		echo ("<ul>Map");
+		$menu_common = $this->CI->base->menu('common');
+		for($i=0; $i<count($menu_common); $i++) {
+			echo ("<li><a href='{$base_url}/{$menu_common[$i]}' style='display:block;'>{$menu_common[$i]}</a></li>");
 		}
-		echo "</div>";
+		echo ("</ul>");
+
+		if($admin === TRUE) {
+			$admin_url = base_url()."admin";
+			echo ("<ul>Admin");
+			$menu_admin = $this->CI->base->menu('admin');
+			$menu_exam = $this->CI->base->menu('exam');
+
+			for($i=0; $i<count($menu_admin); $i++) {
+				echo ("<li><a href='{$admin_url}/{$menu_admin[$i]}' style='display:block;'>{$menu_admin[$i]}</a></li>");
+			}
+			echo ("</ul>");
+
+			echo ("<ul>Exam");
+			for($i=0; $i<count($menu_exam); $i++) {
+				echo ("<li><a href='{$admin_url}/{$menu_exam[$i]}' style='display:block;'>{$menu_exam[$i]}</a></li>");
+			}
+			echo ("</ul>");
+		}
+
+		echo ("</div>");
 	}
 
 	function warning($display = "none")

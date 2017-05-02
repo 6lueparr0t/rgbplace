@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'start';
+$route['default_controller'] = 'init';
 $route['404_override'] = 'play';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -58,6 +58,6 @@ $route['translate_uri_dashes'] = FALSE;
 | Hot Place Maer
 */
 
-$route['board/([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
-	return 'board/view/' . strtolower($map) . '/' . $num;
+$route['post/([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
+	return 'post/view/' . strtolower($map) . '/' . $num;
 };
