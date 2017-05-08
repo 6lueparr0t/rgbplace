@@ -1,5 +1,5 @@
 #title {
-	font-size:5rem;
+	font-size:2rem;
 
 	a {
 		color:$oc-gray-9 !important;
@@ -31,7 +31,7 @@
 
 	.place {
 		position:absolute;
-		padding-left:1rem;
+		padding-left:.6rem;
 
 		@include animation('tada 1s linear 1.2s 1 normal');
 	}

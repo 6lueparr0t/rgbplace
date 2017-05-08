@@ -2,6 +2,23 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Base_model extends CI_Model {
 
+	public function map($search)
+	{
+		$data = [];
+
+		$query = "SELECT * FROM map_code WHERE place like '%{$search}%' or keyword like '%{$search}%'";
+		$find = $this->db->query($query);
+
+		foreach ($find->result() as $key => $row) {
+			$data['country'][$key] = $row->country;
+
+			$data['code'][$key] = $row->code.$row->no;
+			$data['place'][$key] =$row->place;
+		}
+
+		return $data;
+	}
+
 	public function menu($type)
 	{
 		$data = [];
@@ -9,16 +26,16 @@ class Base_model extends CI_Model {
 		$query = "SELECT * FROM common_menu WHERE type = ?";
 		$find = $this->db->query($query, $type);
 
+		if($find->num_rows() === 0) {
+			return false;
+		}
+
 		foreach ($find->result() as $key => $row) {
-			$data[$key] = $row->name;
+			$data['name'][$key] = $row->name;
+			$data['link'][$key] = $row->link;
 		}
 
 		return $data;
-	}
-
-	public function map()
-	{
-
 	}
 
 	public function getInfo($uid)

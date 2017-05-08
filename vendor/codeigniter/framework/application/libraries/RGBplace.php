@@ -120,37 +120,62 @@ class RGBplace {
 	{
 		$sign=$this->CI->session->userdata('signed_in');
 		$admin=$this->CI->session->userdata('admin');
-		$base_url = base_url();
 
 		//setting Common Menu
-		echo ("<div id='menu'>");
+		/*
 
-		echo ("<ul>Map");
-		$menu_common = $this->CI->base->menu('common');
-		for($i=0; $i<count($menu_common); $i++) {
-			echo ("<li><a href='{$base_url}/{$menu_common[$i]}' style='display:block;'>{$menu_common[$i]}</a></li>");
-		}
-		echo ("</ul>");
+		li : Menu Name
+			- ul : Sub Menu Start
+				- li : Sub Menu Name
+				...
+				- /li
+			- /ul
+		/li
+
+		*/
+
+		echo ("<ul id='menu'>");
 
 		if($admin === TRUE) {
-			$admin_url = base_url()."admin";
-			echo ("<ul>Admin");
-			$menu_admin = $this->CI->base->menu('admin');
-			$menu_exam = $this->CI->base->menu('exam');
-
-			for($i=0; $i<count($menu_admin); $i++) {
-				echo ("<li><a href='{$admin_url}/{$menu_admin[$i]}' style='display:block;'>{$menu_admin[$i]}</a></li>");
-			}
-			echo ("</ul>");
-
-			echo ("<ul>Exam");
-			for($i=0; $i<count($menu_exam); $i++) {
-				echo ("<li><a href='{$admin_url}/{$menu_exam[$i]}' style='display:block;'>{$menu_exam[$i]}</a></li>");
-			}
-			echo ("</ul>");
+			echo ("<li>Admin<ul>");
+				echo ("<li>Admin<ul>");
+				$menu = $this->CI->base->menu('admin');
+				for($i=0; $i<count($menu['name']); $i++) {
+					echo ("<li><a href='/admin/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
+				}
+				echo ("</ul></li>");
+	
+				echo ("<li>Exam<ul>");
+				$menu = $this->CI->base->menu('exam');
+				for($i=0; $i<count($menu['name']); $i++) {
+					echo ("<li><a href='/admin/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
+				}
+				echo ("</ul></li>");
+			echo ("</ul></li>");
 		}
 
-		echo ("</div>");
+		echo ("<li>Map<ul>");
+		echo ("<li>Favorite Your Map</li>");
+		echo ("<li id='map-search'>Search</li>");
+		echo ("</ul></li>");
+
+		if($sign === TRUE) {
+			$menu = $this->CI->base->menu('user');
+			for($i=0; $i<count($menu['name']); $i++) {
+				echo ("<li><a href='/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
+			}
+
+			echo ("<li>Config(icon)<ul>");
+			$menu = $this->CI->base->menu('conf');
+			for($i=0; $i<count($menu['name']); $i++) {
+				echo ("<li><a href='/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
+			}
+			echo ("</ul></li>");
+
+		}
+
+		//echo("<li>test<ul><li>wow<ul><li>testmenu</li></ul></li></ul></li>");
+		echo ("</ul>");
 	}
 
 	function warning($display = "none")
