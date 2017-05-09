@@ -91,9 +91,9 @@ class RGBplace {
 		}
 
 		echo("
-	<div id='title'>
-		<a href='".base_url()."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> place</span></a>
-	</div>
+		<div id='title'>
+			<a href='".base_url()."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> place</span></a>
+		</div>
 		");
 	}
 
@@ -122,7 +122,7 @@ class RGBplace {
 		$admin=$this->CI->session->userdata('admin');
 
 		//setting Common Menu
-		/* ****************************** 
+		/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
 
 		li : Menu Name
 			- ul : Sub Menu Start
@@ -135,18 +135,13 @@ class RGBplace {
 		test code
 		echo("<li>test<ul><li>wow<ul><li>testmenu</li></ul></li></ul></li>");
 
-		****************************** */
+		@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 		/* ********** MENU Start ********** */
 		echo ("<ul id='menu'>");
 
 		if($admin === TRUE) {
-			echo ("
-<li>Admin
-	<ul>
-		<li>Admin
-			<ul>
-			");
+			echo (" <li>Admin <ul> <li>Admin <ul> ");
 
 			$menu = $this->CI->base->menu('admin');
 			for($i=0; $i<count($menu['name']); $i++) {
@@ -161,33 +156,24 @@ class RGBplace {
 			}
 			echo ("</ul></li>");
 
-			echo ("
-	</ul>
-</li>
-			");
+			echo (" </ul> </li> ");
 		}
 
-		echo ("
-<li>Map
-	<ul>
-		<li>Favorite Your Map</li>
-		<li id='map-search'>Search</li>
-	</ul>
-</li>
-		");
-
 		if($sign === TRUE) {
+
+			echo (" <li>Map <ul> <li>Favorite Your Map</li> <li id='map-search'>Search</li> </ul> </li> ");
+
 			$menu = $this->CI->base->menu('user');
 			for($i=0; $i<count($menu['name']); $i++) {
 				echo ("<li><a href='/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
 			}
 
-			echo ("<li>Config(icon)<ul>");
+			echo (" <li>Config(icon) <ul>");
 			$menu = $this->CI->base->menu('conf');
 			for($i=0; $i<count($menu['name']); $i++) {
 				echo ("<li><a href='/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
 			}
-			echo ("</ul></li>");
+			echo (" </ul> </li> ");
 
 		}
 

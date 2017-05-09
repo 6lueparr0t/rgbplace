@@ -2645,6 +2645,9 @@ a {
   list-style-type: none;
   width: 100%;
   display: flex; }
+  @media screen and (max-device-width: 425px) {
+    #menu {
+      display: block; } }
   #menu li {
     /*float:left;*/
     flex: 1;
@@ -2662,12 +2665,15 @@ a {
         color: #f8f9fa; }
       #menu li:hover ul {
         left: 0;
-        top: 100%;
         padding: 0;
         width: 100%;
         display: block;
         font-size: 0.8rem;
         position: absolute; }
+        @media screen and (max-device-width: 425px) {
+          #menu li:hover ul {
+            top: 1rem;
+            position: relative; } }
         #menu li:hover ul li {
           display: block;
           background: #000;
@@ -2676,6 +2682,10 @@ a {
             position: absolute;
             display: none;
             list-style-type: none; }
+            @media screen and (max-device-width: 425px) {
+              #menu li:hover ul li ul {
+                top: 1rem;
+                position: relative; } }
           #menu li:hover ul li:hover {
             background: #667; }
             #menu li:hover ul li:hover ul {

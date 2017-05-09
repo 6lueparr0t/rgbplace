@@ -1,3 +1,6 @@
+$width-name: max-device-width;
+$target-width: 425px;
+
 #menu {
 	background: $oc-gray-3;
 	padding: 0;
@@ -5,6 +8,10 @@
 	list-style-type: none;
 	width: 100%;
 	display: flex;
+
+	@media screen and ($width-name : $target-width) {
+		display: block;
+	}
 
 	li {
 		/*float:left;*/
@@ -29,12 +36,16 @@
 
 			ul {
 				left: 0;
-				top: 100%;
 				padding: 0;
 				width: 100%;
 				display: block;
 				font-size: 0.8rem;
 				position:absolute;
+
+				@media screen and ($width-name : $target-width) {
+					top:1rem;
+					position:relative;
+				}
 
 				li {
 					display: block;
@@ -45,6 +56,11 @@
 						position: absolute;
 						display: none;
 						list-style-type: none;
+
+						@media screen and ($width-name : $target-width) {
+							top:1rem;
+							position:relative;
+						}
 					}
 
 					&:hover {
