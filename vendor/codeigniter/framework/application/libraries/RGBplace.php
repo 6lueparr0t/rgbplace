@@ -118,8 +118,6 @@ class RGBplace {
 
 	public function common()
 	{
-		$sign=$this->CI->session->userdata('signed_in');
-		$admin=$this->CI->session->userdata('admin');
 
 		//setting Common Menu
 		/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
@@ -138,46 +136,42 @@ class RGBplace {
 		@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 		/* ********** MENU Start ********** */
-		echo ("<ul id='menu'>");
+		echo("
+		<ul id='menu'>
+		");
 
+		$admin = $this->CI->session->userdata('admin');
 		if($admin === TRUE) {
-			echo (" <li>Admin <ul> <li>Admin <ul> ");
-
-			$menu = $this->CI->base->menu('admin');
-			for($i=0; $i<count($menu['name']); $i++) {
-				echo ("<li><a href='/admin/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
-			}
-			echo ("</ul></li>");
-	
-			echo ("<li>Exam<ul>");
-			$menu = $this->CI->base->menu('exam');
-			for($i=0; $i<count($menu['name']); $i++) {
-				echo ("<li><a href='/admin/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
-			}
-			echo ("</ul></li>");
-
-			echo (" </ul> </li> ");
+		echo("
+		  <li>Admin
+		    <ul>
+		      <li>Admin
+		        <ul>
+		          <a href='/admin/info'><li>PHP Info</li></a>
+		        </ul>
+		      </li>
+		      <li>Exam
+		        <ul>
+		          <a href='/admin/generate_hash'><li>Generate Hash</li></a>
+		          <a href='/admin/animation'><li>Animation</li></a>
+		          <a href='/admin/restful'><li>RESTful Test</li></a>
+		        </ul>
+		      </li>
+		    </ul>
+		  </li>
+		");
 		}
+		echo("
+		  <li>Map</li>
+		  <li>Stage</li>
+		  <li>Notice</li>
+		  <li>History</li>
+		  <li><i class='fa fa-cog' aria-hidden='true'></i>
+		    <ul></ul>
+		  </li>
+		</ul>
+		");
 
-		if($sign === TRUE) {
-
-			echo (" <li>Map <ul> <li>Favorite Your Map</li> <li id='map-search'>Search</li> </ul> </li> ");
-
-			$menu = $this->CI->base->menu('user');
-			for($i=0; $i<count($menu['name']); $i++) {
-				echo ("<li><a href='/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
-			}
-
-			echo (" <li>Config(icon) <ul>");
-			$menu = $this->CI->base->menu('conf');
-			for($i=0; $i<count($menu['name']); $i++) {
-				echo ("<li><a href='/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
-			}
-			echo (" </ul> </li> ");
-
-		}
-
-		echo ("</ul>");
 		/* ********** MENU END ********** */
 	}
 

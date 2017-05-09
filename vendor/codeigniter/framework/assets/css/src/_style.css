@@ -2438,6 +2438,36 @@
     opacity: 1;
     left: 0rem; } }
 
+@-webkit-keyframes marquee {
+  0% {
+    text-indent: 0%; }
+  100% {
+    text-indent: -64px; } }
+
+@-moz-keyframes marquee {
+  0% {
+    text-indent: 0%; }
+  100% {
+    text-indent: -64px; } }
+
+@-ms-keyframes marquee {
+  0% {
+    text-indent: 0%; }
+  100% {
+    text-indent: -64px; } }
+
+@-o-keyframes marquee {
+  0% {
+    text-indent: 0%; }
+  100% {
+    text-indent: -64px; } }
+
+@keyframes marquee {
+  0% {
+    text-indent: 0%; }
+  100% {
+    text-indent: -64px; } }
+
 @-webkit-keyframes tada {
   0% {
     transform: scale(1); }
@@ -2498,7 +2528,19 @@
   100% {
     transform: scale(1) rotate(0); } }
 
-/* Make it a marquee */
+button {
+  padding: 0.5em 1em; }
+
+a {
+  color: #228ae6;
+  text-decoration: none !important; }
+  a:link {
+    background-color: transparent !important; }
+  a:hover {
+    color: #a3daff; }
+  a:active {
+    color: #1c7cd6; }
+
 .none {
   display: none; }
 
@@ -2512,24 +2554,6 @@
 
 .marquee:hover {
   animation-play-state: paused; }
-
-/* Make it move */
-@keyframes marquee {
-  0% {
-    text-indent: 0%; }
-  100% {
-    text-indent: -64px; } }
-
-button {
-  padding: 0.5em 1em; }
-
-a {
-  color: #228ae6;
-  text-decoration: none !important; }
-  a:hover {
-    color: #a3daff; }
-  a:active {
-    color: #1c7cd6; }
 
 .grid {
   background-color: #f8f9fa;
@@ -2644,8 +2668,9 @@ a {
   margin: 0;
   list-style-type: none;
   width: 100%;
-  display: flex; }
-  @media screen and (max-device-width: 425px) {
+  display: flex;
+  font-size: 2rem; }
+  @media screen and (max-device-width: 426px) {
     #menu {
       display: block; } }
   #menu li {
@@ -2665,12 +2690,13 @@ a {
         color: #f8f9fa; }
       #menu li:hover ul {
         left: 0;
+        top: 100%;
         padding: 0;
         width: 100%;
         display: block;
         font-size: 0.8rem;
         position: absolute; }
-        @media screen and (max-device-width: 425px) {
+        @media screen and (max-device-width: 426px) {
           #menu li:hover ul {
             top: 1rem;
             position: relative; } }
@@ -2682,7 +2708,7 @@ a {
             position: absolute;
             display: none;
             list-style-type: none; }
-            @media screen and (max-device-width: 425px) {
+            @media screen and (max-device-width: 426px) {
               #menu li:hover ul li ul {
                 top: 1rem;
                 position: relative; } }
@@ -2707,7 +2733,7 @@ a {
     list-style-type: none; }
 
 #title {
-  font-size: 2rem; }
+  font-size: 3rem; }
   #title a {
     color: #212529 !important; }
   #title .real {

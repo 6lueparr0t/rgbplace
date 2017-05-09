@@ -1,4 +1,3 @@
-/* Make it a marquee */
 .none {
 	display: none; }
 
@@ -12,11 +11,3 @@
 
 .marquee:hover {
 	animation-play-state: paused; }
-
-/* Make it move */
-@keyframes marquee {
-	0% {
-		text-indent: 0%; }
-	100% {
-		text-indent: -64px; }
-}

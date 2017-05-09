@@ -64,7 +64,7 @@ function doesFileExist(filePath) {
 	});
 }
 
-gulp.task('default', ['comm', 'js', 'css', 'watch'], function () {
+gulp.task('default', ['comm', 'js', 'css'], function () {
     //gutil.log("command : gulp css[css-init || css-min]");
 });
 

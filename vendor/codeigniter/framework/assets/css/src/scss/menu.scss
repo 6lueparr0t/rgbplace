@@ -1,5 +1,5 @@
 $width-name: max-device-width;
-$target-width: 425px;
+$target-width: 426px;
 
 #menu {
 	background: $oc-gray-3;
@@ -8,6 +8,7 @@ $target-width: 425px;
 	list-style-type: none;
 	width: 100%;
 	display: flex;
+	font-size:2rem;
 
 	@media screen and ($width-name : $target-width) {
 		display: block;
@@ -36,6 +37,7 @@ $target-width: 425px;
 
 			ul {
 				left: 0;
+				top:100%;
 				padding: 0;
 				width: 100%;
 				display: block;

@@ -6,6 +6,10 @@ a {
 	color : $oc-blue-6;
 	text-decoration : none !important;
 
+	&:link {
+		background-color: transparent !important;
+	}
+
 	&:hover {
 		color : $oc-blue-2;
     }
