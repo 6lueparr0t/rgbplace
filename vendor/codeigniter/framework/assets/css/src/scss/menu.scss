@@ -1,25 +1,26 @@
 #menu {
+	background: $oc-gray-3;
 	padding: 0;
 	margin: 0;
 	list-style-type: none;
 	width: 100%;
-	display: inline-flex;
+	display: flex;
 
 	li {
 		/*float:left;*/
-		/*flex: 1;*/
+		flex: 1;
+		background: $oc-gray-3;
 		text-align: center;
-		padding: 1rem 4rem;
+		padding: 1rem 0rem;
 		display: block;
-		border: .05rem solid black;
 
 		a {
-			color : black;
+			color : $oc-gray-9;
 		}
 
 		&:hover {
 			position: relative;
-			background: #667;
+			background: $oc-gray-5;
 			color : $oc-gray-0;
 
 			a {
@@ -33,6 +34,7 @@
 				width: 100%;
 				display: block;
 				font-size: 0.8rem;
+				position:absolute;
 
 				li {
 					display: block;

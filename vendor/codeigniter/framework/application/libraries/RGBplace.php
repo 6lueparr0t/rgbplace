@@ -122,7 +122,7 @@ class RGBplace {
 		$admin=$this->CI->session->userdata('admin');
 
 		//setting Common Menu
-		/*
+		/* ****************************** 
 
 		li : Menu Name
 			- ul : Sub Menu Start
@@ -132,32 +132,49 @@ class RGBplace {
 			- /ul
 		/li
 
-		*/
+		test code
+		echo("<li>test<ul><li>wow<ul><li>testmenu</li></ul></li></ul></li>");
 
+		****************************** */
+
+		/* ********** MENU Start ********** */
 		echo ("<ul id='menu'>");
 
 		if($admin === TRUE) {
-			echo ("<li>Admin<ul>");
-				echo ("<li>Admin<ul>");
-				$menu = $this->CI->base->menu('admin');
-				for($i=0; $i<count($menu['name']); $i++) {
-					echo ("<li><a href='/admin/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
-				}
-				echo ("</ul></li>");
-	
-				echo ("<li>Exam<ul>");
-				$menu = $this->CI->base->menu('exam');
-				for($i=0; $i<count($menu['name']); $i++) {
-					echo ("<li><a href='/admin/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
-				}
-				echo ("</ul></li>");
+			echo ("
+<li>Admin
+	<ul>
+		<li>Admin
+			<ul>
+			");
+
+			$menu = $this->CI->base->menu('admin');
+			for($i=0; $i<count($menu['name']); $i++) {
+				echo ("<li><a href='/admin/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
+			}
 			echo ("</ul></li>");
+	
+			echo ("<li>Exam<ul>");
+			$menu = $this->CI->base->menu('exam');
+			for($i=0; $i<count($menu['name']); $i++) {
+				echo ("<li><a href='/admin/{$menu['link'][$i]}'>{$menu['name'][$i]}</a></li>");
+			}
+			echo ("</ul></li>");
+
+			echo ("
+	</ul>
+</li>
+			");
 		}
 
-		echo ("<li>Map<ul>");
-		echo ("<li>Favorite Your Map</li>");
-		echo ("<li id='map-search'>Search</li>");
-		echo ("</ul></li>");
+		echo ("
+<li>Map
+	<ul>
+		<li>Favorite Your Map</li>
+		<li id='map-search'>Search</li>
+	</ul>
+</li>
+		");
 
 		if($sign === TRUE) {
 			$menu = $this->CI->base->menu('user');
@@ -174,8 +191,8 @@ class RGBplace {
 
 		}
 
-		//echo("<li>test<ul><li>wow<ul><li>testmenu</li></ul></li></ul></li>");
 		echo ("</ul>");
+		/* ********** MENU END ********** */
 	}
 
 	function warning($display = "none")

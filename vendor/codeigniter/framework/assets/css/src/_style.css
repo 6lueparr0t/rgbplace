@@ -2535,11 +2535,11 @@ a {
   background-color: #f8f9fa;
   color: #495057;
   margin: 3rem;
-  transition: all 0.2s ease 0s; }
+  transition: all 2s ease 0s; }
   .grid:hover {
     background-color: #e9ecef;
     color: #495057;
-    transition: all 0.2s ease 0s; }
+    transition: all 2s ease 0s; }
 
 .selected {
   background-color: #495057;
@@ -2639,23 +2639,24 @@ a {
   padding: 0.5rem; }
 
 #menu {
+  background: #dee2e6;
   padding: 0;
   margin: 0;
   list-style-type: none;
   width: 100%;
-  display: inline-flex; }
+  display: flex; }
   #menu li {
     /*float:left;*/
-    /*flex: 1;*/
+    flex: 1;
+    background: #dee2e6;
     text-align: center;
-    padding: 1rem 4rem;
-    display: block;
-    border: .05rem solid black; }
+    padding: 1rem 0rem;
+    display: block; }
     #menu li a {
-      color: black; }
+      color: #212529; }
     #menu li:hover {
       position: relative;
-      background: #667;
+      background: #adb5bd;
       color: #f8f9fa; }
       #menu li:hover a {
         color: #f8f9fa; }
@@ -2665,7 +2666,8 @@ a {
         padding: 0;
         width: 100%;
         display: block;
-        font-size: 0.8rem; }
+        font-size: 0.8rem;
+        position: absolute; }
         #menu li:hover ul li {
           display: block;
           background: #000;

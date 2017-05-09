@@ -156,7 +156,7 @@ gulp.task('css-min', function () {
 		.pipe(cache.filter())
 		.pipe(plumber())
 		.pipe(cleanCSS({compatibility: 'ie8'}))
-		.pipe(wait(doesFileExist(INIT.CSS)))
+		.pipe(wait(doesFileExist(DIR + 'css/dist/style.min.css')))
 		.pipe(concat('style.min.css'))
 		.pipe(gulp.dest(DIST.CSS));
 });
