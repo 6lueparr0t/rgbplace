@@ -5,6 +5,7 @@
  */
 /* FONT PATH
  * -------------------------- */
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 @font-face {
   font-family: 'FontAwesome';
   src: url("../fonts/fontawesome-webfont.eot?v=4.7.0");
@@ -2527,6 +2528,9 @@
     transform: scale(1.1) rotate(-3deg); }
   100% {
     transform: scale(1) rotate(0); } }
+
+body {
+  font-family: "Nanum Gothic", sans-serif; }
 
 button {
   padding: 0.5em 1em; }

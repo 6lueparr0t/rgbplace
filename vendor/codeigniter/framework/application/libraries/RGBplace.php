@@ -143,7 +143,7 @@ class RGBplace {
 		$admin = $this->CI->session->userdata('admin');
 		if($admin === TRUE) {
 		echo("
-		  <li>Admin
+		  <li><i class='fa fa-code' aria-hidden='true' > Admin</i>
 		    <ul>
 		      <li>Admin
 		        <ul>
@@ -162,10 +162,10 @@ class RGBplace {
 		");
 		}
 		echo("
-		  <li>Map</li>
-		  <li>Stage</li>
-		  <li>Notice</li>
-		  <li>History</li>
+		  <li><i class='fa fa-map-o' aria-hidden='true' ></i> Map</li>
+		  <li><i class='fa fa-street-view' aria-hidden='true'></i> Stage</li>
+		  <li><i class='fa fa-commenting-o' aria-hidden='true' ></i></li>
+		  <li><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></li>
 		  <li><i class='fa fa-cog' aria-hidden='true'></i>
 		    <ul></ul>
 		  </li>
