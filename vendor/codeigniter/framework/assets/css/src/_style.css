@@ -2683,65 +2683,80 @@ a {
   @media screen and (max-device-width: 426px) {
     #menu {
       display: block; } }
-  #menu li {
+  #menu label {
     /*float:left;*/
     flex: 1;
     background: #dee2e6;
+    color: #212529;
     text-align: center;
     padding: 1rem 0;
-    display: block; }
-    #menu li a {
-      color: #212529; }
-    #menu li:hover {
-      position: relative;
-      background: #adb5bd;
+    display: block;
+    position: relative; }
+    #menu label:hover {
+      background: #495057;
       color: #f8f9fa; }
-      #menu li:hover a {
-        color: #f8f9fa; }
-      #menu li:hover ul {
+    #menu label input[type='checkbox'] {
+      display: none; }
+      #menu label input[type='checkbox']:checked + ul {
         left: 0;
-        top: 100%;
         padding: 0;
         width: 100%;
         display: block;
         font-size: 0.8rem;
         position: absolute; }
         @media screen and (max-device-width: 426px) {
-          #menu li:hover ul {
+          #menu label input[type='checkbox']:checked + ul {
             top: 1rem;
             position: relative; } }
-        #menu li:hover ul li {
+        #menu label input[type='checkbox']:checked + ul label {
+          background: #ced4da;
           display: block;
-          background: #000;
-          padding: 1rem 0; }
-          #menu li:hover ul li ul {
+          padding: 1rem 0;
+          top: 1rem; }
+          @media screen and (max-device-width: 426px) {
+            #menu label input[type='checkbox']:checked + ul label {
+              top: 0; } }
+          #menu label input[type='checkbox']:checked + ul label:hover {
+            background: #343a40;
+            color: #f8f9fa; }
+          #menu label input[type='checkbox']:checked + ul label input[type='checkbox']:checked + ul {
+            left: 100%;
+            top: 0;
+            padding: 0;
+            width: 100%;
+            display: block; }
+            @media screen and (max-device-width: 426px) {
+              #menu label input[type='checkbox']:checked + ul label input[type='checkbox']:checked + ul {
+                left: 0;
+                top: 1rem;
+                position: relative; } }
+            #menu label input[type='checkbox']:checked + ul label input[type='checkbox']:checked + ul li {
+              background: #adb5bd; }
+              #menu label input[type='checkbox']:checked + ul label input[type='checkbox']:checked + ul li:hover {
+                background: #212529;
+                color: #f8f9fa; }
+          #menu label input[type='checkbox']:checked + ul label ul {
             position: absolute;
             display: none;
             list-style-type: none; }
             @media screen and (max-device-width: 426px) {
-              #menu li:hover ul li ul {
+              #menu label input[type='checkbox']:checked + ul label ul {
                 top: 1rem;
                 position: relative; } }
-          #menu li:hover ul li:hover {
-            background: #667; }
-            #menu li:hover ul li:hover ul {
-              left: 100%;
-              top: 0;
-              padding: 0;
-              width: 100%;
-              display: block;
-              background: #999; }
-              @media screen and (max-device-width: 426px) {
-                #menu li:hover ul li:hover ul {
-                  left: 0;
-                  top: 1rem;
-                  position: relative; } }
-              #menu li:hover ul li:hover ul li {
-                background: #888; }
-                #menu li:hover ul li:hover ul li:hover {
-                  background-color: #556; }
-    #menu li:last-child:hover ul li:hover ul {
+    #menu label:last-child input[type='checkbox']:checked + ul label input[type='checkbox']:checked + ul {
       left: -100%; }
+  #menu li {
+    /*float:left;*/
+    flex: 1;
+    background: #dee2e6;
+    text-align: center;
+    padding: 1rem 0;
+    display: block;
+    color: #212529; }
+    #menu li:hover {
+      position: relative;
+      background: #adb5bd;
+      color: #f8f9fa; }
   #menu ul {
     position: absolute;
     display: none;

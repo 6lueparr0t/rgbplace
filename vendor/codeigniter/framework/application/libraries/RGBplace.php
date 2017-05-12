@@ -143,32 +143,44 @@ class RGBplace {
 		$admin = $this->CI->session->userdata('admin');
 		if($admin === TRUE) {
 		echo("
-		  <li><i class='fa fa-code' aria-hidden='true' > Admin</i>
-		    <ul>
-		      <li>Admin
-		        <ul>
-		          <a href='/admin/info' target='_blank'><li>PHP Info</li></a>
-		        </ul>
-		      </li>
-		      <li>Exam
-		        <ul>
-		          <a href='/admin/generate_hash'><li>Generate Hash</li></a>
-		          <a href='/admin/animation'><li>Animation</li></a>
-		          <a href='/admin/restful'><li>RESTful Test</li></a>
-		        </ul>
-		      </li>
-		    </ul>
-		  </li>
+		  <label for='menu-admin'><i class='fa fa-code' aria-hidden='true' ></i> Admin
+            <input type='checkbox' id='menu-admin' />
+		      <ul>
+		        <label for='menu-admin-1'>Admin
+                  <input type='checkbox' id='menu-admin-1' />
+		          <ul>
+		            <a href='/admin/info' target='_blank'><li>PHP Info</li></a>
+		          </ul>
+                </label>
+		        <label for='menu-admin-2'>Exam
+                  <input type='checkbox' id='menu-admin-2' />
+		          <ul>
+		            <a href='/admin/generate_hash'><li>Generate Hash</li></a>
+		            <a href='/admin/animation'><li>Animation</li></a>
+		            <a href='/admin/restful'><li>RESTful Test</li></a>
+		          </ul>
+                </label>
+		      </ul>
+          </label>
 		");
 		}
 		echo("
-		  <li><i class='fa fa-map-o' aria-hidden='true' ></i> Map</li>
-		  <li><i class='fa fa-street-view' aria-hidden='true'></i> Stage</li>
-		  <li><i class='fa fa-commenting-o' aria-hidden='true' ></i></li>
-		  <li><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></li>
-		  <li><i class='fa fa-cog' aria-hidden='true'></i>
+		  <label for='menu-map'><i class='fa fa-map-o' aria-hidden='true' ></i> Map
+            <input type='checkbox' id='menu-map' />
+          </label>
+		  <label for='menu-stage'><i class='fa fa-street-view' aria-hidden='true'></i> Stage
+            <input type='checkbox' id='menu-stage' />
+          </label>
+		  <label for='menu-comments'><i class='fa fa-commenting-o' aria-hidden='true' ></i>
+            <input type='checkbox' id='menu-comments' />
+          </label>
+		  <label for='menu-favorite'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>
+            <input type='checkbox' id='menu-favorite' />
+          </label>
+		  <label for='menu-config'><i class='fa fa-cog' aria-hidden='true'></i>
+            <input type='checkbox' id='menu-config' />
 		    <ul></ul>
-		  </li>
+          </label>
 		</ul>
 		");
 
