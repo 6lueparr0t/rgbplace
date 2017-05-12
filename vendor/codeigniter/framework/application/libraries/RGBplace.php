@@ -147,7 +147,7 @@ class RGBplace {
 		    <ul>
 		      <li>Admin
 		        <ul>
-		          <a href='/admin/info'><li>PHP Info</li></a>
+		          <a href='/admin/info' target='_blank'><li>PHP Info</li></a>
 		        </ul>
 		      </li>
 		      <li>Exam

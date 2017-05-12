@@ -2530,7 +2530,7 @@
     transform: scale(1) rotate(0); } }
 
 body {
-  font-family: "Nanum Gothic", sans-serif; }
+  font-family: "Nanum Gothic", sans-serif !important; }
 
 button {
   padding: 0.5em 1em; }
@@ -2667,6 +2667,12 @@ a {
   padding: 0.5rem; }
 
 #menu {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   background: #dee2e6;
   padding: 0;
   margin: 0;
@@ -2682,7 +2688,7 @@ a {
     flex: 1;
     background: #dee2e6;
     text-align: center;
-    padding: 1rem 0rem;
+    padding: 1rem 0;
     display: block; }
     #menu li a {
       color: #212529; }
@@ -2707,7 +2713,7 @@ a {
         #menu li:hover ul li {
           display: block;
           background: #000;
-          padding: 1rem; }
+          padding: 1rem 0; }
           #menu li:hover ul li ul {
             position: absolute;
             display: none;
@@ -2725,6 +2731,11 @@ a {
               width: 100%;
               display: block;
               background: #999; }
+              @media screen and (max-device-width: 426px) {
+                #menu li:hover ul li:hover ul {
+                  left: 0;
+                  top: 1rem;
+                  position: relative; } }
               #menu li:hover ul li:hover ul li {
                 background: #888; }
                 #menu li:hover ul li:hover ul li:hover {

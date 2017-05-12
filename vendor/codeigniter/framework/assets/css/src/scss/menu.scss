@@ -2,6 +2,14 @@ $width-name: max-device-width;
 $target-width: 426px;
 
 #menu {
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
 	background: $oc-gray-3;
 	padding: 0;
 	margin: 0;
@@ -19,7 +27,7 @@ $target-width: 426px;
 		flex: 1;
 		background: $oc-gray-3;
 		text-align: center;
-		padding: 1rem 0rem;
+		padding: 1rem 0;
 		display: block;
 
 		a {
@@ -52,7 +60,7 @@ $target-width: 426px;
 				li {
 					display: block;
 					background: #000;
-					padding: 1rem;
+					padding: 1rem 0;
 
 					ul {
 						position: absolute;
@@ -75,6 +83,12 @@ $target-width: 426px;
 							width: 100%;
 							display: block;
 							background: #999;
+
+							@media screen and ($width-name : $target-width) {
+								left: 0;
+								top: 1rem;
+								position:relative;
+							}
 
 							li {
 								background: #888;
