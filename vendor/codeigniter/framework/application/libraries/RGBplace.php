@@ -179,7 +179,7 @@ class RGBplace {
           </label>
 		  <label for='menu-config'><i class='fa fa-cog' aria-hidden='true'></i>
             <input type='checkbox' id='menu-config' />
-		    <ul></ul>
+		    <ul></ul> 
           </label>
 		</ul>
 		");
