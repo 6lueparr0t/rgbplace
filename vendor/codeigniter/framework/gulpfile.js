@@ -52,6 +52,7 @@ const INIT = {
     COMM: DIR + 'js/comm/common.min.js',
     JS: DIR + 'js/dist/**/*.min.js',
     CSS: DIR + 'css/dist/*.min.css',
+    _CSS: DIR + 'css/src/_style.css',
 };
 
 function doesFileExist(filePath) {
@@ -136,6 +137,7 @@ gulp.task('css', ['css-init', 'css-sass', 'css-min'], function () {
 });
 
 gulp.task('css-init', function () {
+    //return del.sync([INIT.CSS, INIT._CSS], {force : true});
     return del.sync([INIT.CSS], {force : true});
 });
 
@@ -156,7 +158,7 @@ gulp.task('css-min', function () {
 		.pipe(cache.filter())
 		.pipe(plumber())
 		.pipe(cleanCSS({compatibility: 'ie8'}))
-		.pipe(wait(doesFileExist(DIR + 'css/src/_style.css')))
+		.pipe(wait(DIR + "css/dist/style.min.css"))
 		.pipe(concat('style.min.css'))
 		.pipe(gulp.dest(DIST.CSS));
 });
