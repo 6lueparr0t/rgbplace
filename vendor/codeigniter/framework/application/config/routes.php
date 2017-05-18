@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'init';
-$route['404_override'] = 'play';
+$route['404_override'] = 'stage';
 $route['translate_uri_dashes'] = FALSE;
 
 
@@ -58,6 +58,10 @@ $route['translate_uri_dashes'] = FALSE;
 | Hot Place Maer
 */
 
-$route['post/([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
-	return 'post/view/' . strtolower($map) . '/' . $num;
+$route['map/([a-zA-Z]{2}[0-9]+)'] = function ($map) {
+	return 'map/post/' . strtolower($map);
+};
+
+$route['map/([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
+	return 'map/post/' . strtolower($map) . '/' . $num;
 };

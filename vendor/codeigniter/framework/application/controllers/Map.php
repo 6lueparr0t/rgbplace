@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Stage extends CI_Controller {
+class Map extends CI_Controller {
 
 	public function __construct()
 	{
@@ -10,6 +10,11 @@ class Stage extends CI_Controller {
 
 	public function index()
 	{
-		$this->rgb->view("stage/main");
+		redirect("/stage");
+	}
+
+	public function post($map, $num = 0) {
+		
+		echo "{$map}, {$num}";
 	}
 }
