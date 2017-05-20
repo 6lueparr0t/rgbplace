@@ -137,6 +137,13 @@ class RGBplace {
 
 		/* ********** MENU Start ********** */
 		echo("
+        <input type='checkbox' id='menu-toggle' />
+        <label id='menu-button' for='menu-toggle'>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
 		<ul id='menu'>
 		");
 
@@ -145,15 +152,21 @@ class RGBplace {
 		echo("
 		  <label for='menu-admin'><i class='fa fa-code' aria-hidden='true' ></i> Admin
             <input type='checkbox' id='menu-admin' />
+              <i class='open fa fa-caret-up' aria-hidden='true'></i>
+              <i class='close fa fa-caret-down' aria-hidden='true'></i>
 		      <ul>
 		        <label for='menu-admin-1'>Admin
                   <input type='checkbox' id='menu-admin-1' />
+                  <i class='open fa fa-minus' aria-hidden='true'></i>
+                  <i class='close fa fa-plus' aria-hidden='true'></i>
 		          <ul>
 		            <a href='/admin/info' target='_blank'><li>PHP Info</li></a>
 		          </ul>
                 </label>
 		        <label for='menu-admin-2'>Exam
                   <input type='checkbox' id='menu-admin-2' />
+                  <i class='open fa fa-minus' aria-hidden='true'></i>
+                  <i class='close fa fa-plus' aria-hidden='true'></i>
 		          <ul>
 		            <a href='/admin/generate_hash'><li>Generate Hash</li></a>
 		            <a href='/admin/animation'><li>Animation</li></a>
@@ -167,18 +180,32 @@ class RGBplace {
 		echo("
 		  <label for='menu-map'><i class='fa fa-map-o' aria-hidden='true' ></i> Map
             <input type='checkbox' id='menu-map' />
+              <i class='open fa fa-caret-up' aria-hidden='true'></i>
+              <i class='close fa fa-caret-down' aria-hidden='true'></i>
+              <div id='menu-map-box'>
+              </div>
           </label>
 		  <label for='menu-stage'><i class='fa fa-street-view' aria-hidden='true'></i> Stage
             <input type='checkbox' id='menu-stage' />
+              <div id='menu-stage-box'>
+              </div>
           </label>
+<!--
 		  <label for='menu-comments'><i class='fa fa-commenting-o' aria-hidden='true' ></i>
             <input type='checkbox' id='menu-comments' />
+              <div id='menu-comments-box'>
+			  </div>
           </label>
+-->
 		  <label for='menu-favorite'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>
-            <input type='checkbox' id='menu-favorite' />
+            <input type='checkbox' id='menu-favorite' /> Like
+			  <div id='menu-favorite-box'>
+              </div>
           </label>
 		  <label for='menu-config'><i class='fa fa-cog' aria-hidden='true'></i>
             <input type='checkbox' id='menu-config' />
+              <div id='menu-config-box'>
+              </div>
 		    <ul></ul> 
           </label>
 		</ul>

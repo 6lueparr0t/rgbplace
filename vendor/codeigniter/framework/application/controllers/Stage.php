@@ -12,4 +12,9 @@ class Stage extends CI_Controller {
 	{
 		$this->rgb->view("stage/main");
 	}
+
+	public function post($map, $num = 0)
+	{
+		echo "{$map}, {$num}";
+	}
 }
