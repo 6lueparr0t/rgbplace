@@ -1,24 +1,21 @@
 body {
-	font-family: "Nanum Gothic", sans-serif !important;
-}
-
-button {
-	padding : 0.5em 1em;
+  font-family: "Nanum Gothic", sans-serif !important;
 }
 
 a {
-	color : $oc-blue-6;
-	text-decoration : none !important;
+  color : $oc-blue-6;
+  text-decoration : none !important;
 
-	&:link {
-		background-color: transparent !important;
-	}
+  &:link {
+    //background-color: transparent !important;
+    background-color: transparent;
+  }
 
-	&:hover {
-		color : $oc-blue-2;
+  &:hover {
+    color : $oc-blue-2;
     }
 
-	&:active {
-		color : $oc-blue-7;
+  &:active {
+    color : $oc-blue-7;
     }
 }

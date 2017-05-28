@@ -2532,14 +2532,11 @@
 body {
   font-family: "Nanum Gothic", sans-serif !important; }
 
-button {
-  padding: 0.5em 1em; }
-
 a {
   color: #228ae6;
   text-decoration: none !important; }
   a:link {
-    background-color: transparent !important; }
+    background-color: transparent; }
   a:hover {
     color: #a3daff; }
   a:active {
@@ -2705,8 +2702,6 @@ a {
   -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
   display: none;
-  position: absolute;
-  top: 2.5rem;
   left: 90%;
   cursor: pointer;
   width: 2rem;
@@ -2735,7 +2730,9 @@ a {
     top: 2rem; }
   @media screen and (max-width: 860px) {
     #menu-button {
-      display: grid; } }
+      display: grid;
+      position: absolute;
+      top: 4.2rem; } }
 
 #menu {
   -webkit-touch-callout: none;
@@ -2746,7 +2743,7 @@ a {
   user-select: none;
   background: #dee2e6;
   padding: 0;
-  margin: 2rem 0;
+  margin: 0 0 1rem 0;
   list-style-type: none;
   width: 100%;
   display: flex;
@@ -2754,7 +2751,7 @@ a {
   @media screen and (max-width: 860px) {
     #menu {
       display: none; } }
-  #menu label {
+  #menu label, #menu a {
     /*float:left;*/
     flex: 1;
     background: #dee2e6;
@@ -2762,31 +2759,32 @@ a {
     text-align: center;
     padding: 1rem 0;
     display: block;
-    position: relative; }
-    #menu label:hover {
+    position: relative;
+    cursor: pointer; }
+    #menu label:hover, #menu a:hover {
       background: #495057;
       color: #f8f9fa; }
-    #menu label input[type='checkbox'] {
+    #menu label input[type='checkbox'], #menu a input[type='checkbox'] {
       display: none; }
-      #menu label input[type='checkbox'] ~ .open {
+      #menu label input[type='checkbox'] ~ .open, #menu a input[type='checkbox'] ~ .open {
         display: none; }
-      #menu label input[type='checkbox'] ~ .close {
+      #menu label input[type='checkbox'] ~ .close, #menu a input[type='checkbox'] ~ .close {
         display: initial;
         position: absolute;
         left: 85%; }
         @media screen and (max-width: 860px) {
-          #menu label input[type='checkbox'] ~ .close {
+          #menu label input[type='checkbox'] ~ .close, #menu a input[type='checkbox'] ~ .close {
             left: 70%; } }
-      #menu label input[type='checkbox']:checked ~ .close {
+      #menu label input[type='checkbox']:checked ~ .close, #menu a input[type='checkbox']:checked ~ .close {
         display: none; }
-      #menu label input[type='checkbox']:checked ~ .open {
+      #menu label input[type='checkbox']:checked ~ .open, #menu a input[type='checkbox']:checked ~ .open {
         display: initial;
         position: absolute;
         left: 85%; }
         @media screen and (max-width: 860px) {
-          #menu label input[type='checkbox']:checked ~ .open {
+          #menu label input[type='checkbox']:checked ~ .open, #menu a input[type='checkbox']:checked ~ .open {
             left: 70%; } }
-      #menu label input[type='checkbox']:checked ~ ul {
+      #menu label input[type='checkbox']:checked ~ ul, #menu a input[type='checkbox']:checked ~ ul {
         left: 0;
         padding: 0;
         width: 100%;
@@ -2794,45 +2792,47 @@ a {
         font-size: 0.8rem;
         position: absolute; }
         @media screen and (max-width: 860px) {
-          #menu label input[type='checkbox']:checked ~ ul {
+          #menu label input[type='checkbox']:checked ~ ul, #menu a input[type='checkbox']:checked ~ ul {
             top: 1rem;
             position: relative; } }
-        #menu label input[type='checkbox']:checked ~ ul label {
+        #menu label input[type='checkbox']:checked ~ ul label, #menu a input[type='checkbox']:checked ~ ul label {
           background: #ced4da;
           display: block;
           padding: 1rem 0;
           top: 1rem; }
           @media screen and (max-width: 860px) {
-            #menu label input[type='checkbox']:checked ~ ul label {
+            #menu label input[type='checkbox']:checked ~ ul label, #menu a input[type='checkbox']:checked ~ ul label {
               top: 0; } }
-          #menu label input[type='checkbox']:checked ~ ul label:hover {
+          #menu label input[type='checkbox']:checked ~ ul label:hover, #menu a input[type='checkbox']:checked ~ ul label:hover {
             background: #343a40;
             color: #f8f9fa; }
-          #menu label input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul {
+          #menu label input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul, #menu a input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul {
             left: 100%;
             top: 0;
             padding: 0;
             width: 100%;
             display: block; }
             @media screen and (max-width: 860px) {
-              #menu label input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul {
+              #menu label input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul, #menu a input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul {
                 left: 0;
                 top: 1rem;
                 position: relative; } }
-            #menu label input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul li {
-              background: #adb5bd; }
-              #menu label input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul li:hover {
-                background: #212529;
-                color: #f8f9fa; }
-          #menu label input[type='checkbox']:checked ~ ul label ul {
+            #menu label input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul a, #menu a input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul a {
+              padding: 0; }
+              #menu label input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul a li, #menu a input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul a li {
+                background: #adb5bd; }
+                #menu label input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul a li:hover, #menu a input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul a li:hover {
+                  background: #212529;
+                  color: #f8f9fa; }
+          #menu label input[type='checkbox']:checked ~ ul label ul, #menu a input[type='checkbox']:checked ~ ul label ul {
             position: absolute;
             display: none;
             list-style-type: none; }
             @media screen and (max-width: 860px) {
-              #menu label input[type='checkbox']:checked ~ ul label ul {
+              #menu label input[type='checkbox']:checked ~ ul label ul, #menu a input[type='checkbox']:checked ~ ul label ul {
                 top: 1rem;
                 position: relative; } }
-    #menu label:last-child input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul {
+    #menu label:last-child input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul, #menu a:last-child input[type='checkbox']:checked ~ ul label input[type='checkbox']:checked ~ ul {
       left: -100%; }
   #menu li {
     /*float:left;*/
@@ -2851,8 +2851,15 @@ a {
     display: none;
     list-style-type: none; }
 
+#sign {
+  position: relative;
+  top: .5rem;
+  height: 2rem; }
+
 #title {
-  font-size: 3rem; }
+  font-size: 3rem;
+  padding: 1rem 0;
+  background: #f8f9fa; }
   #title a {
     color: #212529 !important; }
   #title .real {

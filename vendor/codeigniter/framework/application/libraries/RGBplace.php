@@ -48,7 +48,10 @@ class RGBplace {
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-	<meta charset='utf-8'>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+	<meta name='viewport' content='width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes' />
+
 	<title>RGB place</title>
 	<link rel='icon' href='data:;base64,iVBORw0KGgo='>
 	<link rel='stylesheet' href='/assets/css/dist/style.min.css' />
@@ -57,6 +60,7 @@ class RGBplace {
 		");
 /* ---------------------------------------------------------------------- */
 
+		echo ("<div id='sign'>");
 		// Sign in check
 		if(!$sign) {
 			// #### setting 'Sign In' Form
@@ -89,6 +93,7 @@ class RGBplace {
 				echo "<span id='apikey' style='display:none'>{$apikey}</span>";
 			}
 		}
+		echo ("</div>");
 
 		echo("
 		<div id='title'>
