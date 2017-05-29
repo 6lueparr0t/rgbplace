@@ -11,13 +11,11 @@ class Sign extends CI_Controller {
 
 	public function index()
 	{
-		redirect("/");
+		$this->rgb->view("sign/main");
 	}
 
 	public function in($check="")
 	{
-
-
 		$config = [
 				[
 					'field' => 'uid',

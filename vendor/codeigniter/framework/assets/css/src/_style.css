@@ -2854,7 +2854,8 @@ a {
 #sign {
   position: relative;
   top: .5rem;
-  height: 2rem; }
+  height: 3rem;
+  text-align: right; }
 
 #title {
   font-size: 3rem;
@@ -2917,3 +2918,26 @@ a {
     -o-animation-fill-mode: forwards;
     animation: tada 1s linear 1.2s 1 normal;
     animation-fill-mode: forwards; }
+
+#sign-up {
+  margin-top: 2rem; }
+  #sign-up input {
+    display: block;
+    margin: 1rem auto;
+    padding: .5rem;
+    width: 50%;
+    height: 3rem;
+    font-size: 1.5rem;
+    border-radius: 1rem; }
+    #sign-up input:focus {
+      outline: none; }
+  #sign-up button {
+    display: block;
+    margin: 1rem auto;
+    padding: .5rem;
+    width: 51.5%;
+    height: 3rem;
+    font-size: 1.5rem;
+    border-radius: 1rem; }
+    #sign-up button:focus {
+      outline: none; }

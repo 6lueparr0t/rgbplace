@@ -1,3 +1,4 @@
+"use strict";
 function signUpCheck (recv) {
 	let form = new FormData(recv);
 
@@ -37,5 +38,16 @@ function signUpCheck (recv) {
 	request.send(form);
 }
 
+function passwordCheck () {
+    if (this.value != document.querySelector('#sign-up input[name=\'pswd\']').value) {
+        this.setCustomValidity('패스워드를 확인해주세요.\nPlease Check your Password.');
+    } else {
+        this.setCustomValidity('');
+    }
+}
+
 let signup = document.querySelector("#sign-up");
+let signUpConf = document.querySelector("#sign-up input[name='conf']");
+
 if (signup) signup.addEventListener("submit", function () { event.preventDefault(); signUpCheck(signup); });
+if (signUpConf) signUpConf.addEventListener("input", passwordCheck);
