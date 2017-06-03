@@ -56,7 +56,7 @@
   transition: .5s ease-in-out;
 
   display:none;
-  left: 90%;
+  left: 87.5%;
   cursor: pointer;
   width: 2rem;
   height: 3rem;
@@ -96,7 +96,7 @@
   @media screen and ($width-name : $target-width) {
     display: grid;
     position: absolute;
-    top: 4.2rem;
+    top: 5rem;
   }
 
 }

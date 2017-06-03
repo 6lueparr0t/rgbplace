@@ -2663,6 +2663,68 @@ a {
   justify-content: center;
   padding: 0.5rem; }
 
+#logo {
+  font-size: 3rem;
+  padding: 1rem 0;
+  background: #f8f9fa; }
+  #logo a {
+    color: #212529 !important; }
+  #logo .real {
+    color: #ff6b6b !important;
+    position: relative;
+    opacity: 0;
+    -webkit-animation: fadeIn 1s linear 0s 1 normal;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation: fadeIn 1s linear 0s 1 normal;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation: fadeIn 1s linear 0s 1 normal;
+    -ms-animation-fill-mode: forwards;
+    -o-animation: fadeIn 1s linear 0s 1 normal;
+    -o-animation-fill-mode: forwards;
+    animation: fadeIn 1s linear 0s 1 normal;
+    animation-fill-mode: forwards; }
+  #logo .gains {
+    color: #51cf66 !important;
+    position: relative;
+    opacity: 0;
+    -webkit-animation: fadeInDown 1s linear .4s 1 normal;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation: fadeInDown 1s linear .4s 1 normal;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation: fadeInDown 1s linear .4s 1 normal;
+    -ms-animation-fill-mode: forwards;
+    -o-animation: fadeInDown 1s linear .4s 1 normal;
+    -o-animation-fill-mode: forwards;
+    animation: fadeInDown 1s linear .4s 1 normal;
+    animation-fill-mode: forwards; }
+  #logo .by {
+    color: #329af0 !important;
+    position: relative;
+    opacity: 0;
+    -webkit-animation: fadeInLeft 1s linear .8s 1 normal;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation: fadeInLeft 1s linear .8s 1 normal;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation: fadeInLeft 1s linear .8s 1 normal;
+    -ms-animation-fill-mode: forwards;
+    -o-animation: fadeInLeft 1s linear .8s 1 normal;
+    -o-animation-fill-mode: forwards;
+    animation: fadeInLeft 1s linear .8s 1 normal;
+    animation-fill-mode: forwards; }
+  #logo .place {
+    position: absolute;
+    padding-left: .6rem;
+    -webkit-animation: tada 1s linear 1.2s 1 normal;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation: tada 1s linear 1.2s 1 normal;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation: tada 1s linear 1.2s 1 normal;
+    -ms-animation-fill-mode: forwards;
+    -o-animation: tada 1s linear 1.2s 1 normal;
+    -o-animation-fill-mode: forwards;
+    animation: tada 1s linear 1.2s 1 normal;
+    animation-fill-mode: forwards; }
+
 #menu-toggle {
   display: none; }
   @media screen and (max-width: 860px) {
@@ -2702,7 +2764,7 @@ a {
   -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
   display: none;
-  left: 90%;
+  left: 87.5%;
   cursor: pointer;
   width: 2rem;
   height: 3rem; }
@@ -2732,7 +2794,7 @@ a {
     #menu-button {
       display: grid;
       position: absolute;
-      top: 4.2rem; } }
+      top: 5rem; } }
 
 #menu {
   -webkit-touch-callout: none;
@@ -2851,73 +2913,25 @@ a {
     display: none;
     list-style-type: none; }
 
+#map-search-box {
+  width: 85%;
+  transform: translateX(6px);
+  border-radius: 4rem;
+  border: none;
+  height: 1rem;
+  padding: 1rem; }
+
+#map-search-button {
+  color: black;
+  transform: translateX(-22px); }
+
 #sign {
   position: relative;
   top: .5rem;
   height: 3rem;
   text-align: right; }
-
-#title {
-  font-size: 3rem;
-  padding: 1rem 0;
-  background: #f8f9fa; }
-  #title a {
-    color: #212529 !important; }
-  #title .real {
-    color: #ff6b6b !important;
-    position: relative;
-    opacity: 0;
-    -webkit-animation: fadeIn 1s linear 0s 1 normal;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation: fadeIn 1s linear 0s 1 normal;
-    -moz-animation-fill-mode: forwards;
-    -ms-animation: fadeIn 1s linear 0s 1 normal;
-    -ms-animation-fill-mode: forwards;
-    -o-animation: fadeIn 1s linear 0s 1 normal;
-    -o-animation-fill-mode: forwards;
-    animation: fadeIn 1s linear 0s 1 normal;
-    animation-fill-mode: forwards; }
-  #title .gains {
-    color: #51cf66 !important;
-    position: relative;
-    opacity: 0;
-    -webkit-animation: fadeInDown 1s linear .4s 1 normal;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation: fadeInDown 1s linear .4s 1 normal;
-    -moz-animation-fill-mode: forwards;
-    -ms-animation: fadeInDown 1s linear .4s 1 normal;
-    -ms-animation-fill-mode: forwards;
-    -o-animation: fadeInDown 1s linear .4s 1 normal;
-    -o-animation-fill-mode: forwards;
-    animation: fadeInDown 1s linear .4s 1 normal;
-    animation-fill-mode: forwards; }
-  #title .by {
-    color: #329af0 !important;
-    position: relative;
-    opacity: 0;
-    -webkit-animation: fadeInLeft 1s linear .8s 1 normal;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation: fadeInLeft 1s linear .8s 1 normal;
-    -moz-animation-fill-mode: forwards;
-    -ms-animation: fadeInLeft 1s linear .8s 1 normal;
-    -ms-animation-fill-mode: forwards;
-    -o-animation: fadeInLeft 1s linear .8s 1 normal;
-    -o-animation-fill-mode: forwards;
-    animation: fadeInLeft 1s linear .8s 1 normal;
-    animation-fill-mode: forwards; }
-  #title .place {
-    position: absolute;
-    padding-left: .6rem;
-    -webkit-animation: tada 1s linear 1.2s 1 normal;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation: tada 1s linear 1.2s 1 normal;
-    -moz-animation-fill-mode: forwards;
-    -ms-animation: tada 1s linear 1.2s 1 normal;
-    -ms-animation-fill-mode: forwards;
-    -o-animation: tada 1s linear 1.2s 1 normal;
-    -o-animation-fill-mode: forwards;
-    animation: tada 1s linear 1.2s 1 normal;
-    animation-fill-mode: forwards; }
+  #sign button {
+    margin: 0 0.2rem; }
 
 #sign-up {
   margin-top: 2rem; }
@@ -2932,12 +2946,18 @@ a {
     #sign-up input:focus {
       outline: none; }
   #sign-up button {
+    background: #dee2e6;
+    color: #212529;
     display: block;
+    border: none;
     margin: 1rem auto;
     padding: .5rem;
     width: 51.5%;
     height: 3rem;
     font-size: 1.5rem;
     border-radius: 1rem; }
+    #sign-up button:hover {
+      background: #495057;
+      color: #f8f9fa; }
     #sign-up button:focus {
       outline: none; }

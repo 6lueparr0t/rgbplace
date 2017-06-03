@@ -87,7 +87,7 @@ class RGBplace {
 		echo ("</div>");
 
 		echo("
-		<div id='title'>
+		<div id='logo'>
 			<a href='".base_url()."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> place</span></a>
 		</div>
 		");
@@ -178,8 +178,11 @@ class RGBplace {
             <input type='checkbox' id='menu-map' />
               <i class='open fa fa-caret-up' aria-hidden='true'></i>
               <i class='close fa fa-caret-down' aria-hidden='true'></i>
-              <div id='menu-map-box'>
-              </div>
+              <ul> 
+		        <label for='menu-map-search'>
+                  <input type='text' id='map-search-box' placeholder='Search'/><i class='fa fa-search' id='map-search-button' aria-hidden='true'></i>
+                </label>
+			  </ul>
           </label>
 		  <label for='menu-stage'><i class='fa fa-street-view' aria-hidden='true'></i> Stage
             <input type='checkbox' id='menu-stage' />

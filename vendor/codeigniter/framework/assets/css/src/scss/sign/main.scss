@@ -16,7 +16,10 @@
   }
 
   & button {
+    background: $oc-gray-3;
+    color: $oc-gray-9;
     display:block;
+	border:none;
     margin:1rem auto;
     padding:.5rem;
     width: 51.5%;
@@ -24,6 +27,10 @@
     font-size:1.5rem;
     border-radius: 1rem;
 
+	&:hover{
+      background: $oc-gray-7;
+      color: $oc-gray-0;
+	}
 	&:focus{
       outline:none;
 	}
