@@ -116,20 +116,6 @@ class RGBplace {
 	{
 
 		//setting Common Menu
-		/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
-
-		li : Menu Name
-			- ul : Sub Menu Start
-				- li : Sub Menu Name
-				...
-				- /li
-			- /ul
-		/li
-
-		test code
-		echo("<li>test<ul><li>wow<ul><li>testmenu</li></ul></li></ul></li>");
-
-		@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 		/* ********** MENU Start ********** */
 		echo("
@@ -179,8 +165,12 @@ class RGBplace {
               <i class='open fa fa-caret-up' aria-hidden='true'></i>
               <i class='close fa fa-caret-down' aria-hidden='true'></i>
               <ul> 
-		        <label for='menu-map-search'>
+		        <label id='menu-map-search'>
                   <input type='text' id='map-search-box' placeholder='Search'/><i class='fa fa-search' id='map-search-button' aria-hidden='true'></i>
+                  <input type='checkbox' id='menu-map-search' />
+                </label>
+		        <label id='menu-map-result'>
+                  <div id='map-search-result'> No Result </div>
                 </label>
 			  </ul>
           </label>
@@ -212,10 +202,10 @@ class RGBplace {
 
 		/* ********** MENU END ********** */
 	}
-
+/*
 	function warning($display = "none")
 	{
 		echo ("<p class='marquee {$display}'>Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning!</p>");
 	}
-
+*/
 }

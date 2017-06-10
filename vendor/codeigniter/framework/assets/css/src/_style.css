@@ -2913,8 +2913,14 @@ a {
     display: none;
     list-style-type: none; }
 
+#menu-map-result {
+  border-top: 1px solid #212529; }
+  #menu-map-result:hover {
+    background: #e9ecef !important;
+    color: #212529 !important; }
+
 #map-search-box {
-  width: 85%;
+  width: 80%;
   transform: translateX(6px);
   border-radius: 4rem;
   border: none;

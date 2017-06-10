@@ -1,5 +1,18 @@
+#menu-map-search {
+  
+}
+
+#menu-map-result {
+  border-top:1px solid $oc-gray-9;
+
+  &:hover {
+    background: $oc-gray-2 !important;
+    color: $oc-gray-9 !important;
+  }
+}
+
 #map-search-box {
-  width: 85%;
+  width: 80%;
   transform: translateX(6px);
   border-radius: 4rem;
   border: none;
@@ -10,4 +23,8 @@
 #map-search-button {
   color:black;
   transform:translateX(-22px);
+}
+
+#map-serach-result {
+
 }

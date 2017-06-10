@@ -12,7 +12,7 @@ function requestGet() {
 	let request = new XMLHttpRequest();
 	let data = "";
 
-	request.open('get', '/api/test', true);
+	request.open('get', '/api/check', true);
 	request.setRequestHeader ("Authorization", apikey);
 
 	request.onload = function() {
@@ -46,7 +46,7 @@ function requestPost() {
 	let request = new XMLHttpRequest();
 	let data = "";
 
-	request.open('post', '/api/test', true);
+	request.open('post', '/api/check', true);
 
 	request.onload = function() {
 		if (this.status >= 200 && this.status < 400) {
@@ -78,7 +78,7 @@ function requestPut() {
 	let request = new XMLHttpRequest();
 	let data = "";
 
-	request.open('put', '/api/test', true);
+	request.open('put', '/api/check', true);
 
 	request.onload = function() {
 		if (this.status >= 200 && this.status < 400) {
@@ -110,7 +110,7 @@ function requestDelete() {
 	let request = new XMLHttpRequest();
 	let data = "";
 
-	request.open('delete', '/api/test', true);
+	request.open('delete', '/api/check', true);
 
 	request.onload = function() {
 		if (this.status >= 200 && this.status < 400) {

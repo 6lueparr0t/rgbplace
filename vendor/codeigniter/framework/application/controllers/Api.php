@@ -14,7 +14,7 @@ class Api extends CI_Controller {
 		redirect("/");
 	}
 
-	public function test()
+	public function check()
 	{
 		$data = ['request' => $this->input->server('REQUEST_METHOD'), 'author' => $this->input->get_request_header('Authorization')];
 		echo json_encode($data);
@@ -50,4 +50,8 @@ class Api extends CI_Controller {
 		
 	}
 
+	public function map_search()
+	{
+
+	}
 }

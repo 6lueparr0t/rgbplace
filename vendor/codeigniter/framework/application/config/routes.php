@@ -55,13 +55,13 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 /*
-| Hot Place Maer
+| RGB place
 */
 
-$route['stage/([a-zA-Z]{2}[0-9]+)'] = function ($map) {
-	return 'stage/post/' . strtolower($map);
+$route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {
+	return 'map/cover/' . strtolower($map);
 };
 
-$route['map/([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
-	return 'stage/post/' . strtolower($map) . '/' . $num;
+$route['([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
+	return 'map/post/' . strtolower($map) . '/' . $num;
 };
