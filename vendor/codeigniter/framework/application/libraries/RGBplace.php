@@ -170,7 +170,13 @@ class RGBplace {
                   <input type='checkbox' id='menu-map-search' />
                 </label>
 		        <label id='menu-map-result'>
-                  <div id='map-search-result'> No Result </div>
+                  <div id='map-search-result'> No Results
+<!--
+                    <ul>
+                      <a href='#'><li>test</li></a>
+                    </ul>
+-->
+                  </div>
                 </label>
 			  </ul>
           </label>
