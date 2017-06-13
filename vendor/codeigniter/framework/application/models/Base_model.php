@@ -2,16 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Base_model extends CI_Model {
 
-	public function map($search)
+	public function map($keyword)
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_code WHERE place like '%{$search}%' or keyword like '%{$search}%'";
+		$query = "SELECT * FROM map_code WHERE place like '%{$keyword}%' or keyword like '%{$keyword}%'";
 		$find = $this->db->query($query);
 
 		foreach ($find->result() as $key => $row) {
 			$data['country'][$key] = $row->country;
-
 			$data['code'][$key] = $row->code.$row->no;
 			$data['place'][$key] =$row->place;
 		}

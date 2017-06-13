@@ -23,9 +23,9 @@ function signInCheck (recv) {
 	};
 
 	request.onprogress = function() {
-		console.log("event.lengthComputable:"+event.lengthComputable);
-		console.log("event.loaded:"+event.loaded);
-		console.log("event.total:"+event.total);
+		//console.log("event.lengthComputable:"+event.lengthComputable);
+		//console.log("event.loaded:"+event.loaded);
+		//console.log("event.total:"+event.total);
 	};
 
 

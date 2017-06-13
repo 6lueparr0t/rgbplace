@@ -13,6 +13,14 @@ class Map extends CI_Controller {
 		$this->rgb->view("map/main");
 	}
 
+	public function search()
+	{
+		$data =   ['keyword' => $this->input->get('keyword')];
+		$output = $this->base->map($data['keyword']);
+
+		echo json_encode($output);
+	}
+
 	public function cover($map)
 	{
 		echo "{$map}";
