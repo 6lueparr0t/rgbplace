@@ -41,7 +41,7 @@ function mapSearch (recv) {
 		when receive on php,
 	===========================
 
-	$data = json_decode($this->input->raw_input_stream, true);
+	$data = json_decode($this->input->input_stream(keyword, true), true);
 	$output = ['valid' => true, 'search' => $data['search'], 'results' => []];
 */
 
