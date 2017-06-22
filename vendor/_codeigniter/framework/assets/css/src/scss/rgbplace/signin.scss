@@ -1,0 +1,10 @@
+#sign { 
+  position: relative;
+  top: .5rem;
+  height: 3rem;
+  text-align:right;
+
+  & button{
+    margin:0 0.2rem;
+  }
+}

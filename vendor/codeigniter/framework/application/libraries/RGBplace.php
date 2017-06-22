@@ -143,7 +143,7 @@ class RGBplace {
                   <i class='open fa fa-minus' aria-hidden='true'></i>
                   <i class='close fa fa-plus' aria-hidden='true'></i>
 		          <ul>
-		            <a href='/admin/info' target='_blank'><li>PHP Info</li></a>
+		            <a href='/admin/info' target='_blank'><li>Version</li></a>
 		          </ul>
                 </label>
 		        <label for='menu-admin-2'>Exam
@@ -154,12 +154,14 @@ class RGBplace {
 		            <a href='/admin/generate_hash'><li>Generate Hash</li></a>
 		            <a href='/admin/animation'><li>Animation</li></a>
 		            <a href='/admin/restful'><li>RESTful Test</li></a>
+		            <a href='/admin/dragndrop_upload'><li>Drag N Drop Upload</li></a>
 		          </ul>
                 </label>
 		      </ul>
           </label>
 		");
 		}
+
 		echo("
 		  <label for='menu-map'><i class='fa fa-map-o' aria-hidden='true' ></i> Map
             <input type='checkbox' id='menu-map' />
@@ -172,11 +174,6 @@ class RGBplace {
                 </label>
 		        <label id='menu-map-result'>
                   <div id='map-search-result'> No Results
-<!--
-                    <ul>
-                      <a href='#'><li>test</li></a>
-                    </ul>
--->
                   </div>
                 </label>
 			  </ul>
