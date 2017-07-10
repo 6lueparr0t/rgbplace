@@ -163,33 +163,27 @@ class RGBplace {
 		}
 
 		echo("
-		  <label for='menu-map'><i class='fa fa-map-o' aria-hidden='true' ></i> Map
-            <input type='checkbox' id='menu-map' />
-              <i class='open fa fa-caret-up' aria-hidden='true'></i>
-              <i class='close fa fa-caret-down' aria-hidden='true'></i>
-              <ul> 
-		        <label id='menu-map-search'>
-                  <input type='text' id='map-search-box' placeholder='Search'/><i class='fa fa-search' id='map-search-button' aria-hidden='true'></i>
-                  <input type='checkbox' id='menu-map-search' />
-                </label>
-		        <label id='menu-map-result'>
-                  <div id='map-search-result'> No Results
-                  </div>
-                </label>
-			  </ul>
+		  <label id='menu-map' for='map-search'>
+            <input type='text' id='map-search-box' placeholder='Map Search'/><i class='fa fa-search' id='map-search-button' aria-hidden='true'></i>
+			<input type='checkbox' id='map-search' />
+            <i class='open fa fa-caret-up' aria-hidden='true'></i>
+            <i class='close fa fa-caret-down' aria-hidden='true'></i>
+			<ul>
+			  <label id='map-result' for=''>
+			    <a href='#'><li>No Results</li></a>
+			  </label>
+			</ul>
           </label>
 		  <label for='menu-stage'><i class='fa fa-street-view' aria-hidden='true'></i> Stage
             <input type='checkbox' id='menu-stage' />
               <div id='menu-stage-box'>
               </div>
           </label>
-<!--
-		  <label for='menu-comments'><i class='fa fa-commenting-o' aria-hidden='true' ></i>
+		  <!-- <label for='menu-comments'><i class='fa fa-commenting-o' aria-hidden='true' ></i>
             <input type='checkbox' id='menu-comments' />
               <div id='menu-comments-box'>
 			  </div>
-          </label>
--->
+          </label> -->
 		  <label for='menu-favorite'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>
             <input type='checkbox' id='menu-favorite' /> Like
 			  <div id='menu-favorite-box'>

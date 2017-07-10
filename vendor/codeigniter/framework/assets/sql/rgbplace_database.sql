@@ -53,63 +53,8 @@ CREATE TABLE `admin_info` (
 
 LOCK TABLES `admin_info` WRITE;
 /*!40000 ALTER TABLE `admin_info` DISABLE KEYS */;
-INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-04-12 12:58:10','JDJ5JDEwJGo0Q3p6cC8vdnh4cDMwZmFnLkJCR2VBdXR5VXBLM28vcnVPSEVYSTJjQkdQSDJJVnkzaXFl','2017-04-13 00:58:10');
+INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-07-08 17:02:23','JDJ5JDEwJHpyZVNCaG9kS3lTUW5yZjhVeG9MQXViZU53cEFkNzN3eGxESGZnaHljekNodFdLcmFiYjRH','2017-07-09 05:02:23');
 /*!40000 ALTER TABLE `admin_info` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `common_menu`
---
-
-DROP TABLE IF EXISTS `common_menu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `common_menu` (
-  `weight` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `common_menu`
---
-
-LOCK TABLES `common_menu` WRITE;
-/*!40000 ALTER TABLE `common_menu` DISABLE KEYS */;
-INSERT INTO `common_menu` VALUES (11,'info','admin',''),(14,'generate_hash','exam',''),(15,'animation','exam',''),(16,'restful','exam','');
-/*!40000 ALTER TABLE `common_menu` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `guest_ipban`
---
-
-DROP TABLE IF EXISTS `guest_ipban`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `guest_ipban` (
-  `no` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ipad` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'IP Address',
-  `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록 일자(create)',
-  `utim` datetime DEFAULT NULL COMMENT '수정 일자(update)',
-  `btim` datetime NOT NULL COMMENT '차단 일자(banned)',
-  `note` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '비고',
-  PRIMARY KEY (`no`) USING BTREE,
-  UNIQUE KEY `no` (`no`),
-  KEY `ipad` (`ipad`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='불법접근 IP 차단';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `guest_ipban`
---
-
-LOCK TABLES `guest_ipban` WRITE;
-/*!40000 ALTER TABLE `guest_ipban` DISABLE KEYS */;
-/*!40000 ALTER TABLE `guest_ipban` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -120,8 +65,9 @@ DROP TABLE IF EXISTS `map_code`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_code` (
-  `country` char(2) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `number` bigint(20) NOT NULL,
+  `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Country Name',
+  `code` char(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Country Code',
+  `no` bigint(20) NOT NULL,
   `place` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `utim` datetime DEFAULT NULL,
@@ -129,7 +75,7 @@ CREATE TABLE `map_code` (
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `editor` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyword` varchar(400) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`country`,`number`)
+  PRIMARY KEY (`code`,`no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='장소(Code) 정보';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -139,7 +85,7 @@ CREATE TABLE `map_code` (
 
 LOCK TABLES `map_code` WRITE;
 /*!40000 ALTER TABLE `map_code` DISABLE KEYS */;
-INSERT INTO `map_code` VALUES ('kr',1,'locality:서울특별시|Seoul&political1:동작구|Dongjak-gu&political2:흑석동|Heukseok-dong','2017-04-16 01:39:44',NULL,NULL,'','',NULL);
+INSERT INTO `map_code` VALUES ('대한민국|Republic of Korea','kr',1,'locality:서울특별시|Seoul&political1:동작구|Dongjak-gu&political2:흑석동|Heukseok-dong','2017-05-06 00:16:38',NULL,NULL,'','','한국'),('대한민국|South Korea','kr',2,'locality:서울특별시|Seoul&political1:동작구|Dongjak-gu&political2:테스트|Heukseok-dong','2017-05-06 00:16:38',NULL,NULL,'test','','한국');
 /*!40000 ALTER TABLE `map_code` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,8 +313,37 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES ('test01','테스트',NULL,'JDJ5JDEyJFY1dUc2dzdWdG9YWHpqRjJ5L3Zad2VwYWlmNDM0N0JSREpHYnRqaGd3aUJacEFFWVhaUjlH',0,NULL,0,'2017-02-16 18:53:33','2017-04-02 01:40:17',NULL,NULL,''),('test02','삭제테스트',NULL,'JDJ5JDEyJEgxcmE5bWc4Nk5kZy9vYWU2MjdWeGV0VEUxLnlkUTRMNEppSnNtYUh5VXlFMlhRdC9YejN5',0,NULL,0,'2017-03-23 02:24:00',NULL,NULL,NULL,''),('test03','ajax테스트',NULL,'JDJ5JDEyJFBqS3dUTi5CR1F5TWFFUTN1eUo2THVwUEJRaHpTTlJBWmFucVQzNGhUUE9LMTdac0hSb3Y2',0,NULL,0,'2017-03-23 15:30:42',NULL,NULL,NULL,'');
+INSERT INTO `user_info` VALUES ('test01','테스트',NULL,'JDJ5JDEyJFY1dUc2dzdWdG9YWHpqRjJ5L3Zad2VwYWlmNDM0N0JSREpHYnRqaGd3aUJacEFFWVhaUjlH',0,NULL,0,'2017-02-16 18:53:33','2017-06-14 12:52:57',NULL,NULL,''),('test02','삭제테스트',NULL,'JDJ5JDEyJEgxcmE5bWc4Nk5kZy9vYWU2MjdWeGV0VEUxLnlkUTRMNEppSnNtYUh5VXlFMlhRdC9YejN5',0,NULL,0,'2017-03-23 02:24:00',NULL,NULL,NULL,''),('test03','ajax테스트',NULL,'JDJ5JDEyJFBqS3dUTi5CR1F5TWFFUTN1eUo2THVwUEJRaHpTTlJBWmFucVQzNGhUUE9LMTdac0hSb3Y2',0,NULL,0,'2017-03-23 15:30:42',NULL,NULL,NULL,'');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_ipban`
+--
+
+DROP TABLE IF EXISTS `user_ipban`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_ipban` (
+  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ipad` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'IP Address',
+  `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록 일자(create)',
+  `utim` datetime DEFAULT NULL COMMENT '수정 일자(update)',
+  `btim` datetime NOT NULL COMMENT '차단 일자(banned)',
+  `note` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '비고',
+  PRIMARY KEY (`no`) USING BTREE,
+  UNIQUE KEY `no` (`no`),
+  KEY `ipad` (`ipad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='불법접근 IP 차단';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_ipban`
+--
+
+LOCK TABLES `user_ipban` WRITE;
+/*!40000 ALTER TABLE `user_ipban` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_ipban` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -393,7 +368,7 @@ CREATE TABLE `user_session` (
 
 LOCK TABLES `user_session` WRITE;
 /*!40000 ALTER TABLE `user_session` DISABLE KEYS */;
-INSERT INTO `user_session` VALUES ('4ocuid6jpov9oout8kmq5a1avf4s1jg3','127.0.0.1',1490681068,'__ci_last_regenerate|i:1490681068;'),('6mtorej3cd79cjccck8hpthc1ru6p0vl','127.0.0.1',1491683821,'__ci_last_regenerate|i:1491683821;'),('c2537u64vso43d3rrn2tsf6qr0t25s2j','127.0.0.1',1491419492,'__ci_last_regenerate|i:1491419492;score|s:1:\"0\";code|N;'),('cfic30prn9pm0rqf100n6eql22htus8h','127.0.0.1',1492280756,'__ci_last_regenerate|i:1492280749;apikey|s:80:\"JDJ5JDEwJDk2WXc5c3J1eW1wd1hPN1BjYjh4YmVjNmRvQXB1RkE5bHFBLlpMOTF4T2dPUXRXeExSdU11\";exp|s:19:\"2017-04-10 00:42:38\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('j5ovgeopnhdga21jjbh4r9k2p3tlkbmk','127.0.0.1',1491684902,'__ci_last_regenerate|i:1491684892;'),('lds5j9k0d9m1b8tljdoc539mhb37nqke','127.0.0.1',1490681068,'__ci_last_regenerate|i:1490681068;'),('lefd1dnh4n37so3lb61rl1kp0lc50nt3','127.0.0.1',1491164281,'__ci_last_regenerate|i:1491164281;'),('lhghf164oadkvp1k2hscvf955v28bfm8','127.0.0.1',1490991986,'__ci_last_regenerate|i:1490991986;'),('qr65d239k23rvp39do1h5l0tq1432mo0','127.0.0.1',1491749279,'__ci_last_regenerate|i:1491749277;apikey|s:1:\"2\";exp|s:1:\"2\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('s75dptfs1iten4njr062nhvqlngtm0pj','127.0.0.1',1491596103,'__ci_last_regenerate|i:1491596103;'),('u8nti51v5udq7o6tno35jjcj3euabdus','127.0.0.1',1491207459,'__ci_last_regenerate|i:1491207405;');
+INSERT INTO `user_session` VALUES ('8lbn0nlapt2hvkpnlkgqk4rh9pdo85hp','127.0.0.1',1499506166,'__ci_last_regenerate|i:1499506166;'),('ddjbppg4k9kjrudc43k0r4vornlsnreq','127.0.0.1',1499506508,'__ci_last_regenerate|i:1499506508;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;');
 /*!40000 ALTER TABLE `user_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -436,19 +411,20 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_map`(IN in_country char(2), in_local varchar(200), in_pol1 varchar(400), in_pol2 varchar(400))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_map`(IN in_country varchar(100), in_code char(2), in_local varchar(200), in_pol1 varchar(400), in_pol2 varchar(400))
 BEGIN
 
-DECLARE in_number bigint default 0;
-SELECT number into in_number FROM map_code WHERE country = in_country LIMIT 1;
-SET in_number = in_number + 1;
+DECLARE in_no bigint default 0;
+SELECT no into in_no FROM map_code WHERE code = in_code LIMIT 1;
+SET in_no = in_no + 1;
 
 
-INSERT INTO map_code (country, number, place) values(in_country, in_number, concat("locality:", in_local, "&political1:", in_pol1, "&political2:", in_pol2));
-SET @post = CONCAT('CREATE TABLE map_', in_country, in_number, '_post (
+
+INSERT INTO map_code (country, code, no, place) values(in_country, in_code, in_no, concat("locality:", in_local, "&political1:", in_pol1, "&political2:", in_pol2));
+SET @post = CONCAT('CREATE TABLE map_', in_code, in_no, '_post (
 	no      bigint not null auto_increment,
 	uid     varchar(100) not null,
-	name    varchar(100) not null,
+	country    varchar(100) not null,
 	ctim    datetime not null default current_timestamp,
 	dtim    datetime not null,
 	utim    datetime not null,
@@ -463,10 +439,10 @@ SET @post = CONCAT('CREATE TABLE map_', in_country, in_number, '_post (
 PREPARE stmt1 FROM @post;
 EXECUTE stmt1;
 
-SET @reply = CONCAT('CREATE TABLE map_', in_country,  in_number, '_reply(
+SET @reply = CONCAT('CREATE TABLE map_', in_code,  in_no, '_reply(
 	no		bigint			not null auto_increment,
 	uid		varchar(100)	not null,
-	name	varchar(100)	not null,
+	country	varchar(100)	not null,
 	ctim	datetime		not null default current_timestamp,
 	utim	datetime,
 	dtim	datetime,
@@ -496,16 +472,16 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `drop_map`(IN in_country char(2), in_number bigint)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `drop_map`(IN in_code char(2), in_no bigint)
 BEGIN
 
-DELETE FROM map_code WHERE country = in_country AND number = in_number;
+DELETE FROM map_code WHERE code = in_code AND no = in_no;
 
-SET @post = CONCAT('DROP TABLE map_', in_country, in_number, '_post');
+SET @post = CONCAT('DROP TABLE map_', in_code, in_no, '_post');
 PREPARE stmt1 FROM @post;
 EXECUTE stmt1;
 
-SET @reply= CONCAT('DROP TABLE map_', in_country, in_number, '_reply');
+SET @reply= CONCAT('DROP TABLE map_', in_code, in_no, '_reply');
 PREPARE stmt2 FROM @reply;
 EXECUTE stmt2;
 
@@ -527,4 +503,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17  3:05:34
+-- Dump completed on 2017-07-08 19:30:20

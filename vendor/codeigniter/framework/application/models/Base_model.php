@@ -6,7 +6,7 @@ class Base_model extends CI_Model {
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_code WHERE place like '%{$keyword}%' or keyword like '%{$keyword}%'";
+		$query = "SELECT * FROM map_code WHERE country like '%{$keyword}%' or place like '%{$keyword}%' or keyword like '%{$keyword}%'";
 		$find = $this->db->query($query);
 
 		foreach ($find->result() as $key => $row) {

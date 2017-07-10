@@ -123,14 +123,15 @@
 
   label, a {
     /*float:left;*/
-    flex: 1;
-    background: $oc-gray-3;
-    color: $oc-gray-9;
-    text-align: center;
-    padding: 1rem 0;
-    display: block;
-    position: relative;
-    cursor: pointer;
+    flex          : 1;
+    background    : $oc-gray-3;
+    color         : $oc-gray-9;
+    text-align    : center;
+    padding       : 1.5rem 0;
+    display       : block;
+    position      : relative;
+    cursor        : pointer;
+	border-bottom : 1px solid $oc-gray-6;
 
     &:hover {
       background: $oc-gray-7;
@@ -175,16 +176,21 @@
         display: block;
         font-size: 0.8rem;
         position:absolute;
+		top:100%;
         @media screen and ($width-name : $target-width) {
-          top:1rem;
+          top:1.55rem;
           position:relative;
+		  z-index:1;
         }
+
+		label:first-child {
+		  border-top:1px solid $oc-gray-6;
+		}
 
         label {
           background: $oc-gray-4;
           display: block;
           padding: 1rem 0;
-          top:1rem;
 
           @media screen and ($width-name : $target-width) {
             top: 0;

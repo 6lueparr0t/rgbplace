@@ -47,4 +47,48 @@ class Admin extends CI_Controller {
 	{
 		$this->rgb->sview("admin/example/dragndrop_upload");
 	}
+
+	public function upload()
+	{
+		$config['upload_path'] = '/upload';
+		$config['allowed_types'] = 'gif|png|jpg|jpeg|bmp';
+		$config['file_name'] = "{$link}_{$count}";
+		$config['max_size'] = '10240';
+
+		$this->load->library('upload', $config);
+
+		if(!$this->upload->do_upload())
+		{
+			$error = $this->upload->display_errors();
+			echo ('<script>alert("'.strip_tags($error).'");</script>');
+			redirect('/solvation_free_energy', 'refresh');
+		} else {
+			$data = $this->upload->data();
+		}
+
+		echo json_encode($data);
+
+/*
+ *        //Php Multiple Upload
+ *        $files = $_FILES;
+ *        $count= count($_FILES['userfile']['name']);
+ *        for($i=0; $i<$count; $i++) {
+ *            $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+ *            $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+ *            $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+ *            $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+ *            $_FILES['userfile']['size']= $files['userfile']['size'][$i];
+ *
+ *            $config = array();
+ *            $config['upload_path'] = '/upload/archive/';
+ *            $config['allowed_types'] = '*';
+ *            $config['max_size']      = '102400';
+ *            $config['encrypt_name'] = TRUE;
+ *
+ *            $this->upload->initialize($config);
+ *            $this->upload->do_upload();
+ *            $file = $this->upload->data();
+ *            print_r($file);
+ */
+	}
 }

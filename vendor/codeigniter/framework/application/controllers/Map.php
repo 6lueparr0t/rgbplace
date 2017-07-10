@@ -15,9 +15,12 @@ class Map extends CI_Controller {
 
 	public function search()
 	{
-		$data =   ['keyword' => $this->input->get('keyword')];
-		$output = $this->base->map($data['keyword']);
-
+		if($this->input->get('keyword')) {
+			$data   = ['keyword' => $this->input->get('keyword')];
+			$output = $this->base->map($data['keyword']);
+		} else {
+			$output = [];
+		}
 		echo json_encode($output);
 	}
 
