@@ -1,0 +1,33 @@
+@mixin drop_content ($text) {
+  top         : 2.3rem;
+  content     : $text;
+  position    : relative;
+  font-weight : bold;
+}
+
+#drop_zone {
+  border         : 4px dashed gray;
+  width          : 100%;
+  height         : 100px;
+  text-align     : center;
+  display        : block;
+  vertical-align : middle;
+
+  &.drop_wait {
+    &::after {
+      @include drop_content("Drag & Drop");
+    }
+  }
+  
+  &.drop_hover {
+    &::after {
+      @include drop_content("Here!");
+    }
+  }
+  
+  &.drop_it {
+    &::after {
+      @include drop_content("Done! More?");
+    }
+  }
+}

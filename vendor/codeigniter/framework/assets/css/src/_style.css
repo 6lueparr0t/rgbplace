@@ -2990,3 +2990,26 @@ a {
       color: #f8f9fa; }
     #sign-up button:focus {
       outline: none; }
+
+#drop_zone {
+  border: 4px dashed gray;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  display: block;
+  vertical-align: middle; }
+  #drop_zone.drop_wait::after {
+    top: 2.3rem;
+    content: "Drag & Drop";
+    position: relative;
+    font-weight: bold; }
+  #drop_zone.drop_hover::after {
+    top: 2.3rem;
+    content: "Here!";
+    position: relative;
+    font-weight: bold; }
+  #drop_zone.drop_it::after {
+    top: 2.3rem;
+    content: "Done! More?";
+    position: relative;
+    font-weight: bold; }
