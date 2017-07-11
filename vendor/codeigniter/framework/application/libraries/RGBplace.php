@@ -154,7 +154,7 @@ class RGBplace {
 		            <a href='/admin/generate_hash'><li>Generate Hash</li></a>
 		            <a href='/admin/animation'><li>Animation</li></a>
 		            <a href='/admin/restful'><li>RESTful Test</li></a>
-		            <a href='/admin/dragndrop_upload'><li>Drag N Drop Upload</li></a>
+		            <a href='/admin/dragndrop_upload'><li>Drag & Drop Upload</li></a>
 		          </ul>
                 </label>
 		      </ul>

@@ -2,6 +2,7 @@
 
 const state = document.querySelector("#drop_zone");
 
+/*
 function drop_handler() {
 	console.log("Drop");
 	event.preventDefault();
@@ -26,6 +27,7 @@ function drop_handler() {
 		}  
 	}
 }
+ */
 
 function dragstart_change() {
 	//console.log("dragOver");
@@ -72,72 +74,53 @@ function dragend_clear() {
 function drop_upload() {
 	console.log("Drop");
 
-	state.className = "";
-	state.classList.add("drop_it");
+	let request = new XMLHttpRequest();
 
-	event.preventDefault();
-	// If dropped items aren't files, reject them
-	var dt = event.dataTransfer;
-	console.log(dt);
-	console.log(dt.files);
+	let formData = new FormData();
+	let dt = event.dataTransfer;
 
-	if (dt.items) {
-		// Use DataTransferItemList interface to access the file(s)
-		for (var i=0; i < dt.items.length; i++) {
-			if (dt.items[i].kind == "file") {
-				var f = dt.items[i].getAsFile();
-				console.log(f);
-				console.log("... items[" + i + "].name = " + f.name);
-			}
-		}
-	} else {
-		// Use DataTransfer interface to access the file(s)
-		for (var i=0; i < dt.files.length; i++) {
-			console.log("... file[" + i + "].name = " + dt.files[i].name);
-		}  
+	// Use DataTransfer interface to access the file(s)
+	for (let i=0; i < dt.files.length; i++) {
+		formData.append('userfile[]', dt.files[i]);
 	}
 
+	console.log(formData);
 
-/*
- *    let request = new XMLHttpRequest();
- *    let data = "";
- *
- *    request.open('get', '/api/check', true);
- *
- *    request.onload = function() {
- *        if (this.status >= 200 && this.status < 400) {
- *            Success!
- *            data = JSON.parse(this.response);
- *            console.log(data);
- *            console.log(request.getAllResponseHeaders());
- *
- *            state.className = "";
- *            state.classList.add("drop_it");
- *        } else {
- *            We reached our target server, but it returned an error
- *            console.log(this.status);
- *        }
- *    };
- *
- *    request.onprogress = function() {
- *        console.log("event.lengthComputable:"+event.lengthComputable);
- *        console.log("event.loaded:"+event.loaded);
- *        console.log("event.total:"+event.total);
- *
- *        var max = e.total;
- *        var current = e.loaded;
- *        var Percentage = (current * 100)/max;
- *        console.log(Percentage);
- *    };
- *
- *
- *    request.onerror = function() {
- *        There was a connection error of some sort
- *    };
- *
- *    request.send();
- *
- */
+	request.open('post', '/admin/upload', true);
+
+	request.onload = function() {
+		if (this.status >= 200 && this.status < 400) {
+			//Success!
+			let data = JSON.parse(this.response);
+			console.log(data);
+			console.log(request.getAllResponseHeaders());
+
+			state.className = "";
+			state.classList.add("drop_it");
+		} else {
+			//We reached our target server, but it returned an error
+			console.log(this.status);
+		}
+	};
+
+	request.upload.onprogress = function() {
+		console.log("event.lengthComputable:"+event.lengthComputable);
+		console.log("event.loaded:"+event.loaded);
+		console.log("event.total:"+event.total);
+
+		var max = event.total;
+		var current = event.loaded;
+		var Percentage = (current * 100)/max;
+		console.log(Percentage);
+	};
+
+
+	request.onerror = function() {
+		//There was a connection error of some sort
+	};
+
+	request.send(formData);
+
 }
 
 let drop_zone = document.querySelector("#drop_zone");
