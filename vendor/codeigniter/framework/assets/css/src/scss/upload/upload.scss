@@ -5,8 +5,16 @@
   font-weight : bold;
 }
 
-#drop_zone {
+#upload {
   border         : 4px dashed gray;
+  height         : 150px;
+  text-align     : center;
+
+  #input_zone {
+  }
+}
+
+#drop_zone {
   height         : 100px;
   text-align     : center;
   display        : block;

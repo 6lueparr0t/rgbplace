@@ -50,26 +50,27 @@ class Admin extends CI_Controller {
 
 	public function upload()
 	{
-/*
- *        $config['upload_path'] = './upload';
- *        $config['allowed_types'] = 'gif|png|jpg|jpeg|bmp';
- *        //$config['file_name'] = "{$link}_{$count}";
- *        //$config['max_size'] = '10240';
- *
- *        $this->load->library('upload', $config);
- *
- *        if(!$this->upload->do_upload())
- *        {
- *            $error = $this->upload->display_errors();
- *            echo ('<script>alert("'.strip_tags($error).'");</script>');
- *            redirect('/', 'refresh');
- *        } else {
- *            $data = $this->upload->data();
- *        }
- *
- *        echo json_encode($data);
- *
- */
+		/*        //Original Upload Code
+		 *
+		 *        $config['upload_path'] = './upload';
+		 *        $config['allowed_types'] = 'gif|png|jpg|jpeg|bmp';
+		 *        //$config['file_name'] = "{$link}_{$count}";
+		 *        //$config['max_size'] = '10240';
+		 *
+		 *        $this->load->library('upload', $config);
+		 *
+		 *        if(!$this->upload->do_upload())
+		 *        {
+		 *            $error = $this->upload->display_errors();
+		 *            echo ('<script>alert("'.strip_tags($error).'");</script>');
+		 *            redirect('/', 'refresh');
+		 *        } else {
+		 *            $data = $this->upload->data();
+		 *        }
+		 *
+		 *        echo json_encode($data);
+		 */
+
 		$this->load->library('upload');
 		$files = $_FILES;
 		$data = [];
@@ -90,9 +91,7 @@ class Admin extends CI_Controller {
 			$this->upload->initialize($config);
 			if(!$this->upload->do_upload())
 			{
-				$error = $this->upload->display_errors();
-				echo ('<script>alert("'.strip_tags($error).'");</script>');
-				redirect('/', 'refresh');
+				array_push($data, $this->upload->display_errors());
 			} else {
 				array_push($data, $this->upload->data());
 			}

@@ -2991,8 +2991,12 @@ a {
     #sign-up button:focus {
       outline: none; }
 
-#drop_zone {
+#upload {
   border: 4px dashed gray;
+  height: 150px;
+  text-align: center; }
+
+#drop_zone {
   height: 100px;
   text-align: center;
   display: block;
