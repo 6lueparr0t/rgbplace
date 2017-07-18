@@ -20,21 +20,18 @@ class RGBplace {
 
 	public function sview($path, $data = [])
 	{
-		//use in 'Controllers !!Dev Mode!!' Only
+		//please check your session
 		$data['path'] = $path;
 		$admin=$this->CI->session->userdata('admin');
 
 		// admin session check
 		if($admin !== TRUE) redirect("/");
-
 		$this->CI->load->view($path, $data);
 	}
 
 	public function view($path, $data = [])
 	{
-		//use in 'Controllers' Only
 		$data['path'] = $path;
-
 		$this->CI->load->view($path, $data);
 	}
 
@@ -144,6 +141,7 @@ class RGBplace {
                   <i class='close fa fa-plus' aria-hidden='true'></i>
 		          <ul>
 		            <a href='/admin/info' target='_blank'><li>Version</li></a>
+		            <a href='/admin/database'><li>Database Management</li></a>
 		          </ul>
                 </label>
 		        <label for='menu-admin-2'>Exam

@@ -13,18 +13,28 @@ class Admin extends CI_Controller {
 		redirect("/");
 	}
 
-/* ########################################
-				Admin [admin]
-######################################## */
+/*
+ * ########################################
+ *				Admin [admin]
+ * ########################################
+ */
 
 	public function info()
 	{
 		$this->rgb->sview("admin/info");
 	}
 
-/* ########################################
-				Example	[exam]
-######################################## */
+	public function database($method="")
+	{
+		$data['method'] = $method;
+		$this->rgb->sview("admin/database", $data);
+	}
+
+/*
+ * ########################################
+ *				Example	[exam]
+ * ########################################
+ */
 
 	public function animation()
 	{
@@ -48,9 +58,16 @@ class Admin extends CI_Controller {
 		$this->rgb->sview("admin/example/dragndrop_upload");
 	}
 
+/*
+ * ########################################
+ *					Process
+ * ########################################
+ */
+
 	public function upload()
 	{
-		/*        //Original Upload Code
+		/*   
+		 *        //Original Upload Code
 		 *
 		 *        $config['upload_path'] = './upload';
 		 *        $config['allowed_types'] = 'gif|png|jpg|jpeg|bmp';
@@ -83,7 +100,7 @@ class Admin extends CI_Controller {
 			$_FILES['userfile']['size']= $files['userfile']['size'][$i];
 
 			$config['upload_path'] = './upload';
-			$config['allowed_types'] = 'gif|png|jpg|jpeg|bmp';
+			$config['allowed_types'] = 'gif|png|jpg|jpeg|bmp|txt';
 			//$config['max_size']      = '102400';
 			//$config['file_name'] = "{$link}_{$count}";
 

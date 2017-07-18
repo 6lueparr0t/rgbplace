@@ -1,40 +1,41 @@
-@mixin drop_content ($text) {
-  top         : 2.3rem;
+@mixin upload_content ($text) {
   content     : $text;
-  position    : relative;
   font-weight : bold;
 }
 
 #upload {
+  text-align     : center;
   border         : 4px dashed gray;
   height         : 150px;
-  text-align     : center;
+
+  label[for="input_zone"] {
+	position : relative;
+	top      : 4rem;
+
+    &.drop_wait {
+      &::after {
+        @include upload_content("Choose or Drag & Drop your files");
+	    cursor : pointer;
+	  }
+    }
+    
+    &.drop_hover {
+      &::after {
+        @include upload_content("Here!");
+      }
+    }
+    
+    &.drop_it {
+      &::after {
+        @include upload_content("Done! More?");
+	    cursor : pointer;
+      }
+    }
+  }
 
   #input_zone {
+    display: none;
   }
+
 }
 
-#drop_zone {
-  height         : 100px;
-  text-align     : center;
-  display        : block;
-  vertical-align : middle;
-
-  &.drop_wait {
-    &::after {
-      @include drop_content("Drag & Drop");
-    }
-  }
-  
-  &.drop_hover {
-    &::after {
-      @include drop_content("Here!");
-    }
-  }
-  
-  &.drop_it {
-    &::after {
-      @include drop_content("Done! More?");
-    }
-  }
-}

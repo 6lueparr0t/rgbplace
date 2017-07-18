@@ -1,4 +1,0 @@
-#!/bin/zsh
-
-echo 'DROP DATABASE IF EXISTS `RGBplace`;' > ../sql/rgbplace_database.sql
-mysqldump  --routines --triggers --databases RGBplace -u root --password="als0emffp*scallop99" >> ../sql/rgbplace_database.sql

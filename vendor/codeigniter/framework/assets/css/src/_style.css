@@ -2915,7 +2915,7 @@ a {
     padding: 1rem; }
   #menu-map #map-search-button {
     color: black;
-    transform: translate(-35px, 2px); }
+    transform: translate(-125%, 10%); }
   #menu-map .fa.fa-caret-up {
     top: 1.5rem !important;
     left: 95% !important; }
@@ -2933,7 +2933,9 @@ a {
     padding: 0; }
     #map-result a li {
       padding: 1rem;
-      background: #f8f9fa !important; }
+      background: #f8f9fa !important;
+      border-left: 1px solid black;
+      border-right: 1px solid black; }
       #map-result a li:hover {
         background: #495057 !important;
         color: #f8f9fa !important; }
@@ -2992,27 +2994,22 @@ a {
       outline: none; }
 
 #upload {
-  border: 4px dashed gray;
-  height: 150px;
-  text-align: center; }
-
-#drop_zone {
-  height: 100px;
   text-align: center;
-  display: block;
-  vertical-align: middle; }
-  #drop_zone.drop_wait::after {
-    top: 2.3rem;
-    content: "Drag & Drop";
+  border: 4px dashed gray;
+  height: 150px; }
+  #upload label[for="input_zone"] {
     position: relative;
-    font-weight: bold; }
-  #drop_zone.drop_hover::after {
-    top: 2.3rem;
-    content: "Here!";
-    position: relative;
-    font-weight: bold; }
-  #drop_zone.drop_it::after {
-    top: 2.3rem;
-    content: "Done! More?";
-    position: relative;
-    font-weight: bold; }
+    top: 4rem; }
+    #upload label[for="input_zone"].drop_wait::after {
+      content: "Choose or Drag & Drop your files";
+      font-weight: bold;
+      cursor: pointer; }
+    #upload label[for="input_zone"].drop_hover::after {
+      content: "Here!";
+      font-weight: bold; }
+    #upload label[for="input_zone"].drop_it::after {
+      content: "Done! More?";
+      font-weight: bold;
+      cursor: pointer; }
+  #upload #input_zone {
+    display: none; }

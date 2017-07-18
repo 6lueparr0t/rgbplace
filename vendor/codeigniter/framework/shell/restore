@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+mysql -u root -p RGBplace --password='als0emffp*scallop99' < assets/sql/rgbplace_database.sql
+
+echo "Restore : `date +%Y%m%d\ %H:%M:%S`" >> shell/log

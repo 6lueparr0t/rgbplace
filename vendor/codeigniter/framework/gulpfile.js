@@ -1,21 +1,21 @@
 'use strict';
  
-const fs = require('fs');
-const del = require('del');
-const gulp = require('gulp');
-const yargs = require('yargs');
-const sass = require('gulp-sass');
-const wait = require('gulp-wait2');
-const gutil = require('gulp-util');
-const babel = require('gulp-babel');
-const rename = require('gulp-rename');
-const uglify = require('gulp-uglify');
-const concat = require('gulp-concat');
-const plumber = require('gulp-plumber');
-const gcache = require('gulp-file-cache');
-const cleanCSS = require('gulp-clean-css');
-const sassGlob = require('gulp-sass-glob');
+const fs          = require('fs');
+const del         = require('del');
+const gulp        = require('gulp');
+const yargs       = require('yargs');
+const sass        = require('gulp-sass');
+const gutil       = require('gulp-util');
+const wait        = require('gulp-wait2');
+const babel       = require('gulp-babel');
+const rename      = require('gulp-rename');
+const concat      = require('gulp-concat');
+const babili      = require("gulp-babili");
+const plumber     = require('gulp-plumber');
 const browserSync = require('browser-sync');
+const cleanCSS    = require('gulp-clean-css');
+const sassGlob    = require('gulp-sass-glob');
+const gcache      = require('gulp-file-cache');
 
 let cache = new gcache();
 
@@ -109,9 +109,13 @@ gulp.task('comm-min', function () {
 		.pipe(cache.filter())
 		.pipe(plumber())
 		.pipe(babel({
-			presets: ['es2015']
+			presets: ['es2016']
 		}))
-		.pipe(uglify())
+		.pipe(babili({
+			mangle: {
+				keepClassName: true
+			}
+		}))
 		.pipe(concat('common.min.js'))
 		.pipe(gulp.dest(DIST.COMM));
 });
@@ -121,9 +125,13 @@ gulp.task('js-min', function () {
 		.pipe(cache.filter())
 		.pipe(plumber())
 		.pipe(babel({
-			presets: ['es2015']
+			presets: ['es2016']
 		}))
-		.pipe(uglify())
+		.pipe(babili({
+			mangle: {
+				keepClassName: true
+			}
+		}))
 		.pipe(rename( function (path) {
 			 path.extname = ".min.js"
 		 }))

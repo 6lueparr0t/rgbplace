@@ -11,7 +11,7 @@
   
   #map-search-button {
     color     : black;
-    transform : translate(-35px, 2px);
+    transform : translate(-125%,10%);
   }
 
   .fa.fa-caret-up {
@@ -39,6 +39,10 @@
     & li {
       padding       : 1rem;
       background    : $oc-gray-0 !important;
+
+	  border-left: 1px solid black;
+	  border-right: 1px solid black;
+
       &:hover {
         background : $oc-gray-7 !important;
         color      : $oc-gray-0 !important;

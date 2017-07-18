@@ -1,6 +1,6 @@
 "use strict";
 
-const state = document.querySelector("#drop_zone");
+const state = document.querySelector("label[for='input_zone']");
 
 /*
 function drop_handler() {
@@ -170,7 +170,7 @@ function input_upload() {
 	request.send(formData);
 }
 
-let drop_zone = document.querySelector("#drop_zone");
+let drop_zone = document.querySelector("#upload");
 let input_zone = document.querySelector("#input_zone");
 
 drop_zone.addEventListener("dragstart",	function () { dragstart_change() });
