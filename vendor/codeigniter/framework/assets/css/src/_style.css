@@ -2651,8 +2651,7 @@ a {
 
 #logo {
   font-size: 3rem;
-  padding: 1rem 0;
-  background-image: linear-gradient(to right, white 0%, #f1f3f5 100%); }
+  padding: 1rem 0; }
   #logo a {
     color: #212529 !important; }
   #logo .real {
@@ -2795,7 +2794,9 @@ a {
   list-style-type: none;
   width: 100%;
   display: flex;
-  font-size: 1.5rem; }
+  font-size: 1.5rem;
+  top: 0;
+  position: sticky; }
   @media screen and (max-width: 860px) {
     #menu {
       display: none; } }
@@ -2918,10 +2919,10 @@ a {
     transform: translate(-125%, 10%); }
   #menu-map .fa.fa-caret-up {
     top: 1.5rem !important;
-    left: 95% !important; }
+    left: 93% !important; }
   #menu-map .fa.fa-caret-down {
     top: 1.5rem !important;
-    left: 95% !important; }
+    left: 93% !important; }
 
 #map-result {
   padding: 0 !important;

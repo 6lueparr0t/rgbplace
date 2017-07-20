@@ -109,13 +109,16 @@
   -ms-user-select: none;
   user-select: none;
 
-  background: $oc-gray-3;
-  padding: 0;
-  margin: 0 0 1rem 0;
-  list-style-type: none;
-  width: 100%;
-  display: flex;
-  font-size:1.5rem;
+  background      : $oc-gray-3;
+  padding         : 0;
+  margin          : 0 0 1rem 0;
+  list-style-type : none;
+  width           : 100%;
+  display         : flex;
+  font-size       : 1.5rem;
+
+  top             : 0;
+  position        : sticky;
 
   @media screen and ($width-name : $target-width) {
     display: none;
