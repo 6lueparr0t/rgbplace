@@ -1,0 +1,59 @@
+#menu-map {
+  padding : 1rem 0 !important;
+  #map-search-box {
+    width         : 75%;
+    transform     : translateX(6px);
+    border-radius : 4rem;
+    border        : none;
+    height        : 1rem;
+    padding       : 1rem;
+  }
+  
+  #map-search-button {
+    color     : black;
+    transform : translate(-125%,10%);
+  }
+
+  .fa.fa-caret-up {
+    top:1.5rem !important;
+    left:95% !important;
+  }
+  
+  .fa.fa-caret-down {
+    top:1.5rem !important;
+    left:95% !important;
+  }
+}
+
+#map-result {
+  padding       : 0 !important;
+  border-bottom : 0 !important;
+
+  &:hover {
+    background : $oc-gray-2 !important;
+    color      : $oc-gray-9 !important;
+  }
+
+  & a {
+    padding : 0;
+    & li {
+      padding       : 1rem;
+      background    : $oc-gray-0 !important;
+
+	  border-left: 1px solid black;
+	  border-right: 1px solid black;
+
+      &:hover {
+        background : $oc-gray-7 !important;
+        color      : $oc-gray-0 !important;
+      }
+    }
+  }
+
+  .org {
+  }
+
+  .rev {
+    display:none;
+  }
+}

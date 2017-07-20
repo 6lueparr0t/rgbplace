@@ -49,11 +49,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'play';
-$route['404_override'] = 'play';
+$route['default_controller'] = 'init';
+$route['404_override'] = 'stage';
 $route['translate_uri_dashes'] = FALSE;
 
 
 /*
-| Hot Place Maer
+| RGB place
 */
+
+$route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {
+	return 'map/cover/' . strtolower($map);
+};
+
+$route['([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
+	return 'map/post/' . strtolower($map) . '/' . $num;
+};

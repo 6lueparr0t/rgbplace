@@ -1,0 +1,41 @@
+@mixin upload_content ($text) {
+  content     : $text;
+  font-weight : bold;
+}
+
+#upload {
+  text-align     : center;
+  border         : 4px dashed gray;
+  height         : 150px;
+
+  label[for="input_zone"] {
+	position : relative;
+	top      : 4rem;
+
+    &.drop_wait {
+      &::after {
+        @include upload_content("Choose or Drag & Drop your files");
+	    cursor : pointer;
+	  }
+    }
+    
+    &.drop_hover {
+      &::after {
+        @include upload_content("Here!");
+      }
+    }
+    
+    &.drop_it {
+      &::after {
+        @include upload_content("Done! More?");
+	    cursor : pointer;
+      }
+    }
+  }
+
+  #input_zone {
+    display: none;
+  }
+
+}
+

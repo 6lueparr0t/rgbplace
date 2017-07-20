@@ -1,0 +1,40 @@
+#logo {
+  font-size:3rem;
+  padding: 1rem 0;
+  background-image:linear-gradient(to right, white 0%, $oc-gray-1 100%);
+
+  a {
+    color:$oc-gray-9 !important;
+  }
+
+  .real {
+    color:$oc-red-5 !important;
+    position:relative;
+    opacity: 0;
+
+    @include animation('fadeIn 1s linear 0s 1 normal');
+  }
+
+  .gains {
+    color:$oc-green-5 !important;
+    position:relative;
+    opacity: 0;
+
+    @include animation('fadeInDown 1s linear .4s 1 normal');
+  }
+
+  .by {
+    color:$oc-blue-5 !important;
+    position:relative;
+    opacity: 0;
+
+    @include animation('fadeInLeft 1s linear .8s 1 normal');
+  }
+
+  .place {
+    position:absolute;
+    padding-left:.6rem;
+
+    @include animation('tada 1s linear 1.2s 1 normal');
+  }
+}
