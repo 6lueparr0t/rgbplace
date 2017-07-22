@@ -172,11 +172,14 @@ class RGBplace {
 			  </label>
 			</ul>
           </label>
-		  <label for='menu-stage'><i class='fa fa-street-view' aria-hidden='true'></i> Stage
+		  <a href='/stage'>
+            <i class='fa fa-street-view' aria-hidden='true'></i> Stage
+		  </a>
+          <!-- <label for='menu-stage'><i class='fa fa-street-view' aria-hidden='true'></i> Stage
             <input type='checkbox' id='menu-stage' />
               <div id='menu-stage-box'>
               </div>
-          </label>
+          </label> -->
 		  <!-- <label for='menu-comments'><i class='fa fa-commenting-o' aria-hidden='true' ></i>
             <input type='checkbox' id='menu-comments' />
               <div id='menu-comments-box'>

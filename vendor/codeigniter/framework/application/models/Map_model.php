@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Init_model extends CI_Model {
+class Map_model extends CI_Model {
 
 	public $title;
 	public $content;

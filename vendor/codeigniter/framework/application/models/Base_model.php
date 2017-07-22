@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Base_model extends CI_Model {
 
-	public function map($keyword)
+	public function get_map($keyword)
 	{
 		$data = [];
 
@@ -11,31 +11,52 @@ class Base_model extends CI_Model {
 
 		foreach ($find->result() as $key => $row) {
 			$data['country'][$key] = $row->country;
-			$data['code'][$key] = $row->code.$row->no;
-			$data['place'][$key] =$row->place;
+			$data['map'][$key]    = $row->code.$row->no;
+			$data['place'][$key]   = $row->place;
 		}
 
 		return $data;
 	}
 
-	public function menu($type)
+	public function get_stage($uid)
 	{
 		$data = [];
 
-		$query = "SELECT * FROM common_menu WHERE type = ?";
-		$find = $this->db->query($query, $type);
+		$query = "SELECT map FROM user_info WHERE uid='{$uid}'";
+		$find = $this->db->query($query);
 
-		if($find->num_rows() === 0) {
-			return false;
+		if($find->num_rows() === 0 || $find->num_rows() > 1) {
+			$data['map'] = 'dmz';
+
+			return $data;
 		}
 
-		foreach ($find->result() as $key => $row) {
-			$data['name'][$key] = $row->name;
-			$data['link'][$key] = $row->link;
+		foreach ($find->result() as $row) {
+			$data['map'] = $row->map;
 		}
 
 		return $data;
 	}
+/*
+ *    public function menu($type)
+ *    {
+ *        $data = [];
+ *
+ *        $query = "SELECT * FROM common_menu WHERE type = ?";
+ *        $find = $this->db->query($query, $type);
+ *
+ *        if($find->num_rows() === 0) {
+ *            return false;
+ *        }
+ *
+ *        foreach ($find->result() as $key => $row) {
+ *            $data['name'][$key] = $row->name;
+ *            $data['link'][$key] = $row->link;
+ *        }
+ *
+ *        return $data;
+ *    }
+ */
 
 	public function getInfo($uid)
 	{

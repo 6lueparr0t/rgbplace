@@ -13,7 +13,7 @@ function mapSearch (recv) {
 		if (this.status >= 200 && this.status < 400) {
 			// Success!
 			data = JSON.parse(this.response);
-			if(data.code != undefined) dataLength = data.code.length;
+			if(data.map != undefined) dataLength = data.map.length;
 
 			if(dataLength != 0) {
 				let place = [];
@@ -47,7 +47,7 @@ function mapSearch (recv) {
 						+", "+ place['locality'   ].split('|')[1]
 						+", "+ place['country'    ];
 
-					lists += "<a href='/"+data.code[i]+"'><li class='org'>"+place_org+"</li><li class='rev'>"+place_rev+"</li></a>";
+					lists += "<a href='/"+data.map[i]+"'><li class='org'>"+place_org+"</li><li class='rev'>"+place_rev+"</li></a>";
 				}
 			} else {
 				lists  = "<a href='#'><li>No Results</li></a>";
@@ -91,4 +91,3 @@ if (searchBox) searchBox.addEventListener("keyup", function(e) {
 		mapSearch(this)
 	}
 });
-	

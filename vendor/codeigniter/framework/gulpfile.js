@@ -27,7 +27,7 @@ const DIR = 'assets/';
  
 const SRC = {
     //JS: DIR + 'js/src/' + dir + '/' + file + '.js',
-    COMM: DIR + 'js/comm/**/*.js',
+    COMM: DIR + 'js/comm/src/**/*.js',
     JS: DIR + 'js/src/**/*.js',
     CSS: DIR + 'css/src/*.css',
     SCSS: DIR + 'css/src/style.scss',

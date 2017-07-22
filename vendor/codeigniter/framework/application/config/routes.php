@@ -58,8 +58,12 @@ $route['translate_uri_dashes'] = FALSE;
 | RGB place
 */
 
+$route['(dmz)'] = function ($map) {
+	return 'map/page/' . strtolower($map);
+};
+
 $route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {
-	return 'map/cover/' . strtolower($map);
+	return 'map/page/' . strtolower($map);
 };
 
 $route['([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
