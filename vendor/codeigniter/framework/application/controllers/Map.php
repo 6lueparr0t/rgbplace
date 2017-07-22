@@ -17,20 +17,26 @@ class Map extends CI_Controller {
 	{
 		if($this->input->get('keyword')) {
 			$data   = ['keyword' => $this->input->get('keyword')];
-			$output = $this->base->map($data['keyword']);
+			$output = $this->base->get_map($data['keyword']);
 		} else {
 			$output = [];
 		}
 		echo json_encode($output);
 	}
 
-	public function cover($map)
+	public function page($map)
 	{
-		echo "{$map}";
+		//echo "{$map}";
+		$data['map'] = $map;
+		$this->rgb->view("map/main", $data);
 	}
 
 	public function post($map, $num = 0)
 	{
-		echo "{$map}, {$num}";
+		//echo "{$map}, {$num}";
+		$data['map'] = $map;
+		$data['num'] = $num;
+		$this->rgb->view("map/main", $data);
 	}
+
 }

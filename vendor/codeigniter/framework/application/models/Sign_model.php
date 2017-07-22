@@ -30,10 +30,10 @@ class Sign_model extends CI_Model {
 				$this->db->query($query, $uid);
 
 				return $result = [
-					'name' => $row->name,
+					'name'  => $row->name,
 					'score' => $row->score,
-					'code' => $row->code,
-					'atim' => $row->atim
+					'map'   => $row->map,
+					'atim'  => $row->atim
 				];
 			} else {
 				//fail count increase

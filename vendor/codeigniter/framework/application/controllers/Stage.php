@@ -10,6 +10,11 @@ class Stage extends CI_Controller {
 
 	public function index()
 	{
-		$this->rgb->view("stage/main");
+		// bring data from user_info 'code' column
+		if($this->session->userdata('uid') && !$this->session->userdata('admin')) {
+			redirect($this->base->get_stage($this->session->userdata('uid'))['map']);
+		}
+
+		redirect("/dmz");
 	}
 }

@@ -67,7 +67,7 @@ class Sign extends CI_Controller {
 					'uid'  => $data['uid'],
 					'name' => $result['name'],
 					'score'=> $result['score'],
-					'code' => $result['code'],
+					'map' => $result['map'],
 					'signed_in' => TRUE
 				];
 				$this->session->set_userdata($user);
