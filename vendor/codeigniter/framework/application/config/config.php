@@ -23,6 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+
 #$config['base_url'] = 'http://rgbplace.gonetis.com:50380';
 #$config['base_url'] = 'http://192.168.219.200:50380';
 #$config['base_url'] = 'http://192.168.1.3:50380';
