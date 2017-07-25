@@ -1,4 +1,5 @@
 #logo {
+  font-family: "logo" !important;
   font-size:3rem;
   padding: 1rem 0;
   //background-image:linear-gradient(to right, white 0%, $oc-gray-1 100%);
@@ -33,7 +34,7 @@
 
   .place {
     position:absolute;
-    padding-left:.6rem;
+    padding-left:1.5rem;
 
     @include animation('tada 1s linear 1.2s 1 normal');
   }

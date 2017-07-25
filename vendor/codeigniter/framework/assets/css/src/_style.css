@@ -2529,8 +2529,16 @@
   100% {
     transform: scale(1) rotate(0); } }
 
+@font-face {
+  font-family: 'logo';
+  src: url("/assets/css/fonts/04b_20__.ttf"); }
+
+@font-face {
+  font-family: 'pixel';
+  src: url("/assets/css/fonts/slkscr.ttf"); }
+
 body {
-  font-family: "Nanum Gothic", sans-serif !important; }
+  font-family: "Nanum Gothic"; }
 
 a {
   color: #228ae6;
@@ -2650,6 +2658,7 @@ a {
   padding: 0.5rem; }
 
 #logo {
+  font-family: "logo" !important;
   font-size: 3rem;
   padding: 1rem 0; }
   #logo a {
@@ -2698,7 +2707,7 @@ a {
     animation-fill-mode: forwards; }
   #logo .place {
     position: absolute;
-    padding-left: .6rem;
+    padding-left: 1.5rem;
     -webkit-animation: tada 1s linear 1.2s 1 normal;
     -webkit-animation-fill-mode: forwards;
     -moz-animation: tada 1s linear 1.2s 1 normal;
@@ -2782,6 +2791,7 @@ a {
       top: 5rem; } }
 
 #menu {
+  font-family: "pixel" !important;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;

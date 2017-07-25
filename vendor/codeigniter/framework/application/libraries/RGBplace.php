@@ -49,7 +49,7 @@ class RGBplace {
 	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
 	<meta name='viewport' content='width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes' />
 
-	<title>RGB place</title>
+	<title>RGB PLACE</title>
 
 	<link rel='icon' href='data:;base64,iVBORw0KGgo='>
 	<link rel='stylesheet' href='/assets/css/dist/style.min.css' />
@@ -86,7 +86,7 @@ class RGBplace {
 
 		echo("
 		<div id='logo'>
-			<a href='".base_url()."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> place</span></a>
+			<a href='".base_url()."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> PLACE</span></a>
 		</div>
 		");
 	}
@@ -192,9 +192,10 @@ class RGBplace {
           </label>
 		  <label for='menu-config'><i class='fa fa-cog' aria-hidden='true'></i>
             <input type='checkbox' id='menu-config' />
-              <div id='menu-config-box'>
-              </div>
-		    <ul></ul> 
+		    <ul>
+		      <label for='menu-config-1'>Fixed / Close
+              </label>
+		    </ul>
           </label>
 		</ul>
 		");

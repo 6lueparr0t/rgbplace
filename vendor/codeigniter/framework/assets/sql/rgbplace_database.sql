@@ -53,7 +53,7 @@ CREATE TABLE `admin_info` (
 
 LOCK TABLES `admin_info` WRITE;
 /*!40000 ALTER TABLE `admin_info` DISABLE KEYS */;
-INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-07-17 16:17:30','JDJ5JDEwJGF6TWRSZXpjV2VseVZ3NExQcnVwT3U0VmVNdS5tWC84N3FJSWVVSnkvbXJWRko3T0k0bVBx','2017-07-18 02:48:21');
+INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-07-25 22:08:54','JDJ5JDEwJFVhZXpQbWpDZ0FEZzNSS1ByamJEU2VqMlhJakJKdi91Zk5RNk1heWxIamk3SlM3VHhmN1c2','2017-07-26 10:08:54');
 /*!40000 ALTER TABLE `admin_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -368,7 +368,7 @@ CREATE TABLE `user_session` (
 
 LOCK TABLES `user_session` WRITE;
 /*!40000 ALTER TABLE `user_session` DISABLE KEYS */;
-INSERT INTO `user_session` VALUES ('a5135a7v7t1akrusrn8h8or0ulntftid','127.0.0.1',1500277199,'__ci_last_regenerate|i:1500276980;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('ggrmrnegqdcvo8ssue9hfgl451rn6lft','127.0.0.1',1499942102,'__ci_last_regenerate|i:1499942094;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;');
+INSERT INTO `user_session` VALUES ('1ktdtvo8c4pf9j0r5lt99e304k7okj68','127.0.0.1',1500959154,'__ci_last_regenerate|i:1500959089;'),('4phr7ohebdmd5tjglnfpuf7ppde29f9n','127.0.0.1',1500736303,'__ci_last_regenerate|i:1500736299;'),('a5135a7v7t1akrusrn8h8or0ulntftid','127.0.0.1',1500277199,'__ci_last_regenerate|i:1500276980;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('ggrmrnegqdcvo8ssue9hfgl451rn6lft','127.0.0.1',1499942102,'__ci_last_regenerate|i:1499942094;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('iuvoipb2v1ulab6jkesqcbt4cknsevfb','127.0.0.1',1500907849,'__ci_last_regenerate|i:1500907846;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('l3n0r2r9ij9nt4oofi364s3mfta15f5e','127.0.0.1',1500996562,'__ci_last_regenerate|i:1500996557;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;');
 /*!40000 ALTER TABLE `user_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -503,4 +503,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-17 16:40:06
+-- Dump completed on 2017-07-26  0:29:29
