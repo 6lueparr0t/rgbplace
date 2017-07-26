@@ -24,11 +24,14 @@ class Map extends CI_Controller {
 		echo json_encode($output);
 	}
 
-	public function page($map)
+	public function page($map, $type = "none" , $num = 0)
 	{
 		//echo "{$map}";
-		$data['map'] = $map;
-		$this->rgb->view("map/main", $data);
+		$data['map']  = $map;
+		$data['type'] = $type;
+		$data['num']  = $num;
+
+		$this->rgb->view("map/page", $data);
 	}
 
 	public function post($map, $num = 0)
@@ -36,7 +39,23 @@ class Map extends CI_Controller {
 		//echo "{$map}, {$num}";
 		$data['map'] = $map;
 		$data['num'] = $num;
-		$this->rgb->view("map/main", $data);
+		$this->rgb->view("map/post", $data);
+	}
+
+	public function edit($map, $num = 0)
+	{
+		//echo "{$map}";
+		$data['map'] = $map;
+		$data['num'] = $num;
+		$this->rgb->view("map/edit", $data);
+	}
+
+	public function del($map, $num = 0)
+	{
+		//echo "{$map}";
+		$data['map'] = $map;
+		$data['num'] = $num;
+		$this->rgb->view("map/delete", $data);
 	}
 
 }
