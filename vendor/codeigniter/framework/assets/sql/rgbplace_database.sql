@@ -1,14 +1,14 @@
 DROP DATABASE IF EXISTS `RGBplace`;
--- MySQL dump 10.16  Distrib 10.1.19-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.19-MariaDB, for osx10.12 (x86_64)
 --
--- Host: localhost    Database: localhost
+-- Host: RGBplace    Database: RGBplace
 -- ------------------------------------------------------
--- Server version	10.1.19-MariaDB-1~xenial
+-- Server version	10.1.19-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -53,7 +53,7 @@ CREATE TABLE `admin_info` (
 
 LOCK TABLES `admin_info` WRITE;
 /*!40000 ALTER TABLE `admin_info` DISABLE KEYS */;
-INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-07-26 01:00:45','JDJ5JDEwJGJ0dTR1R1lrUEhrMlBJc0ZWSEthb2U2eWR6ZU9EallidVJCT1Y0UmduVGxyeDI5MDlsOEwu','2017-07-26 13:00:45');
+INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-07-27 16:58:12','JDJ5JDEwJFN1aFhiRk5tcjNDVlI0aTdVSWltTU9mTk5KeGNqaVREYW91TFo3L2Z4SnpNQzVyc0ttR1Yu','2017-07-28 02:23:18');
 /*!40000 ALTER TABLE `admin_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,7 +231,7 @@ CREATE TABLE `map_total` (
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `map` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`no`),
   KEY `link` (`link`(191)),
   KEY `no` (`no`)
@@ -312,7 +312,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES ('test01','테스트',NULL,'JDJ5JDEyJFY1dUc2dzdWdG9YWHpqRjJ5L3Zad2VwYWlmNDM0N0JSREpHYnRqaGd3aUJacEFFWVhaUjlH',0,'kr1',0,'2017-02-16 18:53:33','2017-07-22 15:59:59',NULL,NULL,''),('test02','삭제테스트',NULL,'JDJ5JDEyJEgxcmE5bWc4Nk5kZy9vYWU2MjdWeGV0VEUxLnlkUTRMNEppSnNtYUh5VXlFMlhRdC9YejN5',0,NULL,0,'2017-03-23 02:24:00',NULL,NULL,NULL,''),('test03','ajax테스트',NULL,'JDJ5JDEyJFBqS3dUTi5CR1F5TWFFUTN1eUo2THVwUEJRaHpTTlJBWmFucVQzNGhUUE9LMTdac0hSb3Y2',0,NULL,0,'2017-03-23 15:30:42',NULL,NULL,NULL,'');
+INSERT INTO `user_info` VALUES ('test01','테스트',NULL,'JDJ5JDEyJFY1dUc2dzdWdG9YWHpqRjJ5L3Zad2VwYWlmNDM0N0JSREpHYnRqaGd3aUJacEFFWVhaUjlH',0,'kr1',0,'2017-02-16 18:53:33','2017-07-27 14:23:34',NULL,NULL,''),('test02','삭제테스트',NULL,'JDJ5JDEyJEgxcmE5bWc4Nk5kZy9vYWU2MjdWeGV0VEUxLnlkUTRMNEppSnNtYUh5VXlFMlhRdC9YejN5',0,NULL,0,'2017-03-23 02:24:00',NULL,NULL,NULL,''),('test03','ajax테스트',NULL,'JDJ5JDEyJFBqS3dUTi5CR1F5TWFFUTN1eUo2THVwUEJRaHpTTlJBWmFucVQzNGhUUE9LMTdac0hSb3Y2',0,NULL,0,'2017-03-23 15:30:42',NULL,NULL,NULL,'');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,7 +367,7 @@ CREATE TABLE `user_session` (
 
 LOCK TABLES `user_session` WRITE;
 /*!40000 ALTER TABLE `user_session` DISABLE KEYS */;
-INSERT INTO `user_session` VALUES ('5qq33kl9s2t1p7tu8tmlq39n4a155gmt','192.168.1.2',1500998450,'__ci_last_regenerate|i:1500998444;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('a5135a7v7t1akrusrn8h8or0ulntftid','127.0.0.1',1500277199,'__ci_last_regenerate|i:1500276980;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('fe62pu78qea47csflo1hf56hjvfecunn','192.168.1.2',1500708258,'__ci_last_regenerate|i:1500708258;score|s:1:\"0\";code|N;map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('ggrmrnegqdcvo8ssue9hfgl451rn6lft','127.0.0.1',1499942102,'__ci_last_regenerate|i:1499942094;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('jejpcsdeg0hcrg9j8c8vsnr3na9q9fg9','192.168.1.2',1500473683,'__ci_last_regenerate|i:1500473418;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('vlfsq4kls2in9gcalai4b71bjgar8lb3','192.168.1.2',1500552249,'__ci_last_regenerate|i:1500552246;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;');
+INSERT INTO `user_session` VALUES ('5qq33kl9s2t1p7tu8tmlq39n4a155gmt','192.168.1.2',1500998450,'__ci_last_regenerate|i:1500998444;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('76g85tgsmco285okks06ql9sje0kpcio','127.0.0.1',1501142296,'__ci_last_regenerate|i:1501142288;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('a5135a7v7t1akrusrn8h8or0ulntftid','127.0.0.1',1500277199,'__ci_last_regenerate|i:1500276980;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('dpv17vt9f9l5lapkgluu1krh3hfk6ob4','127.0.0.1',1501080032,'__ci_last_regenerate|i:1501079895;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('fe62pu78qea47csflo1hf56hjvfecunn','192.168.1.2',1500708258,'__ci_last_regenerate|i:1500708258;score|s:1:\"0\";code|N;map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('ggrmrnegqdcvo8ssue9hfgl451rn6lft','127.0.0.1',1499942102,'__ci_last_regenerate|i:1499942094;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('j8j7ksiup1v11laa6h82bpbjc5pttk59','127.0.0.1',1500999530,'__ci_last_regenerate|i:1500999442;'),('jejpcsdeg0hcrg9j8c8vsnr3na9q9fg9','192.168.1.2',1500473683,'__ci_last_regenerate|i:1500473418;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('vlfsq4kls2in9gcalai4b71bjgar8lb3','192.168.1.2',1500552249,'__ci_last_regenerate|i:1500552246;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;');
 /*!40000 ALTER TABLE `user_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,11 +380,11 @@ DROP TABLE IF EXISTS `user_visit`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_visit` (
   `no` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code` char(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `map` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL,
   PRIMARY KEY (`no`),
-  KEY `code` (`code`),
-  KEY `no` (`no`,`code`)
+  KEY `code` (`map`),
+  KEY `no` (`no`,`map`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='방문자 확인 테이블';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -502,4 +502,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-26  1:00:52
+-- Dump completed on 2017-07-27 16:58:18
