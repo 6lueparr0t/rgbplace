@@ -79,10 +79,9 @@ $route['(dmz)/edit/(:num)'] = function ($map, $num) {
 	return 'map/edit/' . strtolower($map) . '/' . $num;
 };
 
-$route['(dmz)/del/(:num)'] = function ($map, $num) {
-	return 'map/del/' . strtolower($map) . '/' . $num;
+$route['(dmz)/delete/(:num)'] = function ($map, $num) {
+	return 'map/delete/' . strtolower($map) . '/' . $num;
 };
-
 
 
 $route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {
@@ -106,6 +105,6 @@ $route['([a-zA-Z]{2}[0-9]+)/edit/(:num)'] = function ($map, $num) {
 	return 'map/edit/' . strtolower($map) . '/' . $num;
 };
 
-$route['([a-zA-Z]{2}[0-9]+)/del/(:num)'] = function ($map, $num) {
-	return 'map/del/' . strtolower($map) . '/' . $num;
+$route['([a-zA-Z]{2}[0-9]+)/delete/(:num)'] = function ($map, $num) {
+	return 'map/delete/' . strtolower($map) . '/' . $num;
 };

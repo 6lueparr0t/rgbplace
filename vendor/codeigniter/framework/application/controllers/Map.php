@@ -50,7 +50,7 @@ class Map extends CI_Controller {
 		$this->rgb->view("map/edit", $data);
 	}
 
-	public function del($map, $num = 0)
+	public function delete($map, $num = 0)
 	{
 		//echo "{$map}";
 		$data['map'] = $map;
