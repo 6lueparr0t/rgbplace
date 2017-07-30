@@ -103,6 +103,7 @@
 
 #menu {
   font-family: "pixel" !important;
+  font-size: 11px;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -119,8 +120,8 @@
   display         : flex;
   font-size       : 1.5rem;
 
-  top             : 0;
-  position        : sticky;
+  //top             : 0;
+  //position        : sticky;
 
   @media screen and ($width-name : $target-width) {
     display: none;
