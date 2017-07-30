@@ -10,7 +10,7 @@ class Map extends CI_Controller {
 
 	public function index()
 	{
-		$this->rgb->view("map/main");
+		redirect("/");
 	}
 
 	public function search()
