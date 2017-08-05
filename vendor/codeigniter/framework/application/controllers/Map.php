@@ -18,9 +18,9 @@ class Map extends CI_Controller {
 		if($this->input->get('keyword')) {
 			$data   = ['keyword' => $this->input->get('keyword')];
 			$output = $this->base->get_map($data['keyword']);
-		} else {
-			$output = [];
 		}
+
+		if(empty($output)) $output = null;
 		echo json_encode($output);
 	}
 

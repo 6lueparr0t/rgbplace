@@ -119,11 +119,10 @@ class RGBplace {
 		echo("
         <input type='checkbox' id='menu-toggle' />
         <label id='menu-button' for='menu-toggle'>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </label>
+        <i class='open fa fa-bars' aria-hidden='true'></i>
+        <i class='close fa fa-times' aria-hidden='true'></i>
+		</label>
+
 		<ul id='menu'>
 		");
 
@@ -193,9 +192,8 @@ class RGBplace {
 		  <label for='menu-config'><i class='fa fa-cog' aria-hidden='true'></i>
             <input type='checkbox' id='menu-config' />
 		    <ul>
-		      <label for='menu-config-1'>Fixed / Close
-              </label>
-		    </ul>
+                <label for='menu-config-1'>Fix On</label>
+			</ul>
           </label>
 		</ul>
 		");

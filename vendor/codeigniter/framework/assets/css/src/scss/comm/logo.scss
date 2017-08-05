@@ -3,6 +3,10 @@
   font-size:3rem;
   padding: 1rem 0;
   //background-image:linear-gradient(to right, white 0%, $oc-gray-1 100%);
+  @media screen and ($width-name : $target-width) {
+    font-size: 1.5rem;
+    position:absolute;
+  }
 
   a {
     color:$oc-gray-9 !important;

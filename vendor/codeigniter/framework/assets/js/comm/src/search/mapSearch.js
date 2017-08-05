@@ -13,12 +13,17 @@ function mapSearch (recv) {
 		if (this.status >= 200 && this.status < 400) {
 			// Success!
 			data = JSON.parse(this.response);
-			if(data.map != undefined) dataLength = data.map.length;
 
-			if(dataLength != 0) {
+			if(data) {
+				dataLength = data.map.length;
+			} else {
+				dataLength = null;
+			}
+
+			if(dataLength != null) {
 				let place = [];
 
-				for (let i=0; i<dataLength; i++) {
+				for (let i=0; i < dataLength; i++) {
 					/*
 					 * place[locality]   : 서울특별시|Seoul
 					 * place[political1] : 동작구|Dongjak-gu
@@ -54,7 +59,6 @@ function mapSearch (recv) {
 			}
 
 			//console.log(lists);
-
 			searchResult.innerHTML = lists;
 		} else {
 			// We reached our target server, but it returned an error
@@ -81,7 +85,7 @@ let searchBox    = document.querySelector("#map-search-box");
 let searchToggle = document.querySelector("#map-search");
 
 if (searchBtn) searchBtn.addEventListener("click", function() { searchToggle.checked = false; mapSearch(searchBox); });
-if (searchBox) searchBox.addEventListener("keyup", function(e) {
+if (searchBox) searchBox.addEventListener("keydown", function(e) {
 	if(searchBox.value == "") {
 		searchToggle.checked = false;
 		searchResult.innerHTML = "<a href='#'><li>No Results</li></a>";

@@ -1,12 +1,11 @@
 #menu-map {
-  padding : 1rem 0 !important;
+  padding : .5rem 0 !important;
   #map-search-box {
     width         : 75%;
     transform     : translateX(6px);
     border-radius : 4rem;
     border        : none;
-    height        : 1rem;
-    padding       : 1rem;
+	padding       : .67rem;
   }
   
   #map-search-button {
@@ -15,12 +14,12 @@
   }
 
   .fa.fa-caret-up {
-    top:1.5rem !important;
+    top:1rem !important;
     left:93% !important;
   }
   
   .fa.fa-caret-down {
-    top:1.5rem !important;
+    top:1rem !important;
     left:93% !important;
   }
 }

@@ -117,6 +117,7 @@ gulp.task('comm-min', function () {
 			}
 		}))
 		.pipe(concat('common.min.js'))
+		.pipe(wait(DIST.COMM))
 		.pipe(gulp.dest(DIST.COMM));
 });
 
