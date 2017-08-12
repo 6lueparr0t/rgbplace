@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); $this->rgb->common();?>
 
-map/write/<?=$map?>/<?=$num?>
+map/edit/<?=$map?>/<?=$num?>
 <br/>
 <br/>
 <br/>

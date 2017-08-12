@@ -1,0 +1,77 @@
+#page{
+
+	& #scene {
+		background : $oc-gray-9;
+		margin  : 1rem;
+
+		& img {
+		    display: table;
+		    margin: auto;
+		    height: 400px;
+		}
+	}
+
+	& .type {
+		font-family   : pixel !important;
+		font-size     : 2rem;
+		cursor        : pointer;
+		text-align    : center;
+		display       : table;
+		width         : 100%;
+		border-spacing: 1rem;
+		table-layout  : fixed;
+
+		& .type-row {
+			display: table-row;
+
+			@media screen and ($width-name : $target-width) {
+				display : block;
+			}
+
+			& div {
+				display : table-cell;
+				padding : 1rem 0;
+
+				border : 1px solid $oc-gray-9;
+				border-radius: .25rem;
+
+				@media screen and ($width-name : $target-width) {
+					display : block;
+				}
+			}
+
+		}
+
+
+	}
+
+	& #best {
+		background : $oc-gray-7;
+		color      : $oc-yellow-4;
+	}
+
+	& #info {
+		background : white;
+		color      : $oc-gray-9;
+	}
+
+	& #free {
+		background : white;
+		color      : $oc-gray-9;
+	}
+
+	& #photo {
+		background : $oc-gray-7;
+		color      : $oc-lime-4;
+	}
+
+	& #news {
+		background : $oc-gray-7;
+		color      : $oc-blue-4;
+	}
+
+	& #ad {
+		background : $oc-gray-7;
+		color      : $oc-red-6;
+	}
+}

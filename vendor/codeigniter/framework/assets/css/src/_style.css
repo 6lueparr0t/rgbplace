@@ -2881,6 +2881,61 @@ a {
     display: none;
     list-style-type: none; }
 
+#page #scene {
+  background: #212529;
+  margin: 1rem; }
+  #page #scene img {
+    display: table;
+    margin: auto;
+    height: 400px; }
+
+#page .type {
+  font-family: pixel !important;
+  font-size: 2rem;
+  cursor: pointer;
+  text-align: center;
+  display: table;
+  width: 100%;
+  border-spacing: 1rem;
+  table-layout: fixed; }
+  #page .type .type-row {
+    display: table-row; }
+    @media screen and (max-width: 860px) {
+      #page .type .type-row {
+        display: block; } }
+    #page .type .type-row div {
+      display: table-cell;
+      padding: 1rem 0;
+      border: 1px solid #212529;
+      border-radius: .25rem; }
+      @media screen and (max-width: 860px) {
+        #page .type .type-row div {
+          display: block; } }
+
+#page #best {
+  background: #495057;
+  color: #ffd43b; }
+
+#page #info {
+  background: white;
+  color: #212529; }
+
+#page #free {
+  background: white;
+  color: #212529; }
+
+#page #photo {
+  background: #495057;
+  color: #a9e34b; }
+
+#page #news {
+  background: #495057;
+  color: #4dadf7; }
+
+#page #ad {
+  background: #495057;
+  color: #fa5252; }
+
 #menu-map {
   padding: .5rem 0 !important; }
   #menu-map #map-search-box {

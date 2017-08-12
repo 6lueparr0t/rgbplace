@@ -90,6 +90,67 @@ INSERT INTO `map_code` VALUES ('대한민국|Republic of Korea','kr',1,'locality
 UNLOCK TABLES;
 
 --
+-- Table structure for table `map_dmz_post`
+--
+
+DROP TABLE IF EXISTS `map_dmz_post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `map_dmz_post` (
+  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dtim` datetime NOT NULL,
+  `utim` datetime NOT NULL,
+  `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `map_dmz_post`
+--
+
+LOCK TABLES `map_dmz_post` WRITE;
+/*!40000 ALTER TABLE `map_dmz_post` DISABLE KEYS */;
+/*!40000 ALTER TABLE `map_dmz_post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `map_dmz_reply`
+--
+
+DROP TABLE IF EXISTS `map_dmz_reply`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `map_dmz_reply` (
+  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `utim` datetime DEFAULT NULL,
+  `dtim` datetime DEFAULT NULL,
+  `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `map_dmz_reply`
+--
+
+LOCK TABLES `map_dmz_reply` WRITE;
+/*!40000 ALTER TABLE `map_dmz_reply` DISABLE KEYS */;
+/*!40000 ALTER TABLE `map_dmz_reply` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `map_kr1_post`
 --
 
@@ -367,7 +428,7 @@ CREATE TABLE `user_session` (
 
 LOCK TABLES `user_session` WRITE;
 /*!40000 ALTER TABLE `user_session` DISABLE KEYS */;
-INSERT INTO `user_session` VALUES ('68fpvqoq6r0hao4abqecille1m4tvkvu','127.0.0.1',1501423551,'__ci_last_regenerate|i:1501423551;'),('rmt8csgrpes9iclqpu0e9fs84qshskjo','127.0.0.1',1501632094,'__ci_last_regenerate|i:1501632087;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('vk57a6j290df2pvs65a1i4oetj865vdd','127.0.0.1',1501423551,'__ci_last_regenerate|i:1501423551;');
+INSERT INTO `user_session` VALUES ('cv19os4qmmd4qdrh8b4qdo16u2636ov5','127.0.0.1',1502564476,'__ci_last_regenerate|i:1502564408;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;');
 /*!40000 ALTER TABLE `user_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -502,4 +563,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-02  9:01:36
+-- Dump completed on 2017-08-13  4:01:19

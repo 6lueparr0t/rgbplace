@@ -58,20 +58,12 @@ $route['translate_uri_dashes'] = FALSE;
 | RGB place
 */
 
-$route['(dmz)'] = function ($map) {
-	return 'map/page/' . strtolower($map);
-};
-
-$route['(dmz)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
-	return 'map/page/' . strtolower($map) . '/' . $type . '/' . $num;
+$route['(dmz)/(:num)'] = function ($map, $num) {
+	return 'map/post/' . strtolower($map) . '/' . $num;
 };
 
 $route['(dmz)/edit'] = function ($map) {
 	return 'map/edit/' . strtolower($map);
-};
-
-$route['(dmz)/post/(:num)'] = function ($map, $num) {
-	return 'map/post/' . strtolower($map) . '/' . $num;
 };
 
 //post modify
@@ -83,21 +75,24 @@ $route['(dmz)/delete/(:num)'] = function ($map, $num) {
 	return 'map/delete/' . strtolower($map) . '/' . $num;
 };
 
-
-$route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {
+$route['(dmz)'] = function ($map) {
 	return 'map/page/' . strtolower($map);
 };
 
-$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
+$route['(dmz)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
 	return 'map/page/' . strtolower($map) . '/' . $type . '/' . $num;
+};
+
+
+// ====================  ====================  ====================  ====================
+
+
+$route['([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
+	return 'map/post/' . strtolower($map) . '/' . $num;
 };
 
 $route['([a-zA-Z]{2}[0-9]+)/(edit)'] = function ($map) {
 	return 'map/edit/' . strtolower($map);
-};
-
-$route['([a-zA-Z]{2}[0-9]+)/post/(:num)'] = function ($map, $num) {
-	return 'map/post/' . strtolower($map) . '/' . $num;
 };
 
 //post modify
@@ -107,4 +102,12 @@ $route['([a-zA-Z]{2}[0-9]+)/edit/(:num)'] = function ($map, $num) {
 
 $route['([a-zA-Z]{2}[0-9]+)/delete/(:num)'] = function ($map, $num) {
 	return 'map/delete/' . strtolower($map) . '/' . $num;
+};
+
+$route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {
+	return 'map/page/' . strtolower($map);
+};
+
+$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
+	return 'map/page/' . strtolower($map) . '/' . $type . '/' . $num;
 };
