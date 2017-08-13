@@ -14,7 +14,6 @@
 	& .type {
 		font-family   : pixel !important;
 		font-size     : 2rem;
-		cursor        : pointer;
 		text-align    : center;
 		display       : table;
 		width         : 100%;
@@ -28,16 +27,28 @@
 				display : block;
 			}
 
-			& div {
+			& .type-col {
 				display : table-cell;
-				padding : 1rem 0;
-
-				border : 1px solid $oc-gray-9;
-				border-radius: .25rem;
+				//padding : 1rem 0;
+				//border: 1px solid $oc-gray-9;
+				//border-radius: .25rem;
 
 				@media screen and ($width-name : $target-width) {
 					display : block;
 				}
+
+				& .type-list {
+					font-family:"Nanum Gothic";
+					font-size:1rem;
+					margin:1rem;
+				}
+			}
+
+			& span {
+				display       : block;
+				padding       : 1rem 0;
+				border        : 1px solid $oc-gray-9;
+				border-radius : .25rem;
 			}
 
 		}

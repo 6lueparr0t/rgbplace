@@ -2892,7 +2892,6 @@ a {
 #page .type {
   font-family: pixel !important;
   font-size: 2rem;
-  cursor: pointer;
   text-align: center;
   display: table;
   width: 100%;
@@ -2903,14 +2902,20 @@ a {
     @media screen and (max-width: 860px) {
       #page .type .type-row {
         display: block; } }
-    #page .type .type-row div {
-      display: table-cell;
+    #page .type .type-row .type-col {
+      display: table-cell; }
+      @media screen and (max-width: 860px) {
+        #page .type .type-row .type-col {
+          display: block; } }
+      #page .type .type-row .type-col .type-list {
+        font-family: "Nanum Gothic";
+        font-size: 1rem;
+        margin: 1rem; }
+    #page .type .type-row span {
+      display: block;
       padding: 1rem 0;
       border: 1px solid #212529;
       border-radius: .25rem; }
-      @media screen and (max-width: 860px) {
-        #page .type .type-row div {
-          display: block; } }
 
 #page #best {
   background: #495057;

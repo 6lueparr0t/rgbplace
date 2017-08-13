@@ -12,43 +12,44 @@
 
 <div class='type'>
   <div class='type-row'>
-	<div id='best'>BEST
-<?
-
-
-?>
+	<div class='type-col'>
+	  <span id='best'>BEST</span>
+      <div class='type-list'>
+	  <? $this->map->page_list($map, 'best'); ?>
+      </div>
     </div>
-    <div id='free'>FREE
-<?
-
-
-?>
+	<div class='type-col'>
+      <span id='free'>FREE</span>
+      <div class='type-list'>
+	  <?// $this->map->page_list($map, 'best'); ?>
+      </div>
     </div>
-    <div id='info'>INFO
-<?
-
-
-?>
+	<div class='type-col'>
+      <span id='info'>INFO</span>
+      <div class='type-list'>
+	  <?// $this->map->page_list($map, 'best'); ?>
+      </div>
     </div>
   </div>
+
   <div class='type-row'>
-    <div id='photo'>PHOTO
-<?
-
-
-?>
+	<div class='type-col'>
+      <span id='photo'>PHOTO</span>
+      <div class='type-list'>
+	  <?// $this->map->page_list($map, 'best'); ?>
+      </div>
     </div>
-    <div id='news'>NEWS
-<?
-
-
-?>
+	<div class='type-col'>
+      <span id='news'>NEWS</span>
+      <div class='type-list'>
+	  <?// $this->map->page_list($map, 'best'); ?>
+      </div>
     </div>
-    <div id='ad'>AD
-<?
-
-
-?>
+	<div class='type-col'>
+      <span id='ad'>AD</span>
+      <div class='type-list'>
+	  <?// $this->map->page_list($map, 'best'); ?>
+      </div>
     </div>
   </div>
 </div>

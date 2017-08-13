@@ -110,17 +110,23 @@ class Map_model extends CI_Model {
  *    }
  */
 
-	public function page_list($type)
+	public function page_list($map, $type)
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_code WHERE code like '%{$keyword}%' or country like '%{$keyword}%' or place like '%{$keyword}%' or keyword like '%{$keyword}%'";
+		$query = "SELECT * FROM map_{$map}_post where type='{$type}' ORDER BY ctim desc LIMIT 5";
 		$find = $this->db->query($query);
 
 		foreach ($find->result() as $key => $row) {
-			$data['country'][$key] = $row->country;
-			$data['map'][$key]    = $row->code.$row->no;
-			$data['place'][$key]   = $row->place;
+
+			echo $row->no;
+			echo $row->title;
+			echo $row->content;
+			echo $row->ctim;
+
+			//$data['title'][$key]   = $row->title;
+			//$data['content'][$key] = $row->content;
+			//$data['ctim'][$key]    = $row->ctim;
 		}
 
 		return $data;
