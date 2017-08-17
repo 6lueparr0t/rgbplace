@@ -58,28 +58,28 @@ $route['translate_uri_dashes'] = FALSE;
 | RGB place
 */
 
-$route['(dmz)/(:num)'] = function ($map, $num) {
+$route['(sea)/(:num)'] = function ($map, $num) {
 	return 'map/post/' . strtolower($map) . '/' . $num;
 };
 
-$route['(dmz)/edit'] = function ($map) {
+$route['(sea)/edit'] = function ($map) {
 	return 'map/edit/' . strtolower($map);
 };
 
 //post modify
-$route['(dmz)/edit/(:num)'] = function ($map, $num) {
+$route['(sea)/edit/(:num)'] = function ($map, $num) {
 	return 'map/edit/' . strtolower($map) . '/' . $num;
 };
 
-$route['(dmz)/delete/(:num)'] = function ($map, $num) {
+$route['(sea)/delete/(:num)'] = function ($map, $num) {
 	return 'map/delete/' . strtolower($map) . '/' . $num;
 };
 
-$route['(dmz)'] = function ($map) {
+$route['(sea)'] = function ($map) {
 	return 'map/page/' . strtolower($map);
 };
 
-$route['(dmz)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
+$route['(sea)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
 	return 'map/page/' . strtolower($map) . '/' . $type . '/' . $num;
 };
 

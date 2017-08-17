@@ -2909,8 +2909,25 @@ a {
           display: block; } }
       #page .type .type-row .type-col .type-list {
         font-family: "Nanum Gothic";
-        font-size: 1rem;
-        margin: 1rem; }
+        font-size: .8rem;
+        margin: .5rem 0;
+        border-radius: .25rem;
+        border: 1px solid #212529;
+        min-height: 15rem; }
+        #page .type .type-row .type-col .type-list .no-results {
+          margin: auto;
+          height: 15rem; }
+        #page .type .type-row .type-col .type-list .results {
+          display: block;
+          margin: 1rem; }
+          #page .type .type-row .type-col .type-list .results div {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 20rem; }
+            @media screen and (max-width: 860px) {
+              #page .type .type-row .type-col .type-list .results div {
+                max-width: 32.5rem; } }
     #page .type .type-row span {
       display: block;
       padding: 1rem 0;

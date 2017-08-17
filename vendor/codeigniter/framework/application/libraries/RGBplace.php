@@ -86,7 +86,7 @@ class RGBplace {
 
 		echo("
 		<div id='logo'>
-			<a href='".base_url()."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> PLACE</span></a>
+			<a href='".base_url()."sea'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> PLACE</span></a>
 		</div>
 		");
 	}

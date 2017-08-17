@@ -14,14 +14,20 @@
   <div class='type-row'>
 	<div class='type-col'>
 	  <span id='best'>BEST</span>
-      <div class='type-list'>
-	  <? $this->map->page_list($map, 'best'); ?>
+	  <div class='type-list'>
+<?
+if($map === "sea") {
+	$this->map->total_best_list(6);
+} else {
+	$this->map->page_type_list($map, 'best', 6);
+}
+?>
       </div>
     </div>
 	<div class='type-col'>
       <span id='free'>FREE</span>
       <div class='type-list'>
-	  <?// $this->map->page_list($map, 'best'); ?>
+<? $this->map->page_type_list($map, 'free', 6); ?>
       </div>
     </div>
 	<div class='type-col'>
