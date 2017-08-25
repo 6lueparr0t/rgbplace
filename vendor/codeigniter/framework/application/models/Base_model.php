@@ -26,7 +26,7 @@ class Base_model extends CI_Model {
 		$find = $this->db->query($query);
 
 		if($find->num_rows() === 0 || $find->num_rows() > 1) {
-			$data['map'] = 'dmz';
+			$data['map'] = DEFAULT_MAP;
 
 			return $data;
 		}

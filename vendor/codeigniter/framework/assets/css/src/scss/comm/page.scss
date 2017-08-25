@@ -2,12 +2,19 @@
 
 	& #scene {
 		background : $oc-gray-9;
-		margin  : 1rem;
+		margin  : 3rem 1rem 1rem 1rem;
 
 		& img {
 		    display: table;
 		    margin: auto;
 		    height: 400px;
+
+			@media screen and ($width-name : $target-width) {
+				display: table;
+				margin: auto;
+				height:100%;
+				width:100%;
+			}
 		}
 	}
 
@@ -45,26 +52,35 @@
 					border        : 1px solid $oc-gray-9;
 					min-height    : 15rem;
 
+					@media screen and ($width-name : $target-width) {
+						margin-bottom : 4rem;
+					}
+
 					& .no-results {
 						margin  : auto;
-						height  : 15rem;
+						height  : 14rem;
 					}
 
 					& .results {
-						display:block;
-						margin:1rem;
+						display : block;
+						margin  : .5rem 1rem;
+					    width   : 95%;
+
+						& tbody tr {
+							& td:nth-child(1) {
+								font-size: 0.5rem;
+								width: 4rem;
+							}
+						}
 
 						& div {
-							overflow: hidden;
-							text-overflow: ellipsis;
-							white-space: nowrap;
-							max-width: 20rem;
+							display: grid;
 
-							@media screen and ($width-name : $target-width) {
-								max-width: 32.5rem;
+							& a {
+								text-overflow: ellipsis; 
+								overflow: hidden; 
+								white-space: nowrap; 
 							}
-
-
 						}
 					}
 				}
@@ -79,36 +95,50 @@
 
 		}
 
-
 	}
 
 	& #best {
-		background : $oc-gray-7;
+		background : linear-gradient(317.5deg, $oc-yellow-4 3%, $oc-gray-7 3%);
 		color      : $oc-yellow-4;
 	}
 
 	& #info {
-		background : white;
+		background : linear-gradient(317.5deg, $oc-gray-9 3%, white 3%);
 		color      : $oc-gray-9;
 	}
 
 	& #free {
-		background : white;
+		background : linear-gradient(317.5deg, $oc-gray-9 3%, white 3%);
 		color      : $oc-gray-9;
 	}
 
 	& #photo {
-		background : $oc-gray-7;
+		background : linear-gradient(317.5deg, $oc-lime-4 3%, $oc-gray-7 3%);
 		color      : $oc-lime-4;
 	}
 
 	& #news {
-		background : $oc-gray-7;
+		background : linear-gradient(317.5deg, $oc-blue-4 3%, $oc-gray-7 3%);
 		color      : $oc-blue-4;
 	}
 
 	& #ad {
-		background : $oc-gray-7;
+		background : linear-gradient(317.5deg, $oc-red-6 3%, $oc-gray-7 3%);
 		color      : $oc-red-6;
+	}
+
+	& #hobby {
+		background : linear-gradient(317.5deg, $oc-violet-3 3%, $oc-gray-7 3%);
+		color      : $oc-violet-3;
+	}
+
+	& #life {
+		background : linear-gradient(317.5deg, $oc-pink-4 3%, $oc-gray-7 3%);
+		color      : $oc-pink-4;
+	}
+
+	& #work {
+		background : linear-gradient(317.5deg, $oc-cyan-3 3%, $oc-gray-7 3%);
+		color      : $oc-cyan-3;
 	}
 }

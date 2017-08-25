@@ -25,36 +25,46 @@ class Map extends CI_Controller {
 		echo json_encode($output);
 	}
 
-	public function page($map, $type = "none" , $num = 0)
+	public function page($map)
 	{
 		//echo "{$map}";
-		$data['map']  = $map;
-		$data['type'] = $type;
-		$data['num']  = $num;
+		$data['map']  = strtolower($map);
 
 		$this->rgb->view("map/page", $data);
 	}
 
-	public function post($map, $num = 0)
+	public function list($map, $type = "free" , $num = 0)
+	{
+		//echo "{$map}";
+		$data['map']  = strtolower($map);
+		$data['type'] = strtolower($type);
+		$data['num']  = $num;
+
+		$this->rgb->view("map/list", $data);
+	}
+
+	public function post($map, $type, $num = 0)
 	{
 		//echo "{$map}, {$num}";
-		$data['map'] = $map;
-		$data['num'] = $num;
+		$data['map' ] = strtolower($map);
+		$data['type'] = strtolower($type);
+		$data['num' ] = $num;
 		$this->rgb->view("map/post", $data);
 	}
 
-	public function edit($map, $num = 0)
+	public function edit($map, $type, $num = 0)
 	{
 		//echo "{$map}";
-		$data['map'] = $map;
+		$data['map'] = strtolower($map);
+		$data['type'] = strtolower($type);
 		$data['num'] = $num;
 		$this->rgb->view("map/edit", $data);
 	}
 
-	public function delete($map, $num = 0)
+	public function delete($map, $type, $num = 0)
 	{
-		//echo "{$map}";
-		$data['map'] = $map;
+		$data['map'] = strtolower($map);
+		$data['type'] = strtolower($type);
 		$data['num'] = $num;
 		$this->rgb->view("map/delete", $data);
 	}

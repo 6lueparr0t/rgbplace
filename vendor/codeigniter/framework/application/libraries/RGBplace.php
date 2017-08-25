@@ -86,7 +86,7 @@ class RGBplace {
 
 		echo("
 		<div id='logo'>
-			<a href='".base_url()."sea'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> PLACE</span></a>
+			<a href='".base_url().DEFAULT_MAP."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> PLACE</span></a>
 		</div>
 		");
 	}
@@ -115,7 +115,8 @@ class RGBplace {
 
 		//setting Common Menu
 
-		/* ********** MENU Start ********** */
+		/* -------------------------------------------------- MENU Start -------------------------------------------------- */
+
 		echo("
         <input type='checkbox' id='menu-toggle' />
         <label id='menu-button' for='menu-toggle'>
@@ -191,14 +192,40 @@ class RGBplace {
           </label>
 		  <label for='menu-config'><i class='fa fa-cog' aria-hidden='true'></i>
             <input type='checkbox' id='menu-config' />
+            <i class='open fa fa-caret-up' aria-hidden='true'></i>
+            <i class='close fa fa-caret-down' aria-hidden='true'></i>
 		    <ul>
                 <label for='menu-config-1'>Fix On</label>
 			</ul>
           </label>
 		</ul>
 		");
+		/* -------------------------------------------------- MENU End -------------------------------------------------- */
 
-		/* ********** MENU END ********** */
+		//if($this->CI->session->has_userdata('tab1') === false) $this->CI->session->set_userdata('tab1');
+
+		$tab1 = $this->CI->uri->segment(1, "#");
+		$tab2 = $this->CI->uri->segment(2, "#");
+		$tab3 = $this->CI->uri->segment(3, "#");
+		$tab4 = $this->CI->uri->segment(4, "#");
+		
+		echo ("
+        <div id='status'>
+          <a class='type black' href='/{$tab1}'>
+            <span>{$tab1}</span>
+          </a>
+          <a class='type yellow' href='/{$tab1}/{$tab2}/0'>
+            <span>{$tab2}</span>
+          </a>
+          <a class='type gray' href='/{$tab1}/{$tab2}/{$tab3}'>
+            <span>{$tab3}</span>
+          </a>
+          <a class='type gray' href='#'>
+            <span>{$tab4}</span>
+          </a>
+        </div>
+		");
+
 	}
 /*
 	function warning($display = "none")

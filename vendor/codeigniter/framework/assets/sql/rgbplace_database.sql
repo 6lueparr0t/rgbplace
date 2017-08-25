@@ -53,7 +53,7 @@ CREATE TABLE `admin_info` (
 
 LOCK TABLES `admin_info` WRITE;
 /*!40000 ALTER TABLE `admin_info` DISABLE KEYS */;
-INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-08-02 09:01:30','JDJ5JDEwJFViSVRvMC5iaGhoN0lDeGhrN2lSL3VpcGNTR0t1VUQwblZhRGRYbTd0cHBEM0NieHhaWkNX','2017-08-02 21:01:30');
+INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-08-23 01:11:26','JDJ5JDEwJE5rcHV5S0IxbmpCR1lkN3pIMFA3Y3UxcnRzVTNYZ0dPbndnM2ZUZmxsUVJsMkwwdzNEakVt','2017-08-23 13:15:57');
 /*!40000 ALTER TABLE `admin_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ DROP TABLE IF EXISTS `map_code`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_code` (
-  `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Country Name',
+  `country` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Country Name',
   `code` char(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Country Code',
   `no` bigint(20) NOT NULL,
   `place` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -85,69 +85,8 @@ CREATE TABLE `map_code` (
 
 LOCK TABLES `map_code` WRITE;
 /*!40000 ALTER TABLE `map_code` DISABLE KEYS */;
-INSERT INTO `map_code` VALUES ('대한민국|Republic of Korea','kr',1,'locality:서울특별시|Seoul&political1:동작구|Dongjak-gu&political2:흑석동|Heukseok-dong','2017-05-06 00:16:38',NULL,NULL,'','','한국'),('대한민국|South Korea','kr',2,'locality:서울특별시|Seoul&political1:동작구|Dongjak-gu&political2:테스트|Heukseok-dong','2017-05-06 00:16:38',NULL,NULL,'test','','한국');
+INSERT INTO `map_code` VALUES ('대한민국|Republic of Korea','kr',1,'locality:서울특별시|Seoul&political1:동작구|Dongjak-gu&political2:흑석동|Heukseok-dong','2017-05-06 00:16:38',NULL,NULL,'','','한국'),('대한민국|Republic of Korea','kr',2,'locality:서울특별시|Seoul&political1:동작구|Dongjak-gu&political2:상도동|Sangdo-dong','2017-08-16 23:24:23',NULL,NULL,'','',NULL);
 /*!40000 ALTER TABLE `map_code` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `map_dmz_post`
---
-
-DROP TABLE IF EXISTS `map_dmz_post`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `map_dmz_post` (
-  `no` bigint(20) NOT NULL AUTO_INCREMENT,
-  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `dtim` datetime NOT NULL,
-  `utim` datetime NOT NULL,
-  `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `map_dmz_post`
---
-
-LOCK TABLES `map_dmz_post` WRITE;
-/*!40000 ALTER TABLE `map_dmz_post` DISABLE KEYS */;
-/*!40000 ALTER TABLE `map_dmz_post` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `map_dmz_reply`
---
-
-DROP TABLE IF EXISTS `map_dmz_reply`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `map_dmz_reply` (
-  `no` bigint(20) NOT NULL AUTO_INCREMENT,
-  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `utim` datetime DEFAULT NULL,
-  `dtim` datetime DEFAULT NULL,
-  `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `parent` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `map_dmz_reply`
---
-
-LOCK TABLES `map_dmz_reply` WRITE;
-/*!40000 ALTER TABLE `map_dmz_reply` DISABLE KEYS */;
-/*!40000 ALTER TABLE `map_dmz_reply` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -162,10 +101,12 @@ CREATE TABLE `map_kr1_post` (
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `dtim` datetime NOT NULL,
   `utim` datetime NOT NULL,
+  `dtim` datetime NOT NULL,
   `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hits` bigint(20) NOT NULL DEFAULT '0',
+  `reply` bigint(20) NOT NULL DEFAULT '0',
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -197,6 +138,7 @@ CREATE TABLE `map_kr1_reply` (
   `utim` datetime DEFAULT NULL,
   `dtim` datetime DEFAULT NULL,
   `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hits` bigint(20) NOT NULL DEFAULT '0',
   `parent` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -212,6 +154,70 @@ LOCK TABLES `map_kr1_reply` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `map_kr2_post`
+--
+
+DROP TABLE IF EXISTS `map_kr2_post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `map_kr2_post` (
+  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `utim` datetime NOT NULL,
+  `dtim` datetime NOT NULL,
+  `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hits` bigint(20) NOT NULL DEFAULT '0',
+  `reply` bigint(20) NOT NULL DEFAULT '0',
+  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `map_kr2_post`
+--
+
+LOCK TABLES `map_kr2_post` WRITE;
+/*!40000 ALTER TABLE `map_kr2_post` DISABLE KEYS */;
+/*!40000 ALTER TABLE `map_kr2_post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `map_kr2_reply`
+--
+
+DROP TABLE IF EXISTS `map_kr2_reply`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `map_kr2_reply` (
+  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `utim` datetime DEFAULT NULL,
+  `dtim` datetime DEFAULT NULL,
+  `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hits` bigint(20) NOT NULL DEFAULT '0',
+  `parent` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `map_kr2_reply`
+--
+
+LOCK TABLES `map_kr2_reply` WRITE;
+/*!40000 ALTER TABLE `map_kr2_reply` DISABLE KEYS */;
+/*!40000 ALTER TABLE `map_kr2_reply` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `map_notice`
 --
 
@@ -220,6 +226,7 @@ DROP TABLE IF EXISTS `map_notice`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_notice` (
   `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -230,7 +237,6 @@ CREATE TABLE `map_notice` (
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'free',
   `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`no`),
   KEY `no` (`no`),
   KEY `uid` (`uid`)
@@ -244,6 +250,71 @@ CREATE TABLE `map_notice` (
 LOCK TABLES `map_notice` WRITE;
 /*!40000 ALTER TABLE `map_notice` DISABLE KEYS */;
 /*!40000 ALTER TABLE `map_notice` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `map_sea_post`
+--
+
+DROP TABLE IF EXISTS `map_sea_post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `map_sea_post` (
+  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `utim` datetime NOT NULL,
+  `dtim` datetime NOT NULL,
+  `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hits` bigint(20) NOT NULL DEFAULT '0',
+  `reply` bigint(20) NOT NULL DEFAULT '0',
+  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `map_sea_post`
+--
+
+LOCK TABLES `map_sea_post` WRITE;
+/*!40000 ALTER TABLE `map_sea_post` DISABLE KEYS */;
+INSERT INTO `map_sea_post` VALUES (1,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first',''),(2,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first',''),(3,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first',''),(4,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first',''),(5,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first',''),(6,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first','');
+/*!40000 ALTER TABLE `map_sea_post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `map_sea_reply`
+--
+
+DROP TABLE IF EXISTS `map_sea_reply`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `map_sea_reply` (
+  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `utim` datetime DEFAULT NULL,
+  `dtim` datetime DEFAULT NULL,
+  `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hits` bigint(20) NOT NULL DEFAULT '0',
+  `parent` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `map_sea_reply`
+--
+
+LOCK TABLES `map_sea_reply` WRITE;
+/*!40000 ALTER TABLE `map_sea_reply` DISABLE KEYS */;
+/*!40000 ALTER TABLE `map_sea_reply` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -283,19 +354,16 @@ DROP TABLE IF EXISTS `map_total`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_total` (
-  `no` bigint(20) NOT NULL AUTO_INCREMENT,
-  `link` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `utim` datetime DEFAULT NULL,
-  `subject` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reply` bigint(20) NOT NULL DEFAULT '0',
   `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `map` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`no`),
-  KEY `link` (`link`(191)),
-  KEY `no` (`no`)
+  PRIMARY KEY (`link`),
+  KEY `link` (`link`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='전체 게시글 리스트';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -305,6 +373,7 @@ CREATE TABLE `map_total` (
 
 LOCK TABLES `map_total` WRITE;
 /*!40000 ALTER TABLE `map_total` DISABLE KEYS */;
+INSERT INTO `map_total` VALUES ('sea/1','test','2017-08-17 13:47:16',NULL,'Hello, World!',0,'test',NULL);
 /*!40000 ALTER TABLE `map_total` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,7 +442,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES ('test01','테스트',NULL,'JDJ5JDEyJFY1dUc2dzdWdG9YWHpqRjJ5L3Zad2VwYWlmNDM0N0JSREpHYnRqaGd3aUJacEFFWVhaUjlH',0,'kr1',0,'2017-02-16 18:53:33','2017-07-27 14:23:34',NULL,NULL,''),('test02','삭제테스트',NULL,'JDJ5JDEyJEgxcmE5bWc4Nk5kZy9vYWU2MjdWeGV0VEUxLnlkUTRMNEppSnNtYUh5VXlFMlhRdC9YejN5',0,NULL,0,'2017-03-23 02:24:00',NULL,NULL,NULL,''),('test03','ajax테스트',NULL,'JDJ5JDEyJFBqS3dUTi5CR1F5TWFFUTN1eUo2THVwUEJRaHpTTlJBWmFucVQzNGhUUE9LMTdac0hSb3Y2',0,NULL,0,'2017-03-23 15:30:42',NULL,NULL,NULL,'');
+INSERT INTO `user_info` VALUES ('test01','테스트',NULL,'JDJ5JDEyJFY1dUc2dzdWdG9YWHpqRjJ5L3Zad2VwYWlmNDM0N0JSREpHYnRqaGd3aUJacEFFWVhaUjlH',0,'kr1',0,'2017-02-16 18:53:33','2017-08-13 17:55:54',NULL,NULL,''),('test02','삭제테스트',NULL,'JDJ5JDEyJEgxcmE5bWc4Nk5kZy9vYWU2MjdWeGV0VEUxLnlkUTRMNEppSnNtYUh5VXlFMlhRdC9YejN5',0,NULL,0,'2017-03-23 02:24:00',NULL,NULL,NULL,''),('test03','ajax테스트',NULL,'JDJ5JDEyJFBqS3dUTi5CR1F5TWFFUTN1eUo2THVwUEJRaHpTTlJBWmFucVQzNGhUUE9LMTdac0hSb3Y2',0,NULL,0,'2017-03-23 15:30:42',NULL,NULL,NULL,'');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,7 +497,7 @@ CREATE TABLE `user_session` (
 
 LOCK TABLES `user_session` WRITE;
 /*!40000 ALTER TABLE `user_session` DISABLE KEYS */;
-INSERT INTO `user_session` VALUES ('cv19os4qmmd4qdrh8b4qdo16u2636ov5','127.0.0.1',1502564476,'__ci_last_regenerate|i:1502564408;admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;');
+INSERT INTO `user_session` VALUES ('bp4km66ie39t1pcv1uic6k58j10rcdai','127.0.0.1',1503418626,'__ci_last_regenerate|i:1503418557;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('jdj0gs3phohcm7u4bm8mto36cri7otqm','127.0.0.1',1503026021,'__ci_last_regenerate|i:1503025944;');
 /*!40000 ALTER TABLE `user_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,51 +534,28 @@ UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_map`(IN in_country varchar(100), in_code char(2), in_local varchar(200), in_pol1 varchar(400), in_pol2 varchar(400))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_map`(IN `in_country` VARCHAR(100), IN `in_code` CHAR(2), IN `in_local` VARCHAR(200), IN `in_pol1` VARCHAR(400), IN `in_pol2` VARCHAR(400))
 BEGIN
 
 DECLARE in_no bigint default 0;
-SELECT no into in_no FROM map_code WHERE code = in_code LIMIT 1;
+SELECT count(no) into in_no FROM map_code WHERE code = in_code;
 SET in_no = in_no + 1;
 
 
 
 INSERT INTO map_code (country, code, no, place) values(in_country, in_code, in_no, concat("locality:", in_local, "&political1:", in_pol1, "&political2:", in_pol2));
-SET @post = CONCAT('CREATE TABLE map_', in_code, in_no, '_post (
-	no      bigint not null auto_increment,
-	uid     varchar(100) not null,
-	country    varchar(100) not null,
-	ctim    datetime not null default current_timestamp,
-	utim    datetime not null,
-	dtim    datetime not null,
-	title   varchar(1000) not null,
-	content text not null,
-	type    varchar(20) not null,
-	tag     varchar(20) not null,
-	keyword varchar(400) not null,
-	PRIMARY KEY (no)
-)');
+SET @post = CONCAT('CREATE TABLE map_', in_code, in_no, '_post (\n\tno      bigint not null auto_increment,\n\tuid     varchar(100) not null,\n\tcountry    varchar(100) not null,\n\tctim    datetime not null default current_timestamp,\n\tutim    datetime not null,\n\tdtim    datetime not null,\n\ttitle   varchar(1000) not null,\n\tcontent text not null,\nhits bigint not null default 0,\nreply bigint not null default 0,\n\ttype    varchar(20) not null,\n\ttag     varchar(20) not null,\n\tkeyword varchar(400) not null,\n\tPRIMARY KEY (no)\n)');
 
 PREPARE stmt1 FROM @post;
 EXECUTE stmt1;
 
-SET @reply = CONCAT('CREATE TABLE map_', in_code,  in_no, '_reply(
-	no		bigint			not null auto_increment,
-	uid		varchar(100)	not null,
-	country	varchar(100)	not null,
-	ctim	datetime		not null default current_timestamp,
-	utim	datetime,
-	dtim	datetime,
-	content	varchar(2000)	not null,
-	parent	bigint,
-	PRIMARY KEY (no)
-)');
+SET @reply = CONCAT('CREATE TABLE map_', in_code,  in_no, '_reply(\n\tno\t\tbigint\t\t\tnot null auto_increment,\n\tuid\t\tvarchar(100)\tnot null,\n\tcountry\tvarchar(100)\tnot null,\n\tctim\tdatetime\t\tnot null default current_timestamp,\n\tutim\tdatetime,\n\tdtim\tdatetime,\n\tcontent\tvarchar(2000)\tnot null,\nhits bigint not null default 0,\n\tparent\tbigint,\n\tPRIMARY KEY (no)\n)');
 
 PREPARE stmt2 FROM @reply;
 EXECUTE stmt2;
@@ -563,4 +609,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-13  4:01:19
+-- Dump completed on 2017-08-23  1:17:08

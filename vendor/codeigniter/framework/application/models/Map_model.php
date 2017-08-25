@@ -27,7 +27,7 @@ class Map_model extends CI_Model {
  *        $find = $this->db->query($query);
  *
  *        if($find->num_rows() === 0 || $find->num_rows() > 1) {
- *            $data['map'] = 'dmz';
+ *            $data['map'] = 'sea';
  *
  *            return $data;
  *        }
@@ -160,8 +160,8 @@ class Map_model extends CI_Model {
 
 			."<tr>"
 			."<td>".date("Y-m-d", strtotime($row->ctim))."</td>"
-			."<td><div><a href='/{$map}/{$row->no}'>{$row->title}</a></div></td>"
-			."<td>[<a href='/{$map}/{$row->no}#reply'>{$row->reply}</a>]</td>"
+			."<td><div><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></div></td>"
+			."<td>[<a href='/{$map}/{$row->type}/{$row->no}#reply'>{$row->reply}</a>]</td>"
 			."</tr>"
 
 			."</table>";

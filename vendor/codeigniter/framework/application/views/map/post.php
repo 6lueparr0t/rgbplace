@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); $this->rgb->common();?>
 
-map/post/<?=$map?>/<?=$num?>
+map/post/<?=$map?>/<?=$type?>/<?=$num?>
+
 <br/>
 <br/>
 <br/>

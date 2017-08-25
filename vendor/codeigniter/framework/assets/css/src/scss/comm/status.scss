@@ -1,0 +1,89 @@
+@mixin status-arrow ($font, $color) {
+	position: relative;
+	font-size:1.5rem;
+	color:$font;
+	background: $color;
+	padding: .5rem .5rem;
+	text-align: center;
+	display: block;
+	margin:auto;
+	z-index:0;
+
+	@media screen and ($width-name : $target-width) {
+		font-size:1rem;
+	}
+
+	&:before {
+		content:"";
+		position: absolute;
+		border-top: 1.25rem solid $color;
+		border-left: 1.25rem solid transparent;
+		border-bottom: 1.25rem solid $color;
+		left:-1.25rem;
+		top: 0;
+		@media screen and ($width-name : $target-width) {
+			border-top: 1rem solid $color;
+			border-left: 1rem solid transparent;
+			border-bottom: 1rem solid $color;
+			left:-1rem;
+		}
+	}
+
+	&:after {
+		content:"";
+		position: absolute;
+		border-bottom: 1.25rem solid transparent;
+		border-left: 1.25rem solid $color;
+		border-top: 1.25rem solid transparent;
+		top: 0;
+		left:100%;
+		@media screen and ($width-name : $target-width) {
+			border-bottom: 1rem solid transparent;
+			border-left: 1rem solid $color;
+			border-top: 1rem solid transparent;
+		}
+	}
+}
+
+#status {
+	font-family: "pixel";
+	position: relative;
+	display:flex;
+	overflow:hidden;
+	top: 0rem;
+
+	a {
+		color : white;
+		flex:1;
+	}
+
+	.type {
+		@include status-arrow (transparent, transparent);
+		z-index:-1;
+	}
+
+	.type.black {
+		@include status-arrow (white, $oc-gray-9);
+	}
+
+	.type.gray {
+		@include status-arrow ($oc-gray-9, $oc-gray-2);
+	}
+
+	.type.yellow{
+		@include status-arrow ($oc-gray-7, $oc-yellow-4);
+	}
+
+	.type.lime {
+		@include status-arrow ($oc-gray-7, $oc-lime-4);
+	}                                               
+                                                    
+	.type.blue {                                    
+		@include status-arrow ($oc-gray-7, $oc-blue-4);
+	}                                               
+                                                    
+	.type.red {                                      
+		@include status-arrow ($oc-gray-7, $oc-red-6);
+	}
+
+}

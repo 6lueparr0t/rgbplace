@@ -58,35 +58,61 @@ $route['translate_uri_dashes'] = FALSE;
 | RGB place
 */
 
-$route['(sea)/(:num)'] = function ($map, $num) {
-	return 'map/post/' . strtolower($map) . '/' . $num;
+$route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(0)'] = function ($map, $type, $num) {
+	return 'map/list/' . $map . '/' . $type . '/' . $num;
 };
 
-$route['(sea)/edit'] = function ($map) {
-	return 'map/edit/' . strtolower($map);
+$route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
+	return 'map/post/' . $map . '/' . $type . '/' . $num;
+};
+
+$route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(0)/edit'] = function ($map, $type) {
+	return 'map/edit/' . $map . '/' . $type;
 };
 
 //post modify
-$route['(sea)/edit/(:num)'] = function ($map, $num) {
-	return 'map/edit/' . strtolower($map) . '/' . $num;
+$route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(:num)/edit'] = function ($map, $type, $num) {
+	return 'map/edit/' . $map . '/' . $type . '/' . $num;
 };
 
-$route['(sea)/delete/(:num)'] = function ($map, $num) {
-	return 'map/delete/' . strtolower($map) . '/' . $num;
+$route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(:num)/delete'] = function ($map, $type, $num) {
+	return 'map/delete/' . $map . '/' . $num;
 };
 
-$route['(sea)'] = function ($map) {
-	return 'map/page/' . strtolower($map);
-};
-
-$route['(sea)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
-	return 'map/page/' . strtolower($map) . '/' . $type . '/' . $num;
+$route['('.DEFAULT_MAP.')'] = function ($map) {
+	return 'map/page/' . $map;
 };
 
 
 // ====================  ====================  ====================  ====================
 
 
+$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(0)'] = function ($map, $type, $num) {
+	return 'map/list/' . $map . '/' . $type . '/' . $num;
+};
+
+$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
+	return 'map/post/' . $map . '/' . $type . '/' . $num;
+};
+
+$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(0)/edit'] = function ($map, $type) {
+	return 'map/edit/' . $map . '/' . $type;
+};
+
+//post modify
+$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)/edit'] = function ($map, $type, $num) {
+	return 'map/edit/' . $map . '/' . $type . '/' . $num;
+};
+
+$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)/delete'] = function ($map, $type, $num) {
+	return 'map/delete/' . $map . '/' . $num;
+};
+
+$route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {
+	return 'map/page/' . $map;
+};
+
+/*
 $route['([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
 	return 'map/post/' . strtolower($map) . '/' . $num;
 };
@@ -109,5 +135,6 @@ $route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {
 };
 
 $route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
-	return 'map/page/' . strtolower($map) . '/' . $type . '/' . $num;
+	return 'map/list/' . strtolower($map) . '/' . $type . '/' . $num;
 };
+ */
