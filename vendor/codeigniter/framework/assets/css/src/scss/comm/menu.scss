@@ -112,11 +112,8 @@
       & ~ .close {
         display:initial;
         position:absolute;
-        left:75%;
-
-        @media screen and ($width-name : $target-width) {
-          left:70%;
-        }
+		float: right;
+		margin-left:.5rem;
       }
 
       &:checked ~ .close {
@@ -126,11 +123,8 @@
       &:checked ~ .open {
         display:initial;
         position:absolute;
-        left:75%;
-
-        @media screen and ($width-name : $target-width) {
-          left:70%;
-        }
+		float: right;
+		margin-left:.5rem;
       }
 
       &:checked ~ ul {

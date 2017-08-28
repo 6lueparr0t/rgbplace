@@ -2799,19 +2799,15 @@ a {
       #menu label input[type='checkbox'] ~ .close, #menu a input[type='checkbox'] ~ .close {
         display: initial;
         position: absolute;
-        left: 75%; }
-        @media screen and (max-width: 860px) {
-          #menu label input[type='checkbox'] ~ .close, #menu a input[type='checkbox'] ~ .close {
-            left: 70%; } }
+        float: right;
+        margin-left: .5rem; }
       #menu label input[type='checkbox']:checked ~ .close, #menu a input[type='checkbox']:checked ~ .close {
         display: none; }
       #menu label input[type='checkbox']:checked ~ .open, #menu a input[type='checkbox']:checked ~ .open {
         display: initial;
         position: absolute;
-        left: 75%; }
-        @media screen and (max-width: 860px) {
-          #menu label input[type='checkbox']:checked ~ .open, #menu a input[type='checkbox']:checked ~ .open {
-            left: 70%; } }
+        float: right;
+        margin-left: .5rem; }
       #menu label input[type='checkbox']:checked ~ ul, #menu a input[type='checkbox']:checked ~ ul {
         left: 0;
         padding: 0;
@@ -2967,11 +2963,11 @@ a {
   background: linear-gradient(317.5deg, #4dadf7 3%, #495057 3%);
   color: #4dadf7; }
 
-#page #ad {
+#page #adad {
   background: linear-gradient(317.5deg, #fa5252 3%, #495057 3%);
   color: #fa5252; }
 
-#page #hobby {
+#page #game {
   background: linear-gradient(317.5deg, #b197fc 3%, #495057 3%);
   color: #b197fc; }
 
@@ -2979,7 +2975,7 @@ a {
   background: linear-gradient(317.5deg, #f783ac 3%, #495057 3%);
   color: #f783ac; }
 
-#page #work {
+#page #dev {
   background: linear-gradient(317.5deg, #66d9e8 3%, #495057 3%);
   color: #66d9e8; }
 
@@ -2996,10 +2992,10 @@ a {
     transform: translate(-125%, 10%); }
   #menu-map .fa.fa-caret-up {
     top: 1rem !important;
-    left: 93% !important; }
+    margin: 0 !important; }
   #menu-map .fa.fa-caret-down {
     top: 1rem !important;
-    left: 93% !important; }
+    margin: 0 !important; }
 
 #map-result {
   padding: 0 !important;

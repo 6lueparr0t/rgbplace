@@ -122,12 +122,12 @@
 		color      : $oc-blue-4;
 	}
 
-	& #ad {
+	& #adad {
 		background : linear-gradient(317.5deg, $oc-red-6 3%, $oc-gray-7 3%);
 		color      : $oc-red-6;
 	}
 
-	& #hobby {
+	& #game {
 		background : linear-gradient(317.5deg, $oc-violet-3 3%, $oc-gray-7 3%);
 		color      : $oc-violet-3;
 	}
@@ -137,8 +137,23 @@
 		color      : $oc-pink-4;
 	}
 
-	& #work {
+	& #dev {
 		background : linear-gradient(317.5deg, $oc-cyan-3 3%, $oc-gray-7 3%);
 		color      : $oc-cyan-3;
 	}
+
+//	& #travel {
+//		background : linear-gradient(317.5deg, $oc-violet-3 3%, $oc-gray-7 3%);
+//		color      : $oc-violet-3;
+//	}
+//
+//	& #art {
+//		background : linear-gradient(317.5deg, $oc-pink-4 3%, $oc-gray-7 3%);
+//		color      : $oc-pink-4;
+//	}
+//
+//	& #horror {
+//		background : linear-gradient(317.5deg, $oc-cyan-3 3%, $oc-gray-7 3%);
+//		color      : $oc-cyan-3;
+//	}
 }

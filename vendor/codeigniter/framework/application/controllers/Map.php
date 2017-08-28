@@ -27,45 +27,44 @@ class Map extends CI_Controller {
 
 	public function page($map)
 	{
-		//echo "{$map}";
-		$data['map']  = strtolower($map);
+		$data['map' ] = strtolower($map);
 
 		$this->rgb->view("map/page", $data);
 	}
 
 	public function list($map, $type = "free" , $num = 0)
 	{
-		//echo "{$map}";
-		$data['map']  = strtolower($map);
+		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
-		$data['num']  = $num;
+		$data['num' ] = $num;
 
 		$this->rgb->view("map/list", $data);
 	}
 
 	public function post($map, $type, $num = 0)
 	{
-		//echo "{$map}, {$num}";
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
+
 		$this->rgb->view("map/post", $data);
 	}
 
 	public function edit($map, $type, $num = 0)
 	{
-		//echo "{$map}";
-		$data['map'] = strtolower($map);
+		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
-		$data['num'] = $num;
+		$data['num' ] = $num;
+
 		$this->rgb->view("map/edit", $data);
 	}
 
 	public function delete($map, $type, $num = 0)
 	{
-		$data['map'] = strtolower($map);
+		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
-		$data['num'] = $num;
+		$data['num' ] = $num;
+
 		$this->rgb->view("map/delete", $data);
 	}
 
