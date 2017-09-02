@@ -102,12 +102,7 @@
 		color      : $oc-yellow-4;
 	}
 
-	& #info {
-		background : linear-gradient(317.5deg, $oc-gray-9 3%, white 3%);
-		color      : $oc-gray-9;
-	}
-
-	& #free {
+	& #info, & #free {
 		background : linear-gradient(317.5deg, $oc-gray-9 3%, white 3%);
 		color      : $oc-gray-9;
 	}
@@ -122,14 +117,14 @@
 		color      : $oc-blue-4;
 	}
 
-	& #adad {
+	& #_ad_ {
 		background : linear-gradient(317.5deg, $oc-red-6 3%, $oc-gray-7 3%);
 		color      : $oc-red-6;
 	}
 
-	& #game {
-		background : linear-gradient(317.5deg, $oc-violet-3 3%, $oc-gray-7 3%);
-		color      : $oc-violet-3;
+	& #food {
+		background : linear-gradient(317.5deg, $oc-orange-5 3%, $oc-gray-7 3%);
+		color      : $oc-orange-5;
 	}
 
 	& #life {

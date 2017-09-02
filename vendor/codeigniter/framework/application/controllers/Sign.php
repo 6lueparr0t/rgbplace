@@ -48,7 +48,8 @@ class Sign extends CI_Controller {
 
 				} elseif (strpos($data['uid'], "@") !== false && $this->sign->adminCheck($data) === false) {
 					$result = $this->sign->failCount($data);
-					$output['msg'] = "로그인에 실패하였습니다.\n\n {$result['atim']}, {$result['fail']}/5번 실패";
+					//$output['msg'] = "로그인에 실패하였습니다.\n\n {$result['atim']}, {$result['fail']}/5번 실패";
+					$output['msg'] = "로그인에 실패하였습니다.";
 
 				} else {
 					$output['valid'] = true;

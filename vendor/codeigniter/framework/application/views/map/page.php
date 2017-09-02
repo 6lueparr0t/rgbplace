@@ -9,7 +9,7 @@
   <div class='type'> <!-- type start -->
 <?
 
-$type = ['best', 'free', 'info', 'photo', 'news', 'adad', 'game', 'life', 'dev'];
+$type = ['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', '_ad_'];
 
 echo "<div class='type-row'>";
 for($i=0; $i<count($type); $i++) {
@@ -21,11 +21,11 @@ for($i=0; $i<count($type); $i++) {
 
 	echo ("
 	 <div class='type-col'>
-		<a href='{$map}/{$type[$i]}/0'><span id='{$type[$i]}'>".strtoupper($type[$i])."</span></a>
+		<a href='{$map}/{$type[$i]}/list'><span id='{$type[$i]}'>".strtoupper($type[$i])."</span></a>
 		<div class='type-list'>
 	");
 
-	$this->map->page_list($map, $type[$i], 9);
+	$this->map->page($map, $type[$i], 9);
 
 	echo ("
 	    </div>

@@ -205,22 +205,33 @@ class RGBplace {
 		//if($this->CI->session->has_userdata('tab1') === false) $this->CI->session->set_userdata('tab1');
 
 		$tab1 = $this->CI->uri->segment(1, "#");
-		$tab2 = $this->CI->uri->segment(2, "#");
+
+		$tab2 = $this->CI->uri->segment(2, "none");
+		$tab2_text = ($tab2=="none")?"#":$tab2;
+
 		$tab3 = $this->CI->uri->segment(3, "#");
+		if($tab3=="list" || $tab3=="#") {
+			$tab3_class = "none";
+			$tab3_text = "#";
+		} else {
+			$tab3_class = "num";
+			$tab3_text = $tab3;
+		}
+
 		$tab4 = $this->CI->uri->segment(4, "#");
 		
 		echo ("
         <div id='status'>
-          <a class='type black' href='/{$tab1}'>
+          <a class='type' href='/{$tab1}'>
             <span>{$tab1}</span>
           </a>
-          <a class='type yellow' href='/{$tab1}/{$tab2}/0'>
-            <span>{$tab2}</span>
+          <a class='type {$tab2}' href='/{$tab1}/{$tab2}/list'>
+            <span>{$tab2_text}</span>
           </a>
-          <a class='type gray' href='/{$tab1}/{$tab2}/{$tab3}'>
-            <span>{$tab3}</span>
+          <a class='type {$tab2} {$tab3_class}' href='/{$tab1}/{$tab2}/{$tab3}'>
+            <span>{$tab3_text}</span>
           </a>
-          <a class='type gray' href='#'>
+          <a class='type none' href='/{$tab1}/{$tab2}/{$tab3}/{$tab4}'>
             <span>{$tab4}</span>
           </a>
         </div>

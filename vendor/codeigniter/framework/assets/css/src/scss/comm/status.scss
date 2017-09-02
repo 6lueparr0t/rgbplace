@@ -58,32 +58,117 @@
 	}
 
 	.type {
-		@include status-arrow (transparent, transparent);
+		@include status-arrow (white, $oc-gray-9);
+		//@include status-arrow (transparent, transparent);
+	}
+
+	.type.none {
+		@include status-arrow ($oc-gray-9, $oc-gray-2);
 		z-index:-1;
 	}
 
-	.type.black {
-		@include status-arrow (white, $oc-gray-9);
-	}
+	.type.free, .type.info {
+		@include status-arrow (white, $oc-gray-7);
 
-	.type.gray {
+		&.none {
 		@include status-arrow ($oc-gray-9, $oc-gray-2);
+			z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow (white, $oc-gray-5);
+		}
 	}
 
-	.type.yellow{
+	.type.best{
 		@include status-arrow ($oc-gray-7, $oc-yellow-4);
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-yellow-2);
+		}
 	}
 
-	.type.lime {
+	.type.photo {
 		@include status-arrow ($oc-gray-7, $oc-lime-4);
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-lime-2);
+		}
 	}                                               
                                                     
-	.type.blue {                                    
+	.type.news {                                    
 		@include status-arrow ($oc-gray-7, $oc-blue-4);
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-blue-2);
+		}
 	}                                               
                                                     
-	.type.red {                                      
+	.type._ad_ {                                      
 		@include status-arrow ($oc-gray-7, $oc-red-6);
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-red-4);
+		}
+	}
+
+	.type.food {                                      
+		@include status-arrow ($oc-gray-7, $oc-orange-5);
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-orange-3);
+		}
+	}
+
+	.type.life {                                      
+		@include status-arrow ($oc-gray-7, $oc-pink-4);
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-pink-2);
+		}
+	}
+
+	.type.dev {                                      
+		@include status-arrow ($oc-gray-7, $oc-cyan-3);
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-cyan-1);
+		}
 	}
 
 }

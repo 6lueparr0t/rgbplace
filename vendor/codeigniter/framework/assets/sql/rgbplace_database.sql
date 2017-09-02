@@ -53,7 +53,7 @@ CREATE TABLE `admin_info` (
 
 LOCK TABLES `admin_info` WRITE;
 /*!40000 ALTER TABLE `admin_info` DISABLE KEYS */;
-INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-08-23 01:11:26','JDJ5JDEwJE5rcHV5S0IxbmpCR1lkN3pIMFA3Y3UxcnRzVTNYZ0dPbndnM2ZUZmxsUVJsMkwwdzNEakVt','2017-08-23 13:15:57');
+INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-09-02 23:10:41','JDJ5JDEwJG1QTHVNamZ6N0d3ajZyVFdvSDdpY3VsSnN5VkJ4ek9DSGFTdG11amx4S3RTTklLcDlFOEdD','2017-09-03 01:59:24');
 /*!40000 ALTER TABLE `admin_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,8 +105,9 @@ CREATE TABLE `map_kr1_post` (
   `dtim` datetime NOT NULL,
   `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` bigint(20) NOT NULL DEFAULT '0',
   `reply` bigint(20) NOT NULL DEFAULT '0',
+  `hits` bigint(20) NOT NULL DEFAULT '0',
+  `vote` bigint(20) NOT NULL DEFAULT '0',
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -138,7 +139,7 @@ CREATE TABLE `map_kr1_reply` (
   `utim` datetime DEFAULT NULL,
   `dtim` datetime DEFAULT NULL,
   `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` bigint(20) NOT NULL DEFAULT '0',
+  `vote` bigint(20) NOT NULL DEFAULT '0',
   `parent` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -169,8 +170,9 @@ CREATE TABLE `map_kr2_post` (
   `dtim` datetime NOT NULL,
   `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` bigint(20) NOT NULL DEFAULT '0',
   `reply` bigint(20) NOT NULL DEFAULT '0',
+  `hits` bigint(20) NOT NULL DEFAULT '0',
+  `vote` bigint(20) NOT NULL DEFAULT '0',
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -202,7 +204,7 @@ CREATE TABLE `map_kr2_reply` (
   `utim` datetime DEFAULT NULL,
   `dtim` datetime DEFAULT NULL,
   `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` bigint(20) NOT NULL DEFAULT '0',
+  `vote` bigint(20) NOT NULL DEFAULT '0',
   `parent` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -253,13 +255,13 @@ LOCK TABLES `map_notice` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `map_sea_post`
+-- Table structure for table `map_space_post`
 --
 
-DROP TABLE IF EXISTS `map_sea_post`;
+DROP TABLE IF EXISTS `map_space_post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `map_sea_post` (
+CREATE TABLE `map_space_post` (
   `no` bigint(20) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -269,6 +271,7 @@ CREATE TABLE `map_sea_post` (
   `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `hits` bigint(20) NOT NULL DEFAULT '0',
+  `vote` bigint(20) NOT NULL DEFAULT '0',
   `reply` bigint(20) NOT NULL DEFAULT '0',
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -278,23 +281,23 @@ CREATE TABLE `map_sea_post` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `map_sea_post`
+-- Dumping data for table `map_space_post`
 --
 
-LOCK TABLES `map_sea_post` WRITE;
-/*!40000 ALTER TABLE `map_sea_post` DISABLE KEYS */;
-INSERT INTO `map_sea_post` VALUES (1,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first',''),(2,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first',''),(3,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first',''),(4,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first',''),(5,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first',''),(6,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,'best','first','');
-/*!40000 ALTER TABLE `map_sea_post` ENABLE KEYS */;
+LOCK TABLES `map_space_post` WRITE;
+/*!40000 ALTER TABLE `map_space_post` DISABLE KEYS */;
+INSERT INTO `map_space_post` VALUES (1,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(2,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(3,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(4,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(5,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(6,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first','');
+/*!40000 ALTER TABLE `map_space_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `map_sea_reply`
+-- Table structure for table `map_space_reply`
 --
 
-DROP TABLE IF EXISTS `map_sea_reply`;
+DROP TABLE IF EXISTS `map_space_reply`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `map_sea_reply` (
+CREATE TABLE `map_space_reply` (
   `no` bigint(20) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -302,19 +305,19 @@ CREATE TABLE `map_sea_reply` (
   `utim` datetime DEFAULT NULL,
   `dtim` datetime DEFAULT NULL,
   `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` bigint(20) NOT NULL DEFAULT '0',
+  `vote` bigint(20) NOT NULL DEFAULT '0',
   `parent` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `map_sea_reply`
+-- Dumping data for table `map_space_reply`
 --
 
-LOCK TABLES `map_sea_reply` WRITE;
-/*!40000 ALTER TABLE `map_sea_reply` DISABLE KEYS */;
-/*!40000 ALTER TABLE `map_sea_reply` ENABLE KEYS */;
+LOCK TABLES `map_space_reply` WRITE;
+/*!40000 ALTER TABLE `map_space_reply` DISABLE KEYS */;
+/*!40000 ALTER TABLE `map_space_reply` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -373,7 +376,7 @@ CREATE TABLE `map_total` (
 
 LOCK TABLES `map_total` WRITE;
 /*!40000 ALTER TABLE `map_total` DISABLE KEYS */;
-INSERT INTO `map_total` VALUES ('sea/1','test','2017-08-17 13:47:16',NULL,'Hello, World!',0,'test',NULL);
+INSERT INTO `map_total` VALUES ('space/1','test','2017-08-17 13:47:16',NULL,'Hello, World!',0,'test',NULL);
 /*!40000 ALTER TABLE `map_total` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +445,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES ('test01','테스트',NULL,'JDJ5JDEyJFY1dUc2dzdWdG9YWHpqRjJ5L3Zad2VwYWlmNDM0N0JSREpHYnRqaGd3aUJacEFFWVhaUjlH',0,'kr1',0,'2017-02-16 18:53:33','2017-08-13 17:55:54',NULL,NULL,''),('test02','삭제테스트',NULL,'JDJ5JDEyJEgxcmE5bWc4Nk5kZy9vYWU2MjdWeGV0VEUxLnlkUTRMNEppSnNtYUh5VXlFMlhRdC9YejN5',0,NULL,0,'2017-03-23 02:24:00',NULL,NULL,NULL,''),('test03','ajax테스트',NULL,'JDJ5JDEyJFBqS3dUTi5CR1F5TWFFUTN1eUo2THVwUEJRaHpTTlJBWmFucVQzNGhUUE9LMTdac0hSb3Y2',0,NULL,0,'2017-03-23 15:30:42',NULL,NULL,NULL,'');
+INSERT INTO `user_info` VALUES ('test01','테스트',NULL,'JDJ5JDEyJFY1dUc2dzdWdG9YWHpqRjJ5L3Zad2VwYWlmNDM0N0JSREpHYnRqaGd3aUJacEFFWVhaUjlH',0,'kr1',0,'2017-02-16 18:53:33','2017-09-02 13:59:02',NULL,NULL,''),('test02','삭제테스트',NULL,'JDJ5JDEyJEgxcmE5bWc4Nk5kZy9vYWU2MjdWeGV0VEUxLnlkUTRMNEppSnNtYUh5VXlFMlhRdC9YejN5',0,NULL,0,'2017-03-23 02:24:00',NULL,NULL,NULL,''),('test03','ajax테스트',NULL,'JDJ5JDEyJFBqS3dUTi5CR1F5TWFFUTN1eUo2THVwUEJRaHpTTlJBWmFucVQzNGhUUE9LMTdac0hSb3Y2',0,NULL,0,'2017-03-23 15:30:42',NULL,NULL,NULL,'');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -497,7 +500,7 @@ CREATE TABLE `user_session` (
 
 LOCK TABLES `user_session` WRITE;
 /*!40000 ALTER TABLE `user_session` DISABLE KEYS */;
-INSERT INTO `user_session` VALUES ('bp4km66ie39t1pcv1uic6k58j10rcdai','127.0.0.1',1503418626,'__ci_last_regenerate|i:1503418557;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('jdj0gs3phohcm7u4bm8mto36cri7otqm','127.0.0.1',1503026021,'__ci_last_regenerate|i:1503025944;');
+INSERT INTO `user_session` VALUES ('3fl4v75f464nk0p4oalncudeuifjh18p','192.168.219.104',1504328370,'__ci_last_regenerate|i:1504328237;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('4clpd3l9fukkolh3nbfpkuv8kv9m43vo','127.0.0.1',1504361446,'__ci_last_regenerate|i:1504361435;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;');
 /*!40000 ALTER TABLE `user_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -550,12 +553,12 @@ SET in_no = in_no + 1;
 
 
 INSERT INTO map_code (country, code, no, place) values(in_country, in_code, in_no, concat("locality:", in_local, "&political1:", in_pol1, "&political2:", in_pol2));
-SET @post = CONCAT('CREATE TABLE map_', in_code, in_no, '_post (\n\tno      bigint not null auto_increment,\n\tuid     varchar(100) not null,\n\tcountry    varchar(100) not null,\n\tctim    datetime not null default current_timestamp,\n\tutim    datetime not null,\n\tdtim    datetime not null,\n\ttitle   varchar(1000) not null,\n\tcontent text not null,\nhits bigint not null default 0,\nreply bigint not null default 0,\n\ttype    varchar(20) not null,\n\ttag     varchar(20) not null,\n\tkeyword varchar(400) not null,\n\tPRIMARY KEY (no)\n)');
+SET @post = CONCAT('CREATE TABLE map_', in_code, in_no, '_post (\n\tno      bigint not null auto_increment,\n\tuid     varchar(100) not null,\n\tcountry    varchar(100) not null,\n\tctim    datetime not null default current_timestamp,\n\tutim    datetime not null,\n\tdtim    datetime not null,\n\ttitle   varchar(1000) not null,\n\tcontent text not null,\n\treply bigint not null default 0,\n\thits bigint not null default 0,\n\tvote bigint not null default 0,\n\ttype    varchar(20) not null,\n\ttag     varchar(20) not null,\n\tkeyword varchar(400) not null,\n\tPRIMARY KEY (no)\n)');
 
 PREPARE stmt1 FROM @post;
 EXECUTE stmt1;
 
-SET @reply = CONCAT('CREATE TABLE map_', in_code,  in_no, '_reply(\n\tno\t\tbigint\t\t\tnot null auto_increment,\n\tuid\t\tvarchar(100)\tnot null,\n\tcountry\tvarchar(100)\tnot null,\n\tctim\tdatetime\t\tnot null default current_timestamp,\n\tutim\tdatetime,\n\tdtim\tdatetime,\n\tcontent\tvarchar(2000)\tnot null,\nhits bigint not null default 0,\n\tparent\tbigint,\n\tPRIMARY KEY (no)\n)');
+SET @reply = CONCAT('CREATE TABLE map_', in_code,  in_no, '_reply(\n\tno\t\tbigint\t\t\tnot null auto_increment,\n\tuid\t\tvarchar(100)\tnot null,\n\tcountry\tvarchar(100)\tnot null,\n\tctim\tdatetime\t\tnot null default current_timestamp,\n\tutim\tdatetime,\n\tdtim\tdatetime,\n\tcontent\tvarchar(2000)\tnot null,\nvote bigint not null default 0,\n\tparent\tbigint,\n\tPRIMARY KEY (no)\n)');
 
 PREPARE stmt2 FROM @reply;
 EXECUTE stmt2;
@@ -609,4 +612,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-23  1:17:08
+-- Dump completed on 2017-09-02 23:10:53

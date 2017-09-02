@@ -32,11 +32,15 @@ class Map extends CI_Controller {
 		$this->rgb->view("map/page", $data);
 	}
 
-	public function list($map, $type = "free" , $num = 0)
+	public function list($map, $type)
 	{
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
-		$data['num' ] = $num;
+
+		$data['search']['page'   ] = urldecode($this->input->get('page'));
+		$data['search']['method' ] = urldecode($this->input->get('method'));
+		$data['search']['keyword'] = urldecode($this->input->get('keyword'));
+		$data['search']['date'   ] = urldecode($this->input->get('date'));
 
 		$this->rgb->view("map/list", $data);
 	}

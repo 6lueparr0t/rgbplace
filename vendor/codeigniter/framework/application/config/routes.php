@@ -58,8 +58,8 @@ $route['translate_uri_dashes'] = FALSE;
 | RGB place
 */
 
-$route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(0)'] = function ($map, $type, $num) {
-	return 'map/list/' . $map . '/' . $type . '/' . $num;
+$route['('.DEFAULT_MAP.')/([a-zA-Z]+)/list'] = function ($map, $type) {
+	return 'map/list/' . $map . '/' . $type;
 };
 
 $route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
@@ -87,8 +87,8 @@ $route['('.DEFAULT_MAP.')'] = function ($map) {
 // ====================  ====================  ====================  ====================
 
 
-$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(0)'] = function ($map, $type, $num) {
-	return 'map/list/' . $map . '/' . $type . '/' . $num;
+$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/list'] = function ($map, $type) {
+	return 'map/list/' . $map . '/' . $type;
 };
 
 $route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
@@ -111,30 +111,3 @@ $route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)/delete'] = function ($map, $type,
 $route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {
 	return 'map/page/' . $map;
 };
-
-/*
-$route['([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
-	return 'map/post/' . strtolower($map) . '/' . $num;
-};
-
-$route['([a-zA-Z]{2}[0-9]+)/(edit)'] = function ($map) {
-	return 'map/edit/' . strtolower($map);
-};
-
-//post modify
-$route['([a-zA-Z]{2}[0-9]+)/edit/(:num)'] = function ($map, $num) {
-	return 'map/edit/' . strtolower($map) . '/' . $num;
-};
-
-$route['([a-zA-Z]{2}[0-9]+)/delete/(:num)'] = function ($map, $num) {
-	return 'map/delete/' . strtolower($map) . '/' . $num;
-};
-
-$route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {
-	return 'map/page/' . strtolower($map);
-};
-
-$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
-	return 'map/list/' . strtolower($map) . '/' . $type . '/' . $num;
-};
- */
