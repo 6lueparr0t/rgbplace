@@ -32,6 +32,15 @@ class Map extends CI_Controller {
 		$this->rgb->view("map/page", $data);
 	}
 
+	public function link($map, $num)
+	{
+		$map  = strtolower($map);
+		$type = $this->map->link($map, $num);
+		$num  = $num;
+
+		redirect("/{$map}/{$type}/{$num}");
+	}
+
 	public function list($map, $type)
 	{
 		$data['map' ] = strtolower($map);

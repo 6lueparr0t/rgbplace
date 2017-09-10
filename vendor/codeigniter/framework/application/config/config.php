@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 #$config['base_url'] = 'http://rgbplace.gonetis.com:50380';
-#$config['base_url'] = 'http://192.168.219.200:50380';
+#$config['base_url'] = 'http://192.168.219.100:50380';
 #$config['base_url'] = 'http://192.168.1.3:50380';
 $config['base_url'] = '';
 
@@ -389,7 +389,7 @@ $config['sess_save_path'] = 'user_session';
 #$config['sess_save_path'] = sys_get_temp_dir();
 $config['sess_match_ip'] = TRUE;
 $config['sess_time_to_update'] = 300;
-$config['sess_regenerate_destroy'] = TRUE;
+$config['sess_regenerate_destroy'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

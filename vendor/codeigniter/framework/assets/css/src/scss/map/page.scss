@@ -5,9 +5,9 @@
 		margin  : 3rem 1rem 1rem 1rem;
 
 		& img {
-		    display: table;
-		    margin: auto;
-		    height: 400px;
+			display: table;
+			margin: auto;
+			height: 400px;
 
 			@media screen and ($width-name : $target-width) {
 				display: table;
@@ -64,9 +64,9 @@
 					& .results {
 						display : block;
 						margin  : .5rem 1rem;
-					    width   : 95%;
+						width   : 90%;
 
-						& tbody tr {
+						& tr {
 							& td:nth-child(1) {
 								font-size: 0.5rem;
 								width: 4rem;
@@ -137,18 +137,19 @@
 		color      : $oc-cyan-3;
 	}
 
-//	& #travel {
-//		background : linear-gradient(317.5deg, $oc-violet-3 3%, $oc-gray-7 3%);
-//		color      : $oc-violet-3;
-//	}
-//
-//	& #art {
-//		background : linear-gradient(317.5deg, $oc-pink-4 3%, $oc-gray-7 3%);
-//		color      : $oc-pink-4;
-//	}
-//
-//	& #horror {
-//		background : linear-gradient(317.5deg, $oc-cyan-3 3%, $oc-gray-7 3%);
-//		color      : $oc-cyan-3;
-//	}
+	//	& #travel {
+	//		background : linear-gradient(317.5deg, $oc-violet-3 3%, $oc-gray-7 3%);
+	//		color      : $oc-violet-3;
+	//	}
+	//
+	//	& #art {
+	//		background : linear-gradient(317.5deg, $oc-pink-4 3%, $oc-gray-7 3%);
+	//		color      : $oc-pink-4;
+	//	}
+	//
+	//	& #horror {
+	//		background : linear-gradient(317.5deg, $oc-cyan-3 3%, $oc-gray-7 3%);
+	//		color      : $oc-cyan-3;
+	//	}
 }
+

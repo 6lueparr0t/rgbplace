@@ -2,70 +2,23 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Map_model extends CI_Model {
 
-	public function total_best($limit)
-	{
-		$data = [];
+	public function link ($map, $num) {
+		$data = "";
 
-		$query = "SELECT * FROM map_total ORDER BY ctim desc LIMIT {$limit}";
+		$where = "no={$num}";
+
+		$query = "SELECT type FROM map_{$map}_post where {$where}";
 		$find = $this->db->query($query);
 
-		if($find->num_rows() === 0) {
-			echo "<table class='no-results'><tr><td>No Results.</td></tr></table>";
-
-			return false;
+		if($find->num_rows() === 0 || $find->num_rows() >= 2) {
+			return null;
 		}
 
 		foreach ($find->result() as $key => $row) {
-			echo "<table class='results'>"
-
-			."<tr>"
-			."<td>".date("Y-m-d", strtotime($row->ctim))."</td>"
-			."<td><div><a href='/{$row->link}'>{$row->title}</a></div></td>"
-			."<td>[<a href='/{$row->link}#reply'>{$row->reply}</a>]</div></td>"
-			."</tr>"
-
-			."</table>";
+			$data = $row->type;
 		}
 
-		return true;
-	}
-
-	public function list ($map, $type, $limit, $search = null)
-	{
-		$data = [];
-
-		//array_key_exists('', $search);
-		$where = "type='{$type}'";
-
-		$query = "SELECT * FROM map_{$map}_post where {$where} ORDER BY no desc LIMIT {$limit}";
-		$find = $this->db->query($query);
-
-		if($find->num_rows() === 0) {
-			echo "<table class='no-results'><tr><td>No Results.</td></tr></table>";
-
-			return false;
-		}
-
-		foreach ($find->result() as $key => $row) {
-
-			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
-
-			echo "<table class='results'>"
-
-			."<tr>"
-			."<td>{$row->no}</td>"
-			."<td><div><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></div></td>"
-			."<td>{$row->reply}</td>"
-			."<td>{$row->hits}</td>"
-			."<td>{$row->name}</td>"
-			."<td>".$date."</td>"
-			."</tr>"
-
-			."</table>";
-
-		}
-
-		return true;
+		return $data;
 	}
 
 	public function page($map, $type, $limit)
@@ -81,21 +34,58 @@ class Map_model extends CI_Model {
 			return false;
 		}
 
+		echo "<table class='results'>";
 		foreach ($find->result() as $key => $row) {
-			echo "<table class='results'>"
-
-			."<tr>"
-			."<td>".date("Y-m-d", strtotime($row->ctim))."</td>"
-			."<td><div><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></div></td>"
-			."<td>[<a href='/{$map}/{$row->type}/{$row->no}#reply'>{$row->reply}</a>]</td>"
-			."</tr>"
-
-			."</table>";
+			echo "<tr>"
+				."<td class='date'>".date("Y-m-d", strtotime($row->ctim))."</td>"
+				."<td class='title'><div><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></div></td>"
+				."<td class='reply'>[<a href='/{$map}/{$row->type}/{$row->no}#reply'>{$row->reply}</a>]</td>"
+			."</tr>";
 
 			//$data['title'][$key]   = $row->title;
 			//$data['content'][$key] = $row->content;
 			//$data['ctim'][$key]    = $row->ctim;
 		}
+		echo "</table>";
+
+		return true;
+	}
+
+	public function list ($map, $type, $limit, $search = null)
+	{
+		$data = [];
+
+		//array_key_exists('', $search);
+		
+		$where = "type='{$type}'";
+		//$limit = ($limit_end)?"{$limit_start}, {$limit_end}":"{$limit_start}";
+
+		$query = "SELECT * FROM map_{$map}_post where {$where} ORDER BY no desc LIMIT {$limit}";
+		$find = $this->db->query($query);
+
+		if($find->num_rows() === 0) {
+			echo "<div class='no-list'>No List.</div>";
+
+			return false;
+		}
+
+		echo "<table class='results'>";
+		foreach ($find->result() as $key => $row) {
+			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
+
+			echo "<tr>"
+				."<td class='no'>{$row->no}</td>"
+				."<td class='title'><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></td>"
+				."<td class='reply'>{$row->reply}</td>"
+				."<td class='hit'>{$row->hit}</td>"
+				."<td class='name'>{$row->name}</td>"
+				."<td class='date'>".$date."</td>"
+			."</tr>";
+		}
+		echo "</table>";
+
+		// pagination
+		// count($find->result());
 
 		return true;
 	}
@@ -104,41 +94,82 @@ class Map_model extends CI_Model {
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_{$map}_post where no={$num}";
+		$query = "SELECT * FROM map_{$map}_post where no={$num} and dtim is null";
 		$find = $this->db->query($query);
 
-		if($find->num_rows() === 0 && $find->num_rows() >= 2) {
-			redirect($this->input->server('http_referer'));
+		if($find->num_rows() === 0 || $find->num_rows() >= 2) {
+			echo "<div class='no-post'>No Post.</div>";
 
 			return false;
 		}
 
+		echo "<table class='results'>";
 		foreach ($find->result() as $key => $row) {
-
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 
-			echo "<table class='results'>"
-
-			."<tr>"
-			."<td>{$row->no}</td>"
-			."<td colspan='4'><div><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></div></td>"
+			echo "<tr>"
+				."<td class='no' >{$row->no}</td>"
+				."<td class='title'><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></td>"
 			."</tr>"
 
 			."<tr>"
-			."<td>{$row->reply}</td>"
-			."<td>{$row->hits}</td>"
-			."<td>{$row->vote}</td>"
-			."<td>{$row->name}</td>"
-			."<td>".$date."</td>"
+				."<td class='reply'>{$row->reply}</td>"
+				."<td class='hit'>{$row->hit}</td>"
+				."<td class='vote'>{$row->vote}</td>"
+				."<td class='name'>{$row->name}</td>"
+				."<td class='date'>".$date."</td>"
 			."</tr>"
 
 			."<tr>"
-			."<td>{$row->content}</td>"
-			."</tr>"
-
-			."</table>";
-
+				."<td id='post-content'>{$row->content}</td>"
+			."</tr>";
 		}
+		echo "</table>";
+
+		return true;
+	}
+
+	public function reply ($map, $type, $num, $search = null)
+	{
+		$data = [];
+
+		$query = "SELECT * FROM map_{$map}_reply where follow={$num} and dtim is null order by if(isnull(head), no, head), ctim";
+		$find = $this->db->query($query);
+
+		if($find->num_rows() === 0) {
+			echo "<div class='no-replies'>No Replies.</div>";
+
+			return false;
+		}
+
+		echo "<table class='results'>";
+		foreach ($find->result() as $key => $row) {
+			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
+
+			echo "<tr>"
+				."<td class='name'>{$row->name}</td>"
+				."<td class='content' style='width:200px;'>{$row->content}</td>"
+				."<td class='date'>{$date}</td>"
+				."<td class='func'>  <i class='fa fa-ellipsis-v' aria-hidden='true'></i></td>"
+				."<td class='edit'>  <i class='fa fa-pencil'     aria-hidden='true'></i></td>"
+				."<td class='delete'><i class='fa fa-trash'      aria-hidden='true'></i></td>"
+				."<td class='report'><i class='fa fa-meh-o'      aria-hidden='true'></i></td>"
+				."<td class='add'>   <i class='fa fa-plus'       aria-hidden='true'></i></td>"
+			."</tr>";
+
+			//echo "<tr>"
+				//."<td class='name'>{$row->name}</td>"
+				//."<td class='content'><div>{$row->content}</div></td>"
+				//."<td class='date'>{$date}</td>"
+				//."<td class='func'>"
+					//."<i class='fa fa-pencil' aria-hidden='true'></i> <i class='fa fa-trash' aria-hidden='true'></i> <i class='fa fa-meh-o' aria-hidden='true'></i>"
+				//."</td>"
+			//."</tr>"
+			//."<tr>"
+				//."<td colspan='3' class='add'><div contentEditable='true'></div></td>"
+			//."</tr>";
+		}
+		echo "</table>";
 
 		return true;
 	}

@@ -2879,102 +2879,6 @@ a {
     display: none;
     list-style-type: none; }
 
-#page #scene {
-  background: #212529;
-  margin: 3rem 1rem 1rem 1rem; }
-  #page #scene img {
-    display: table;
-    margin: auto;
-    height: 400px; }
-    @media screen and (max-width: 860px) {
-      #page #scene img {
-        display: table;
-        margin: auto;
-        height: 100%;
-        width: 100%; } }
-
-#page .type {
-  font-family: pixel !important;
-  font-size: 2rem;
-  text-align: center;
-  display: table;
-  width: 100%;
-  border-spacing: 1rem;
-  table-layout: fixed; }
-  #page .type .type-row {
-    display: table-row; }
-    @media screen and (max-width: 860px) {
-      #page .type .type-row {
-        display: block; } }
-    #page .type .type-row .type-col {
-      display: table-cell; }
-      @media screen and (max-width: 860px) {
-        #page .type .type-row .type-col {
-          display: block; } }
-      #page .type .type-row .type-col .type-list {
-        font-family: "Nanum Gothic";
-        font-size: .8rem;
-        margin: .5rem 0;
-        border-radius: .25rem;
-        border: 1px solid #212529;
-        min-height: 15rem; }
-        @media screen and (max-width: 860px) {
-          #page .type .type-row .type-col .type-list {
-            margin-bottom: 4rem; } }
-        #page .type .type-row .type-col .type-list .no-results {
-          margin: auto;
-          height: 14rem; }
-        #page .type .type-row .type-col .type-list .results {
-          display: block;
-          margin: .5rem 1rem;
-          width: 95%; }
-          #page .type .type-row .type-col .type-list .results tbody tr td:nth-child(1) {
-            font-size: 0.5rem;
-            width: 4rem; }
-          #page .type .type-row .type-col .type-list .results div {
-            display: grid; }
-            #page .type .type-row .type-col .type-list .results div a {
-              text-overflow: ellipsis;
-              overflow: hidden;
-              white-space: nowrap; }
-    #page .type .type-row span {
-      display: block;
-      padding: 1rem 0;
-      border: 1px solid #212529;
-      border-radius: .25rem; }
-
-#page #best {
-  background: linear-gradient(317.5deg, #ffd43b 3%, #495057 3%);
-  color: #ffd43b; }
-
-#page #info, #page #free {
-  background: linear-gradient(317.5deg, #212529 3%, white 3%);
-  color: #212529; }
-
-#page #photo {
-  background: linear-gradient(317.5deg, #a9e34b 3%, #495057 3%);
-  color: #a9e34b; }
-
-#page #news {
-  background: linear-gradient(317.5deg, #4dadf7 3%, #495057 3%);
-  color: #4dadf7; }
-
-#page #_ad_ {
-  background: linear-gradient(317.5deg, #fa5252 3%, #495057 3%);
-  color: #fa5252; }
-
-#page #food {
-  background: linear-gradient(317.5deg, #ff922b 3%, #495057 3%);
-  color: #ff922b; }
-
-#page #life {
-  background: linear-gradient(317.5deg, #f783ac 3%, #495057 3%);
-  color: #f783ac; }
-
-#page #dev {
-  background: linear-gradient(317.5deg, #66d9e8 3%, #495057 3%);
-  color: #66d9e8; }
-
 #menu-map {
   padding: .5rem 0 !important; }
   #menu-map #map-search-box {
@@ -3018,6 +2922,19 @@ a {
   top: .5rem;
   height: 3rem;
   text-align: right; }
+  #sign input[name='uid'] {
+    width: 10%; }
+    @media screen and (max-width: 860px) {
+      #sign input[name='uid'] {
+        width: 20%; } }
+  #sign input[name='pswd'] {
+    width: 10%; }
+    @media screen and (max-width: 860px) {
+      #sign input[name='pswd'] {
+        width: 20%; } }
+  @media screen and (max-width: 860px) {
+    #sign {
+      text-align: left; } }
   #sign button {
     margin: 0 0.2rem; }
 
@@ -4093,6 +4010,102 @@ a {
 
 .marquee:hover {
   animation-play-state: paused; }
+
+#page #scene {
+  background: #212529;
+  margin: 3rem 1rem 1rem 1rem; }
+  #page #scene img {
+    display: table;
+    margin: auto;
+    height: 400px; }
+    @media screen and (max-width: 860px) {
+      #page #scene img {
+        display: table;
+        margin: auto;
+        height: 100%;
+        width: 100%; } }
+
+#page .type {
+  font-family: pixel !important;
+  font-size: 2rem;
+  text-align: center;
+  display: table;
+  width: 100%;
+  border-spacing: 1rem;
+  table-layout: fixed; }
+  #page .type .type-row {
+    display: table-row; }
+    @media screen and (max-width: 860px) {
+      #page .type .type-row {
+        display: block; } }
+    #page .type .type-row .type-col {
+      display: table-cell; }
+      @media screen and (max-width: 860px) {
+        #page .type .type-row .type-col {
+          display: block; } }
+      #page .type .type-row .type-col .type-list {
+        font-family: "Nanum Gothic";
+        font-size: .8rem;
+        margin: .5rem 0;
+        border-radius: .25rem;
+        border: 1px solid #212529;
+        min-height: 15rem; }
+        @media screen and (max-width: 860px) {
+          #page .type .type-row .type-col .type-list {
+            margin-bottom: 4rem; } }
+        #page .type .type-row .type-col .type-list .no-results {
+          margin: auto;
+          height: 14rem; }
+        #page .type .type-row .type-col .type-list .results {
+          display: block;
+          margin: .5rem 1rem;
+          width: 90%; }
+          #page .type .type-row .type-col .type-list .results tr td:nth-child(1) {
+            font-size: 0.5rem;
+            width: 4rem; }
+          #page .type .type-row .type-col .type-list .results div {
+            display: grid; }
+            #page .type .type-row .type-col .type-list .results div a {
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap; }
+    #page .type .type-row span {
+      display: block;
+      padding: 1rem 0;
+      border: 1px solid #212529;
+      border-radius: .25rem; }
+
+#page #best {
+  background: linear-gradient(317.5deg, #ffd43b 3%, #495057 3%);
+  color: #ffd43b; }
+
+#page #info, #page #free {
+  background: linear-gradient(317.5deg, #212529 3%, white 3%);
+  color: #212529; }
+
+#page #photo {
+  background: linear-gradient(317.5deg, #a9e34b 3%, #495057 3%);
+  color: #a9e34b; }
+
+#page #news {
+  background: linear-gradient(317.5deg, #4dadf7 3%, #495057 3%);
+  color: #4dadf7; }
+
+#page #_ad_ {
+  background: linear-gradient(317.5deg, #fa5252 3%, #495057 3%);
+  color: #fa5252; }
+
+#page #food {
+  background: linear-gradient(317.5deg, #ff922b 3%, #495057 3%);
+  color: #ff922b; }
+
+#page #life {
+  background: linear-gradient(317.5deg, #f783ac 3%, #495057 3%);
+  color: #f783ac; }
+
+#page #dev {
+  background: linear-gradient(317.5deg, #66d9e8 3%, #495057 3%);
+  color: #66d9e8; }
 
 #sign-up {
   margin-top: 2rem; }

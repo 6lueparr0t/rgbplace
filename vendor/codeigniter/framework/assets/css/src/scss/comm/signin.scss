@@ -1,10 +1,28 @@
 #sign { 
-  position: relative;
-  top: .5rem;
-  height: 3rem;
-  text-align:right;
+	position: relative;
+	top: .5rem;
+	height: 3rem;
+	text-align:right;
 
-  & button{
-    margin:0 0.2rem;
-  }
+	input[name='uid'] {
+		width:10%;	
+		@media screen and ($width-name : $target-width) {
+			width:20%;	
+		}
+	}
+
+	input[name='pswd'] {
+		width:10%;	
+		@media screen and ($width-name : $target-width) {
+			width:20%;	
+		}
+	}
+
+	@media screen and ($width-name : $target-width) {
+		text-align:left;
+	}
+
+	& button{
+		margin:0 0.2rem;
+	}
 }

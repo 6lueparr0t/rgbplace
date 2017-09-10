@@ -4,6 +4,7 @@ map/post/<?=$map?>/<?=$type?>/<?=$num?>
 
 <?
 $this->map->post($map, $type, $num);
+$this->map->reply($map, $type, $num);
 ?>
 
 <?

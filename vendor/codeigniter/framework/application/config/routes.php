@@ -56,7 +56,17 @@ $route['translate_uri_dashes'] = FALSE;
 
 /*
 | RGB place
-*/
+ */
+
+$route['('.DEFAULT_MAP.')/(:num)'] = function ($map, $num) {
+	return 'map/link/' . $map . '/' . $num;
+};
+
+$route['([a-zA-Z]{2}[0-9]+)/(:num)'] = function ($map, $num) {
+	return 'map/link/' . $map . '/' . $num;
+};
+
+// ====================  ====================  ====================  ====================
 
 $route['('.DEFAULT_MAP.')/([a-zA-Z]+)/list'] = function ($map, $type) {
 	return 'map/list/' . $map . '/' . $type;
@@ -83,9 +93,7 @@ $route['('.DEFAULT_MAP.')'] = function ($map) {
 	return 'map/page/' . $map;
 };
 
-
 // ====================  ====================  ====================  ====================
-
 
 $route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/list'] = function ($map, $type) {
 	return 'map/list/' . $map . '/' . $type;

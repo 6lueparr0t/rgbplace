@@ -3,9 +3,7 @@
 map/list/<?=$map?>/<?=$type?>
 
 <?
-
 $this->map->list($map, $type, 30, $search);
-
 ?>
 
 <?php $this->rgb->end($path); ?>
