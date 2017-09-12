@@ -59,12 +59,16 @@
 
 	.type {
 		@include status-arrow (white, $oc-gray-9);
-		//@include status-arrow (transparent, transparent);
+	}
+
+	.type.void {
+		@include status-arrow (transparent, transparent);
+		pointer-events:none;
 	}
 
 	.type.none {
 		@include status-arrow ($oc-gray-9, $oc-gray-2);
-		z-index:-1;
+		pointer-events:none;
 	}
 
 	.type.free, .type.info {

@@ -15,31 +15,31 @@
   .real {
     color:$oc-red-5 !important;
     position:relative;
-    opacity: 0;
+    //opacity: 0;
 
-    @include animation('fadeIn 1s linear 0s 1 normal');
+    //@include animation('fadeIn 1s linear 0s 1 normal');
   }
 
   .gains {
     color:$oc-green-5 !important;
     position:relative;
-    opacity: 0;
+    //opacity: 0;
 
-    @include animation('fadeInDown 1s linear .4s 1 normal');
+    //@include animation('fadeInDown 1s linear .4s 1 normal');
   }
 
   .by {
     color:$oc-blue-5 !important;
     position:relative;
-    opacity: 0;
+    //opacity: 0;
 
-    @include animation('fadeInLeft 1s linear .8s 1 normal');
+    //@include animation('fadeInLeft 1s linear .8s 1 normal');
   }
 
   .place {
     position:absolute;
     padding-left:1.5rem;
 
-    @include animation('tada 1s linear 1.2s 1 normal');
+    //@include animation('tada 1s linear 1.2s 1 normal');
   }
 }

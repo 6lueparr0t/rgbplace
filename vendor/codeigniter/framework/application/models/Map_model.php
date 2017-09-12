@@ -2,6 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Map_model extends CI_Model {
 
+	/*
+	 * ====================
+	 * Usage : $this->map->link ( map code, post num )
+	 * Desc : simple link. use for redirect "$this->map->post".
+	 * ====================
+	 */
 	public function link ($map, $num) {
 		$data = "";
 
@@ -21,6 +27,15 @@ class Map_model extends CI_Model {
 		return $data;
 	}
 
+	/*
+	 * ====================
+	 * Usage : $this->map->page ( map code, all type, limit )
+	 * Desc : get 'post' list. use only map/page.php
+	 *
+	 * Limit ?
+	 * ex: select ~ from ~ where ~ LIMIT start, count
+	 * ====================
+	 */
 	public function page($map, $type, $limit)
 	{
 		$data = [];
@@ -51,6 +66,12 @@ class Map_model extends CI_Model {
 		return true;
 	}
 
+	/*
+	 * ====================
+	 * Usage : $this->map->list ( map code, all type, limit )
+	 * Desc : get classification list.
+	 * ====================
+	 */
 	public function list ($map, $type, $limit, $search = null)
 	{
 		$data = [];
@@ -84,13 +105,19 @@ class Map_model extends CI_Model {
 		}
 		echo "</table>";
 
-		// pagination
+		// pagination + edit button
 		// count($find->result());
 
 		return true;
 	}
 
-	public function post ($map, $type, $num, $search = null)
+	/*
+	 * ====================
+	 * Usage : $this->map->post ( map code, post type, post number )
+	 * Desc : get 'post'
+	 * ====================
+	 */
+	public function post ($map, $type, $num)
 	{
 		$data = [];
 
@@ -126,9 +153,17 @@ class Map_model extends CI_Model {
 		}
 		echo "</table>";
 
+		// modify + delete button
+
 		return true;
 	}
 
+	/*
+	 * ====================
+	 * Usage : $this->map->reply ( map code, post type, post number, (OPTION) search )
+	 * Desc : show all reply in 'post'
+	 * ====================
+	 */
 	public function reply ($map, $type, $num, $search = null)
 	{
 		$data = [];
@@ -170,6 +205,8 @@ class Map_model extends CI_Model {
 			//."</tr>";
 		}
 		echo "</table>";
+
+		//input reply text box
 
 		return true;
 	}
