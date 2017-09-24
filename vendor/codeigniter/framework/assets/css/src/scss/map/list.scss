@@ -1,0 +1,115 @@
+#list{
+	font-size:1rem;
+	@media screen and ($width-name : $target-width) {
+		font-size:.8rem;
+	}
+
+	.no-list {
+		text-align : center;
+	}
+
+	.list {
+		font-family: "Nanum Gothic";
+		border-collapse: collapse;
+		width:100%;
+		margin: .5rem 0;
+
+		.list-head {
+			font-family: "pixel";
+			border: 1px solid $oc-gray-9;
+			border-radius : .5rem;
+			height:2rem;
+		}
+
+		.list-row {
+			td {
+				padding: 1rem 0;
+				border-bottom: 1px solid $oc-gray-9;
+			}
+
+			.no {
+				text-align:center;
+			}
+
+			.name {
+				width:10%;
+				@media screen and ($width-name : $target-width) {
+					width:15%;
+				}
+				text-align:center;
+			}
+
+			.title {
+				a {
+					color : black;
+
+					&:hover {
+						color : $oc-blue-6;
+					}
+				}
+			}
+
+			.hit {
+				width:10%;
+				text-align:center;
+			}
+
+			.date {
+				width:10%;
+				@media screen and ($width-name : $target-width) {
+					width:22%;
+				}
+				text-align:center;
+			}
+		}
+
+	}
+
+	.button {
+		font-family: "pixel";
+		margin: 2.5rem 0;
+		width:100%;
+		display:flex;
+		text-align:center;
+
+		a {
+			color : black;
+		}
+
+		.refresh {
+			padding: .5rem 1rem;
+			border: 1px solid $oc-gray-9;
+			border-radius : .25rem;
+			flex:1;
+		}
+
+		.pagination {
+			margin: .5rem 1rem;
+			flex:10;
+			a {
+				padding: .5rem 1rem;
+			}
+		}
+
+		.edit {
+			padding: .5rem 1rem;
+			border-radius : .25rem;
+			flex:1;
+
+			&.enable {
+				border: 1px solid $oc-gray-9;
+				a {
+				}
+			}
+			&.disable {
+				border: 1px solid $oc-gray-4;
+				a {
+					pointer-events: none;
+					cursor: default;
+					color : $oc-gray-4;
+				}
+			}
+		}
+	}
+}
+

@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); $this->rgb->common();?>
 
 <!-- map/page/<?=$map?> -->
+
 <div id="page">
   <div id="scene">
     <img src="/assets/img/placeholder.jpg" />

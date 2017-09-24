@@ -2930,7 +2930,7 @@ a {
           border-top: 1rem solid #212529;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid #212529;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type:after {
       content: "";
       position: absolute;
@@ -2971,7 +2971,7 @@ a {
           border-top: 1rem solid transparent;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid transparent;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type.void:after {
       content: "";
       position: absolute;
@@ -3012,7 +3012,7 @@ a {
           border-top: 1rem solid #e9ecef;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid #e9ecef;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type.none:after {
       content: "";
       position: absolute;
@@ -3052,7 +3052,7 @@ a {
           border-top: 1rem solid #495057;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid #495057;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type.free:after, #status .type.info:after {
       content: "";
       position: absolute;
@@ -3093,7 +3093,7 @@ a {
             border-top: 1rem solid #e9ecef;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #e9ecef;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.free.none:after, #status .type.info.none:after {
         content: "";
         position: absolute;
@@ -3133,7 +3133,7 @@ a {
             border-top: 1rem solid #adb5bd;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #adb5bd;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.free.num:after, #status .type.info.num:after {
         content: "";
         position: absolute;
@@ -3173,7 +3173,7 @@ a {
           border-top: 1rem solid #ffd43b;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid #ffd43b;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type.best:after {
       content: "";
       position: absolute;
@@ -3214,7 +3214,7 @@ a {
             border-top: 1rem solid #e9ecef;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #e9ecef;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.best.none:after {
         content: "";
         position: absolute;
@@ -3254,7 +3254,7 @@ a {
             border-top: 1rem solid #ffec99;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #ffec99;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.best.num:after {
         content: "";
         position: absolute;
@@ -3294,7 +3294,7 @@ a {
           border-top: 1rem solid #a9e34b;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid #a9e34b;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type.photo:after {
       content: "";
       position: absolute;
@@ -3335,7 +3335,7 @@ a {
             border-top: 1rem solid #e9ecef;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #e9ecef;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.photo.none:after {
         content: "";
         position: absolute;
@@ -3375,7 +3375,7 @@ a {
             border-top: 1rem solid #d8f5a2;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #d8f5a2;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.photo.num:after {
         content: "";
         position: absolute;
@@ -3415,7 +3415,7 @@ a {
           border-top: 1rem solid #4dadf7;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid #4dadf7;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type.news:after {
       content: "";
       position: absolute;
@@ -3456,7 +3456,7 @@ a {
             border-top: 1rem solid #e9ecef;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #e9ecef;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.news.none:after {
         content: "";
         position: absolute;
@@ -3496,7 +3496,7 @@ a {
             border-top: 1rem solid #a3daff;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #a3daff;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.news.num:after {
         content: "";
         position: absolute;
@@ -3536,7 +3536,7 @@ a {
           border-top: 1rem solid #fa5252;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid #fa5252;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type._ad_:after {
       content: "";
       position: absolute;
@@ -3577,7 +3577,7 @@ a {
             border-top: 1rem solid #e9ecef;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #e9ecef;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type._ad_.none:after {
         content: "";
         position: absolute;
@@ -3617,7 +3617,7 @@ a {
             border-top: 1rem solid #ff8787;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #ff8787;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type._ad_.num:after {
         content: "";
         position: absolute;
@@ -3657,7 +3657,7 @@ a {
           border-top: 1rem solid #ff922b;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid #ff922b;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type.food:after {
       content: "";
       position: absolute;
@@ -3698,7 +3698,7 @@ a {
             border-top: 1rem solid #e9ecef;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #e9ecef;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.food.none:after {
         content: "";
         position: absolute;
@@ -3738,7 +3738,7 @@ a {
             border-top: 1rem solid #ffc078;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #ffc078;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.food.num:after {
         content: "";
         position: absolute;
@@ -3778,7 +3778,7 @@ a {
           border-top: 1rem solid #f783ac;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid #f783ac;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type.life:after {
       content: "";
       position: absolute;
@@ -3819,7 +3819,7 @@ a {
             border-top: 1rem solid #e9ecef;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #e9ecef;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.life.none:after {
         content: "";
         position: absolute;
@@ -3859,7 +3859,7 @@ a {
             border-top: 1rem solid #fcc2d7;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #fcc2d7;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.life.num:after {
         content: "";
         position: absolute;
@@ -3899,7 +3899,7 @@ a {
           border-top: 1rem solid #66d9e8;
           border-left: 1rem solid transparent;
           border-bottom: 1rem solid #66d9e8;
-          left: -1rem; } }
+          left: -.95rem; } }
     #status .type.dev:after {
       content: "";
       position: absolute;
@@ -3940,7 +3940,7 @@ a {
             border-top: 1rem solid #e9ecef;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #e9ecef;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.dev.none:after {
         content: "";
         position: absolute;
@@ -3980,7 +3980,7 @@ a {
             border-top: 1rem solid #c5f6fa;
             border-left: 1rem solid transparent;
             border-bottom: 1rem solid #c5f6fa;
-            left: -1rem; } }
+            left: -.95rem; } }
       #status .type.dev.num:after {
         content: "";
         position: absolute;
@@ -4008,6 +4008,78 @@ a {
 
 .marquee:hover {
   animation-play-state: paused; }
+
+#list {
+  font-size: 1rem; }
+  @media screen and (max-width: 860px) {
+    #list {
+      font-size: .8rem; } }
+  #list .no-list {
+    text-align: center; }
+  #list .list {
+    font-family: "Nanum Gothic";
+    border-collapse: collapse;
+    width: 100%;
+    margin: .5rem 0; }
+    #list .list .list-head {
+      font-family: "pixel";
+      border: 1px solid #212529;
+      border-radius: .5rem;
+      height: 2rem; }
+    #list .list .list-row td {
+      padding: 1rem 0;
+      border-bottom: 1px solid #212529; }
+    #list .list .list-row .no {
+      text-align: center; }
+    #list .list .list-row .name {
+      width: 10%;
+      text-align: center; }
+      @media screen and (max-width: 860px) {
+        #list .list .list-row .name {
+          width: 15%; } }
+    #list .list .list-row .title a {
+      color: black; }
+      #list .list .list-row .title a:hover {
+        color: #228ae6; }
+    #list .list .list-row .hit {
+      width: 10%;
+      text-align: center; }
+    #list .list .list-row .date {
+      width: 10%;
+      text-align: center; }
+      @media screen and (max-width: 860px) {
+        #list .list .list-row .date {
+          width: 22%; } }
+  #list .button {
+    font-family: "pixel";
+    margin: 2.5rem 0;
+    width: 100%;
+    display: flex;
+    text-align: center; }
+    #list .button a {
+      color: black; }
+    #list .button .refresh {
+      padding: .5rem 1rem;
+      border: 1px solid #212529;
+      border-radius: .25rem;
+      flex: 1; }
+    #list .button .pagination {
+      margin: .5rem 1rem;
+      flex: 10; }
+      #list .button .pagination a {
+        padding: .5rem 1rem; }
+    #list .button .edit {
+      padding: .5rem 1rem;
+      border-radius: .25rem;
+      flex: 1; }
+      #list .button .edit.enable {
+        border: 1px solid #212529; }
+      #list .button .edit.disable {
+        border: 1px solid #ced4da; }
+        #list .button .edit.disable a {
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
 
 #page #scene {
   background: #212529;
@@ -4051,19 +4123,19 @@ a {
         @media screen and (max-width: 860px) {
           #page .type .type-row .type-col .type-list {
             margin-bottom: 4rem; } }
-        #page .type .type-row .type-col .type-list .no-results {
+        #page .type .type-row .type-col .type-list .no-result {
           margin: auto;
           height: 14rem; }
-        #page .type .type-row .type-col .type-list .results {
+        #page .type .type-row .type-col .type-list .result {
           display: block;
           margin: .5rem 1rem;
           width: 90%; }
-          #page .type .type-row .type-col .type-list .results tr td:nth-child(1) {
+          #page .type .type-row .type-col .type-list .result tr td:nth-child(1) {
             font-size: 0.5rem;
             width: 4rem; }
-          #page .type .type-row .type-col .type-list .results div {
+          #page .type .type-row .type-col .type-list .result div {
             display: grid; }
-            #page .type .type-row .type-col .type-list .results div a {
+            #page .type .type-row .type-col .type-list .result div a {
               text-overflow: ellipsis;
               overflow: hidden;
               white-space: nowrap; }

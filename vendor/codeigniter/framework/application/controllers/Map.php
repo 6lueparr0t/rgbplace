@@ -43,10 +43,14 @@ class Map extends CI_Controller {
 
 	public function list($map, $type)
 	{
+		if(!$this->check($type)) redirect("/");
+
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
 
 		$data['search']['page'   ] = urldecode($this->input->get('page'));
+
+		// method : title, text, title+text, name, reply ... etc
 		$data['search']['method' ] = urldecode($this->input->get('method'));
 		$data['search']['keyword'] = urldecode($this->input->get('keyword'));
 		$data['search']['date'   ] = urldecode($this->input->get('date'));
@@ -56,6 +60,8 @@ class Map extends CI_Controller {
 
 	public function post($map, $type, $num = 0)
 	{
+		if(!$this->check($type)) redirect("/");
+
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
@@ -65,6 +71,8 @@ class Map extends CI_Controller {
 
 	public function edit($map, $type, $num = 0)
 	{
+		if(!$this->check($type)) redirect("/");
+
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
@@ -74,11 +82,30 @@ class Map extends CI_Controller {
 
 	public function delete($map, $type, $num = 0)
 	{
+		if(!$this->check($type)) redirect("/");
+
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
 
 		$this->rgb->view("map/delete", $data);
+	}
+
+	private function check($type) {
+		switch($type) {
+		case 'best' :
+		case 'free' :
+		case 'info' :
+		case 'photo':
+		case 'food' :
+		case 'life' :
+		case 'news' :
+		case 'dev'  :
+		case '_ad_' :
+			return true;
+		default :
+			return false;
+		}
 	}
 
 }

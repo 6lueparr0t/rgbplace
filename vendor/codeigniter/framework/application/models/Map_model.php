@@ -44,12 +44,12 @@ class Map_model extends CI_Model {
 		$find = $this->db->query($query);
 
 		if($find->num_rows() === 0) {
-			echo "<table class='no-results'><tr><td>No Results.</td></tr></table>";
+			echo "<table class='no-result'><tr><td>No Results.</td></tr></table>";
 
 			return false;
 		}
 
-		echo "<table class='results'>";
+		echo "<table class='result'>";
 		foreach ($find->result() as $key => $row) {
 			echo "<tr>"
 				."<td class='date'>".date("Y-m-d", strtotime($row->ctim))."</td>"
@@ -72,40 +72,130 @@ class Map_model extends CI_Model {
 	 * Desc : get classification list.
 	 * ====================
 	 */
-	public function list ($map, $type, $limit, $search = null)
+	public function list ($map, $type, $start=0, $end=0, $search = null)
 	{
+		$search_list = ['page', 'method', 'keyword', 'date'];
 		$data = [];
 
-		//array_key_exists('', $search);
+		if(isset($search)) {
+			for($i=0; $i<count($search_list); $i++) {
+				if(array_key_exists($search_list[$i], $search)) {
+					$data[$search_list[$i]] = $search[$search_list[$i]];
+				}
+			}
+		}
 		
 		$where = "type='{$type}'";
-		//$limit = ($limit_end)?"{$limit_start}, {$limit_end}":"{$limit_start}";
+		$limit = ($end)?"{$start}, {$end}":"{$start}";
 
 		$query = "SELECT * FROM map_{$map}_post where {$where} ORDER BY no desc LIMIT {$limit}";
 		$find = $this->db->query($query);
 
-		if($find->num_rows() === 0) {
-			echo "<div class='no-list'>No List.</div>";
+		echo "<table class='list'>";
 
-			return false;
+		echo "<tr class='list-head'>"
+				."<th>No</th>"
+				."<th>Title</th>"
+				."<th>Hit</th>"
+				."<th>Name</th>"
+				."<th>Date</th>"
+			."</tr>";
+
+		if($find->num_rows() === 0) {
+			echo "<tr><td class='no-list' colspan=5>No List</td></tr>";
 		}
 
-		echo "<table class='results'>";
+		// title list
 		foreach ($find->result() as $key => $row) {
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 
-			echo "<tr>"
+			echo "<tr class='list-row'>"
 				."<td class='no'>{$row->no}</td>"
-				."<td class='title'><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></td>"
-				."<td class='reply'>{$row->reply}</td>"
+				."<td class='title'><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a>[<a href='/{$map}/{$row->type}/{$row->no}'>{$row->reply}</a>]</td>"
 				."<td class='hit'>{$row->hit}</td>"
 				."<td class='name'>{$row->name}</td>"
 				."<td class='date'>".$date."</td>"
-			."</tr>";
+				."</tr>";
 		}
+
 		echo "</table>";
 
-		// pagination + edit button
+		// ****************
+		// pagination start
+		// ****************
+
+
+		// get list count (new sql run)
+		$where = "type='{$type}'";
+
+		$query = "SELECT count(*) as list_count FROM map_{$map}_post where {$where}";
+		$find = $this->db->query($query);
+
+		// sql result only 1
+		if($find->num_rows() != 1) {
+			return false;
+		}
+
+		// all list count / 30 (default)
+		foreach ($find->result() as $key => $row) {
+			$max = ceil($row->list_count/$end);
+			if($max == 0) $max=1;
+		}
+
+		$current = 1;
+
+		// 'page' option check
+		if(array_key_exists('page', $data)) {
+			if($data['page'] <= $max) {
+				$current = $data['page'];
+			}
+		}
+
+		$range = 10;
+		$min_page = ((int)$current-(int)$range>0)?(int)$current-(int)$range:1;
+		$max_page = ((int)$current+(int)$range>$max)?$max:(int)$current+(int)$range;
+
+		echo "<div class='button'>";
+		echo "<span class='refresh'><a href='/{$map}/{$type}/list'>LIST</a></span>";
+
+
+		echo "<span class='pagination'>";
+		echo "<a href='/{$map}/{$type}/list?page={$min_page}'><i class='fa fa-step-backward' aria-hidden='true'></i></a>";
+		for($i=(int)$min_page; $i < $current; $i++) {
+
+			if($i == 0) continue;
+
+			$next = $i;
+			echo "<a href='/{$map}/{$type}/list?page={$next}'>{$next}</a>";
+		}
+
+		for($i=(int)$current; $i <= $max_page; $i++) {
+
+			if($i == 0) continue;
+
+			$next = $i;
+			echo "<a href='/{$map}/{$type}/list?page={$next}'>{$next}</a>";
+		}
+
+		echo "<a href='/{$map}/{$type}/list?page={$max_page}'><i class='fa fa-step-forward' aria-hidden='true'></i></a>";
+		echo "</span>";
+
+
+		// ****************
+		// pagination end
+		// ****************
+
+		if($type != "best") {
+			echo "<span class='edit enable'><a href='/{$map}/{$type}/0/edit'>EDIT</a></span>";
+		} else {
+			echo "<span class='edit disable'><a href='/{$map}/{$type}/0/edit'>EDIT</a></span>";
+		}
+
+		// pagination + edit button end
+
+		echo "</div>";
+
+
 		// count($find->result());
 
 		return true;
@@ -130,7 +220,7 @@ class Map_model extends CI_Model {
 			return false;
 		}
 
-		echo "<table class='results'>";
+		echo "<table class='post'>";
 		foreach ($find->result() as $key => $row) {
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 
@@ -177,7 +267,7 @@ class Map_model extends CI_Model {
 			return false;
 		}
 
-		echo "<table class='results'>";
+		echo "<table class='result'>";
 		foreach ($find->result() as $key => $row) {
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 
@@ -210,4 +300,5 @@ class Map_model extends CI_Model {
 
 		return true;
 	}
+
 }
