@@ -156,10 +156,10 @@ class Map_model extends CI_Model {
 		$max_page = ((int)$current+(int)$range>$max)?$max:(int)$current+(int)$range;
 
 		echo "<div class='button'>";
-		echo "<span class='refresh'><a href='/{$map}/{$type}/list'>LIST</a></span>";
+		echo "<a class='refresh' href='/{$map}/{$type}/list'><span>LIST</span></a>";
 
 
-		echo "<span class='pagination'>";
+		echo "<div class='pagination'>";
 		echo "<a href='/{$map}/{$type}/list?page={$min_page}'><i class='fa fa-step-backward' aria-hidden='true'></i></a>";
 		for($i=(int)$min_page; $i < $current; $i++) {
 
@@ -178,7 +178,7 @@ class Map_model extends CI_Model {
 		}
 
 		echo "<a href='/{$map}/{$type}/list?page={$max_page}'><i class='fa fa-step-forward' aria-hidden='true'></i></a>";
-		echo "</span>";
+		echo "</div>";
 
 
 		// ****************
@@ -186,9 +186,9 @@ class Map_model extends CI_Model {
 		// ****************
 
 		if($type != "best") {
-			echo "<span class='edit enable'><a href='/{$map}/{$type}/0/edit'>EDIT</a></span>";
-		} else {
-			echo "<span class='edit disable'><a href='/{$map}/{$type}/0/edit'>EDIT</a></span>";
+			echo "<a class='edit enable ' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
+		} else {                                                                             
+			echo "<a class='edit disable' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
 		}
 
 		// pagination + edit button end

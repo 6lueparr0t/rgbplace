@@ -4055,7 +4055,8 @@ a {
     margin: 2.5rem 0;
     width: 100%;
     display: flex;
-    text-align: center; }
+    text-align: center;
+    user-select: none; }
     #list .button a {
       color: black; }
     #list .button .refresh {
@@ -4075,11 +4076,10 @@ a {
       #list .button .edit.enable {
         border: 1px solid #212529; }
       #list .button .edit.disable {
-        border: 1px solid #ced4da; }
-        #list .button .edit.disable a {
-          pointer-events: none;
-          cursor: default;
-          color: #ced4da; }
+        border: 1px solid #ced4da;
+        pointer-events: none;
+        cursor: default;
+        color: #ced4da; }
 
 #page #scene {
   background: #212529;
