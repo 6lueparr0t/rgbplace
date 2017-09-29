@@ -2,10 +2,20 @@
 
 <!-- map/post/<?=$map?>/<?=$type?>/<?=$num?> -->
 
+<div id="notice">
+</div>
+
+<div id='post'>
 <?
 $this->map->post($map, $type, $num);
+?>
+</div>
+
+<div id='reply'>
+<?
 $this->map->reply($map, $type, $num);
 ?>
+</div>
 
 <div id='list'>
 <?

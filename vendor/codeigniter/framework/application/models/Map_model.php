@@ -107,14 +107,25 @@ class Map_model extends CI_Model {
 
 		// title list
 		foreach ($find->result() as $key => $row) {
+			$no = $row->no;
+
+			$title = "<a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a>";
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
+			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
+
+			$reply = ($row->reply > 0)?"<a href='/{$map}/{$row->type}/{$row->no}'> <i class='fa fa-commenting-o' aria-hidden='true'></i> {$row->reply}</a>":"";
+
+			$toggle = "<div class='toggle'><span class='toggle-name'>{$row->name}</span> <span class='toggle-date'>{$date} {$time}</span></div>";
 
 			echo "<tr class='list-row'>"
 				."<td class='no'>{$row->no}</td>"
-				."<td class='title'><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a>[<a href='/{$map}/{$row->type}/{$row->no}'>{$row->reply}</a>]</td>"
+				."<td class='title'>"
+					."{$title} {$reply}"
+					."{$toggle}"
+				."</td>"
 				."<td class='hit'>{$row->hit}</td>"
 				."<td class='name'>{$row->name}</td>"
-				."<td class='date'>".$date."</td>"
+				."<td class='date' title='{$date} {$time}'>{$date}</td>"
 				."</tr>";
 		}
 
@@ -220,28 +231,23 @@ class Map_model extends CI_Model {
 			return false;
 		}
 
-		echo "<table class='post'>";
+		echo "<div class='post'>";
 		foreach ($find->result() as $key => $row) {
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 
-			echo "<tr>"
-				."<td class='no' >{$row->no}</td>"
-				."<td class='title'><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></td>"
-			."</tr>"
+			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></div>"
 
-			."<tr>"
-				."<td class='reply'>{$row->reply}</td>"
-				."<td class='hit'>{$row->hit}</td>"
-				."<td class='vote'>{$row->vote}</td>"
-				."<td class='name'>{$row->name}</td>"
-				."<td class='date'>".$date."</td>"
-			."</tr>"
+			."<div class='post-info'>"
+				."<span class='reply'>{$row->reply}</span>"
+				."<span class='hit'>{$row->hit}</span>"
+				."<span class='vote'>{$row->vote}</span>"
+				."<span class='name'>{$row->name}</span>"
+				."<span class='date'>".$date."</span>"
+			."</div>"
 
-			."<tr>"
-				."<td id='post-content'>{$row->content}</td>"
-			."</tr>";
+			."<div id='post-conetent'>{$row->content}</div>";
 		}
-		echo "</table>";
+		echo "</div>";
 
 		// modify + delete button
 
@@ -262,12 +268,12 @@ class Map_model extends CI_Model {
 		$find = $this->db->query($query);
 
 		if($find->num_rows() === 0) {
-			echo "<div class='no-replies'>No Replies.</div>";
+			echo "<div class='no-reply'>No Replies.</div>";
 
 			return false;
 		}
 
-		echo "<table class='result'>";
+		echo "<table class='reply'>";
 		foreach ($find->result() as $key => $row) {
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 

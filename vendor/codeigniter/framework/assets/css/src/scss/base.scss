@@ -8,8 +8,14 @@
 	src: url("/assets/css/fonts/slkscr.ttf");
 }
 
+@font-face {
+	font-family: 'normal';
+	src: url("/assets/css/fonts/NanumBarunGothic.ttf");
+}
+
 body {
-  font-family: "Nanum Gothic";
+  font-family: "normal";
+  font-size:20px;
 }
 
 a {

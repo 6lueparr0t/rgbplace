@@ -2,4 +2,7 @@
 
 <!-- map/edit/<?=$map?>/<?=$type?>/<?=$num?> -->
 
+<div id="notice">
+</div>
+
 <?php $this->rgb->end($path); ?>

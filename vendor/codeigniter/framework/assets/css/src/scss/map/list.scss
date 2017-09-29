@@ -1,7 +1,7 @@
 #list{
-	font-size:1rem;
+	font-size:1.2rem;
 	@media screen and ($width-name : $target-width) {
-		font-size:.8rem;
+		font-size:1rem;
 	}
 
 	.no-list {
@@ -9,7 +9,6 @@
 	}
 
 	.list {
-		font-family: "Nanum Gothic";
 		border-collapse: collapse;
 		width:100%;
 		margin: .5rem 0;
@@ -19,6 +18,24 @@
 			border: 1px solid $oc-gray-9;
 			border-radius : .5rem;
 			height:2rem;
+			background-color:$oc-gray-7;
+			th {
+				color:$oc-gray-0;
+			}
+		}
+
+		.list-head {
+			th:nth-child(4) { // name
+				@media screen and ($width-name : $target-width) {
+					display:none;
+				}
+			}
+
+			th:nth-child(5) { // date
+				@media screen and ($width-name : $target-width) {
+					display:none;
+				}
+			}
 		}
 
 		.list-row {
@@ -31,20 +48,26 @@
 				text-align:center;
 			}
 
-			.name {
-				width:10%;
-				@media screen and ($width-name : $target-width) {
-					width:15%;
-				}
-				text-align:center;
-			}
-
 			.title {
 				a {
 					color : black;
-
 					&:hover {
-						color : $oc-blue-6;
+						color : $oc-gray-6;
+					}
+				}
+
+				div.toggle {
+					font-size:0.8rem;
+					@media screen and ($width-name : $target-width) {
+
+						margin-top:1rem;
+					}
+
+					span {
+						display:none;
+						@media screen and ($width-name : $target-width) {
+							display:initial;
+						}
 					}
 				}
 			}
@@ -54,10 +77,21 @@
 				text-align:center;
 			}
 
+			.name {
+				width:10%;
+				@media screen and ($width-name : $target-width) {
+					//width:15%;
+					display:none;
+				}
+				text-align:center;
+			}
+
+
 			.date {
 				width:10%;
 				@media screen and ($width-name : $target-width) {
-					width:22%;
+					//width:22%;
+					display:none;
 				}
 				text-align:center;
 			}
@@ -82,6 +116,12 @@
 			border: 1px solid $oc-gray-9;
 			border-radius : .25rem;
 			flex:1;
+
+			&:hover {
+				background-color: $oc-gray-9;
+				color:white;
+				transition:all .1s ease-out;
+			}
 		}
 
 		.pagination {
@@ -99,6 +139,11 @@
 
 			&.enable {
 				border: 1px solid $oc-gray-9;
+				&:hover {
+					background-color: $oc-gray-9;
+					color:white;
+					transition:all .1s ease-out;
+				}
 			}
 			&.disable {
 				border: 1px solid $oc-gray-4;

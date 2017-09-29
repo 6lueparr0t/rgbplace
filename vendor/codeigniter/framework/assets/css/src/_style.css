@@ -5,7 +5,6 @@
  */
 /* FONT PATH
  * -------------------------- */
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 @font-face {
   font-family: 'FontAwesome';
   src: url("../fonts/fontawesome-webfont.eot?v=4.7.0");
@@ -2537,8 +2536,13 @@
   font-family: 'pixel';
   src: url("/assets/css/fonts/slkscr.ttf"); }
 
+@font-face {
+  font-family: 'normal';
+  src: url("/assets/css/fonts/NanumBarunGothic.ttf"); }
+
 body {
-  font-family: "Nanum Gothic"; }
+  font-family: "normal";
+  font-size: 20px; }
 
 a {
   color: #228ae6;
@@ -4010,14 +4014,13 @@ a {
   animation-play-state: paused; }
 
 #list {
-  font-size: 1rem; }
+  font-size: 1.2rem; }
   @media screen and (max-width: 860px) {
     #list {
-      font-size: .8rem; } }
+      font-size: 1rem; } }
   #list .no-list {
     text-align: center; }
   #list .list {
-    font-family: "Nanum Gothic";
     border-collapse: collapse;
     width: 100%;
     margin: .5rem 0; }
@@ -4025,31 +4028,50 @@ a {
       font-family: "pixel";
       border: 1px solid #212529;
       border-radius: .5rem;
-      height: 2rem; }
+      height: 2rem;
+      background-color: #495057; }
+      #list .list .list-head th {
+        color: #f8f9fa; }
+    @media screen and (max-width: 860px) {
+      #list .list .list-head th:nth-child(4) {
+        display: none; } }
+    @media screen and (max-width: 860px) {
+      #list .list .list-head th:nth-child(5) {
+        display: none; } }
     #list .list .list-row td {
       padding: 1rem 0;
       border-bottom: 1px solid #212529; }
     #list .list .list-row .no {
+      text-align: center; }
+    #list .list .list-row .title a {
+      color: black; }
+      #list .list .list-row .title a:hover {
+        color: #868e96; }
+    #list .list .list-row .title div.toggle {
+      font-size: 0.8rem; }
+      @media screen and (max-width: 860px) {
+        #list .list .list-row .title div.toggle {
+          margin-top: 1rem; } }
+      #list .list .list-row .title div.toggle span {
+        display: none; }
+        @media screen and (max-width: 860px) {
+          #list .list .list-row .title div.toggle span {
+            display: initial; } }
+    #list .list .list-row .hit {
+      width: 10%;
       text-align: center; }
     #list .list .list-row .name {
       width: 10%;
       text-align: center; }
       @media screen and (max-width: 860px) {
         #list .list .list-row .name {
-          width: 15%; } }
-    #list .list .list-row .title a {
-      color: black; }
-      #list .list .list-row .title a:hover {
-        color: #228ae6; }
-    #list .list .list-row .hit {
-      width: 10%;
-      text-align: center; }
+          display: none; } }
     #list .list .list-row .date {
       width: 10%;
       text-align: center; }
       @media screen and (max-width: 860px) {
         #list .list .list-row .date {
-          width: 22%; } }
+          display: none; } }
   #list .button {
     font-family: "pixel";
     margin: 2.5rem 0;
@@ -4064,6 +4086,10 @@ a {
       border: 1px solid #212529;
       border-radius: .25rem;
       flex: 1; }
+      #list .button .refresh:hover {
+        background-color: #212529;
+        color: white;
+        transition: all .1s ease-out; }
     #list .button .pagination {
       margin: .5rem 1rem;
       flex: 10; }
@@ -4075,6 +4101,10 @@ a {
       flex: 1; }
       #list .button .edit.enable {
         border: 1px solid #212529; }
+        #list .button .edit.enable:hover {
+          background-color: #212529;
+          color: white;
+          transition: all .1s ease-out; }
       #list .button .edit.disable {
         border: 1px solid #ced4da;
         pointer-events: none;
@@ -4176,6 +4206,17 @@ a {
 #page #dev {
   background: linear-gradient(317.5deg, #66d9e8 3%, #495057 3%);
   color: #66d9e8; }
+
+#post {
+  margin: 2rem 0; }
+  #post .post .post-title {
+    margin: 2rem 0;
+    padding: 1rem;
+    font-size: 2.5rem; }
+    #post .post .post-title a {
+      color: black; }
+      #post .post .post-title a:hover {
+        color: #868e96; }
 
 #sign-up {
   margin-top: 2rem; }

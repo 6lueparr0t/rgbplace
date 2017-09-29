@@ -2,6 +2,9 @@
 
 <!-- map/page/<?=$map?> -->
 
+<div id="notice">
+</div>
+
 <div id="page">
   <div id="scene">
     <img src="/assets/img/placeholder.jpg" />

@@ -1,0 +1,21 @@
+#post {
+	margin: 2rem 0;
+
+	.no-post {
+	}
+	.post {
+
+		.post-title {
+			margin: 2rem 0;
+			padding: 1rem;
+			font-size: 2.5rem;
+
+			a {
+				color : black;
+				&:hover {
+					color : $oc-gray-6;
+				}
+			}
+		}
+	}
+}
