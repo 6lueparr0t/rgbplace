@@ -4144,8 +4144,8 @@ a {
         #page .type .type-row .type-col {
           display: block; } }
       #page .type .type-row .type-col .type-list {
-        font-family: "Nanum Gothic";
-        font-size: .8rem;
+        font-family: "normal";
+        font-size: 1rem;
         margin: .5rem 0;
         border-radius: .25rem;
         border: 1px solid #212529;
