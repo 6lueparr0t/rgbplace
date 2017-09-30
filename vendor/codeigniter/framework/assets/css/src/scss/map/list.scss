@@ -3,6 +3,7 @@
 	@media screen and ($width-name : $target-width) {
 		font-size:1rem;
 	}
+	margin: 2.5rem 0;
 
 	.no-list {
 		text-align : center;
@@ -39,6 +40,11 @@
 		}
 
 		.list-row {
+
+			&:hover {
+				background:$oc-gray-1;
+			}
+
 			td {
 				padding: 1rem 0;
 				border-bottom: 1px solid $oc-gray-9;

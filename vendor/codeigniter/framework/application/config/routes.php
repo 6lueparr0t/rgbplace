@@ -76,7 +76,7 @@ $route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
 	return 'map/post/' . $map . '/' . $type . '/' . $num;
 };
 
-$route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(0)/edit'] = function ($map, $type) {
+$route['('.DEFAULT_MAP.')/([a-zA-Z]+)/0/edit'] = function ($map, $type) {
 	return 'map/edit/' . $map . '/' . $type;
 };
 
@@ -86,7 +86,7 @@ $route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(:num)/edit'] = function ($map, $type, $nu
 };
 
 $route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(:num)/delete'] = function ($map, $type, $num) {
-	return 'map/delete/' . $map . '/' . $num;
+	return 'map/delete/' . $map . '/' . $type . '/' . $num;
 };
 
 $route['('.DEFAULT_MAP.')'] = function ($map) {
@@ -103,7 +103,7 @@ $route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) 
 	return 'map/post/' . $map . '/' . $type . '/' . $num;
 };
 
-$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(0)/edit'] = function ($map, $type) {
+$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/0/edit'] = function ($map, $type) {
 	return 'map/edit/' . $map . '/' . $type;
 };
 
@@ -113,7 +113,7 @@ $route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)/edit'] = function ($map, $type, $
 };
 
 $route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/(:num)/delete'] = function ($map, $type, $num) {
-	return 'map/delete/' . $map . '/' . $num;
+	return 'map/delete/' . $map . '/' . $type . '/' . $num;
 };
 
 $route['([a-zA-Z]{2}[0-9]+)'] = function ($map) {

@@ -98,7 +98,6 @@ class Sign extends CI_Controller {
 		//echo ("<script>setTimeout(function(){history.go(-1);},3000);</script>");
 		
 		header('Location: '.$_SERVER['HTTP_REFERER']);
-		//redirect($this->input->server('http_referer'));
 	}
 
 	public function out()
@@ -107,7 +106,6 @@ class Sign extends CI_Controller {
 		$this->session->unset_userdata($config);
 
 		header('Location: '.$_SERVER['HTTP_REFERER']);
-		//redirect($this->input->server('http_referer'));
 	}
 	
 	public function up($check="")

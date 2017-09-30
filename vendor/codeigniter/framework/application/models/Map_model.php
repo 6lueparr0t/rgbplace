@@ -44,12 +44,12 @@ class Map_model extends CI_Model {
 		$find = $this->db->query($query);
 
 		if($find->num_rows() === 0) {
-			echo "<table class='no-result'><tr><td>No Results.</td></tr></table>";
+			echo "<table class='no-page'><tr><td>No Results.</td></tr></table>";
 
 			return false;
 		}
 
-		echo "<table class='result'>";
+		echo "<table class='page'>";
 		foreach ($find->result() as $key => $row) {
 			echo "<tr>"
 				."<td class='date'>".date("Y-m-d", strtotime($row->ctim))."</td>"
@@ -135,7 +135,6 @@ class Map_model extends CI_Model {
 		// pagination start
 		// ****************
 
-
 		// get list count (new sql run)
 		$where = "type='{$type}'";
 
@@ -166,6 +165,7 @@ class Map_model extends CI_Model {
 		$min_page = ((int)$current-(int)$range>0)?(int)$current-(int)$range:1;
 		$max_page = ((int)$current+(int)$range>$max)?$max:(int)$current+(int)$range;
 
+		// ** button class start
 		echo "<div class='button'>";
 		echo "<a class='refresh' href='/{$map}/{$type}/list'><span>LIST</span></a>";
 
@@ -191,19 +191,15 @@ class Map_model extends CI_Model {
 		echo "<a href='/{$map}/{$type}/list?page={$max_page}'><i class='fa fa-step-forward' aria-hidden='true'></i></a>";
 		echo "</div>";
 
-
 		// ****************
 		// pagination end
 		// ****************
 
-		if($type != "best") {
-			echo "<a class='edit enable ' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
-		} else {                                                                             
-			echo "<a class='edit disable' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
-		}
+		$activate = "disable";
+		if($type != "best") $activate = "enable";
+		echo "<a class='edit {$activate}' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
 
-		// pagination + edit button end
-
+		// ** button class end
 		echo "</div>";
 
 
@@ -234,22 +230,34 @@ class Map_model extends CI_Model {
 		echo "<div class='post'>";
 		foreach ($find->result() as $key => $row) {
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
+			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
+			$no = $row->no;
+			$uid= $row->uid;
 
-			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></div>"
+			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$row->title}</a></div>";
+			echo "<div class='post-date' ><i class='fa fa-clock-o' aria-hidden='true'></i> {$date} {$time} </div>";
 
-			."<div class='post-info'>"
-				."<span class='reply'>{$row->reply}</span>"
-				."<span class='hit'>{$row->hit}</span>"
-				."<span class='vote'>{$row->vote}</span>"
-				."<span class='name'>{$row->name}</span>"
-				."<span class='date'>".$date."</span>"
+			//."<span class='vote'>{$row->vote}</span>"
+			echo "<div class='post-info'>"
+				."<span class='name' ><i class='fa fa-user' aria-hidden='true'></i> {$row->name} </span>"
+				."<span class='hit'  ><i class='fa fa-eye' aria-hidden='true'></i> {$row->hit} </span>"
+				."<span class='reply'><i class='fa fa-commenting-o' aria-hidden='true'></i> {$row->reply} </span>"
 			."</div>"
 
 			."<div id='post-conetent'>{$row->content}</div>";
 		}
 		echo "</div>";
 
+		// permission check
+		$activate = "disable";
+		if ($this->session->userdata('uid') === $uid || $this->session->userdata('admin')) $activate = "enable";
+
 		// modify + delete button
+		echo "<div class='button'>"
+			."<span class='null'></span>"
+			."<a class='edit {$activate}' href='/{$map}/{$type}/{$no}/edit'><span>edit</span></a>"
+			."<a class='delete {$activate}' href='/{$map}/{$type}/{$no}/delete'><span>delete</span></a>"
+		."</div>";
 
 		return true;
 	}

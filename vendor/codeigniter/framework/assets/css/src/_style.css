@@ -2700,6 +2700,7 @@ a {
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  user-select: none;
   -webkit-transition: .5s ease-in-out;
   -moz-transition: .5s ease-in-out;
   -o-transition: .5s ease-in-out;
@@ -4014,7 +4015,8 @@ a {
   animation-play-state: paused; }
 
 #list {
-  font-size: 1.2rem; }
+  font-size: 1.2rem;
+  margin: 2.5rem 0; }
   @media screen and (max-width: 860px) {
     #list {
       font-size: 1rem; } }
@@ -4038,6 +4040,8 @@ a {
     @media screen and (max-width: 860px) {
       #list .list .list-head th:nth-child(5) {
         display: none; } }
+    #list .list .list-row:hover {
+      background: #f1f3f5; }
     #list .list .list-row td {
       padding: 1rem 0;
       border-bottom: 1px solid #212529; }
@@ -4153,19 +4157,19 @@ a {
         @media screen and (max-width: 860px) {
           #page .type .type-row .type-col .type-list {
             margin-bottom: 4rem; } }
-        #page .type .type-row .type-col .type-list .no-result {
+        #page .type .type-row .type-col .type-list .no-page {
           margin: auto;
           height: 14rem; }
-        #page .type .type-row .type-col .type-list .result {
+        #page .type .type-row .type-col .type-list .page {
           display: block;
           margin: .5rem 1rem;
           width: 90%; }
-          #page .type .type-row .type-col .type-list .result tr td:nth-child(1) {
+          #page .type .type-row .type-col .type-list .page tr td:nth-child(1) {
             font-size: 0.5rem;
             width: 4rem; }
-          #page .type .type-row .type-col .type-list .result div {
+          #page .type .type-row .type-col .type-list .page div {
             display: grid; }
-            #page .type .type-row .type-col .type-list .result div a {
+            #page .type .type-row .type-col .type-list .page div a {
               text-overflow: ellipsis;
               overflow: hidden;
               white-space: nowrap; }
@@ -4208,15 +4212,80 @@ a {
   color: #66d9e8; }
 
 #post {
-  margin: 2rem 0; }
-  #post .post .post-title {
-    margin: 2rem 0;
-    padding: 1rem;
-    font-size: 2.5rem; }
-    #post .post .post-title a {
-      color: black; }
-      #post .post .post-title a:hover {
-        color: #868e96; }
+  margin: 1rem 0; }
+  #post .post {
+    font-size: 1rem;
+    padding: 0 1rem; }
+    #post .post .post-title {
+      margin: 2rem 0;
+      font-size: 2.5rem; }
+      @media screen and (max-width: 860px) {
+        #post .post .post-title {
+          font-size: 1.5rem; } }
+      #post .post .post-title a {
+        color: black; }
+        #post .post .post-title a:hover {
+          color: #868e96; }
+    #post .post .post-date {
+      font-size: 1rem; }
+      @media screen and (max-width: 860px) {
+        #post .post .post-date {
+          font-size: .8rem; } }
+    #post .post .post-info {
+      font-size: 1rem;
+      margin: .5rem 0 2rem 0;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #212529; }
+      @media screen and (max-width: 860px) {
+        #post .post .post-info {
+          font-size: .8rem; } }
+      #post .post .post-info span {
+        padding-right: 1rem; }
+        #post .post .post-info span i {
+          padding-right: .5rem; }
+  #post .button {
+    font-family: "pixel";
+    margin: 2.5rem 0;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    user-select: none; }
+    #post .button span.null {
+      flex: 8; }
+    #post .button .edit {
+      color: black;
+      padding: .5rem 1rem;
+      border-radius: .25rem;
+      flex: 1;
+      margin: 0 1rem; }
+      #post .button .edit.enable {
+        border: 1px solid #087f5b; }
+        #post .button .edit.enable:hover {
+          background-color: #087f5b;
+          color: white;
+          transition: all .1s ease-out; }
+      #post .button .edit.disable {
+        border: 1px solid #e9ecef;
+        pointer-events: none;
+        cursor: default;
+        color: #e9ecef; }
+    #post .button .delete {
+      color: black;
+      padding: .5rem 1rem;
+      border-radius: .25rem;
+      flex: 1;
+      margin: 0 1rem; }
+      #post .button .delete.enable {
+        border: 1px solid #c92a2a; }
+        #post .button .delete.enable:hover {
+          background-color: #c92a2a;
+          color: white;
+          transition: all .1s ease-out; }
+      #post .button .delete.disable {
+        border: 1px solid #e9ecef;
+        pointer-events: none;
+        cursor: default;
+        color: #e9ecef; }
 
 #sign-up {
   margin-top: 2rem; }

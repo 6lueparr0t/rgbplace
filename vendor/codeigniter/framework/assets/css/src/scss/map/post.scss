@@ -1,14 +1,19 @@
 #post {
-	margin: 2rem 0;
+	margin: 1rem 0;
 
 	.no-post {
 	}
 	.post {
+		font-size : 1rem;
+		padding: 0 1rem;
 
 		.post-title {
 			margin: 2rem 0;
-			padding: 1rem;
 			font-size: 2.5rem;
+
+			@media screen and ($width-name : $target-width) {
+				font-size: 1.5rem;
+			}
 
 			a {
 				color : black;
@@ -17,5 +22,105 @@
 				}
 			}
 		}
+
+		.post-date {
+			font-size: 1rem;
+
+			@media screen and ($width-name : $target-width) {
+				font-size: .8rem;
+			}
+		}
+
+		.post-info {
+			font-size: 1rem;
+			margin: .5rem 0 2rem 0;
+			padding-bottom:1rem;
+			border-bottom:1px solid $oc-gray-9;
+
+			@media screen and ($width-name : $target-width) {
+				font-size: .8rem;
+			}
+
+			span {
+				padding-right : 1rem;
+
+				i {
+					padding-right:.5rem;
+				}
+
+			}
+
+			.reply {
+			}
+
+			.hit {
+			}
+
+			.name {
+			}
+
+		}
+	}
+
+	.button {
+		font-family: "pixel";
+		margin: 2.5rem 0;
+		width:100%;
+		display:flex;
+		text-align:center;
+		user-select: none;
+
+		span.null {
+			flex:8;
+		}
+
+		.edit {
+			color : black;
+			padding: .5rem 1rem;
+			border-radius : .25rem;
+			flex:1;
+			margin:0 1rem;
+
+			&.enable {
+				border: 1px solid $oc-teal-9;
+				&:hover {
+					background-color: $oc-teal-9;
+					color:white;
+					transition:all .1s ease-out;
+				}
+			}
+
+			&.disable {
+				border: 1px solid $oc-gray-2;
+				pointer-events: none;
+				cursor: default;
+				color : $oc-gray-2;
+			}
+		}
+
+		.delete {
+			color : black;
+			padding: .5rem 1rem;
+			border-radius : .25rem;
+			flex:1;
+			margin:0 1rem;
+
+			&.enable {
+				border: 1px solid $oc-red-9;
+				&:hover {
+					background-color: $oc-red-9;
+					color:white;
+					transition:all .1s ease-out;
+				}
+			}
+
+			&.disable {
+				border: 1px solid $oc-gray-2;
+				pointer-events: none;
+				cursor: default;
+				color : $oc-gray-2;
+			}
+		}
+
 	}
 }
