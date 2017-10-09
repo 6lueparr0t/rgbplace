@@ -1,6 +1,36 @@
+@mixin depth($num) {
+	margin-left: $num * 1rem;
+}
+
+
 #reply {
 	.no-reply {
 	}
 	.reply {
+		border-top:1px solid $oc-gray-9;
+		margin:1rem;
+		padding:1rem 0;
+
+		.mention {
+			color:black;
+			background-color:$oc-yellow-3;
+		}
+
+		ul {
+			list-style: none;
+			padding-left: 0;
+
+			@for $i from 0 through 4 {
+				li.depth-#{$i} {
+					@include depth($i);
+				}
+			}
+
+			@for $i from 5 through 10 {
+				li.depth-#{$i} {
+					@include depth(4);
+				}
+			}
+		}
 	}
 }

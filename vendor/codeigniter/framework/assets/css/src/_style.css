@@ -4016,12 +4016,14 @@ a {
 
 #list {
   font-size: 1.2rem;
-  margin: 2.5rem 0; }
+  margin: 5rem 0; }
   @media screen and (max-width: 860px) {
     #list {
       font-size: 1rem; } }
   #list .no-list {
-    text-align: center; }
+    font-family: "pixel";
+    text-align: center;
+    padding: 2rem 0; }
   #list .list {
     border-collapse: collapse;
     width: 100%;
@@ -4213,6 +4215,10 @@ a {
 
 #post {
   margin: 1rem 0; }
+  #post .no-post {
+    font-size: 2rem;
+    padding: 2rem;
+    text-align: center; }
   #post .post {
     font-size: 1rem;
     padding: 0 1rem; }
@@ -4245,7 +4251,7 @@ a {
           padding-right: .5rem; }
   #post .button {
     font-family: "pixel";
-    margin: 2.5rem 0;
+    margin: 2.5rem 0 0 0;
     width: 100%;
     display: flex;
     text-align: center;
@@ -4259,10 +4265,12 @@ a {
       flex: 1;
       margin: 0 1rem; }
       #post .button .edit.enable {
-        border: 1px solid #087f5b; }
+        border: 1px solid #087f5b;
+        background-color: #087f5b;
+        color: white; }
         #post .button .edit.enable:hover {
-          background-color: #087f5b;
-          color: white;
+          background-color: white;
+          color: #087f5b;
           transition: all .1s ease-out; }
       #post .button .edit.disable {
         border: 1px solid #e9ecef;
@@ -4276,16 +4284,51 @@ a {
       flex: 1;
       margin: 0 1rem; }
       #post .button .delete.enable {
-        border: 1px solid #c92a2a; }
+        border: 1px solid #c92a2a;
+        background-color: #c92a2a;
+        color: white; }
         #post .button .delete.enable:hover {
-          background-color: #c92a2a;
-          color: white;
+          background-color: white;
+          color: #c92a2a;
           transition: all .1s ease-out; }
       #post .button .delete.disable {
         border: 1px solid #e9ecef;
         pointer-events: none;
         cursor: default;
         color: #e9ecef; }
+
+#reply .reply {
+  border-top: 1px solid #212529;
+  margin: 1rem;
+  padding: 1rem 0; }
+  #reply .reply .mention {
+    color: black;
+    background-color: #ffe066; }
+  #reply .reply ul {
+    list-style: none;
+    padding-left: 0; }
+    #reply .reply ul li.depth-0 {
+      margin-left: 0rem; }
+    #reply .reply ul li.depth-1 {
+      margin-left: 1rem; }
+    #reply .reply ul li.depth-2 {
+      margin-left: 2rem; }
+    #reply .reply ul li.depth-3 {
+      margin-left: 3rem; }
+    #reply .reply ul li.depth-4 {
+      margin-left: 4rem; }
+    #reply .reply ul li.depth-5 {
+      margin-left: 4rem; }
+    #reply .reply ul li.depth-6 {
+      margin-left: 4rem; }
+    #reply .reply ul li.depth-7 {
+      margin-left: 4rem; }
+    #reply .reply ul li.depth-8 {
+      margin-left: 4rem; }
+    #reply .reply ul li.depth-9 {
+      margin-left: 4rem; }
+    #reply .reply ul li.depth-10 {
+      margin-left: 4rem; }
 
 #sign-up {
   margin-top: 2rem; }

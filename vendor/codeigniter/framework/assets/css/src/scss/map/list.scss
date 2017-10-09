@@ -3,10 +3,12 @@
 	@media screen and ($width-name : $target-width) {
 		font-size:1rem;
 	}
-	margin: 2.5rem 0;
+	margin: 5rem 0;
 
 	.no-list {
-		text-align : center;
+		font-family:"pixel";
+		text-align: center;
+		padding: 2rem 0;
 	}
 
 	.list {

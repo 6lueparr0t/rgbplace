@@ -222,7 +222,7 @@ class Map_model extends CI_Model {
 		$find = $this->db->query($query);
 
 		if($find->num_rows() === 0 || $find->num_rows() >= 2) {
-			echo "<div class='no-post'>No Post.</div>";
+			echo "<div class='no-post'>Not Found <i class='fa fa-frown-o' aria-hidden='true'></i> </div>";
 
 			return false;
 		}
@@ -272,43 +272,68 @@ class Map_model extends CI_Model {
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_{$map}_reply where follow={$num} and dtim is null order by if(isnull(head), no, head), ctim";
+		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, depth11, depth12, depth13, depth14, depth15, ctim";
 		$find = $this->db->query($query);
 
 		if($find->num_rows() === 0) {
-			echo "<div class='no-reply'>No Replies.</div>";
-
 			return false;
 		}
 
-		echo "<table class='reply'>";
+		echo "<div class='reply'>";
+		echo "<ul>";
+
+		$cnt = 0;
 		foreach ($find->result() as $key => $row) {
-			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
+			$cnt++;
 
-			echo "<tr>"
-				."<td class='name'>{$row->name}</td>"
-				."<td class='content' style='width:200px;'>{$row->content}</td>"
-				."<td class='date'>{$date}</td>"
-				."<td class='func'>  <i class='fa fa-ellipsis-v' aria-hidden='true'></i></td>"
-				."<td class='edit'>  <i class='fa fa-pencil'     aria-hidden='true'></i></td>"
-				."<td class='delete'><i class='fa fa-trash'      aria-hidden='true'></i></td>"
-				."<td class='report'><i class='fa fa-meh-o'      aria-hidden='true'></i></td>"
-				."<td class='add'>   <i class='fa fa-plus'       aria-hidden='true'></i></td>"
-			."</tr>";
+			$date   = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
+			$time   = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
+			$no     = $row->no;
+			$mention= ($row->mention)? "@".$row->mention:"";
+			$follow = ($row->follow)?$row->follow:"0";
 
-			//echo "<tr>"
-				//."<td class='name'>{$row->name}</td>"
-				//."<td class='content'><div>{$row->content}</div></td>"
-				//."<td class='date'>{$date}</td>"
-				//."<td class='func'>"
-					//."<i class='fa fa-pencil' aria-hidden='true'></i> <i class='fa fa-trash' aria-hidden='true'></i> <i class='fa fa-meh-o' aria-hidden='true'></i>"
-				//."</td>"
-			//."</tr>"
-			//."<tr>"
-				//."<td colspan='3' class='add'><div contentEditable='true'></div></td>"
-			//."</tr>";
+			$depth = [
+				$row->depth1, $row->depth2, $row->depth3,
+				$row->depth4, $row->depth5, $row->depth6,
+				$row->depth7, $row->depth8, $row->depth9,
+				$row->depth10
+			];
+
+			$padding = 0;
+
+			for($i=0; $i<count($depth); $i++) {
+				if($depth[$i]>0) $padding = $i;
+			}
+
+			echo "<li class='depth-{$padding}'>"
+				."<span class='name'> {$row->name} </span>"
+				."<span class='content'> <b class='mention'>{$mention}</b> {$row->content} </span>"
+				."<span class='date'> {$date} {$time} </span>"
+			."</li>";
+
 		}
-		echo "</table>";
+		echo "</ul>";
+		echo "</div>";
+		/*
+			$depth = [
+				$row->depth1, $row->depth2, $row->depth3,
+				$row->depth4, $row->depth5, $row->depth6,
+				$row->depth7, $row->depth8, $row->depth9,
+				$row->depth10, $row->depth11, $row->depth12,
+				$row->depth13, $row->depth14, $row->depth15
+			];
+		*/
+		//."<li class='func'>  <i class='fa fa-ellipsis-v' aria-hidden='true'></i></li>"
+		//."<li class='edit'>  <i class='fa fa-pencil'     aria-hidden='true'></i></li>"
+		//."<li class='delete'><i class='fa fa-trash'      aria-hidden='true'></i></li>"
+		//."<li class='report'><i class='fa fa-meh-o'      aria-hidden='true'></i></li>"
+		//."<li class='add'>   <i class='fa fa-plus'       aria-hidden='true'></i></li>"
+		//."<li class='name'>{$row->name}</li>"
+		//."<li class='content'><div>{$row->content}</div></li>"
+		//."<li class='date'>{$date}</li>"
+		//."<li class='func'>"
+		//."<i class='fa fa-pencil' aria-hidden='true'></i> <i class='fa fa-trash' aria-hidden='true'></i> <i class='fa fa-meh-o' aria-hidden='true'></i>"
+		//."<li colspan='3' class='add'><div contentEditable='true'></div></li>"
 
 		//input reply text box
 
