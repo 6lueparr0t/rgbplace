@@ -272,10 +272,13 @@ class Map_model extends CI_Model {
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, depth11, depth12, depth13, depth14, depth15, ctim";
+		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim";
 		$find = $this->db->query($query);
 
 		if($find->num_rows() === 0) {
+			echo "<div class='reply'>";
+			$this->message();
+			echo "</div>";
 			return false;
 		}
 
@@ -299,30 +302,23 @@ class Map_model extends CI_Model {
 				$row->depth10
 			];
 
-			$padding = 0;
-
+			$depth_no = 0;
 			for($i=0; $i<count($depth); $i++) {
-				if($depth[$i]>0) $padding = $i;
+				if($depth[$i]>0) $depth_no = $i;
 			}
 
-			echo "<li class='depth-{$padding}'>"
+			echo "<li class='depth-{$depth_no}'>"
 				."<span class='name'> {$row->name} </span>"
 				."<span class='content'> <b class='mention'>{$mention}</b> {$row->content} </span>"
 				."<span class='date'> {$date} {$time} </span>"
 			."</li>";
+		$this->message("hide", $no);
 
 		}
 		echo "</ul>";
+		$this->message();
 		echo "</div>";
-		/*
-			$depth = [
-				$row->depth1, $row->depth2, $row->depth3,
-				$row->depth4, $row->depth5, $row->depth6,
-				$row->depth7, $row->depth8, $row->depth9,
-				$row->depth10, $row->depth11, $row->depth12,
-				$row->depth13, $row->depth14, $row->depth15
-			];
-		*/
+
 		//."<li class='func'>  <i class='fa fa-ellipsis-v' aria-hidden='true'></i></li>"
 		//."<li class='edit'>  <i class='fa fa-pencil'     aria-hidden='true'></i></li>"
 		//."<li class='delete'><i class='fa fa-trash'      aria-hidden='true'></i></li>"
@@ -338,6 +334,25 @@ class Map_model extends CI_Model {
 		//input reply text box
 
 		return true;
+	}
+
+	private function message($status = "block", $id = 0) {
+		$to = ($id != 0)? "to":"";
+
+		echo "<div class='message {$status}' id='message-{$id}' name='message-{$id}'>"
+			."<input type='hidden' class='message-no' value='{$id}'>"
+			."<textarea class='message-box' id='message-box-{$id}' placeholder='Leave a Message .. &#xf040;'></textarea>"
+			."<div class='message-button-group'>"
+
+			."<div class='message-button-send {$to}'>Send <i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
+			."<div class='message-button-send no'>no</div>"
+			."<div class='message-button-send yes'>yes</div>"
+
+			."<div class='message-button-reset'>reset ?</div>"
+			."<div class='message-button-reset no'>no</div>"
+			."<div class='message-button-reset yes'>yes</div>"
+			."</div>"
+			."</div>";
 	}
 
 }
