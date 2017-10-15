@@ -345,12 +345,12 @@ class Map_model extends CI_Model {
 			."<div class='message-button-group'>"
 
 			."<div class='message-button-send {$to}'>Send <i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
-			."<div class='message-button-send no'>no</div>"
 			."<div class='message-button-send yes'>yes</div>"
+			."<div class='message-button-send no'>no</div>"
 
 			."<div class='message-button-reset'>reset ?</div>"
-			."<div class='message-button-reset no'>no</div>"
 			."<div class='message-button-reset yes'>yes</div>"
+			."<div class='message-button-reset no'>no</div>"
 			."</div>"
 			."</div>";
 	}
