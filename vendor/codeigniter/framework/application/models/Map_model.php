@@ -165,8 +165,8 @@ class Map_model extends CI_Model {
 		$min_page = ((int)$current-(int)$range>0)?(int)$current-(int)$range:1;
 		$max_page = ((int)$current+(int)$range>$max)?$max:(int)$current+(int)$range;
 
-		// ** button class start
-		echo "<div class='button'>";
+		// ** button-group class start
+		echo "<div class='button-group'>";
 		echo "<a class='refresh' href='/{$map}/{$type}/list'><span>LIST</span></a>";
 
 
@@ -199,7 +199,20 @@ class Map_model extends CI_Model {
 		if($type != "best") $activate = "enable";
 		echo "<a class='edit {$activate}' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
 
-		// ** button class end
+		// ** button-group class end
+		echo "</div>";
+
+		// ** search-group class start
+		echo "<div class='search-group'>";
+
+		echo "<span class='null'></span>";
+
+		echo "<input type='text' class='search-input' value='' placeholder='Search Tag .. [ ex : #tag_name1 #tag_name2 ]'/>";
+		echo "<div class='search-button'><i class='fa fa-search' aria-hidden='true'></i></div>";
+		echo "<span class='null'></span>";
+
+		
+		// ** search-group class end
 		echo "</div>";
 
 
@@ -253,7 +266,7 @@ class Map_model extends CI_Model {
 		if ($this->session->userdata('uid') === $uid || $this->session->userdata('admin')) $activate = "enable";
 
 		// modify + delete button
-		echo "<div class='button'>"
+		echo "<div class='button-group'>"
 			."<span class='null'></span>"
 			."<a class='edit {$activate}' href='/{$map}/{$type}/{$no}/edit'><span>edit</span></a>"
 			."<a class='delete {$activate}' href='/{$map}/{$type}/{$no}/delete'><span>delete</span></a>"

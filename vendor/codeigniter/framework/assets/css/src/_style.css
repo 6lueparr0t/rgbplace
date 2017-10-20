@@ -4078,44 +4078,71 @@ a {
       @media screen and (max-width: 860px) {
         #list .list .list-row .date {
           display: none; } }
-  #list .button {
+  #list .button-group {
     font-family: "pixel";
     margin: 2.5rem 0;
     width: 100%;
     display: flex;
     text-align: center;
     user-select: none; }
-    #list .button a {
+    #list .button-group a {
       color: black; }
-    #list .button .refresh {
+    #list .button-group .refresh {
       padding: .5rem 1rem;
       border: 1px solid #212529;
       border-radius: .25rem;
       flex: 1; }
-      #list .button .refresh:hover {
+      #list .button-group .refresh:hover {
         background-color: #212529;
         color: white;
         transition: all .1s ease-out; }
-    #list .button .pagination {
+    #list .button-group .pagination {
       margin: .5rem 1rem;
       flex: 10; }
-      #list .button .pagination a {
+      #list .button-group .pagination a {
         padding: .5rem 1rem; }
-    #list .button .edit {
+    #list .button-group .edit {
       padding: .5rem 1rem;
       border-radius: .25rem;
       flex: 1; }
-      #list .button .edit.enable {
+      #list .button-group .edit.enable {
         border: 1px solid #212529; }
-        #list .button .edit.enable:hover {
+        #list .button-group .edit.enable:hover {
           background-color: #212529;
           color: white;
           transition: all .1s ease-out; }
-      #list .button .edit.disable {
+      #list .button-group .edit.disable {
         border: 1px solid #ced4da;
         pointer-events: none;
         cursor: default;
         color: #ced4da; }
+  #list .search-group {
+    font-family: "pixel";
+    margin: 2.5rem 0;
+    width: 100%;
+    display: flex;
+    text-align: center; }
+    #list .search-group a {
+      color: black; }
+    #list .search-group span.null {
+      flex: 8; }
+    #list .search-group .search-input {
+      padding: .75rem 1rem;
+      border: 1px solid #212529;
+      border-radius: .25rem;
+      margin: 0 .25rem;
+      flex: 4; }
+    #list .search-group .search-button {
+      padding: .75rem 1rem;
+      border: 1px solid #212529;
+      border-radius: .25rem;
+      margin: 0 .25rem;
+      cursor: pointer;
+      width: 1rem; }
+      #list .search-group .search-button:hover {
+        background-color: #212529;
+        color: white;
+        transition: all .1s ease-out; }
 
 #page #scene {
   background: #212529;
@@ -4249,49 +4276,49 @@ a {
         padding-right: 1rem; }
         #post .post .post-info span i {
           padding-right: .5rem; }
-  #post .button {
+  #post .button-group {
     font-family: "pixel";
     margin: 2.5rem 0 0 0;
     width: 100%;
     display: flex;
     text-align: center;
     user-select: none; }
-    #post .button span.null {
+    #post .button-group span.null {
       flex: 8; }
-    #post .button .edit {
+    #post .button-group .edit {
       color: black;
       padding: .5rem 1rem;
       border-radius: .25rem;
       flex: 1;
       margin: 0 1rem; }
-      #post .button .edit.enable {
+      #post .button-group .edit.enable {
         border: 1px solid #087f5b;
         background-color: #087f5b;
         color: white; }
-        #post .button .edit.enable:hover {
+        #post .button-group .edit.enable:hover {
           background-color: white;
           color: #087f5b;
           transition: all .1s ease-out; }
-      #post .button .edit.disable {
+      #post .button-group .edit.disable {
         border: 1px solid #e9ecef;
         pointer-events: none;
         cursor: default;
         color: #e9ecef; }
-    #post .button .delete {
+    #post .button-group .delete {
       color: black;
       padding: .5rem 1rem;
       border-radius: .25rem;
       flex: 1;
       margin: 0 1rem; }
-      #post .button .delete.enable {
+      #post .button-group .delete.enable {
         border: 1px solid #c92a2a;
         background-color: #c92a2a;
         color: white; }
-        #post .button .delete.enable:hover {
+        #post .button-group .delete.enable:hover {
           background-color: white;
           color: #c92a2a;
           transition: all .1s ease-out; }
-      #post .button .delete.disable {
+      #post .button-group .delete.disable {
         border: 1px solid #e9ecef;
         pointer-events: none;
         cursor: default;
@@ -4303,7 +4330,7 @@ a {
   border-bottom: 1px solid #212529;
   display: grid; }
   #reply .reply {
-    margin: 1rem;
+    margin: .5rem;
     padding: 1rem 0; }
     #reply .reply .mention {
       color: black;
@@ -4339,11 +4366,14 @@ a {
         display: none; }
       #reply .reply .message .message-box {
         font-family: normal, FontAwesome;
-        font-size: 1.4rem;
-        margin: auto;
+        font-size: 1rem;
         padding: 1rem;
         height: 5rem;
-        width: 97.75%; }
+        width: 97.75%;
+        border: 1px solid #212529; }
+        @media screen and (max-width: 860px) {
+          #reply .reply .message .message-box {
+            width: 90.8%; } }
         #reply .reply .message .message-box:active, #reply .reply .message .message-box:focus {
           border: 1px solid #212529; }
       #reply .reply .message .message-button-group {

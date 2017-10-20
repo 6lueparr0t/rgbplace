@@ -10,7 +10,7 @@
 	display: grid;
 
 	.reply {
-		margin:1rem;
+		margin:.5rem;
 		padding:1rem 0;
 
 		.mention {
@@ -44,11 +44,15 @@
 
 			.message-box {
 				font-family:normal, FontAwesome;
-				font-size:1.4rem;
-				margin: auto;
+				font-size:1rem;
 				padding:1rem;
 				height:5rem;
 				width:97.75%;
+				border: 1px solid $oc-gray-9;
+
+				@media screen and ($width-name : $target-width) {
+					width:90.8%;
+				}
 
 				&:active,
 				&:focus{

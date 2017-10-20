@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "codeigniter/framework",
-            "version": "3.1.5",
+            "version": "3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bcit-ci/CodeIgniter.git",
-                "reference": "6c7a4266410070d30f8f6bcdf9c9e67f3d6478e3"
+                "reference": "7e4f63cd4b792e7dc2dc4b8b0183a6072a3f9462"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bcit-ci/CodeIgniter/zipball/6c7a4266410070d30f8f6bcdf9c9e67f3d6478e3",
-                "reference": "6c7a4266410070d30f8f6bcdf9c9e67f3d6478e3",
+                "url": "https://api.github.com/repos/bcit-ci/CodeIgniter/zipball/7e4f63cd4b792e7dc2dc4b8b0183a6072a3f9462",
+                "reference": "7e4f63cd4b792e7dc2dc4b8b0183a6072a3f9462",
                 "shasum": ""
             },
             "require": {
@@ -38,7 +38,7 @@
             ],
             "description": "The CodeIgniter framework",
             "homepage": "https://codeigniter.com",
-            "time": "2017-06-19 08:33:58"
+            "time": "2017-09-25 16:43:58"
         },
         {
             "name": "monolog/monolog",
