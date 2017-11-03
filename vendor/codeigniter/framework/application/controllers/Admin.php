@@ -24,10 +24,10 @@ class Admin extends CI_Controller {
 		$this->rgb->sview("admin/info");
 	}
 
-	public function database($method="")
+	public function db($method="")
 	{
 		$data['method'] = $method;
-		$this->rgb->sview("admin/database", $data);
+		$this->rgb->sview("admin/db", $data);
 	}
 
 /*

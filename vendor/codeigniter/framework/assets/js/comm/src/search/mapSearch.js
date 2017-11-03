@@ -1,4 +1,4 @@
-var searchResult = document.querySelector("#map-result");
+let searchResult = document.querySelector("#map-result");
 
 function mapSearch (recv) {
 	//console.log(recv.value);

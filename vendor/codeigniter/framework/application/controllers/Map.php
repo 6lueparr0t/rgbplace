@@ -50,9 +50,12 @@ class Map extends CI_Controller {
 
 		$data['search']['page'   ] = urldecode($this->input->get('page'));
 
-		// method : title, text, title+text, name, reply ... etc
-		$data['search']['method' ] = urldecode($this->input->get('method'));
-		$data['search']['keyword'] = urldecode($this->input->get('keyword'));
+		// Map_model, search list ['title', 'content', 'reply', 'name', 'tag', 'date'];
+		$data['search']['title'  ] = urldecode($this->input->get('title'));
+		$data['search']['content'] = urldecode($this->input->get('content'));
+		$data['search']['reply'  ] = urldecode($this->input->get('reply'));
+		$data['search']['name'   ] = urldecode($this->input->get('name'));
+		$data['search']['tag'    ] = urldecode($this->input->get('tag'));
 		$data['search']['date'   ] = urldecode($this->input->get('date'));
 
 		$this->rgb->view("map/list", $data);
@@ -93,15 +96,15 @@ class Map extends CI_Controller {
 
 	private function check($type) {
 		switch($type) {
-		case 'best' :
-		case 'free' :
-		case 'info' :
-		case 'photo':
-		case 'food' :
-		case 'life' :
-		case 'news' :
-		case 'dev'  :
-		case '_ad_' :
+		case 'best'   :
+		case 'free'   :
+		case 'info'   :
+		case 'photo'  :
+		case 'food'   :
+		case 'life'   :
+		case 'news'   :
+		case 'dev'    :
+		case "public" :
 			return true;
 		default :
 			return false;

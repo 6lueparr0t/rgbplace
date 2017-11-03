@@ -1,6 +1,6 @@
 "use strict"
 
-var onUnload = function () {
+let onUnload = function () {
     event.returnValue = 1;
 }
 

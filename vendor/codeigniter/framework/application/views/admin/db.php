@@ -19,15 +19,15 @@ if($method==="restore") {
 
 <?
 
-echo form_open('admin/database/backup', ['name' => 'backup', 'id' => 'backup'])
+echo form_open('admin/db/backup', ['name' => 'backup', 'id' => 'backup'])
 	.('<input type="submit" value="backup" />')
 	.form_close();
 
-echo form_open('admin/database/restore', ['name' => 'restore', 'id' => 'restore'])
+echo form_open('admin/db/restore', ['name' => 'restore', 'id' => 'restore'])
 	.('<input type="submit" value="restore" />')
 	.form_close();
 
-echo form_open('admin/database/clear', ['name' => 'clear', 'id' => 'clear'])
+echo form_open('admin/db/clear', ['name' => 'clear', 'id' => 'clear'])
 	.('<input type="submit" value="log clear" />')
 	.form_close();
 

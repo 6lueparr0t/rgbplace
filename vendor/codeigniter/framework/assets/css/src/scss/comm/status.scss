@@ -11,6 +11,7 @@
 
 	@media screen and ($width-name : $target-width) {
 		font-size:1rem;
+		text-align: justify;
 	}
 
 	&:before {
@@ -52,10 +53,39 @@
 	overflow:hidden;
 	top: 0rem;
 
-	a {
+	a, label {
 		color : white;
 		flex:1;
+
+		&:nth-child(2) {
+			padding : .35rem .4rem !important;
+			@media screen and ($width-name : $target-width) {
+			}
+		}
+
+		select {
+			font-family: "pixel";
+			font-size: 1.6rem;
+			border: 0;
+			background: none;
+			@media screen and ($width-name : $target-width) {
+				font-size: 1.12rem;
+			}
+
+			&.none {
+				display:initial !important;
+			}
+
+			&.db {
+				color:$oc-gray-2;
+			}
+
+			&.free, &.info {
+				color:$oc-gray-2;
+			}
+		}
 	}
+
 
 	.type {
 		@include status-arrow (white, $oc-gray-9);
@@ -68,7 +98,6 @@
 
 	.type.none {
 		@include status-arrow ($oc-gray-9, $oc-gray-2);
-		pointer-events:none;
 	}
 
 	.type.free, .type.info {
@@ -76,7 +105,7 @@
 
 		&.none {
 		@include status-arrow ($oc-gray-9, $oc-gray-2);
-			z-index:-1;
+			//z-index:-1;
 		}
 
 		&.num {
@@ -89,7 +118,7 @@
 
 		&.none {
 			@include status-arrow ($oc-gray-9, $oc-gray-2);
-			z-index:-1;
+			//z-index:-1;
 		}
 
 		&.num {
@@ -102,7 +131,7 @@
 
 		&.none {
 			@include status-arrow ($oc-gray-9, $oc-gray-2);
-			z-index:-1;
+			//z-index:-1;
 		}
 
 		&.num {
@@ -115,7 +144,7 @@
 
 		&.none {
 			@include status-arrow ($oc-gray-9, $oc-gray-2);
-			z-index:-1;
+			//z-index:-1;
 		}
 
 		&.num {
@@ -123,12 +152,12 @@
 		}
 	}                                               
                                                     
-	.type._ad_ {                                      
+	.type.public {                                      
 		@include status-arrow ($oc-gray-7, $oc-red-6);
 
 		&.none {
 			@include status-arrow ($oc-gray-9, $oc-gray-2);
-			z-index:-1;
+			//z-index:-1;
 		}
 
 		&.num {
@@ -141,7 +170,7 @@
 
 		&.none {
 			@include status-arrow ($oc-gray-9, $oc-gray-2);
-			z-index:-1;
+			//z-index:-1;
 		}
 
 		&.num {
@@ -154,7 +183,7 @@
 
 		&.none {
 			@include status-arrow ($oc-gray-9, $oc-gray-2);
-			z-index:-1;
+			//z-index:-1;
 		}
 
 		&.num {
@@ -167,7 +196,7 @@
 
 		&.none {
 			@include status-arrow ($oc-gray-9, $oc-gray-2);
-			z-index:-1;
+			//z-index:-1;
 		}
 
 		&.num {

@@ -74,8 +74,10 @@ class Map_model extends CI_Model {
 	 */
 	public function list ($map, $type, $start=0, $end=0, $search = null)
 	{
-		$search_list = ['page', 'method', 'keyword', 'date'];
+		$search_list = ['title', 'content', 'reply', 'name', 'tag', 'date'];
 		$data = [];
+
+		$where = "type='{$type}'";
 
 		if(isset($search)) {
 			for($i=0; $i<count($search_list); $i++) {
@@ -84,8 +86,9 @@ class Map_model extends CI_Model {
 				}
 			}
 		}
-		
-		$where = "type='{$type}'";
+
+		//$where .= " and title like '%{$data['title']}%' ";
+
 		$limit = ($end)?"{$start}, {$end}":"{$start}";
 
 		$query = "SELECT * FROM map_{$map}_post where {$where} ORDER BY no desc LIMIT {$limit}";
@@ -207,7 +210,22 @@ class Map_model extends CI_Model {
 
 		echo "<span class='null'></span>";
 
-		echo "<input type='text' class='search-input' value='' placeholder='Search Tag .. [ ex : #tag_name1 #tag_name2 ]'/>";
+		echo "<div class='search-select'>
+			<label class='search-select-list' for='search-select-toggle'>
+				<input type='checkbox' id='search-select-toggle' />
+				<i class='open fa fa-minus' aria-hidden='true'></i>
+				<i class='close fa fa-plus' aria-hidden='true'></i>
+				<ul>
+					<li><label for='search-mode-title'  ><input type='checkbox' id='search-mode-title'   checked/><span><i class='fa fa-header' aria-hidden='true'>			</i></span></label></li>
+					<li><label for='search-mode-content'><input type='checkbox' id='search-mode-content' checked/><span><i class='fa fa-file-text-o' aria-hidden='true'>		</i></span></label></li>
+					<li><label for='search-mode-reply'  ><input type='checkbox' id='search-mode-reply'          /><span><i class='fa fa-commenting-o' aria-hidden='true'>	</i></span></label></li>
+					<li><label for='search-mode-name'   ><input type='checkbox' id='search-mode-name'           /><span><i class='fa fa-user' aria-hidden='true'>			</i></span></label></li>
+					<li><label for='search-mode-tag'    ><input type='checkbox' id='search-mode-tag'            /><span><i class='fa fa-hashtag' aria-hidden='true'>			</i></span></label></li>
+					<li><label for='search-mode-date'   ><input type='checkbox' id='search-mode-date'           /><span><i class='fa fa-calendar' aria-hidden='true'>		</i></span></label></li>
+				</ul>
+			</label>
+		</div>";
+		echo "<input type='search' class='search-input' value='' placeholder='Search ..'/>";
 		echo "<div class='search-button'><i class='fa fa-search' aria-hidden='true'></i></div>";
 		echo "<span class='null'></span>";
 
@@ -299,14 +317,23 @@ class Map_model extends CI_Model {
 		echo "<ul>";
 
 		$cnt = 0;
+		$uid   = $this->session->userdata('uid');
+		$admin = $this->session->userdata('admin');
+
 		foreach ($find->result() as $key => $row) {
 			$cnt++;
 
-			$date   = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
-			$time   = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
-			$no     = $row->no;
-			$mention= ($row->mention)? "@".$row->mention:"";
-			$follow = ($row->follow)?$row->follow:"0";
+			$date    = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
+			$time    = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
+			$no      = $row->no;
+
+			$reply_uid = $row->uid;
+
+			$name    = $row->name;
+			$mention = ($row->mention)? "@".$row->mention:"";
+			$follow  = ($row->follow)?$row->follow:"0";
+
+			$content = $row->content;
 
 			$depth = [
 				$row->depth1, $row->depth2, $row->depth3,
@@ -320,12 +347,39 @@ class Map_model extends CI_Model {
 				if($depth[$i]>0) $depth_no = $i;
 			}
 
-			echo "<li class='depth-{$depth_no}'>"
-				."<span class='name'> {$row->name} </span>"
-				."<span class='content'> <b class='mention'>{$mention}</b> {$row->content} </span>"
-				."<span class='date'> {$date} {$time} </span>"
+			echo "<li class='depth-{$depth_no}'>";
+			echo "<ul>";
+
+			echo "<li class='null'></li>";
+			echo "<li class='content'><b class='mention'>{$mention}</b> {$content}</li>";
+			echo "<li class='name'> {$name} </li>";
+			echo "<li class='date'> {$date} {$time} </li>";
+
+			echo "<li class='func'>";
+
+			echo "<button id='depth-{$depth_no}-report' /><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+
+			if($uid) {
+				echo "<button id='depth-{$depth_no}-up' /><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
+				echo "<button id='depth-{$depth_no}-down' /><i class='fa fa-thumbs-o-down' aria-hidden='true'></i></button>";
+			}
+
+			if ($uid) {
+				echo "<button id='depth-{$depth_no}-plus' /><i class='fa fa-plus' aria-hidden='true'></i></button>";
+
+				if($uid == $reply_uid || $admin ) {
+					echo "<button id='depth-{$depth_no}-edit' /><i class='fa fa-pencil' aria-hidden='true'></i></button>";
+					echo "<button id='depth-{$depth_no}-delete' /><i class='fa fa-trash' aria-hidden='true'></i></button>";
+				}
+			}
+
+			echo "</span>"
 			."</li>";
-		$this->message("hide", $no);
+
+			echo "</ul>"
+			."</li>";
+
+			$this->message("hide", $no);
 
 		}
 		echo "</ul>";

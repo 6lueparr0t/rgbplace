@@ -75,7 +75,7 @@ class RGBplace {
 
 			$name = $this->CI->session->userdata('name');
 
-			echo ("<div class='status'>{$name} <a href='/#'>Modify</a> <a href='/sign/out'>Sign Out</a></div>");
+			echo ("<div class='sign'>{$name} <a href='/#'>Modify</a> <a href='/sign/out'>Sign Out</a></div>");
 
 			if($admin === TRUE) {
 				$apikey = $this->CI->base->getAdminApiKey($name);
@@ -141,7 +141,7 @@ class RGBplace {
                   <i class='close fa fa-plus' aria-hidden='true'></i>
 		          <ul>
 		            <a href='/admin/info' target='_blank'><li>Version</li></a>
-		            <a href='/admin/database'><li>Database Management</li></a>
+		            <a href='/admin/db'><li>Database Management</li></a>
 		          </ul>
                 </label>
 		        <label for='menu-admin-2'>Exam
@@ -223,11 +223,23 @@ class RGBplace {
 		echo ("
         <div id='status'>
           <a class='type' href='/{$tab1}'>
-            <span>{$tab1}</span>
+            <span id='status-place'>{$tab1}</span>
           </a>
-          <a class='type {$tab2}' href='/{$tab1}/{$tab2}/list'>
-            <span>{$tab2_text}</span>
-          </a>
+          <label class='type {$tab2}'>
+            <select class='{$tab2}' id='status-type'>
+			  <option>{$tab2_text}</option>
+			  ");
+
+		$type = ['#', 'best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
+
+		for($i=0; $i<count($type); $i++) {
+			if($tab2_text === $type[$i]) continue;
+			echo "<option>{$type[$i]}</option>";
+		}
+
+		echo("
+            </select>
+          </label>
           <a class='type {$tab2} {$tab3_class}' href='/{$tab1}/{$tab2}/{$tab3}'>
             <span>{$tab3_text}</span>
           </a>

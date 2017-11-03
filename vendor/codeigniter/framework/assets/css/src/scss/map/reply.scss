@@ -1,5 +1,36 @@
-@mixin depth($num) {
-	margin-left: $num * 1rem;
+@mixin reply($num) {
+	border-bottom:1px solid $oc-gray-5;
+	//padding: .5rem 0;
+	//margin: .5rem 0;
+	padding:1rem 0 1rem 0;
+
+	ul li {
+		display:flex;
+
+		&.depth {
+		}
+
+		&.null {
+		}
+
+		&.content {
+			margin-bottom:1rem;
+		}
+
+		&.name {
+			font-size:1rem;
+		}
+
+		&.date {
+			font-size:1rem;
+		}
+
+		&.func {
+			button {
+				font-size: 1rem;
+			}
+		}
+	}
 }
 
 
@@ -10,8 +41,8 @@
 	display: grid;
 
 	.reply {
-		margin:.5rem;
-		padding:1rem 0;
+		//margin:.5rem;
+		//padding:1rem 0;
 
 		.mention {
 			color:black;
@@ -22,15 +53,12 @@
 			list-style: none;
 			padding-left: 0;
 
-			@for $i from 0 through 4 {
-				li.depth-#{$i} {
-					@include depth($i);
-				}
+			li {
 			}
 
-			@for $i from 5 through 10 {
+			@for $i from 0 through 10 {
 				li.depth-#{$i} {
-					@include depth(4);
+					@include reply(1);
 				}
 			}
 		}

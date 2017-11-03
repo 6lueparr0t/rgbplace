@@ -53,7 +53,7 @@ CREATE TABLE `admin_info` (
 
 LOCK TABLES `admin_info` WRITE;
 /*!40000 ALTER TABLE `admin_info` DISABLE KEYS */;
-INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-09-02 23:10:41','JDJ5JDEwJG1QTHVNamZ6N0d3ajZyVFdvSDdpY3VsSnN5VkJ4ek9DSGFTdG11amx4S3RTTklLcDlFOEdD','2017-09-03 01:59:24');
+INSERT INTO `admin_info` VALUES (1,'admin','daihyun99','JDJ5JDEyJGp6d2doM2REWnkxNlVTRWNsN3pGLnVwUUd4NDF4MjZhS1JYdTFQbGQ1aWJ3R2dhRTduQnFx',0,'2017-10-31 23:56:38','JDJ5JDEwJDhOcXovcE15OEZldm1VZnFRTm1Cc3VvRS5Rcm0yTlNqekcwOUFFc0tidVlLa01aT2dkVlFp','2017-11-01 11:56:38');
 /*!40000 ALTER TABLE `admin_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +97,7 @@ DROP TABLE IF EXISTS `map_kr1_post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_kr1_post` (
-  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `no` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -105,9 +105,9 @@ CREATE TABLE `map_kr1_post` (
   `dtim` datetime NOT NULL,
   `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `reply` bigint(20) NOT NULL DEFAULT '0',
-  `hits` bigint(20) NOT NULL DEFAULT '0',
-  `vote` bigint(20) NOT NULL DEFAULT '0',
+  `reply` int(11) NOT NULL DEFAULT '0',
+  `hit` int(11) NOT NULL DEFAULT '0',
+  `vote` int(11) NOT NULL DEFAULT '0',
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -132,15 +132,27 @@ DROP TABLE IF EXISTS `map_kr1_reply`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_kr1_reply` (
-  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `no` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `utim` datetime DEFAULT NULL,
   `dtim` datetime DEFAULT NULL,
   `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vote` bigint(20) NOT NULL DEFAULT '0',
-  `parent` bigint(20) DEFAULT NULL,
+  `vote` int(11) NOT NULL DEFAULT '0',
+  `post` int(11) DEFAULT NULL,
+  `mention` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '상대방 아이디',
+  `follow` int(11) DEFAULT NULL,
+  `depth1` int(11) NOT NULL DEFAULT '0',
+  `depth2` int(11) NOT NULL DEFAULT '0',
+  `depth3` int(11) NOT NULL DEFAULT '0',
+  `depth4` int(11) NOT NULL DEFAULT '0',
+  `depth5` int(11) NOT NULL DEFAULT '0',
+  `depth6` int(11) NOT NULL DEFAULT '0',
+  `depth7` int(11) NOT NULL DEFAULT '0',
+  `depth8` int(11) NOT NULL DEFAULT '0',
+  `depth9` int(11) NOT NULL DEFAULT '0',
+  `depth10` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -162,7 +174,7 @@ DROP TABLE IF EXISTS `map_kr2_post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_kr2_post` (
-  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `no` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -170,9 +182,9 @@ CREATE TABLE `map_kr2_post` (
   `dtim` datetime NOT NULL,
   `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `reply` bigint(20) NOT NULL DEFAULT '0',
-  `hits` bigint(20) NOT NULL DEFAULT '0',
-  `vote` bigint(20) NOT NULL DEFAULT '0',
+  `reply` int(11) NOT NULL DEFAULT '0',
+  `hit` int(11) NOT NULL DEFAULT '0',
+  `vote` int(11) NOT NULL DEFAULT '0',
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -197,15 +209,27 @@ DROP TABLE IF EXISTS `map_kr2_reply`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_kr2_reply` (
-  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `no` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `utim` datetime DEFAULT NULL,
   `dtim` datetime DEFAULT NULL,
   `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vote` bigint(20) NOT NULL DEFAULT '0',
-  `parent` bigint(20) DEFAULT NULL,
+  `vote` int(11) NOT NULL DEFAULT '0',
+  `post` int(11) DEFAULT NULL,
+  `mention` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '상대방 아이디',
+  `follow` int(11) DEFAULT NULL,
+  `depth1` int(11) NOT NULL DEFAULT '0',
+  `depth2` int(11) NOT NULL DEFAULT '0',
+  `depth3` int(11) NOT NULL DEFAULT '0',
+  `depth4` int(11) NOT NULL DEFAULT '0',
+  `depth5` int(11) NOT NULL DEFAULT '0',
+  `depth6` int(11) NOT NULL DEFAULT '0',
+  `depth7` int(11) NOT NULL DEFAULT '0',
+  `depth8` int(11) NOT NULL DEFAULT '0',
+  `depth9` int(11) NOT NULL DEFAULT '0',
+  `depth10` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -262,7 +286,7 @@ DROP TABLE IF EXISTS `map_space_post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_space_post` (
-  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `no` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -270,9 +294,9 @@ CREATE TABLE `map_space_post` (
   `dtim` datetime NOT NULL,
   `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` bigint(20) NOT NULL DEFAULT '0',
-  `vote` bigint(20) NOT NULL DEFAULT '0',
-  `reply` bigint(20) NOT NULL DEFAULT '0',
+  `hit` int(11) NOT NULL DEFAULT '0',
+  `vote` int(11) NOT NULL DEFAULT '0',
+  `reply` int(11) NOT NULL DEFAULT '0',
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -286,7 +310,7 @@ CREATE TABLE `map_space_post` (
 
 LOCK TABLES `map_space_post` WRITE;
 /*!40000 ALTER TABLE `map_space_post` DISABLE KEYS */;
-INSERT INTO `map_space_post` VALUES (1,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(2,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(3,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(4,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(5,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(6,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first','');
+INSERT INTO `map_space_post` VALUES (1,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,5,'best','first',''),(2,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(3,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(4,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(5,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Hello, 한글!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first',''),(6,'test01','테스트','2017-08-13 17:58:14','0000-00-00 00:00:00','0000-00-00 00:00:00','Test, World!','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa at accumsan sagittis. In hac habitasse platea dictumst.',0,0,0,'best','first','');
 /*!40000 ALTER TABLE `map_space_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,17 +322,29 @@ DROP TABLE IF EXISTS `map_space_reply`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_space_reply` (
-  `no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `no` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ctim` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `utim` datetime DEFAULT NULL,
   `dtim` datetime DEFAULT NULL,
   `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vote` bigint(20) NOT NULL DEFAULT '0',
-  `parent` bigint(20) DEFAULT NULL,
+  `vote` int(11) NOT NULL DEFAULT '0',
+  `post` int(11) DEFAULT NULL,
+  `mention` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '상대방 아이디',
+  `follow` int(11) DEFAULT NULL,
+  `depth1` int(11) NOT NULL DEFAULT '0',
+  `depth2` int(11) NOT NULL DEFAULT '0',
+  `depth3` int(11) NOT NULL DEFAULT '0',
+  `depth4` int(11) NOT NULL DEFAULT '0',
+  `depth5` int(11) NOT NULL DEFAULT '0',
+  `depth6` int(11) NOT NULL DEFAULT '0',
+  `depth7` int(11) NOT NULL DEFAULT '0',
+  `depth8` int(11) NOT NULL DEFAULT '0',
+  `depth9` int(11) NOT NULL DEFAULT '0',
+  `depth10` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,6 +353,7 @@ CREATE TABLE `map_space_reply` (
 
 LOCK TABLES `map_space_reply` WRITE;
 /*!40000 ALTER TABLE `map_space_reply` DISABLE KEYS */;
+INSERT INTO `map_space_reply` VALUES (1,'test02','test02','2017-10-03 20:38:13',NULL,NULL,'1',0,1,'test01',NULL,0,0,0,0,0,0,0,0,0,0),(2,'test01','test01','2017-10-03 22:08:17',NULL,NULL,'1',0,1,'',1,0,0,0,0,0,0,0,0,0,0),(3,'test01','test01','2017-10-03 22:09:56',NULL,NULL,'2',0,1,'',NULL,0,0,0,0,0,0,0,0,0,0),(4,'test01','test01','2017-10-03 22:13:47',NULL,NULL,'4',0,1,'',1,1,0,0,0,0,0,0,0,0,0),(5,'test01','test01','2017-10-03 22:14:38',NULL,NULL,'5',0,1,'',1,2,0,0,0,0,0,0,0,0,0),(6,'test01','test01','2017-10-03 22:15:14',NULL,NULL,'6',0,1,'',1,1,1,0,0,0,0,0,0,0,0),(7,'test01','test01','2017-10-03 22:16:21',NULL,NULL,'7',0,1,'',1,1,1,1,0,0,0,0,0,0,0);
 /*!40000 ALTER TABLE `map_space_reply` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -445,7 +482,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES ('test01','테스트',NULL,'JDJ5JDEyJFY1dUc2dzdWdG9YWHpqRjJ5L3Zad2VwYWlmNDM0N0JSREpHYnRqaGd3aUJacEFFWVhaUjlH',0,'kr1',0,'2017-02-16 18:53:33','2017-09-02 13:59:02',NULL,NULL,''),('test02','삭제테스트',NULL,'JDJ5JDEyJEgxcmE5bWc4Nk5kZy9vYWU2MjdWeGV0VEUxLnlkUTRMNEppSnNtYUh5VXlFMlhRdC9YejN5',0,NULL,0,'2017-03-23 02:24:00',NULL,NULL,NULL,''),('test03','ajax테스트',NULL,'JDJ5JDEyJFBqS3dUTi5CR1F5TWFFUTN1eUo2THVwUEJRaHpTTlJBWmFucVQzNGhUUE9LMTdac0hSb3Y2',0,NULL,0,'2017-03-23 15:30:42',NULL,NULL,NULL,'');
+INSERT INTO `user_info` VALUES ('test01','테스트',NULL,'JDJ5JDEyJFY1dUc2dzdWdG9YWHpqRjJ5L3Zad2VwYWlmNDM0N0JSREpHYnRqaGd3aUJacEFFWVhaUjlH',0,'kr1',0,'2017-02-16 18:53:33','2017-10-24 18:20:32',NULL,NULL,''),('test02','삭제테스트',NULL,'JDJ5JDEyJEgxcmE5bWc4Nk5kZy9vYWU2MjdWeGV0VEUxLnlkUTRMNEppSnNtYUh5VXlFMlhRdC9YejN5',0,NULL,0,'2017-03-23 02:24:00',NULL,NULL,NULL,''),('test03','ajax테스트',NULL,'JDJ5JDEyJFBqS3dUTi5CR1F5TWFFUTN1eUo2THVwUEJRaHpTTlJBWmFucVQzNGhUUE9LMTdac0hSb3Y2',0,NULL,0,'2017-03-23 15:30:42',NULL,NULL,NULL,'');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -500,7 +537,7 @@ CREATE TABLE `user_session` (
 
 LOCK TABLES `user_session` WRITE;
 /*!40000 ALTER TABLE `user_session` DISABLE KEYS */;
-INSERT INTO `user_session` VALUES ('3fl4v75f464nk0p4oalncudeuifjh18p','192.168.219.104',1504328370,'__ci_last_regenerate|i:1504328237;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('4clpd3l9fukkolh3nbfpkuv8kv9m43vo','127.0.0.1',1504361446,'__ci_last_regenerate|i:1504361435;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;');
+INSERT INTO `user_session` VALUES ('02vi46hl3fbn1l9u8fkvdpvpqen6dcpl','127.0.0.1',1508840197,'__ci_last_regenerate|i:1508840197;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('0amvotrp9adol4p7440g4to1tdk4397g','127.0.0.1',1508681290,'__ci_last_regenerate|i:1508681290;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('1boohd73g0ltlm5hif3ofqqv70mm6ceo','127.0.0.1',1508835714,'__ci_last_regenerate|i:1508835714;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('1fdfs1svmts62htob3fnhobnri2dllsv','127.0.0.1',1508841617,'__ci_last_regenerate|i:1508841617;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('28hbi34lcul8pcr8n29t01lrhte8j857','127.0.0.1',1509461791,'__ci_last_regenerate|i:1509461791;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('2i0i6bkrge1a6vrhq79rihadrfj4s5uq','127.0.0.1',1508679430,'__ci_last_regenerate|i:1508679430;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('3p5gd27d3s5p92g565108iov74gavbuu','127.0.0.1',1508840878,'__ci_last_regenerate|i:1508840878;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('44hj8d9uo1d8qjcomfr5h87i0k8l7vkj','127.0.0.1',1508831103,'__ci_last_regenerate|i:1508831103;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('61b6thtvvk6dieq3r90mr3vuc9nh3qoh','127.0.0.1',1508680934,'__ci_last_regenerate|i:1508680934;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('6imibjqdju7ul61cpnc37sifa6o4got1','127.0.0.1',1509465539,'__ci_last_regenerate|i:1509465539;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('7g6s4aqb7rm3u7a84r26uqg42ctrdvk3','127.0.0.1',1508679127,'__ci_last_regenerate|i:1508679127;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('7tt14lse88sl3g73lt7nde4pvjhikr20','127.0.0.1',1508681612,'__ci_last_regenerate|i:1508681612;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('8mhrmiqa1fainog2o7ui8od443a638ig','127.0.0.1',1509130803,'__ci_last_regenerate|i:1509130803;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('9a8msna215i64e0tc72fg7o6211b38ie','127.0.0.1',1508680601,'__ci_last_regenerate|i:1508680601;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('c5tnj23c5d4l8qnp6fu6ii2mukdr749b','127.0.0.1',1508838277,'__ci_last_regenerate|i:1508838277;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('cb9ht8u6deq5d50usn3vhpgb4ici113e','127.0.0.1',1509465234,'__ci_last_regenerate|i:1509465234;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('cc10gct9fjrgfbij3oafj9vec2kbe6of','127.0.0.1',1508839697,'__ci_last_regenerate|i:1508839697;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('cgmn563a0cke92p1k16ipuhas3mq8022','127.0.0.1',1508676159,'__ci_last_regenerate|i:1508676159;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('chmr17oeed8j1t70f4fl5rb1uaeijhni','127.0.0.1',1508678825,'__ci_last_regenerate|i:1508678825;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('cs5l7nefje4d7q0i9fv42blfflc1cbos','127.0.0.1',1508675706,'__ci_last_regenerate|i:1508675706;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('e734josuefbqg0js15jip73r2nb39amp','127.0.0.1',1509466220,'__ci_last_regenerate|i:1509466210;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('elr9etrvcll0j5m95g8jqe4kcp8os2ie','127.0.0.1',1508831977,'__ci_last_regenerate|i:1508831977;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('fk3jto1qqsbg88v9rfm0bmar75ip9pfv','127.0.0.1',1508831526,'__ci_last_regenerate|i:1508831526;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('fk665eheme69vbbejqtc7ckc7pi555pm','127.0.0.1',1508841308,'__ci_last_regenerate|i:1508841308;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('gcapedmbnmtqhtoqi6khsfgnjg5k4mc6','127.0.0.1',1508835225,'__ci_last_regenerate|i:1508835225;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('h0d8igmu1lck3ncrdskmjoluj2dp04dd','127.0.0.1',1509460012,'__ci_last_regenerate|i:1509460012;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('i3bu9b0d01trudul2srnhqr9ejr7rqqf','127.0.0.1',1508839382,'__ci_last_regenerate|i:1508839382;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('igiddafkmpooud9dsh85l11ip5fs4m3d','127.0.0.1',1508676513,'__ci_last_regenerate|i:1508676513;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('ik28njl3j30dumu5kisu6jbvlsms3kft','127.0.0.1',1508836826,'__ci_last_regenerate|i:1508836826;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('klfl93eipt72rhh6cmrub1nrva19vi3t','127.0.0.1',1508679905,'__ci_last_regenerate|i:1508679905;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('l04binkp9q4djs9qmph9tvcb4p5gr207','127.0.0.1',1508840522,'__ci_last_regenerate|i:1508840522;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('m0it40irm6l8kltqmr3pbvs2re8ks9ud','127.0.0.1',1508674447,'__ci_last_regenerate|i:1508674447;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('m2ba4ijik411bjkc9q3gl3s7qp5rq5sb','127.0.0.1',1509135411,'__ci_last_regenerate|i:1509135411;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('n6a29t6al42mnku2pa226p0s9itf0pm1','127.0.0.1',1508678003,'__ci_last_regenerate|i:1508678003;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('neobi1l1815hlrri3704qkl7l81k9i2v','127.0.0.1',1508677649,'__ci_last_regenerate|i:1508677649;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('nr2p4fpjh6it679li97iqo3nbnk56rjq','127.0.0.1',1508839040,'__ci_last_regenerate|i:1508839040;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('nsm3oc81uvg9n20m4jftmufueam6e3tk','127.0.0.1',1508838580,'__ci_last_regenerate|i:1508838580;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('oldm00hi4kfgki8jguqev6obub1ds280','127.0.0.1',1508675056,'__ci_last_regenerate|i:1508675056;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('qbms3df7uh7gjuprfe33frpco3uqa382','127.0.0.1',1509465851,'__ci_last_regenerate|i:1509465851;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('qir62l7ktbnemaltp9mmkfhifv2es1mm','127.0.0.1',1508678434,'__ci_last_regenerate|i:1508678434;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('qr56h0cl38ji1rnafv2i2bm3339erafv','127.0.0.1',1508841922,'__ci_last_regenerate|i:1508841922;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:0;uid|s:6:\"test01\";name|s:9:\"테스트\";signed_in|b:1;'),('qtdbftos2mbiqtritt04n57snb7lm2d4','127.0.0.1',1508674749,'__ci_last_regenerate|i:1508674749;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('t5s2isluf94u92hk5rvattbapgmmgoft','127.0.0.1',1508724017,'__ci_last_regenerate|i:1508724017;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('ugjn66gftaepfka4h9b13vpaqr5uh5u6','127.0.0.1',1509466210,'__ci_last_regenerate|i:1509466210;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;'),('uvqn8ol0c0fp1s6pni03fspm7itckraj','127.0.0.1',1508680294,'__ci_last_regenerate|i:1508680294;score|s:1:\"0\";map|s:3:\"kr1\";admin|b:1;uid|s:15:\"admin@daihyun99\";name|s:9:\"daihyun99\";signed_in|b:1;');
 /*!40000 ALTER TABLE `user_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -546,19 +583,19 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_map`(IN `in_country` VARCHAR(100), IN `in_code` CHAR(2), IN `in_local` VARCHAR(200), IN `in_pol1` VARCHAR(400), IN `in_pol2` VARCHAR(400))
 BEGIN
 
-DECLARE in_no bigint default 0;
+DECLARE in_no int default 0;
 SELECT count(no) into in_no FROM map_code WHERE code = in_code;
 SET in_no = in_no + 1;
 
 
 
 INSERT INTO map_code (country, code, no, place) values(in_country, in_code, in_no, concat("locality:", in_local, "&political1:", in_pol1, "&political2:", in_pol2));
-SET @post = CONCAT('CREATE TABLE map_', in_code, in_no, '_post (\n\tno      bigint not null auto_increment,\n\tuid     varchar(100) not null,\n\tcountry    varchar(100) not null,\n\tctim    datetime not null default current_timestamp,\n\tutim    datetime not null,\n\tdtim    datetime not null,\n\ttitle   varchar(1000) not null,\n\tcontent text not null,\n\treply bigint not null default 0,\n\thits bigint not null default 0,\n\tvote bigint not null default 0,\n\ttype    varchar(20) not null,\n\ttag     varchar(20) not null,\n\tkeyword varchar(400) not null,\n\tPRIMARY KEY (no)\n)');
+SET @post = CONCAT('CREATE TABLE map_', in_code, in_no, '_post (\n\tno      int not null auto_increment,\n\tuid     varchar(100) not null,\n\tcountry    varchar(100) not null,\n\tctim    datetime not null default current_timestamp,\n\tutim    datetime not null,\n\tdtim    datetime not null,\n\ttitle   varchar(1000) not null,\n\tcontent text not null,\n\treply int not null default 0,\n\thit int not null default 0,\n\tvote int not null default 0,\n\ttype    varchar(20) not null,\n\ttag     varchar(20) not null,\n\tkeyword varchar(400) not null,\n\tPRIMARY KEY (no)\n)');
 
 PREPARE stmt1 FROM @post;
 EXECUTE stmt1;
 
-SET @reply = CONCAT('CREATE TABLE map_', in_code,  in_no, '_reply(\n\tno\t\tbigint\t\t\tnot null auto_increment,\n\tuid\t\tvarchar(100)\tnot null,\n\tcountry\tvarchar(100)\tnot null,\n\tctim\tdatetime\t\tnot null default current_timestamp,\n\tutim\tdatetime,\n\tdtim\tdatetime,\n\tcontent\tvarchar(2000)\tnot null,\nvote bigint not null default 0,\n\tparent\tbigint,\n\tPRIMARY KEY (no)\n)');
+SET @reply = CONCAT('CREATE TABLE map_', in_code,  in_no, '_reply(\n\tno\t\tint\t\t\tnot null auto_increment,\n\tuid\t\tvarchar(100)\tnot null,\n\tname\tvarchar(100)\tnot null,\n\tctim\tdatetime\t\tnot null default current_timestamp,\n\tutim\tdatetime,\n\tdtim\tdatetime,\n\tcontent\tvarchar(2000)\tnot null,\nvote int not null default 0,\n\tpost\tint not null,\n\tmention\tvarchar(100) default null,\n\tfollow\tint null default null,\n\tdepth1 int not null default 0\r\n, \n\tdepth2 int not null default 0\r\n, \n\tdeprh3 int not null default 0\r\n, \n\tdepth4 int not null default 0\r\n, \n\tdepth5 int not null default 0\r\n, \n\tdepth6 int not null default 0\r\n, \n\tdepth7 int not null default 0\r\n, \n\tdepth8 int not null default 0\r\n, \n\tdepth9 int not null default 0\r\n, \n\tdepth10 int not null default 0\r\n, \n\tPRIMARY KEY (no)\n)');
 
 PREPARE stmt2 FROM @reply;
 EXECUTE stmt2;
@@ -612,4 +649,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-02 23:10:53
+-- Dump completed on 2017-11-01  1:10:43
