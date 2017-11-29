@@ -14,7 +14,7 @@
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
-$cfg['blowfish_secret'] = 'rgbplacedatabase. my name is daihyun im, i`m living in korea. nice to meet you'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['blowfish_secret'] = '_alsfjaweio;mfcoqi-fmoi3r+q^3333rq23rc3R=#RQ#rfq23orjc12!@#!R23r((*(*(*c'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
 /**
  * Servers configuration
@@ -152,6 +152,3 @@ $cfg['SaveDir'] = '';
  * You can find more configuration options in the documentation
  * in the doc/ folder or at <https://docs.phpmyadmin.net/>.
  */
-
-$cfg['LoginCookieValidity'] = '7200';
-$cfg['ConsoleEnterExecutes'] = TRUE;

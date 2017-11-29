@@ -294,7 +294,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         $GLOBALS['PHP_AUTH_USER'] = $GLOBALS['PHP_AUTH_PW'] = '';
         $GLOBALS['from_cookie'] = false;
 
-        if (! empty($_REQUEST['pma_username'])) {
+        if (isset($_REQUEST['pma_username']) && strlen($_REQUEST['pma_username']) > 0) {
 
             // Verify Captcha if it is required.
             if (! empty($GLOBALS['cfg']['CaptchaLoginPrivateKey'])
@@ -337,7 +337,7 @@ class AuthenticationCookie extends AuthenticationPlugin
 
             // The user just logged in
             $GLOBALS['PHP_AUTH_USER'] = PMA_sanitizeMySQLUser($_REQUEST['pma_username']);
-            $GLOBALS['PHP_AUTH_PW']   = $_REQUEST['pma_password'];
+            $GLOBALS['PHP_AUTH_PW'] = isset($_REQUEST['pma_password']) ? $_REQUEST['pma_password'] : '';
             if ($GLOBALS['cfg']['AllowArbitraryServer']
                 && isset($_REQUEST['pma_servername'])
             ) {

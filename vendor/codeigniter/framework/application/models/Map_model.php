@@ -155,41 +155,60 @@ class Map_model extends CI_Model {
 			if($max == 0) $max=1;
 		}
 
-		$current = 1;
-
 		// 'page' option check
+		$current = 1;
 		if(array_key_exists('page', $data)) {
 			if($data['page'] <= $max) {
 				$current = $data['page'];
 			}
 		}
 
+		if($current > 5) {
+			$cur_page = $current - 5;
+		} else {
+			$cur_page = 1;
+		}
+
 		$range = 10;
+
+		// first page
 		$min_page = ((int)$current-(int)$range>0)?(int)$current-(int)$range:1;
+
+		// end page
 		$max_page = ((int)$current+(int)$range>$max)?$max:(int)$current+(int)$range;
 
 		// ** button-group class start
 		echo "<div class='button-group'>";
 		echo "<a class='refresh' href='/{$map}/{$type}/list'><span>LIST</span></a>";
 
-
 		echo "<div class='pagination'>";
 		echo "<a href='/{$map}/{$type}/list?page={$min_page}'><i class='fa fa-step-backward' aria-hidden='true'></i></a>";
-		for($i=(int)$min_page; $i < $current; $i++) {
 
-			if($i == 0) continue;
+		for($count=0; $count<10; $count++) {
+			$next = $cur_page;
 
-			$next = $i;
-			echo "<a href='/{$map}/{$type}/list?page={$next}'>{$next}</a>";
+			if($cur_page++>$max) {
+			} else {
+				echo "<a href='/{$map}/{$type}/list?page={$next}'>{$next}</a>";
+			}
+
 		}
 
-		for($i=(int)$current; $i <= $max_page; $i++) {
+		//for($i=(int)$min_page; $i < $current; $i++) {
 
-			if($i == 0) continue;
+			//if($i == 0) continue;
 
-			$next = $i;
-			echo "<a href='/{$map}/{$type}/list?page={$next}'>{$next}</a>";
-		}
+			//$next = $i;
+			//echo "<a href='/{$map}/{$type}/list?page={$next}'>{$next}</a>";
+		//}
+
+		//for($i=(int)$current; $i <= $max_page; $i++) {
+
+			//if($i == 0) continue;
+
+			//$next = $i;
+			//echo "<a href='/{$map}/{$type}/list?page={$next}'>{$next}</a>";
+		//}
 
 		echo "<a href='/{$map}/{$type}/list?page={$max_page}'><i class='fa fa-step-forward' aria-hidden='true'></i></a>";
 		echo "</div>";

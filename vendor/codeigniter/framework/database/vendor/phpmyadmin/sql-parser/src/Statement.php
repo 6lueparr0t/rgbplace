@@ -246,7 +246,12 @@ abstract class Statement
 
             // Unions are parsed by the parser because they represent more than
             // one statement.
-            if (($token->value === 'UNION') || ($token->value === 'UNION ALL') || ($token->value === 'UNION DISTINCT')) {
+            if (($token->keyword === 'UNION') ||
+                    ($token->keyword === 'UNION ALL') ||
+                    ($token->keyword === 'UNION DISTINCT') ||
+                    ($token->keyword === 'EXCEPT') ||
+                    ($token->keyword === 'INTERSECT')
+            ) {
                 break;
             }
 
@@ -312,7 +317,7 @@ abstract class Statement
             }
 
             // Checking if this is the beginning of a clause.
-            if (!empty(Parser::$KEYWORD_PARSERS[$token->value])) {
+            if (!empty(Parser::$KEYWORD_PARSERS[$token->value]) && $list->idx < $list->count) {
                 $class = Parser::$KEYWORD_PARSERS[$token->value]['class'];
                 $field = Parser::$KEYWORD_PARSERS[$token->value]['field'];
                 if (!empty(Parser::$KEYWORD_PARSERS[$token->value]['options'])) {
@@ -321,7 +326,7 @@ abstract class Statement
             }
 
             // Checking if this is the beginning of the statement.
-            if (!empty(Parser::$STATEMENT_PARSERS[$token->value])) {
+            if (!empty(Parser::$STATEMENT_PARSERS[$token->keyword])) {
                 if ((!empty(static::$CLAUSES)) // Undefined for some statements.
                     && (empty(static::$CLAUSES[$token->value]))
                 ) {
@@ -372,6 +377,11 @@ abstract class Statement
 
             // Parsing this keyword.
             if ($class !== null) {
+                // We can't parse keyword at the end of statement
+                if ($list->idx >= $list->count) {
+                    $parser->error('Keyword at end of statement.', $token);
+                    continue;
+                }
                 ++$list->idx; // Skipping keyword or last option.
                 $this->$field = $class::parse($parser, $list, $options);
             }
@@ -452,7 +462,7 @@ abstract class Statement
         /**
          * For tracking JOIN clauses in a query
          *   = 0 - JOIN not found till now
-         *   > 0 - Index of first JOIN clause in the statement
+         *   > 0 - Index of first JOIN clause in the statement.
          *
          * @var int
          */
@@ -463,7 +473,7 @@ abstract class Statement
          *   = 0 - JOIN not found till now
          *   > 0 - Index of last JOIN clause
          *         (which appears together with other JOINs)
-         *         in the statement
+         *         in the statement.
          *
          * @var int
          */
@@ -483,7 +493,7 @@ abstract class Statement
                 if ($minJoin === 0 && stripos($clauseType, 'JOIN')) {
                     // First JOIN clause is detected
                     $minJoin = $maxJoin = $clauseStartIdx;
-                } elseif ($minJoin !== 0 && ! stripos($clauseType, 'JOIN')) {
+                } elseif ($minJoin !== 0 && !stripos($clauseType, 'JOIN')) {
                     // After a previous JOIN clause, a non-JOIN clause has been detected
                     $maxJoin = $lastIdx;
                 } elseif ($maxJoin < $clauseStartIdx && stripos($clauseType, 'JOIN')) {

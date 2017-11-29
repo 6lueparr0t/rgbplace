@@ -401,7 +401,7 @@ Server connection settings
     there is a chance your SSL connection will fail due to validation.
     Setting this to ``false`` will disable the validation check.
 
-    Since PHP 5.6.0 it also verifies whether server name matches CN of it's
+    Since PHP 5.6.0 it also verifies whether server name matches CN of its
     certificate. There is currently no way to disable just this check without
     disabling complete SSL verification.
     
@@ -1344,6 +1344,8 @@ Server connection settings
     :type: string
     :default: ``''``
 
+    .. versionadded:: 3.5.0
+
     Name of PHP script to be sourced and executed to obtain login
     credentials. This is alternative approach to session based single
     signon. The script has to provide a function called
@@ -1995,7 +1997,7 @@ Navigation panel setup
 .. config:option:: $cfg['NavigationTreeEnableExpansion']
 
     :type: boolean
-    :default: false
+    :default: true
 
     Whether to offer the possibility of tree expansion in the navigation panel.
 
@@ -2062,20 +2064,8 @@ Main panel
     :type: boolean
     :default: false
 
-.. config:option:: $cfg['ShowChgPassword']
-
-    :type: boolean
-    :default: true
-
-.. config:option:: $cfg['ShowCreateDb']
-
-    :type: boolean
-    :default: true
-
-    Defines whether to display the :guilabel:`PHP information` and
-    :guilabel:`Change password` links and form for creating database or not at
-    the starting main (right) frame. This setting does not check MySQL commands
-    entered directly.
+    Defines whether to display the :guilabel:`PHP information` or not at
+    the starting main (right) frame.
 
     Please note that to block the usage of ``phpinfo()`` in scripts, you have to
     put this in your :file:`php.ini`:
@@ -2092,10 +2082,28 @@ Main panel
         This might also make easier some remote attacks on your installations,
         so enable this only when needed.
 
-    Also note that enabling the :guilabel:`Change password` link has no effect
+.. config:option:: $cfg['ShowChgPassword']
+
+    :type: boolean
+    :default: true
+
+    Defines whether to display the :guilabel:`Change password` link or not at
+    the starting main (right) frame. This setting does not check MySQL commands
+    entered directly.
+
+    Please note that enabling the :guilabel:`Change password` link has no effect
     with config authentication mode: because of the hard coded password value
     in the configuration file, end users can't be allowed to change their
     passwords.
+
+.. config:option:: $cfg['ShowCreateDb']
+
+    :type: boolean
+    :default: true
+
+    Defines whether to display the form for creating database or not at the
+    starting main (right) frame. This setting does not check MySQL commands
+    entered directly.
 
 .. config:option:: $cfg['ShowGitRevision']
 
@@ -3207,6 +3215,13 @@ Developer
 
     Enable to let server present itself as demo server.
     This is used for `phpMyAdmin demo server <https://www.phpmyadmin.net/try/>`_.
+
+    It currently changes following behavior:
+
+    * There is welcome message on the main page.
+    * There is footer information about demo server and used git revision.
+    * The setup script is enabled even with existing configuration.
+    * The setup does not try to connect to the MySQL server.
 
 .. _config-examples:
 

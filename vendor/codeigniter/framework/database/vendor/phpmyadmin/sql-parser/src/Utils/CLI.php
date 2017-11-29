@@ -6,6 +6,7 @@
 
 namespace PhpMyAdmin\SqlParser\Utils;
 
+use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Lexer;
 use PhpMyAdmin\SqlParser\Parser;
 
@@ -92,9 +93,9 @@ class CLI
 
     public function parseLint()
     {
-        $longopts = array('help', 'query:');
+        $longopts = array('help', 'query:', 'context:');
         $params = $this->getopt(
-            'hq:', $longopts
+            'hq:c:', $longopts
         );
         $this->mergeLongOpts($params, $longopts);
 
@@ -112,6 +113,9 @@ class CLI
 
             return 0;
         }
+        if (isset($params['c'])) {
+            Context::load($params['c']);
+        }
         if (isset($params['q'])) {
             $lexer = new Lexer($params['q'], false);
             $parser = new Parser($lexer->list);
@@ -127,6 +131,56 @@ class CLI
         }
         echo "ERROR: Missing parameters!\n";
         $this->usageLint();
+
+        return 1;
+    }
+
+    public function usageTokenize()
+    {
+        echo "Usage: tokenize-query --query SQL\n";
+    }
+
+    public function parseTokenize()
+    {
+        $longopts = array('help', 'query:');
+        $params = $this->getopt(
+            'hq:', $longopts
+        );
+        $this->mergeLongOpts($params, $longopts);
+
+        return $params;
+    }
+
+    public function runTokenize()
+    {
+        $params = $this->parseTokenize();
+        if ($params === false) {
+            return 1;
+        }
+        if (isset($params['h'])) {
+            $this->usageTokenize();
+
+            return 0;
+        }
+        if (isset($params['q'])) {
+            $lexer = new Lexer($params['q'], false);
+            foreach ($lexer->list->tokens as $idx => $token) {
+                echo '[TOKEN ', $idx, "]\n";
+                echo 'Type = ', $token->type, "\n";
+                echo 'Flags = ', $token->flags, "\n";
+                echo 'Value = ';
+                var_export($token->value);
+                echo "\n";
+                echo 'Token = ';
+                var_export($token->token);
+                echo "\n";
+                echo "\n";
+            }
+
+            return 0;
+        }
+        echo "ERROR: Missing parameters!\n";
+        $this->usageTokenize();
 
         return 1;
     }

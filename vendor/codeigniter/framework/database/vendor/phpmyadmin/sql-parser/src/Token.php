@@ -167,6 +167,7 @@ class Token
     const FLAG_SYMBOL_BACKTICK = 2;
     const FLAG_SYMBOL_USER = 4;
     const FLAG_SYMBOL_SYSTEM = 8;
+    const FLAG_SYMBOL_PARAMETER = 16;
 
     /**
      * The token it its raw string representation.
@@ -269,10 +270,26 @@ class Token
 
                 return $ret;
             case self::TYPE_STRING:
-                $quote = $this->token[0];
-                $str = str_replace($quote . $quote, $quote, $this->token);
+                // Trims quotes.
+                $str = $this->token;
+                $str = mb_substr($str, 1, -1, 'UTF-8');
 
-                return mb_substr($str, 1, -1, 'UTF-8'); // trims quotes
+                // Removes surrounding quotes.
+                $quote = $this->token[0];
+                $str = str_replace($quote . $quote, $quote, $str);
+
+                // Finally unescapes the string.
+                //
+                // `stripcslashes` replaces escape sequences with their
+                // representation.
+                //
+                // NOTE: In MySQL, `\f` and `\v` have no representation,
+                // even they usually represent: form-feed and vertical tab.
+                $str = str_replace('\f', 'f', $str);
+                $str = str_replace('\v', 'v', $str);
+                $str = stripcslashes($str);
+
+                return $str;
             case self::TYPE_SYMBOL:
                 $str = $this->token;
                 if ((isset($str[0])) && ($str[0] === '@')) {
@@ -284,6 +301,9 @@ class Token
                         mb_strlen($str),
                         'UTF-8'
                     );
+                }
+                if ((isset($str[0])) && ($str[0] === ':')) {
+                    $str = mb_substr($str, 1, mb_strlen($str), 'UTF-8');
                 }
                 if ((isset($str[0])) && (($str[0] === '`')
                 || ($str[0] === '"') || ($str[0] === '\''))

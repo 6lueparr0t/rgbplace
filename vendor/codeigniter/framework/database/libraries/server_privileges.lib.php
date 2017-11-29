@@ -3614,6 +3614,12 @@ function PMA_getHtmlTableBodyForUserRights($db_rights)
                 break;
             } // end switch
 
+            if (! isset($host['Select_priv'])) {
+                $html_output .= Util::showHint(
+                    __('The selected user was not found in the privilege table.')
+                );
+            }
+
             $html_output .= '</td>' . "\n";
 
             $html_output .= '<td><code>' . "\n"
@@ -4607,7 +4613,6 @@ function PMA_getHtmlForUserOverview($pmaThemeImage, $text_dir)
             $raw = 'Your privilege table structure seems to be older than'
                 . ' this MySQL version!<br />'
                 . 'Please run the <code>mysql_upgrade</code> command'
-                . '(<code>mysql_fix_privilege_tables</code> on older systems)'
                 . ' that should be included in your MySQL server distribution'
                 . ' to solve this problem!';
             $html_output .= Message::rawError($raw)->getDisplay();
@@ -5049,9 +5054,14 @@ function PMA_checkIfMariaDBPwdCheckPluginActive()
         return false;
     }
 
-    $result = $GLOBALS['dbi']->query(
+    $result = $GLOBALS['dbi']->tryQuery(
         'SHOW PLUGINS SONAME LIKE \'%_password_check%\''
     );
+
+    /* Plugins are not working, for example directory does not exists */
+    if ($result === false) {
+        return false;
+    }
 
     while ($row = $GLOBALS['dbi']->fetchAssoc($result)) {
         if ($row['Status'] === 'ACTIVE') {
