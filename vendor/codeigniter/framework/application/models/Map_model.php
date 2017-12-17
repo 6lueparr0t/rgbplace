@@ -369,31 +369,35 @@ class Map_model extends CI_Model {
 			echo "<li class='depth-{$depth_no}'>";
 			echo "<ul>";
 
-			echo "<li class='null'></li>";
-			echo "<li class='content'><b class='mention'>{$mention}</b> {$content}</li>";
-			echo "<li class='name'> {$name} </li>";
-			echo "<li class='date'> {$date} {$time} </li>";
+			echo "<li class='content'><span name='space' id='space'>&lt;space&gt;</span><b class='mention'>{$mention}</b> {$content}</li>";
 
-			echo "<li class='func'>";
+			// reply info start
+			echo "<div class='reply-info'>";
+			echo "<div class='name'> {$name} </div>";
+			echo "<div class='date'> {$date} {$time} </div>";
+			// func start
 
-			echo "<button id='depth-{$depth_no}-report' /><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
-
+			/* _-_ : add func css */
+			echo "<div class='func'>";
+			echo "<button/><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 			if($uid) {
-				echo "<button id='depth-{$depth_no}-up' /><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
-				echo "<button id='depth-{$depth_no}-down' /><i class='fa fa-thumbs-o-down' aria-hidden='true'></i></button>";
+				echo "<button/><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
+				echo "<button/><i class='fa fa-thumbs-o-down' aria-hidden='true'></i></button>";
 			}
 
 			if ($uid) {
-				echo "<button id='depth-{$depth_no}-plus' /><i class='fa fa-plus' aria-hidden='true'></i></button>";
+				echo "<button/><i class='fa fa-reply' aria-hidden='true' style='transform: rotate3d(0, 0, -1, 180deg);'></i></button>";
 
 				if($uid == $reply_uid || $admin ) {
-					echo "<button id='depth-{$depth_no}-edit' /><i class='fa fa-pencil' aria-hidden='true'></i></button>";
-					echo "<button id='depth-{$depth_no}-delete' /><i class='fa fa-trash' aria-hidden='true'></i></button>";
+					echo "<button/><i class='fa fa-pencil' aria-hidden='true'></i></button>";
+					echo "<button/><i class='fa fa-trash' aria-hidden='true'></i></button>";
 				}
 			}
-
-			echo "</span>"
-			."</li>";
+			echo "</div>";
+			// func finish
+				
+			echo "</div>";
+			// reply info finish
 
 			echo "</ul>"
 			."</li>";
@@ -423,7 +427,7 @@ class Map_model extends CI_Model {
 	}
 
 	private function message($status = "block", $id = 0) {
-		$to = ($id != 0)? "to":"";
+		$to = ($id != 0)? "to ":"";
 
 		echo "<div class='message {$status}' id='message-{$id}' name='message-{$id}'>"
 			."<input type='hidden' class='message-no' value='{$id}'>"
@@ -431,8 +435,8 @@ class Map_model extends CI_Model {
 			."<div class='message-button-group'>"
 
 			."<div class='message-button-send {$to}'>Send <i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
-			."<div class='message-button-send yes'>yes</div>"
-			."<div class='message-button-send no'>no</div>"
+			."<div class='message-button-send {$to} yes'>yes</div>"
+			."<div class='message-button-send {$to} no'>no</div>"
 
 			."<div class='message-button-reset'>reset ?</div>"
 			."<div class='message-button-reset yes'>yes</div>"

@@ -2910,7 +2910,10 @@ a {
     color: white;
     flex: 1; }
     #status a:nth-child(2), #status label:nth-child(2) {
-      padding: .35rem .4rem !important; }
+      padding: .314rem .4rem !important; }
+      @media screen and (max-width: 860px) {
+        #status a:nth-child(2), #status label:nth-child(2) {
+          padding: .345rem .4rem !important; } }
     #status a select, #status label select {
       font-family: "pixel";
       font-size: 1.6rem;
@@ -2930,7 +2933,7 @@ a {
     font-size: 1.5rem;
     color: white;
     background: #212529;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -2971,7 +2974,7 @@ a {
     font-size: 1.5rem;
     color: transparent;
     background: transparent;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -3013,7 +3016,7 @@ a {
     font-size: 1.5rem;
     color: #212529;
     background: #e9ecef;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -3054,7 +3057,7 @@ a {
     font-size: 1.5rem;
     color: white;
     background: #495057;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -3095,7 +3098,7 @@ a {
       font-size: 1.5rem;
       color: #212529;
       background: #e9ecef;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3136,7 +3139,7 @@ a {
       font-size: 1.5rem;
       color: white;
       background: #adb5bd;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3177,7 +3180,7 @@ a {
     font-size: 1.5rem;
     color: #495057;
     background: #ffd43b;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -3218,7 +3221,7 @@ a {
       font-size: 1.5rem;
       color: #212529;
       background: #e9ecef;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3259,7 +3262,7 @@ a {
       font-size: 1.5rem;
       color: #495057;
       background: #ffec99;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3300,7 +3303,7 @@ a {
     font-size: 1.5rem;
     color: #495057;
     background: #a9e34b;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -3341,7 +3344,7 @@ a {
       font-size: 1.5rem;
       color: #212529;
       background: #e9ecef;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3382,7 +3385,7 @@ a {
       font-size: 1.5rem;
       color: #495057;
       background: #d8f5a2;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3423,7 +3426,7 @@ a {
     font-size: 1.5rem;
     color: #495057;
     background: #4dadf7;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -3464,7 +3467,7 @@ a {
       font-size: 1.5rem;
       color: #212529;
       background: #e9ecef;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3505,7 +3508,7 @@ a {
       font-size: 1.5rem;
       color: #495057;
       background: #a3daff;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3546,7 +3549,7 @@ a {
     font-size: 1.5rem;
     color: #495057;
     background: #fa5252;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -3587,7 +3590,7 @@ a {
       font-size: 1.5rem;
       color: #212529;
       background: #e9ecef;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3628,7 +3631,7 @@ a {
       font-size: 1.5rem;
       color: #495057;
       background: #ff8787;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3669,7 +3672,7 @@ a {
     font-size: 1.5rem;
     color: #495057;
     background: #ff922b;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -3710,7 +3713,7 @@ a {
       font-size: 1.5rem;
       color: #212529;
       background: #e9ecef;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3751,7 +3754,7 @@ a {
       font-size: 1.5rem;
       color: #495057;
       background: #ffc078;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3792,7 +3795,7 @@ a {
     font-size: 1.5rem;
     color: #495057;
     background: #f783ac;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -3833,7 +3836,7 @@ a {
       font-size: 1.5rem;
       color: #212529;
       background: #e9ecef;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3874,7 +3877,7 @@ a {
       font-size: 1.5rem;
       color: #495057;
       background: #fcc2d7;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3915,7 +3918,7 @@ a {
     font-size: 1.5rem;
     color: #495057;
     background: #66d9e8;
-    padding: .48rem .5rem;
+    padding: .47rem .5rem;
     text-align: center;
     display: block;
     margin: auto;
@@ -3956,7 +3959,7 @@ a {
       font-size: 1.5rem;
       color: #212529;
       background: #e9ecef;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;
@@ -3997,7 +4000,7 @@ a {
       font-size: 1.5rem;
       color: #495057;
       background: #c5f6fa;
-      padding: .48rem .5rem;
+      padding: .47rem .5rem;
       text-align: center;
       display: block;
       margin: auto;

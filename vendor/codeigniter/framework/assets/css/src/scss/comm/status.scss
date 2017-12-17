@@ -3,7 +3,7 @@
 	font-size:1.5rem;
 	color:$font;
 	background: $color;
-	padding: .48rem .5rem;
+	padding: .47rem .5rem;
 	text-align: center;
 	display: block;
 	margin:auto;
@@ -58,8 +58,9 @@
 		flex:1;
 
 		&:nth-child(2) {
-			padding : .35rem .4rem !important;
+			padding : .314rem .4rem !important;
 			@media screen and ($width-name : $target-width) {
+				padding : .345rem .4rem !important;
 			}
 		}
 
