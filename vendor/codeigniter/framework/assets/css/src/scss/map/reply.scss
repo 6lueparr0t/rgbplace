@@ -25,10 +25,30 @@
 			font-size:1rem;
 		}
 
-		&.func {
-			button {
-				font-size: 1rem;
+	}
+
+	.func {
+		display:flex;
+		button {
+			font-size: 1rem;
+			padding: .5rem 1rem;
+			border: 1px solid $oc-gray-9;
+			border-radius: .25rem;
+			margin:0 .2rem;
+			flex: 1;
+
+			&:hover {
+				background-color: $oc-gray-9;
+				color:white;
+				transition:all .1s ease-out;
 			}
+		}
+
+		.disable {
+			border: 1px solid $oc-gray-4; 
+			pointer-events: none;
+			cursor: default;
+			color: $oc-gray-4;
 		}
 	}
 }

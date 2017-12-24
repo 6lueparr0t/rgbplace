@@ -2913,7 +2913,7 @@ a {
       padding: .314rem .4rem !important; }
       @media screen and (max-width: 860px) {
         #status a:nth-child(2), #status label:nth-child(2) {
-          padding: .345rem .4rem !important; } }
+          padding: .344rem .4rem !important; } }
     #status a select, #status label select {
       font-family: "pixel";
       font-size: 1.6rem;
@@ -4432,8 +4432,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-0 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-0 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-0 .func {
+        display: flex; }
+        #reply .reply ul li.depth-0 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-0 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-0 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
     #reply .reply ul li.depth-1 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 1rem 0; }
@@ -4445,8 +4461,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-1 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-1 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-1 .func {
+        display: flex; }
+        #reply .reply ul li.depth-1 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-1 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-1 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
     #reply .reply ul li.depth-2 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 1rem 0; }
@@ -4458,8 +4490,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-2 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-2 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-2 .func {
+        display: flex; }
+        #reply .reply ul li.depth-2 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-2 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-2 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
     #reply .reply ul li.depth-3 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 1rem 0; }
@@ -4471,8 +4519,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-3 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-3 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-3 .func {
+        display: flex; }
+        #reply .reply ul li.depth-3 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-3 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-3 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
     #reply .reply ul li.depth-4 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 1rem 0; }
@@ -4484,8 +4548,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-4 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-4 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-4 .func {
+        display: flex; }
+        #reply .reply ul li.depth-4 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-4 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-4 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
     #reply .reply ul li.depth-5 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 1rem 0; }
@@ -4497,8 +4577,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-5 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-5 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-5 .func {
+        display: flex; }
+        #reply .reply ul li.depth-5 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-5 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-5 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
     #reply .reply ul li.depth-6 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 1rem 0; }
@@ -4510,8 +4606,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-6 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-6 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-6 .func {
+        display: flex; }
+        #reply .reply ul li.depth-6 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-6 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-6 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
     #reply .reply ul li.depth-7 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 1rem 0; }
@@ -4523,8 +4635,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-7 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-7 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-7 .func {
+        display: flex; }
+        #reply .reply ul li.depth-7 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-7 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-7 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
     #reply .reply ul li.depth-8 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 1rem 0; }
@@ -4536,8 +4664,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-8 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-8 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-8 .func {
+        display: flex; }
+        #reply .reply ul li.depth-8 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-8 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-8 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
     #reply .reply ul li.depth-9 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 1rem 0; }
@@ -4549,8 +4693,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-9 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-9 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-9 .func {
+        display: flex; }
+        #reply .reply ul li.depth-9 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-9 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-9 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
     #reply .reply ul li.depth-10 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 1rem 0; }
@@ -4562,8 +4722,24 @@ a {
           font-size: 1rem; }
         #reply .reply ul li.depth-10 ul li.date {
           font-size: 1rem; }
-        #reply .reply ul li.depth-10 ul li.func button {
-          font-size: 1rem; }
+      #reply .reply ul li.depth-10 .func {
+        display: flex; }
+        #reply .reply ul li.depth-10 .func button {
+          font-size: 1rem;
+          padding: .5rem 1rem;
+          border: 1px solid #212529;
+          border-radius: .25rem;
+          margin: 0 .2rem;
+          flex: 1; }
+          #reply .reply ul li.depth-10 .func button:hover {
+            background-color: #212529;
+            color: white;
+            transition: all .1s ease-out; }
+        #reply .reply ul li.depth-10 .func .disable {
+          border: 1px solid #ced4da;
+          pointer-events: none;
+          cursor: default;
+          color: #ced4da; }
   #reply .reply .message {
     margin-top: 1rem; }
     #reply .reply .message.hide {

@@ -369,32 +369,42 @@ class Map_model extends CI_Model {
 			echo "<li class='depth-{$depth_no}'>";
 			echo "<ul>";
 
-			echo "<li class='content'><span name='space' id='space'>&lt;space&gt;</span><b class='mention'>{$mention}</b> {$content}</li>";
+			echo "<li class='content'>";
+
+			/* depth arrow output : top */
+			echo "<span name='space' id='space'>";
+			for($i=0; $i<$depth_no; $i++) {
+				echo "<i class='fa fa-reply' aria-hidden='true' style='transform: rotate3d(0, 0, -1, 180deg);'></i>";
+			}
+			echo "</span>";
+			/* depth arrow output : end */
+
+			echo "<b class='mention'>{$mention}</b> {$content}</li>";
 
 			// reply info start
 			echo "<div class='reply-info'>";
 			echo "<div class='name'> {$name} </div>";
 			echo "<div class='date'> {$date} {$time} </div>";
-			// func start
 
-			/* _-_ : add func css */
+			// scallop99 to do : add button class depends on each role and setting color
+			/* func : top */
 			echo "<div class='func'>";
-			echo "<button/><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 			if($uid) {
-				echo "<button/><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
-				echo "<button/><i class='fa fa-thumbs-o-down' aria-hidden='true'></i></button>";
+				echo "<button><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
+				echo "<button><i class='fa fa-thumbs-o-down' aria-hidden='true'></i></button>";
 			}
 
 			if ($uid) {
-				echo "<button/><i class='fa fa-reply' aria-hidden='true' style='transform: rotate3d(0, 0, -1, 180deg);'></i></button>";
+				echo "<button><i class='fa fa-reply' aria-hidden='true' style='transform: rotate3d(1, 0, 0, 180deg);'></i></button>";
 
 				if($uid == $reply_uid || $admin ) {
-					echo "<button/><i class='fa fa-pencil' aria-hidden='true'></i></button>";
-					echo "<button/><i class='fa fa-trash' aria-hidden='true'></i></button>";
+					echo "<button><i class='fa fa-pencil' aria-hidden='true'></i></button>";
+					echo "<button><i class='fa fa-trash' aria-hidden='true'></i></button>";
 				}
 			}
+			echo "<button><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 			echo "</div>";
-			// func finish
+			/* func : end */
 				
 			echo "</div>";
 			// reply info finish
