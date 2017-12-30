@@ -339,6 +339,15 @@ class Map_model extends CI_Model {
 		$uid   = $this->session->userdata('uid');
 		$admin = $this->session->userdata('admin');
 
+		$btn_perm = '';
+		$reply_perm = '';
+
+		if($uid || $admin) {
+			$btn_perm = 'enable';
+		} else {
+			$btn_perm = 'disable';
+		}
+
 		foreach ($find->result() as $key => $row) {
 			$cnt++;
 
@@ -386,23 +395,25 @@ class Map_model extends CI_Model {
 			echo "<div class='name'> {$name} </div>";
 			echo "<div class='date'> {$date} {$time} </div>";
 
-			// scallop99 to do : add button class depends on each role and setting color
+			// daihyun99 to do : button class setting color
 			/* func : top */
 			echo "<div class='func'>";
-			if($uid) {
-				echo "<button><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
-				echo "<button><i class='fa fa-thumbs-o-down' aria-hidden='true'></i></button>";
-			}
 
-			if ($uid) {
-				echo "<button><i class='fa fa-reply' aria-hidden='true' style='transform: rotate3d(1, 0, 0, 180deg);'></i></button>";
+				echo "<button class='up {$btn_perm}'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
+				echo "<button class='down {$btn_perm}'><i class='fa fa-thumbs-o-down' aria-hidden='true'></i></button>";
+
+				echo "<button class='reply {$btn_perm}'><i class='fa fa-reply' aria-hidden='true' style='transform: rotate3d(1, 0, 0, 180deg);'></i></button>";
 
 				if($uid == $reply_uid || $admin ) {
-					echo "<button><i class='fa fa-pencil' aria-hidden='true'></i></button>";
-					echo "<button><i class='fa fa-trash' aria-hidden='true'></i></button>";
+					$reply_perm = "enable";
+				} else {
+					$reply_perm = "disable";
 				}
-			}
-			echo "<button><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+
+				echo "<button class='modify {$reply_perm}'><i class='fa fa-pencil' aria-hidden='true'></i></button>";
+				echo "<button class='delete {$reply_perm}'><i class='fa fa-trash' aria-hidden='true'></i></button>";
+				echo "<button class='report ' ><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+
 			echo "</div>";
 			/* func : end */
 				

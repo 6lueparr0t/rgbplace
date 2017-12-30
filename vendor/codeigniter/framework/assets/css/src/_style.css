@@ -4440,7 +4440,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-0 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-0 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-0 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-0 .func button:hover {
             background-color: #212529;
             color: white;
@@ -4469,7 +4475,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-1 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-1 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-1 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-1 .func button:hover {
             background-color: #212529;
             color: white;
@@ -4498,7 +4510,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-2 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-2 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-2 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-2 .func button:hover {
             background-color: #212529;
             color: white;
@@ -4527,7 +4545,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-3 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-3 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-3 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-3 .func button:hover {
             background-color: #212529;
             color: white;
@@ -4556,7 +4580,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-4 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-4 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-4 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-4 .func button:hover {
             background-color: #212529;
             color: white;
@@ -4585,7 +4615,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-5 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-5 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-5 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-5 .func button:hover {
             background-color: #212529;
             color: white;
@@ -4614,7 +4650,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-6 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-6 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-6 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-6 .func button:hover {
             background-color: #212529;
             color: white;
@@ -4643,7 +4685,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-7 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-7 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-7 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-7 .func button:hover {
             background-color: #212529;
             color: white;
@@ -4672,7 +4720,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-8 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-8 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-8 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-8 .func button:hover {
             background-color: #212529;
             color: white;
@@ -4701,7 +4755,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-9 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-9 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-9 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-9 .func button:hover {
             background-color: #212529;
             color: white;
@@ -4730,7 +4790,13 @@ a {
           border: 1px solid #212529;
           border-radius: .25rem;
           margin: 0 .2rem;
-          flex: 1; }
+          flex: 2; }
+          #reply .reply ul li.depth-10 .func button.modify {
+            flex: 1; }
+          #reply .reply ul li.depth-10 .func button.delete {
+            flex: 1; }
+          #reply .reply ul li.depth-10 .func button.report {
+            flex: 1; }
           #reply .reply ul li.depth-10 .func button:hover {
             background-color: #212529;
             color: white;

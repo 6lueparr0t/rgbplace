@@ -35,7 +35,19 @@
 			border: 1px solid $oc-gray-9;
 			border-radius: .25rem;
 			margin:0 .2rem;
-			flex: 1;
+			flex: 2;
+
+			&.modify {
+				flex: 1;
+			}
+
+			&.delete {
+				flex: 1;
+			}
+
+			&.report {
+				flex: 1;
+			}
 
 			&:hover {
 				background-color: $oc-gray-9;
