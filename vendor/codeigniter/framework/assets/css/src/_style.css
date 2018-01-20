@@ -4211,6 +4211,7 @@ a {
         position: absolute;
         display: none;
         left: -.08rem;
+        height: 0;
         padding-left: 0;
         margin-top: .98rem; }
         @media screen and (max-width: 860px) {
@@ -4423,7 +4424,9 @@ a {
     padding-left: 0; }
     #reply .reply ul li.depth-0 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-0 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-0 ul li {
         display: flex; }
         #reply .reply ul li.depth-0 ul li.content {
@@ -4439,6 +4442,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-0 .func button.modify {
@@ -4458,7 +4462,9 @@ a {
           color: #ced4da; }
     #reply .reply ul li.depth-1 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-1 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-1 ul li {
         display: flex; }
         #reply .reply ul li.depth-1 ul li.content {
@@ -4474,6 +4480,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-1 .func button.modify {
@@ -4493,7 +4500,9 @@ a {
           color: #ced4da; }
     #reply .reply ul li.depth-2 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-2 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-2 ul li {
         display: flex; }
         #reply .reply ul li.depth-2 ul li.content {
@@ -4509,6 +4518,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-2 .func button.modify {
@@ -4528,7 +4538,9 @@ a {
           color: #ced4da; }
     #reply .reply ul li.depth-3 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-3 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-3 ul li {
         display: flex; }
         #reply .reply ul li.depth-3 ul li.content {
@@ -4544,6 +4556,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-3 .func button.modify {
@@ -4563,7 +4576,9 @@ a {
           color: #ced4da; }
     #reply .reply ul li.depth-4 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-4 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-4 ul li {
         display: flex; }
         #reply .reply ul li.depth-4 ul li.content {
@@ -4579,6 +4594,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-4 .func button.modify {
@@ -4598,7 +4614,9 @@ a {
           color: #ced4da; }
     #reply .reply ul li.depth-5 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-5 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-5 ul li {
         display: flex; }
         #reply .reply ul li.depth-5 ul li.content {
@@ -4614,6 +4632,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-5 .func button.modify {
@@ -4633,7 +4652,9 @@ a {
           color: #ced4da; }
     #reply .reply ul li.depth-6 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-6 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-6 ul li {
         display: flex; }
         #reply .reply ul li.depth-6 ul li.content {
@@ -4649,6 +4670,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-6 .func button.modify {
@@ -4668,7 +4690,9 @@ a {
           color: #ced4da; }
     #reply .reply ul li.depth-7 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-7 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-7 ul li {
         display: flex; }
         #reply .reply ul li.depth-7 ul li.content {
@@ -4684,6 +4708,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-7 .func button.modify {
@@ -4703,7 +4728,9 @@ a {
           color: #ced4da; }
     #reply .reply ul li.depth-8 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-8 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-8 ul li {
         display: flex; }
         #reply .reply ul li.depth-8 ul li.content {
@@ -4719,6 +4746,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-8 .func button.modify {
@@ -4738,7 +4766,9 @@ a {
           color: #ced4da; }
     #reply .reply ul li.depth-9 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-9 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-9 ul li {
         display: flex; }
         #reply .reply ul li.depth-9 ul li.content {
@@ -4754,6 +4784,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-9 .func button.modify {
@@ -4773,7 +4804,9 @@ a {
           color: #ced4da; }
     #reply .reply ul li.depth-10 {
       border-bottom: 1px solid #adb5bd;
-      padding: 1rem 0 1rem 0; }
+      padding: 1rem 0 .4rem 0; }
+      #reply .reply ul li.depth-10 ul span.no {
+        display: none; }
       #reply .reply ul li.depth-10 ul li {
         display: flex; }
         #reply .reply ul li.depth-10 ul li.content {
@@ -4789,6 +4822,7 @@ a {
           padding: .5rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
+          background: white;
           margin: 0 .2rem;
           flex: 2; }
           #reply .reply ul li.depth-10 .func button.modify {
@@ -4827,7 +4861,7 @@ a {
       text-align: center;
       display: flex;
       user-select: none; }
-      #reply .reply .message .message-button-group .message-button-send {
+      #reply .reply .message .message-button-group .send {
         margin-top: .5rem;
         margin-bottom: 1rem;
         margin-right: .5rem;
@@ -4838,25 +4872,25 @@ a {
         border-radius: .25rem;
         flex: 2;
         cursor: pointer; }
-        #reply .reply .message .message-button-group .message-button-send:hover {
+        #reply .reply .message .message-button-group .send:hover {
           background-color: white;
           color: #228ae6;
           transition: all .1s ease-out; }
-        #reply .reply .message .message-button-group .message-button-send.to {
+        #reply .reply .message .message-button-group .send.to {
           border: 1px solid #fd7e14;
           background-color: #fd7e14;
           color: white; }
-          #reply .reply .message .message-button-group .message-button-send.to:hover {
+          #reply .reply .message .message-button-group .send.to:hover {
             background-color: white;
             color: #fd7e14;
             transition: all .1s ease-out; }
-        #reply .reply .message .message-button-group .message-button-send.no {
+        #reply .reply .message .message-button-group .send.no {
           display: none;
           flex: 1; }
-        #reply .reply .message .message-button-group .message-button-send.yes {
+        #reply .reply .message .message-button-group .send.yes {
           display: none;
           flex: 1; }
-      #reply .reply .message .message-button-group .message-button-reset {
+      #reply .reply .message .message-button-group .reset {
         margin-top: .5rem;
         margin-bottom: 1rem;
         margin-left: .5rem;
@@ -4867,14 +4901,14 @@ a {
         border-radius: .25rem;
         flex: 2;
         cursor: pointer; }
-        #reply .reply .message .message-button-group .message-button-reset:hover {
+        #reply .reply .message .message-button-group .reset:hover {
           background-color: white;
           color: #868e96;
           transition: all .1s ease-out; }
-        #reply .reply .message .message-button-group .message-button-reset.no {
+        #reply .reply .message .message-button-group .reset.no {
           display: none;
           flex: 1; }
-        #reply .reply .message .message-button-group .message-button-reset.yes {
+        #reply .reply .message .message-button-group .reset.yes {
           display: none;
           flex: 1; }
 
@@ -4884,7 +4918,7 @@ a {
     display: block;
     margin: 1rem auto;
     padding: .5rem;
-    width: 50%;
+    width: 90%;
     height: 3rem;
     font-size: 1.5rem;
     border-radius: 1rem; }

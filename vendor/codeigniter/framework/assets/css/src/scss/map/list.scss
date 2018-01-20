@@ -251,6 +251,7 @@
 				position: absolute;
 				display: none;
 				left: -.08rem;
+				height:0;
 
 				@media screen and ($width-name : $target-width) {
 					left: -1.8rem;

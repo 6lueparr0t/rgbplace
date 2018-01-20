@@ -2,27 +2,34 @@
 	border-bottom:1px solid $oc-gray-5;
 	//padding: .5rem 0;
 	//margin: .5rem 0;
-	padding:1rem 0 1rem 0;
+	padding:1rem 0 .4rem 0;
 
-	ul li {
-		display:flex;
-
-		&.depth {
+	ul {
+		span.no {
+			display:none;
 		}
 
-		&.null {
-		}
+		li {
+			display:flex;
 
-		&.content {
-			margin-bottom:1rem;
-		}
+			&.depth {
+			}
 
-		&.name {
-			font-size:1rem;
-		}
+			&.null {
+			}
 
-		&.date {
-			font-size:1rem;
+			&.content {
+				margin-bottom:1rem;
+			}
+
+			&.name {
+				font-size:1rem;
+			}
+
+			&.date {
+				font-size:1rem;
+			}
+
 		}
 
 	}
@@ -34,6 +41,7 @@
 			padding: .5rem 1rem;
 			border: 1px solid $oc-gray-9;
 			border-radius: .25rem;
+			background:white;
 			margin:0 .2rem;
 			flex: 2;
 
@@ -127,7 +135,7 @@
 				display:flex;
 				user-select: none;
 
-				.message-button-send {
+				.send {
 					margin-top: .5rem;
 					margin-bottom: 1rem;
 					margin-right: .5rem;
@@ -168,7 +176,7 @@
 					}
 				}
 
-				.message-button-reset {
+				.reset {
 					margin-top: .5rem;
 					margin-bottom: 1rem;
 					margin-left: .5rem;

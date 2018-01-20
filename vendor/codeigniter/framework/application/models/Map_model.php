@@ -378,6 +378,7 @@ class Map_model extends CI_Model {
 			echo "<li class='depth-{$depth_no}'>";
 			echo "<ul>";
 
+			echo "<span class='no'>{$no}</span>";
 			echo "<li class='content'>";
 
 			/* depth arrow output : top */
@@ -423,7 +424,7 @@ class Map_model extends CI_Model {
 			echo "</ul>"
 			."</li>";
 
-			$this->message("hide", $no);
+			//$this->message("hide", $no);
 
 		}
 		echo "</ul>";
@@ -447,21 +448,19 @@ class Map_model extends CI_Model {
 		return true;
 	}
 
-	private function message($status = "block", $id = 0) {
-		$to = ($id != 0)? "to ":"";
-
+	private function message($status = "block") {
 		echo "<div class='message {$status}' id='message-{$id}' name='message-{$id}'>"
 			."<input type='hidden' class='message-no' value='{$id}'>"
 			."<textarea class='message-box' id='message-box-{$id}' placeholder='Leave a Message .. &#xf040;'></textarea>"
 			."<div class='message-button-group'>"
 
-			."<div class='message-button-send {$to}'>Send <i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
-			."<div class='message-button-send {$to} yes'>yes</div>"
-			."<div class='message-button-send {$to} no'>no</div>"
+			."<div class='message-button send'>Send <i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
+			."<div class='message-button send yes'>yes</div>"
+			."<div class='message-button send no'>no</div>"
 
-			."<div class='message-button-reset'>reset ?</div>"
-			."<div class='message-button-reset yes'>yes</div>"
-			."<div class='message-button-reset no'>no</div>"
+			."<div class='message-button reset'>reset ?</div>"
+			."<div class='message-button reset yes'>yes</div>"
+			."<div class='message-button reset no'>no</div>"
 			."</div>"
 			."</div>";
 	}
