@@ -118,8 +118,8 @@ class RGBplace {
 		/* -------------------------------------------------- MENU Start -------------------------------------------------- */
 
 		echo("
-        <input type='checkbox' id='menu-toggle' />
-        <label id='menu-button' for='menu-toggle'>
+        <input class='menu' type='checkbox' id='menu-toggle' />
+        <label class='menu' id='menu-button' for='menu-toggle'>
         <i class='open fa fa-bars' aria-hidden='true'></i>
         <i class='close fa fa-times' aria-hidden='true'></i>
 		</label>
@@ -130,29 +130,29 @@ class RGBplace {
 		$admin = $this->CI->session->userdata('admin');
 		if($admin === TRUE) {
 		echo("
-		  <label for='menu-admin'><i class='fa fa-code' aria-hidden='true' ></i> Admin
-            <input type='checkbox' id='menu-admin' />
+		  <label class='menu' for='menu-admin'><i class='fa fa-code' aria-hidden='true' ></i> Admin
+            <input class='menu' type='checkbox' id='menu-admin' />
               <i class='open fa fa-caret-up' aria-hidden='true'></i>
               <i class='close fa fa-caret-down' aria-hidden='true'></i>
 		      <ul>
-		        <label for='menu-admin-1'>Admin
-                  <input type='checkbox' id='menu-admin-1' />
+		        <label class='menu' for='menu-admin-1'>Admin
+                  <input class='menu' type='checkbox' id='menu-admin-1' />
                   <i class='open fa fa-minus' aria-hidden='true'></i>
                   <i class='close fa fa-plus' aria-hidden='true'></i>
 		          <ul>
-		            <a href='/admin/info' target='_blank'><li>Version</li></a>
-		            <a href='/admin/db'><li>Database Management</li></a>
+		            <a class='menu' href='/admin/info' target='_blank'><li>Version</li></a>
+		            <a class='menu' href='/admin/db'><li>Database Management</li></a>
 		          </ul>
                 </label>
-		        <label for='menu-admin-2'>Exam
-                  <input type='checkbox' id='menu-admin-2' />
+		        <label class='menu' for='menu-admin-2'>Exam
+                  <input class='menu' type='checkbox' id='menu-admin-2' />
                   <i class='open fa fa-minus' aria-hidden='true'></i>
                   <i class='close fa fa-plus' aria-hidden='true'></i>
 		          <ul>
-		            <a href='/admin/generate_hash'><li>Generate Hash</li></a>
-		            <a href='/admin/animation'><li>Animation</li></a>
-		            <a href='/admin/restful'><li>RESTful Test</li></a>
-		            <a href='/admin/dragndrop_upload'><li>Drag & Drop Upload</li></a>
+		            <a class='menu' href='/admin/generate_hash'><li>Generate Hash</li></a>
+		            <a class='menu' href='/admin/animation'><li>Animation</li></a>
+		            <a class='menu' href='/admin/restful'><li>RESTful Test</li></a>
+		            <a class='menu' href='/admin/dragndrop_upload'><li>Drag & Drop Upload</li></a>
 		          </ul>
                 </label>
 		      </ul>
@@ -161,41 +161,41 @@ class RGBplace {
 		}
 
 		echo("
-		  <label id='menu-map' for='map-search'>
-            <input type='text' id='map-search-box' placeholder='Map Search'/><i class='fa fa-search' id='map-search-button' aria-hidden='true'></i>
-			<input type='checkbox' id='map-search' />
+		  <label class='menu' id='menu-map' for='map-search'>
+            <input class='menu' type='text' id='map-search-box' placeholder='Map Search'/><i class='fa fa-search' id='map-search-button' aria-hidden='true'></i>
+			<input class='menu' type='checkbox' id='map-search' />
             <i class='open fa fa-caret-up' aria-hidden='true'></i>
             <i class='close fa fa-caret-down' aria-hidden='true'></i>
 			<ul>
-			  <label id='map-result' for=''>
+			  <label class='menu' id='map-result' for=''>
 			    <a href='#'><li>No Results</li></a>
 			  </label>
 			</ul>
           </label>
-		  <a href='/stage'>
+		  <a class='menu' href='/stage'>
             <i class='fa fa-street-view' aria-hidden='true'></i> Stage
 		  </a>
           <!-- <label for='menu-stage'><i class='fa fa-street-view' aria-hidden='true'></i> Stage
-            <input type='checkbox' id='menu-stage' />
-              <div id='menu-stage-box'>
+            <input class='menu' type='checkbox' id='menu-stage' />
+              <div class='menu' id='menu-stage-box'>
               </div>
           </label> -->
-		  <!-- <label for='menu-comments'><i class='fa fa-commenting-o' aria-hidden='true' ></i>
-            <input type='checkbox' id='menu-comments' />
-              <div id='menu-comments-box'>
+		  <!-- <label class='menu' for='menu-comments'><i class='fa fa-commenting-o' aria-hidden='true' ></i>
+            <input class='menu' type='checkbox' id='menu-comments' />
+              <div class='menu' id='menu-comments-box'>
 			  </div>
           </label> -->
-		  <label for='menu-favorite'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>
-            <input type='checkbox' id='menu-favorite' /> Like
-			  <div id='menu-favorite-box'>
+		  <label class='menu' for='menu-favorite'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>
+            <input class='menu' type='checkbox' id='menu-favorite' /> Like
+			  <div class='menu' id='menu-favorite-box'>
               </div>
           </label>
-		  <label for='menu-config'><i class='fa fa-cog' aria-hidden='true'></i>
-            <input type='checkbox' id='menu-config' />
+		  <label class='menu' for='menu-config'><i class='fa fa-cog' aria-hidden='true'></i>
+            <input class='menu' type='checkbox' id='menu-config' />
             <i class='open fa fa-caret-up' aria-hidden='true'></i>
             <i class='close fa fa-caret-down' aria-hidden='true'></i>
 		    <ul>
-                <label for='menu-config-1'>Fix On</label>
+                <label class='menu' for='menu-config-1'>Fix On</label>
 			</ul>
           </label>
 		</ul>
@@ -221,12 +221,12 @@ class RGBplace {
 		$tab4 = $this->CI->uri->segment(4, "#");
 		
 		echo ("
-        <div id='status'>
-          <a class='type' href='/{$tab1}'>
+        <div class='status' id='status'>
+          <a class='status type' href='/{$tab1}'>
             <span id='status-place'>{$tab1}</span>
           </a>
-          <label class='type {$tab2}'>
-            <select class='{$tab2}' id='status-type'>
+          <label class='status type {$tab2}'>
+            <select class='status {$tab2}' id='status-type'>
 			  <option>{$tab2_text}</option>
 			  ");
 
@@ -240,10 +240,10 @@ class RGBplace {
 		echo("
             </select>
           </label>
-          <a class='type {$tab2} {$tab3_class}' href='/{$tab1}/{$tab2}/{$tab3}'>
+          <a class='status type {$tab2} {$tab3_class}' href='/{$tab1}/{$tab2}/{$tab3}'>
             <span>{$tab3_text}</span>
           </a>
-          <a class='type none' href='/{$tab1}/{$tab2}/{$tab3}/{$tab4}'>
+          <a class='status type none' href='/{$tab1}/{$tab2}/{$tab3}/{$tab4}'>
             <span>{$tab4}</span>
           </a>
         </div>

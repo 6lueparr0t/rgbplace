@@ -1,4 +1,8 @@
 "use strict";
+
+let signup = document.querySelector("#sign-up");
+let signUpConf = document.querySelector("#sign-up input[name='conf']");
+
 function signUpCheck (recv) {
 	let form = new FormData(recv);
 
@@ -45,9 +49,6 @@ function passwordCheck () {
         this.setCustomValidity('');
     }
 }
-
-let signup = document.querySelector("#sign-up");
-let signUpConf = document.querySelector("#sign-up input[name='conf']");
 
 if (signup) signup.addEventListener("submit", function () { event.preventDefault(); signUpCheck(signup); });
 if (signUpConf) signUpConf.addEventListener("input", passwordCheck);

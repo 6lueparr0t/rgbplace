@@ -1,35 +1,35 @@
 "use strict"
 //view page(post) event
 
-function messageBoxToggle (i, state) {
+let replyBox     = document.querySelectorAll(".reply-button:not(.no):not(.yes)");
+let replyBoxNo   = document.querySelectorAll(".reply-button.no:not(.yes)");
+let replyBoxYes  = document.querySelectorAll(".reply-button.yes:not(.no)");
+
+function replyBoxToggle (i, state) {
 
 	if(state === true) {
-		messageBox[i].style.display = "none";
-		messageBoxNo[i].style.display = "initial";
-		messageBoxYes[i].style.display = "initial";
+		replyBox[i].style.display = "none";
+		replyBoxNo[i].style.display = "initial";
+		replyBoxYes[i].style.display = "initial";
 	} else if(state === false) {
-		messageBox[i].style.display = "initial";
-		messageBoxNo[i].style.display = "none";
-		messageBoxYes[i].style.display = "none";
+		replyBox[i].style.display = "initial";
+		replyBoxNo[i].style.display = "none";
+		replyBoxYes[i].style.display = "none";
 	}
 };
 
-let messageBox     = document.querySelectorAll(".message-button:not(.no):not(.yes)");
-let messageBoxNo   = document.querySelectorAll(".message-button.no:not(.yes)");
-let messageBoxYes  = document.querySelectorAll(".message-button.yes:not(.no)");
-
-if (messageBox && messageBoxNo && messageBoxYes) {
+if (replyBox && replyBoxNo && replyBoxYes) {
 	//Switch
-	for(let i=0; i<messageBox.length; i++) {
-		messageBox[i].addEventListener("click", function() {
-			messageBoxToggle.call(this, i, true);
+	for(let i=0; i<replyBox.length; i++) {
+		replyBox[i].addEventListener("click", function() {
+			replyBoxToggle.call(this, i, true);
 		});
 	}
 
 	//Reset
-	for(let i=0; i<messageBoxNo.length; i++) {
-		messageBoxNo[i].addEventListener("click", function() {
-			messageBoxToggle.call(this, i, false);
+	for(let i=0; i<replyBoxNo.length; i++) {
+		replyBoxNo[i].addEventListener("click", function() {
+			replyBoxToggle.call(this, i, false);
 		});
 	}
 }

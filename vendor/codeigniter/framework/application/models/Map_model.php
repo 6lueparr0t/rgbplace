@@ -327,7 +327,7 @@ class Map_model extends CI_Model {
 
 		if($find->num_rows() === 0) {
 			echo "<div class='reply'>";
-			$this->message();
+			$this->replyBox();
 			echo "</div>";
 			return false;
 		}
@@ -421,45 +421,30 @@ class Map_model extends CI_Model {
 			echo "</div>";
 			// reply info finish
 
-			echo "</ul>"
-			."</li>";
-
-			//$this->message("hide", $no);
+			echo "</ul>";
+			echo "</li>";
 
 		}
 		echo "</ul>";
-		$this->message();
+		$this->replyBox();
 		echo "</div>";
 
-		//."<li class='func'>  <i class='fa fa-ellipsis-v' aria-hidden='true'></i></li>"
-		//."<li class='edit'>  <i class='fa fa-pencil'     aria-hidden='true'></i></li>"
-		//."<li class='delete'><i class='fa fa-trash'      aria-hidden='true'></i></li>"
-		//."<li class='report'><i class='fa fa-meh-o'      aria-hidden='true'></i></li>"
-		//."<li class='add'>   <i class='fa fa-plus'       aria-hidden='true'></i></li>"
-		//."<li class='name'>{$row->name}</li>"
-		//."<li class='content'><div>{$row->content}</div></li>"
-		//."<li class='date'>{$date}</li>"
-		//."<li class='func'>"
-		//."<i class='fa fa-pencil' aria-hidden='true'></i> <i class='fa fa-trash' aria-hidden='true'></i> <i class='fa fa-meh-o' aria-hidden='true'></i>"
-		//."<li colspan='3' class='add'><div contentEditable='true'></div></li>"
-
 		//input reply text box
-
 		return true;
 	}
 
-	private function message($status = "block") {
-		echo "<div class='message {$status}' id='message-{$id}' name='message-{$id}'>"
-			."<input type='hidden' class='message-no' value='{$id}'>"
-			."<textarea class='message-box' id='message-box-{$id}' placeholder='Leave a Message .. &#xf040;'></textarea>"
-			."<div class='message-button-group'>"
+	private function replyBox($status = "block", $id='0') {
+		echo "<div class='reply {$status}' id='reply-{$id}' name='reply-{$id}'>"
+			."<input type='hidden' class='reply-no' value='{$id}'>"
+			."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf040;'></textarea>"
+			."<div class='reply-button-group'>"
 
-			."<div class='message-button send'>Send <i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
-			."<div class='message-button send yes'>yes</div>"
-			."<div class='message-button send no'>no</div>"
+			."<div class='reply-button send'>Send <i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
+			."<div class='reply-button send yes'>yes</div>"
+			."<div class='reply-button send no'>no</div>"
 
-			."<div class='message-button reset'>reset ?</div>"
-			."<div class='message-button reset yes'>yes</div>"
+			."<div class='reply-button reset'>reset ?</div>"
+			."<div class='reply-button reset yes'>yes</div>"
 			."<div class='message-button reset no'>no</div>"
 			."</div>"
 			."</div>";

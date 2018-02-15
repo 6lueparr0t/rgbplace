@@ -4840,11 +4840,11 @@ a {
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-  #reply .reply .message {
+  #reply .reply .reply {
     margin-top: 1rem; }
-    #reply .reply .message.hide {
+    #reply .reply .reply.hide {
       display: none; }
-    #reply .reply .message .message-box {
+    #reply .reply .reply .reply-box {
       font-family: normal, FontAwesome;
       font-size: 1rem;
       padding: 1rem;
@@ -4852,16 +4852,16 @@ a {
       width: 97.75%;
       border: 1px solid #212529; }
       @media screen and (max-width: 860px) {
-        #reply .reply .message .message-box {
+        #reply .reply .reply .reply-box {
           width: 90.8%; } }
-      #reply .reply .message .message-box:active, #reply .reply .message .message-box:focus {
+      #reply .reply .reply .reply-box:active, #reply .reply .reply .reply-box:focus {
         border: 1px solid #212529; }
-    #reply .reply .message .message-button-group {
+    #reply .reply .reply .reply-button-group {
       font-family: 'pixel';
       text-align: center;
       display: flex;
       user-select: none; }
-      #reply .reply .message .message-button-group .send {
+      #reply .reply .reply .reply-button-group .send {
         margin-top: .5rem;
         margin-bottom: 1rem;
         margin-right: .5rem;
@@ -4872,25 +4872,25 @@ a {
         border-radius: .25rem;
         flex: 2;
         cursor: pointer; }
-        #reply .reply .message .message-button-group .send:hover {
+        #reply .reply .reply .reply-button-group .send:hover {
           background-color: white;
           color: #228ae6;
           transition: all .1s ease-out; }
-        #reply .reply .message .message-button-group .send.to {
+        #reply .reply .reply .reply-button-group .send.to {
           border: 1px solid #fd7e14;
           background-color: #fd7e14;
           color: white; }
-          #reply .reply .message .message-button-group .send.to:hover {
+          #reply .reply .reply .reply-button-group .send.to:hover {
             background-color: white;
             color: #fd7e14;
             transition: all .1s ease-out; }
-        #reply .reply .message .message-button-group .send.no {
+        #reply .reply .reply .reply-button-group .send.no {
           display: none;
           flex: 1; }
-        #reply .reply .message .message-button-group .send.yes {
+        #reply .reply .reply .reply-button-group .send.yes {
           display: none;
           flex: 1; }
-      #reply .reply .message .message-button-group .reset {
+      #reply .reply .reply .reply-button-group .reset {
         margin-top: .5rem;
         margin-bottom: 1rem;
         margin-left: .5rem;
@@ -4901,14 +4901,14 @@ a {
         border-radius: .25rem;
         flex: 2;
         cursor: pointer; }
-        #reply .reply .message .message-button-group .reset:hover {
+        #reply .reply .reply .reply-button-group .reset:hover {
           background-color: white;
           color: #868e96;
           transition: all .1s ease-out; }
-        #reply .reply .message .message-button-group .reset.no {
+        #reply .reply .reply .reply-button-group .reset.no {
           display: none;
           flex: 1; }
-        #reply .reply .message .message-button-group .reset.yes {
+        #reply .reply .reply .reply-button-group .reset.yes {
           display: none;
           flex: 1; }
 

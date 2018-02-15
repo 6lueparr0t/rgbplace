@@ -1,3 +1,5 @@
+let signin = document.querySelector("#sign-in");
+
 function signInCheck (recv) {
 	let form = new FormData(recv);
 
@@ -36,5 +38,4 @@ function signInCheck (recv) {
 	request.send(form);
 }
 
-let signin = document.querySelector("#sign-in");
 if (signin) signin.addEventListener("submit", function () { event.preventDefault(); signInCheck(signin); });

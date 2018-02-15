@@ -103,14 +103,14 @@
 			}
 		}
 
-		.message {
+		.reply {
 			margin-top: 1rem;
 
 			&.hide {
 				display:none;
 			}
 
-			.message-box {
+			.reply-box {
 				font-family:normal, FontAwesome;
 				font-size:1rem;
 				padding:1rem;
@@ -129,7 +129,7 @@
 
 			}
 
-			.message-button-group {
+			.reply-button-group {
 				font-family:'pixel';
 				text-align:center;
 				display:flex;

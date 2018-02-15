@@ -1,4 +1,8 @@
 let searchResult = document.querySelector("#map-result");
+let searchBtn    = document.querySelector("#map-search-button");
+let searchBox    = document.querySelector("#map-search-box");
+let searchToggle = document.querySelector("#map-search");
+
 
 function mapSearch (recv) {
 	//console.log(recv.value);
@@ -79,10 +83,6 @@ function mapSearch (recv) {
 
 	request.send();
 }
-
-let searchBtn    = document.querySelector("#map-search-button");
-let searchBox    = document.querySelector("#map-search-box");
-let searchToggle = document.querySelector("#map-search");
 
 if (searchBtn) searchBtn.addEventListener("click", function() { searchToggle.checked = false; mapSearch(searchBox); });
 if (searchBox) searchBox.addEventListener("keydown", function(e) {
