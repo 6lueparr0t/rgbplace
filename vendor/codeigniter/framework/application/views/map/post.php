@@ -19,7 +19,7 @@ $this->map->reply($map, $type, $num);
 
 <div id='list'>
 <?
-$this->map->list($map, $type, 0, 30);
+$this->map->list($map, $type, 0, LIST_ROWS_LIMIT);
 ?>
 </div>
 

@@ -97,3 +97,6 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 //define("HASH_PBKDF2_INDEX", 3);
 
 define("DEFAULT_MAP", "space");
+
+define("PAGINATION_COUNT", 10);
+define("LIST_ROWS_LIMIT", 30);

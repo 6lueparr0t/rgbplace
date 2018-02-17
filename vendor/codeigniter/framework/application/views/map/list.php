@@ -7,7 +7,7 @@
 
 <div id="list">
 <?
-$this->map->list($map, $type, 0, 30, $search);
+$this->map->list($map, $type, 0, LIST_ROWS_LIMIT, $search);
 ?>
 </div>
 

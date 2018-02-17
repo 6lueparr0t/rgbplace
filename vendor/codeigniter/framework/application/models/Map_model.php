@@ -54,7 +54,7 @@ class Map_model extends CI_Model {
 			echo "<tr>"
 				."<td class='date'>".date("Y-m-d", strtotime($row->ctim))."</td>"
 				."<td class='title'><div><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></div></td>"
-				."<td class='reply'>[<a href='/{$map}/{$row->type}/{$row->no}#reply'>{$row->reply}</a>]</td>"
+				."<td class='reply count'>[<a href='/{$map}/{$row->type}/{$row->no}#reply'>{$row->reply}</a>]</td>"
 			."</tr>";
 
 			//$data['title'][$key]   = $row->title;
@@ -149,6 +149,39 @@ class Map_model extends CI_Model {
 			return false;
 		}
 
+/*
+ *
+ *        $result = $this->sql("select count(*) from board");
+ *
+ *        foreach($result as $row) {
+ *            $max = ceil($row[0]/$range);
+ *            if($max == 0) $max=1;
+ *        }
+ *
+ *        if($current>5) {
+ *            $cur_page=$current-5;
+ *        } else {
+ *            $cur_page=1;
+ *        }
+ *
+ *        echo "<a href='/board/list.php?page=1'><li><i class='fa fa-step-backward' aria-hidden='true'></i></li></a>";
+ *        for($count=0; $count<10; $count++) {
+ *            $next = $cur_page;
+ *
+ *            if($cur_page++>$max) {
+ *                echo "<li class='page-item'></li>";
+ *            } else {
+ *                echo "<a class='page-link' href='/board/list.php?page={$next}'><li class='page-item'>{$next}</li></a>";
+ *            }
+ *
+ *        }
+ *        echo "<a href='/board/list.php?page={$max}'><li><i class='fa fa-step-forward' aria-hidden='true'></i></li></a>";
+ *
+ *        return true;
+ *
+ */
+
+
 		// all list count / 30 (default)
 		foreach ($find->result() as $key => $row) {
 			$max = ceil($row->list_count/$end);
@@ -169,7 +202,7 @@ class Map_model extends CI_Model {
 			$cur_page = 1;
 		}
 
-		$range = 10;
+		$range = PAGINATION_COUNT;
 
 		// first page
 		$min_page = ((int)$current-(int)$range>0)?(int)$current-(int)$range:1;
@@ -193,22 +226,6 @@ class Map_model extends CI_Model {
 			}
 
 		}
-
-		//for($i=(int)$min_page; $i < $current; $i++) {
-
-			//if($i == 0) continue;
-
-			//$next = $i;
-			//echo "<a href='/{$map}/{$type}/list?page={$next}'>{$next}</a>";
-		//}
-
-		//for($i=(int)$current; $i <= $max_page; $i++) {
-
-			//if($i == 0) continue;
-
-			//$next = $i;
-			//echo "<a href='/{$map}/{$type}/list?page={$next}'>{$next}</a>";
-		//}
 
 		echo "<a href='/{$map}/{$type}/list?page={$max_page}'><i class='fa fa-step-forward' aria-hidden='true'></i></a>";
 		echo "</div>";
@@ -326,13 +343,13 @@ class Map_model extends CI_Model {
 		$find = $this->db->query($query);
 
 		if($find->num_rows() === 0) {
-			echo "<div class='reply'>";
+			echo "<div class='reply-root'>";
 			$this->replyBox();
 			echo "</div>";
 			return false;
 		}
 
-		echo "<div class='reply'>";
+		echo "<div class='reply-root'>";
 		echo "<ul>";
 
 		$cnt = 0;

@@ -80,7 +80,7 @@
 	border-bottom : 1px solid $oc-gray-9;
 	display: grid;
 
-	.reply {
+	.reply-root{
 		//margin:.5rem;
 		//padding:1rem 0;
 
@@ -105,6 +105,7 @@
 
 		.reply {
 			margin-top: 1rem;
+			width:100%;
 
 			&.hide {
 				display:none;
@@ -154,13 +155,13 @@
 					}
 
 					&.to {
-						border : 1px solid $oc-orange-6;
-						background-color:$oc-orange-6;
+						border : 1px solid $oc-blue-3;
+						background-color:$oc-blue-3;
 						color:white;
 
 						&:hover {
 							background-color:white;
-							color:$oc-orange-6;
+							color:$oc-blue-3;
 							transition:all .1s ease-out;
 						}
 					}

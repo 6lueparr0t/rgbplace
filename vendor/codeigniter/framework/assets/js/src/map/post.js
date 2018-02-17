@@ -33,3 +33,41 @@ if (replyBox && replyBoxNo && replyBoxYes) {
 		});
 	}
 }
+
+document.querySelector("body").addEventListener("click", function(event) {
+	let t = event.target;
+
+	console.log("test");
+
+	// reply button event
+	if (t.parentElement.className.search("reply enable") == 0 || t.className.search("reply enable") == 0) {
+		//console.log(t.className);
+
+		let reply = t.parentElement.parentElement.parentElement.parentElement;
+		t.classList.toggle('show');
+
+		if(t.classList.contains('show') == 0) {
+			reply.removeChild(reply.lastChild);
+		} else {
+			let no = reply.querySelector("ul .no").innerHTML;
+			let node = document.createElement("LI");
+			node.innerHTML =
+				"<div class='reply block' id='reply-"+no+"' name='reply-"+no+"'>"
+				+"<input type='hidden' class='reply-no' value=''>"
+				+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf040;'></textarea>"
+				+"<div class='reply-button-group'>"
+
+				+"<div class='reply-button send to'>Send <i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
+				+"<div class='reply-button send yes'>yes</div>"
+				+"<div class='reply-button send no'>no</div>"
+
+				+"<div class='reply-button reset'>reset ?</div>"
+				+"<div class='reply-button reset yes'>yes</div>"
+				+"<div class='reply-button reset no'>no</div>"
+				+"</div>"
+				+"</div>";
+
+			reply.appendChild(node);
+		}
+	}
+});

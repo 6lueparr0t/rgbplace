@@ -4416,28 +4416,28 @@ a {
   border-top: 1px solid #212529;
   border-bottom: 1px solid #212529;
   display: grid; }
-  #reply .reply .mention {
+  #reply .reply-root .mention {
     color: black;
     background-color: #ffe066; }
-  #reply .reply ul {
+  #reply .reply-root ul {
     list-style: none;
     padding-left: 0; }
-    #reply .reply ul li.depth-0 {
+    #reply .reply-root ul li.depth-0 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-0 ul span.no {
+      #reply .reply-root ul li.depth-0 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-0 ul li {
+      #reply .reply-root ul li.depth-0 ul li {
         display: flex; }
-        #reply .reply ul li.depth-0 ul li.content {
+        #reply .reply-root ul li.depth-0 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-0 ul li.name {
+        #reply .reply-root ul li.depth-0 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-0 ul li.date {
+        #reply .reply-root ul li.depth-0 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-0 .func {
+      #reply .reply-root ul li.depth-0 .func {
         display: flex; }
-        #reply .reply ul li.depth-0 .func button {
+        #reply .reply-root ul li.depth-0 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4445,37 +4445,37 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-0 .func button.modify {
+          #reply .reply-root ul li.depth-0 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-0 .func button.delete {
+          #reply .reply-root ul li.depth-0 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-0 .func button.report {
+          #reply .reply-root ul li.depth-0 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-0 .func button:hover {
+          #reply .reply-root ul li.depth-0 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-0 .func .disable {
+        #reply .reply-root ul li.depth-0 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-    #reply .reply ul li.depth-1 {
+    #reply .reply-root ul li.depth-1 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-1 ul span.no {
+      #reply .reply-root ul li.depth-1 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-1 ul li {
+      #reply .reply-root ul li.depth-1 ul li {
         display: flex; }
-        #reply .reply ul li.depth-1 ul li.content {
+        #reply .reply-root ul li.depth-1 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-1 ul li.name {
+        #reply .reply-root ul li.depth-1 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-1 ul li.date {
+        #reply .reply-root ul li.depth-1 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-1 .func {
+      #reply .reply-root ul li.depth-1 .func {
         display: flex; }
-        #reply .reply ul li.depth-1 .func button {
+        #reply .reply-root ul li.depth-1 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4483,37 +4483,37 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-1 .func button.modify {
+          #reply .reply-root ul li.depth-1 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-1 .func button.delete {
+          #reply .reply-root ul li.depth-1 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-1 .func button.report {
+          #reply .reply-root ul li.depth-1 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-1 .func button:hover {
+          #reply .reply-root ul li.depth-1 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-1 .func .disable {
+        #reply .reply-root ul li.depth-1 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-    #reply .reply ul li.depth-2 {
+    #reply .reply-root ul li.depth-2 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-2 ul span.no {
+      #reply .reply-root ul li.depth-2 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-2 ul li {
+      #reply .reply-root ul li.depth-2 ul li {
         display: flex; }
-        #reply .reply ul li.depth-2 ul li.content {
+        #reply .reply-root ul li.depth-2 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-2 ul li.name {
+        #reply .reply-root ul li.depth-2 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-2 ul li.date {
+        #reply .reply-root ul li.depth-2 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-2 .func {
+      #reply .reply-root ul li.depth-2 .func {
         display: flex; }
-        #reply .reply ul li.depth-2 .func button {
+        #reply .reply-root ul li.depth-2 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4521,37 +4521,37 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-2 .func button.modify {
+          #reply .reply-root ul li.depth-2 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-2 .func button.delete {
+          #reply .reply-root ul li.depth-2 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-2 .func button.report {
+          #reply .reply-root ul li.depth-2 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-2 .func button:hover {
+          #reply .reply-root ul li.depth-2 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-2 .func .disable {
+        #reply .reply-root ul li.depth-2 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-    #reply .reply ul li.depth-3 {
+    #reply .reply-root ul li.depth-3 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-3 ul span.no {
+      #reply .reply-root ul li.depth-3 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-3 ul li {
+      #reply .reply-root ul li.depth-3 ul li {
         display: flex; }
-        #reply .reply ul li.depth-3 ul li.content {
+        #reply .reply-root ul li.depth-3 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-3 ul li.name {
+        #reply .reply-root ul li.depth-3 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-3 ul li.date {
+        #reply .reply-root ul li.depth-3 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-3 .func {
+      #reply .reply-root ul li.depth-3 .func {
         display: flex; }
-        #reply .reply ul li.depth-3 .func button {
+        #reply .reply-root ul li.depth-3 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4559,37 +4559,37 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-3 .func button.modify {
+          #reply .reply-root ul li.depth-3 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-3 .func button.delete {
+          #reply .reply-root ul li.depth-3 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-3 .func button.report {
+          #reply .reply-root ul li.depth-3 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-3 .func button:hover {
+          #reply .reply-root ul li.depth-3 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-3 .func .disable {
+        #reply .reply-root ul li.depth-3 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-    #reply .reply ul li.depth-4 {
+    #reply .reply-root ul li.depth-4 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-4 ul span.no {
+      #reply .reply-root ul li.depth-4 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-4 ul li {
+      #reply .reply-root ul li.depth-4 ul li {
         display: flex; }
-        #reply .reply ul li.depth-4 ul li.content {
+        #reply .reply-root ul li.depth-4 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-4 ul li.name {
+        #reply .reply-root ul li.depth-4 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-4 ul li.date {
+        #reply .reply-root ul li.depth-4 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-4 .func {
+      #reply .reply-root ul li.depth-4 .func {
         display: flex; }
-        #reply .reply ul li.depth-4 .func button {
+        #reply .reply-root ul li.depth-4 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4597,37 +4597,37 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-4 .func button.modify {
+          #reply .reply-root ul li.depth-4 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-4 .func button.delete {
+          #reply .reply-root ul li.depth-4 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-4 .func button.report {
+          #reply .reply-root ul li.depth-4 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-4 .func button:hover {
+          #reply .reply-root ul li.depth-4 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-4 .func .disable {
+        #reply .reply-root ul li.depth-4 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-    #reply .reply ul li.depth-5 {
+    #reply .reply-root ul li.depth-5 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-5 ul span.no {
+      #reply .reply-root ul li.depth-5 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-5 ul li {
+      #reply .reply-root ul li.depth-5 ul li {
         display: flex; }
-        #reply .reply ul li.depth-5 ul li.content {
+        #reply .reply-root ul li.depth-5 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-5 ul li.name {
+        #reply .reply-root ul li.depth-5 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-5 ul li.date {
+        #reply .reply-root ul li.depth-5 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-5 .func {
+      #reply .reply-root ul li.depth-5 .func {
         display: flex; }
-        #reply .reply ul li.depth-5 .func button {
+        #reply .reply-root ul li.depth-5 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4635,37 +4635,37 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-5 .func button.modify {
+          #reply .reply-root ul li.depth-5 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-5 .func button.delete {
+          #reply .reply-root ul li.depth-5 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-5 .func button.report {
+          #reply .reply-root ul li.depth-5 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-5 .func button:hover {
+          #reply .reply-root ul li.depth-5 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-5 .func .disable {
+        #reply .reply-root ul li.depth-5 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-    #reply .reply ul li.depth-6 {
+    #reply .reply-root ul li.depth-6 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-6 ul span.no {
+      #reply .reply-root ul li.depth-6 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-6 ul li {
+      #reply .reply-root ul li.depth-6 ul li {
         display: flex; }
-        #reply .reply ul li.depth-6 ul li.content {
+        #reply .reply-root ul li.depth-6 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-6 ul li.name {
+        #reply .reply-root ul li.depth-6 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-6 ul li.date {
+        #reply .reply-root ul li.depth-6 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-6 .func {
+      #reply .reply-root ul li.depth-6 .func {
         display: flex; }
-        #reply .reply ul li.depth-6 .func button {
+        #reply .reply-root ul li.depth-6 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4673,37 +4673,37 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-6 .func button.modify {
+          #reply .reply-root ul li.depth-6 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-6 .func button.delete {
+          #reply .reply-root ul li.depth-6 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-6 .func button.report {
+          #reply .reply-root ul li.depth-6 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-6 .func button:hover {
+          #reply .reply-root ul li.depth-6 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-6 .func .disable {
+        #reply .reply-root ul li.depth-6 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-    #reply .reply ul li.depth-7 {
+    #reply .reply-root ul li.depth-7 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-7 ul span.no {
+      #reply .reply-root ul li.depth-7 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-7 ul li {
+      #reply .reply-root ul li.depth-7 ul li {
         display: flex; }
-        #reply .reply ul li.depth-7 ul li.content {
+        #reply .reply-root ul li.depth-7 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-7 ul li.name {
+        #reply .reply-root ul li.depth-7 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-7 ul li.date {
+        #reply .reply-root ul li.depth-7 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-7 .func {
+      #reply .reply-root ul li.depth-7 .func {
         display: flex; }
-        #reply .reply ul li.depth-7 .func button {
+        #reply .reply-root ul li.depth-7 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4711,37 +4711,37 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-7 .func button.modify {
+          #reply .reply-root ul li.depth-7 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-7 .func button.delete {
+          #reply .reply-root ul li.depth-7 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-7 .func button.report {
+          #reply .reply-root ul li.depth-7 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-7 .func button:hover {
+          #reply .reply-root ul li.depth-7 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-7 .func .disable {
+        #reply .reply-root ul li.depth-7 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-    #reply .reply ul li.depth-8 {
+    #reply .reply-root ul li.depth-8 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-8 ul span.no {
+      #reply .reply-root ul li.depth-8 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-8 ul li {
+      #reply .reply-root ul li.depth-8 ul li {
         display: flex; }
-        #reply .reply ul li.depth-8 ul li.content {
+        #reply .reply-root ul li.depth-8 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-8 ul li.name {
+        #reply .reply-root ul li.depth-8 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-8 ul li.date {
+        #reply .reply-root ul li.depth-8 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-8 .func {
+      #reply .reply-root ul li.depth-8 .func {
         display: flex; }
-        #reply .reply ul li.depth-8 .func button {
+        #reply .reply-root ul li.depth-8 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4749,37 +4749,37 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-8 .func button.modify {
+          #reply .reply-root ul li.depth-8 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-8 .func button.delete {
+          #reply .reply-root ul li.depth-8 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-8 .func button.report {
+          #reply .reply-root ul li.depth-8 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-8 .func button:hover {
+          #reply .reply-root ul li.depth-8 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-8 .func .disable {
+        #reply .reply-root ul li.depth-8 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-    #reply .reply ul li.depth-9 {
+    #reply .reply-root ul li.depth-9 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-9 ul span.no {
+      #reply .reply-root ul li.depth-9 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-9 ul li {
+      #reply .reply-root ul li.depth-9 ul li {
         display: flex; }
-        #reply .reply ul li.depth-9 ul li.content {
+        #reply .reply-root ul li.depth-9 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-9 ul li.name {
+        #reply .reply-root ul li.depth-9 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-9 ul li.date {
+        #reply .reply-root ul li.depth-9 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-9 .func {
+      #reply .reply-root ul li.depth-9 .func {
         display: flex; }
-        #reply .reply ul li.depth-9 .func button {
+        #reply .reply-root ul li.depth-9 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4787,37 +4787,37 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-9 .func button.modify {
+          #reply .reply-root ul li.depth-9 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-9 .func button.delete {
+          #reply .reply-root ul li.depth-9 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-9 .func button.report {
+          #reply .reply-root ul li.depth-9 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-9 .func button:hover {
+          #reply .reply-root ul li.depth-9 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-9 .func .disable {
+        #reply .reply-root ul li.depth-9 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-    #reply .reply ul li.depth-10 {
+    #reply .reply-root ul li.depth-10 {
       border-bottom: 1px solid #adb5bd;
       padding: 1rem 0 .4rem 0; }
-      #reply .reply ul li.depth-10 ul span.no {
+      #reply .reply-root ul li.depth-10 ul span.no {
         display: none; }
-      #reply .reply ul li.depth-10 ul li {
+      #reply .reply-root ul li.depth-10 ul li {
         display: flex; }
-        #reply .reply ul li.depth-10 ul li.content {
+        #reply .reply-root ul li.depth-10 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply ul li.depth-10 ul li.name {
+        #reply .reply-root ul li.depth-10 ul li.name {
           font-size: 1rem; }
-        #reply .reply ul li.depth-10 ul li.date {
+        #reply .reply-root ul li.depth-10 ul li.date {
           font-size: 1rem; }
-      #reply .reply ul li.depth-10 .func {
+      #reply .reply-root ul li.depth-10 .func {
         display: flex; }
-        #reply .reply ul li.depth-10 .func button {
+        #reply .reply-root ul li.depth-10 .func button {
           font-size: 1rem;
           padding: .5rem 1rem;
           border: 1px solid #212529;
@@ -4825,26 +4825,27 @@ a {
           background: white;
           margin: 0 .2rem;
           flex: 2; }
-          #reply .reply ul li.depth-10 .func button.modify {
+          #reply .reply-root ul li.depth-10 .func button.modify {
             flex: 1; }
-          #reply .reply ul li.depth-10 .func button.delete {
+          #reply .reply-root ul li.depth-10 .func button.delete {
             flex: 1; }
-          #reply .reply ul li.depth-10 .func button.report {
+          #reply .reply-root ul li.depth-10 .func button.report {
             flex: 1; }
-          #reply .reply ul li.depth-10 .func button:hover {
+          #reply .reply-root ul li.depth-10 .func button:hover {
             background-color: #212529;
             color: white;
             transition: all .1s ease-out; }
-        #reply .reply ul li.depth-10 .func .disable {
+        #reply .reply-root ul li.depth-10 .func .disable {
           border: 1px solid #ced4da;
           pointer-events: none;
           cursor: default;
           color: #ced4da; }
-  #reply .reply .reply {
-    margin-top: 1rem; }
-    #reply .reply .reply.hide {
+  #reply .reply-root .reply {
+    margin-top: 1rem;
+    width: 100%; }
+    #reply .reply-root .reply.hide {
       display: none; }
-    #reply .reply .reply .reply-box {
+    #reply .reply-root .reply .reply-box {
       font-family: normal, FontAwesome;
       font-size: 1rem;
       padding: 1rem;
@@ -4852,16 +4853,16 @@ a {
       width: 97.75%;
       border: 1px solid #212529; }
       @media screen and (max-width: 860px) {
-        #reply .reply .reply .reply-box {
+        #reply .reply-root .reply .reply-box {
           width: 90.8%; } }
-      #reply .reply .reply .reply-box:active, #reply .reply .reply .reply-box:focus {
+      #reply .reply-root .reply .reply-box:active, #reply .reply-root .reply .reply-box:focus {
         border: 1px solid #212529; }
-    #reply .reply .reply .reply-button-group {
+    #reply .reply-root .reply .reply-button-group {
       font-family: 'pixel';
       text-align: center;
       display: flex;
       user-select: none; }
-      #reply .reply .reply .reply-button-group .send {
+      #reply .reply-root .reply .reply-button-group .send {
         margin-top: .5rem;
         margin-bottom: 1rem;
         margin-right: .5rem;
@@ -4872,25 +4873,25 @@ a {
         border-radius: .25rem;
         flex: 2;
         cursor: pointer; }
-        #reply .reply .reply .reply-button-group .send:hover {
+        #reply .reply-root .reply .reply-button-group .send:hover {
           background-color: white;
           color: #228ae6;
           transition: all .1s ease-out; }
-        #reply .reply .reply .reply-button-group .send.to {
-          border: 1px solid #fd7e14;
-          background-color: #fd7e14;
+        #reply .reply-root .reply .reply-button-group .send.to {
+          border: 1px solid #72c3fc;
+          background-color: #72c3fc;
           color: white; }
-          #reply .reply .reply .reply-button-group .send.to:hover {
+          #reply .reply-root .reply .reply-button-group .send.to:hover {
             background-color: white;
-            color: #fd7e14;
+            color: #72c3fc;
             transition: all .1s ease-out; }
-        #reply .reply .reply .reply-button-group .send.no {
+        #reply .reply-root .reply .reply-button-group .send.no {
           display: none;
           flex: 1; }
-        #reply .reply .reply .reply-button-group .send.yes {
+        #reply .reply-root .reply .reply-button-group .send.yes {
           display: none;
           flex: 1; }
-      #reply .reply .reply .reply-button-group .reset {
+      #reply .reply-root .reply .reply-button-group .reset {
         margin-top: .5rem;
         margin-bottom: 1rem;
         margin-left: .5rem;
@@ -4901,14 +4902,14 @@ a {
         border-radius: .25rem;
         flex: 2;
         cursor: pointer; }
-        #reply .reply .reply .reply-button-group .reset:hover {
+        #reply .reply-root .reply .reply-button-group .reset:hover {
           background-color: white;
           color: #868e96;
           transition: all .1s ease-out; }
-        #reply .reply .reply .reply-button-group .reset.no {
+        #reply .reply-root .reply .reply-button-group .reset.no {
           display: none;
           flex: 1; }
-        #reply .reply .reply .reply-button-group .reset.yes {
+        #reply .reply-root .reply .reply-button-group .reset.yes {
           display: none;
           flex: 1; }
 
