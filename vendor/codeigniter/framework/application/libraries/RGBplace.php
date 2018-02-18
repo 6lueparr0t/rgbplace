@@ -250,10 +250,5 @@ class RGBplace {
 		");
 
 	}
-/*
-	function warning($display = "none")
-	{
-		echo ("<p class='marquee {$display}'>Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning! Warning!</p>");
-	}
-*/
+
 }

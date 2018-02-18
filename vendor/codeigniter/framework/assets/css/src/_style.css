@@ -2442,31 +2442,31 @@
   0% {
     text-indent: 0%; }
   100% {
-    text-indent: -64px; } }
+    text-indent: -90px; } }
 
 @-moz-keyframes marquee {
   0% {
     text-indent: 0%; }
   100% {
-    text-indent: -64px; } }
+    text-indent: -90px; } }
 
 @-ms-keyframes marquee {
   0% {
     text-indent: 0%; }
   100% {
-    text-indent: -64px; } }
+    text-indent: -90px; } }
 
 @-o-keyframes marquee {
   0% {
     text-indent: 0%; }
   100% {
-    text-indent: -64px; } }
+    text-indent: -90px; } }
 
 @keyframes marquee {
   0% {
     text-indent: 0%; }
   100% {
-    text-indent: -64px; } }
+    text-indent: -90px; } }
 
 @-webkit-keyframes tada {
   0% {
@@ -2550,9 +2550,9 @@ a {
   a:link {
     background-color: transparent; }
   a:hover {
-    color: #a3daff; }
+    color: #fa5252; }
   a:active {
-    color: #1c7cd6; }
+    color: #40c057; }
 
 .grid {
   background-color: #f8f9fa;
