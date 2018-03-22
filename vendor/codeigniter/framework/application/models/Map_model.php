@@ -460,9 +460,6 @@ class Map_model extends CI_Model {
 			."<div class='reply-button send yes'>yes</div>"
 			."<div class='reply-button send no'>no</div>"
 
-			."<div class='reply-button reset'>reset ?</div>"
-			."<div class='reply-button reset yes'>yes</div>"
-			."<div class='message-button reset no'>no</div>"
 			."</div>"
 			."</div>";
 	}

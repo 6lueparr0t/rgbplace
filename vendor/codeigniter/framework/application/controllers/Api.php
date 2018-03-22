@@ -45,12 +45,4 @@ class Api extends CI_Controller {
 		}
 	}
 
-	public function user($request)
-	{
-		
-	}
-
-	public function upload()
-	{
-	}
 }

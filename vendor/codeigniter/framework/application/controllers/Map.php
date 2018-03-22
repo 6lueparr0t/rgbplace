@@ -14,6 +14,11 @@ class Map extends CI_Controller {
 		redirect("/");
 	}
 
+	public function request($type)
+	{
+		
+	}
+
 	public function search()
 	{
 		if($this->input->get('keyword')) {
@@ -95,18 +100,10 @@ class Map extends CI_Controller {
 	}
 
 	private function check($type) {
-		switch($type) {
-		case 'best'   :
-		case 'free'   :
-		case 'info'   :
-		case 'photo'  :
-		case 'food'   :
-		case 'life'   :
-		case 'news'   :
-		case 'dev'    :
-		case "public" :
-			return true;
-		default :
+
+		if(in_array($type, ['best','free','info','photo','food','life','news','dev','public'])) {
+			return true;	
+		} else {
 			return false;
 		}
 	}
