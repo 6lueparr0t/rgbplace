@@ -4862,56 +4862,43 @@ a {
       text-align: center;
       display: flex;
       user-select: none; }
-      #reply .reply-root .reply .reply-button-group .send {
+      #reply .reply-root .reply .reply-button-group .reply-button {
         margin-top: .5rem;
         margin-bottom: 1rem;
         margin-right: .5rem;
-        border: 1px solid #228ae6;
-        background-color: #228ae6;
         color: white;
         padding: .5rem 1rem;
         border-radius: .25rem;
         flex: 2;
-        cursor: pointer; }
-        #reply .reply-root .reply .reply-button-group .send:hover {
+        cursor: pointer;
+        border: 1px solid #228ae6;
+        background-color: #228ae6; }
+        #reply .reply-root .reply .reply-button-group .reply-button.send:hover {
           background-color: white;
           color: #228ae6;
           transition: all .1s ease-out; }
-        #reply .reply-root .reply .reply-button-group .send.to {
+        #reply .reply-root .reply .reply-button-group .reply-button.send.to {
           border: 1px solid #72c3fc;
           background-color: #72c3fc;
           color: white; }
-          #reply .reply-root .reply .reply-button-group .send.to:hover {
+          #reply .reply-root .reply .reply-button-group .reply-button.send.to:hover {
             background-color: white;
             color: #72c3fc;
             transition: all .1s ease-out; }
-        #reply .reply-root .reply .reply-button-group .send.no {
+        #reply .reply-root .reply .reply-button-group .reply-button.yes, #reply .reply-root .reply .reply-button-group .reply-button.no {
           display: none;
           flex: 1; }
-        #reply .reply-root .reply .reply-button-group .send.yes {
-          display: none;
-          flex: 1; }
-      #reply .reply-root .reply .reply-button-group .reset {
-        margin-top: .5rem;
-        margin-bottom: 1rem;
-        margin-left: .5rem;
-        border: 1px solid #868e96;
-        background-color: #868e96;
-        color: white;
-        padding: .5rem 1rem;
-        border-radius: .25rem;
-        flex: 2;
-        cursor: pointer; }
-        #reply .reply-root .reply .reply-button-group .reset:hover {
-          background-color: white;
-          color: #868e96;
-          transition: all .1s ease-out; }
-        #reply .reply-root .reply .reply-button-group .reset.no {
-          display: none;
-          flex: 1; }
-        #reply .reply-root .reply .reply-button-group .reset.yes {
-          display: none;
-          flex: 1; }
+          #reply .reply-root .reply .reply-button-group .reply-button.yes:hover, #reply .reply-root .reply .reply-button-group .reply-button.no:hover {
+            background-color: white;
+            color: #228ae6;
+            transition: all .1s ease-out; }
+        #reply .reply-root .reply .reply-button-group .reply-button.cancel {
+          border: 1px solid #868e96;
+          background-color: #868e96; }
+          #reply .reply-root .reply .reply-button-group .reply-button.cancel:hover {
+            background-color: white;
+            color: #868e96;
+            transition: all .1s ease-out; }
 
 #sign-up {
   margin-top: 2rem; }

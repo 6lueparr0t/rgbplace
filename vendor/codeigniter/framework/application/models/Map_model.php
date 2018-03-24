@@ -452,15 +452,13 @@ class Map_model extends CI_Model {
 
 	private function replyBox($status = "block", $id='0') {
 		echo "<div class='reply {$status}' id='reply-{$id}' name='reply-{$id}'>"
-			."<input type='hidden' class='reply-no' value='{$id}'>"
-			."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf040;'></textarea>"
-			."<div class='reply-button-group'>"
-
-			."<div class='reply-button send'>Send <i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
-			."<div class='reply-button send yes'>yes</div>"
-			."<div class='reply-button send no'>no</div>"
-
-			."</div>"
+				."<input type='hidden' class='reply-no' value='{$id}'>"
+				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf040;'></textarea>"
+				."<div class='reply-button-group'>"
+					."<div class='reply-button send'>Send <i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
+					."<div class='reply-button yes'>yes</div>"
+					."<div class='reply-button no'>no</div>"
+				."</div>"
 			."</div>";
 	}
 

@@ -136,73 +136,59 @@
 				display:flex;
 				user-select: none;
 
-				.send {
+				.reply-button {
 					margin-top: .5rem;
 					margin-bottom: 1rem;
 					margin-right: .5rem;
-					border : 1px solid $oc-blue-6;
-					background-color:$oc-blue-6;
 					color:white;
 					padding: .5rem 1rem;
 					border-radius: .25rem;
 					flex: 2;
 					cursor : pointer;
+					border : 1px solid $oc-blue-6;
+					background-color:$oc-blue-6;
 
-					&:hover {
-						background-color:white;
-						color:$oc-blue-6;
-						transition:all .1s ease-out;
-					}
-
-					&.to {
-						border : 1px solid $oc-blue-3;
-						background-color:$oc-blue-3;
-						color:white;
+					&.send {
 
 						&:hover {
 							background-color:white;
-							color:$oc-blue-3;
+							color:$oc-blue-6;
+							transition:all .1s ease-out;
+						}
+
+						&.to {
+							border : 1px solid $oc-blue-3;
+							background-color:$oc-blue-3;
+							color:white;
+
+							&:hover {
+								background-color:white;
+								color:$oc-blue-3;
+								transition:all .1s ease-out;
+							}
+						}
+
+					}
+
+					&.yes, &.no {
+						display:none;
+						flex: 1;
+						&:hover {
+							background-color:white;
+							color:$oc-blue-6;
 							transition:all .1s ease-out;
 						}
 					}
 
-					&.no {
-						display:none;
-						flex: 1;
-					}
+					&.cancel {
+						border : 1px solid $oc-gray-6;
+						background-color:$oc-gray-6;
 
-					&.yes {
-						display:none;
-						flex: 1;
-					}
-				}
-
-				.reset {
-					margin-top: .5rem;
-					margin-bottom: 1rem;
-					margin-left: .5rem;
-					border : 1px solid $oc-gray-6;
-					background-color:$oc-gray-6;
-					color:white;
-					padding: .5rem 1rem;
-					border-radius: .25rem;
-					flex: 2;
-					cursor : pointer;
-
-					&:hover {
-						background-color:white;
-						color:$oc-gray-6;
-						transition:all .1s ease-out;
-					}
-
-					&.no {
-						display:none;
-						flex: 1;
-					}
-
-					&.yes {
-						display:none;
-						flex: 1;
+						&:hover {
+							background-color:white;
+							color:$oc-gray-6;
+							transition:all .1s ease-out;
+						}
 					}
 				}
 			}
