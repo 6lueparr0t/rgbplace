@@ -9,12 +9,12 @@ let replyBoxYes  = document.querySelectorAll(".reply-button.yes");
 
 function replyBoxToggle (state) {
 
-	try {
-		console.log(this);
-		console.log(this.previousSibling);
-		console.log(this.previousSibling.previousSibling);
-	} catch(e) {
-	}
+//	try {
+//		console.log(this);
+//		console.log(this.previousSibling);
+//		console.log(this.previousSibling.previousSibling);
+//	} catch(e) {
+//	}
 
 	if(state) {
 		this.style.display = "none";
@@ -30,21 +30,23 @@ function replyBoxToggle (state) {
 document.querySelector("body").addEventListener("click", function(event) {
 	let t = event.target;
 
-	console.log(t.className);
 	// reply button event
-	if (t.parentElement.className.search("reply enable") == 0 || t.className.search("reply enable") == 0) {
+	if (t.parentElement.className.search("reply enable") === 0 || t.className.search("reply enable") === 0) {
 
+		// reply item (li tag)
 		let reply = t.parentElement.parentElement.parentElement.parentElement;
+
 		t.classList.toggle('show');
 
-		if(t.classList.contains('show') == 0) {
+		if(reply.lastChild.className.search("reply-container") === 0) {
 			reply.removeChild(reply.lastChild);
 		} else {
 			let no = reply.querySelector("ul .no").innerHTML;
 			let node = document.createElement("li");
+			node.className = "reply-container";
 			node.innerHTML =
 				"<div class='reply block' id='reply-"+no+"' name='reply-"+no+"'>"
-					+"<input type='hidden' class='reply-no' value=''>"
+					+"<input type='hidden' class='reply-no' value='"+no+"'>"
 					+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf040;'></textarea>"
 
 					+"<div class='reply-button-group'>"
@@ -60,17 +62,21 @@ document.querySelector("body").addEventListener("click", function(event) {
 		}
 	}
 
-	if (t.className.search("reply-button send") == 0) {
+	if (t.className.search("reply-button cancel") === 0) {
+
+		// reply item (li tag)
+		let cancel = t.parentElement.parentElement.parentElement.parentElement;
+		cancel.querySelector(".reply.enable").classList.toggle('show');
+		cancel.removeChild(cancel.lastChild);
+		
+	}
+
+	if (t.className.search("reply-button send") === 0) {
 		replyBoxToggle.call(t, true);
 	}
 
-	if (t.className.search("reply-button no") == 0) {
+	if (t.className.search("reply-button no") === 0) {
 		replyBoxToggle.call(t, false);
-	}
-
-	if (t.className.search("reply-button cancel") == 0) {
-		let reply = t.parentElement.parentElement.parentElement;
-		reply.removeChild(reply.lastChild);
 	}
 
 
