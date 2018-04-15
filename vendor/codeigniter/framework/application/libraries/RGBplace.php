@@ -203,11 +203,12 @@ class RGBplace {
 		/* -------------------------------------------------- MENU End -------------------------------------------------- */
 
 		//if($this->CI->session->has_userdata('tab1') === false) $this->CI->session->set_userdata('tab1');
+		$type = ['#', 'best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
 
 		$tab1 = $this->CI->uri->segment(1, "#");
 
 		$tab2 = $this->CI->uri->segment(2, "none");
-		$tab2_text = ($tab2=="none")?"#":$tab2;
+		$tab2_text = (!in_array($tab2, $type))?"#":$tab2;
 
 		$tab3 = $this->CI->uri->segment(3, "#");
 		if($tab3=="list" || $tab3=="#") {
@@ -229,8 +230,6 @@ class RGBplace {
             <select class='status {$tab2}' id='status-type'>
 			  <option>{$tab2_text}</option>
 			  ");
-
-		$type = ['#', 'best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
 
 		for($i=0; $i<count($type); $i++) {
 			if($tab2_text === $type[$i]) continue;

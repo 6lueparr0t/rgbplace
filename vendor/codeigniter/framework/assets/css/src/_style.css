@@ -2542,7 +2542,8 @@
 
 body {
   font-family: "normal";
-  font-size: 20px; }
+  font-size: 20px;
+  overflow-y: scroll; }
 
 a {
   color: #228ae6;
@@ -2918,15 +2919,15 @@ a {
       font-family: "pixel";
       font-size: 1.6rem;
       border: 0;
-      background: none; }
+      background: none;
+      color: white; }
       @media screen and (max-width: 860px) {
         #status a select, #status label select {
           font-size: 1.12rem; } }
       #status a select.none, #status label select.none {
+        color: black;
         display: initial !important; }
       #status a select.db, #status label select.db {
-        color: #e9ecef; }
-      #status a select.free, #status a select.info, #status label select.free, #status label select.info {
         color: #e9ecef; }
   #status .type {
     position: relative;
@@ -3093,6 +3094,8 @@ a {
           border-bottom: 1rem solid transparent;
           border-left: 1rem solid #495057;
           border-top: 1rem solid transparent; } }
+    #status .type.free select, #status .type.info select {
+      color: white; }
     #status .type.free.none, #status .type.info.none {
       position: relative;
       font-size: 1.5rem;
@@ -3216,6 +3219,8 @@ a {
           border-bottom: 1rem solid transparent;
           border-left: 1rem solid #ffd43b;
           border-top: 1rem solid transparent; } }
+    #status .type.best select {
+      color: black; }
     #status .type.best.none {
       position: relative;
       font-size: 1.5rem;
@@ -3339,6 +3344,8 @@ a {
           border-bottom: 1rem solid transparent;
           border-left: 1rem solid #a9e34b;
           border-top: 1rem solid transparent; } }
+    #status .type.photo select {
+      color: black; }
     #status .type.photo.none {
       position: relative;
       font-size: 1.5rem;
@@ -3462,6 +3469,8 @@ a {
           border-bottom: 1rem solid transparent;
           border-left: 1rem solid #4dadf7;
           border-top: 1rem solid transparent; } }
+    #status .type.news select {
+      color: black; }
     #status .type.news.none {
       position: relative;
       font-size: 1.5rem;
@@ -3585,6 +3594,8 @@ a {
           border-bottom: 1rem solid transparent;
           border-left: 1rem solid #fa5252;
           border-top: 1rem solid transparent; } }
+    #status .type.public select {
+      color: black; }
     #status .type.public.none {
       position: relative;
       font-size: 1.5rem;
@@ -3708,6 +3719,8 @@ a {
           border-bottom: 1rem solid transparent;
           border-left: 1rem solid #ff922b;
           border-top: 1rem solid transparent; } }
+    #status .type.food select {
+      color: black; }
     #status .type.food.none {
       position: relative;
       font-size: 1.5rem;
@@ -3831,6 +3844,8 @@ a {
           border-bottom: 1rem solid transparent;
           border-left: 1rem solid #f783ac;
           border-top: 1rem solid transparent; } }
+    #status .type.life select {
+      color: black; }
     #status .type.life.none {
       position: relative;
       font-size: 1.5rem;
@@ -3954,6 +3969,8 @@ a {
           border-bottom: 1rem solid transparent;
           border-left: 1rem solid #66d9e8;
           border-top: 1rem solid transparent; } }
+    #status .type.dev select {
+      color: black; }
     #status .type.dev.none {
       position: relative;
       font-size: 1.5rem;
@@ -4878,19 +4895,34 @@ a {
           color: #228ae6;
           transition: all .1s ease-out; }
         #reply .reply-root .reply .reply-button-group .reply-button.send.to {
-          border: 1px solid #72c3fc;
-          background-color: #72c3fc;
+          border: 1px solid #495057;
+          background-color: #495057;
           color: white; }
           #reply .reply-root .reply .reply-button-group .reply-button.send.to:hover {
             background-color: white;
-            color: #72c3fc;
+            color: #495057;
             transition: all .1s ease-out; }
-        #reply .reply-root .reply .reply-button-group .reply-button.yes, #reply .reply-root .reply .reply-button-group .reply-button.no {
+        #reply .reply-root .reply .reply-button-group .reply-button.yes {
           display: none;
           flex: 1; }
-          #reply .reply-root .reply .reply-button-group .reply-button.yes:hover, #reply .reply-root .reply .reply-button-group .reply-button.no:hover {
+          #reply .reply-root .reply .reply-button-group .reply-button.yes.to {
+            border: 1px solid #37b24d;
+            background-color: #37b24d;
+            color: white; }
+          #reply .reply-root .reply .reply-button-group .reply-button.yes:hover {
             background-color: white;
-            color: #228ae6;
+            color: #37b24d;
+            transition: all .1s ease-out; }
+        #reply .reply-root .reply .reply-button-group .reply-button.no {
+          display: none;
+          flex: 1; }
+          #reply .reply-root .reply .reply-button-group .reply-button.no.to {
+            border: 1px solid #f03e3e;
+            background-color: #f03e3e;
+            color: white; }
+          #reply .reply-root .reply .reply-button-group .reply-button.no:hover {
+            background-color: white;
+            color: #f03e3e;
             transition: all .1s ease-out; }
         #reply .reply-root .reply .reply-button-group .reply-button.cancel {
           border: 1px solid #868e96;
