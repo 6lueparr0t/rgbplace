@@ -3,7 +3,6 @@
     "babel-preset-es2016": "^6.24.1",
     "browser-sync": "^2.24.4",
     "del": "^2.2.2",
-    "font-awesome": "^4.7.0",
     "fs": "^0.0.1-security",
     "global": "^4.3.2",
     "gulp": "^3.9.1",
@@ -17,6 +16,7 @@
     "gulp-sass-glob": "^1.0.9",
     "gulp-util": "^3.0.8",
     "gulp-wait2": "^0.0.5",
+    "npm": "^6.0.0",
     "open-color": "^1.6.3",
     "yargs": "^6.6.0"
   },
