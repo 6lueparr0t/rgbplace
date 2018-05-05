@@ -14,9 +14,15 @@ class Map extends CI_Controller {
 		redirect("/");
 	}
 
-	public function request($type)
+	public function request($type, $act)
 	{
-		
+/*
+ *        if($type === "reply") {
+ *            switch($act) {
+ *
+ *            }
+ *        }
+ */
 	}
 
 	public function search()

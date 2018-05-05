@@ -116,7 +116,7 @@ class Map_model extends CI_Model {
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 
-			$reply = ($row->reply > 0)?"<a href='/{$map}/{$row->type}/{$row->no}'> <i class='fa fa-commenting-o' aria-hidden='true'></i> {$row->reply}</a>":"";
+			$reply = ($row->reply > 0)?"<a href='/{$map}/{$row->type}/{$row->no}'> <i class='far fa-comment-dots'></i> {$row->reply}</a>":"";
 
 			$toggle = "<div class='toggle'><span class='toggle-name'>{$row->name}</span> <span class='toggle-date'>{$date} {$time}</span></div>";
 
@@ -164,7 +164,7 @@ class Map_model extends CI_Model {
  *            $cur_page=1;
  *        }
  *
- *        echo "<a href='/board/list.php?page=1'><li><i class='fa fa-step-backward' aria-hidden='true'></i></li></a>";
+ *        echo "<a href='/board/list.php?page=1'><li><i class='fa fa-step-backward'></i></li></a>";
  *        for($count=0; $count<10; $count++) {
  *            $next = $cur_page;
  *
@@ -175,7 +175,7 @@ class Map_model extends CI_Model {
  *            }
  *
  *        }
- *        echo "<a href='/board/list.php?page={$max}'><li><i class='fa fa-step-forward' aria-hidden='true'></i></li></a>";
+ *        echo "<a href='/board/list.php?page={$max}'><li><i class='fa fa-step-forward'></i></li></a>";
  *
  *        return true;
  *
@@ -215,7 +215,7 @@ class Map_model extends CI_Model {
 		echo "<a class='refresh' href='/{$map}/{$type}/list'><span>LIST</span></a>";
 
 		echo "<div class='pagination'>";
-		echo "<a href='/{$map}/{$type}/list?page={$min_page}'><i class='fa fa-step-backward' aria-hidden='true'></i></a>";
+		echo "<a href='/{$map}/{$type}/list?page={$min_page}'><i class='fa fa-step-backward'></i></a>";
 
 		for($count=0; $count<10; $count++) {
 			$next = $cur_page;
@@ -227,7 +227,7 @@ class Map_model extends CI_Model {
 
 		}
 
-		echo "<a href='/{$map}/{$type}/list?page={$max_page}'><i class='fa fa-step-forward' aria-hidden='true'></i></a>";
+		echo "<a href='/{$map}/{$type}/list?page={$max_page}'><i class='fa fa-step-forward'></i></a>";
 		echo "</div>";
 
 		// ****************
@@ -249,20 +249,20 @@ class Map_model extends CI_Model {
 		echo "<div class='search-select'>
 			<label class='search-select-list' for='search-select-toggle'>
 				<input type='checkbox' id='search-select-toggle' />
-				<i class='open fa fa-minus' aria-hidden='true'></i>
-				<i class='close fa fa-plus' aria-hidden='true'></i>
+				<i class='open fa fa-minus'></i>
+				<i class='close fa fa-plus'></i>
 				<ul>
-					<li><label for='search-mode-title'  ><input type='checkbox' id='search-mode-title'   checked/><span><i class='fa fa-header' aria-hidden='true'>			</i></span></label></li>
-					<li><label for='search-mode-content'><input type='checkbox' id='search-mode-content' checked/><span><i class='fa fa-file-text-o' aria-hidden='true'>		</i></span></label></li>
-					<li><label for='search-mode-reply'  ><input type='checkbox' id='search-mode-reply'          /><span><i class='fa fa-commenting-o' aria-hidden='true'>	</i></span></label></li>
-					<li><label for='search-mode-name'   ><input type='checkbox' id='search-mode-name'           /><span><i class='fa fa-user' aria-hidden='true'>			</i></span></label></li>
-					<li><label for='search-mode-tag'    ><input type='checkbox' id='search-mode-tag'            /><span><i class='fa fa-hashtag' aria-hidden='true'>			</i></span></label></li>
-					<li><label for='search-mode-date'   ><input type='checkbox' id='search-mode-date'           /><span><i class='fa fa-calendar' aria-hidden='true'>		</i></span></label></li>
+					<li><label for='search-mode-title'  ><input type='checkbox' id='search-mode-title'   checked/><span><i class='fas fa-heading'>			</i></span></label></li>
+					<li><label for='search-mode-content'><input type='checkbox' id='search-mode-content' checked/><span><i class='fas fa-file-alt'>		</i></span></label></li>
+					<li><label for='search-mode-reply'  ><input type='checkbox' id='search-mode-reply'          /><span><i class='far fa-comment-dots'>	</i></span></label></li>
+					<li><label for='search-mode-name'   ><input type='checkbox' id='search-mode-name'           /><span><i class='fa fa-user'>			</i></span></label></li>
+					<li><label for='search-mode-tag'    ><input type='checkbox' id='search-mode-tag'            /><span><i class='fa fa-hashtag'>			</i></span></label></li>
+					<li><label for='search-mode-date'   ><input type='checkbox' id='search-mode-date'           /><span><i class='fa fa-calendar'>		</i></span></label></li>
 				</ul>
 			</label>
 		</div>";
 		echo "<input type='search' class='search-input' value='' placeholder='Search ..'/>";
-		echo "<div class='search-button'><i class='fa fa-search' aria-hidden='true'></i></div>";
+		echo "<div class='search-button'><i class='fa fa-search'></i></div>";
 		echo "<span class='null'></span>";
 
 		
@@ -289,7 +289,7 @@ class Map_model extends CI_Model {
 		$find = $this->db->query($query);
 
 		if($find->num_rows() === 0 || $find->num_rows() >= 2) {
-			echo "<div class='no-post'>Not Found <i class='fa fa-frown-o' aria-hidden='true'></i> </div>";
+			echo "<div class='no-post'>Not Found <i class='fa fa-frown-o'></i> </div>";
 
 			return false;
 		}
@@ -302,13 +302,13 @@ class Map_model extends CI_Model {
 			$uid= $row->uid;
 
 			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$row->title}</a></div>";
-			echo "<div class='post-date' ><i class='fa fa-clock-o' aria-hidden='true'></i> {$date} {$time} </div>";
+			echo "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
 
 			//."<span class='vote'>{$row->vote}</span>"
 			echo "<div class='post-info'>"
-				."<span class='name' ><i class='fa fa-user' aria-hidden='true'></i> {$row->name} </span>"
-				."<span class='hit'  ><i class='fa fa-eye' aria-hidden='true'></i> {$row->hit} </span>"
-				."<span class='reply'><i class='fa fa-commenting-o' aria-hidden='true'></i> {$row->reply} </span>"
+				."<span class='name' ><i class='fa fa-user'></i> {$row->name} </span>"
+				."<span class='hit'  ><i class='fa fa-eye'></i> {$row->hit} </span>"
+				."<span class='reply'><i class='far fa-comment-dots'></i> {$row->reply} </span>"
 			."</div>"
 
 			."<div id='post-conetent'>{$row->content}</div>";
@@ -350,7 +350,7 @@ class Map_model extends CI_Model {
 		}
 
 		echo "<div class='reply-root'>";
-		echo "<ul>";
+		echo "<ul id='reply-list'>";
 
 		$cnt = 0;
 		$uid   = $this->session->userdata('uid');
@@ -401,7 +401,7 @@ class Map_model extends CI_Model {
 			/* depth arrow output : top */
 			echo "<span name='space' id='space'>";
 			for($i=0; $i<$depth_no; $i++) {
-				echo "<i class='fa fa-reply' aria-hidden='true' style='transform: rotate3d(0, 0, -1, 180deg);'></i>";
+				echo "<i class='fa fa-reply' style='transform: rotate3d(0, 0, -1, 180deg);'></i>";
 			}
 			echo "</span>";
 			/* depth arrow output : end */
@@ -417,10 +417,10 @@ class Map_model extends CI_Model {
 			/* func : top */
 			echo "<div class='func'>";
 
-				echo "<button class='up {$btn_perm}'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
-				echo "<button class='down {$btn_perm}'><i class='fa fa-thumbs-o-down' aria-hidden='true'></i></button>";
+				echo "<button class='up {$btn_perm}'><i class='far fa-thumbs-up'></i></button>";
+				echo "<button class='down {$btn_perm}'><i class='far fa-thumbs-down'></i></button>";
 
-				echo "<button class='reply {$btn_perm}'><i class='fa fa-reply' aria-hidden='true' style='transform: rotate3d(1, 0, 0, 180deg);'></i></button>";
+				echo "<button class='reply {$btn_perm}'><i class='fa fa-reply' style='transform: rotate3d(1, 0, 0, 180deg);'></i></button>";
 
 				if($uid == $reply_uid || $admin ) {
 					$reply_perm = "enable";
@@ -428,9 +428,9 @@ class Map_model extends CI_Model {
 					$reply_perm = "disable";
 				}
 
-				echo "<button class='modify {$reply_perm}'><i class='fa fa-pencil' aria-hidden='true'></i></button>";
-				echo "<button class='delete {$reply_perm}'><i class='fa fa-trash' aria-hidden='true'></i></button>";
-				echo "<button class='report ' ><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+				echo "<button class='modify {$reply_perm}'><i class='fa fa-pencil-alt'></i></button>";
+				echo "<button class='delete {$reply_perm}'><i class='fa fa-trash'></i></button>";
+				echo "<button class='report ' ><i class='far fa-paper-plane'></i></button>";
 
 			echo "</div>";
 			/* func : end */
@@ -450,12 +450,42 @@ class Map_model extends CI_Model {
 		return true;
 	}
 
+	/*
+	 * ====================
+	 * Usage : $this->map->reply_insert ( map code, post type, post number )
+	 * Desc : 
+	 * ====================
+	 */
+	public function reply_insert ()
+	{
+	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->reply_modify ( map code, post type, post number )
+	 * Desc : 
+	 * ====================
+	 */
+	public function reply_modify ()
+	{
+	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->reply_delete ( map code, post type, post number )
+	 * Desc : 
+	 * ====================
+	 */
+	public function reply_delete ()
+	{
+	}
+
 	private function replyBox($status = "block", $id='0') {
 		echo "<div class='reply {$status}' id='reply-{$id}' name='reply-{$id}'>"
 				."<input type='hidden' class='reply-no' value='{$id}'>"
-				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf040;'></textarea>"
+				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf303;'></textarea>"
 				."<div class='reply-button-group'>"
-					."<div class='reply-button send'>Send Message<i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
+					."<div class='reply-button send'>Send Message &#xf11c; </div>"
 					."<div class='reply-button yes'>yes</div>"
 					."<div class='reply-button no'>no</div>"
 				."</div>"

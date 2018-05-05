@@ -47,12 +47,12 @@ document.querySelector("body").addEventListener("click", function(event) {
 			node.innerHTML =
 				"<div class='reply block' id='reply-"+no+"' name='reply-"+no+"'>"
 					+"<input type='hidden' class='reply-no' value='"+no+"'>"
-					+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf040;'></textarea>"
+					+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;'></textarea>"
 
 					+"<div class='reply-button-group'>"
-						+"<div class='reply-button send to''>Reply on Post<i class='fa fa-keyboard-o' aria-hidden='true' style='position: absolute;margin: 0 .5rem;'></i> </div>"
+						+"<div class='reply-button send to'>Reply on Message &#xf11c; </div>"
 						+"<div class='reply-button yes to'>confirm</div>"
-						+"<div class='reply-button no to'>no way!</div>"
+						+"<div class='reply-button no to'>No way!</div>"
 						+"<div class='reply-button cancel'>Cancel</div>"
 					+"</div>";
 

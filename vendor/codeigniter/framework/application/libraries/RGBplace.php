@@ -66,8 +66,8 @@ class RGBplace {
 				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true', 'minlength' => 6])
 				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10]);
 
-			echo "<button type='submit'><i class='fa fa-sign-in' aria-hidden='true'></i> Sign In</button>";
-			echo "<button type='button' onClick=\"location.href='/sign'\"><i class='fa fa-user-plus' aria-hidden='true'></i> Sign Up</button>";
+			echo "<button type='submit'><i class='fa fa-sign-in'></i> Sign In</button>";
+			echo "<button type='button' onClick=\"location.href='/sign'\"><i class='fa fa-user-plus'></i> Sign Up</button>";
 			echo form_close();
 
 		} else {
@@ -120,8 +120,8 @@ class RGBplace {
 		echo("
         <input class='menu' type='checkbox' id='menu-toggle' />
         <label class='menu' id='menu-button' for='menu-toggle'>
-        <i class='open fa fa-bars' aria-hidden='true'></i>
-        <i class='close fa fa-times' aria-hidden='true'></i>
+        <i class='open fa fa-bars'></i>
+        <i class='close fa fa-times'></i>
 		</label>
 
 		<ul id='menu'>
@@ -130,15 +130,15 @@ class RGBplace {
 		$admin = $this->CI->session->userdata('admin');
 		if($admin === TRUE) {
 		echo("
-		  <label class='menu' for='menu-admin'><i class='fa fa-code' aria-hidden='true' ></i> Admin
+		  <label class='menu' for='menu-admin'><i class='fa fa-code' ></i> Admin
             <input class='menu' type='checkbox' id='menu-admin' />
-              <i class='open fa fa-caret-up' aria-hidden='true'></i>
-              <i class='close fa fa-caret-down' aria-hidden='true'></i>
+              <i class='open fa fa-caret-up'></i>
+              <i class='close fa fa-caret-down'></i>
 		      <ul>
 		        <label class='menu' for='menu-admin-1'>Admin
                   <input class='menu' type='checkbox' id='menu-admin-1' />
-                  <i class='open fa fa-minus' aria-hidden='true'></i>
-                  <i class='close fa fa-plus' aria-hidden='true'></i>
+                  <i class='open fa fa-minus'></i>
+                  <i class='close fa fa-plus'></i>
 		          <ul>
 		            <a class='menu' href='/admin/info' target='_blank'><li>Version</li></a>
 		            <a class='menu' href='/admin/db'><li>Database Management</li></a>
@@ -146,8 +146,8 @@ class RGBplace {
                 </label>
 		        <label class='menu' for='menu-admin-2'>Exam
                   <input class='menu' type='checkbox' id='menu-admin-2' />
-                  <i class='open fa fa-minus' aria-hidden='true'></i>
-                  <i class='close fa fa-plus' aria-hidden='true'></i>
+                  <i class='open fa fa-minus'></i>
+                  <i class='close fa fa-plus'></i>
 		          <ul>
 		            <a class='menu' href='/admin/generate_hash'><li>Generate Hash</li></a>
 		            <a class='menu' href='/admin/animation'><li>Animation</li></a>
@@ -162,10 +162,10 @@ class RGBplace {
 
 		echo("
 		  <label class='menu' id='menu-map' for='map-search'>
-            <input class='menu' type='text' id='map-search-box' placeholder='Map Search'/><i class='fa fa-search' id='map-search-button' aria-hidden='true'></i>
+            <input class='menu' type='text' id='map-search-box' placeholder='Map Search'/><i class='fa fa-search' id='map-search-button'></i>
 			<input class='menu' type='checkbox' id='map-search' />
-            <i class='open fa fa-caret-up' aria-hidden='true'></i>
-            <i class='close fa fa-caret-down' aria-hidden='true'></i>
+            <i class='open fa fa-caret-up'></i>
+            <i class='close fa fa-caret-down'></i>
 			<ul>
 			  <label class='menu' id='map-result' for=''>
 			    <a href='#'><li>No Results</li></a>
@@ -173,27 +173,27 @@ class RGBplace {
 			</ul>
           </label>
 		  <a class='menu' href='/stage'>
-            <i class='fa fa-street-view' aria-hidden='true'></i> Stage
+            <i class='fa fa-street-view'></i> Stage
 		  </a>
-          <!-- <label for='menu-stage'><i class='fa fa-street-view' aria-hidden='true'></i> Stage
+          <!-- <label for='menu-stage'><i class='fa fa-street-view'></i> Stage
             <input class='menu' type='checkbox' id='menu-stage' />
               <div class='menu' id='menu-stage-box'>
               </div>
           </label> -->
-		  <!-- <label class='menu' for='menu-comments'><i class='fa fa-commenting-o' aria-hidden='true' ></i>
+		  <!-- <label class='menu' for='menu-comments'><i class='fa fa-commenting-o' ></i>
             <input class='menu' type='checkbox' id='menu-comments' />
               <div class='menu' id='menu-comments-box'>
 			  </div>
           </label> -->
-		  <label class='menu' for='menu-favorite'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>
+		  <label class='menu' for='menu-favorite'><i class='far fa-thumbs-up'></i>
             <input class='menu' type='checkbox' id='menu-favorite' /> Like
 			  <div class='menu' id='menu-favorite-box'>
               </div>
           </label>
-		  <label class='menu' for='menu-config'><i class='fa fa-cog' aria-hidden='true'></i>
+		  <label class='menu' for='menu-config'><i class='fa fa-cog'></i>
             <input class='menu' type='checkbox' id='menu-config' />
-            <i class='open fa fa-caret-up' aria-hidden='true'></i>
-            <i class='close fa fa-caret-down' aria-hidden='true'></i>
+            <i class='open fa fa-caret-up'></i>
+            <i class='close fa fa-caret-down'></i>
 		    <ul>
                 <label class='menu' for='menu-config-1'>Fix On</label>
 			</ul>

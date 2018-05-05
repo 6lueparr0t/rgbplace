@@ -91,6 +91,7 @@ function drop_upload() {
 	request.onload = function() {
 		if (this.status >= 200 && this.status < 400) {
 			//Success!
+			console.log(this.response);
 			let data = JSON.parse(this.response);
 			console.log(data);
 			console.log(request.getAllResponseHeaders());

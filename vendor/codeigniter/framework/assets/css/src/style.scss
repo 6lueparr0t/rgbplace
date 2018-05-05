@@ -2,5 +2,14 @@ $width-name : "max-width";
 $target-width : "860px";
 
 @import "../../../node_modules/open-color/open-color.scss";
-@import "../../../node_modules/font-awesome/scss/font-awesome.scss";
+//@import "../fonts/fontawesome/fontawesome-all.min.css";
+//@import "../../../node_modules/font-awesome/scss/font-awesome.scss";
+
+//2018/05/05 fontawesome 5
+$fa-font-path:   "../fonts/fontawesome";
+@import "fontawesome/fontawesome.scss";
+@import "fontawesome/fa-solid.scss";
+@import "fontawesome/fa-brands.scss";
+@import "fontawesome/fa-regular.scss";
+
 @import "scss/**/*";
