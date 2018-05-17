@@ -18,6 +18,7 @@ class Map extends CI_Controller {
 	{
 /*
  *        if($type === "reply") {
+ *            //$act : insert, modify, delete ..
  *            switch($act) {
  *
  *            }

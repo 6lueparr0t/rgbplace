@@ -5563,6 +5563,8 @@ a {
         cursor: pointer;
         border: 1px solid #228be6;
         background-color: #228be6;
+        max-height: 1.4rem;
+        line-height: 1.4rem;
         display: flex;
         justify-content: center;
         /* align horizontal */
@@ -5572,8 +5574,7 @@ a {
           #reply .reply-root .reply .reply-button-group .reply-button {
             font-size: .8rem; } }
         #reply .reply-root .reply .reply-button-group .reply-button.send {
-          font-family: pixel, 'Font Awesome 5 free';
-          font-weight: 900; }
+          font-family: pixel, 'Font Awesome 5 free'; }
           #reply .reply-root .reply .reply-button-group .reply-button.send:hover {
             background-color: white;
             color: #228be6;

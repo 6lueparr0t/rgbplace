@@ -50,7 +50,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 					+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;'></textarea>"
 
 					+"<div class='reply-button-group'>"
-						+"<div class='reply-button send to'>Reply on Message &#xf11c; </div>"
+						+"<div class='reply-button send to'>Reply on Message <span style='font-weight:900;transform: translate(.4rem,.1rem);'>&#xf11c;</span></div>"
 						+"<div class='reply-button yes to'>confirm</div>"
 						+"<div class='reply-button no to'>No way!</div>"
 						+"<div class='reply-button cancel'>Cancel</div>"
@@ -62,22 +62,29 @@ document.querySelector("body").addEventListener("click", function(event) {
 		}
 	}
 
-	if (t.className.search("reply-button cancel") === 0) {
+	//console.log(t.className);
+	switch (t.className) {
+		case "reply-button cancel" :
+			// reply item (li tag)
+			let cancel = t.parentElement.parentElement.parentElement.parentElement;
+			cancel.querySelector(".reply.enable").classList.toggle('show');
+			cancel.removeChild(cancel.lastChild);
+			break;
 
-		// reply item (li tag)
-		let cancel = t.parentElement.parentElement.parentElement.parentElement;
-		cancel.querySelector(".reply.enable").classList.toggle('show');
-		cancel.removeChild(cancel.lastChild);
-		
+		case "reply-button send to" :
+		case "reply-button send" :
+			replyBoxToggle.call(t, true);
+			break;
+
+		case "reply-button yes to" :
+		case "reply-button yes" :
+			console.log('send message');
+			break;
+
+		case "reply-button no to" :
+		case "reply-button no" :
+			replyBoxToggle.call(t, false);
+			break;
 	}
-
-	if (t.className.search("reply-button send") === 0) {
-		replyBoxToggle.call(t, true);
-	}
-
-	if (t.className.search("reply-button no") === 0) {
-		replyBoxToggle.call(t, false);
-	}
-
 
 });

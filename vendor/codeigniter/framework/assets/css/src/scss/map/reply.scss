@@ -149,6 +149,8 @@
 					cursor           : pointer;
 					border           : 1px solid $oc-blue-6;
 					background-color : $oc-blue-6;
+					max-height       : 1.4rem;
+					line-height      : 1.4rem;
 
 					display         : flex;
 					justify-content : center; /* align horizontal */
@@ -160,7 +162,6 @@
 
 					&.send {
 						font-family:pixel, 'Font Awesome 5 free';
-						font-weight:900;
 
 						&:hover {
 							background-color:white;
