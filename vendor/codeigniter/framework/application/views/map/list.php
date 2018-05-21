@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); $this->rgb->common();?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
 
 <!-- map/list/<?=$map?>/<?=$type?> -->
 
@@ -11,4 +11,4 @@ $this->map->list($map, $type, 0, LIST_ROWS_LIMIT, $search);
 ?>
 </div>
 
-<?php $this->rgb->end($path); ?>
+<?php $this->root->end($path); ?>

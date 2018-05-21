@@ -26,13 +26,13 @@ class Admin extends CI_Controller {
 
 	public function info()
 	{
-		$this->rgb->sview("admin/info");
+		$this->root->sview("admin/info");
 	}
 
 	public function db($method="")
 	{
 		$data['method'] = $method;
-		$this->rgb->sview("admin/db", $data);
+		$this->root->sview("admin/db", $data);
 	}
 
 /*
@@ -69,24 +69,24 @@ class Admin extends CI_Controller {
 
 	public function animation()
 	{
-		$this->rgb->sview("admin/example/animation");
+		$this->root->sview("admin/example/animation");
 	}
 
 	public function generate_hash()
 	{
 		$data["pswd"] = $this->input->post("pswd")?:"null";
 		$data["hash"] = base64_encode(password_hash($data["pswd"], PASSWORD_DEFAULT, ['cost'=>12]));
-		$this->rgb->sview('admin/example/generate_hash', $data);
+		$this->root->sview('admin/example/generate_hash', $data);
 	}
 
 	public function restful()
 	{
-		$this->rgb->sview("admin/example/restful");
+		$this->root->sview("admin/example/restful");
 	}
 
 	public function dragndrop_upload()
 	{
-		$this->rgb->sview("admin/example/dragndrop_upload");
+		$this->root->sview("admin/example/dragndrop_upload");
 	}
 
 /*

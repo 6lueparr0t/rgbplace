@@ -41,7 +41,7 @@ class Map extends CI_Controller {
 	{
 		$data['map' ] = strtolower($map);
 
-		$this->rgb->view("map/page", $data);
+		$this->root->view("map/page", $data);
 	}
 
 	public function link($map, $num)
@@ -70,7 +70,7 @@ class Map extends CI_Controller {
 		$data['search']['tag'    ] = urldecode($this->input->get('tag'));
 		$data['search']['date'   ] = urldecode($this->input->get('date'));
 
-		$this->rgb->view("map/list", $data);
+		$this->root->view("map/list", $data);
 	}
 
 	public function post($map, $type, $num = 0)
@@ -81,7 +81,7 @@ class Map extends CI_Controller {
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
 
-		$this->rgb->view("map/post", $data);
+		$this->root->view("map/post", $data);
 	}
 
 	public function edit($map, $type, $num = 0)
@@ -92,7 +92,7 @@ class Map extends CI_Controller {
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
 
-		$this->rgb->view("map/edit", $data);
+		$this->root->view("map/edit", $data);
 	}
 
 	public function delete($map, $type, $num = 0)
@@ -103,7 +103,7 @@ class Map extends CI_Controller {
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
 
-		$this->rgb->view("map/delete", $data);
+		$this->root->view("map/delete", $data);
 	}
 
 	private function check($type) {

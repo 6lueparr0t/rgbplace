@@ -11,7 +11,7 @@ class Sign extends CI_Controller {
 
 	public function index()
 	{
-		$this->rgb->view("sign/main");
+		$this->root->view("sign/main");
 	}
 
 	public function in($check="")

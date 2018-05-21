@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-class RGBplace {
+class Template {
 
 	protected $CI;
 
@@ -203,7 +203,8 @@ class RGBplace {
 		/* -------------------------------------------------- MENU End -------------------------------------------------- */
 
 		//if($this->CI->session->has_userdata('tab1') === false) $this->CI->session->set_userdata('tab1');
-		$type = ['#', 'best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
+		//$type = ['#', 'best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
+		$type = ['#', 'best', 'free', 'info'];
 
 		$tab1 = $this->CI->uri->segment(1, "#");
 

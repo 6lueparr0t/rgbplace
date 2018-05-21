@@ -10,11 +10,11 @@ class Profile extends CI_Controller {
 
 	public function index()
 	{
-		$this->rgb->view("profile/info");
+		$this->root->view("profile/info");
 	}
 
 	public function config()
 	{
-		$this->rgb->view("profile/config");
+		$this->root->view("profile/config");
 	}
 }

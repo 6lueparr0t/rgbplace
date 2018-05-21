@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); $this->rgb->common();?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
 <?php
 	// #### setting 'Sign Up' Form
 	echo form_open('sign/up', ['class' => 'sign', 'name' => 'sign-up', 'id' => 'sign-up'])
@@ -10,4 +10,4 @@
 	echo "<button type='submit'><i class='fa fa-user-plus' aria-hidden='true'></i> Sign Up</button>";
 	echo form_close();
 ?>
-<?php $this->rgb->end($path); ?>
+<?php $this->root->end($path); ?>

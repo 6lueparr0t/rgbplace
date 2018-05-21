@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); $this->rgb->common(); ?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common(); ?>
 
 <div class="grid" name="map" id="map">
 	<div class="row" name="grid-head" id="grid-head">
@@ -13,4 +13,4 @@
 	</div>
 </div>
 
-<?php $this->rgb->end($path); ?>
+<?php $this->root->end($path); ?>

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); $this->rgb->common();
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();
 
 echo form_open('admin/generate_hash', ['class' => '', 'name' => 'admform', 'id' => 'admform'])
 	.form_input('pswd', '', ['placeholder' => 'Password', 'required' => 'true'])
@@ -8,4 +8,4 @@ echo form_open('admin/generate_hash', ['class' => '', 'name' => 'admform', 'id' 
 echo "Your Password : {$pswd}".br(2);
 echo "Hash Value : {$hash}";
 
-$this->rgb->end($path); ?>
+$this->root->end($path); ?>

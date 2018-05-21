@@ -1,7 +1,7 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); $this->rgb->common(); ?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common(); ?>
 <?
 if($method==="clear") {
-	shell_exec("cat /dev/null > shell/log");
+	shell_exec("cat /dev/null > log/db");
 }
 
 if($method==="backup") {
@@ -14,7 +14,7 @@ if($method==="restore") {
 ?>
 
 <pre>
-<? system("cat shell/log") ?>
+<? system("cat log/db") ?>
 </pre>
 
 <?
@@ -32,4 +32,4 @@ echo form_open('admin/db/clear', ['name' => 'clear', 'id' => 'clear'])
 	.form_close();
 
 ?>
-<?php $this->rgb->end($path); ?>
+<?php $this->root->end($path); ?>

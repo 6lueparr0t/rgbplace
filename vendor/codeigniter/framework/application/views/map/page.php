@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->rgb->start(); $this->rgb->common();?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
 
 <!-- map/page/<?=$map?> -->
 
@@ -13,7 +13,8 @@
   <div class='type'> <!-- type start -->
 <?
 
-$type = ['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
+//$type = ['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
+$type = ['best', 'free', 'info'];
 
 echo "<div class='type-row'>";
 for($i=0; $i<count($type); $i++) {
@@ -45,4 +46,4 @@ echo "</div>";
 <!-- user customizing  -->
   </div>
 </div>
-<?php $this->rgb->end($path); ?>
+<?php $this->root->end($path); ?>
