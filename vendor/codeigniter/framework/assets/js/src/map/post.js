@@ -78,7 +78,8 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 		case "reply-button yes to" :
 		case "reply-button yes" :
-			console.log('send message');
+			let reply = t.parentElement.parentElement;
+			console.log(reply.querySelector(".reply-no").value);
 			break;
 
 		case "reply-button no to" :

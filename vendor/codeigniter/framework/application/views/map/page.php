@@ -13,8 +13,7 @@
   <div class='type'> <!-- type start -->
 <?
 
-//$type = ['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
-$type = ['best', 'free', 'info'];
+$type = TYPE_LIST;
 
 echo "<div class='type-row'>";
 for($i=0; $i<count($type); $i++) {

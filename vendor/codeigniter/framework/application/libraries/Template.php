@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 |	Used Table : None
 |
-|	Role : common function in RGB place (using 'rgb')
+|	Role : common function in Template (using 'root')
 |
 */
 
@@ -49,7 +49,7 @@ class Template {
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
 	<meta name='viewport' content='width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes'/>
 
-	<title>RGB PLACE</title>
+	<title>RGB place</title>
 
 	<link rel='icon' href='data:;base64,iVBORw0KGgo='>
 	<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>
@@ -78,15 +78,17 @@ class Template {
 			echo ("<div class='sign'>{$name} <a href='/#'>Modify</a> <a href='/sign/out'>Sign Out</a></div>");
 
 			if($admin === TRUE) {
-				$apikey = $this->CI->base->getAdminApiKey($name);
-				echo "<span id='apikey' style='display:none'>{$apikey}</span>";
+				$apikey = $this->CI->base->setAdminApiKey($name);
+				//echo "<span id='apikey' style='display:none'>{$apikey}</span>";
 			}
 		}
 		echo ("</div>");
 
 		echo("
 		<div id='logo'>
-			<a href='".base_url().DEFAULT_MAP."'><span class='real'>R</span><span class='gains'>G</span><span class='by'>B</span><span class='place'> PLACE</span></a>
+			<a href='".base_url().DEFAULT_MAP."'>
+				<span class='red'>R</span><span class='green'>G</span><span class='blue'>B</span><span class='place'>PLACE</span>
+			</a>
 		</div>
 		");
 	}
@@ -203,8 +205,8 @@ class Template {
 		/* -------------------------------------------------- MENU End -------------------------------------------------- */
 
 		//if($this->CI->session->has_userdata('tab1') === false) $this->CI->session->set_userdata('tab1');
-		//$type = ['#', 'best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
-		$type = ['#', 'best', 'free', 'info'];
+		$type = ['#'];
+		$type = array_merge(TYPE_LIST);
 
 		$tab1 = $this->CI->uri->segment(1, "#");
 

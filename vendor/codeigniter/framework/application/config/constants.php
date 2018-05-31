@@ -100,3 +100,6 @@ define("DEFAULT_MAP", "space");
 
 define("PAGINATION_COUNT", 10);
 define("LIST_ROWS_LIMIT", 30);
+
+//['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
+define("TYPE_LIST", ['best', 'free', 'info', 'news', 'public', 'dev']);

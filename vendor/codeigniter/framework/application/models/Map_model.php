@@ -352,6 +352,7 @@ class Map_model extends CI_Model {
 		echo "<div class='reply-root'>";
 		echo "<ul id='reply-list'>";
 
+
 		$cnt = 0;
 		$uid   = $this->session->userdata('uid');
 		$admin = $this->session->userdata('admin');

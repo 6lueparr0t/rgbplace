@@ -3344,13 +3344,13 @@ a {
       position: absolute; } }
   #logo a {
     color: #212529 !important; }
-  #logo .real {
+  #logo .red {
     color: #ff6b6b !important;
     position: relative; }
-  #logo .gains {
+  #logo .green {
     color: #51cf66 !important;
     position: relative; }
-  #logo .by {
+  #logo .blue {
     color: #339af0 !important;
     position: relative; }
   #logo .place {
@@ -4749,7 +4749,8 @@ a {
   #list .no-list {
     font-family: "pixel";
     text-align: center;
-    padding: 2rem 0; }
+    padding: 2rem 0;
+    border-bottom: 1px solid #212529; }
   #list .list {
     border-collapse: collapse;
     width: 100%;
@@ -5014,8 +5015,8 @@ a {
   color: #f783ac; }
 
 #page #dev {
-  background: linear-gradient(317.5deg, #66d9e8 3%, #495057 3%);
-  color: #66d9e8; }
+  background: linear-gradient(317.5deg, #69db7c 3%, #495057 3%);
+  color: #69db7c; }
 
 #post {
   margin: 1rem 0; }

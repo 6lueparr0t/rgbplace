@@ -77,7 +77,7 @@ class Base_model extends CI_Model {
 		return true;
 	}
 
-	public function getAdminApiKey($name)
+	public function setAdminApiKey($name)
 	{
 		$data = "";
 
@@ -87,15 +87,14 @@ class Base_model extends CI_Model {
 		if($find->num_rows() !== 1) {
 			$apikey = $this->generateKey();
 			$exp = date("Y-m-d H:i:s", time()+(12*60*60));
-
-			$this->db->query("UPDATE admin_info SET apikey='{$apikey}', exp='{$exp}' WHERE name = '{$name}'");
+			$update = $this->db->query("UPDATE admin_info SET apikey='{$apikey}', exp='{$exp}' WHERE name = '{$name}'");
 		}
 
-		foreach ($find->result() as $key => $row) {
-			$data = $row->apikey;
-		}
+		//echo $this->db->last_query();
+		//echo $find->row()->apikey;
+		//echo isset($update);
 
-		return $data;
+		return true;
 	}
 
 	function generateKey($length = 20) {
@@ -106,6 +105,6 @@ class Base_model extends CI_Model {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
 
-        return base64_encode(password_hash(time().$randomString, PASSWORD_DEFAULT));
+        return base64_encode(password_hash(microtime().$randomString, PASSWORD_DEFAULT));
     }
 }
