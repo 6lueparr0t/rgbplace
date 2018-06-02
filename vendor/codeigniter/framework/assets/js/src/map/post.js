@@ -27,6 +27,10 @@ function replyBoxToggle (state) {
 	}
 }
 
+var test = function (wow) {
+	alert(wow+', world!');
+}.bind(this);
+
 document.querySelector("body").addEventListener("click", function(event) {
 	let t = event.target;
 
@@ -80,6 +84,8 @@ document.querySelector("body").addEventListener("click", function(event) {
 		case "reply-button yes" :
 			let reply = t.parentElement.parentElement;
 			console.log(reply.querySelector(".reply-no").value);
+
+			test('test');
 			break;
 
 		case "reply-button no to" :

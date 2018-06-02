@@ -1,4 +1,4 @@
-function ajaxHandler(method, url, data = null) {
+function ajaxHandler(method, url, data, success, error) {
 	let request = new XMLHttpRequest();
 
 	request.open(method, url, true);
@@ -6,7 +6,8 @@ function ajaxHandler(method, url, data = null) {
 	request.onload = function() {
 		if (this.status >= 200 && this.status < 400) {
 			// Success!
-			data = JSON.parse(this.response);
+			let ret = JSON.parse(this.response);
+			success(ret);
 		}
 	};
 
@@ -19,6 +20,7 @@ function ajaxHandler(method, url, data = null) {
 
 	request.onerror = function() {
 		//There was a connection error of some sort
+		error();
 	};
 
 	request.send(data);
