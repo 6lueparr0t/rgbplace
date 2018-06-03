@@ -27,10 +27,6 @@ function replyBoxToggle (state) {
 	}
 }
 
-var test = function (wow) {
-	alert(wow+', world!');
-}.bind(this);
-
 document.querySelector("body").addEventListener("click", function(event) {
 	let t = event.target;
 
@@ -66,6 +62,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 		}
 	}
 
+
 	//console.log(t.className);
 	switch (t.className) {
 		case "reply-button cancel" :
@@ -83,9 +80,17 @@ document.querySelector("body").addEventListener("click", function(event) {
 		case "reply-button yes to" :
 		case "reply-button yes" :
 			let reply = t.parentElement.parentElement;
-			console.log(reply.querySelector(".reply-no").value);
+			let data = new FormData();
 
-			test('test');
+			var test = success.bind(this);
+
+			data.append('reply-box', reply.querySelector(".reply-box").value);
+			data.append('reply-no', reply.querySelector(".reply-no").value);
+
+			//httpRequest(method, url, data, success, error);
+			//httpRequest('POST', '/', data, success, error);
+
+			test(data);
 			break;
 
 		case "reply-button no to" :
@@ -95,3 +100,12 @@ document.querySelector("body").addEventListener("click", function(event) {
 	}
 
 });
+
+function success (data) {
+	var response = [];
+	for(var pair of data.entries()) { response.push(pair); }
+	console.log(JSON.stringify(response));
+	alert('TEMP::Message sent successfully');
+	//location.reload();
+}
+

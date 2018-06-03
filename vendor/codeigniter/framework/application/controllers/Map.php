@@ -14,16 +14,15 @@ class Map extends CI_Controller {
 		redirect("/");
 	}
 
-	public function request($type, $act)
+	public function request($type=null, $act=null)
 	{
-/*
- *        if($type === "reply") {
- *            //$act : insert, modify, delete ..
- *            switch($act) {
- *
- *            }
- *        }
- */
+		$this->session->userdata();
+		if($type === "reply") {
+			//$act : insert, modify, delete ..
+			switch($act) {
+
+			}
+		}
 	}
 
 	public function search()

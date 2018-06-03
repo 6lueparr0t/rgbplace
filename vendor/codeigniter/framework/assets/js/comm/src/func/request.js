@@ -1,4 +1,4 @@
-function ajaxHandler(method, url, data, success, error) {
+function httpRequest(method, url, data, success, error = null) {
 	let request = new XMLHttpRequest();
 
 	request.open(method, url, true);
