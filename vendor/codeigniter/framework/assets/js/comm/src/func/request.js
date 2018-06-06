@@ -1,4 +1,4 @@
-function httpRequest(method, url, data, success, error = null) {
+function httpRequest(method, url, data, success, fail, error = null) {
 	let request = new XMLHttpRequest();
 
 	request.open(method, url, true);
@@ -6,8 +6,12 @@ function httpRequest(method, url, data, success, error = null) {
 	request.onload = function() {
 		if (this.status >= 200 && this.status < 400) {
 			// Success!
-			let ret = JSON.parse(this.response);
-			success(ret);
+			if(this.response) {
+				let ret = JSON.parse(this.response);
+				success(ret);
+			} else {
+				fail(this);
+			}
 		}
 	};
 

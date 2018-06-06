@@ -4,6 +4,10 @@ let onUnload = function () {
     event.returnValue = 1;
 }
 
+// ["127.0.0.1", "space", "best", "1"]
+var URL = (window.location.hostname + window.location.pathname);
+var URL_ARR = URL.split("/");
+
 window.addEventListener("dragover",function(){ event.preventDefault(); });
 window.addEventListener("drop",function(){ event.preventDefault(); });
 

@@ -63,6 +63,10 @@ document.querySelector("body").addEventListener("click", function(event) {
 	}
 
 
+	let reply = null;
+	let no = null;
+	let message = null;
+
 	//console.log(t.className);
 	switch (t.className) {
 		case "reply-button cancel" :
@@ -79,33 +83,46 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 		case "reply-button yes to" :
 		case "reply-button yes" :
-			let reply = t.parentElement.parentElement;
-			let data = new FormData();
+			reply = t.parentElement.parentElement;
+			message = reply.querySelector(".reply-box").value;
+			no = reply.querySelector(".reply-no").value;
 
-			var test = success.bind(this);
+			let data = [];
+			data.push({
+				'info': URL,
+				'message': message,
+				'no': no
+			});
 
-			data.append('reply-box', reply.querySelector(".reply-box").value);
-			data.append('reply-no', reply.querySelector(".reply-no").value);
+			//var response = [];
+			//for(var pair of data.entries()) { response.push(pair); }
 
 			//httpRequest(method, url, data, success, error);
-			//httpRequest('POST', '/', data, success, error);
+			httpRequest('POST', '/map/request/reply', JSON.stringify(data), success.bind(this), fail.bind(this));
 
-			test(data);
 			break;
 
 		case "reply-button no to" :
 		case "reply-button no" :
 			replyBoxToggle.call(t, false);
 			break;
+
+		case "delete enable":
+			reply = t.parentElement.parentElement.parentElement;
+			no = reply.querySelector(".no").innerHTML;
+
+			break;
 	}
 
 });
 
 function success (data) {
-	var response = [];
-	for(var pair of data.entries()) { response.push(pair); }
-	console.log(JSON.stringify(response));
+	console.log(data);
 	alert('TEMP::Message sent successfully');
-	//location.reload();
+}
+
+function fail (data) {
+	console.log('request fail : ');
+	console.log(data);
 }
 

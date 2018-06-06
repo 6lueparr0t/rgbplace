@@ -14,14 +14,38 @@ class Map extends CI_Controller {
 		redirect("/");
 	}
 
-	public function request($type=null, $act=null)
+	public function request($type=null, $val=null, $api_key=null)
 	{
-		$this->session->userdata();
-		if($type === "reply") {
-			//$act : insert, modify, delete ..
-			switch($act) {
+		//if(!$this->session->userdata('signed_in') || $type) exit;
+		$data = (array)json_decode($this->input->raw_input_stream)[0];
+		$info = explode('/', $data['info']);
 
+		//echo json_encode($data);
+		//exit;
+
+		switch ($type) {
+		case 'reply': 
+			//$act : insert, modify, delete ..
+			switch($this->input->method()) {
+			case 'get':
+				break;
+			case 'post':
+				echo $this->map->reply_insert($data);
+				break;
+			case 'put':
+				break;
+			case 'delete':
+				break;
+			default :
+				break;
 			}
+			break;
+
+		case 'post' :
+			break;
+
+		default :
+			break;
 		}
 	}
 

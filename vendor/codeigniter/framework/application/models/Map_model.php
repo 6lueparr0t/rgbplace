@@ -36,7 +36,7 @@ class Map_model extends CI_Model {
 	 * ex: select ~ from ~ where ~ LIMIT start, count
 	 * ====================
 	 */
-	public function page($map, $type, $limit)
+	public function page ($map, $type, $limit)
 	{
 		$data = [];
 
@@ -453,17 +453,18 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
-	 * Usage : $this->map->reply_insert ( map code, post type, post number )
+	 * Usage : $this->map->reply_insert ( [map code, post type, post number], data )
 	 * Desc : 
 	 * ====================
 	 */
 	public function reply_insert ()
 	{
+
 	}
 
 	/*
 	 * ====================
-	 * Usage : $this->map->reply_modify ( map code, post type, post number )
+	 * Usage : $this->map->reply_modify ( [map code, post type, post number], data )
 	 * Desc : 
 	 * ====================
 	 */
@@ -473,7 +474,7 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
-	 * Usage : $this->map->reply_delete ( map code, post type, post number )
+	 * Usage : $this->map->reply_delete ( [map code, post type, post number], data )
 	 * Desc : 
 	 * ====================
 	 */
