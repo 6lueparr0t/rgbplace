@@ -30,7 +30,7 @@ class Map extends CI_Controller {
 			case 'get':
 				break;
 			case 'post':
-				echo $this->map->reply_insert($data);
+				echo $this->map->reply_insert($data, $info);
 				break;
 			case 'put':
 				break;

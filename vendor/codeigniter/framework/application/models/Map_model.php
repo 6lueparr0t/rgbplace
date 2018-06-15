@@ -20,9 +20,12 @@ class Map_model extends CI_Model {
 			return null;
 		}
 
-		foreach ($find->result() as $key => $row) {
-			$data = $row->type;
-		}
+		/* //2018/06/16 comment
+		 *foreach ( as $key => $row) {
+		 *    $data = $row->type;
+		 *}
+		 */
+		$data = $find->result()[0]->type;
 
 		return $data;
 	}
@@ -371,13 +374,14 @@ class Map_model extends CI_Model {
 
 			$date    = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time    = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
+			
 			$no      = $row->no;
+			$follow  = ($row->follow)?$row->follow:$no;
 
 			$reply_uid = $row->uid;
 
 			$name    = $row->name;
 			$mention = ($row->mention)? "@".$row->mention:"";
-			$follow  = ($row->follow)?$row->follow:"0";
 
 			$content = $row->content;
 
@@ -411,7 +415,9 @@ class Map_model extends CI_Model {
 
 			// reply info start
 			echo "<div class='reply-info'>";
-			echo "<div class='name'> {$name} </div>";
+			echo "<div class='name'>{$name}</div>";
+			echo "<div class='depth'>{$depth_no}</div>";
+			echo "<div class='follow'>{$follow}</div>";
 			echo "<div class='date'> {$date} {$time} </div>";
 
 			// daihyun99 to do : button class setting color
@@ -457,9 +463,81 @@ class Map_model extends CI_Model {
 	 * Desc : 
 	 * ====================
 	 */
-	public function reply_insert ()
+	public function reply_insert ($data, $info)
 	{
-
+		//$this->monolog->debug('reply_insert', print_r($data,1));
+		//$this->monolog->debug('reply_insert', print_r($info,1));
+/*
+ *        $table = "map_{$info[1]}_reply";
+ *        $post_no = $info[3];
+ *
+ *        $depth = $data['depth'];
+ *        $mention = $data['mention'];
+ *
+ *        $depth_array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+ *
+ *
+ *        $follow = "NULL";
+ *
+ *        if($depth>0) {
+ *            $follow = $data['follow'];
+ *            $query = "select ";
+ *
+ *            for($i=0; $i<count($depth_array); $i++) {
+ *
+ *                if($i==$depth) {
+ *                    $query.= "max(depth".($i+1).") depth".($i+1).",";
+ *                } else {
+ *                    $query.= "depth".($i+1).",";
+ *                }
+ *            }
+ *
+ *            if($depth==1) {
+ *                $query .= "	follow
+ *                    from {$table}
+ *                    where no='{$follow}'";
+ *            } else {
+ *                $query .= "	follow
+ *                    from {$table}
+ *                    where follow='{$follow}'";
+ *            }
+ *
+ *            $this->monolog->debug('reply_insert', $query);
+ *            //exit();
+ *
+ *            $select = $this->db->query($query);
+ *
+ *            //$this->monolog->debug('reply_insert', print_r($select->result(),1));
+ *
+ *            $row = $select->result()[0];
+ *
+ *            //exit();
+ *            for($i=0; $i<count($depth_array); $i++) {
+ *                $depth_array[$i] = $row->{'depth'.($i+1)};
+ *            }
+ *            //if($depth==1) $depth_array[$depth]++;
+ *        }
+ *
+ *        $depth_array[$depth] = $depth_array[$depth]+1;
+ *
+ *        $data['message'] = htmlspecialchars($data['message']);
+ *
+ *        $query= "insert into {$table} (uid, name,
+ *            content, mention, post,
+ *            follow, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)
+ *
+ *            values('".$this->session->userdata('uid')."', '".$this->session->userdata('name')."',
+ *                '{$data['message']}', '{$mention}', '{$post_no}',
+ *                {$follow}, {$depth_array[0]}, {$depth_array[1]}, {$depth_array[2]}, {$depth_array[3]}, {$depth_array[4]}, {$depth_array[5]}, {$depth_array[6]}, {$depth_array[7]}, {$depth_array[8]}, {$depth_array[9]})";
+ *
+ *        $this->monolog->debug('reply_insert', $query);
+ *        
+ *        $result = $this->db->query($query);
+ *
+ *        $this->monolog->debug('reply_insert', $result);
+ *
+ *        return $result;
+ */
 	}
 
 	/*
@@ -482,9 +560,12 @@ class Map_model extends CI_Model {
 	{
 	}
 
-	private function replyBox($status = "block", $id='0') {
+	private function replyBox($status = "block", $id=0, $depth=0) {
 		echo "<div class='reply {$status}' id='reply-{$id}' name='reply-{$id}'>"
 				."<input type='hidden' class='reply-no' value='{$id}'>"
+				."<input type='hidden' class='reply-depth' value='{$depth}'>"
+				."<input type='hidden' class='reply-follow' value=''>"
+				."<input type='hidden' class='reply-name' value=''>"
 				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf303;'></textarea>"
 				."<div class='reply-button-group'>"
 					."<div class='reply-button send'>Send Message &#xf11c; </div>"

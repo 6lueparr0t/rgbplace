@@ -12,24 +12,27 @@
 		li {
 			display:flex;
 
-			&.depth {
-			}
-
-			&.null {
-			}
-
 			&.content {
 				margin-bottom:1rem;
 			}
+		}
 
-			&.name {
+		.reply-info {
+			.depth {
+				display:none;
+			}
+
+			.follow {
+				display:none;
+			}
+
+			.name {
 				font-size:1rem;
 			}
 
-			&.date {
+			.date {
 				font-size:1rem;
 			}
-
 		}
 
 	}
@@ -118,11 +121,11 @@
 				font-size:1rem;
 				padding:1rem;
 				height:5rem;
-				width:97.75%;
+				width:96.75%;
 				border: 1px solid $oc-gray-9;
 
 				@media screen and ($width-name : $target-width) {
-					width:90.8%;
+					width:90%;
 				}
 
 				&:active,

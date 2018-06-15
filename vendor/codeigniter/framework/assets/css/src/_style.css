@@ -5121,10 +5121,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-0 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-0 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-0 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-0 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-0 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-0 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-0 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-0 .func {
         display: flex; }
         #reply .reply-root ul li.depth-0 .func button {
@@ -5159,10 +5163,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-1 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-1 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-1 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-1 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-1 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-1 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-1 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-1 .func {
         display: flex; }
         #reply .reply-root ul li.depth-1 .func button {
@@ -5197,10 +5205,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-2 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-2 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-2 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-2 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-2 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-2 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-2 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-2 .func {
         display: flex; }
         #reply .reply-root ul li.depth-2 .func button {
@@ -5235,10 +5247,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-3 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-3 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-3 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-3 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-3 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-3 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-3 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-3 .func {
         display: flex; }
         #reply .reply-root ul li.depth-3 .func button {
@@ -5273,10 +5289,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-4 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-4 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-4 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-4 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-4 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-4 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-4 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-4 .func {
         display: flex; }
         #reply .reply-root ul li.depth-4 .func button {
@@ -5311,10 +5331,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-5 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-5 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-5 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-5 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-5 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-5 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-5 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-5 .func {
         display: flex; }
         #reply .reply-root ul li.depth-5 .func button {
@@ -5349,10 +5373,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-6 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-6 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-6 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-6 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-6 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-6 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-6 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-6 .func {
         display: flex; }
         #reply .reply-root ul li.depth-6 .func button {
@@ -5387,10 +5415,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-7 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-7 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-7 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-7 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-7 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-7 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-7 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-7 .func {
         display: flex; }
         #reply .reply-root ul li.depth-7 .func button {
@@ -5425,10 +5457,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-8 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-8 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-8 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-8 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-8 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-8 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-8 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-8 .func {
         display: flex; }
         #reply .reply-root ul li.depth-8 .func button {
@@ -5463,10 +5499,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-9 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-9 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-9 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-9 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-9 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-9 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-9 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-9 .func {
         display: flex; }
         #reply .reply-root ul li.depth-9 .func button {
@@ -5501,10 +5541,14 @@ a {
         display: flex; }
         #reply .reply-root ul li.depth-10 ul li.content {
           margin-bottom: 1rem; }
-        #reply .reply-root ul li.depth-10 ul li.name {
-          font-size: 1rem; }
-        #reply .reply-root ul li.depth-10 ul li.date {
-          font-size: 1rem; }
+      #reply .reply-root ul li.depth-10 ul .reply-info .depth {
+        display: none; }
+      #reply .reply-root ul li.depth-10 ul .reply-info .follow {
+        display: none; }
+      #reply .reply-root ul li.depth-10 ul .reply-info .name {
+        font-size: 1rem; }
+      #reply .reply-root ul li.depth-10 ul .reply-info .date {
+        font-size: 1rem; }
       #reply .reply-root ul li.depth-10 .func {
         display: flex; }
         #reply .reply-root ul li.depth-10 .func button {
@@ -5541,11 +5585,11 @@ a {
       font-size: 1rem;
       padding: 1rem;
       height: 5rem;
-      width: 97.75%;
+      width: 96.75%;
       border: 1px solid #212529; }
       @media screen and (max-width: 860px) {
         #reply .reply-root .reply .reply-box {
-          width: 90.8%; } }
+          width: 90%; } }
       #reply .reply-root .reply .reply-box:active, #reply .reply-root .reply .reply-box:focus {
         border: 1px solid #212529; }
     #reply .reply-root .reply .reply-button-group {

@@ -42,11 +42,17 @@ document.querySelector("body").addEventListener("click", function(event) {
 			reply.removeChild(reply.lastChild);
 		} else {
 			let no = reply.querySelector("ul .no").innerHTML;
+			let depth = parseInt(reply.querySelector("ul .depth").innerHTML)+1;
+			let follow = parseInt(reply.querySelector("ul .follow").innerHTML);
+			let name = reply.querySelector("ul .name").innerHTML;
 			let node = document.createElement("li");
 			node.className = "reply-container";
 			node.innerHTML =
 				"<div class='reply block' id='reply-"+no+"' name='reply-"+no+"'>"
-					+"<input type='hidden' class='reply-no' value='"+no+"'>"
+					+"<input type='hidden' class='reply-no' value='"+no+"'/>"
+					+"<input type='hidden' class='reply-depth' value='"+depth+"'/>"
+					+"<input type='hidden' class='reply-follow' value='"+follow+"'/>"
+					+"<input type='hidden' class='reply-name' value='"+name+"'/>"
 					+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;'></textarea>"
 
 					+"<div class='reply-button-group'>"
@@ -63,9 +69,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 	}
 
 
-	let reply = null;
-	let no = null;
-	let message = null;
+	let reply, no, message, depth, follow, mention; 
 
 	//console.log(t.className);
 	switch (t.className) {
@@ -84,14 +88,21 @@ document.querySelector("body").addEventListener("click", function(event) {
 		case "reply-button yes to" :
 		case "reply-button yes" :
 			reply = t.parentElement.parentElement;
-			message = reply.querySelector(".reply-box").value;
+
 			no = reply.querySelector(".reply-no").value;
+			message = reply.querySelector(".reply-box").value;
+			depth = reply.querySelector(".reply-depth").value;
+			follow = reply.querySelector(".reply-follow").value;
+			mention = reply.querySelector(".reply-name").value;
 
 			let data = [];
 			data.push({
 				'info': URL,
+				'no': no,
 				'message': message,
-				'no': no
+				'depth': depth, 
+				'follow': follow, 
+				'mention': mention, 
 			});
 
 			//var response = [];
