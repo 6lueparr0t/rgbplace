@@ -470,7 +470,7 @@ class Map_model extends CI_Model {
 		$table = "map_{$info[1]}_reply";
 		$post_no = $info[3];
 
-		$depth = $data['depth'];
+		$depth = ($data['depth']<10)?$data['depth']:9;
 		$mention = $data['mention'];
 
 		$depth_array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];

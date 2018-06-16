@@ -551,3 +551,46 @@
 [2018-06-16 06:33:43] reply_insert.DEBUG: select depth1,depth2,depth3,	follow from map_space_reply where no='166' order by depth3 desc LIMIT 1   
 [2018-06-16 06:33:43] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test13', 'daihyun99', '1', 				151, 166, 2, 1, 2, 0, 0, 0, 0, 0, 0, 0)  
 [2018-06-16 06:33:43] reply_insert.DEBUG: 1  
+[2018-06-16 07:42:00] reply_insert.DEBUG: select depth1,	follow from map_space_reply where post='5' order by depth1 desc LIMIT 1   
+[2018-06-16 07:42:00] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test', '', '5', 				NULL, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-06-16 07:42:00] reply_insert.DEBUG: 1  
+[2018-06-16 07:42:06] reply_insert.DEBUG: select depth1,depth2,	follow from map_space_reply where no='172' order by depth2 desc LIMIT 1   
+[2018-06-16 07:42:06] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test2', 'daihyun99', '5', 				172, 172, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-06-16 07:42:06] reply_insert.DEBUG: 1  
+[2018-06-16 07:42:12] reply_insert.DEBUG: select depth1,depth2,depth3,	follow from map_space_reply where no='173' order by depth3 desc LIMIT 1   
+[2018-06-16 07:42:12] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test3', 'daihyun99', '5', 				172, 173, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0)  
+[2018-06-16 07:42:12] reply_insert.DEBUG: 1  
+[2018-06-16 07:42:21] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,	follow from map_space_reply where no='174' order by depth4 desc LIMIT 1   
+[2018-06-16 07:42:21] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test4', 'daihyun99', '5', 				172, 174, 3, 1, 1, 1, 0, 0, 0, 0, 0, 0)  
+[2018-06-16 07:42:21] reply_insert.DEBUG: 1  
+[2018-06-16 07:42:22] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,	follow from map_space_reply where no='174' order by depth4 desc LIMIT 1   
+[2018-06-16 07:42:22] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test4', 'daihyun99', '5', 				172, 174, 3, 1, 1, 2, 0, 0, 0, 0, 0, 0)  
+[2018-06-16 07:42:22] reply_insert.DEBUG: 1  
+[2018-06-16 07:42:36] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,	follow from map_space_reply where no='175' order by depth5 desc LIMIT 1   
+[2018-06-16 07:42:36] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test5', 'daihyun99', '5', 				172, 175, 3, 1, 1, 1, 1, 0, 0, 0, 0, 0)  
+[2018-06-16 07:42:36] reply_insert.DEBUG: 1  
+[2018-06-16 07:42:44] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,	follow from map_space_reply where no='177' order by depth6 desc LIMIT 1   
+[2018-06-16 07:42:44] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test6', 'daihyun99', '5', 				172, 177, 3, 1, 1, 1, 1, 1, 0, 0, 0, 0)  
+[2018-06-16 07:42:44] reply_insert.DEBUG: 1  
+[2018-06-16 07:42:51] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,	follow from map_space_reply where no='178' order by depth7 desc LIMIT 1   
+[2018-06-16 07:42:51] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test7', 'daihyun99', '5', 				172, 178, 3, 1, 1, 1, 1, 1, 1, 0, 0, 0)  
+[2018-06-16 07:42:51] reply_insert.DEBUG: 1  
+[2018-06-16 07:42:57] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,	follow from map_space_reply where no='179' order by depth8 desc LIMIT 1   
+[2018-06-16 07:42:57] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test8', 'daihyun99', '5', 				172, 179, 3, 1, 1, 1, 1, 1, 1, 1, 0, 0)  
+[2018-06-16 07:42:57] reply_insert.DEBUG: 1  
+[2018-06-16 07:43:02] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,depth9,	follow from map_space_reply where no='180' order by depth9 desc LIMIT 1   
+[2018-06-16 07:43:02] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'', 'daihyun99', '5', 				172, 180, 3, 1, 1, 1, 1, 1, 1, 1, 1, 0)  
+[2018-06-16 07:43:02] reply_insert.DEBUG: 1  
+[2018-06-16 07:43:11] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,depth9,depth10,	follow from map_space_reply where no='181' order by depth10 desc LIMIT 1   
+[2018-06-16 07:43:11] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test10', 'daihyun99', '5', 				172, 181, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1)  
+[2018-06-16 07:43:11] reply_insert.DEBUG: 1  
+[2018-06-16 07:43:25] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,depth9,depth10,depth11,	follow from map_space_reply where no='182' order by depth11 desc LIMIT 1   
+[2018-06-16 07:43:28] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,depth9,depth10,depth11,	follow from map_space_reply where no='182' order by depth11 desc LIMIT 1   
+[2018-06-16 07:48:16] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,depth9,depth10,depth11,	follow from map_space_reply where no='182' order by depth11 desc LIMIT 1   
+[2018-06-16 07:48:19] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,depth9,depth10,depth11,	follow from map_space_reply where no='182' order by depth11 desc LIMIT 1   
+[2018-06-16 07:48:20] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,depth9,depth10,depth11,	follow from map_space_reply where no='182' order by depth11 desc LIMIT 1   
+[2018-06-16 07:48:20] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,depth9,depth10,depth11,	follow from map_space_reply where no='182' order by depth11 desc LIMIT 1   
+[2018-06-16 07:48:21] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,depth9,depth10,depth11,	follow from map_space_reply where no='182' order by depth11 desc LIMIT 1   
+[2018-06-16 07:50:13] reply_insert.DEBUG: select depth1,depth2,depth3,depth4,depth5,depth6,depth7,depth8,depth9,depth10,	follow from map_space_reply where no='182' order by depth10 desc LIMIT 1   
+[2018-06-16 07:50:13] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test11', 'daihyun99', '5', 				172, 182, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1)  
+[2018-06-16 07:50:13] reply_insert.DEBUG: 1  
