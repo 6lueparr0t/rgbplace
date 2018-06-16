@@ -467,77 +467,68 @@ class Map_model extends CI_Model {
 	{
 		//$this->monolog->debug('reply_insert', print_r($data,1));
 		//$this->monolog->debug('reply_insert', print_r($info,1));
-/*
- *        $table = "map_{$info[1]}_reply";
- *        $post_no = $info[3];
- *
- *        $depth = $data['depth'];
- *        $mention = $data['mention'];
- *
- *        $depth_array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
- *
- *
- *        $follow = "NULL";
- *
- *        if($depth>0) {
- *            $follow = $data['follow'];
- *            $query = "select ";
- *
- *            for($i=0; $i<count($depth_array); $i++) {
- *
- *                if($i==$depth) {
- *                    $query.= "max(depth".($i+1).") depth".($i+1).",";
- *                } else {
- *                    $query.= "depth".($i+1).",";
- *                }
- *            }
- *
- *            if($depth==1) {
- *                $query .= "	follow
- *                    from {$table}
- *                    where no='{$follow}'";
- *            } else {
- *                $query .= "	follow
- *                    from {$table}
- *                    where follow='{$follow}'";
- *            }
- *
- *            $this->monolog->debug('reply_insert', $query);
- *            //exit();
- *
- *            $select = $this->db->query($query);
- *
- *            //$this->monolog->debug('reply_insert', print_r($select->result(),1));
- *
- *            $row = $select->result()[0];
- *
- *            //exit();
- *            for($i=0; $i<count($depth_array); $i++) {
- *                $depth_array[$i] = $row->{'depth'.($i+1)};
- *            }
- *            //if($depth==1) $depth_array[$depth]++;
- *        }
- *
- *        $depth_array[$depth] = $depth_array[$depth]+1;
- *
- *        $data['message'] = htmlspecialchars($data['message']);
- *
- *        $query= "insert into {$table} (uid, name,
- *            content, mention, post,
- *            follow, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)
- *
- *            values('".$this->session->userdata('uid')."', '".$this->session->userdata('name')."',
- *                '{$data['message']}', '{$mention}', '{$post_no}',
- *                {$follow}, {$depth_array[0]}, {$depth_array[1]}, {$depth_array[2]}, {$depth_array[3]}, {$depth_array[4]}, {$depth_array[5]}, {$depth_array[6]}, {$depth_array[7]}, {$depth_array[8]}, {$depth_array[9]})";
- *
- *        $this->monolog->debug('reply_insert', $query);
- *        
- *        $result = $this->db->query($query);
- *
- *        $this->monolog->debug('reply_insert', $result);
- *
- *        return $result;
- */
+		$table = "map_{$info[1]}_reply";
+		$post_no = $info[3];
+
+		$depth = $data['depth'];
+		$mention = $data['mention'];
+
+		$depth_array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+
+		//if($depth>0) {
+			$follow = ($data['follow'])?$data['follow']:"NULL";
+			$query = "select ";
+
+			for($i=0; $i<=$depth; $i++) {
+				$query.= "depth".($i+1).",";
+			}
+
+			$query .= "	follow from {$table} ";
+
+			if($depth==0) {
+					$query .= "where post='{$post_no}' order by depth".($depth+1)." desc LIMIT 1 ";
+			} else {
+					$query .= "where no='{$data['no']}' order by depth".($depth+1)." desc LIMIT 1 ";
+			}
+
+			$this->monolog->debug('reply_insert', $query);
+			//exit();
+
+			$select = $this->db->query($query);
+
+			//$this->monolog->debug('reply_insert', print_r($select->result(),1));
+
+			//exit();
+
+			if($select->num_rows() != 0) {
+				$row = $select->result()[0];
+				for($i=0; $i<count($depth_array); $i++) {
+					$depth_array[$i] = (isset($row->{'depth'.($i+1)}))?$row->{'depth'.($i+1)}:0;
+				}
+			}
+			//if($depth==1) $depth_array[$depth]++;
+		//}
+
+		$depth_array[$depth] = $this->db->query("select count(no) cnt from {$table} where relation = {$data['no']}")->result()[0]->cnt+1;
+
+		$data['message'] = htmlspecialchars($data['message']);
+
+		$query= "insert into {$table} (uid, name,
+			content, mention, post,
+			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)
+
+			values('".$this->session->userdata('uid')."', '".$this->session->userdata('name')."',
+				'{$data['message']}', '{$mention}', '{$post_no}',
+				{$follow}, {$data['no']}, {$depth_array[0]}, {$depth_array[1]}, {$depth_array[2]}, {$depth_array[3]}, {$depth_array[4]}, {$depth_array[5]}, {$depth_array[6]}, {$depth_array[7]}, {$depth_array[8]}, {$depth_array[9]})";
+
+		$this->monolog->debug('reply_insert', $query);
+		//exit();	
+		$result = $this->db->query($query);
+
+		$this->monolog->debug('reply_insert', $result);
+
+		return $result;
 	}
 
 	/*
