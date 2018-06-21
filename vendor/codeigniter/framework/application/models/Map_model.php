@@ -457,6 +457,21 @@ class Map_model extends CI_Model {
 		return true;
 	}
 
+	public function reply_count_update ($command='up', $info)
+	{
+		$table = $info[1];
+		$no = $info[3];
+
+		switch($command) {
+		case "up":
+			$update = $this->db->query("update map_{$table}_post set reply = reply + 1 where no = '{$no}'");
+		case "down":
+			$update = $this->db->query("update map_{$table}_post set reply = reply - 1 where no = '{$no}'");
+		default:
+		}
+		return $update->result();
+	}
+
 	/*
 	 * ====================
 	 * Usage : $this->map->reply_insert ( [map code, post type, post number], data )
@@ -492,7 +507,7 @@ class Map_model extends CI_Model {
 					$query .= "where no='{$data['no']}' order by depth".($depth+1)." desc LIMIT 1 ";
 			}
 
-			$this->monolog->debug('reply_insert', $query);
+			//$this->monolog->debug('reply_insert', $query);
 			//exit();
 
 			$select = $this->db->query($query);

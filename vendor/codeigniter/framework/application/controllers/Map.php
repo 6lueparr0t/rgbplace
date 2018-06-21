@@ -30,11 +30,14 @@ class Map extends CI_Controller {
 			case 'get':
 				break;
 			case 'post':
-				echo $this->map->reply_insert($data, $info);
+				if($this->map->reply_insert($data, $info)) {
+					echo $this->map->reply_count_update('up', $info);
+				}
 				break;
 			case 'put':
 				break;
 			case 'delete':
+				//echo $this->map->reply_count_update('down', $info);
 				break;
 			default :
 				break;
