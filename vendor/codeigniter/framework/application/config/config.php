@@ -329,7 +329,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = 'darkstone_station';
+$config['encryption_key'] = hex2bin('9671bd33cccfcf99726a0179725dcee6');
 
 /*
 |--------------------------------------------------------------------------

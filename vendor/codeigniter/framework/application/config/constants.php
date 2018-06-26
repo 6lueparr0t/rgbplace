@@ -103,3 +103,6 @@ define("LIST_ROWS_LIMIT", 30);
 
 //['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
 define("TYPE_LIST", ['best', 'free', 'info', 'news', 'public', 'dev']);
+
+define("CIPHER_METHOD", "aes-128-gcm");
+define("CIPHER_KEY", "Have a nice Day!");

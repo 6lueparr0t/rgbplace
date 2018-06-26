@@ -109,7 +109,7 @@ gulp.task('comm-min', function () {
 		.pipe(cache.filter())
 		.pipe(plumber())
 		.pipe(babel({
-			presets: ['es2016']
+			presets: ['env']
 		}))
 		.pipe(babili({
 			mangle: {
@@ -126,7 +126,7 @@ gulp.task('js-min', function () {
 		.pipe(cache.filter())
 		.pipe(plumber())
 		.pipe(babel({
-			presets: ['es2016']
+			presets: ['env']
 		}))
 		.pipe(babili({
 			mangle: {
