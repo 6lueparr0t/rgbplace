@@ -42,23 +42,17 @@ document.querySelector("body").addEventListener("click", function(event) {
 			reply.removeChild(reply.lastChild);
 		} else {
 			let no = reply.querySelector("ul .no").innerHTML;
-			let depth = parseInt(reply.querySelector("ul .depth").innerHTML)+1;
-			let follow = parseInt(reply.querySelector("ul .follow").innerHTML);
-			let name = reply.querySelector("ul .name").innerHTML;
 			let node = document.createElement("li");
 			node.className = "reply-container";
 			node.innerHTML =
 				"<div class='reply block' id='reply-"+no+"' name='reply-"+no+"'>"
 					+"<input type='hidden' class='reply-no' value='"+no+"'/>"
-					+"<input type='hidden' class='reply-depth' value='"+depth+"'/>"
-					+"<input type='hidden' class='reply-follow' value='"+follow+"'/>"
-					+"<input type='hidden' class='reply-name' value='"+name+"'/>"
 					+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;'></textarea>"
 
 					+"<div class='reply-button-group'>"
 						+"<div class='reply-button send to'>Reply on Message <span style='font-weight:900;transform: translate(.4rem,.1rem);'>&#xf11c;</span></div>"
-						+"<div class='reply-button yes to'>confirm</div>"
-						+"<div class='reply-button no to'>No way!</div>"
+						+"<div class='reply-button yes to'>Confirm</div>"
+						+"<div class='reply-button no to'>Not Yet ..</div>"
 						+"<div class='reply-button cancel'>Cancel</div>"
 					+"</div>";
 
@@ -69,7 +63,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 	}
 
 
-	let reply, no, message, depth, follow, mention; 
+	let reply, no, message; 
 
 	//console.log(t.className);
 	switch (t.className) {
@@ -91,18 +85,12 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 			no = reply.querySelector(".reply-no").value;
 			message = reply.querySelector(".reply-box").value;
-			depth = reply.querySelector(".reply-depth").value;
-			follow = reply.querySelector(".reply-follow").value;
-			mention = reply.querySelector(".reply-name").value;
 
 			let data = [];
 			data.push({
 				'info': URL,
 				'no': no,
 				'message': message,
-				'depth': depth, 
-				'follow': follow, 
-				'mention': mention, 
 			});
 
 			//var response = [];

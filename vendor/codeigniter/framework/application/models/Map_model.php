@@ -465,11 +465,38 @@ class Map_model extends CI_Model {
 		switch($command) {
 		case "up":
 			$update = $this->db->query("update map_{$table}_post set reply = reply + 1 where no = '{$no}'");
+			break;
 		case "down":
 			$update = $this->db->query("update map_{$table}_post set reply = reply - 1 where no = '{$no}'");
+			break;
 		default:
 		}
-		return $update->result();
+
+		return $update;
+	}
+
+	public function reply_select ($table, $no) {
+		//$this->monolog->debug('reply_insert', print_r($data,1));
+		$select = $this->db->query("select * from {$table} where no = '{$no}' ");
+
+		$result = $select->result()[0];
+
+		$depth = [
+			$result->depth1, $result->depth2, $result->depth3,
+			$result->depth4, $result->depth5, $result->depth6,
+			$result->depth7, $result->depth8, $result->depth9,
+			$result->depth10
+		];
+
+		$reply['depth'] = 0;
+		for($i=0; $i<count($depth); $i++) {
+			if($depth[$i]>0) $reply['depth'] = $i;
+		}
+
+		$reply['mention'] = $result->name;
+		$reply['follow'] = ($result->follow)?$result->follow:$result->no;
+
+		return $reply;
 	}
 
 	/*
@@ -481,18 +508,27 @@ class Map_model extends CI_Model {
 	public function reply_insert ($data, $info)
 	{
 		//$this->monolog->debug('reply_insert', print_r($data,1));
-		//$this->monolog->debug('reply_insert', print_r($info,1));
 		$table = "map_{$info[1]}_reply";
 		$post_no = $info[3];
 
-		$depth = ($data['depth']<10)?$data['depth']:9;
-		$mention = $data['mention'];
+		$reply = [
+			'depth' => 0,
+			'mention' => '',
+			'follow' => '',
+		];
+
+		if($data['no'] > 0) {
+			$reply = self::reply_select($table, $data['no']);
+			$reply['depth'] += 1;
+		}
+
+		$depth = ($reply['depth']<10)?$reply['depth']:9;
+		$mention = $reply['mention'];
 
 		$depth_array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-
 		//if($depth>0) {
-			$follow = ($data['follow'])?$data['follow']:"NULL";
+			$follow = ($reply['follow'])?$reply['follow']:"NULL";
 			$query = "select ";
 
 			for($i=0; $i<=$depth; $i++) {
@@ -569,9 +605,6 @@ class Map_model extends CI_Model {
 	private function replyBox($status = "block", $id=0, $depth=0) {
 		echo "<div class='reply {$status}' id='reply-{$id}' name='reply-{$id}'>"
 				."<input type='hidden' class='reply-no' value='{$id}'>"
-				."<input type='hidden' class='reply-depth' value='{$depth}'>"
-				."<input type='hidden' class='reply-follow' value=''>"
-				."<input type='hidden' class='reply-name' value=''>"
 				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf303;'></textarea>"
 				."<div class='reply-button-group'>"
 					."<div class='reply-button send'>Send Message &#xf11c; </div>"
