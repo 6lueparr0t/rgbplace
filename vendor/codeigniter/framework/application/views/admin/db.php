@@ -6,10 +6,12 @@ if($method==="clear") {
 
 if($method==="backup") {
 	shell_exec("shell/backup");
+	redirect('/admin/db');
 }
 
 if($method==="restore") {
 	shell_exec("shell/restore");
+	redirect('/admin/db');
 }
 ?>
 

@@ -7,6 +7,10 @@ let replyBoxYes  = document.querySelectorAll(".reply-button.yes");
 
 //console.log(replyBox);
 
+!function () {
+	httpRequest('GET', '/map/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
+}();
+
 function replyBoxToggle (state) {
 
 //	try {
@@ -116,12 +120,17 @@ document.querySelector("body").addEventListener("click", function(event) {
 });
 
 function success (data) {
-	console.log(data);
+	//console.log(data);
 	alert('TEMP::Message sent successfully');
+	httpRequest('GET', '/map/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
+}
+
+function refresh (data) {
+	document.querySelector("#reply").innerHTML = data;
 }
 
 function fail (data) {
-	console.log('request fail : ');
-	console.log(data);
+	console.log('request fail : '+data);
+	httpRequest('GET', '/map/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
 }
 

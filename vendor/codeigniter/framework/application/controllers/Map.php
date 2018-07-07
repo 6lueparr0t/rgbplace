@@ -17,7 +17,12 @@ class Map extends CI_Controller {
 	public function request($type=null, $val=null, $api_key=null)
 	{
 		//if(!$this->session->userdata('signed_in') || $type) exit;
-		$data = (array)json_decode($this->input->raw_input_stream)[0];
+		if($this->input->method() == 'get') {
+			$data = $this->input->get();
+		} else {
+			$data = (array)json_decode($this->input->raw_input_stream)[0];
+		}
+
 		$info = explode('/', $data['info']);
 
 		//echo json_encode($data);
@@ -28,10 +33,11 @@ class Map extends CI_Controller {
 			//$act : insert, modify, delete ..
 			switch($this->input->method()) {
 			case 'get':
+				$ret = json_encode($this->map->reply($info[1], $info[2], $info[3]));
 				break;
 			case 'post':
 				if($this->map->reply_insert($data, $info)) {
-					echo $this->map->reply_count_update('up', $info);
+					$ret = $this->map->reply_count_update('up', $info);
 				}
 				break;
 			case 'put':
@@ -50,6 +56,8 @@ class Map extends CI_Controller {
 		default :
 			break;
 		}
+
+		echo $ret;
 	}
 
 	public function search()

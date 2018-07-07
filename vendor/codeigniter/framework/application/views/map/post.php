@@ -13,7 +13,7 @@ $this->map->post($map, $type, $num);
 
 <div id='reply'>
 <?
-$this->map->reply($map, $type, $num);
+//$this->map->reply($map, $type, $num);
 ?>
 </div>
 

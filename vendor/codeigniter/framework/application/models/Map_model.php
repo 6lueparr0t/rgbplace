@@ -334,26 +334,28 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
-	 * Usage : $this->map->reply ( map code, post type, post number, (OPTION) search )
+	 * Usage : $this->map->reply ( map code, post type, post number, (OPTION) limit(offset), (OPTION) search )
 	 * Desc : show all reply in 'post'
 	 * ====================
 	 */
-	public function reply ($map, $type, $num, $search = null)
+	public function reply ($map, $type, $num, $limit = null, $search = null)
 	{
 		$data = [];
 
 		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim";
 		$find = $this->db->query($query);
 
+		$ret = null;
+
 		if($find->num_rows() === 0) {
-			echo "<div class='reply-root'>";
-			$this->replyBox();
-			echo "</div>";
+			$ret .= "<div class='reply-root'>";
+			$ret .= $this->replyBox();
+			$ret .= "</div>";
 			return false;
 		}
 
-		echo "<div class='reply-root'>";
-		echo "<ul id='reply-list'>";
+		$ret .= "<div class='reply-root'>";
+		$ret .= "<ul id='reply-list'>";
 
 
 		$cnt = 0;
@@ -397,37 +399,37 @@ class Map_model extends CI_Model {
 				if($depth[$i]>0) $depth_no = $i;
 			}
 
-			echo "<li class='depth-{$depth_no}'>";
-			echo "<ul>";
+			$ret .= "<li class='depth-{$depth_no}'>";
+			$ret .= "<ul>";
 
-			echo "<span class='no'>{$no}</span>";
-			echo "<li class='content'>";
+			$ret .= "<span class='no'>{$no}</span>";
+			$ret .= "<li class='content'>";
 
 			/* depth arrow output : top */
-			echo "<span name='space' id='space'>";
+			$ret .= "<span name='space' id='space'>";
 			for($i=0; $i<$depth_no; $i++) {
-				echo "<i class='fa fa-reply' style='transform: rotate3d(0, 0, -1, 180deg);'></i>";
+				$ret .= "<i class='fa fa-reply' style='transform: rotate3d(0, 0, -1, 180deg);'></i>";
 			}
-			echo "</span>";
+			$ret .= "</span>";
 			/* depth arrow output : end */
 
-			echo "<b class='mention'>{$mention}</b> {$content}</li>";
+			$ret .= "<b class='mention'>{$mention}</b> {$content}</li>";
 
 			// reply info start
-			echo "<div class='reply-info'>";
-			echo "<div class='name'>{$name}</div>";
-			echo "<div class='depth'>{$depth_no}</div>";
-			echo "<div class='follow'>{$follow}</div>";
-			echo "<div class='date'> {$date} {$time} </div>";
+			$ret .= "<div class='reply-info'>";
+			$ret .= "<div class='name'>{$name}</div>";
+			$ret .= "<div class='depth'>{$depth_no}</div>";
+			$ret .= "<div class='follow'>{$follow}</div>";
+			$ret .= "<div class='date'> {$date} {$time} </div>";
 
 			// daihyun99 to do : button class setting color
 			/* func : top */
-			echo "<div class='func'>";
+			$ret .= "<div class='func'>";
 
-				echo "<button class='up {$btn_perm}'><i class='far fa-thumbs-up'></i></button>";
-				echo "<button class='down {$btn_perm}'><i class='far fa-thumbs-down'></i></button>";
+				$ret .= "<button class='up {$btn_perm}'><i class='far fa-thumbs-up'></i></button>";
+				$ret .= "<button class='down {$btn_perm}'><i class='far fa-thumbs-down'></i></button>";
 
-				echo "<button class='reply {$btn_perm}'><i class='fa fa-reply' style='transform: rotate3d(1, 0, 0, 180deg);'></i></button>";
+				$ret .= "<button class='reply {$btn_perm}'><i class='fa fa-reply' style='transform: rotate3d(1, 0, 0, 180deg);'></i></button>";
 
 				if($uid == $reply_uid || $admin ) {
 					$reply_perm = "enable";
@@ -435,26 +437,26 @@ class Map_model extends CI_Model {
 					$reply_perm = "disable";
 				}
 
-				echo "<button class='modify {$reply_perm}'><i class='fa fa-pencil-alt'></i></button>";
-				echo "<button class='delete {$reply_perm}'><i class='fa fa-trash'></i></button>";
-				echo "<button class='report ' ><i class='far fa-paper-plane'></i></button>";
+				$ret .= "<button class='modify {$reply_perm}'><i class='fa fa-pencil-alt'></i></button>";
+				$ret .= "<button class='delete {$reply_perm}'><i class='fa fa-trash'></i></button>";
+				$ret .= "<button class='report ' ><i class='far fa-paper-plane'></i></button>";
 
-			echo "</div>";
+			$ret .= "</div>";
 			/* func : end */
 				
-			echo "</div>";
+			$ret .= "</div>";
 			// reply info finish
 
-			echo "</ul>";
-			echo "</li>";
+			$ret .= "</ul>";
+			$ret .= "</li>";
 
 		}
-		echo "</ul>";
-		$this->replyBox();
-		echo "</div>";
+		$ret .= "</ul>";
+		$ret .= $this->replyBox();
+		$ret .= "</div>";
 
 		//input reply text box
-		return true;
+		return $ret;
 	}
 
 	public function reply_count_update ($command='up', $info)
@@ -603,7 +605,7 @@ class Map_model extends CI_Model {
 	}
 
 	private function replyBox($status = "block", $id=0, $depth=0) {
-		echo "<div class='reply {$status}' id='reply-{$id}' name='reply-{$id}'>"
+		$ret = "<div class='reply {$status}' id='reply-{$id}' name='reply-{$id}'>"
 				."<input type='hidden' class='reply-no' value='{$id}'>"
 				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf303;'></textarea>"
 				."<div class='reply-button-group'>"
@@ -612,6 +614,8 @@ class Map_model extends CI_Model {
 					."<div class='reply-button no'>no</div>"
 				."</div>"
 			."</div>";
+
+		return $ret;
 	}
 
 }

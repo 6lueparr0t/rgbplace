@@ -632,3 +632,21 @@
 [2018-06-30 15:54:03] reply_insert.DEBUG: 1  
 [2018-06-30 15:54:31] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test4', 'daihyun99', '1', 				205, 205, 14, 2, 0, 0, 0, 0, 0, 0, 0, 0)  
 [2018-06-30 15:54:31] reply_insert.DEBUG: 1  
+[2018-07-07 06:46:48] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'테스트 댓글 답니다', '', '1', 				NULL, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-07-07 06:46:48] reply_insert.DEBUG: 1  
+[2018-07-07 06:46:56] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'우앙!', 'daihyun99', '1', 				1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-07-07 06:46:56] reply_insert.DEBUG: 1  
+[2018-07-07 06:47:11] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'2등', '', '1', 				NULL, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-07-07 06:47:11] reply_insert.DEBUG: 1  
+[2018-07-07 06:47:18] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'ㄴㄴ 님 3등', 'daihyun99', '1', 				3, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-07-07 06:47:18] reply_insert.DEBUG: 1  
+[2018-07-07 06:47:36] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'귀척 ㄴㄴ', 'daihyun99', '1', 				1, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0)  
+[2018-07-07 06:47:36] reply_insert.DEBUG: 1  
+[2018-07-07 06:47:56] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'십.노.잼', 'daihyun99', '1', 				1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-07-07 06:47:56] reply_insert.DEBUG: 1  
+[2018-07-07 06:48:14] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'이분 이제 5등이랍니다 글 내려주세요', 'daihyun99', '1', 				3, 4, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0)  
+[2018-07-07 06:48:14] reply_insert.DEBUG: 1  
+[2018-07-07 06:50:43] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'ㅇㅈ', 'daihyun99', '1', 				1, 5, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0)  
+[2018-07-07 06:50:43] reply_insert.DEBUG: 1  
+[2018-07-07 08:28:22] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'wow', '', '1', 				NULL, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-07-07 08:28:22] reply_insert.DEBUG: 1  
