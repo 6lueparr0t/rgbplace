@@ -98,8 +98,11 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 define("DEFAULT_MAP", "space");
 
-define("PAGINATION_COUNT", 10);
-define("LIST_ROWS_LIMIT", 30);
+//PAGINATION_COUNT => MINIMUM VALUE : 3
+define("PAGINATION_COUNT", 3);
+
+//LIST_ROWS_LIMIT => MINIMUM VALUE : 1
+define("LIST_ROWS_LIMIT", 20);
 
 //['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
 define("TYPE_LIST", ['best', 'free', 'info', 'news', 'public', 'dev']);
