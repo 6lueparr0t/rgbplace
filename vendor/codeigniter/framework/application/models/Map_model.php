@@ -344,7 +344,7 @@ class Map_model extends CI_Model {
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim limit ";
+		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim ";
 		$find = $this->db->query($query);
 
 		$ret = null;
