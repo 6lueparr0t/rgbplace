@@ -126,7 +126,7 @@ function success (data) {
 }
 
 function refresh (data) {
-	document.querySelector("#reply").innerHTML = data;
+	if(data) document.querySelector(".reply-root").innerHTML = data;
 }
 
 function fail (data) {

@@ -12,9 +12,12 @@ $this->map->post($map, $type, $num);
 </div>
 
 <div id='reply'>
+<div class='reply-root'>
 <?
 //$this->map->reply($map, $type, $num);
+echo $this->map->replyBox();
 ?>
+</div>
 </div>
 
 <div id='list'>

@@ -350,13 +350,10 @@ class Map_model extends CI_Model {
 		$ret = null;
 
 		if($find->num_rows() === 0) {
-			$ret .= "<div class='reply-root'>";
 			$ret .= $this->replyBox();
-			$ret .= "</div>";
 			return false;
 		}
 
-		$ret .= "<div class='reply-root'>";
 		$ret .= "<ul id='reply-list'>";
 
 
@@ -455,7 +452,6 @@ class Map_model extends CI_Model {
 		}
 		$ret .= "</ul>";
 		$ret .= $this->replyBox();
-		$ret .= "</div>";
 
 		//input reply text box
 		return $ret;
@@ -606,7 +602,7 @@ class Map_model extends CI_Model {
 	{
 	}
 
-	private function replyBox($status = "block", $id=0, $depth=0) {
+	public function replyBox($status = "block", $id=0, $depth=0) {
 		$ret = "<div class='reply {$status}' id='reply-{$id}' name='reply-{$id}'>"
 				."<input type='hidden' class='reply-no' value='{$id}'>"
 				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf303;'></textarea>"

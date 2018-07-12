@@ -231,12 +231,12 @@ class Template {
           </a>
           <label class='status type {$tab2}'>
             <select class='status {$tab2}' id='status-type'>
-			  <option>{$tab2_text}</option>
+			  <option id='type-{$tab2}'>{$tab2_text}</option>
 			  ");
 
 		for($i=0; $i<count($type); $i++) {
 			if($tab2_text === $type[$i]) continue;
-			echo "<option>{$type[$i]}</option>";
+			echo "<option id='type-{$type[$i]}' >{$type[$i]}</option>";
 		}
 
 		echo("

@@ -650,3 +650,5 @@
 [2018-07-07 06:50:43] reply_insert.DEBUG: 1  
 [2018-07-07 08:28:22] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'wow', '', '1', 				NULL, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
 [2018-07-07 08:28:22] reply_insert.DEBUG: 1  
+[2018-07-12 15:12:00] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test1', '', '2', 				NULL, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-07-12 15:12:00] reply_insert.DEBUG: 1  

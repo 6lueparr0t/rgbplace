@@ -1,49 +1,24 @@
 @mixin status-arrow ($font, $color) {
 	position: relative;
-	font-size:1.5rem;
+	font-size:1.6rem;
 	color:$font;
 	background: $color;
-	padding: .47rem .5rem;
+	padding: .5rem;
 	text-align: center;
 	display: block;
-	margin:auto;
 	z-index:0;
+	line-height: 30px;
+
+	& span {
+		display: inline-block;
+	}
 
 	@media screen and ($width-name : $target-width) {
 		font-size:1rem;
-		text-align: justify;
+		height: 10px;
+		line-height: 15px;
 	}
 
-	&:before {
-		content:"";
-		position: absolute;
-		border-top: 1.25rem solid $color;
-		border-left: 1.25rem solid transparent;
-		border-bottom: 1.25rem solid $color;
-		left:-1.25rem;
-		top: 0;
-		@media screen and ($width-name : $target-width) {
-			border-top: 1rem solid $color;
-			border-left: 1rem solid transparent;
-			border-bottom: 1rem solid $color;
-			left:-.95rem;
-		}
-	}
-
-	&:after {
-		content:"";
-		position: absolute;
-		border-bottom: 1.25rem solid transparent;
-		border-left: 1.25rem solid $color;
-		border-top: 1.25rem solid transparent;
-		top: 0;
-		left:100%;
-		@media screen and ($width-name : $target-width) {
-			border-bottom: 1rem solid transparent;
-			border-left: 1rem solid $color;
-			border-top: 1rem solid transparent;
-		}
-	}
 }
 
 #status {
@@ -57,21 +32,23 @@
 		color : white;
 		flex:1;
 
-		&:nth-child(2) {
-			padding : .314rem .4rem !important;
-			@media screen and ($width-name : $target-width) {
-				padding : .344rem .4rem !important;
-			}
-		}
-
 		select {
 			font-family: "pixel";
 			font-size: 1.6rem;
 			border: 0;
 			background: none;
 			color: white;
+
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+
+			text-indent:20px;
+
 			@media screen and ($width-name : $target-width) {
 				font-size: 1.12rem;
+				text-indent:10px;
+				line-height: 15px;
 			}
 
 			&.none {
