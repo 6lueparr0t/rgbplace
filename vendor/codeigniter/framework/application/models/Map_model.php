@@ -453,6 +453,8 @@ class Map_model extends CI_Model {
 		$ret .= "</ul>";
 		$ret .= $this->replyBox();
 
+		//reply Pagination add
+
 		//input reply text box
 		return $ret;
 	}
@@ -473,6 +475,10 @@ class Map_model extends CI_Model {
 		}
 
 		return $update;
+	}
+
+	public function reply_pagination () {
+		// 2018/07/15 To do ..
 	}
 
 	public function reply_select ($table, $no) {
