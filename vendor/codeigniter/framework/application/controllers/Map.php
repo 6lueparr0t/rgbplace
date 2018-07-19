@@ -24,6 +24,9 @@ class Map extends CI_Controller {
 		}
 
 		$info = explode('/', $data['info']);
+		$page = 0;
+
+		if(isset($data['page'])) $page = $data['page'];
 
 		//echo json_encode($data);
 		//exit;
@@ -33,7 +36,7 @@ class Map extends CI_Controller {
 			//$act : insert, modify, delete ..
 			switch($this->input->method()) {
 			case 'get':
-				$ret = json_encode($this->map->reply($info[1], $info[2], $info[3]));
+				$ret = json_encode($this->map->reply($info[1], $info[2], $info[3], $page));
 				break;
 			case 'post':
 				if($this->map->reply_insert($data, $info)) {

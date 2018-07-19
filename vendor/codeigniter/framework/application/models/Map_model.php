@@ -75,9 +75,9 @@ class Map_model extends CI_Model {
 	 * Desc : get classification list.
 	 * ====================
 	 */
-	public function list ($map, $type, $start=0, $end=0, $search = null)
+	public function list ($map, $type, $start=0, $rows=0, $search = null)
 	{
-		if(!$end) $end = LIST_ROWS_LIMIT;
+		if(!$rows) $rows = LIST_ROWS_LIMIT;
 		$search_list = ['page', 'title', 'content', 'reply', 'name', 'tag', 'date'];
 		$data = [];
 
@@ -93,7 +93,7 @@ class Map_model extends CI_Model {
 
 		//$where .= " and title like '%{$data['title']}%' ";
 
-		$limit = ($end)?"{$start}, {$end}":$start;
+		$limit = ($rows)?"{$start}, {$rows}":$start;
 
 		$query = "SELECT * FROM map_{$map}_post where {$where} ORDER BY no desc LIMIT {$limit}";
 		$find = $this->db->query($query);
@@ -142,98 +142,7 @@ class Map_model extends CI_Model {
 		// pagination start
 		// ****************
 
-		// get list count (new sql run)
-		$where = "type='{$type}'";
-
-		$query = "SELECT count(*) as list_count FROM map_{$map}_post where {$where}";
-		$find = $this->db->query($query);
-
-		// sql result only 1
-		if($find->num_rows() != 1) {
-			return false;
-		}
-
-/*
- *
- *        $result = $this->sql("select count(*) from board");
- *
- *        foreach($result as $row) {
- *            $max = ceil($row[0]/$range);
- *            if($max == 0) $max=1;
- *        }
- *
- *        if($current>5) {
- *            $cur_page=$current-5;
- *        } else {
- *            $cur_page=1;
- *        }
- *
- *        echo "<a href='/board/list.php?page=1'><li><i class='fa fa-step-backward'></i></li></a>";
- *        for($count=0; $count<10; $count++) {
- *            $next = $cur_page;
- *
- *            if($cur_page++>$max) {
- *                echo "<li class='page-item'></li>";
- *            } else {
- *                echo "<a class='page-link' href='/board/list.php?page={$next}'><li class='page-item'>{$next}</li></a>";
- *            }
- *
- *        }
- *        echo "<a href='/board/list.php?page={$max}'><li><i class='fa fa-step-forward'></i></li></a>";
- *
- *        return true;
- *
- */
-
-
-		// all list count / 30 (default)
-		foreach ($find->result() as $key => $row) {
-			$max = ceil($row->list_count/$end);
-			if($max == 0) $max=1;
-		}
-
-		// 'page' option check
-		$current = 1;
-		if(array_key_exists('page', $data)) {
-			if($data['page'] <= $max) {
-				$current = $data['page'];
-			}
-		}
-
-		if($current > floor(PAGINATION_COUNT/2) && $current <= $max - PAGINATION_COUNT + 2) {
-			$pagination_start = $current - floor(PAGINATION_COUNT/2);
-		} else if($current >= $max - PAGINATION_COUNT + 2) {
-			$pagination_start = $max - PAGINATION_COUNT + 2;
-		} else {
-			$pagination_start = 1;
-		}
-
-		$range = PAGINATION_COUNT;
-
-		// first page
-		$min_pagination = ((int)$current-(int)$range>0)?(int)$current-(int)$range:1;
-
-		// end page
-		$max_pagination = ((int)$current+(int)$range>$max)?$max:(int)$current+(int)$range;
-
-		// ** button-group class start
-		echo "<div class='button-group'>";
-		echo "<a class='refresh' href='/{$map}/{$type}/list'><span>LIST</span></a>";
-
-		echo "<div class='pagination'>";
-
-		echo "<a href='/{$map}/{$type}/list?page=1'><i class='fas fa-step-backward'></i></a>";
-		echo "<a href='/{$map}/{$type}/list?page={$min_pagination}'><i class='fas fa-backward'></i></a>";
-
-		for($count=0; $count<$range; $count++) {
-			$next = $pagination_start;
-			if($pagination_start <= $max && $pagination_start != 0) echo "<a href='/{$map}/{$type}/list?page=".($next)."'>".($next)."</a>";
-			$pagination_start++;
-		}
-
-		echo "<a href='/{$map}/{$type}/list?page={$max_pagination}'><i class='fas fa-forward'></i></a>";
-		echo "<a href='/{$map}/{$type}/list?page={$max}'><i class='fas fa-step-forward'></i></a>";
-		echo "</div>";
+		$this->list_pagination($map, $type, LIST_ROWS_LIMIT, $data);
 
 		// ****************
 		// pagination end
@@ -279,6 +188,107 @@ class Map_model extends CI_Model {
 
 		return true;
 	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->list ( map code, all type, limit )
+	 * Desc : get classification list.
+	 * ====================
+	 */
+	public function list_pagination ($map, $type, $rows = REPLY_LIST_ROWS_LIMIT, $search = null)
+	{
+
+		// get list count (new sql run)
+		$where = "type='{$type}'";
+
+		$query = "SELECT count(*) as list_count FROM map_{$map}_post where {$where}";
+		$find = $this->db->query($query);
+
+/*
+ *
+ *        $result = $this->sql("select count(*) from board");
+ *
+ *        foreach($result as $row) {
+ *            $max = ceil($row[0]/$range);
+ *            if($max == 0) $max=1;
+ *        }
+ *
+ *        if($current>5) {
+ *            $cur_page=$current-5;
+ *        } else {
+ *            $cur_page=1;
+ *        }
+ *
+ *        echo "<a href='/board/list.php?page=1'><li><i class='fa fa-step-backward'></i></li></a>";
+ *        for($count=0; $count<10; $count++) {
+ *            $next = $cur_page;
+ *
+ *            if($cur_page++>$max) {
+ *                echo "<li class='page-item'></li>";
+ *            } else {
+ *                echo "<a class='page-link' href='/board/list.php?page={$next}'><li class='page-item'>{$next}</li></a>";
+ *            }
+ *
+ *        }
+ *        echo "<a href='/board/list.php?page={$max}'><li><i class='fa fa-step-forward'></i></li></a>";
+ *
+ *        return true;
+ *
+ */
+
+
+		// all list count / 30 (default)
+		foreach ($find->result() as $key => $row) {
+			$max = ceil($row->list_count/$rows);
+			if($max == 0) $max=1;
+		}
+
+		// 'page' option check
+		$current = 1;
+		if(array_key_exists('page', $search)) {
+			if($search['page'] <= $max) {
+				$current = $search['page'];
+			}
+		}
+
+		$temp_start_page = $max - PAGINATION_COUNT + 2;
+		if($current > floor(PAGINATION_COUNT/2) && $current <= $temp_start_page) {
+			$pagination_start = $current - floor(PAGINATION_COUNT/2);
+		} else if($current >= $temp_start_page && $temp_start_page > 0) {
+			$pagination_start = $temp_start_page;
+		} else {
+			$pagination_start = 1;
+		}
+
+		$range = PAGINATION_COUNT;
+
+		// first page
+		$min_pagination = ((int)$current-(int)$range>0)?(int)$current-(int)$range:1;
+
+		// end page
+		$max_pagination = ((int)$current+(int)$range>$max)?$max:(int)$current+(int)$range;
+
+		// ** button-group class start
+		echo "<div class='button-group'>";
+		echo "<a class='refresh' href='/{$map}/{$type}/list'><span>LIST</span></a>";
+
+		echo "<div class='pagination'>";
+
+		echo "<a href='/{$map}/{$type}/list?page=1'><i class='fas fa-step-backward'></i></a>";
+		echo "<a href='/{$map}/{$type}/list?page={$min_pagination}'><i class='fas fa-backward'></i></a>";
+
+		for($count=0; $count<$range; $count++) {
+			$next = $pagination_start;
+			if($pagination_start <= $max && $pagination_start != 0) echo "<a href='/{$map}/{$type}/list?page=".($next)."'>".($next)."</a>";
+			$pagination_start++;
+		}
+
+		echo "<a href='/{$map}/{$type}/list?page={$max_pagination}'><i class='fas fa-forward'></i></a>";
+		echo "<a href='/{$map}/{$type}/list?page={$max}'><i class='fas fa-step-forward'></i></a>";
+		echo "</div>";
+
+	}
+
 
 	/*
 	 * ====================
@@ -340,11 +350,11 @@ class Map_model extends CI_Model {
 	 * Desc : show all reply in 'post'
 	 * ====================
 	 */
-	public function reply ($map, $type, $num, $limit = null, $search = null)
+	public function reply ($map, $type, $num, $page = 0, $rows = REPLY_LIST_ROWS_LIMIT, $search = null)
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim ";
+		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim LIMIT {$page}, {$rows}";
 		$find = $this->db->query($query);
 
 		$ret = null;
@@ -451,11 +461,72 @@ class Map_model extends CI_Model {
 
 		}
 		$ret .= "</ul>";
-		$ret .= $this->replyBox();
 
 		//reply Pagination add
+		$ret .= $this->reply_pagination($map, $num, REPLY_LIST_ROWS_LIMIT, $search);
 
 		//input reply text box
+		$ret .= $this->replyBox();
+
+		return $ret;
+	}
+
+	public function reply_pagination ($map, $num, $rows = REPLY_LIST_ROWS_LIMIT, $data = null) {
+
+		$data = [];
+
+		$query = "SELECT count(*) as list_count FROM map_{$map}_reply where post={$num}";
+		$find = $this->db->query($query);
+
+		// all list count / 30 (default)
+		foreach ($find->result() as $key => $row) {
+			$max = ceil($row->list_count/$rows);
+			if($max == 0) $max=1;
+		}
+
+		// 'page' option check
+		$current = 1;
+		if(array_key_exists('page', $data)) {
+			if($data['page'] <= $max) {
+				$current = $data['page'];
+			}
+		}
+
+		$temp_start_page = $max - REPLY_PAGINATION_COUNT + 2;
+		if($current > floor(REPLY_PAGINATION_COUNT/2) && $current <= $temp_start_page) {
+			$pagination_start = $current - floor(REPLY_PAGINATION_COUNT/2);
+		} else if($current >= $temp_start_page && $temp_start_page > 0) {
+			$pagination_start = $temp_start_page;
+		} else {
+			$pagination_start = 1;
+		}
+
+		$range = REPLY_PAGINATION_COUNT;
+
+		// first page
+		$min_pagination = ((int)$current-abs((int)$range)>0)?(int)$current-(int)$range:1;
+
+		// end page
+		$max_pagination = ((int)$current+(int)$range>$max)?$max:(int)$current+(int)$range;
+
+		// ** button-group class start
+		$ret = "<div class='button-group'>";
+		$ret .= "<div class='pagination'>";
+
+		$ret .= "<a href='#'><i class='fas fa-step-backward'></i></a>";
+		$ret .= "<a href='#'><i class='fas fa-backward'></i></a>";
+
+		for($count=0; $count<$range; $count++) {
+			$next = $pagination_start;
+			if($pagination_start <= $max && $pagination_start != 0) $ret .= "<a href='#'>".($next)."</a>";
+			$pagination_start++;
+		}
+
+		$ret .= "<a href='#'><i class='fas fa-forward'></i></a>";
+		$ret .= "<a href='#'><i class='fas fa-step-forward'></i></a>";
+		$ret .= "</div>";
+		$ret .= "</div>";
+
 		return $ret;
 	}
 
@@ -475,10 +546,6 @@ class Map_model extends CI_Model {
 		}
 
 		return $update;
-	}
-
-	public function reply_pagination () {
-		// 2018/07/15 To do ..
 	}
 
 	public function reply_select ($table, $no) {

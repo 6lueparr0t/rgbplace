@@ -7,9 +7,15 @@ let replyBoxYes  = document.querySelectorAll(".reply-button.yes");
 
 //console.log(replyBox);
 
+//when start, get reply
 !function () {
 	httpRequest('GET', '/map/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
 }();
+
+//reply Paging Process
+function getReplyPaging(page) {
+	httpRequest('GET', '/map/request/reply?info='+URL+'&page='+page, null, refresh.bind(this), fail.bind(this));
+}
 
 function replyBoxToggle (state) {
 

@@ -98,19 +98,26 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 define("DEFAULT_MAP", "space");
 
-/** POST : pagination **/
+/*##### POST  : pagination ##############*/
+
 //PAGINATION_COUNT => MINIMUM VALUE : 3
-define("PAGINATION_COUNT", 3);
+define("PAGINATION_COUNT", 9);
 
 //LIST_ROWS_LIMIT => MINIMUM VALUE : 1
 define("LIST_ROWS_LIMIT", 20);
 
-/** REPLY : pagination **/
+/*#######################################*/
+
+/*##### REPLY : pagination ##############*/
+
 //PAGINATION_COUNT => MINIMUM VALUE : 3
 define("REPLY_PAGINATION_COUNT", 3);
 
+//::TEMP:: => it can be customizing
 //LIST_ROWS_LIMIT => MINIMUM VALUE : 1
-define("REPLY_LIST_ROWS_LIMIT", 1);
+define("REPLY_LIST_ROWS_LIMIT", 20);
+
+/*#######################################*/
 
 //['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
 define("TYPE_LIST", ['best', 'free', 'info', 'news', 'public', 'dev']);
