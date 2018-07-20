@@ -24,9 +24,6 @@ class Map extends CI_Controller {
 		}
 
 		$info = explode('/', $data['info']);
-		$page = 0;
-
-		if(isset($data['page'])) $page = $data['page'];
 
 		//echo json_encode($data);
 		//exit;
@@ -36,7 +33,19 @@ class Map extends CI_Controller {
 			//$act : insert, modify, delete ..
 			switch($this->input->method()) {
 			case 'get':
-				$ret = json_encode($this->map->reply($info[1], $info[2], $info[3], $page));
+				if(!isset($data['page'])) {
+					$page = $data['page'] = 0;
+				} else {
+					$page = $data['page'];
+				}
+
+				$start = ($page>1)?$page-1:0;
+
+				$search = [
+					'page' => $page
+				];
+
+				$ret = json_encode($this->map->reply($info[1], $info[2], $info[3], $start*REPLY_LIST_ROWS_LIMIT, 0, $search));
 				break;
 			case 'post':
 				if($this->map->reply_insert($data, $info)) {

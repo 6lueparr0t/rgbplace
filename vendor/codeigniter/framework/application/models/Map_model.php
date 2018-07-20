@@ -75,18 +75,19 @@ class Map_model extends CI_Model {
 	 * Desc : get classification list.
 	 * ====================
 	 */
-	public function list ($map, $type, $start=0, $rows=0, $search = null)
+	public function list ($map, $type, $start=0, $rows=0, $data= null)
 	{
 		if(!$rows) $rows = LIST_ROWS_LIMIT;
+
 		$search_list = ['page', 'title', 'content', 'reply', 'name', 'tag', 'date'];
-		$data = [];
+		$search = [];
 
 		$where = "type='{$type}'";
 
-		if(isset($search)) {
+		if(isset($data)) {
 			for($i=0; $i<count($search_list); $i++) {
-				if(array_key_exists($search_list[$i], $search)) {
-					$data[$search_list[$i]] = $search[$search_list[$i]];
+				if(array_key_exists($search_list[$i], $data)) {
+					$search[$search_list[$i]] = $data[$search_list[$i]];
 				}
 			}
 		}
@@ -142,7 +143,7 @@ class Map_model extends CI_Model {
 		// pagination start
 		// ****************
 
-		$this->list_pagination($map, $type, LIST_ROWS_LIMIT, $data);
+		$this->list_pagination($map, $type, LIST_ROWS_LIMIT, $search);
 
 		// ****************
 		// pagination end
@@ -191,11 +192,11 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
-	 * Usage : $this->map->list ( map code, all type, limit )
-	 * Desc : get classification list.
+	 * Usage : $this->list_pagination ( map code, all type, rows, search )
+	 * Desc : get list pagination button.
 	 * ====================
 	 */
-	public function list_pagination ($map, $type, $rows = REPLY_LIST_ROWS_LIMIT, $search = null)
+	public function list_pagination ($map, $type, $rows = REPLY_LIST_ROWS_LIMIT, $search = [])
 	{
 
 		// get list count (new sql run)
@@ -350,11 +351,22 @@ class Map_model extends CI_Model {
 	 * Desc : show all reply in 'post'
 	 * ====================
 	 */
-	public function reply ($map, $type, $num, $page = 0, $rows = REPLY_LIST_ROWS_LIMIT, $search = null)
+	public function reply ($map, $type, $num, $start = 0, $rows = 0, $data = null)
 	{
-		$data = [];
+		if(!$rows) $rows = REPLY_LIST_ROWS_LIMIT;
 
-		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim LIMIT {$page}, {$rows}";
+		$search = [];
+		$search_list = ['page', 'title', 'content', 'reply', 'name', 'tag', 'date'];
+
+		if(isset($data)) {
+			for($i=0; $i<count($search_list); $i++) {
+				if(array_key_exists($search_list[$i], $data)) {
+					$search[$search_list[$i]] = $data[$search_list[$i]];
+				}
+			}
+		}
+
+		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim LIMIT {$start}, {$rows}";
 		$find = $this->db->query($query);
 
 		$ret = null;
@@ -471,9 +483,13 @@ class Map_model extends CI_Model {
 		return $ret;
 	}
 
-	public function reply_pagination ($map, $num, $rows = REPLY_LIST_ROWS_LIMIT, $data = null) {
-
-		$data = [];
+	/*
+	 * ====================
+	 * Usage : $this->reply_pagination ( map code, post number, (OPTION) rows(row count), (OPTION) search )
+	 * Desc : get pagination of some post in reply
+	 * ====================
+	 */
+	public function reply_pagination ($map, $num, $rows = REPLY_LIST_ROWS_LIMIT, $search = []) {
 
 		$query = "SELECT count(*) as list_count FROM map_{$map}_reply where post={$num}";
 		$find = $this->db->query($query);
@@ -486,9 +502,9 @@ class Map_model extends CI_Model {
 
 		// 'page' option check
 		$current = 1;
-		if(array_key_exists('page', $data)) {
-			if($data['page'] <= $max) {
-				$current = $data['page'];
+		if(array_key_exists('page', $search)) {
+			if($search['page'] <= $max) {
+				$current = $search['page'];
 			}
 		}
 
@@ -510,21 +526,19 @@ class Map_model extends CI_Model {
 		$max_pagination = ((int)$current+(int)$range>$max)?$max:(int)$current+(int)$range;
 
 		// ** button-group class start
-		$ret = "<div class='button-group'>";
-		$ret .= "<div class='pagination'>";
+		$ret = "<div class='reply-pagination'>";
 
-		$ret .= "<a href='#'><i class='fas fa-step-backward'></i></a>";
-		$ret .= "<a href='#'><i class='fas fa-backward'></i></a>";
+		$ret .= "<span data='1'><i class='fas fa-step-backward'></i></span>";
+		$ret .= "<span data='{$min_pagination}'><i class='fas fa-backward'></i></span>";
 
 		for($count=0; $count<$range; $count++) {
 			$next = $pagination_start;
-			if($pagination_start <= $max && $pagination_start != 0) $ret .= "<a href='#'>".($next)."</a>";
+			if($pagination_start <= $max && $pagination_start != 0) $ret .= "<span data='{$next}'>".($next)."</span>";
 			$pagination_start++;
 		}
 
-		$ret .= "<a href='#'><i class='fas fa-forward'></i></a>";
-		$ret .= "<a href='#'><i class='fas fa-step-forward'></i></a>";
-		$ret .= "</div>";
+		$ret .= "<span data='{$max_pagination}'><i class='fas fa-forward'></i></span>";
+		$ret .= "<span data='{$max}'><i class='fas fa-step-forward'></i></span>";
 		$ret .= "</div>";
 
 		return $ret;

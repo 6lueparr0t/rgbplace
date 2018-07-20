@@ -13,6 +13,7 @@
 			display:flex;
 
 			&.content {
+				font-size:1rem;
 				margin-bottom:1rem;
 			}
 		}
@@ -40,8 +41,8 @@
 	.func {
 		display:flex;
 		button {
-			font-size: 1rem;
-			padding: .5rem 1rem;
+			font-size: .8rem;
+			padding: .4rem 1rem;
 			border: 1px solid $oc-gray-9;
 			border-radius: .25rem;
 			background:white;
@@ -239,6 +240,18 @@
 						}
 					}
 				}
+			}
+		}
+
+		.reply-pagination {
+			font-family: pixel;
+			flex:10;
+			text-align:center;
+			margin: .5rem 1rem;
+			user-select: none;
+			span {
+				cursor:pointer;
+				padding: .5rem 1rem;
 			}
 		}
 	}

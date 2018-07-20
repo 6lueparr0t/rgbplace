@@ -72,10 +72,15 @@ document.querySelector("body").addEventListener("click", function(event) {
 		}
 	}
 
+	if (t.parentElement.parentElement.className.search("reply-pagination") === 0 || t.parentElement.className.search("reply-pagination") === 0) {
+		if(t.tagName === "I") t = t.parentElement;
+		let page = t.getAttribute('data');
+		getReplyPaging(page);
+	}
 
 	let reply, no, message; 
 
-	//console.log(t.className);
+	//console.log(t.parentElement);
 	switch (t.className) {
 		case "reply-button cancel" :
 			// reply item (li tag)

@@ -4473,6 +4473,7 @@ a {
       #reply .reply-root ul li.depth-0 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-0 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-0 ul .reply-info .depth {
         display: none; }
@@ -4485,8 +4486,8 @@ a {
       #reply .reply-root ul li.depth-0 .func {
         display: flex; }
         #reply .reply-root ul li.depth-0 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -4515,6 +4516,7 @@ a {
       #reply .reply-root ul li.depth-1 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-1 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-1 ul .reply-info .depth {
         display: none; }
@@ -4527,8 +4529,8 @@ a {
       #reply .reply-root ul li.depth-1 .func {
         display: flex; }
         #reply .reply-root ul li.depth-1 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -4557,6 +4559,7 @@ a {
       #reply .reply-root ul li.depth-2 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-2 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-2 ul .reply-info .depth {
         display: none; }
@@ -4569,8 +4572,8 @@ a {
       #reply .reply-root ul li.depth-2 .func {
         display: flex; }
         #reply .reply-root ul li.depth-2 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -4599,6 +4602,7 @@ a {
       #reply .reply-root ul li.depth-3 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-3 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-3 ul .reply-info .depth {
         display: none; }
@@ -4611,8 +4615,8 @@ a {
       #reply .reply-root ul li.depth-3 .func {
         display: flex; }
         #reply .reply-root ul li.depth-3 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -4641,6 +4645,7 @@ a {
       #reply .reply-root ul li.depth-4 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-4 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-4 ul .reply-info .depth {
         display: none; }
@@ -4653,8 +4658,8 @@ a {
       #reply .reply-root ul li.depth-4 .func {
         display: flex; }
         #reply .reply-root ul li.depth-4 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -4683,6 +4688,7 @@ a {
       #reply .reply-root ul li.depth-5 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-5 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-5 ul .reply-info .depth {
         display: none; }
@@ -4695,8 +4701,8 @@ a {
       #reply .reply-root ul li.depth-5 .func {
         display: flex; }
         #reply .reply-root ul li.depth-5 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -4725,6 +4731,7 @@ a {
       #reply .reply-root ul li.depth-6 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-6 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-6 ul .reply-info .depth {
         display: none; }
@@ -4737,8 +4744,8 @@ a {
       #reply .reply-root ul li.depth-6 .func {
         display: flex; }
         #reply .reply-root ul li.depth-6 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -4767,6 +4774,7 @@ a {
       #reply .reply-root ul li.depth-7 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-7 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-7 ul .reply-info .depth {
         display: none; }
@@ -4779,8 +4787,8 @@ a {
       #reply .reply-root ul li.depth-7 .func {
         display: flex; }
         #reply .reply-root ul li.depth-7 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -4809,6 +4817,7 @@ a {
       #reply .reply-root ul li.depth-8 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-8 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-8 ul .reply-info .depth {
         display: none; }
@@ -4821,8 +4830,8 @@ a {
       #reply .reply-root ul li.depth-8 .func {
         display: flex; }
         #reply .reply-root ul li.depth-8 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -4851,6 +4860,7 @@ a {
       #reply .reply-root ul li.depth-9 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-9 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-9 ul .reply-info .depth {
         display: none; }
@@ -4863,8 +4873,8 @@ a {
       #reply .reply-root ul li.depth-9 .func {
         display: flex; }
         #reply .reply-root ul li.depth-9 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -4893,6 +4903,7 @@ a {
       #reply .reply-root ul li.depth-10 ul li {
         display: flex; }
         #reply .reply-root ul li.depth-10 ul li.content {
+          font-size: 1rem;
           margin-bottom: 1rem; }
       #reply .reply-root ul li.depth-10 ul .reply-info .depth {
         display: none; }
@@ -4905,8 +4916,8 @@ a {
       #reply .reply-root ul li.depth-10 .func {
         display: flex; }
         #reply .reply-root ul li.depth-10 .func button {
-          font-size: 1rem;
-          padding: .5rem 1rem;
+          font-size: .8rem;
+          padding: .4rem 1rem;
           border: 1px solid #212529;
           border-radius: .25rem;
           background: white;
@@ -5022,6 +5033,15 @@ a {
             background-color: white;
             color: #868e96;
             transition: all .1s ease-out; }
+  #reply .reply-root .reply-pagination {
+    font-family: pixel;
+    flex: 10;
+    text-align: center;
+    margin: .5rem 1rem;
+    user-select: none; }
+    #reply .reply-root .reply-pagination span {
+      cursor: pointer;
+      padding: .5rem 1rem; }
 
 #sign-up {
   margin-top: 2rem; }
