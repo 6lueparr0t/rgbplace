@@ -111,11 +111,11 @@ define("LIST_ROWS_LIMIT", 20);
 /*##### REPLY : pagination ##############*/
 
 //PAGINATION_COUNT => MINIMUM VALUE : 3
-define("REPLY_PAGINATION_COUNT", 6);
+define("REPLY_PAGINATION_COUNT", 9);
 
 //::TEMP:: => it can be customizing
 //LIST_ROWS_LIMIT => MINIMUM VALUE : 1
-define("REPLY_LIST_ROWS_LIMIT", 10);
+define("REPLY_LIST_ROWS_LIMIT", 20);
 
 /*#######################################*/
 

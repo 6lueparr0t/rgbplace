@@ -5042,6 +5042,10 @@ a {
     #reply .reply-root .reply-pagination span {
       cursor: pointer;
       padding: .5rem 1rem; }
+      #reply .reply-root .reply-pagination span.active {
+        color: #f8f9fa;
+        background-color: #212529;
+        border-radius: 0.5rem; }
 
 #sign-up {
   margin-top: 2rem; }

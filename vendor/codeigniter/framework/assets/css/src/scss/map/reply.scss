@@ -252,6 +252,12 @@
 			span {
 				cursor:pointer;
 				padding: .5rem 1rem;
+
+				&.active {
+					color:$oc-gray-0;
+					background-color:$oc-gray-9;
+					border-radius:0.5rem;
+				}
 			}
 		}
 	}

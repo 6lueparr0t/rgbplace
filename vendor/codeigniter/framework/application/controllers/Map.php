@@ -34,18 +34,17 @@ class Map extends CI_Controller {
 			switch($this->input->method()) {
 			case 'get':
 				if(!isset($data['page'])) {
-					$page = $data['page'] = 0;
+					$start = $page = 'last';
 				} else {
 					$page = $data['page'];
+					$start = (($page>1)?$page-1:0)*REPLY_LIST_ROWS_LIMIT;
 				}
-
-				$start = ($page>1)?$page-1:0;
 
 				$search = [
 					'page' => $page
 				];
 
-				$ret = json_encode($this->map->reply($info[1], $info[2], $info[3], $start*REPLY_LIST_ROWS_LIMIT, 0, $search));
+				$ret = json_encode($this->map->reply($info[1], $info[2], $info[3], $start, 0, $search));
 				break;
 			case 'post':
 				if($this->map->reply_insert($data, $info)) {

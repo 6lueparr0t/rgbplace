@@ -366,6 +366,11 @@ class Map_model extends CI_Model {
 			}
 		}
 
+		if(strcmp($start, "last") === 0) {
+			$reply_count = $this->db->query("SELECT count(*) as list_count FROM map_{$map}_reply where post={$num}");
+			$start = (floor($reply_count->result()[0]->list_count/$rows))*$rows;
+		}
+
 		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim LIMIT {$start}, {$rows}";
 		$find = $this->db->query($query);
 
@@ -495,16 +500,15 @@ class Map_model extends CI_Model {
 		$find = $this->db->query($query);
 
 		// all list count / 30 (default)
-		foreach ($find->result() as $key => $row) {
-			$max = ceil($row->list_count/$rows);
-			if($max == 0) $max=1;
-		}
+		$max = ceil($find->result()[0]->list_count/$rows);
+		if($max == 0) $max=1;
 
 		// 'page' option check
 		$current = 1;
 		if(array_key_exists('page', $search)) {
 			if($search['page'] <= $max) {
 				$current = $search['page'];
+				if($current === 'last') $current = $max;
 			}
 		}
 
@@ -533,7 +537,9 @@ class Map_model extends CI_Model {
 
 		for($count=0; $count<$range; $count++) {
 			$next = $pagination_start;
-			if($pagination_start <= $max && $pagination_start != 0) $ret .= "<span data='{$next}'>".($next)."</span>";
+			if($pagination_start <= $max && $pagination_start != 0) {
+				$ret .= "<span class='".(($current==$next)?'active':'')."' data='{$next}'>".($next)."</span>";
+			}
 			$pagination_start++;
 		}
 
