@@ -66,63 +66,13 @@ function doesFileExist(filePath) {
 	});
 }
 
-gulp.task('default', ['comm', 'js', 'css'], function () {
-    //log("command : gulp css[css-init || css-min]");
-});
+function js_init () {
+	return del([INIT.JS], {force : true});
+}
 
-gulp.task('watch', function () {
-    const watcher = {
-		comm : gulp.watch(WATCH.COMM, ['comm']),
-		js : gulp.watch(WATCH.JS,  ['js']),
-		css : gulp.watch(WATCH.CSS, ['css'])
-	};
- 
-    var notify = function (event) {
-        log('File', c.yellow(event.path), 'was', c.bold.cyan(event.type));
-    };
- 
-    for(var key in watcher) {
-        watcher[key].on('change', notify);
-    }
-});
-
-/* TASK */
-gulp.task('comm', ['comm-init', 'comm-min'], function () {
-	log('Gulp COMM Processing is running');
-});
-
-gulp.task('js', ['js-init', 'js-min'], function () {
+function js_min () {
 	log('Gulp JS Processing is running');
-});
 
-/* INIT */
-gulp.task('comm-init', function () {
-	return del.sync([INIT.COMM], {force : true});
-});
-
-gulp.task('js-init', function () {
-	return del.sync([INIT.JS], {force : true});
-});
-
-/* MINIFY  */
-gulp.task('comm-min', function () {
-	return gulp.src(SRC.COMM)
-		.pipe(cache.filter())
-		.pipe(plumber())
-		.pipe(babel({
-			presets: ['env']
-		}))
-		.pipe(babili({
-			mangle: {
-				keepClassName: true
-			}
-		}))
-		.pipe(wait(DIST.COMM))
-		.pipe(concat('common.min.js'))
-		.pipe(gulp.dest(DIST.COMM));
-});
-
-gulp.task('js-min', function () {
 	return gulp.src(SRC.JS)
 		.pipe(cache.filter())
 		.pipe(plumber())
@@ -138,46 +88,71 @@ gulp.task('js-min', function () {
 			 path.extname = ".min.js"
 		 }))
 		.pipe(gulp.dest(DIST.JS));
-});
+}
 
-/* CSS */
+var js = gulp.parallel(js_init, js_min);
 
-gulp.task('css', ['css-init', 'css-sass', 'css-min'], function () {
-    log('Gulp css Processing is running');
-});
+//var build = gulp.parallel(comm, js, css);
+var build = gulp.parallel(js);
 
-gulp.task('css-init', function () {
-    //return del.sync([INIT.CSS, INIT._CSS], {force : true});
-    return del.sync([INIT.CSS], {force : true});
-});
+gulp.task('default', build);
 
-gulp.task('css-sass', function () {
-	return gulp.src(SRC.SCSS)
-		.pipe(cache.filter())
-		.pipe(plumber())
-		.pipe(sassGlob())
-		.pipe(sass().on('error', sass.logError))
-		.pipe(rename({
-			prefix: "_"
-		 }))
-		.pipe(gulp.dest(DIST.SCSS));
-});
+/* 2018/07/25 gulp code translate */
+//gulp.task('watch', function () {
+	//const watcher = {
+		//comm : gulp.watch(WATCH.COMM, ['comm']),
+		//js : gulp.watch(WATCH.JS,  ['js']),
+		//css : gulp.watch(WATCH.CSS, ['css'])
+	//};
+ 
+	//var notify = function (event) {
+		//log('File', c.yellow(event.path), 'was', c.bold.cyan(event.type));
+	//};
+ 
+	//for(var key in watcher) {
+		//watcher[key].on('change', notify);
+	//}
+//});
 
-gulp.task('css-min', function () {
-	return gulp.src(SRC.CSS)
-		.pipe(cache.filter())
-		.pipe(plumber())
-		.pipe(cleanCSS({compatibility: 'ie8'}))
-		.pipe(wait(DIR + "css/dist/style.min.css"))
-		.pipe(concat('style.min.css'))
-		.pipe(gulp.dest(DIST.CSS));
-});
 
-//files: ["assets/js/**/*.*", "assets/css/*.*"],
-gulp.task('browser-sync', function () {
-	browserSync.init(null, {
-		proxy: "http://localhost",
-		files: ["application/**/*.*", "assets/js/**/*.*", "assets/css/*.*"],
-			port: 3000
-		})
-});
+//[> CSS <]
+
+//gulp.task('css', ['css-init', 'css-sass', 'css-min'], function () {
+	//log('Gulp css Processing is running');
+//});
+
+//gulp.task('css-init', function () {
+	////return del.sync([INIT.CSS, INIT._CSS], {force : true});
+	//return del.sync([INIT.CSS], {force : true});
+//});
+
+//gulp.task('css-sass', function () {
+	//return gulp.src(SRC.SCSS)
+		//.pipe(cache.filter())
+		//.pipe(plumber())
+		//.pipe(sassGlob())
+		//.pipe(sass().on('error', sass.logError))
+		//.pipe(rename({
+			//prefix: "_"
+		 //}))
+		//.pipe(gulp.dest(DIST.SCSS));
+//});
+
+//gulp.task('css-min', function () {
+	//return gulp.src(SRC.CSS)
+		//.pipe(cache.filter())
+		//.pipe(plumber())
+		//.pipe(cleanCSS({compatibility: 'ie8'}))
+		//.pipe(wait(DIR + "css/dist/style.min.css"))
+		//.pipe(concat('style.min.css'))
+		//.pipe(gulp.dest(DIST.CSS));
+//});
+
+////files: ["assets/js/**/*.*", "assets/css/*.*"],
+//gulp.task('browser-sync', function () {
+	//browserSync.init(null, {
+		//proxy: "http://localhost",
+		//files: ["application/**/*.*", "assets/js/**/*.*", "assets/css/*.*"],
+			//port: 3000
+		//})
+//});
