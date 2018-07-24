@@ -5,9 +5,10 @@ const del         = require('del');
 const gulp        = require('gulp');
 const yargs       = require('yargs');
 const sass        = require('gulp-sass');
-const gutil       = require('gulp-util');
+const log         = require('fancy-log');
 const wait        = require('gulp-wait2');
 const babel       = require('gulp-babel');
+const c           = require('ansi-colors');
 const rename      = require('gulp-rename');
 const concat      = require('gulp-concat');
 const babili      = require("gulp-babili");
@@ -66,7 +67,7 @@ function doesFileExist(filePath) {
 }
 
 gulp.task('default', ['comm', 'js', 'css'], function () {
-    //gutil.log("command : gulp css[css-init || css-min]");
+    //log("command : gulp css[css-init || css-min]");
 });
 
 gulp.task('watch', function () {
@@ -77,7 +78,7 @@ gulp.task('watch', function () {
 	};
  
     var notify = function (event) {
-        gutil.log('File', gutil.colors.yellow(event.path), 'was', gutil.colors.magenta(event.type));
+        log('File', c.yellow(event.path), 'was', c.bold.cyan(event.type));
     };
  
     for(var key in watcher) {
@@ -87,11 +88,11 @@ gulp.task('watch', function () {
 
 /* TASK */
 gulp.task('comm', ['comm-init', 'comm-min'], function () {
-	gutil.log('Gulp COMM Processing is running');
+	log('Gulp COMM Processing is running');
 });
 
 gulp.task('js', ['js-init', 'js-min'], function () {
-	gutil.log('Gulp JS Processing is running');
+	log('Gulp JS Processing is running');
 });
 
 /* INIT */
@@ -142,7 +143,7 @@ gulp.task('js-min', function () {
 /* CSS */
 
 gulp.task('css', ['css-init', 'css-sass', 'css-min'], function () {
-    gutil.log('Gulp css Processing is running');
+    log('Gulp css Processing is running');
 });
 
 gulp.task('css-init', function () {

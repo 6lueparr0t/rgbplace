@@ -134,6 +134,7 @@ function success (data) {
 	//console.log(data);
 	alert('TEMP::Message sent successfully');
 	httpRequest('GET', '/map/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
+	console.log('test');
 }
 
 function refresh (data) {
