@@ -19,6 +19,7 @@
     "gulp-wait2": "^0.0.5",
     "npm": "^6.2.0",
     "open-color": "^1.6.3",
+    "simplemde": "^1.11.2",
     "yargs": "^6.6.0"
   },
   "devDependencies": {
