@@ -7,6 +7,7 @@ class Map extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Map_model','map');
+		//$this->allow=array('list', 'post', 'page', 'link', 'request', 'search');
 	}
 
 	public function index()
@@ -47,14 +48,20 @@ class Map extends CI_Controller {
 				$ret = json_encode($this->map->reply($info[1], $info[2], $info[3], $start, 0, $search));
 				break;
 			case 'post':
-				if($this->map->reply_insert($data, $info)) {
-					$ret = $this->map->reply_count_update('up', $info);
+				if($this->session->userdata('signed_in')) {
+					if($this->map->reply_insert($data, $info)) {
+						$ret = $this->map->reply_count_update('up', $info);
+					}
+				} else {
+					header('HTTP/1.1 401 Unauthorized');
+					header('Content-Type: application/json; charset=UTF-8');
+					$ret = 'login please';
 				}
 				break;
 			case 'put':
+			case 'update':
 				break;
 			case 'delete':
-				//echo $this->map->reply_count_update('down', $info);
 				break;
 			default :
 				break;
@@ -153,7 +160,8 @@ class Map extends CI_Controller {
 
 	private function check($type) {
 
-		if(in_array($type, ['best','free','info','photo','food','life','news','dev','public'])) {
+		$type_list = TYPE_LIST;
+		if(in_array($type, $type_list)) {
 			return true;	
 		} else {
 			return false;

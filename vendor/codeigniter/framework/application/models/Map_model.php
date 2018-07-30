@@ -149,8 +149,8 @@ class Map_model extends CI_Model {
 		// pagination end
 		// ****************
 
-		$activate = "disable";
-		if($type != "best") $activate = "enable";
+		$activate = "enable";
+		if($type == "best" || !$this->session->userdata('signed_in')) $activate = "disable";
 		echo "<a class='edit {$activate}' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
 
 		// ** button-group class end

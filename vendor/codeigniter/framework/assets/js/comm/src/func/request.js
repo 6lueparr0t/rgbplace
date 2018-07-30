@@ -5,13 +5,11 @@ function httpRequest(method, url, data, success, fail, error = null) {
 
 	request.onload = function() {
 		if (this.status >= 200 && this.status < 400) {
+			let ret = JSON.parse(this.response);
 			// Success!
-			if(this.response) {
-				let ret = JSON.parse(this.response);
-				success(ret);
-			} else {
-				fail(this);
-			}
+			success(ret);
+		} else {
+			fail(this);
 		}
 	};
 

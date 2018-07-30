@@ -66,7 +66,7 @@ class Template {
 				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true', 'minlength' => 6])
 				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10]);
 
-			echo "<button type='submit'><i class='fa fa-sign-in'></i> Sign In</button>";
+			echo "<button type='submit' id='login' onclick='this.setCustomValidity(\"\")'><i class='fa fa-sign-in'></i> Sign In</button>";
 			echo "<button type='button' onClick=\"location.href='/sign'\"><i class='fa fa-user-plus'></i> Sign Up</button>";
 			echo form_close();
 

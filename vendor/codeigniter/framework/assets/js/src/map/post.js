@@ -141,7 +141,9 @@ function refresh (data) {
 }
 
 function fail (data) {
-	console.log('request fail : '+data);
-	httpRequest('GET', '/map/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
+	let e = document.querySelector("#login");
+	//console.log(data.responseText);
+	e.setCustomValidity(data.responseText);
+	e.reportValidity();
 }
 

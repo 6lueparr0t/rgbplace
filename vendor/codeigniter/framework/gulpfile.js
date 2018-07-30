@@ -41,7 +41,7 @@ const DIST = {
 };
 
 const WATCH = {
-    COMM: DIR + 'js/comm/**/*.js',
+    COMM: DIR + 'js/comm/src/**/*.js',
     JS: DIR + 'js/src/**/*',
     CSS: DIR + 'css/src/**/*',
 }

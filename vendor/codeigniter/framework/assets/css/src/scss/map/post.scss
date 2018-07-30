@@ -96,10 +96,10 @@
 			}
 
 			&.disable {
-				border: 1px solid $oc-gray-2;
+				border: 1px solid $oc-green-2;
 				pointer-events: none;
 				cursor: default;
-				color : $oc-gray-2;
+				color : $oc-green-2;
 			}
 		}
 
@@ -122,10 +122,10 @@
 			}
 
 			&.disable {
-				border: 1px solid $oc-gray-2;
+				border: 1px solid $oc-red-2;
 				pointer-events: none;
 				cursor: default;
-				color : $oc-gray-2;
+				color : $oc-red-2;
 			}
 		}
 
