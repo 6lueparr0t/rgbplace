@@ -290,6 +290,12 @@ class Map_model extends CI_Model {
 
 	}
 
+	public function get_post($map, $type, $num) {
+		$query = "SELECT * FROM map_{$map}_post where no={$num} and dtim is null";
+		$ret = $this->db->query($query);
+
+		return $ret;
+	}
 
 	/*
 	 * ====================
@@ -301,8 +307,7 @@ class Map_model extends CI_Model {
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_{$map}_post where no={$num} and dtim is null";
-		$find = $this->db->query($query);
+		$find = $this->get_post($map, $type, $num);
 
 		if($find->num_rows() === 0 || $find->num_rows() >= 2) {
 			echo "<div class='no-post'>Not Found <i class='fa fa-frown-o'></i> </div>";

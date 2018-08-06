@@ -138,7 +138,25 @@ class Map extends CI_Controller {
 
 	public function edit($map, $type, $num = 0)
 	{
-		if(!$this->check($type)) redirect("/");
+		if($this->check($type)) {
+			if(!$this->session->userdata('signed_in')) {
+				redirect("/{$type}/list");
+			} 
+		} else {
+			redirect("/");
+		}
+
+		$data['content'] = "";
+
+		if($num > 0) {
+			$ret = $this->map->get_post($map, $type, $num);
+
+			if($ret->result()[0]->uid == $this->session->userdata('uid') || $this->session->userdata('admin')) {
+				$data['content'] = $ret->result()[0]->content;
+			} else {
+				redirect("/{$map}/{$type}/{$num}");
+			}
+		}
 
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
