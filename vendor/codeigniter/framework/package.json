@@ -17,9 +17,8 @@
     "gulp-sass": "^3.2.1",
     "gulp-sass-glob": "^1.0.9",
     "gulp-wait2": "^0.0.5",
-    "npm": "^6.2.0",
+    "npm": "^6.3.0",
     "open-color": "^1.6.3",
-    "simplemde": "^1.11.2",
     "yargs": "^6.6.0"
   },
   "devDependencies": {
