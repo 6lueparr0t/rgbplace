@@ -72,6 +72,10 @@ $route['('.DEFAULT_MAP.')/([a-zA-Z]+)/list'] = function ($map, $type) {
 	return 'map/list/' . $map . '/' . $type;
 };
 
+$route['('.DEFAULT_MAP.')/([a-zA-Z]+)/0'] = function ($map, $type) {
+	return 'map/list/' . $map . '/' . $type;
+};
+
 $route['('.DEFAULT_MAP.')/([a-zA-Z]+)/(:num)'] = function ($map, $type, $num) {
 	return 'map/post/' . $map . '/' . $type . '/' . $num;
 };
@@ -96,6 +100,10 @@ $route['('.DEFAULT_MAP.')'] = function ($map) {
 // ====================  ====================  ====================  ====================
 
 $route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/list'] = function ($map, $type) {
+	return 'map/list/' . $map . '/' . $type;
+};
+
+$route['([a-zA-Z]{2}[0-9]+)/([a-zA-Z]+)/0'] = function ($map, $type) {
 	return 'map/list/' . $map . '/' . $type;
 };
 

@@ -9,12 +9,12 @@ let replyBoxYes  = document.querySelectorAll(".reply-button.yes");
 
 //when start, get reply
 !function () {
-	httpRequest('GET', '/map/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
+	httpRequest('GET', '/api/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
 }();
 
 //reply Paging Process
 function getReplyPaging(page) {
-	httpRequest('GET', '/map/request/reply?info='+URL+'&page='+page, null, refresh.bind(this), fail.bind(this));
+	httpRequest('GET', '/api/request/reply?info='+URL+'&page='+page, null, refresh.bind(this), fail.bind(this));
 }
 
 function replyBoxToggle (state) {
@@ -112,7 +112,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			//for(var pair of data.entries()) { response.push(pair); }
 
 			//httpRequest(method, url, data, success, error);
-			httpRequest('POST', '/map/request/reply', JSON.stringify(data), success.bind(this), fail.bind(this));
+			httpRequest('POST', '/api/request/reply', JSON.stringify(data), success.bind(this), fail.bind(this));
 
 			break;
 
@@ -133,7 +133,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 function success (data) {
 	//console.log(data);
 	alert('TEMP::Message sent successfully');
-	httpRequest('GET', '/map/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
+	httpRequest('GET', '/api/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
 }
 
 function refresh (data) {

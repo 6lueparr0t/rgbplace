@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
+<div id='edit'>
 
 <? echo form_open('/', ['class' => '', 'name' => '', 'id' => '']); ?>
 <!-- map/edit/<?=$map?>/<?=$type?>/<?=$num?> -->
@@ -13,4 +14,5 @@
   <input type="file" id="input_zone" name="userfile[]" multiple />
 <? echo form_close(); ?>
 
+</div>
 <?php $this->root->end($path);?>

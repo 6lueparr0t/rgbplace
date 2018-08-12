@@ -7,6 +7,7 @@ class Api extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Api_model', 'api');
+		$this->load->model('Map_model', 'map');
 	}
 
 	public function index()
@@ -45,4 +46,99 @@ class Api extends CI_Controller {
 		}
 	}
 
+	public function request($type=null, $val=null, $api_key=null)
+	{
+		//if(!$this->session->userdata('signed_in') || $type) exit;
+		if($this->input->method() == 'get') {
+			$data = $this->input->get();
+		} else {
+			$data = (array)json_decode($this->input->raw_input_stream)[0];
+		}
+
+		$info = explode('/', $data['info']);
+
+		//echo json_encode($data);
+		//exit;
+
+		switch ($type) {
+		case 'post':
+			break;
+		case 'reply': 
+			//$act : insert, modify, delete ..
+			switch($this->input->method()) {
+			case 'get':
+				if(!isset($data['page'])) {
+					$start = $page = 'last';
+				} else {
+					$page = $data['page'];
+					$start = (($page>1)?$page-1:0)*REPLY_LIST_ROWS_LIMIT;
+				}
+
+				$search = [
+					'page' => $page
+				];
+
+				$ret = json_encode($this->map->reply($info[1], $info[2], $info[3], $start, 0, $search));
+				break;
+			case 'post':
+				if($this->session->userdata('signed_in')) {
+					if($this->map->reply_insert($data, $info)) {
+						$ret = $this->map->reply_count_update('up', $info);
+					}
+				} else {
+					header('HTTP/1.1 401 Unauthorized');
+					header('Content-Type: application/json; charset=UTF-8');
+					$ret = 'login please';
+				}
+				break;
+			case 'put':
+			case 'update':
+				break;
+			case 'delete':
+				break;
+			default :
+				break;
+			}
+			break;
+
+		case 'post' :
+			break;
+
+		default :
+			break;
+		}
+
+		echo $ret;
+	}
+
+	public function upload()
+	{
+		$this->load->library('upload');
+		$files = $_FILES;
+		$data = [];
+		$count = count($_FILES['userfile']['name']);
+		for($i=0; $i<$count; $i++) {
+			$_FILES['userfile']['name']= $files['userfile']['name'][$i];
+			$_FILES['userfile']['type']= $files['userfile']['type'][$i];
+			$_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+			$_FILES['userfile']['error']= $files['userfile']['error'][$i];
+			$_FILES['userfile']['size']= $files['userfile']['size'][$i];
+
+			$config['upload_path'] = './upload';
+			$config['allowed_types'] = 'gif|png|jpg|jpeg|bmp|txt';
+			//$config['max_size']      = '102400';
+			//$config['file_name'] = "{$link}_{$count}";
+
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+			if(!$this->upload->do_upload())
+			{
+				array_push($data, $this->upload->display_errors());
+			} else {
+				array_push($data, $this->upload->data());
+			}
+		}
+
+		echo json_encode($data);
+	}
 }

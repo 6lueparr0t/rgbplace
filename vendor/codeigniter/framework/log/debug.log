@@ -654,3 +654,5 @@
 [2018-07-12 15:12:00] reply_insert.DEBUG: 1  
 [2018-07-29 09:10:14] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('', '', 				'로그인 안한 상태에서 댓글 남겨보기', '', '1', 				NULL, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
 [2018-07-29 09:10:14] reply_insert.DEBUG: 1  
+[2018-08-11 15:36:55] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('test01', '테스트', 				'map -&gt; api 로 request 처리 옮김.', '', '1', 				NULL, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-08-11 15:36:55] reply_insert.DEBUG: 1  
