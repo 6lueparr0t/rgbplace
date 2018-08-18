@@ -61,7 +61,20 @@ class Api extends CI_Controller {
 		//exit;
 
 		switch ($type) {
-		case 'post':
+		case 'edit':
+			switch($this->input->method()) {
+			case 'get' :
+				break;
+			case 'post' :
+				break;
+			case 'put':
+			case 'update':
+				break;
+			case 'delete':
+				break;
+			default :
+				break;
+			}
 			break;
 		case 'reply': 
 			//$act : insert, modify, delete ..
