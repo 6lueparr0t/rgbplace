@@ -66,6 +66,14 @@ class Api extends CI_Controller {
 			case 'get' :
 				break;
 			case 'post' :
+				//save
+				if($this->session->userdata('signed_in')) {
+					$ret = $this->map->post_insert($data, $info);
+				} else {
+					header('HTTP/1.1 401 Unauthorized');
+					header('Content-Type: application/json; charset=UTF-8');
+					$ret = 'login please';
+				}
 				break;
 			case 'put':
 			case 'update':

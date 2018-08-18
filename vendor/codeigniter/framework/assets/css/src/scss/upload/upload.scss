@@ -13,26 +13,28 @@
 	position : relative;
 	top      : 1.5rem;
 
-    &.drop_wait {
-      &::after {
-        @include upload_content("Choose \a\a or \a\a Drag & Drop your files");
-	    cursor : pointer;
-		white-space : pre-wrap;
-	  }
-    }
-    
-    &.drop_hover {
-      &::after {
-        @include upload_content("Here!");
-      }
-    }
-    
-    &.drop_it {
-      &::after {
-        @include upload_content("Done! More?");
-	    cursor : pointer;
-      }
-    }
+	&.drop_wait {
+		&::after {
+			@include upload_content("Choose \a\a or \a\a Drag & Drop your files");
+			cursor : pointer;
+			white-space : pre-wrap;
+		}
+	}
+
+	&.drop_hover {
+		top:4rem;
+		&::after {
+			@include upload_content("Here!");
+		}
+	}
+
+	&.drop_it {
+		top:4rem;
+		&::after {
+			@include upload_content("Done! More?");
+			cursor : pointer;
+		}
+	}
   }
 
   #input_zone {

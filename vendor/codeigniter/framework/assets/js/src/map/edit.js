@@ -1,33 +1,17 @@
 "use strict"
 
+/* ******************** Upload Event TOP ******************** */
 const state = document.querySelector("label[for='input_zone']");
 
-/*
-function drop_handler() {
-	console.log("Drop");
-	event.preventDefault();
-	// If dropped items aren't files, reject them
-	var dt = event.dataTransfer;
-	console.log(dt);
-	console.log(dt.files);
+let drop_zone = document.querySelector("#upload");
+let input_zone = document.querySelector("#input_zone");
 
-	if (dt.items) {
-		// Use DataTransferItemList interface to access the file(s)
-		for (var i=0; i < dt.items.length; i++) {
-			if (dt.items[i].kind == "file") {
-				var f = dt.items[i].getAsFile();
-				console.log(f);
-				console.log("... items[" + i + "].name = " + f.name);
-			}
-		}
-	} else {
-		// Use DataTransfer interface to access the file(s)
-		for (var i=0; i < dt.files.length; i++) {
-			console.log("... file[" + i + "].name = " + dt.files[i].name);
-		}  
-	}
-}
- */
+drop_zone.addEventListener("dragstart",	function () { dragstart_change() });
+drop_zone.addEventListener("dragover",	function () { dragover_change() });
+drop_zone.addEventListener("dragleave",	function () { dragleave_change() });
+drop_zone.addEventListener("dragend",	function () { dragend_clear() });
+drop_zone.addEventListener("drop",	function () { drop_upload() });
+input_zone.addEventListener("change",	function () { input_upload() });
 
 function dragstart_change() {
 	//console.log("dragOver");
@@ -171,13 +155,12 @@ function input_upload() {
 	request.send(formData);
 }
 
-let drop_zone = document.querySelector("#upload");
-let input_zone = document.querySelector("#input_zone");
+/* ******************** Upload Event END ******************** */
 
-drop_zone.addEventListener("dragstart",	function () { dragstart_change() });
-drop_zone.addEventListener("dragover",	function () { dragover_change() });
-drop_zone.addEventListener("dragleave",	function () { dragleave_change() });
-drop_zone.addEventListener("dragend",	function () { dragend_clear() });
-drop_zone.addEventListener("drop",	function () { drop_upload() });
+document.querySelector("body").addEventListener("click", function(event) {
+	let t = event.target;
 
-input_zone.addEventListener("change",	function () { input_upload() });
+	console.log(t);
+
+});
+

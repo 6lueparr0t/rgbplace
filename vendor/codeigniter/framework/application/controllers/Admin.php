@@ -20,7 +20,7 @@ class Admin extends CI_Controller {
 
 /*
  * ########################################
- *				Admin [admin]test
+ *				Admin [admin]
  * ########################################
  */
 
