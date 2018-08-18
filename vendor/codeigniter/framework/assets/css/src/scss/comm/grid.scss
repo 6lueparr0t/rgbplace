@@ -17,7 +17,7 @@
 }
 
 .row {
-  display: flex;
+  @include flex ();
 }
 
 @for $i from 1 through 10 {

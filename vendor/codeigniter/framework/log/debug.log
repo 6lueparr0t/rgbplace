@@ -656,3 +656,11 @@
 [2018-07-29 09:10:14] reply_insert.DEBUG: 1  
 [2018-08-11 15:36:55] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('test01', '테스트', 				'map -&gt; api 로 request 처리 옮김.', '', '1', 				NULL, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
 [2018-08-11 15:36:55] reply_insert.DEBUG: 1  
+[2018-08-18 00:28:56] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'reply -&gt; reply-addon 으로 클래스 변경', '', '1', 				NULL, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-08-18 00:28:56] reply_insert.DEBUG: 1  
+[2018-08-18 00:29:11] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'대댓글도 잘 되는지 확인', 'daihyun99', '1', 				13, 13, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-08-18 00:29:11] reply_insert.DEBUG: 1  
+[2018-08-18 00:29:21] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'나도 확인', 'daihyun99', '1', 				13, 14, 6, 1, 1, 0, 0, 0, 0, 0, 0, 0)  
+[2018-08-18 00:29:21] reply_insert.DEBUG: 1  
+[2018-08-18 00:29:58] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'2등 (새치기당함)', 'daihyun99', '1', 				13, 13, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-08-18 00:29:58] reply_insert.DEBUG: 1  

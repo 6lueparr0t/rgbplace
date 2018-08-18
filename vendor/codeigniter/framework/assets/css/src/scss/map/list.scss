@@ -112,7 +112,7 @@
 		font-family: "pixel";
 		margin: 2.5rem 0;
 		width:100%;
-		display:flex;
+		@include flex ();
 		text-align:center;
 		user-select: none;
 
@@ -124,7 +124,7 @@
 			padding: .5rem 1rem;
 			border: 1px solid $oc-gray-9;
 			border-radius : .25rem;
-			flex:1;
+			flex-grow:1;
 
 			&:hover {
 				background-color: $oc-gray-9;
@@ -135,7 +135,7 @@
 
 		.pagination {
 			margin: .5rem 1rem;
-			flex:10;
+			flex-grow:10;
 			a {
 				padding: .5rem 1rem;
 			}
@@ -144,7 +144,7 @@
 		.edit {
 			padding: .5rem 1rem;
 			border-radius : .25rem;
-			flex:1;
+			flex-grow:1;
 
 			&.enable {
 				border: 1px solid $oc-gray-9;
@@ -167,7 +167,7 @@
 		font-family: "pixel";
 		margin: 2.5rem 0;
 		width:100%;
-		display:flex;
+		@include flex ();
 		text-align:center;
 		//user-select: none;
 
@@ -176,7 +176,7 @@
 		}
 
 		span.null {
-			flex:8;
+			flex-grow:8;
 		}
 
 		.search-input {
@@ -184,7 +184,7 @@
 			border: 1px solid $oc-gray-9;
 			border-radius : .25rem;
 			margin: 0 .25rem;
-			flex:4;
+			flex-grow:4;
 
 		}
 
@@ -194,7 +194,7 @@
 			border-radius : .25rem;
 			margin: 0 .25rem;
 			cursor:pointer;
-			//flex:1;
+			//flex-grow:1;
 			width:1rem;
 
 			&:hover {
@@ -226,7 +226,7 @@
 				display:none;
 
 				&:checked ~ ul {
-					display: flex;
+					@include flex ();
 					z-index: 1;
 				}
 				& ~ .open {

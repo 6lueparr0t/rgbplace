@@ -701,7 +701,7 @@ class Map_model extends CI_Model {
 	}
 
 	public function replyBox($status = "block", $id=0, $depth=0) {
-		$ret = "<div class='reply {$status}' id='reply-{$id}' name='reply-{$id}'>"
+		$ret = "<div class='reply-addon {$status}' id='reply-{$id}' name='reply-{$id}'>"
 				."<input type='hidden' class='reply-no' value='{$id}'>"
 				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf303;'></textarea>"
 				."<div class='reply-button-group'>"

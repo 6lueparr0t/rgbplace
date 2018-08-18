@@ -24,13 +24,13 @@
 #status {
 	font-family: "pixel";
 	position: relative;
-	display:flex;
+	@include flex ();
 	overflow:hidden;
 	top: 0rem;
 
 	a, label {
 		color : white;
-		flex:1;
+		flex-grow:1;
 
 		select {
 			font-family: "pixel";

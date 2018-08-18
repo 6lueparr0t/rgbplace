@@ -14,5 +14,10 @@
   <input type="file" id="input_zone" name="userfile[]" multiple />
 <? echo form_close(); ?>
 
+<div class="button-group">
+	<div class='enable' id='save' name='save'>SAVE</div>
+	<div class='enable' id='cancel' name='cancel'>CANCEL</div>
+</div>
+
 </div>
 <?php $this->root->end($path);?>

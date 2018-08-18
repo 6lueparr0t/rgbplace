@@ -10,7 +10,7 @@
 		}
 
 		li {
-			display:flex;
+			@include flex ();
 
 			&.content {
 				font-size:1rem;
@@ -39,7 +39,7 @@
 	}
 
 	.func {
-		display:flex;
+		@include flex ();
 		button {
 			font-size: .8rem;
 			padding: .4rem 1rem;
@@ -47,18 +47,18 @@
 			border-radius: .25rem;
 			background:white;
 			margin:0 .2rem;
-			flex: 2;
+			flex-grow: 2;
 
 			&.modify {
-				flex: 1;
+				flex-grow: 1;
 			}
 
 			&.delete {
-				flex: 1;
+				flex-grow: 1;
 			}
 
 			&.report {
-				flex: 1;
+				flex-grow: 1;
 			}
 
 			&:hover {
@@ -107,9 +107,8 @@
 			}
 		}
 
-		.reply {
+		.reply-addon {
 			margin-top: 1rem;
-			width:100%;
 
 			&.hide {
 				display:none;
@@ -139,7 +138,7 @@
 			.reply-button-group {
 				font-family:'pixel';
 				text-align:center;
-				display:flex;
+				@include flex ();
 				user-select: none;
 
 				.reply-button {
@@ -149,7 +148,7 @@
 					color            : white;
 					padding          : .5rem 1rem;
 					border-radius    : .25rem;
-					flex             : 2;
+					flex-grow             : 2;
 					cursor           : pointer;
 					border           : 1px solid $oc-blue-6;
 					background-color : $oc-blue-6;
@@ -189,7 +188,7 @@
 
 					&.yes {
 						display:none;
-						flex: 1;
+						flex-grow: 1;
 						&.to {
 							border : 1px solid $oc-green-7;
 							background-color:$oc-green-7;
@@ -210,7 +209,7 @@
 
 					&.no {
 						display:none;
-						flex: 1;
+						flex-grow: 1;
 						&.to {
 							border : 1px solid $oc-red-7;
 							background-color:$oc-red-7;
@@ -245,7 +244,7 @@
 
 		.reply-pagination {
 			font-family: pixel;
-			flex:10;
+			flex-grow:10;
 			text-align:center;
 			margin: .5rem 1rem;
 			user-select: none;

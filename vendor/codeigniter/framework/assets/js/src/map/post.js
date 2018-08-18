@@ -55,7 +55,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			let node = document.createElement("li");
 			node.className = "reply-container";
 			node.innerHTML =
-				"<div class='reply block' id='reply-"+no+"' name='reply-"+no+"'>"
+				"<div class='reply-addon block' id='reply-"+no+"' name='reply-"+no+"'>"
 					+"<input type='hidden' class='reply-no' value='"+no+"'/>"
 					+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;'></textarea>"
 

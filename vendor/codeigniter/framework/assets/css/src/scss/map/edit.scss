@@ -1,16 +1,89 @@
 #edit {
 
+	margin:1rem 0;
+	text-align:center;
+
 	#edit-title {
-		width: 97.8%;
+		border:1px solid $oc-gray-6;
+		width: 96%;
+		@media screen and ($width-name : $target-width) {
+			width: 90%;
+		}
 		height:2rem;
 		padding:1rem;
 		font-size:2rem;
 	}
 
 	#edit-content-div {
-		width: 97.8%;
+		border:1px solid  $oc-gray-6;
 		min-height:10rem;
 		height:100%;
 		padding:1rem;
+		margin:1rem auto;
 	}
+
+
+	.button-group {
+		font-family: "pixel";
+		margin: 2.5rem 0 0 0;
+		@include flex ();
+		text-align:center;
+		user-select: none;
+
+		#save {
+			color : black;
+			padding: .5rem 1rem;
+			border-radius : .25rem;
+			flex-grow:1;
+			margin:0 1rem;
+			cursor:pointer;
+
+			&.enable {
+				border: 1px solid $oc-indigo-9;
+				background-color: $oc-indigo-9;
+				color:white;
+				&:hover {
+					background-color: white;
+					color: $oc-indigo-9;
+					transition:all .1s ease-out;
+				}
+			}
+
+			&.disable {
+				border: 1px solid $oc-indigo-2;
+				pointer-events: none;
+				cursor: default;
+				color : $oc-indigo-2;
+			}
+		}
+
+		#cancel {
+			color : black;
+			padding: .5rem 1rem;
+			border-radius : .25rem;
+			flex-grow:1;
+			margin:0 1rem;
+			cursor:pointer;
+
+			&.enable {
+				border: 1px solid $oc-red-9;
+				background-color: $oc-red-9;
+				color:white;
+				&:hover {
+					background-color: white;
+					color: $oc-red-9;
+					transition:all .1s ease-out;
+				}
+			}
+
+			&.disable {
+				border: 1px solid $oc-red-2;
+				pointer-events: none;
+				cursor: default;
+				color : $oc-red-2;
+			}
+		}
+
+	}
+
 }
