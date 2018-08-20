@@ -160,7 +160,12 @@ function input_upload() {
 document.querySelector("body").addEventListener("click", function(event) {
 	let t = event.target;
 
-	console.log(t);
-
+	switch(t.id) {
+		case 'save' :
+			//httpRequest('post', '/api/request/edit/save', JSON.stringify(data), refresh.bind(this), fail.bind(this)
+			break;
+		case 'cancel' :
+			break;
+	}
 });
 
