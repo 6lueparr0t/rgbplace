@@ -290,13 +290,6 @@ class Map_model extends CI_Model {
 
 	}
 
-	public function get_post($map, $type, $num) {
-		$query = "SELECT * FROM map_{$map}_post where no={$num} and dtim is null";
-		$ret = $this->db->query($query);
-
-		return $ret;
-	}
-
 	/*
 	 * ====================
 	 * Usage : $this->map->post ( map code, post type, post number )
@@ -307,7 +300,13 @@ class Map_model extends CI_Model {
 	{
 		$data = [];
 
-		$find = $this->get_post($map, $type, $num);
+		$info = [
+			$map,
+			$type,
+			$num
+		];
+
+		$find = $this->post_select($data, $info);
 
 		if($find->num_rows() === 0 || $find->num_rows() >= 2) {
 			echo "<div class='no-post'>Not Found <i class='fa fa-frown-o'></i> </div>";
@@ -348,6 +347,49 @@ class Map_model extends CI_Model {
 		."</div>";
 
 		return true;
+	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->post_select (data array, info [$map, $type, $num] array)
+	 * Desc : select 'post'
+	 * ====================
+	 */
+	public function post_select($data, $info) {
+		$query = "SELECT * FROM map_{$info[0]}_post where no={$info[2]} and dtim is null";
+		$ret = $this->db->query($query);
+
+		return $ret;
+	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->post_insert (data array, info [$map, $type, $num] array)
+	 * Desc : insert 'post'
+	 * ====================
+	 */
+	public function post_insert ($data, $info)
+	{
+	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->post_update (data array, info [$map, $type, $num] array)
+	 * Desc : update 'post'
+	 * ====================
+	 */
+	public function post_update ($map, $type, $num, $data)
+	{
+	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->post_delete (data array, info [$map, $type, $num] array)
+	 * Desc : delete 'post'
+	 * ====================
+	 */
+	public function post_delete ($map, $type, $num, $data)
+	{
 	}
 
 	/*
@@ -616,7 +658,7 @@ class Map_model extends CI_Model {
 		];
 
 		if($data['no'] > 0) {
-			$reply = self::reply_select($table, $data['no']);
+			$reply = $this->reply_select($table, $data['no']);
 			$reply['depth'] += 1;
 		}
 

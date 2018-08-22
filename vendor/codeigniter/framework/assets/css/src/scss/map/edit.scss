@@ -14,13 +14,14 @@
 		font-size:2rem;
 	}
 
-	#edit-content-div {
+	#edit-content {
 		border:1px solid  $oc-gray-6;
-		min-height:10rem;
+		min-height:50rem;
 		height:100%;
 		padding:1rem;
 		margin:1rem auto;
 		text-align:justify;
+		line-height: 2rem;
 	}
 
 
@@ -40,12 +41,12 @@
 			cursor:pointer;
 
 			&.enable {
-				border: 1px solid $oc-indigo-9;
-				background-color: $oc-indigo-9;
+				border: 1px solid $oc-green-5;
+				background-color: $oc-green-5;
 				color:white;
 				&:hover {
 					background-color: white;
-					color: $oc-indigo-9;
+					color: $oc-green-5;
 					transition:all .1s ease-out;
 				}
 			}
@@ -67,21 +68,21 @@
 			cursor:pointer;
 
 			&.enable {
-				border: 1px solid $oc-red-9;
-				background-color: $oc-red-9;
+				border: 1px solid $oc-gray-6;
+				background-color: $oc-gray-6;
 				color:white;
 				&:hover {
 					background-color: white;
-					color: $oc-red-9;
+					color: $oc-gray-6;
 					transition:all .1s ease-out;
 				}
 			}
 
 			&.disable {
-				border: 1px solid $oc-red-2;
+				border: 1px solid $oc-gray-2;
 				pointer-events: none;
 				cursor: default;
-				color : $oc-red-2;
+				color : $oc-gray-2;
 			}
 		}
 

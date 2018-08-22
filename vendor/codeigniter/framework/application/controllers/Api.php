@@ -62,26 +62,26 @@ class Api extends CI_Controller {
 
 		switch ($type) {
 		case 'edit':
-			switch($this->input->method()) {
-			case 'get' :
-				break;
-			case 'post' :
-				//save
-				if($this->session->userdata('signed_in')) {
+			if($this->session->userdata('signed_in')) {
+				switch($this->input->method()) {
+				case 'get' :
+					break;
+				case 'post' :
+					//save
 					$ret = $this->map->post_insert($data, $info);
-				} else {
-					header('HTTP/1.1 401 Unauthorized');
-					header('Content-Type: application/json; charset=UTF-8');
-					$ret = 'login please';
+					break;
+				case 'put':
+				case 'update':
+					break;
+				case 'delete':
+					break;
+				default :
+					break;
 				}
-				break;
-			case 'put':
-			case 'update':
-				break;
-			case 'delete':
-				break;
-			default :
-				break;
+			} else {
+				header('HTTP/1.1 401 Unauthorized');
+				header('Content-Type: application/json; charset=UTF-8');
+				$ret = 'login please';
 			}
 			break;
 		case 'reply': 

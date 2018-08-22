@@ -11,6 +11,7 @@ drop_zone.addEventListener("dragover",	function () { dragover_change() });
 drop_zone.addEventListener("dragleave",	function () { dragleave_change() });
 drop_zone.addEventListener("dragend",	function () { dragend_clear() });
 drop_zone.addEventListener("drop",	function () { drop_upload() });
+drop_zone.addEventListener("click",	function () { input_zone.click(); });
 input_zone.addEventListener("change",	function () { input_upload() });
 
 function dragstart_change() {
@@ -157,12 +158,29 @@ function input_upload() {
 
 /* ******************** Upload Event END ******************** */
 
+function done (data) {
+	console.log(data);
+	alert('save done');
+}
+
+function fail (data) {
+	console.log(data);
+	alert('try again');
+}
+
 document.querySelector("body").addEventListener("click", function(event) {
 	let t = event.target;
 
 	switch(t.id) {
 		case 'save' :
-			//httpRequest('post', '/api/request/edit/save', JSON.stringify(data), refresh.bind(this), fail.bind(this)
+			let data = [];
+			data.push({
+				'info': URL,
+				'title': document.querySelector('#edit-title').value,
+				'content': document.querySelector('#edit-content').innerHTML,
+			});
+
+			httpRequest('post', '/api/request/edit/save', JSON.stringify(data), done, fail);
 			break;
 		case 'cancel' :
 			break;
