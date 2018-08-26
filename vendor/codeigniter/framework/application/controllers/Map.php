@@ -44,7 +44,7 @@ class Map extends CI_Controller {
 
 	public function list($map, $type)
 	{
-		if(!$this->check($type)) redirect("/");
+		if(!$this->root->check($type)) redirect("/");
 
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
@@ -64,7 +64,7 @@ class Map extends CI_Controller {
 
 	public function post($map, $type, $num = 0)
 	{
-		if(!$this->check($type)) redirect("/");
+		if(!$this->root->check($type)) redirect("/");
 
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
@@ -75,12 +75,12 @@ class Map extends CI_Controller {
 
 	public function edit($map, $type, $num = 0)
 	{
-		if($this->check($type)) {
+		if(!$this->root->check($type)) {
+			redirect("/");
+		} else {
 			if(!$this->session->userdata('signed_in')) {
 				redirect("/{$type}/list");
 			} 
-		} else {
-			redirect("/");
 		}
 
 		$data['content'] = "";
@@ -104,23 +104,13 @@ class Map extends CI_Controller {
 
 	public function delete($map, $type, $num = 0)
 	{
-		if(!$this->check($type)) redirect("/");
+		if(!$this->root->check($type)) redirect("/");
 
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
 
 		$this->root->view("map/delete", $data);
-	}
-
-	private function check($type) {
-
-		$type_list = TYPE_LIST;
-		if(in_array($type, $type_list)) {
-			return true;	
-		} else {
-			return false;
-		}
 	}
 
 }

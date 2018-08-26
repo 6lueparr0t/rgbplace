@@ -1,4 +1,8 @@
 @mixin status-arrow ($font, $color) {
+	.none {
+		color:black;
+	}
+
 	position: relative;
 	font-size:1.6rem;
 	color:$font;
@@ -37,13 +41,12 @@
 			font-size: 1.6rem;
 			border: 0;
 			background: none;
-			color: white;
 
 			-webkit-appearance: none;
 			-moz-appearance: none;
 			appearance: none;
 
-			text-indent:20px;
+			text-align-last:center;
 
 			@media screen and ($width-name : $target-width) {
 				font-size: 1.12rem;

@@ -318,8 +318,9 @@ class Map_model extends CI_Model {
 		foreach ($find->result() as $key => $row) {
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
-			$no = $row->no;
-			$uid= $row->uid;
+			$no   = $row->no;
+			$uid  = $row->uid;
+			$content = htmlspecialchars_decode($row->content);
 
 			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$row->title}</a></div>";
 			echo "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
@@ -331,7 +332,7 @@ class Map_model extends CI_Model {
 				."<span class='reply'><i class='far fa-comment-dots'></i> {$row->reply} </span>"
 			."</div>"
 
-			."<div id='post-conetent'>{$row->content}</div>";
+			."<div id='post-conetent'>{$content}</div>";
 		}
 		echo "</div>";
 
@@ -356,7 +357,8 @@ class Map_model extends CI_Model {
 	 * ====================
 	 */
 	public function post_select($data, $info) {
-		$query = "SELECT * FROM map_{$info[0]}_post where no={$info[2]} and dtim is null";
+		$query = "SELECT * FROM map_{$info[0]}_post where no={$info[2]} and (dtim = 0 or dtim is null)";
+
 		$ret = $this->db->query($query);
 
 		return $ret;
@@ -364,12 +366,46 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
-	 * Usage : $this->map->post_insert (data array, info [$map, $type, $num] array)
+	 * Usage : $this->map->post_insert (data array, info [domain, map, type, num, act] array)
 	 * Desc : insert 'post'
 	 * ====================
 	 */
 	public function post_insert ($data, $info)
 	{
+		$table = "map_{$info[1]}_post";
+		$type = $info[2];
+
+		$title = htmlspecialchars($data['title']);
+		$content = htmlspecialchars($data['content']);
+
+		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
+		//$keyworkd[0] => #keyword, $keyworkd[1] => keyword
+
+		$keyword = implode('|',$keyword[1]);
+
+		$query = "insert into {$table}
+			(
+				uid,
+				name,
+				title,
+				content,
+				type,
+				tag,
+				keyword
+			)
+			VALUES (
+				'".$this->session->userdata('uid')."',
+				'".$this->session->userdata('name')."',
+				'{$title}',
+				'{$content}',
+				'{$type}',
+				'',
+				'{$keyword}'
+			)";
+
+		$ret = $this->db->query($query);
+
+		return $ret;
 	}
 
 	/*

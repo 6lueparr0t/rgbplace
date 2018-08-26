@@ -216,10 +216,11 @@ class Template {
 		$tab3 = $this->CI->uri->segment(3, "#");
 		if($tab3=="list" || $tab3=="#") {
 			$tab3_class = "none";
-			$tab3_text = "#";
+			$tab3_text = "LIST";
 		} else {
 			$tab3_class = "num";
 			$tab3_text = $tab3;
+			$tab3_list = '<option>LIST</option>';
 		}
 
 		$tab4 = $this->CI->uri->segment(4, "#");
@@ -242,9 +243,12 @@ class Template {
 		echo("
             </select>
           </label>
-          <a class='status type {$tab2} {$tab3_class}' href='/{$tab1}/{$tab2}/{$tab3}'>
-            <span>{$tab3_text}</span>
-          </a>
+          <label class='status type {$tab2} {$tab3_class}' href='/{$tab1}/{$tab2}/{$tab3}'>
+            <select class='status {$tab2} {$tab3_class}' id='status-num'>
+			  <option>{$tab3_text}</option>
+              {$tab3_list}
+            </select>
+          </label>
           <a class='status type none' href='/{$tab1}/{$tab2}/{$tab3}/{$tab4}'>
             <span>{$tab4}</span>
           </a>
@@ -252,5 +256,15 @@ class Template {
 		");
 
 	}
+
+	public function check($type) {
+
+        $type_list = TYPE_LIST;
+        if(in_array($type, $type_list)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
