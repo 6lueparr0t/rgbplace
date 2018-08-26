@@ -378,9 +378,13 @@ class Map_model extends CI_Model {
 		$title = htmlspecialchars($data['title']);
 		$content = htmlspecialchars($data['content']);
 
+		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
 		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
-		//$keyworkd[0] => #keyword, $keyworkd[1] => keyword
 
+		//$tag[0] => [tag], $tag[1] => tag 
+		$tag = $tag[1];
+
+		//$keyworkd[0] => #keyword, $keyworkd[1] => keyword
 		$keyword = implode('|',$keyword[1]);
 
 		$query = "insert into {$table}
@@ -399,7 +403,7 @@ class Map_model extends CI_Model {
 				'{$title}',
 				'{$content}',
 				'{$type}',
-				'',
+				'{$tag}',
 				'{$keyword}'
 			)";
 
