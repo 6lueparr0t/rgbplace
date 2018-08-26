@@ -220,7 +220,7 @@ class Template {
 		} else {
 			$tab3_class = "num";
 			$tab3_text = $tab3;
-			$tab3_list = '<option>LIST</option>';
+			$tab3_list = "<option id='type-list'>LIST</option>";
 		}
 
 		$tab4 = $this->CI->uri->segment(4, "#");
@@ -245,7 +245,7 @@ class Template {
           </label>
           <label class='status type {$tab2} {$tab3_class}' href='/{$tab1}/{$tab2}/{$tab3}'>
             <select class='status {$tab2} {$tab3_class}' id='status-num'>
-			  <option>{$tab3_text}</option>
+			  <option id='type-num'>{$tab3_text}</option>
               {$tab3_list}
             </select>
           </label>

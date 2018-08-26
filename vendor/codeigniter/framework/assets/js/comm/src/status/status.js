@@ -4,6 +4,7 @@ let place= document.querySelector('#status-place');
 
 if(URL_ARR.length>2) { 
 	document.querySelector('#type-'+URL_ARR[2]).selected = true;
+	document.querySelector('#type-num').selected = true;
 } else {
 	document.querySelector('#status-type').selectedIndex = 0;
 }
