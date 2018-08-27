@@ -83,13 +83,17 @@ class Map extends CI_Controller {
 			} 
 		}
 
+		$data['mode'] = 'new';
 		$data['content'] = "";
 
 		if($num > 0) {
-			$ret = $this->map->get_post($map, $type, $num);
+			$info = [$map, $type, $num];
+			$ret = $this->map->post_select(null, $info);
 
 			if($ret->result()[0]->uid == $this->session->userdata('uid') || $this->session->userdata('admin')) {
-				$data['content'] = $ret->result()[0]->content;
+				$data['mode'] = 'modify';
+				$data['title'] = htmlspecialchars_decode($ret->result()[0]->title);
+				$data['content'] = htmlspecialchars_decode($ret->result()[0]->content);
 			} else {
 				redirect("/{$map}/{$type}/{$num}");
 			}

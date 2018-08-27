@@ -2,8 +2,10 @@
 <div id='edit'>
 
 <!-- map/edit/<?=$map?>/<?=$type?>/<?=$num?> -->
-<input type='text' id='edit-title' name='edit-title' value='' />
+<input type='hidden' id='edit-mode' name='edit-mode' value='<?=$mode?>' />
+<input type='text' id='edit-title' name='edit-title' value='<?=$title?>' />
 <div id='edit-content' name='edit-content' contenteditable='true'>
+<?=$content?>
 </div>
 
 <? echo form_open('', ['name' => 'upload', 'id' => 'upload']); ?>
