@@ -174,13 +174,16 @@ document.querySelector("body").addEventListener("click", function(event) {
 	switch(t.id) {
 		case 'save' :
 			let data = [];
+			
 			data.push({
 				'info': URL,
 				'title': document.querySelector('#edit-title').value,
 				'content': document.querySelector('#edit-content').innerHTML,
 			});
 
-			httpRequest('post', '/api/request/edit/save', JSON.stringify(data), done, fail);
+			let mode = (document.querySelector('#edit-mode') || {value:'post'}).value;
+
+			httpRequest(mode, '/api/request/edit/save', JSON.stringify(data), done, fail);
 			break;
 		case 'cancel' :
 			break;
