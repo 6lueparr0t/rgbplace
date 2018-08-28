@@ -83,7 +83,7 @@ class Map extends CI_Controller {
 			} 
 		}
 
-		$data['mode'] = 'new';
+		$data['mode'] = 'post';
 		$data['content'] = "";
 
 		if($num > 0) {
@@ -91,7 +91,7 @@ class Map extends CI_Controller {
 			$ret = $this->map->post_select(null, $info);
 
 			if($ret->result()[0]->uid == $this->session->userdata('uid') || $this->session->userdata('admin')) {
-				$data['mode'] = 'modify';
+				$data['mode'] = 'update';
 				$data['title'] = htmlspecialchars_decode($ret->result()[0]->title);
 				$data['content'] = htmlspecialchars_decode($ret->result()[0]->content);
 			} else {

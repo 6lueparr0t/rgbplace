@@ -414,21 +414,21 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
-	 * Usage : $this->map->post_update (data array, info [$map, $type, $num] array)
+	 * Usage : $this->map->post_update (data array, info [domain, map, type, num, act] array)
 	 * Desc : update 'post'
 	 * ====================
 	 */
-	public function post_update ($map, $type, $num, $data)
+	public function post_update ($data, $info)
 	{
 	}
 
 	/*
 	 * ====================
-	 * Usage : $this->map->post_delete (data array, info [$map, $type, $num] array)
+	 * Usage : $this->map->post_delete (data array, info [domain, map, type, num, act] array)
 	 * Desc : delete 'post'
 	 * ====================
 	 */
-	public function post_delete ($map, $type, $num, $data)
+	public function post_delete ($data, $info)
 	{
 	}
 
