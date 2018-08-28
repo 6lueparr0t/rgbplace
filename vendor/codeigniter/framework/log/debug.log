@@ -672,3 +672,7 @@
 [2018-08-22 14:53:00] reply_insert.DEBUG: 1  
 [2018-08-22 14:53:12] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'대댓글 확.인.', 'daihyun99', '3', 				19, 19, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0)  
 [2018-08-22 14:53:12] reply_insert.DEBUG: 1  
+[2018-08-28 16:17:12] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'테스트 첫 댓글', '', '13', 				NULL, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-08-28 16:17:12] reply_insert.DEBUG: 1  
+[2018-08-28 16:28:12] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'테스트 첫 대댓글', 'daihyun99', '13', 				21, 21, 8, 1, 0, 0, 0, 0, 0, 0, 0, 0)  
+[2018-08-28 16:28:12] reply_insert.DEBUG: 1  

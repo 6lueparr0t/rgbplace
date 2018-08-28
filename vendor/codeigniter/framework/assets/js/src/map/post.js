@@ -46,6 +46,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 	if (t.parentElement.className.search("reply enable") === 0 || t.className.search("reply enable") === 0) {
 
 		// reply item (li tag)
+		if(t.tagName === "I") t = t.parentElement;
 		let reply = t.parentElement.parentElement.parentElement.parentElement;
 
 		t.classList.toggle('show');
