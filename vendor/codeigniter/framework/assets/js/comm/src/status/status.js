@@ -1,22 +1,25 @@
-let num = document.querySelector('#status-num');
-let type = document.querySelector('#status-type');
 let place= document.querySelector('#status-place');
+let type = document.querySelector('#status-type');
+let num = document.querySelector('#status-num');
+let act = document.querySelector('#status-act');
 
 if(URL_ARR.length>2) { 
+	document.querySelector('#type-act-default').selected = true;
 	document.querySelector('#type-'+URL_ARR[2]).selected = true;
 	document.querySelector('#type-num').selected = true;
 } else {
 	document.querySelector('#status-type').selectedIndex = 0;
 }
 
-function goToList () {
+function goToURL () {
 	let url = "";
 
+	url = '/'+place.innerHTML+'/'+type.value+'/'+this;
 	if(type.value === '#') url = '/' + place.innerHTML; 
-	url = '/'+place.innerHTML+'/'+type.value+'/list';
 
 	window.location.href = url;
 }
 
-type.addEventListener("change", goToList);
-num.addEventListener("change", goToList);
+type.addEventListener("change", goToURL.bind('list'));
+num.addEventListener("change", goToURL.bind('list'));
+act.addEventListener("change", goToURL.bind(URL_ARR[3]));

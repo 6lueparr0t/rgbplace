@@ -38,7 +38,9 @@ function replyBoxToggle (state) {
 }
 
 document.querySelector("body").addEventListener("click", function(event) {
+
 	let t = event.target;
+	if (t.tagName === 'BODY') return false;
 
 	// reply button event
 	if (t.parentElement.className.search("reply enable") === 0 || t.className.search("reply enable") === 0) {

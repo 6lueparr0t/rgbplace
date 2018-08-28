@@ -420,6 +420,48 @@ class Map_model extends CI_Model {
 	 */
 	public function post_update ($data, $info)
 	{
+		print_r($data);
+		print_r($info);
+	/*
+		$table = "map_{$info[1]}_post";
+		$type = $info[2];
+
+		$title = htmlspecialchars($data['title']);
+		$content = htmlspecialchars($data['content']);
+
+		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
+		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
+
+		//$tag[0] => [tag], $tag[1] => tag 
+		$tag = $tag[1];
+
+		//$keyworkd[0] => #keyword, $keyworkd[1] => keyword
+		$keyword = implode('|',$keyword[1]);
+
+		$query = "insert into {$table}
+			(
+				uid,
+				name,
+				title,
+				content,
+				type,
+				tag,
+				keyword
+			)
+			VALUES (
+				'".$this->session->userdata('uid')."',
+				'".$this->session->userdata('name')."',
+				'{$title}',
+				'{$content}',
+				'{$type}',
+				'{$tag}',
+				'{$keyword}'
+			)";
+
+		$ret = $this->db->query($query);
+
+		return $ret;
+	 */
 	}
 
 	/*

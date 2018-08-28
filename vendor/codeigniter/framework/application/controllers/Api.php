@@ -57,9 +57,6 @@ class Api extends CI_Controller {
 
 		$info = explode('/', $data['info']);
 
-		//echo json_encode($data);
-		//exit;
-
 		switch ($type) {
 		case 'edit':
 			if($this->session->userdata('signed_in')) {
@@ -71,7 +68,7 @@ class Api extends CI_Controller {
 					$ret = $this->map->post_insert($data, $info);
 					break;
 				case 'put':
-				case 'update':
+					$ret = $this->map->post_update($data, $info);
 					break;
 				case 'delete':
 					break;
@@ -113,7 +110,6 @@ class Api extends CI_Controller {
 				}
 				break;
 			case 'put':
-			case 'update':
 				break;
 			case 'delete':
 				break;

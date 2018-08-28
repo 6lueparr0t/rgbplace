@@ -224,36 +224,43 @@ class Template {
 		}
 
 		$tab4 = $this->CI->uri->segment(4, "#");
+		if($tab3!="list" && $tab4=="#") {
+			$tab4 = 'view';
+		} else {
+			$tab4_list = "<option id='type-view'>view</option>";
+		}
 		
-		echo ("
-        <div class='status' id='status'>
-          <a class='status type' href='/{$tab1}'>
-            <span id='status-place'>{$tab1}</span>
-          </a>
-          <label class='status type {$tab2}'>
-            <select class='status {$tab2}' id='status-type'>
-			  <option id='type-{$tab2}'>{$tab2_text}</option>
-			  ");
+		echo("<div class='status' id='status'>");
 
+		echo("<a class='status type' href='/{$tab1}'>");
+		echo("<span id='status-place'>{$tab1}</span>");
+		echo("</a>");
+
+		echo("<label class='status type {$tab2}'>");
+		echo("<select class='status {$tab2}' id='status-type'>");
+		echo("<option id='type-{$tab2}'>{$tab2_text}</option>");
 		for($i=0; $i<count($type); $i++) {
 			if($tab2_text === $type[$i]) continue;
 			echo "<option id='type-{$type[$i]}' >{$type[$i]}</option>";
 		}
+		echo("</select>");
+		echo("</label>");
 
-		echo("
-            </select>
-          </label>
-          <label class='status type {$tab2} {$tab3_class}' href='/{$tab1}/{$tab2}/{$tab3}'>
-            <select class='status {$tab2} {$tab3_class}' id='status-num'>
-			  <option id='type-num'>{$tab3_text}</option>
-              {$tab3_list}
-            </select>
-          </label>
-          <a class='status type none' href='/{$tab1}/{$tab2}/{$tab3}/{$tab4}'>
-            <span>{$tab4}</span>
-          </a>
-        </div>
-		");
+		echo("<label class='status type {$tab2} {$tab3_class}' href='/{$tab1}/{$tab2}/{$tab3}'>");
+		echo("<select class='status {$tab2} {$tab3_class}' id='status-num'>");
+		echo("<option id='type-num'>{$tab3_text}</option>");
+		echo("{$tab3_list}");
+		echo("</select>");
+		echo("</label>");
+
+		echo("<label class='status type none' href='/{$tab1}/{$tab2}/{$tab3}/{$tab4}'>");
+		echo("<select class='status {$tab2} {$tab3_class}' id='status-act'>");
+		echo("<option id='type-act-default'>{$tab4}</option>");
+		echo("{$tab4_list}");
+		echo("</select>");
+		echo("</label>");
+
+		echo("</div>");
 
 	}
 

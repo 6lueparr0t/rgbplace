@@ -182,6 +182,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			});
 
 			let mode = (document.querySelector('#edit-mode') || {value:'post'}).value;
+			console.log(mode);
 
 			httpRequest(mode, '/api/request/edit/save', JSON.stringify(data), done, fail);
 			break;
