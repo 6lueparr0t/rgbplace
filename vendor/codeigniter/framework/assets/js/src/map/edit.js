@@ -159,8 +159,9 @@ function input_upload() {
 /* ******************** Upload Event END ******************** */
 
 function done (data) {
-	console.log(data);
+	let num = data;
 	alert('save done');
+	location.replace('/'+URL_ARRAY[1]+'/'+URL_ARRAY[2]+'/'+num);
 }
 
 function fail (data) {
@@ -182,7 +183,6 @@ document.querySelector("body").addEventListener("click", function(event) {
 			});
 
 			let mode = (document.querySelector('#edit-mode') || {value:'post'}).value;
-			console.log(mode);
 
 			httpRequest(mode, '/api/request/edit/save', JSON.stringify(data), done, fail);
 			break;

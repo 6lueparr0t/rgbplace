@@ -397,10 +397,10 @@ class Map_model extends CI_Model {
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
 		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
 
-		//$tag[0] => [tag], $tag[1] => tag 
-		$tag = $tag[1];
+		//$tag[0] => array : [tag], $tag[1] => array : tag 
+		$tag = ($tag[1][0])?$tag[1][0]:"";
 
-		//$keyworkd[0] => #keyword, $keyworkd[1] => keyword
+		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword = implode('|',$keyword[1]);
 
 		$query = "insert into {$table}
@@ -423,7 +423,8 @@ class Map_model extends CI_Model {
 				'{$keyword}'
 			)";
 
-		$ret = $this->db->query($query);
+		$this->db->query($query);
+		$ret = $this->db->insert_id(); 
 
 		return $ret;
 	}

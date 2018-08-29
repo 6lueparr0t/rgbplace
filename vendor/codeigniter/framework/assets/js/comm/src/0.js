@@ -6,7 +6,7 @@ let onUnload = function () {
 
 // ["127.0.0.1", "space", "best", "1"]
 var URL = (window.location.hostname + window.location.pathname);
-var URL_ARR = URL.split("/");
+var URL_ARRAY = URL.split("/");
 
 window.addEventListener("dragover",function(){ event.preventDefault(); });
 window.addEventListener("drop",function(){ event.preventDefault(); });
