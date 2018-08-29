@@ -25,6 +25,7 @@ class Map_model extends CI_Model {
 		 *    $data = $row->type;
 		 *}
 		 */
+
 		$data = $find->result()[0]->type;
 
 		return $data;
@@ -137,21 +138,38 @@ class Map_model extends CI_Model {
 				."</tr>";
 		}
 
-		echo "</table>";
 
 		// ****************
-		// pagination start
+		// button group TOP
 		// ****************
+
+		echo "</table>";
+
+		echo "<div class='button-group'>";
+		echo "<a class='refresh' href='/{$map}/{$type}/list'><span>LIST</span></a>";
+
+		echo "<span class='null'></span>";
+
+		if($type == "best" || !$this->session->userdata('signed_in')) {
+			$activate = "disable";
+		} else {
+			$activate = "enable";
+		}
+		echo "<a class='edit {$activate}' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
+		echo "</div>";
+		// ****************
+		// button group END
+		// ****************
+
+		// **************
+		// pagination TOP
+		// **************
 
 		$this->list_pagination($map, $type, LIST_ROWS_LIMIT, $search);
 
-		// ****************
-		// pagination end
-		// ****************
-
-		$activate = "enable";
-		if($type == "best" || !$this->session->userdata('signed_in')) $activate = "disable";
-		echo "<a class='edit {$activate}' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
+		// **************
+		// pagination END
+		// **************
 
 		// ** button-group class end
 		echo "</div>";
@@ -271,8 +289,6 @@ class Map_model extends CI_Model {
 
 		// ** button-group class start
 		echo "<div class='button-group'>";
-		echo "<a class='refresh' href='/{$map}/{$type}/list'><span>LIST</span></a>";
-
 		echo "<div class='pagination'>";
 
 		echo "<a href='/{$map}/{$type}/list?page=1'><i class='fas fa-step-backward'></i></a>";

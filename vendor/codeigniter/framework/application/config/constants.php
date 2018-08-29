@@ -101,7 +101,7 @@ define("DEFAULT_MAP", "space");
 /*##### POST  : pagination ##############*/
 
 //PAGINATION_COUNT => MINIMUM VALUE : 3
-define("PAGINATION_COUNT", 9);
+define("PAGINATION_COUNT", 5);
 
 //LIST_ROWS_LIMIT => MINIMUM VALUE : 1
 define("LIST_ROWS_LIMIT", 20);
