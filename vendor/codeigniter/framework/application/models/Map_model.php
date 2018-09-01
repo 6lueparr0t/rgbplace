@@ -398,7 +398,7 @@ class Map_model extends CI_Model {
 		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
 
 		//$tag[0] => array : [tag], $tag[1] => array : tag 
-		$tag = ($tag[1][0])?$tag[1][0]:"";
+		$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword = implode('|',$keyword[1]);

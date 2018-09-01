@@ -161,7 +161,7 @@ function input_upload() {
 function done (data) {
 	let num = data;
 	alert('save done');
-	location.replace('/'+URL_ARRAY[1]+'/'+URL_ARRAY[2]+'/'+num);
+	redirect(num);
 }
 
 function fail (data) {
@@ -177,7 +177,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			let data = [];
 			
 			data.push({
-				'info': URL,
+				'info': __URL__,
 				'title': document.querySelector('#edit-title').value,
 				'content': document.querySelector('#edit-content').innerHTML,
 			});
@@ -187,6 +187,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			httpRequest(mode, '/api/request/edit/save', JSON.stringify(data), done, fail);
 			break;
 		case 'cancel' :
+			back();
 			break;
 	}
 });

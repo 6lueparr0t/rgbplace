@@ -9,12 +9,12 @@ let replyBoxYes  = document.querySelectorAll(".reply-button.yes");
 
 //when start, get reply
 !function () {
-	httpRequest('GET', '/api/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
+	httpRequest('GET', '/api/request/reply?info='+__URL__, null, refresh.bind(this), fail.bind(this));
 }();
 
 //reply Paging Process
 function getReplyPaging(page) {
-	httpRequest('GET', '/api/request/reply?info='+URL+'&page='+page, null, refresh.bind(this), fail.bind(this));
+	httpRequest('GET', '/api/request/reply?info='+__URL__+'&page='+page, null, refresh.bind(this), fail.bind(this));
 }
 
 function replyBoxToggle (state) {
@@ -106,7 +106,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 			let data = [];
 			data.push({
-				'info': URL,
+				'info': __URL__,
 				'no': no,
 				'message': message,
 			});
@@ -136,7 +136,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 function success (data) {
 	//console.log(data);
 	alert('TEMP::Message sent successfully');
-	httpRequest('GET', '/api/request/reply?info='+URL, null, refresh.bind(this), fail.bind(this));
+	httpRequest('GET', '/api/request/reply?info='+__URL__, null, refresh.bind(this), fail.bind(this));
 }
 
 function refresh (data) {

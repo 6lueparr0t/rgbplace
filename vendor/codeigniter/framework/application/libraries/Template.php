@@ -41,21 +41,17 @@ class Template {
 		$sign=$this->CI->session->userdata('signed_in');
 		$admin=$this->CI->session->userdata('admin');
 /* ---------------------------------------------------------------------- */
-		echo("
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-	<meta charset='UTF-8'>
-	<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
-	<meta name='viewport' content='width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes'/>
-
-	<title>RGB place</title>
-
-	<link rel='icon' href='data:;base64,iVBORw0KGgo='>
-	<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>
-</head>
-<body>
-		");
+		echo("<!DOCTYPE html>");
+		echo("<html lang='en'>");
+		echo("<head>");
+		echo("<meta charset='UTF-8'>");
+		echo("<meta http-equiv='X-UA-Compatible' content='IE=edge'/>");
+		echo("<meta name='viewport' content='width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes'/>");
+		echo("<title>RGB place</title>");
+		echo("<link rel='icon' href='data:;base64,iVBORw0KGgo='>");
+		echo("<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>");
+		echo("</head>");
+		echo("<body>");
 /* ---------------------------------------------------------------------- */
 
 		echo ("<div id='sign'>");
@@ -84,13 +80,11 @@ class Template {
 		}
 		echo ("</div>");
 
-		echo("
-		<div id='logo'>
-			<a href='".base_url().DEFAULT_MAP."'>
-				<span class='red'>R</span><span class='green'>G</span><span class='blue'>B</span><span class='place'>PLACE</span>
-			</a>
-		</div>
-		");
+		echo("<div id='logo'>");
+		echo("<a href='".base_url().DEFAULT_MAP."'>");
+		echo("<span class='red'>R</span><span class='green'>G</span><span class='blue'>B</span><span class='place'>PLACE</span>");
+		echo("</a>");
+		echo("</div>");
 	}
 
 	public function end($path) 
@@ -101,13 +95,11 @@ class Template {
 		}
 
 /* ---------------------------------------------------------------------- */
-		echo ("
-	<div id='push'></div>
-	<script src='/assets/js/comm/common.min.js'></script>
-	<script src='/assets/js/dist/{$path}.min.js'></script>
-</body>
-</html>
-		");
+		echo("<div id='push'></div>");
+		echo("<script src='/assets/js/comm/common.min.js'></script>");
+		echo("<script src='/assets/js/dist/{$path}.min.js'></script>");
+		echo("</body>");
+		echo("</html>");
 /* ---------------------------------------------------------------------- */
 	}
 
@@ -119,89 +111,83 @@ class Template {
 
 		/* -------------------------------------------------- MENU Start -------------------------------------------------- */
 
-		echo("
-        <input class='menu' type='checkbox' id='menu-toggle' />
-        <label class='menu' id='menu-button' for='menu-toggle'>
-        <i class='open fa fa-bars'></i>
-        <i class='close fa fa-times'></i>
-		</label>
+		echo("<input class='menu' type='checkbox' id='menu-toggle' />");
+		echo("<label class='menu' id='menu-button' for='menu-toggle'>");
+		echo("<i class='open fa fa-bars'></i>");
+		echo("<i class='close fa fa-times'></i>");
+		echo("</label>");
 
-		<ul id='menu'>
-		");
+		echo("<ul id='menu'>");
 
 		$admin = $this->CI->session->userdata('admin');
 		if($admin === TRUE) {
-		echo("
-		  <label class='menu' for='menu-admin'><i class='fa fa-code' ></i> Admin
-            <input class='menu' type='checkbox' id='menu-admin' />
-              <i class='open fa fa-caret-up'></i>
-              <i class='close fa fa-caret-down'></i>
-		      <ul>
-		        <label class='menu' for='menu-admin-1'>Admin
-                  <input class='menu' type='checkbox' id='menu-admin-1' />
-                  <i class='open fa fa-minus'></i>
-                  <i class='close fa fa-plus'></i>
-		          <ul>
-		            <a class='menu' href='/admin/info' target='_blank'><li>Version</li></a>
-		            <a class='menu' href='/admin/db'><li>Database Management</li></a>
-		          </ul>
-                </label>
-		        <label class='menu' for='menu-admin-2'>Exam
-                  <input class='menu' type='checkbox' id='menu-admin-2' />
-                  <i class='open fa fa-minus'></i>
-                  <i class='close fa fa-plus'></i>
-		          <ul>
-		            <a class='menu' href='/admin/generate_hash'><li>Generate Hash</li></a>
-		            <a class='menu' href='/admin/animation'><li>Animation</li></a>
-		            <a class='menu' href='/admin/restful'><li>RESTful Test</li></a>
-		            <a class='menu' href='/admin/dragndrop_upload'><li>Drag & Drop Upload</li></a>
-		          </ul>
-                </label>
-		      </ul>
-          </label>
-		");
+			echo("<label class='menu' for='menu-admin'><i class='fa fa-code' ></i> Admin");
+			echo("<input class='menu' type='checkbox' id='menu-admin' />");
+			echo("<i class='open fa fa-caret-up'></i>");
+			echo("<i class='close fa fa-caret-down'></i>");
+			echo("<ul>");
+			echo("<label class='menu' for='menu-admin-1'>Admin");
+			echo("<input class='menu' type='checkbox' id='menu-admin-1' />");
+			echo("<i class='open fa fa-minus'></i>");
+			echo("<i class='close fa fa-plus'></i>");
+			echo("<ul>");
+			echo("<a class='menu' href='/admin/info' target='_blank'><li>Version</li></a>");
+			echo("<a class='menu' href='/admin/db'><li>Database Management</li></a>");
+			echo("</ul>");
+			echo("</label>");
+			echo("<label class='menu' for='menu-admin-2'>Exam");
+			echo("<input class='menu' type='checkbox' id='menu-admin-2' />");
+			echo("<i class='open fa fa-minus'></i>");
+			echo("<i class='close fa fa-plus'></i>");
+			echo("<ul>");
+			echo("<a class='menu' href='/admin/generate_hash'><li>Generate Hash</li></a>");
+			echo("<a class='menu' href='/admin/animation'><li>Animation</li></a>");
+			echo("<a class='menu' href='/admin/restful'><li>RESTful Test</li></a>");
+			echo("<a class='menu' href='/admin/dragndrop_upload'><li>Drag & Drop Upload</li></a>");
+			echo("</ul>");
+			echo("</label>");
+			echo("</ul>");
+			echo("</label>");
 		}
 
-		echo("
-		  <label class='menu' id='menu-map' for='map-search'>
-            <input class='menu' type='text' id='map-search-box' placeholder='Map Search'/><i class='fa fa-search' id='map-search-button'></i>
-			<input class='menu' type='checkbox' id='map-search' />
-            <i class='open fa fa-caret-up'></i>
-            <i class='close fa fa-caret-down'></i>
-			<ul>
-			  <label class='menu' id='map-result' for=''>
-			    <a href='#'><li>No Results</li></a>
-			  </label>
-			</ul>
-          </label>
-		  <a class='menu' href='/stage'>
-            <i class='fa fa-street-view'></i> Stage
-		  </a>
-          <!-- <label for='menu-stage'><i class='fa fa-street-view'></i> Stage
-            <input class='menu' type='checkbox' id='menu-stage' />
-              <div class='menu' id='menu-stage-box'>
-              </div>
-          </label> -->
-		  <!-- <label class='menu' for='menu-comments'><i class='fa fa-commenting-o' ></i>
-            <input class='menu' type='checkbox' id='menu-comments' />
-              <div class='menu' id='menu-comments-box'>
-			  </div>
-          </label> -->
-		  <label class='menu' for='menu-favorite'><i class='far fa-thumbs-up'></i>
-            <input class='menu' type='checkbox' id='menu-favorite' /> Like
-			  <div class='menu' id='menu-favorite-box'>
-              </div>
-          </label>
-		  <label class='menu' for='menu-config'><i class='fa fa-cog'></i>
-            <input class='menu' type='checkbox' id='menu-config' />
-            <i class='open fa fa-caret-up'></i>
-            <i class='close fa fa-caret-down'></i>
-		    <ul>
-                <label class='menu' for='menu-config-1'>Fix On</label>
-			</ul>
-          </label>
-		</ul>
-		");
+		echo("<label class='menu' id='menu-map' for='map-search'>");
+		echo("<input class='menu' type='text' id='map-search-box' placeholder='Map Search'/><i class='fa fa-search' id='map-search-button'></i>");
+		echo("<input class='menu' type='checkbox' id='map-search' />");
+		echo("<i class='open fa fa-caret-up'></i>");
+		echo("<i class='close fa fa-caret-down'></i>");
+		echo("<ul>");
+		echo("<label class='menu' id='map-result' for=''>");
+		echo("<a href='#'><li>No Results</li></a>");
+		echo("</label>");
+		echo("</ul>");
+		echo("</label>");
+		echo("<a class='menu' href='/stage'>");
+		echo("<i class='fa fa-street-view'></i> Stage");
+		echo("</a>");
+		echo("<!-- <label for='menu-stage'><i class='fa fa-street-view'></i> Stage");
+		echo("<input class='menu' type='checkbox' id='menu-stage' />");
+		echo("<div class='menu' id='menu-stage-box'>");
+		echo("</div>");
+		echo("</label> -->");
+		echo("<!-- <label class='menu' for='menu-comments'><i class='fa fa-commenting-o' ></i>");
+		echo("<input class='menu' type='checkbox' id='menu-comments' />");
+		echo("<div class='menu' id='menu-comments-box'>");
+		echo("</div>");
+		echo("</label> -->");
+		echo("<label class='menu' for='menu-favorite'><i class='far fa-thumbs-up'></i>");
+		echo("<input class='menu' type='checkbox' id='menu-favorite' /> Like");
+		echo("<div class='menu' id='menu-favorite-box'>");
+		echo("</div>");
+		echo("</label>");
+		echo("<label class='menu' for='menu-config'><i class='fa fa-cog'></i>");
+		echo("<input class='menu' type='checkbox' id='menu-config' />");
+		echo("<i class='open fa fa-caret-up'></i>");
+		echo("<i class='close fa fa-caret-down'></i>");
+		echo("<ul>");
+		echo("<label class='menu' for='menu-config-1'>Fix On</label>");
+		echo("</ul>");
+		echo("</label>");
+		echo("</ul>");
 		/* -------------------------------------------------- MENU End -------------------------------------------------- */
 
 		//if($this->CI->session->has_userdata('tab1') === false) $this->CI->session->set_userdata('tab1');
@@ -217,6 +203,7 @@ class Template {
 		if($tab3=="list" || $tab3=="#") {
 			$tab3_class = "none";
 			$tab3_text = "LIST";
+			$tab3_list = "";
 		} else {
 			$tab3_class = "num";
 			$tab3_text = $tab3;
@@ -226,6 +213,7 @@ class Template {
 		$tab4 = $this->CI->uri->segment(4, "#");
 		if($tab3!="list" && $tab4=="#") {
 			$tab4 = 'view';
+			$tab4_list = "";
 		} else {
 			$tab4_list = "<option id='type-view'>view</option>";
 		}

@@ -5,8 +5,8 @@ let onUnload = function () {
 }
 
 // ["127.0.0.1", "space", "best", "1"]
-var URL = (window.location.hostname + window.location.pathname);
-var URL_ARRAY = URL.split("/");
+var __URL__ = (window.location.hostname + window.location.pathname);
+var __URL_ARRAY__ = __URL__.split("/");
 
 window.addEventListener("dragover",function(){ event.preventDefault(); });
 window.addEventListener("drop",function(){ event.preventDefault(); });
