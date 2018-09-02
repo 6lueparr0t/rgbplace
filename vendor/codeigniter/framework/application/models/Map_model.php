@@ -391,8 +391,8 @@ class Map_model extends CI_Model {
 		$table = "map_{$info[1]}_post";
 		$type = $info[2];
 
-		$title = htmlspecialchars($data['title']);
-		$content = htmlspecialchars($data['content']);
+		$title = addslashes(htmlspecialchars($data['title']));
+		$content = addslashes(htmlspecialchars($data['content']));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
 		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
@@ -437,48 +437,36 @@ class Map_model extends CI_Model {
 	 */
 	public function post_update ($data, $info)
 	{
-		print_r($data);
-		print_r($info);
-	/*
 		$table = "map_{$info[1]}_post";
 		$type = $info[2];
+		$no = $info[3];
 
-		$title = htmlspecialchars($data['title']);
-		$content = htmlspecialchars($data['content']);
+		$title = addslashes(htmlspecialchars($data['title']));
+		$content = addslashes(htmlspecialchars($data['content']));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
 		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
 
-		//$tag[0] => [tag], $tag[1] => tag 
-		$tag = $tag[1];
+		//$tag[0] => array : [tag], $tag[1] => array : tag 
+		$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
-		//$keyworkd[0] => #keyword, $keyworkd[1] => keyword
+		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword = implode('|',$keyword[1]);
 
-		$query = "insert into {$table}
-			(
-				uid,
-				name,
-				title,
-				content,
-				type,
-				tag,
-				keyword
-			)
-			VALUES (
-				'".$this->session->userdata('uid')."',
-				'".$this->session->userdata('name')."',
-				'{$title}',
-				'{$content}',
-				'{$type}',
-				'{$tag}',
-				'{$keyword}'
-			)";
+		$query = "update {$table}
+			set
+			title = '{$title}',
+			content = '{$content}',
+			tag = '{$tag}',
+			keyword = '{$keyword}'
 
-		$ret = $this->db->query($query);
+			where type = '{$type}' and no = '{$no}' ";
+
+		if($this->db->query($query)) {
+			$ret = $no;	
+		};
 
 		return $ret;
-	 */
 	}
 
 	/*
