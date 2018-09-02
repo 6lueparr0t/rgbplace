@@ -324,7 +324,7 @@ class Map_model extends CI_Model {
 
 		$find = $this->post_select($data, $info);
 
-		if($find->num_rows() === 0 || $find->num_rows() >= 2) {
+		if($find->num_rows() === 0 || $find->num_rows() > 1) {
 			echo "<div class='no-post'>Not Found <i class='fa fa-frown-o'></i> </div>";
 
 			return false;
@@ -360,7 +360,7 @@ class Map_model extends CI_Model {
 		echo "<div class='button-group'>"
 			."<span class='null'></span>"
 			."<a class='edit {$activate}' href='/{$map}/{$type}/{$no}/edit'><span>edit</span></a>"
-			."<a class='delete {$activate}' href='/{$map}/{$type}/{$no}/delete'><span>delete</span></a>"
+			."<span class='delete {$activate}' >delete</span>"
 		."</div>";
 
 		return true;
@@ -464,7 +464,7 @@ class Map_model extends CI_Model {
 
 		if($this->db->query($query)) {
 			$ret = $no;	
-		};
+		}
 
 		return $ret;
 	}
@@ -475,8 +475,22 @@ class Map_model extends CI_Model {
 	 * Desc : delete 'post'
 	 * ====================
 	 */
-	public function post_delete ($data, $info)
+	public function post_delete ($info)
 	{
+		$table = "map_{$info[1]}_post";
+		$type = $info[2];
+		$no = $info[3];
+
+		$query = "delete from {$table} 
+			where 
+				type = '{$type}'
+				and no = '{$no}'
+				and uid = '".$this->session->userdata('uid')."'
+				and name = '".$this->session->userdata('name')."' ";
+
+		$ret = $this->db->query($query);
+
+		return $ret;
 	}
 
 	/*

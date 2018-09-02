@@ -107,7 +107,7 @@ class Map extends CI_Controller {
 		$this->root->view("map/edit", $data);
 	}
 
-	public function delete($map, $type, $num = 0)
+	public function _delete($map, $type, $num = 0)
 	{
 		if(!$this->root->check($type)) redirect("/");
 

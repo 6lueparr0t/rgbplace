@@ -7,7 +7,7 @@
 
 <div id='post'>
 <?
-$this->map->post($map, $type, $num);
+if(!$this->map->post($map, $type, $num)) redirect("/{$map}/{$type}/list");
 ?>
 </div>
 

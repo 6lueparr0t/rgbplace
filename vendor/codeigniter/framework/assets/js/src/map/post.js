@@ -82,6 +82,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 	}
 
 	let reply, no, message; 
+	let data = [];
 
 	//console.log(t.parentElement);
 	switch (t.className) {
@@ -104,7 +105,6 @@ document.querySelector("body").addEventListener("click", function(event) {
 			no = reply.querySelector(".reply-no").value;
 			message = reply.querySelector(".reply-box").value;
 
-			let data = [];
 			data.push({
 				'info': __URL__,
 				'no': no,
@@ -125,8 +125,13 @@ document.querySelector("body").addEventListener("click", function(event) {
 			break;
 
 		case "delete enable":
-			reply = t.parentElement.parentElement.parentElement;
-			no = reply.querySelector(".no").innerHTML;
+
+			data.push({
+				'info': __URL__,
+				'no': no
+			});
+
+			httpRequest('delete', '/api/request/post', JSON.stringify(data), successDelete.bind(this), fail.bind(this));
 
 			break;
 	}
@@ -135,8 +140,14 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 function success (data) {
 	//console.log(data);
-	alert('TEMP::Message sent successfully');
+	alert('Message sent successfully');
 	httpRequest('GET', '/api/request/reply?info='+__URL__, null, refresh.bind(this), fail.bind(this));
+}
+
+function successDelete (data) {
+	//console.log(data);
+	alert('Post Remove successfully');
+	redirect('list');
 }
 
 function refresh (data) {
