@@ -234,15 +234,15 @@ class Template {
 		echo("</select>");
 		echo("</label>");
 
-		echo("<label class='status type {$tab2} {$tab3_class}' href='/{$tab1}/{$tab2}/{$tab3}'>");
+		echo("<label class='status type {$tab2} num' href='/{$tab1}/{$tab2}/{$tab3}'>");
 		echo("<select class='status {$tab2} {$tab3_class}' id='status-num'>");
 		echo("<option id='type-num'>{$tab3_text}</option>");
 		echo("{$tab3_list}");
 		echo("</select>");
 		echo("</label>");
 
-		echo("<label class='status type none' href='/{$tab1}/{$tab2}/{$tab3}/{$tab4}'>");
-		echo("<select class='status {$tab2} {$tab3_class}' id='status-act'>");
+		echo("<label class='status type {$tab2} act' href='/{$tab1}/{$tab2}/{$tab3}/{$tab4}'>");
+		echo("<select class='status {$tab2}' id='status-act'>");
 		echo("<option id='type-act-default'>{$tab4}</option>");
 		echo("{$tab4_list}");
 		echo("</select>");

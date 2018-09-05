@@ -41,55 +41,64 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 	let t = event.target;
 	if (t.tagName === 'BODY') return false;
+	if(t.tagName === "I") t = t.parentElement;
 
 	// reply button event
-	if (t.parentElement.className.search("reply enable") === 0 || t.className.search("reply enable") === 0) {
 
-		// reply item (li tag)
-		if(t.tagName === "I") t = t.parentElement;
-		let reply = t.parentElement.parentElement.parentElement.parentElement;
-
-		t.classList.toggle('show');
-
-		if(reply.lastChild.className.search("reply-container") === 0) {
-			reply.removeChild(reply.lastChild);
-		} else {
-			let no = reply.querySelector("ul .no").innerHTML;
-			let node = document.createElement("li");
-			node.className = "reply-container";
-			node.innerHTML =
-				"<div class='reply-addon block' id='reply-"+no+"' name='reply-"+no+"'>"
-					+"<input type='hidden' class='reply-no' value='"+no+"'/>"
-					+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;'></textarea>"
-
-					+"<div class='reply-button-group'>"
-						+"<div class='reply-button send to'>Reply on Message <span style='font-weight:900;transform: translate(.4rem,.1rem);'>&#xf11c;</span></div>"
-						+"<div class='reply-button yes to'>Confirm</div>"
-						+"<div class='reply-button no to'>Not Yet ..</div>"
-						+"<div class='reply-button cancel'>Cancel</div>"
-					+"</div>";
-
-				+"</div>";
-
-			reply.appendChild(node);
-		}
-	}
-
-	if (t.parentElement.parentElement.className.search("reply-pagination") === 0 || t.parentElement.className.search("reply-pagination") === 0) {
-		if(t.tagName === "I") t = t.parentElement;
+	if (t.parentElement.className.search("reply-pagination") === 0) {
 		let page = t.getAttribute('data');
 		getReplyPaging(page);
 	}
 
-	let reply, no, message; 
+	let reply, no, message = '';
+	let node;
 	let data = [];
 
 	//console.log(t.parentElement);
 	switch (t.className) {
+		case "modify enable":
+		case "modify enable show" :
+		case "reply enable" :
+		case "reply enable show" :
+			// reply item (li tag)
+			reply = t.parentElement.parentElement.parentElement.parentElement;
+
+			if(t.classList.contains('modify')) {
+				message  = reply.querySelector("ul .content .text").innerHTML;
+				reply.querySelector("ul").classList.toggle('hide');
+			}
+
+			t.classList.toggle('show');
+
+			if(reply.lastChild.className.search("reply-container") === 0) {
+				reply.removeChild(reply.lastChild);
+			} else {
+				no = reply.querySelector("ul .no").innerHTML;
+				node = document.createElement("li");
+				node.className = "reply-container";
+				node.innerHTML =
+					"<div class='reply-addon block' id='reply-"+no+"' name='reply-"+no+"'>"
+					+"<input type='hidden' class='reply-no' value='"+no+"'/>"
+					+"<div class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;' contenteditable='true'>"+message+"</div>"
+
+					+"<div class='reply-button-group'>"
+					+"<div class='reply-button send to'>Reply on Message <span style='font-weight:900;transform: translate(.4rem,.1rem);'>&#xf11c;</span></div>"
+					+"<div class='reply-button yes to'>Confirm</div>"
+					+"<div class='reply-button no to'>Not Yet ..</div>"
+					+"<div class='reply-button cancel'>Cancel</div>"
+					+"</div>";
+
+				+"</div>";
+
+				reply.appendChild(node);
+			}
+			break;
+
 		case "reply-button cancel" :
 			// reply item (li tag)
 			let cancel = t.parentElement.parentElement.parentElement.parentElement;
 			cancel.querySelector(".reply.enable").classList.toggle('show');
+			cancel.querySelector("ul").classList.remove('hide');
 			cancel.removeChild(cancel.lastChild);
 			break;
 

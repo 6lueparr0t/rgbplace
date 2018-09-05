@@ -91,6 +91,16 @@
 
 		&.num {
 			@include status-arrow (white, $oc-gray-5);
+			select {
+				color:black;
+			}
+		}
+
+		&.act {
+			@include status-arrow (white, $oc-gray-3);
+			select {
+				color:black;
+			}
 		}
 	}
 
@@ -108,6 +118,10 @@
 		&.num {
 			@include status-arrow ($oc-gray-7, $oc-yellow-2);
 		}
+
+		&.act {
+			@include status-arrow (white, $oc-yellow-1);
+		}
 	}
 
 	.type.photo {
@@ -123,6 +137,10 @@
 
 		&.num {
 			@include status-arrow ($oc-gray-7, $oc-lime-2);
+		}
+
+		&.act {
+			@include status-arrow (white, $oc-lime-1);
 		}
 	}                                               
                                                     
@@ -140,6 +158,10 @@
 		&.num {
 			@include status-arrow ($oc-gray-7, $oc-blue-2);
 		}
+
+		&.act {
+			@include status-arrow (white, $oc-blue-1);
+		}
 	}                                               
                                                     
 	.type.public {                                      
@@ -155,6 +177,10 @@
 
 		&.num {
 			@include status-arrow ($oc-gray-7, $oc-red-4);
+		}
+
+		&.act {
+			@include status-arrow (white, $oc-red-2);
 		}
 	}
 
@@ -172,6 +198,10 @@
 		&.num {
 			@include status-arrow ($oc-gray-7, $oc-orange-3);
 		}
+
+		&.act {
+			@include status-arrow (white, $oc-orange-1);
+		}
 	}
 
 	.type.life {                                      
@@ -188,6 +218,10 @@
 		&.num {
 			@include status-arrow ($oc-gray-7, $oc-pink-2);
 		}
+
+		&.act {
+			@include status-arrow (white, $oc-pink-1);
+		}
 	}
 
 	.type.dev {                                      
@@ -202,7 +236,11 @@
 		}
 
 		&.num {
-			@include status-arrow ($oc-gray-7, $oc-cyan-1);
+			@include status-arrow ($oc-gray-7, $oc-cyan-2);
+		}
+
+		&.act {
+			@include status-arrow (white, $oc-cyan-1);
 		}
 	}
 

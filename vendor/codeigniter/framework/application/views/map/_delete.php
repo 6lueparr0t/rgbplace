@@ -1,8 +1,38 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
+<!doctype html>
+<html lang="en">
 
-<!-- map/delete/<?=$map?>/<?=$type?>/<?=$num?> -->
+<head>
+  <meta charset="utf-8">
+  <title>WebSocket</title>
+</head>
 
-<div id="notice">
-</div>
+<body>
+  <p id="output"></p>
 
-<?php $this->root->end($path); ?>
+  <script>
+    var loc = '127.0.0.1';
+    var uri = 'ws:';
+
+    if (loc.protocol === 'https:') {
+      uri = 'wss:';
+    }
+    uri += '//' + loc + ':1323/ws';
+
+    ws = new WebSocket(uri)
+
+    ws.onopen = function() {
+      console.log('Connected')
+    }
+
+    ws.onmessage = function(evt) {
+      var out = document.getElementById('output');
+      out.innerHTML += evt.data + '<br>';
+    }
+
+    setInterval(function() {
+      ws.send('Hello, Server!');
+    }, 1000);
+  </script>
+</body>
+
+</html>
