@@ -122,6 +122,15 @@ class Api extends CI_Controller {
 				}
 				break;
 			case 'delete':
+				if($this->session->userdata('signed_in')) {
+					if($this->map->reply_delete($data, $info)) {
+						$ret = true;
+					}
+				} else {
+					header('HTTP/1.1 401 Unauthorized');
+					header('Content-Type: application/json; charset=UTF-8');
+					$ret = 'login please';
+				}
 				break;
 			default :
 				break;

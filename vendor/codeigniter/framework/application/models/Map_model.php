@@ -611,8 +611,8 @@ class Map_model extends CI_Model {
 					$reply_perm = "disable";
 				}
 
-				$ret .= "<button class='modify {$reply_perm}'><i class='fa fa-pencil-alt'></i></button>";
-				$ret .= "<button class='delete {$reply_perm}'><i class='fa fa-trash'></i></button>";
+				$ret .= "<button class='reply-modify {$reply_perm}'><i class='fa fa-pencil-alt'></i></button>";
+				$ret .= "<button class='reply-delete {$reply_perm}'><i class='fa fa-trash'></i></button>";
 				$ret .= "<button class='report ' ><i class='far fa-paper-plane'></i></button>";
 
 			$ret .= "</div>";
@@ -804,7 +804,7 @@ class Map_model extends CI_Model {
 
 		$depth_array[$depth] = $this->db->query("select count(no) cnt from {$table} where relation = {$data['no']}")->result()[0]->cnt+1;
 
-		$data['message'] = htmlspecialchars($data['message']);
+		$data['message'] = addslashes(htmlspecialchars($data['message']));
 
 		$query= "insert into {$table} (uid, name,
 			content, mention, post,
@@ -829,8 +829,20 @@ class Map_model extends CI_Model {
 	 * Desc : 
 	 * ====================
 	 */
-	public function reply_update ()
+	public function reply_update ($data, $info)
 	{
+		$table = "map_{$info[1]}_reply";
+		$content = addslashes(htmlspecialchars($data['message']));
+
+		$query = "update {$table}
+			set
+				content = '{$content}'
+			where
+				uid = '".$this->session->userdata('uid')."'
+				and name = '".$this->session->userdata('name')."'
+				and no = '{$data['no']}'";
+
+		return $this->db->query($query);
 	}
 
 	/*
@@ -839,8 +851,17 @@ class Map_model extends CI_Model {
 	 * Desc : 
 	 * ====================
 	 */
-	public function reply_delete ()
+	public function reply_delete ($data, $info)
 	{
+		$table = "map_{$info[1]}_reply";
+
+		$query = "delete from {$table}
+				where
+					uid = '".$this->session->userdata('uid')."'
+					and name = '".$this->session->userdata('name')."'
+					and no = '{$data['no']}'";
+
+		return $this->db->query($query);
 	}
 
 	public function replyBox($status = "block", $id=0, $depth=0) {
