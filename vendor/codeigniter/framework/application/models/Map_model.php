@@ -742,7 +742,7 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
-	 * Usage : $this->map->reply_insert ( [map code, post type, post number], data )
+	 * Usage : $this->map->reply_insert ( [map code, post type, post number], link info )
 	 * Desc : 
 	 * ====================
 	 */
@@ -825,17 +825,17 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
-	 * Usage : $this->map->reply_modify ( [map code, post type, post number], data )
+	 * Usage : $this->map->reply_update ( [map code, post type, post number], link info )
 	 * Desc : 
 	 * ====================
 	 */
-	public function reply_modify ()
+	public function reply_update ()
 	{
 	}
 
 	/*
 	 * ====================
-	 * Usage : $this->map->reply_delete ( [map code, post type, post number], data )
+	 * Usage : $this->map->reply_delete ( [map code, post type, post number], link info )
 	 * Desc : 
 	 * ====================
 	 */
