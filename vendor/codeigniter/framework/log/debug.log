@@ -696,3 +696,39 @@
 [2018-09-06 12:50:10] reply_insert.DEBUG: 1  
 [2018-09-06 13:15:30] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values('admin@daihyun99', 'daihyun99', 				'test4 대댓글 닮', 'daihyun99', '29', 				29, 30, 11, 1, 1, 0, 0, 0, 0, 0, 0, 0)  
 [2018-09-06 13:15:30] reply_insert.DEBUG: 1  
+[2018-09-07 14:11:36] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:11:36] reply_insert.DEBUG: 1  
+[2018-09-07 14:14:08] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:14:08] reply_insert.DEBUG: 1  
+[2018-09-07 14:19:24] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:19:24] reply_insert.DEBUG: 1  
+[2018-09-07 14:19:31] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				34, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:19:31] reply_insert.DEBUG: 1  
+[2018-09-07 14:19:47] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				34, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:19:47] reply_insert.DEBUG: 1  
+[2018-09-07 14:19:56] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				34, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:19:56] reply_insert.DEBUG: 1  
+[2018-09-07 14:19:57] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				34, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:19:57] reply_insert.DEBUG: 1  
+[2018-09-07 14:21:51] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:21:51] reply_insert.DEBUG: 1  
+[2018-09-07 14:25:08] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:25:08] reply_insert.DEBUG: 1  
+[2018-09-07 14:45:24] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:45:24] reply_insert.DEBUG: 1  
+[2018-09-07 14:49:43] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				34, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 14:49:43] reply_insert.DEBUG: 1  
+[2018-09-07 15:37:28] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 15:37:28] reply_insert.DEBUG: 1  
+[2018-09-07 15:39:40] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				42, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 15:39:40] reply_insert.DEBUG: 1  
+[2018-09-07 15:41:10] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				42, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 15:41:10] reply_insert.DEBUG: 1  
+[2018-09-07 15:42:38] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				42, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 15:42:38] reply_insert.DEBUG: 1  
+[2018-09-07 15:42:59] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 15:42:59] reply_insert.DEBUG: 1  
+[2018-09-07 16:02:36] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				34, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 16:02:36] reply_insert.DEBUG: 1  
+[2018-09-07 16:03:23] reply_insert.DEBUG: insert into map_space_reply (uid, name, 			content, mention, post, 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)  			values(?, ?, 				?, ?, ?, 				34, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  
+[2018-09-07 16:03:23] reply_insert.DEBUG: 1  

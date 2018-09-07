@@ -26,8 +26,8 @@ class Sign_model extends CI_Model {
 			if(password_verify($pswd,  base64_decode($row->pswd))) {
 				//fail count init
 				$atim = date("Y-m-d H:i:s");
-				$query = "UPDATE user_info SET fail = 0, atim='{$atim}' WHERE uid = ?";
-				$this->db->query($query, $uid);
+				$query = "UPDATE user_info SET fail = 0, atim = ? WHERE uid = ?";
+				$this->db->query($query, array($atim, $uid);
 
 				return $result = [
 					'name'  => $row->name,
@@ -53,14 +53,14 @@ class Sign_model extends CI_Model {
 		$pswd= $data['pswd'];
 
 		$query = "SELECT * FROM admin_info WHERE uid = ? AND name = ? AND fail < 5 LIMIT 1";
-		$find = $this->db->query($query, [$uid[0], $uid[1]]);
+		$find = $this->db->query($query, array($uid[0], $uid[1]));
 
 		foreach ($find->result() as $row) {
 			if(password_verify($pswd, base64_decode($row->pswd))) {
 				//fail count init
 				$atim = date("Y-m-d H:i:s");
 				$query = "UPDATE admin_info SET fail = 0, atim='{$atim}' WHERE uid = ? AND name = ?";
-				$this->db->query($query, [$uid[0], $uid[1]]);
+				$this->db->query($query, array($uid[0], $uid[1]));
 
 				return $result = [
 					'name' => $row->name,
@@ -69,7 +69,7 @@ class Sign_model extends CI_Model {
 				//fail count increase
 				$atim = date("Y-m-d H:i:s");
 				$query = "UPDATE admin_info SET fail = fail + 1, atim='{$atim}' WHERE uid = ? AND name = ?";
-				$this->db->query($query, [$uid[0], $uid[1]]);
+				$this->db->query($query, array($uid[0], $uid[1]));
 
 				return false;
 			}
@@ -91,7 +91,7 @@ class Sign_model extends CI_Model {
 			// use user_info, user_config
 			
 			$query = "INSERT INTO user_info (uid, name, pswd) VALUES (?, ?, ?)";
-			$this->db->query($query, [$uid, $name, $pswd]);
+			$this->db->query($query, array($uid, $name, $pswd));
 
 			$query = "INSERT INTO user_conf (uid) VALUES (?)";
 			$this->db->query($query, $uid);
@@ -110,7 +110,7 @@ class Sign_model extends CI_Model {
 			$uid = explode("@", $data['uid']);
 			$query = "SELECT * FROM admin_info WHERE uid = ? AND name = ? LIMIT 1";
 
-			$find = $this->db->query($query, [$uid[0], $uid[1]]);
+			$find = $this->db->query($query, array($uid[0], $uid[1]));
 
 		} else {
 			$uid = $data['uid'];

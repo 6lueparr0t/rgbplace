@@ -149,6 +149,8 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 			//var response = [];
 			//for(var pair of data.entries()) { response.push(pair); }
+			
+			this.page = document.querySelector(".reply-pagination .active").getAttribute('data');
 
 			httpRequest(mode, '/api/request/reply', JSON.stringify(data), success.bind(this), fail.bind(this));
 
@@ -175,7 +177,8 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 function success (data) {
 	//console.log(data);
-	httpRequest('GET', '/api/request/reply?info='+__URL__, null, refresh.bind(this), fail.bind(this));
+	//httpRequest('GET', '/api/request/reply?page='+this.page+'&info='+__URL__, null, refresh.bind(this), fail.bind(this));
+	getReplyPaging(this.page);
 }
 
 function successDelete (data) {
