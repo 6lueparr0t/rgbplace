@@ -11,10 +11,11 @@ class Map_model extends CI_Model {
 	public function link ($map, $num) {
 		$data = "";
 
-		$where = "no={$num}";
+		$table = "map_{$map}_post";
+		$where = "no='".$this->db->escape_str($num)."'";
 
-		$query = "SELECT type FROM map_{$map}_post where {$where}";
-		$find = $this->db->query($query);
+		$query = "SELECT type FROM ? where {$where}";
+		$find = $this->db->query($query, array($table));
 
 		if($find->num_rows() === 0 || $find->num_rows() >= 2) {
 			return null;
@@ -44,8 +45,10 @@ class Map_model extends CI_Model {
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_{$map}_post where type='{$type}' ORDER BY no desc LIMIT {$limit}";
-		$find = $this->db->query($query);
+		$table = "map_{$map}_post";
+
+		$query = "SELECT * FROM ? where type='?' ORDER BY no desc LIMIT ?";
+		$find = $this->db->query($query, array($table, $type, $limit));
 
 		if($find->num_rows() === 0) {
 			echo "<table class='no-page'><tr><td>No Results.</td></tr></table>";
@@ -80,10 +83,12 @@ class Map_model extends CI_Model {
 	{
 		if(!$rows) $rows = LIST_ROWS_LIMIT;
 
+		$table = "map_{$map}_post";
+
 		$search_list = ['page', 'title', 'content', 'reply', 'name', 'tag', 'date'];
 		$search = [];
 
-		$where = "type='{$type}'";
+		$where = "type='".$this->db->escape_str($type)."'";
 
 		if(isset($data)) {
 			for($i=0; $i<count($search_list); $i++) {
@@ -97,8 +102,8 @@ class Map_model extends CI_Model {
 
 		$limit = ($rows)?"{$start}, {$rows}":$start;
 
-		$query = "SELECT * FROM map_{$map}_post where {$where} ORDER BY no desc LIMIT {$limit}";
-		$find = $this->db->query($query);
+		$query = "SELECT * FROM ? where {$where} ORDER BY no desc LIMIT ?";
+		$find = $this->db->query($query, array($table, $limit));
 
 		echo "<table class='list'>";
 
@@ -217,11 +222,13 @@ class Map_model extends CI_Model {
 	public function list_pagination ($map, $type, $rows = REPLY_LIST_ROWS_LIMIT, $search = [])
 	{
 
-		// get list count (new sql run)
-		$where = "type='{$type}'";
+		$table = "map_{$map}_post";
 
-		$query = "SELECT count(*) as list_count FROM map_{$map}_post where {$where}";
-		$find = $this->db->query($query);
+		// get list count (new sql run)
+		$where = "type='".$this->db->escape_str($type)."'";
+
+		$query = "SELECT count(*) as list_count FROM ? where {$where}";
+		$find = $this->db->query($query, $table);
 
 /*
  *
@@ -373,9 +380,12 @@ class Map_model extends CI_Model {
 	 * ====================
 	 */
 	public function post_select($data, $info) {
-		$query = "SELECT * FROM map_{$info[0]}_post where no={$info[2]} and (dtim = 0 or dtim is null)";
+		$table = "map_{$info[0]}_post";
+		$no = $info[2];
 
-		$ret = $this->db->query($query);
+		$query = "SELECT * FROM ? where no=? and (dtim = 0 or dtim is null)";
+
+		$ret = $this->db->query($query, array($table, $no));
 
 		return $ret;
 	}
@@ -403,7 +413,7 @@ class Map_model extends CI_Model {
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword = implode('|',$keyword[1]);
 
-		$query = "insert into {$table}
+		$query = "insert into ?
 			(
 				uid,
 				name,
@@ -414,16 +424,28 @@ class Map_model extends CI_Model {
 				keyword
 			)
 			VALUES (
-				'".$this->session->userdata('uid')."',
-				'".$this->session->userdata('name')."',
-				'{$title}',
-				'{$content}',
-				'{$type}',
-				'{$tag}',
-				'{$keyword}'
+				'?',
+				'?',
+				'?',
+				'?',
+				'?',
+				'?',
+				'?'
 			)";
 
-		$this->db->query($query);
+		$values = array(
+			$table,
+			
+			$this->session->userdata('uid'),
+            $this->session->userdata('name'),
+            $title,
+            $content,
+            $type,
+            $tag,
+            $keyword
+		);
+
+		$this->db->query($query, $values);
 		$ret = $this->db->insert_id(); 
 
 		return $ret;
@@ -453,14 +475,31 @@ class Map_model extends CI_Model {
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword = implode('|',$keyword[1]);
 
-		$query = "update {$table}
+		$query = "update ?
 			set
-			title = '{$title}',
-			content = '{$content}',
-			tag = '{$tag}',
-			keyword = '{$keyword}'
+				title = '?',
+				content = '?',
+				tag = '?',
+				keyword = '?'
+			where
+				type = '?'
+				and no = '?'
+				and uid = '?'
+				and name = '?'";
+			
+		$values = array(
+			$table,
 
-			where type = '{$type}' and no = '{$no}' ";
+            $title,
+            $content,
+            $tag,
+            $keyword,
+
+            $type,
+            $no,
+			$this->session->userdata('uid'),
+            $this->session->userdata('name')
+		);
 
 		if($this->db->query($query)) {
 			$ret = $no;	
@@ -481,14 +520,23 @@ class Map_model extends CI_Model {
 		$type = $info[2];
 		$no = $info[3];
 
-		$query = "delete from {$table} 
+		$query = "delete from ? 
 			where 
-				type = '{$type}'
-				and no = '{$no}'
-				and uid = '".$this->session->userdata('uid')."'
-				and name = '".$this->session->userdata('name')."' ";
+				type = '?'
+				and no = '?'
+				and uid = '?'
+				and name = '?' ";
 
-		$ret = $this->db->query($query);
+		$values = array(
+            $table,
+
+            $type,
+            $no,
+            $this->session->userdata('uid'),
+            $this->session->userdata('name')
+		);
+
+		$ret = $this->db->query($query, $values);
 
 		return $ret;
 	}
@@ -503,6 +551,8 @@ class Map_model extends CI_Model {
 	{
 		if(!$rows) $rows = REPLY_LIST_ROWS_LIMIT;
 
+		$table = "map_{$map}_reply";
+
 		$search = [];
 		$search_list = ['page', 'title', 'content', 'reply', 'name', 'tag', 'date'];
 
@@ -515,12 +565,12 @@ class Map_model extends CI_Model {
 		}
 
 		if(strcmp($start, "last") === 0) {
-			$reply_count = $this->db->query("SELECT count(*) as list_count FROM map_{$map}_reply where post={$num}");
+			$reply_count = $this->db->query("SELECT count(*) as list_count FROM ? where post='?'", array($table, $num));
 			$start = (floor($reply_count->result()[0]->list_count/$rows))*$rows;
 		}
 
-		$query = "SELECT * FROM map_{$map}_reply where post={$num} order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim LIMIT {$start}, {$rows}";
-		$find = $this->db->query($query);
+		$query = "SELECT * FROM ? where post='?' order by if(isnull(follow), no, follow), depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10, ctim LIMIT ?, ?";
+		$find = $this->db->query($query, array($table, $num, $start, $rows));
 
 		$ret = null;
 
@@ -644,8 +694,9 @@ class Map_model extends CI_Model {
 	 */
 	public function reply_pagination ($map, $num, $rows = REPLY_LIST_ROWS_LIMIT, $search = []) {
 
-		$query = "SELECT count(*) as list_count FROM map_{$map}_reply where post={$num}";
-		$find = $this->db->query($query);
+		$table = "map_{$map}_reply";
+		$query = "SELECT count(*) as list_count FROM ? where post='?'";
+		$find = $this->db->query($query, array($table, $num));
 
 		// all list count / 30 (default)
 		$max = ceil($find->result()[0]->list_count/$rows);
@@ -700,25 +751,27 @@ class Map_model extends CI_Model {
 
 	public function reply_count_update ($command='up', $info)
 	{
-		$table = $info[1];
+		$table = "map_{$info[1]}_post";
 		$no = $info[3];
 
 		switch($command) {
 		case "up":
-			$update = $this->db->query("update map_{$table}_post set reply = reply + 1 where no = '{$no}'");
+			$count = "reply + 1";
 			break;
 		case "down":
-			$update = $this->db->query("update map_{$table}_post set reply = reply - 1 where no = '{$no}'");
+			$count = "reply - 1";
 			break;
 		default:
 		}
+
+		$update = $this->db->query("update ? set reply = ? where no = '?'", array($table, $count, $no);
 
 		return $update;
 	}
 
 	public function reply_select ($table, $no) {
 		//$this->monolog->debug('reply_insert', print_r($data,1));
-		$select = $this->db->query("select * from {$table} where no = '{$no}' ");
+		$select = $this->db->query("select * from ? where no = '?' ", array($table, $no));
 
 		$result = $select->result()[0];
 
@@ -751,6 +804,7 @@ class Map_model extends CI_Model {
 		//$this->monolog->debug('reply_insert', print_r($data,1));
 		$table = "map_{$info[1]}_reply";
 		$post_no = $info[3];
+		$no = $data['no'];
 
 		$reply = [
 			'depth' => 0,
@@ -758,8 +812,8 @@ class Map_model extends CI_Model {
 			'follow' => '',
 		];
 
-		if($data['no'] > 0) {
-			$reply = $this->reply_select($table, $data['no']);
+		if($no > 0) {
+			$reply = $this->reply_select($table, $no);
 			$reply['depth'] += 1;
 		}
 
@@ -776,18 +830,22 @@ class Map_model extends CI_Model {
 				$query.= "depth".($i+1).",";
 			}
 
-			$query .= "	follow from {$table} ";
+			$query .= "	follow from ? ";
+			$values = array ($table);
 
 			if($depth==0) {
-					$query .= "where post='{$post_no}' order by depth".($depth+1)." desc LIMIT 1 ";
+					$query .= "where post='?' order by depth".($depth+1)." desc LIMIT 1 ";
+					$values[] = $post_no;
+
 			} else {
-					$query .= "where no='{$data['no']}' order by depth".($depth+1)." desc LIMIT 1 ";
+					$query .= "where no='?' order by depth".($depth+1)." desc LIMIT 1 ";
+					$values[] = $no;
 			}
 
 			//$this->monolog->debug('reply_insert', $query);
 			//exit();
 
-			$select = $this->db->query($query);
+			$select = $this->db->query($query, $values);
 
 			//$this->monolog->debug('reply_insert', print_r($select->result(),1));
 
@@ -802,21 +860,43 @@ class Map_model extends CI_Model {
 			//if($depth==1) $depth_array[$depth]++;
 		//}
 
-		$depth_array[$depth] = $this->db->query("select count(no) cnt from {$table} where relation = {$data['no']}")->result()[0]->cnt+1;
+		$depth_array[$depth] = 
+			$this->db->query("select count(no) cnt from ? where relation = ?",array($table, $no))->result()[0]->cnt+1;
 
-		$data['message'] = addslashes(htmlspecialchars($data['message']));
+		$content = addslashes(htmlspecialchars($data['message']));
 
 		$query= "insert into {$table} (uid, name,
 			content, mention, post,
 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)
 
-			values('".$this->session->userdata('uid')."', '".$this->session->userdata('name')."',
-				'{$data['message']}', '{$mention}', '{$post_no}',
-				{$follow}, {$data['no']}, {$depth_array[0]}, {$depth_array[1]}, {$depth_array[2]}, {$depth_array[3]}, {$depth_array[4]}, {$depth_array[5]}, {$depth_array[6]}, {$depth_array[7]}, {$depth_array[8]}, {$depth_array[9]})";
+			values('?', '?',
+				'?', '?', '?',
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		$values = array(
+			$this->session->userdata('uid'),
+			$this->session->userdata('name'),
+
+			$content,
+			$mention,
+			$post_no,
+			
+			$follow,
+			$no,
+			$depth_array[0],
+			$depth_array[1],
+			$depth_array[2],
+			$depth_array[3],
+			$depth_array[4],
+			$depth_array[5],
+			$depth_array[6],
+			$depth_array[7],
+			$depth_array[8],
+			$depth_array[9],
+		);
 
 		$this->monolog->debug('reply_insert', $query);
 		//exit();	
-		$result = $this->db->query($query);
+		$result = $this->db->query($query, $values);
 
 		$this->monolog->debug('reply_insert', $result);
 
@@ -833,16 +913,27 @@ class Map_model extends CI_Model {
 	{
 		$table = "map_{$info[1]}_reply";
 		$content = addslashes(htmlspecialchars($data['message']));
+		$no = $data['no'];
 
-		$query = "update {$table}
+		$query = "update ?
 			set
-				content = '{$content}'
+				content = '?'
 			where
-				uid = '".$this->session->userdata('uid')."'
-				and name = '".$this->session->userdata('name')."'
-				and no = '{$data['no']}'";
+				uid = '?'
+				and name = '?'
+				and no = '?'";
 
-		return $this->db->query($query);
+		$values = array(
+			$table,
+
+			$content,
+
+			$this->session->userdata('uid'),
+			$this->session->userdata('name'),
+			$no
+		);
+
+		return $this->db->query($query, $values);
 	}
 
 	/*
@@ -854,14 +945,23 @@ class Map_model extends CI_Model {
 	public function reply_delete ($data, $info)
 	{
 		$table = "map_{$info[1]}_reply";
+		$no = $data['no'];
 
-		$query = "delete from {$table}
+		$query = "delete from ?
 				where
-					uid = '".$this->session->userdata('uid')."'
-					and name = '".$this->session->userdata('name')."'
-					and no = '{$data['no']}'";
+					uid = '?'
+					and name = '?'
+					and no = '?'";
 
-		return $this->db->query($query);
+		$values = array(
+			$table,
+			
+			$this->session->userdata('uid'),
+			$this->session->userdata('name'),
+			$no
+		);
+
+		return $this->db->query($query, $values);
 	}
 
 	public function replyBox($status = "block", $id=0, $depth=0) {
