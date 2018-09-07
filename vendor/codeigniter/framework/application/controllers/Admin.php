@@ -89,6 +89,11 @@ class Admin extends CI_Controller {
 		$this->root->sview("admin/example/dragndrop_upload");
 	}
 
+	public function socket_alert()
+	{
+		$this->root->sview("admin/example/socket_alert");
+	}
+
 /*
  * ########################################
  *					Process
