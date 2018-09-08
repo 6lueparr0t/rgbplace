@@ -613,7 +613,6 @@ class Map_model extends CI_Model {
 			$date    = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time    = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 			
-			$idx     = $row->idx;
 			$no      = $row->no;
 			$follow  = ($row->follow)?$row->follow:$no;
 
@@ -639,7 +638,7 @@ class Map_model extends CI_Model {
 			$ret .= "<li class='depth-{$depth_no}'>";
 			$ret .= "<ul>";
 
-			$ret .= "<span class='no' idx='{$idx}'>{$no}</span>";
+			$ret .= "<span class='no'>{$no}</span>";
 			$ret .= "<li class='content'>";
 
 			/* depth arrow output : top */
@@ -907,13 +906,40 @@ class Map_model extends CI_Model {
 			$depth_array[9]
 		);
 
-		$this->monolog->debug('reply_insert', $query);
+		//$this->monolog->debug('reply_insert', $query);
 		//exit();	
-		$result = $this->db->query($query, $values);
+		$this->db->query($query, $values);
+		$result = $this->reply_getPageNum($table, $post_no, $this->db->insert_id());
 
-		$this->monolog->debug('reply_insert', $result);
+		//$this->monolog->debug('reply_insert', $result);
 
 		return $result;
+	}
+
+	private function reply_getPageNum($table, $post_no, $no) {
+		$query = "select reply.idx
+					from
+						(
+							SELECT @IDX := @IDX + 1 AS idx, r.no FROM {$table} r, (SELECT @IDX := 0 ) idx
+							where post=?
+							order by
+								if(isnull(follow), no, follow),
+								depth1,
+								depth2,
+								depth3,
+								depth4,
+								depth5,
+								depth6,
+								depth7,
+								depth8,
+								depth9,
+								depth10,
+								ctim
+							) reply
+					where
+						reply.no=? ";
+
+		return ceil($this->db->query($query, array($post_no, $no))->result()[0]->idx/REPLY_LIST_ROWS_LIMIT);
 	}
 
 	/*

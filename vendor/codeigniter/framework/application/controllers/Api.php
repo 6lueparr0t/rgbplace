@@ -100,8 +100,8 @@ class Api extends CI_Controller {
 				break;
 			case 'post':
 				if($this->session->userdata('signed_in')) {
-					if($this->map->reply_insert($data, $info)) {
-						$ret = $this->map->reply_count_update('up', $info);
+					if($ret = $this->map->reply_insert($data, $info)) {
+						$this->map->reply_count_update('up', $info);
 					}
 				} else {
 					header('HTTP/1.1 401 Unauthorized');
@@ -123,8 +123,8 @@ class Api extends CI_Controller {
 				break;
 			case 'delete':
 				if($this->session->userdata('signed_in')) {
-					if($this->map->reply_delete($data, $info)) {
-						$ret = $this->map->reply_count_update('down', $info);
+					if($ret = $this->map->reply_delete($data, $info)) {
+						$this->map->reply_count_update('down', $info);
 					}
 				} else {
 					header('HTTP/1.1 401 Unauthorized');
