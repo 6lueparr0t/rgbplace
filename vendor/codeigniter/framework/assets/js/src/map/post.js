@@ -12,11 +12,12 @@ let replyBoxYes  = document.querySelectorAll(".reply-button.yes");
 	httpRequest('GET', '/api/request/reply?info='+__URL__, null, refresh.bind(this), fail.bind(this));
 }();
 
-function replyTemplate(no, mode, message) {
+function replyTemplate(idx, no, mode, message) {
 	let node = document.createElement("li");
 	node.className = "reply-container";
 	node.innerHTML =
 		"<div class='reply-addon block' id='reply-"+no+"' name='reply-"+no+"'>"
+		+"<input type='hidden' class='reply-idx' value='"+idx+"'/>"
 		+"<input type='hidden' class='reply-no' value='"+no+"'/>"
 		+"<input type='hidden' class='reply-mode' value='"+mode+"'/>"
 		+"<div class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;' contenteditable='true'>"+message+"</div>"
@@ -71,7 +72,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 		getReplyPaging(page);
 	}
 
-	let reply, no, node;
+	let reply, idx, no, node;
 	let message = '';
 	let mode = 'POST';
 	let data = [];
@@ -84,6 +85,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 		case "reply-modify enable show" :
 			// reply item (li tag)
 			reply = t.parentElement.parentElement.parentElement.parentElement;
+			idx = reply.querySelector("ul .no").getAttribute('idx');
 			no = reply.querySelector("ul .no").innerHTML;
 
 			if(t.classList.contains('reply-modify')) {
@@ -97,10 +99,10 @@ document.querySelector("body").addEventListener("click", function(event) {
 			if(reply.lastChild.className.search("reply-container") === 0) {
 				reply.removeChild(reply.lastChild);
 				if(mode === 'UPDATE') {
-					reply.appendChild(replyTemplate(no, mode, message));
+					reply.appendChild(replyTemplate(idx, no, mode, message));
 				}
 			} else {
-				reply.appendChild(replyTemplate(no, mode, message));
+				reply.appendChild(replyTemplate(idx, no, mode, message));
 			}
 			break;
 
@@ -137,12 +139,16 @@ document.querySelector("body").addEventListener("click", function(event) {
 		case "reply-button yes" :
 			reply = t.parentElement.parentElement;
 
+			idx = reply.querySelector(".reply-idx").value;
 			no = reply.querySelector(".reply-no").value;
 			mode = reply.querySelector(".reply-mode").value;
 			message = reply.querySelector(".reply-box").innerHTML;
 
+			this.page = document.querySelector(".reply-pagination .active").getAttribute('data');
+
 			data.push({
 				'info': __URL__,
+				'idx': parseInt(this.page*__REPLY_LIST_ROWS_LIMIT__)+parseInt(idx),
 				'no': no,
 				'message': message,
 			});
@@ -150,7 +156,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			//var response = [];
 			//for(var pair of data.entries()) { response.push(pair); }
 			
-			this.page = document.querySelector(".reply-pagination .active").getAttribute('data');
+			//console.log(data);
 
 			httpRequest(mode, '/api/request/reply', JSON.stringify(data), success.bind(this), fail.bind(this));
 

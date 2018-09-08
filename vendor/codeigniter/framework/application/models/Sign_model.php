@@ -27,7 +27,7 @@ class Sign_model extends CI_Model {
 				//fail count init
 				$atim = date("Y-m-d H:i:s");
 				$query = "UPDATE user_info SET fail = 0, atim = ? WHERE uid = ?";
-				$this->db->query($query, array($atim, $uid);
+				$this->db->query($query, array($atim, $uid));
 
 				return $result = [
 					'name'  => $row->name,

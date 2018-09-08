@@ -116,6 +116,7 @@ define("REPLY_PAGINATION_COUNT", 9);
 //::TEMP:: => it can be customizing
 //LIST_ROWS_LIMIT => MINIMUM VALUE : 1
 define("REPLY_LIST_ROWS_LIMIT", 20);
+/* !!!!! if you modify, codeigniter/framework/assets/js/comm/src/0.js check !!!!! */
 
 /*#######################################*/
 

@@ -613,6 +613,7 @@ class Map_model extends CI_Model {
 			$date    = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time    = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 			
+			$idx     = $row->idx;
 			$no      = $row->no;
 			$follow  = ($row->follow)?$row->follow:$no;
 
@@ -638,7 +639,7 @@ class Map_model extends CI_Model {
 			$ret .= "<li class='depth-{$depth_no}'>";
 			$ret .= "<ul>";
 
-			$ret .= "<span class='no'>{$no}</span>";
+			$ret .= "<span class='no' idx='{$idx}'>{$no}</span>";
 			$ret .= "<li class='content'>";
 
 			/* depth arrow output : top */
