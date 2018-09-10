@@ -6,13 +6,14 @@ class Base_model extends CI_Model {
 	{
 		$data = [];
 
-		$query = "SELECT * FROM map_code WHERE code like '%{$keyword}%' or country like '%{$keyword}%' or place like '%{$keyword}%' or keyword like '%{$keyword}%'";
+		$query = "SELECT * FROM map_code WHERE code like '%{$keyword}%' or country like '%{$keyword}%' or global like '%{$keyword}%' or native like '%{$keyword}%' or keyword like '%{$keyword}%'";
 		$find = $this->db->query($query);
 
 		foreach ($find->result() as $key => $row) {
 			$data['country'][$key] = $row->country;
 			$data['map'][$key]    = $row->code.$row->no;
-			$data['place'][$key]   = $row->place;
+			$data['global'][$key]   = $row->global;
+			$data['native'][$key]   = $row->native;
 		}
 
 		return $data;
