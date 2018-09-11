@@ -42,7 +42,7 @@ function dragleave_change() {
 }
 
 function dragend_clear() {
-	console.log("dragEnd");
+	//console.log("dragEnd");
 	// Remove all of the drag data
 	var dt = event.dataTransfer;
 	if (dt.items) {
@@ -56,8 +56,9 @@ function dragend_clear() {
 	}
 }
 
+//Drag N Drop
 function drop_upload() {
-	console.log("Drop");
+	//console.log("Drop");
 
 	let request = new XMLHttpRequest();
 
@@ -76,13 +77,14 @@ function drop_upload() {
 	request.onload = function() {
 		if (this.status >= 200 && this.status < 400) {
 			//Success!
-			console.log(this.response);
 			let data = JSON.parse(this.response);
-			console.log(data);
-			console.log(request.getAllResponseHeaders());
+			//console.log(data);
+			//console.log(request.getAllResponseHeaders());
 
 			state.className = "";
 			state.classList.add("drop_it");
+
+			addFile(data);
 		} else {
 			//We reached our target server, but it returned an error
 			console.log(this.status);
@@ -109,8 +111,9 @@ function drop_upload() {
 
 }
 
+//Click Upload Button
 function input_upload() {
-	console.log("change");
+	//console.log("change");
 
 	let request = new XMLHttpRequest();
 
@@ -118,7 +121,6 @@ function input_upload() {
 	if(formData.getAll('userfile[]').length < 0) {
 		return false;
 	}
-	console.log(formData);
 
 	request.open('post', '/api/upload', true);
 
@@ -131,6 +133,8 @@ function input_upload() {
 
 			state.className = "";
 			state.classList.add("drop_it");
+
+			addFile(data);
 		} else {
 			//We reached our target server, but it returned an error
 			//console.log(this.status);
@@ -154,6 +158,12 @@ function input_upload() {
 	};
 
 	request.send(formData);
+}
+
+function addFile(data) {
+	data.forEach(function(value, key) {
+		console.log(value['file_name']);
+	});
 }
 
 /* ******************** Upload Event END ******************** */

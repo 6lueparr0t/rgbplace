@@ -189,6 +189,8 @@ class Api extends CI_Controller {
 			} else {
 				array_push($data, $this->upload->data());
 			}
+
+			$data[$i]['file_path'] = $data[$i]['full_path'] = null;
 		}
 
 		echo json_encode($data);
