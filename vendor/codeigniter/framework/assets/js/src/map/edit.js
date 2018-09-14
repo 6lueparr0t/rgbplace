@@ -11,7 +11,6 @@ drop_zone.addEventListener("dragover",	function () { dragover_change() });
 drop_zone.addEventListener("dragleave",	function () { dragleave_change() });
 drop_zone.addEventListener("dragend",	function () { dragend_clear() });
 drop_zone.addEventListener("drop",	function () { drop_upload() });
-drop_zone.addEventListener("click",	function () { input_zone.click(); });
 input_zone.addEventListener("change",	function () { input_upload() });
 
 function dragstart_change() {
@@ -135,6 +134,7 @@ function input_upload() {
 			state.classList.add("drop_it");
 
 			addFile(data);
+			input_zone.value = '';
 		} else {
 			//We reached our target server, but it returned an error
 			//console.log(this.status);
@@ -161,9 +161,49 @@ function input_upload() {
 }
 
 function addFile(data) {
+
+	let tag = '';
+	let upload = JSON.parse(window.atob(document.querySelector('#edit-upload').value.substr(1)));
+
 	data.forEach(function(value, key) {
-		console.log(value['file_name']);
+		if(value['file_name']) {
+			console.log(value['file_name']);
+			tag='';
+
+			switch (value['file_type'].split('/')[0]) {
+				case 'image' :
+					tag = document.createElement('IMG');
+					break;
+				case 'audio' :
+					tag = document.createElement('AUDIO');
+					tag.setAttribute('controls', 'controls');
+					break;
+				case 'video' :
+					tag = document.createElement('VIDEO');
+					tag.setAttribute('controls', 'controls');
+					break;
+				default :
+					tag = document.createElement('A');
+					tag.setAttribute('download', '');
+
+					break;
+			}
+
+			tag.setAttribute('src', value['default_path']+value['file_name']);
+			tag.setAttribute('alt', value['client_name']);
+
+			document.querySelector('#edit-content').appendChild(tag);
+			document.querySelector('#edit-content').innerHTML += '<br/><br/>';
+
+			upload.push({'file_name':value['file_name'], 'file_type':value['file_type'], 'client_name':value['client_name'], 'file_size':value['file_size']});
+
+		} else {
+			document.querySelector('#edit-content').innerHTML += value;
+		}
+		
 	});
+
+	document.querySelector('#edit-upload').value = 'Z'+window.btoa(JSON.stringify(upload));
 }
 
 /* ******************** Upload Event END ******************** */
@@ -190,6 +230,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 				'info': __URL__,
 				'title': document.querySelector('#edit-title').value,
 				'content': document.querySelector('#edit-content').innerHTML,
+				'upload': document.querySelector('#edit-upload').value,
 			});
 
 			let mode = (document.querySelector('#edit-mode') || {value:'post'}).value;

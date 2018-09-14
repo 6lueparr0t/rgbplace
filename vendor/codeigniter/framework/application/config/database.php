@@ -95,3 +95,8 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+/*
+|	$db['other'] = array();
+|	$otherdb = $this->load->database('otherdb', TRUE);
+ */

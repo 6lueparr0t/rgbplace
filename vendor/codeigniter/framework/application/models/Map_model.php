@@ -403,6 +403,7 @@ class Map_model extends CI_Model {
 
 		$title = addslashes(htmlspecialchars($data['title']));
 		$content = addslashes(htmlspecialchars($data['content']));
+		$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
 		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
@@ -421,9 +422,11 @@ class Map_model extends CI_Model {
 				content,
 				type,
 				tag,
-				keyword
+				keyword,
+				upload
 			)
 			VALUES (
+				?,
 				?,
 				?,
 				?,
@@ -440,7 +443,8 @@ class Map_model extends CI_Model {
             $content,
             $type,
             $tag,
-            $keyword
+            $keyword,
+            $upload
 		);
 
 		$this->db->query($query, $values);
@@ -463,6 +467,7 @@ class Map_model extends CI_Model {
 
 		$title = addslashes(htmlspecialchars($data['title']));
 		$content = addslashes(htmlspecialchars($data['content']));
+		$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
 		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
@@ -478,7 +483,8 @@ class Map_model extends CI_Model {
 				title = ?,
 				content = ?,
 				tag = ?,
-				keyword = ?
+				keyword = ?,
+				upload = ?
 			where
 				type = ?
 				and no = ?
@@ -489,7 +495,8 @@ class Map_model extends CI_Model {
             $title,
             $content,
             $tag,
-            $keyword,
+			$keyword,
+			$upload,
 
             $type,
             $no,
@@ -497,7 +504,7 @@ class Map_model extends CI_Model {
             $this->session->userdata('name')
 		);
 
-		if($this->db->query($query)) {
+		if($this->db->query($query, $values)) {
 			$ret = $no;	
 		}
 

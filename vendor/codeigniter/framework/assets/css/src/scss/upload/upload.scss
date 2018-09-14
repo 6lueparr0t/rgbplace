@@ -12,7 +12,11 @@
 
   label[for="input_zone"] {
 	position : relative;
-	top      : 1.5rem;
+    display: block;
+    padding-top: 1.5rem;
+	width: 100%;
+    height: 84%;
+	cursor:pointer;
 
 	&.drop_wait {
 		&::after {
@@ -23,14 +27,14 @@
 	}
 
 	&.drop_hover {
-		top:4rem;
+		top:2.5rem;
 		&::after {
 			@include upload_content("Here!");
 		}
 	}
 
 	&.drop_it {
-		top:4rem;
+		top:2.5rem;
 		&::after {
 			@include upload_content("Done! More?");
 			cursor : pointer;

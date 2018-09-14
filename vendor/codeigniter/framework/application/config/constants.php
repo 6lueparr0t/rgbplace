@@ -96,6 +96,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 //define("HASH_SALT_INDEX", 2);
 //define("HASH_PBKDF2_INDEX", 3);
 
+define("UPLOAD_PATH", "/upload/");
+
 define("DEFAULT_MAP", "space");
 
 /*##### POST  : pagination ##############*/

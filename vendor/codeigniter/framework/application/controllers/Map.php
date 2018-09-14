@@ -86,6 +86,7 @@ class Map extends CI_Controller {
 		$data['mode'] = 'post';
 		$data['title'] = "";
 		$data['content'] = "";
+		$data['upload'] = "[]";
 
 		if($num > 0) {
 			$info = [$map, $type, $num];
@@ -95,10 +96,13 @@ class Map extends CI_Controller {
 				$data['mode'] = 'put';
 				$data['title'] = htmlspecialchars_decode($ret->result()[0]->title);
 				$data['content'] = htmlspecialchars_decode($ret->result()[0]->content);
+				$data['upload'] = htmlspecialchars_decode($ret->result()[0]->upload);
 			} else {
 				redirect("/{$map}/{$type}/{$num}");
 			}
 		}
+
+		$data['upload'] = "Z".base64_encode($data['upload']);
 
 		$data['map' ] = strtolower($map);
 		$data['type'] = strtolower($type);
