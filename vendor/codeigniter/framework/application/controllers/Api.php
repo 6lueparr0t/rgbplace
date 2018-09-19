@@ -190,6 +190,8 @@ class Api extends CI_Controller {
 				array_push($data, $this->upload->data());
 				$data[$i]['file_path'] = $data[$i]['full_path'] = null;
 				$data[$i]['default_path'] = UPLOAD_PATH;
+
+				$this->base->setUploadList($data[$i], $this->session->userdata('admin'));
 			}
 
 		}

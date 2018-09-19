@@ -98,7 +98,27 @@ class Base_model extends CI_Model {
 		return true;
 	}
 
-	function generateKey($length = 20) {
+	public function setUploadList($data, $admin = 'FALSE')
+	{
+		if($admin) {
+			$table = 'admin_info';
+			$col = 'name';
+			$uid = explode('@', $this->session->userdata('uid'))[1];
+		} else {
+			$table = 'user_info';
+			$col = 'uid';
+			$uid = $this->session->userdata('uid');
+		}
+
+		$jsonData = "{'file_name':{$data['file_name']}, 'file_type':{$data['file_type']}, 'client_name':{$data['client_name']}, 'file_size':{$data['file_size']}}";
+
+		$update = $this->db->query("UPDATE {$table} SET upload = JSON_ARRAY_APPEND(upload, '$', ?) where {$col} = ? ", array(json_encode($jsonData), $uid));
+
+		return $update;
+	}
+
+	function generateKey($length = 20)
+	{
         $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~`!@#$%^&*()_-+=[]{}|\:;\'\"<>?,.";
         $charactersLength = strlen($characters);
         $randomString = '';

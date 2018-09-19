@@ -163,7 +163,7 @@ function input_upload() {
 function addFile(data) {
 
 	let tag = '';
-	let upload = JSON.parse(window.atob(document.querySelector('#edit-upload').value.substr(1)));
+	//let upload = JSON.parse(window.atob(document.querySelector('#edit-upload').value.substr(1)));
 
 	data.forEach(function(value, key) {
 		if(value['file_name']) {
@@ -173,6 +173,7 @@ function addFile(data) {
 			switch (value['file_type'].split('/')[0]) {
 				case 'image' :
 					tag = document.createElement('IMG');
+					tag.style.maxWidth = "100%";
 					break;
 				case 'audio' :
 					tag = document.createElement('AUDIO');
@@ -195,7 +196,7 @@ function addFile(data) {
 			document.querySelector('#edit-content').appendChild(tag);
 			document.querySelector('#edit-content').innerHTML += '<br/><br/>';
 
-			upload.push({'file_name':value['file_name'], 'file_type':value['file_type'], 'client_name':value['client_name'], 'file_size':value['file_size']});
+			//upload.push({'file_name':value['file_name'], 'file_type':value['file_type'], 'client_name':value['client_name'], 'file_size':value['file_size']});
 
 		} else {
 			document.querySelector('#edit-content').innerHTML += value;
@@ -203,7 +204,7 @@ function addFile(data) {
 		
 	});
 
-	document.querySelector('#edit-upload').value = 'Z'+window.btoa(JSON.stringify(upload));
+	//document.querySelector('#edit-upload').value = 'Z'+window.btoa(JSON.stringify(upload));
 }
 
 /* ******************** Upload Event END ******************** */
@@ -230,7 +231,6 @@ document.querySelector("body").addEventListener("click", function(event) {
 				'info': __URL__,
 				'title': document.querySelector('#edit-title').value,
 				'content': document.querySelector('#edit-content').innerHTML,
-				'upload': document.querySelector('#edit-upload').value,
 			});
 
 			let mode = (document.querySelector('#edit-mode') || {value:'post'}).value;

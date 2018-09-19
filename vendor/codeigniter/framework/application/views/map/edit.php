@@ -3,7 +3,6 @@
 
 <!-- map/edit/<?=$map?>/<?=$type?>/<?=$num?> -->
 <input type='hidden' id='edit-mode' name='edit-mode' value='<?=$mode?>' />
-<input type='hidden' id='edit-upload' name='edit-upload' value='<?=$upload?>' />
 <input type='text' id='edit-title' name='edit-title' value='<?=$title?>' />
 <div id='edit-content' name='edit-content' contenteditable='true'>
 <?=$content?>
