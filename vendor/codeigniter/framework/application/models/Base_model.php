@@ -110,11 +110,11 @@ class Base_model extends CI_Model {
 			$uid = $this->session->userdata('uid');
 		}
 		
-		$jsonData = "{'file_name':{$data['file_name']}, 'file_type':{$data['file_type']}, 'client_name':{$data['client_name']}, 'file_size':{$data['file_size']}}";
+		$json = "{\"file_name\":\"{$data['file_name']}\", \"file_type\":\"{$data['file_type']}\", \"client_name\":\"{$data['client_name']}\", \"file_size\":\"{$data['file_size']}\"}";
 
 		//select json_merge('{"fileList": []}', JSON_QUERY('{"fileList":[{"date":"2018-09-03","text":"mmmmmmm"}]}', '$')) ;
 		
-		$update = $this->db->query("UPDATE {$table} SET upload = JSON_ARRAY_APPEND(upload, '$', ?) where {$col} = ? ", array(json_encode($jsonData), $uid));
+		$update = $this->db->query("UPDATE {$table} SET upload = JSON_MERGE(upload, JSON_QUERY('{\"history\":[".$json."]}', '$')) where {$col} = ? ", $uid);
 
 		return $update;
 	}
