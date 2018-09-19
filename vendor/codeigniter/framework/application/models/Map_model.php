@@ -46,9 +46,14 @@ class Map_model extends CI_Model {
 		$data = [];
 
 		$table = $this->db->escape_str("map_{$map}_post");
-		
-		$query = "SELECT * FROM {$table} where type=? ORDER BY no desc LIMIT ".$this->db->escape_str($limit);
-		$find = $this->db->query($query, $type);
+
+		$query = "SELECT * FROM {$table} where type='{$type}' ORDER BY no desc LIMIT ".$this->db->escape_str($limit);
+		if($this->db->simple_query($query)) {
+			$find = $this->db->query($query, $type);
+		} else {
+			redirect('/'.DEFAULT_MAP);
+			exit();
+		}
 
 		if($find->num_rows() === 0) {
 			echo "<table class='no-page'><tr><td>No Results.</td></tr></table>";
@@ -381,11 +386,15 @@ class Map_model extends CI_Model {
 	 */
 	public function post_select($data, $info) {
 		$table = $this->db->escape_str("map_{$info[0]}_post");
-		$no = $info[2];
+		$no = $this->db->escape_str($info[2]);
 
-		$query = "SELECT * FROM {$table} where no=? and (dtim = 0 or dtim is null)";
+		$query = "SELECT * FROM {$table} where no='{$no}' and (dtim = 0 or dtim is null)";
 
-		$ret = $this->db->query($query, $no);
+        if($this->db->simple_query($query)) {
+			$ret = $this->db->query($query);
+		} else {
+			redirect("/");
+        }
 
 		return $ret;
 	}

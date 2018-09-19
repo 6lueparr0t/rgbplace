@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Base_model extends CI_Model {
 
-	public function get_map($keyword)
+	public function getMap($keyword)
 	{
 		$data = [];
 
@@ -19,7 +19,7 @@ class Base_model extends CI_Model {
 		return $data;
 	}
 
-	public function get_stage($uid)
+	public function getStage($uid)
 	{
 		$data = [];
 

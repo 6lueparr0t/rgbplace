@@ -10,7 +10,7 @@ class Init extends CI_Controller {
 
 	public function index()
 	{
-		redirect(current_url()."stage");
+		redirect('/'.DEFAULT_MAP);
 	}
 
 }

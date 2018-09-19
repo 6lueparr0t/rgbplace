@@ -19,7 +19,7 @@ class Map extends CI_Controller {
 	{
 		if($this->input->get('keyword')) {
 			$data   = ['keyword' => $this->input->get('keyword')];
-			$output = $this->base->get_map($data['keyword']);
+			$output = $this->base->getMap($data['keyword']);
 		}
 
 		if(empty($output)) $output = null;
@@ -39,6 +39,10 @@ class Map extends CI_Controller {
 		$type = $this->map->link($map, $num);
 		$num  = $num;
 
+		if(!$type) {
+			redirect("/{$map}");
+			exit();
+		}
 		redirect("/{$map}/{$type}/{$num}");
 	}
 
