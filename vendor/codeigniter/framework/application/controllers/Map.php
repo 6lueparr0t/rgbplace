@@ -74,6 +74,8 @@ class Map extends CI_Controller {
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
 
+		$this->map->post_hit($data);
+
 		$this->root->view("map/post", $data);
 	}
 

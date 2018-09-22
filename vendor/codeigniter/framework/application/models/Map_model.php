@@ -361,6 +361,14 @@ class Map_model extends CI_Model {
 			."</div>"
 
 			."<div id='post-conetent'>{$content}</div>";
+
+			echo "<div class='vote button-group'>"
+				."<span class='null'></span>"
+				."<div class='vote-up'><span class='far fa-thumbs-up'> {$row->up} </span></div>"
+				."<span class='quater null'></span>"
+				."<div class='vote-down'><span class='far fa-thumbs-down'> {$row->down} </span></div>"
+				."<span class='null'></span>"
+				."</div>";
 		}
 		echo "</div>";
 
@@ -376,6 +384,36 @@ class Map_model extends CI_Model {
 		."</div>";
 
 		return true;
+	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->post_hit (data [$map, $type, $num] array)
+	 * Desc : select 'post'
+	 * ====================
+	 */
+	public function post_hit($data) {
+		$insert_table = $this->db->escape_str("map_{$data['map']}_history");
+		$no = $this->db->escape_str($data['num']);
+		$uid = $this->session->userdata('uid');
+
+		$query = "SELECT no FROM {$insert_table} where uid=? and type='post' and relation=? and act='view' ";
+
+		if($this->db->query($query, array($uid, $no))->num_rows() > 0) {
+			$ret = true;
+		} else {
+			$insert = "INSERT INTO {$insert_table}
+				( uid, type, relation, act)
+				VALUES
+				( ?, 'post', ?, 'view')";
+			if( $this->db->query($insert, array($uid, $no)) ) {
+				$update_table = $this->db->escape_str("map_{$data['map']}_post");
+				$update = "UPDATE {$update_table} SET hit = hit + 1  where no = ?";
+				$ret = $this->db->query($update, $no);
+			}
+		}
+
+		return $ret;
 	}
 
 	/*
@@ -423,7 +461,7 @@ class Map_model extends CI_Model {
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword = implode('|',$keyword[1]);
 
-		$query = "insert into {$table}
+		$query = "INSERT INTO {$table}
 			(
 				uid,
 				name,
