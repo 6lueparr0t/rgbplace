@@ -365,7 +365,6 @@ class Map_model extends CI_Model {
 			echo "<div class='vote button-group'>"
 				."<span class='null'></span>"
 				."<div class='vote-up'><span class='far fa-thumbs-up'> {$row->up} </span></div>"
-				."<span class='quater null'></span>"
 				."<div class='vote-down'><span class='far fa-thumbs-down'> {$row->down} </span></div>"
 				."<span class='null'></span>"
 				."</div>";

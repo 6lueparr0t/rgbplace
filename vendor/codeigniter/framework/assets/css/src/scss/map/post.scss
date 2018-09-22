@@ -77,23 +77,19 @@
 			flex-grow:8;
 		}
 
-		span.quater.null {
-			flex-grow:2;
-		}
-
 		.vote-up {
-			padding: .5rem 2rem;
+			padding: .5rem 0rem;
 			border-radius: .25rem;
-			flex-grow: 2;
+			flex-grow: 1;
 			margin: 0 1rem;
 			border: 1px solid $oc-gray-9;
 			cursor:pointer;
 		}
 
 		.vote-down {
-			padding: .5rem 2rem;
+			padding: .5rem 0rem;
 			border-radius: .25rem;
-			flex-grow: 2;
+			flex-grow: 1;
 			margin: 0 1rem;
 			border: 1px solid $oc-gray-9;
 			cursor:pointer;
