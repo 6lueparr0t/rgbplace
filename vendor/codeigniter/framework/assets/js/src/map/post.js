@@ -77,7 +77,28 @@ document.querySelector("body").addEventListener("click", function(event) {
 	let data = [];
 
 	//console.log(t.parentElement);
-	switch (t.className) {
+	//console.log(t.className);
+	switch (t.className.trim()) {
+		case "far fa-thumbs-up post-up enable" :
+			this.act = 'up';
+			data.push({
+				'info': __URL__,
+				'target':'POST',
+				'act':this.act,
+			});
+
+			httpRequest(mode, '/api/request/vote', JSON.stringify(data), successPostVote.bind(this), fail.bind(this));
+			break;
+		case "far fa-thumbs-down post-down enable" :
+			this.act = 'down';
+			data.push({
+				'info': __URL__,
+				'target':'POST',
+				'act':this.act,
+			});
+
+			httpRequest(mode, '/api/request/vote', JSON.stringify(data), successPostVote.bind(this), fail.bind(this));
+			break;
 		case "reply enable" :
 		case "reply enable show" :
 		case "reply-modify enable":
@@ -185,6 +206,10 @@ function successDelete (data) {
 	//console.log(data);
 	alert('Post Remove successfully');
 	redirect('list');
+}
+
+function successPostVote (data) {
+	document.querySelector(".post-"+this.act+".enable").innerHTML = " "+data+" ";
 }
 
 function refresh (data) {

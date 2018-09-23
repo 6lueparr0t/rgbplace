@@ -56,6 +56,7 @@ class Api extends CI_Controller {
 		}
 
 		$info = explode('/', $data['info']);
+		unset($data['info']);
 
 		switch ($type) {
 		case 'edit':
@@ -152,21 +153,18 @@ class Api extends CI_Controller {
 				$ret = 'login please';
 			}
 			break;
+		case 'vote' :
+			if($this->map->vote($data, $info)) {
+				$result = $this->map->post_select(null, $info, 'vote');
+				$ret = $result->result()[0]->{$data['act']};
+			}
+			break;
 
 		default :
 			break;
 		}
 
 		echo $ret;
-	}
-
-	public function vote($map, $type, $num, $act) {
-		$data['map' ] = strtolower($map);
-        $data['type'] = strtolower($type);
-        $data['num' ] = $num;
-		$data['act' ] = $act;
-
-        $this->map->post_vote($data);
 	}
 
 	public function upload()

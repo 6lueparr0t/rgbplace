@@ -342,6 +342,23 @@ class Map_model extends CI_Model {
 			return false;
 		}
 
+		$vote = array(
+			'up' => '',
+			'down' => '',
+		);
+
+		// permission check
+		$activate = "disable";
+		if($user = $this->session->userdata('uid')) {
+			$activate = "enable";
+			$history_table = $this->db->escape_str("map_{$map}_history");
+			$vote_result = $this->vote_select($history_table, $user, $type, $num);
+
+			if( $vote_result->num_rows() > 0 ) {
+				$vote[$vote_result->result()[0]->act] = 'active';
+			} 
+		}
+
 		echo "<div class='post'>";
 		foreach ($find->result() as $key => $row) {
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
@@ -364,8 +381,8 @@ class Map_model extends CI_Model {
 
 			echo "<div class='vote button-group'>"
 				."<span class='null'></span>"
-				."<div class='vote-up'><span class='far fa-thumbs-up'> {$row->up} </span></div>"
-				."<div class='vote-down'><span class='far fa-thumbs-down'> {$row->down} </span></div>"
+				."<div class='far fa-thumbs-up post-up {$activate} {$vote['up']}'> {$row->up} </div>"
+				."<div class='far fa-thumbs-down post-down {$activate} {$vote['down']}'> {$row->down} </div>"
 				."<span class='null'></span>"
 				."</div>";
 		}
@@ -373,7 +390,7 @@ class Map_model extends CI_Model {
 
 		// permission check
 		$activate = "disable";
-		if ($this->session->userdata('uid') === $uid || $this->session->userdata('admin')) $activate = "enable";
+		if ($user === $uid || $this->session->userdata('admin')) $activate = "enable";
 
 		// modify + delete button
 		echo "<div class='button-group'>"
@@ -405,65 +422,18 @@ class Map_model extends CI_Model {
 				( uid, type, relation, act)
 				VALUES
 				( ?, 'post', ?, 'view')";
-			if( $this->db->query($insert, array($uid, $no)) ) {
+			if( $uid && $this->db->query($insert, array($uid, $no)) ) {
 				$update_table = $this->db->escape_str("map_{$data['map']}_post");
 				$update = "UPDATE {$update_table} SET hit = hit + 1  where no = ?";
 				$ret = $this->db->query($update, $no);
-			}
-		}
-
-		return $ret;
-	}
-
-	/*
-	 * ====================
-	 * Usage : $this->map->post_hit (data [$map, $type, $num] array)
-	 * Desc : select 'post'
-	 * ====================
-	 */
-	public function post_vote($data) {
-		$history_table = $this->db->escape_str("map_{$data['map']}_history");
-		$no = $this->db->escape_str($data['num']);
-		$uid = $this->session->userdata('uid');
-		$act = $this->db->escape_str($data['act']);
-
-		$query = "SELECT no, act, ctim, utim FROM {$history_table} where uid=? and type='post' and relation=? and act in ('up','down','n') ";
-
-		$result = $this->db->query($query, array($uid, $no));
-		$update_table = $this->db->escape_str("map_{$data['map']}_post");
-
-		if($result->num_rows() > 0) {
-			if (!is_null($result->result()[0]->utim)) {
-				$query = "UPDATE {$history_table} SET act=?, ctim=now(), utim=NULL where uid=? and type='post' and relation=? and act='n'";
-				if( $this->db->query($query, array($act, $uid, $no)) ) {
-					$query = "UPDATE {$update_table} SET {$act} = {$act} + 1  where no = ?";
-					$ret = $this->db->query($query, $no);
-				}
 			} else {
-				if($act == $result->result()[0]->act && $result->result()[0]->act != 'n') {
-					$query = "UPDATE {$history_table} SET act='n', utim=now() where uid=? and type='post' and relation=? and act=?";
-					if( $this->db->query($query, array($uid, $no, $act)) ) {
-						$update_table = $this->db->escape_str("map_{$data['map']}_post");
-						$query = "UPDATE {$update_table} SET {$act} = {$act} - 1  where no = ?";
-						$ret = $this->db->query($query, $no);
-					}
-				} else {
-					return 0;
-				}
-			}
-		} else {
-			$query = "INSERT INTO {$history_table}
-				( uid, type, relation, act)
-				VALUES
-				( ?, 'post', ?, ?)";
-			if( $this->db->query($query, array($uid, $no, $act)) ) {
-				$query = "UPDATE {$update_table} SET {$act} = {$act} + 1  where no = ?";
-				$ret = $this->db->query($query, $no);
+				$ret = false;
 			}
 		}
 
 		return $ret;
 	}
+
 
 
 	/*
@@ -472,11 +442,19 @@ class Map_model extends CI_Model {
 	 * Desc : select 'post'
 	 * ====================
 	 */
-	public function post_select($data, $info) {
-		$table = $this->db->escape_str("map_{$info[0]}_post");
-		$no = $this->db->escape_str($info[2]);
+	public function post_select($data, $info, $option = null) {
 
-		$query = "SELECT * FROM {$table} where no='{$no}' and (dtim = 0 or dtim is null)";
+		if($option == 'vote') {
+			$table = $this->db->escape_str("map_{$info[1]}_post");
+			$no = $this->db->escape_str($info[3]);
+			$field = 'up, down';
+		} else {
+			$table = $this->db->escape_str("map_{$info[0]}_post");
+			$no = $this->db->escape_str($info[2]);
+			$field = '*';
+		}
+
+		$query = "SELECT {$field} FROM {$table} where no='{$no}' and (dtim = 0 or dtim is null)";
 
         if($this->db->simple_query($query)) {
 			$ret = $this->db->query($query);
@@ -1113,4 +1091,67 @@ class Map_model extends CI_Model {
 		return $ret;
 	}
 
+	/*
+	 * ====================
+	 * Usage : $this->map->vote (data, info [$map, $type, $num] array)
+	 * Desc : insert or update 'history' table, and increase up, down column to 'post' 'reply' table
+	 * ====================
+	 */
+	public function vote_select($table, $uid, $type, $no) {
+		$query = "SELECT * FROM {$table} where uid=? and type=? and relation=? and act in ('up','down','n') ";
+
+		$result = $this->db->query($query, array($uid, $type, $no));
+
+		return $result;
+	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->vote (data, info [domain, map, type, num] array)
+	 * Desc : insert or update 'history' table, and increase up, down column to 'post' 'reply' table
+	 * ====================
+	 */
+	public function vote($data, $info) {
+		$no = $this->db->escape_str($info[3]);
+		$uid = $this->session->userdata('uid');
+
+		$act = strtolower($this->db->escape_str($data['act']));
+		$type = $this->db->escape_str($data['target']);
+
+		$history_table = $this->db->escape_str("map_{$info[1]}_history");
+		$update_table = $this->db->escape_str("map_{$info[1]}_{$type}");
+
+		$result = $this->vote_select($history_table, $uid, $type, $no);
+		if($result->num_rows() > 0) {
+			if (!is_null($result->result()[0]->utim)) {
+				$query = "UPDATE {$history_table} SET act=?, ctim=now(), utim=NULL where uid=? and type=? and relation=? and act='n'";
+				if( $this->db->query($query, array($act, $uid, $type, $no)) ) {
+					$query = "UPDATE {$update_table} SET {$act} = {$act} + 1  where no = ?";
+					$ret = $this->db->query($query, $no);
+				}
+			} else {
+				$act_check = $result->result();
+				if($act == $act_check[0]->act && $act_check[0]->act != 'n') {
+					$query = "UPDATE {$history_table} SET act='n', utim=now() where uid=? and type=? and relation=? and act=?";
+					if( $this->db->query($query, array($uid, $type, $no, $act)) ) {
+						$query = "UPDATE {$update_table} SET {$act} = {$act} - 1  where no = ?";
+						$ret = $this->db->query($query, $no);
+					}
+				} else {
+					$ret = 1;
+				}
+			}
+		} else {
+			$query = "INSERT INTO {$history_table}
+				( uid, type, relation, act)
+				VALUES
+				( ?, 'post', ?, ?)";
+			if( $this->db->query($query, array($uid, $no, $act)) ) {
+				$query = "UPDATE {$update_table} SET {$act} = {$act} + 1  where no = ?";
+				$ret = $this->db->query($query, $no);
+			}
+		}
+
+		return $ret;
+	}
 }

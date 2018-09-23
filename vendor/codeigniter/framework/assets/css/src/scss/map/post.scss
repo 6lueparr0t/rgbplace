@@ -77,7 +77,7 @@
 			flex-grow:8;
 		}
 
-		.vote-up {
+		.post-up {
 			padding: .5rem 0rem;
 			border-radius: .25rem;
 			flex-grow: 1;
@@ -91,9 +91,13 @@
 				background-color: $oc-red-8;
 				transition:all .1s ease-out;
 			}
+
+			&.disable:hover {
+				@include animation('shake .5s linear');
+            }
 		}
 
-		.vote-down {
+		.post-down {
 			padding: .5rem 0rem;
 			border-radius: .25rem;
 			flex-grow: 1;
@@ -107,6 +111,10 @@
 				background-color: $oc-blue-8;
 				transition:all .1s ease-out;
 			}
+
+			&.disable:hover {
+				@include animation('shake .5s linear');
+            }
 		}
 
 		.edit {
