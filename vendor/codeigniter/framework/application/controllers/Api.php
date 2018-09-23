@@ -160,6 +160,15 @@ class Api extends CI_Controller {
 		echo $ret;
 	}
 
+	public function vote($map, $type, $num, $act) {
+		$data['map' ] = strtolower($map);
+        $data['type'] = strtolower($type);
+        $data['num' ] = $num;
+		$data['act' ] = $act;
+
+        $this->map->post_vote($data);
+	}
+
 	public function upload()
 	{
 		$this->load->library('upload');

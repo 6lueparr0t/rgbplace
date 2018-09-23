@@ -84,6 +84,13 @@
 			margin: 0 1rem;
 			border: 1px solid $oc-gray-9;
 			cursor:pointer;
+
+			&:hover, &.active {
+				border: 1px solid $oc-red-9;
+				color: white;
+				background-color: $oc-red-8;
+				transition:all .1s ease-out;
+			}
 		}
 
 		.vote-down {
@@ -93,6 +100,13 @@
 			margin: 0 1rem;
 			border: 1px solid $oc-gray-9;
 			cursor:pointer;
+
+			&:hover, &.active {
+				border: 1px solid $oc-blue-9;
+				color: white;
+				background-color: $oc-blue-8;
+				transition:all .1s ease-out;
+			}
 		}
 
 		.edit {

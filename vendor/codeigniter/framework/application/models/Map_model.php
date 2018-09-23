@@ -388,20 +388,20 @@ class Map_model extends CI_Model {
 	/*
 	 * ====================
 	 * Usage : $this->map->post_hit (data [$map, $type, $num] array)
-	 * Desc : select 'post'
+	 * Desc : up to 'post' hit (and insert history table)
 	 * ====================
 	 */
 	public function post_hit($data) {
-		$insert_table = $this->db->escape_str("map_{$data['map']}_history");
+		$history_table = $this->db->escape_str("map_{$data['map']}_history");
 		$no = $this->db->escape_str($data['num']);
 		$uid = $this->session->userdata('uid');
 
-		$query = "SELECT no FROM {$insert_table} where uid=? and type='post' and relation=? and act='view' ";
+		$query = "SELECT no FROM {$history_table} where uid=? and type='post' and relation=? and act='view' ";
 
 		if($this->db->query($query, array($uid, $no))->num_rows() > 0) {
 			$ret = true;
 		} else {
-			$insert = "INSERT INTO {$insert_table}
+			$insert = "INSERT INTO {$history_table}
 				( uid, type, relation, act)
 				VALUES
 				( ?, 'post', ?, 'view')";
@@ -414,6 +414,57 @@ class Map_model extends CI_Model {
 
 		return $ret;
 	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->post_hit (data [$map, $type, $num] array)
+	 * Desc : select 'post'
+	 * ====================
+	 */
+	public function post_vote($data) {
+		$history_table = $this->db->escape_str("map_{$data['map']}_history");
+		$no = $this->db->escape_str($data['num']);
+		$uid = $this->session->userdata('uid');
+		$act = $this->db->escape_str($data['act']);
+
+		$query = "SELECT no, act, ctim, utim FROM {$history_table} where uid=? and type='post' and relation=? and act in ('up','down','n') ";
+
+		$result = $this->db->query($query, array($uid, $no));
+		$update_table = $this->db->escape_str("map_{$data['map']}_post");
+
+		if($result->num_rows() > 0) {
+			if (!is_null($result->result()[0]->utim)) {
+				$query = "UPDATE {$history_table} SET act=?, ctim=now(), utim=NULL where uid=? and type='post' and relation=? and act='n'";
+				if( $this->db->query($query, array($act, $uid, $no)) ) {
+					$query = "UPDATE {$update_table} SET {$act} = {$act} + 1  where no = ?";
+					$ret = $this->db->query($query, $no);
+				}
+			} else {
+				if($act == $result->result()[0]->act && $result->result()[0]->act != 'n') {
+					$query = "UPDATE {$history_table} SET act='n', utim=now() where uid=? and type='post' and relation=? and act=?";
+					if( $this->db->query($query, array($uid, $no, $act)) ) {
+						$update_table = $this->db->escape_str("map_{$data['map']}_post");
+						$query = "UPDATE {$update_table} SET {$act} = {$act} - 1  where no = ?";
+						$ret = $this->db->query($query, $no);
+					}
+				} else {
+					return 0;
+				}
+			}
+		} else {
+			$query = "INSERT INTO {$history_table}
+				( uid, type, relation, act)
+				VALUES
+				( ?, 'post', ?, ?)";
+			if( $this->db->query($query, array($uid, $no, $act)) ) {
+				$query = "UPDATE {$update_table} SET {$act} = {$act} + 1  where no = ?";
+				$ret = $this->db->query($query, $no);
+			}
+		}
+
+		return $ret;
+	}
+
 
 	/*
 	 * ====================
