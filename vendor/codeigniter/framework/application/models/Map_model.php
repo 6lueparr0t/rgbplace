@@ -352,11 +352,12 @@ class Map_model extends CI_Model {
 		if($user = $this->session->userdata('uid')) {
 			$activate = "enable";
 			$history_table = $this->db->escape_str("map_{$map}_history");
-			$vote_result = $this->vote_select($history_table, $user, $type, $num);
+			$vote_result = $this->vote_select($history_table, $user, 'post', $num);
 
+			$result = $vote_result->result();
 			if( $vote_result->num_rows() > 0 ) {
-				$vote[$vote_result->result()[0]->act] = 'active';
-			} 
+				$vote[$result[0]->act] = 'active';
+			}
 		}
 
 		echo "<div class='post'>";
