@@ -78,9 +78,9 @@
 		}
 
 		.post-up {
-			padding: .5rem 0rem;
+			padding: .5rem 1rem;
 			border-radius: .25rem;
-			flex-grow: 1;
+			min-width:10rem;
 			margin: 0 1rem;
 			border: 1px solid $oc-gray-9;
 			cursor:pointer;
@@ -98,9 +98,9 @@
 		}
 
 		.post-down {
-			padding: .5rem 0rem;
+			padding: .5rem 1rem;
 			border-radius: .25rem;
-			flex-grow: 1;
+			min-width:10rem;
 			margin: 0 1rem;
 			border: 1px solid $oc-gray-9;
 			cursor:pointer;

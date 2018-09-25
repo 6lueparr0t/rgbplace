@@ -77,10 +77,12 @@ document.querySelector("body").addEventListener("click", function(event) {
 	let data = [];
 
 	//console.log(t.parentElement);
-	//console.log(t.className);
+	//console.log(t.className.trim());
 	switch (t.className.trim()) {
 		case "far fa-thumbs-up post-up enable" :
+		case "far fa-thumbs-up post-up enable active" :
 			this.act = 'up';
+
 			data.push({
 				'info': __URL__,
 				'target':'POST',
@@ -90,7 +92,9 @@ document.querySelector("body").addEventListener("click", function(event) {
 			httpRequest(mode, '/api/request/vote', JSON.stringify(data), successPostVote.bind(this), fail.bind(this));
 			break;
 		case "far fa-thumbs-down post-down enable" :
+		case "far fa-thumbs-down post-down enable active" :
 			this.act = 'down';
+
 			data.push({
 				'info': __URL__,
 				'target':'POST',
@@ -210,6 +214,7 @@ function successDelete (data) {
 
 function successPostVote (data) {
 	document.querySelector(".post-"+this.act+".enable").innerHTML = " "+data+" ";
+	document.querySelector(".post-"+this.act+".enable").classList.toggle('active');
 }
 
 function refresh (data) {
