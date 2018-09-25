@@ -154,6 +154,7 @@ class Api extends CI_Controller {
 			}
 			break;
 		case 'vote' :
+			$ret = false;
 			if($this->map->vote($data, $info)) {
 				$result = $this->map->post_select(null, $info, 'vote');
 				$ret = $result->result()[0]->{$data['act']};

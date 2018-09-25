@@ -1139,7 +1139,7 @@ class Map_model extends CI_Model {
 						$ret = $this->db->query($query, $no);
 					}
 				} else {
-					$ret = 1;
+					$ret = 0;
 				}
 			}
 		} else {
