@@ -662,11 +662,11 @@ class Map_model extends CI_Model {
 
 		$find = $this->db->query($query, $num);
 
-		$ret = null;
+		$ret = '';
 
 		if($find->num_rows() === 0) {
 			$ret .= $this->replyBox();
-			return false;
+			return $ret;
 		}
 
 		$ret .= "<ul id='reply-list'>";
@@ -699,7 +699,7 @@ class Map_model extends CI_Model {
 			$name    = $row->name;
 			$mention = ($row->mention)? "@".$row->mention:"";
 
-			$content = $row->content;
+			$content = stripslashes($row->content);
 
 			$depth = [
 				$row->depth1, $row->depth2, $row->depth3,
@@ -1077,24 +1077,9 @@ class Map_model extends CI_Model {
 		return $this->db->query($query, $values);
 	}
 
-	public function replyBox($status = "block", $id=0, $depth=0) {
-		$ret = "<div class='reply-addon {$status}' id='reply-{$id}' name='reply-{$id}'>"
-				."<input type='hidden' class='reply-no' value='{$id}'>"
-				."<input type='hidden' class='reply-mode' value='POST'/>"
-				."<div class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf303;' contenteditable='true'></div>"
-				."<div class='reply-button-group'>"
-					."<div class='reply-button send'>Send Message &#xf11c; </div>"
-					."<div class='reply-button yes'>yes</div>"
-					."<div class='reply-button no'>no</div>"
-				."</div>"
-			."</div>";
-
-		return $ret;
-	}
-
 	/*
 	 * ====================
-	 * Usage : $this->map->vote (data, info [$map, $type, $num] array)
+	 * Usage : $this->map->vote_select ($table, $uid, $type, $no)
 	 * Desc : insert or update 'history' table, and increase up, down column to 'post' 'reply' table
 	 * ====================
 	 */
@@ -1152,6 +1137,38 @@ class Map_model extends CI_Model {
 				$ret = $this->db->query($query, $no);
 			}
 		}
+
+		return $ret;
+	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->move_to_best (data, info [domain, map, type, num] array)
+	 * Desc : type update to 'best'
+	 * ====================
+	 */
+	public function move_to_best($data, $info) {
+		$table = $this->db->escape_str("map_{$info[1]}_post");
+		$type = $info[2];
+		$no = $info[3];
+
+		$query = "update {$table} set type = ? where no = ?";
+		$values = array('best', $no);
+
+		return $this->db->query($query, $values);
+	}
+
+	public function replyBox($status = "block", $id=0, $depth=0) {
+		$ret = "<div class='reply-addon {$status}' id='reply-{$id}' name='reply-{$id}'>"
+				."<input type='hidden' class='reply-no' value='{$id}'>"
+				."<input type='hidden' class='reply-mode' value='POST'/>"
+				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf303;'></textarea>"
+				."<div class='reply-button-group'>"
+					."<div class='reply-button send'>Send Message &#xf11c; </div>"
+					."<div class='reply-button yes'>yes</div>"
+					."<div class='reply-button no'>no</div>"
+				."</div>"
+			."</div>";
 
 		return $ret;
 	}

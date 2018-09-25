@@ -48,12 +48,14 @@ class Api extends CI_Controller {
 
 	public function request($type=null, $val=null, $api_key=null)
 	{
-		//if(!$this->session->userdata('signed_in') || $type) exit;
-		if($this->input->method() == 'get') {
+		$method = $this->input->method();
+		if($method == 'get') {
 			$data = $this->input->get();
 		} else {
 			$data = (array)json_decode($this->input->raw_input_stream)[0];
 		}
+
+		if(!$data) redirect("/");
 
 		$info = explode('/', $data['info']);
 		unset($data['info']);
@@ -158,6 +160,10 @@ class Api extends CI_Controller {
 			if($this->map->vote($data, $info)) {
 				$result = $this->map->post_select(null, $info, 'vote');
 				$ret = $result->result()[0]->{$data['act']};
+
+				if($ret > 20) {
+					$this->map->move_to_best($data, $info);
+				}	
 			}
 			break;
 

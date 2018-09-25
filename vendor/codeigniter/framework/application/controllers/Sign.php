@@ -16,6 +16,8 @@ class Sign extends CI_Controller {
 
 	public function in($check="")
 	{
+		if(!$this->input->post('uid') || !$this->input->post('pswd')) redirect("/");
+
 		$config = [
 				[
 					'field' => 'uid',
@@ -110,6 +112,13 @@ class Sign extends CI_Controller {
 	
 	public function up($check="")
 	{
+		if (
+			!$this->input->post('uid')
+			|| !$this->input->post('name')
+			|| !$this->input->post('pswd')
+			|| !$this->input->post('conf')
+		) redirect("/");
+
 		$config = [
 				[
 					'field' => 'uid',

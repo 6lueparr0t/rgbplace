@@ -19,7 +19,7 @@ function replyTemplate(no, mode, message) {
 		"<div class='reply-addon block' id='reply-"+no+"' name='reply-"+no+"'>"
 		+"<input type='hidden' class='reply-no' value='"+no+"'/>"
 		+"<input type='hidden' class='reply-mode' value='"+mode+"'/>"
-		+"<div class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;' contenteditable='true'>"+message+"</div>"
+		+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;'>"+message+"</textarea>"
 
 		+"<div class='reply-button-group'>"
 		+"<div class='reply-button send to'>Reply on Message <span style='font-weight:900;transform: translate(.4rem,.1rem);'>&#xf11c;</span></div>"
@@ -112,7 +112,8 @@ document.querySelector("body").addEventListener("click", function(event) {
 			no = reply.querySelector("ul .no").innerHTML;
 
 			if(t.classList.contains('reply-modify')) {
-				message  = reply.querySelector("ul .content .text").innerHTML;
+				//message  = reply.querySelector("ul .content .text").innerHTML;
+				message  = reply.querySelector("ul .content .text").value;
 				reply.querySelector("ul").classList.toggle('hide');
 				mode = 'UPDATE';
 			}
@@ -164,7 +165,8 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 			no = reply.querySelector(".reply-no").value;
 			mode = reply.querySelector(".reply-mode").value;
-			message = reply.querySelector(".reply-box").innerHTML;
+			//message = reply.querySelector(".reply-box").innerHTML;
+			message = reply.querySelector(".reply-box").value;
 
 			data.push({
 				'info': __URL__,
@@ -215,6 +217,11 @@ function successDelete (data) {
 function successPostVote (data) {
 	document.querySelector(".post-"+this.act+".enable").innerHTML = " "+data+" ";
 	document.querySelector(".post-"+this.act+".enable").classList.toggle('active');
+
+	if(__URL_ARRAY__[2] != 'best' && data>20) {
+		alert('😎');
+		redirect(__URL_ARRAY__[3], 'best');
+	}
 }
 
 function refresh (data) {
