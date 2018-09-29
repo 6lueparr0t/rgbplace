@@ -103,8 +103,10 @@ class Api extends CI_Controller {
 				break;
 			case 'post':
 				if($this->session->userdata('signed_in')) {
-					if($ret = $this->map->reply_insert($data, $info)) {
+					if($ret = $this->map->reply_insert($data, $info) && $data['message']) {
 						$this->map->reply_count_update('up', $info);
+					} else {
+						$ret = 'Input Text Message';
 					}
 				} else {
 					header('HTTP/1.1 401 Unauthorized');

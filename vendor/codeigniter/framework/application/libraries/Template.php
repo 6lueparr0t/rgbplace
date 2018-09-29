@@ -140,10 +140,17 @@ class Template {
 			echo("<i class='open fa fa-minus'></i>");
 			echo("<i class='close fa fa-plus'></i>");
 			echo("<ul>");
+
+			/* Admin Menu */
+
 			echo("<a class='menu' href='/admin/generate_hash'><li>Generate Hash</li></a>");
 			echo("<a class='menu' href='/admin/animation'><li>Animation</li></a>");
 			echo("<a class='menu' href='/admin/restful'><li>RESTful Test</li></a>");
 			echo("<a class='menu' href='/admin/dragndrop_upload'><li>Drag & Drop Upload</li></a>");
+			echo("<a class='menu' href='/admin/geolocation'><li>Google Geolocation Api Test</li></a>");
+
+			/* Admin Menu */
+
 			echo("</ul>");
 			echo("</label>");
 			echo("</ul>");

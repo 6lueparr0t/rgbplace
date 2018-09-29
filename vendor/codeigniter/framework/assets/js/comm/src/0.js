@@ -4,6 +4,9 @@ let onUnload = function () {
     event.returnValue = 1;
 }
 
+// !! ATTENTION !!
+var __API_KEY__ = 'AIzaSyCLfqh2kzDo3DzclIyQ5IWF8GUjGwOyjnc';
+
 // ["127.0.0.1", "space", "best", "1"]
 var __URL__ = (window.location.hostname + window.location.pathname);
 var __URL_ARRAY__ = __URL__.split("/");
