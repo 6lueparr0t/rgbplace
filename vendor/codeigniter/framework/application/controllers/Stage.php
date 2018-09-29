@@ -17,6 +17,6 @@ class Stage extends CI_Controller {
 
 		if($uid && !$admin && $map) redirect($map);
 
-		//redirect("/".DEFAULT_MAP);
+		redirect("/".DEFAULT_MAP);
 	}
 }

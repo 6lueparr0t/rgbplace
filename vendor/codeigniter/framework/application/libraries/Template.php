@@ -200,7 +200,7 @@ class Template {
 		$tab2_text = (!in_array($tab2, $type))?"#":$tab2;
 
 		$tab3 = $this->CI->uri->segment(3, "#");
-		if($tab3=="list" || $tab3=="#") {
+		if($tab3=="list" || $tab2=="#") {
 			$tab3_class = "none";
 			$tab3_text = "LIST";
 			$tab3_list = "";
@@ -211,11 +211,11 @@ class Template {
 		}
 
 		$tab4 = $this->CI->uri->segment(4, "#");
-		if($tab3!="list" && $tab4=="#") {
-			$tab4 = 'view';
-			$tab4_list = "";
+		if($tab3=="list" || $tab3=="#") {
+			$tab4 = '#';
 		} else {
-			$tab4_list = "<option id='type-view'>view</option>";
+			$tab4 = ($tab4!='#')?$tab4:'view';
+			//$tab4_list = "";
 		}
 		
 		echo("<div class='status' id='status'>");
@@ -244,7 +244,7 @@ class Template {
 		echo("<label class='status type {$tab2} act' href='/{$tab1}/{$tab2}/{$tab3}/{$tab4}'>");
 		echo("<select class='status {$tab2}' id='status-act'>");
 		echo("<option id='type-act-default'>{$tab4}</option>");
-		echo("{$tab4_list}");
+		//echo("{$tab4_list}");
 		echo("</select>");
 		echo("</label>");
 

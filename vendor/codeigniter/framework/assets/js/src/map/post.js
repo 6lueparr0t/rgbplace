@@ -166,12 +166,18 @@ document.querySelector("body").addEventListener("click", function(event) {
 			no = reply.querySelector(".reply-no").value;
 			mode = reply.querySelector(".reply-mode").value;
 			//message = reply.querySelector(".reply-box").innerHTML;
-			message = reply.querySelector(".reply-box").value;
+			message = reply.querySelector(".reply-box");
+
+			if(!message.value) {
+				message.setCustomValidity('😳💬');
+				message.reportValidity();
+				break;
+			}
 
 			data.push({
 				'info': __URL__,
 				'no': no,
-				'message': message,
+				'message': message.value,
 			});
 
 			//var response = [];

@@ -16,9 +16,9 @@
 $type = TYPE_LIST;
 
 echo "<div class='type-row'>";
-for($i=0; $i<count($type); $i++) {
+for($i=1; $i<count($type); $i++) {
 
-	if($i%3 == 0) {
+	if(($i-1)%3 == 0) {
 		echo "</div>";
 		echo "<div class='type-row'>";
 	}
