@@ -214,4 +214,57 @@ class Api extends CI_Controller {
 
 		echo json_encode($data);
 	}
+
+	public function geocode()
+	{
+		$latlng = $this->input->get('latlng');
+
+		$result_type = 'administrative_area_level_1|administrative_area_level_2|administrative_area_level_3|sublocality_level_1|sublocality_level_2|sublocality_level_3';
+
+		$url = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng='.$latlng.'&language=en&key='.GOOGLE_API_KEY.'&result_type'.$result_type;
+
+		echo $this->curl('GET', $url, null);
+	}
+
+	private function curl($method, $url, $data){
+
+		## Reference : https://www.weichieprojects.com/blog/curl-api-calls-with-php/
+
+		$curl = curl_init();
+
+		switch ($method){
+		case "POST":
+			curl_setopt($curl, CURLOPT_POST, 1);
+			if ($data)
+				curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+			break;
+		case "PUT":
+		case "UPDATE":
+		case "DELETE":
+			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+			if ($data)
+				curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+			break;
+		case "GET":
+		default:
+		if ($data)
+			$url = sprintf("%s?%s", $url, http_build_query($data));
+		}
+
+		// OPTIONS:
+		//curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+			//'APIKEY: 111111111111111111111',
+			//'Content-Type: application/json',
+		//));
+		curl_setopt($curl, CURLOPT_URL, $url);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+		// EXECUTE:
+		$result = curl_exec($curl);
+		if(!$result){die("Connection Failure");}
+		curl_close($curl);
+		return $result;
+	}
+
 }

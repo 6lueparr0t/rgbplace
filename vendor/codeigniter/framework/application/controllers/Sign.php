@@ -11,7 +11,11 @@ class Sign extends CI_Controller {
 
 	public function index()
 	{
-		$this->root->view("sign/main");
+		if($this->session->userdata('signed_in')) {
+			redirect('/');
+		} else {
+			$this->root->view("sign/main");
+		}
 	}
 
 	public function in($check="")
@@ -46,12 +50,12 @@ class Sign extends CI_Controller {
 			if ($check === "check") {
 				if (strpos($data['uid'], "@") === false && $this->sign->userCheck($data) === false) {
 					$result = $this->sign->failCount($data);
-					$output['msg'] = "로그인에 실패하였습니다.\n\n {$result['atim']}, {$result['fail']}/20번 실패";
+					$output['msg'] = "로그인에 실패하였습니다.\nLogin fail.\n\n {$result['atim']}, {$result['fail']}/20";
 
 				} elseif (strpos($data['uid'], "@") !== false && $this->sign->adminCheck($data) === false) {
 					$result = $this->sign->failCount($data);
 					//$output['msg'] = "로그인에 실패하였습니다.\n\n {$result['atim']}, {$result['fail']}/5번 실패";
-					$output['msg'] = "로그인에 실패하였습니다.";
+					$output['msg'] = "로그인에 실패하였습니다.\nLogin fail.";
 
 				} else {
 					$output['valid'] = true;
@@ -89,7 +93,7 @@ class Sign extends CI_Controller {
 		//validation === false
 		} else if($check === "check") { 
 			$output['valid'] = false;
-			$output['msg'] = "잘못된 정보입니다.";
+			$output['msg'] = "잘못된 정보입니다.\ncheck your account.";
 
 			echo json_encode($output);
 
@@ -162,7 +166,7 @@ class Sign extends CI_Controller {
 					$output['msg'] = "";
 				} else {
 					$output['valid'] = false;
-					$output['msg'] = "사용할 수 없는 아이디입니다.";
+					$output['msg'] = "사용할 수 없는 아이디입니다.\nalready used Input ID.";
 				}
 
 				echo json_encode($output);
@@ -183,7 +187,7 @@ class Sign extends CI_Controller {
 		//validation === false
 		} else if($check === "check") {
 			$output['valid'] = false;
-			$output['msg'] = "잘못된 정보입니다.";
+			$output['msg'] = "잘못된 정보입니다.\ncheck your account.";
 
 			echo json_encode($output);
 

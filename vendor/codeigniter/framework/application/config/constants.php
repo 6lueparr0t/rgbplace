@@ -108,8 +108,6 @@ define("PAGINATION_COUNT", 5);
 //LIST_ROWS_LIMIT => MINIMUM VALUE : 1
 define("LIST_ROWS_LIMIT", 20);
 
-/*#######################################*/
-
 /*##### REPLY : pagination ##############*/
 
 //PAGINATION_COUNT => MINIMUM VALUE : 3
@@ -120,10 +118,10 @@ define("REPLY_PAGINATION_COUNT", 9);
 define("REPLY_LIST_ROWS_LIMIT", 20);
 /* !!!!! if you modify, codeigniter/framework/assets/js/comm/src/0.js check !!!!! */
 
-/*#######################################*/
-
 //['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
 define("TYPE_LIST", ['#', 'best', 'free', 'info', 'news', 'public', 'dev']);
 
 define("CIPHER_METHOD", "aes-128-gcm");
 define("CIPHER_KEY", "Have a nice Day!");
+
+define("GOOGLE_API_KEY", "AIzaSyCLfqh2kzDo3DzclIyQ5IWF8GUjGwOyjnc");
