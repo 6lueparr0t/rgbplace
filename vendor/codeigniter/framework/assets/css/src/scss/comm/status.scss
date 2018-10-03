@@ -58,7 +58,7 @@
 				display:initial !important;
 			}
 
-			&.db {
+			&.db, &.geolocation {
 				color:$oc-gray-2;
 			}
 		}

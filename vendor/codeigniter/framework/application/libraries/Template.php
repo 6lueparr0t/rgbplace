@@ -133,6 +133,8 @@ class Template {
 			echo("<ul>");
 			echo("<a class='menu' href='/admin/info' target='_blank'><li>Version</li></a>");
 			echo("<a class='menu' href='/admin/db'><li>Database Management</li></a>");
+			echo("<a class='menu' href='/admin/geolocation'><li>Create Map</li></a>");
+			//echo("<a class='menu' href='/admin/geolocation'><li>Google Geolocation Api Test</li></a>");
 			echo("</ul>");
 			echo("</label>");
 			echo("<label class='menu' for='menu-admin-2'>Exam");
@@ -147,7 +149,6 @@ class Template {
 			echo("<a class='menu' href='/admin/animation'><li>Animation</li></a>");
 			echo("<a class='menu' href='/admin/restful'><li>RESTful Test</li></a>");
 			echo("<a class='menu' href='/admin/dragndrop_upload'><li>Drag & Drop Upload</li></a>");
-			echo("<a class='menu' href='/admin/geolocation'><li>Google Geolocation Api Test</li></a>");
 
 			/* Admin Menu */
 

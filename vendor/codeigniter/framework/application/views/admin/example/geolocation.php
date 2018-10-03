@@ -1,14 +1,25 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common(); ?>
 
-<div style='margin:2rem;'>
-	<input id='geolocation-submit' type='button' value='Get Api Result (Random)'>
+<div class='admin'>
+
+<!--
+	<div>
+		<?php echo GOOGLE_API_KEY; ?>
+	</div>
+-->
+	<input id='geolocation-submit' type='button' value='Get Api Result'>
+	<input id='geolocation-submit-random' type='button' value='Get Api Result (test)'>
+
 	<br/><br/>
-	<div>Result(Eng) : </div>
-	<pre id='geolocation-result' style='font-size: 0.8rem;'></pre>
 
-	<div>Result(Local) : </div>
-	<pre id='geolocation-result-local' style='font-size: 0.8rem;'></pre>
-
+	<div class='geocode'>
+		<div>Result(Ko) : 
+			<textarea id='geolocation-result-ko' style='font-size: 0.8rem;'></textarea>
+		</div>
+		<div>Result(En) : 
+			<textarea id='geolocation-result-en' style='font-size: 0.8rem;'></textarea>
+		</div>
+	</div>
 </div>
 
 <?php $this->root->end($path); ?>
