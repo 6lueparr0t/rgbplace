@@ -11,7 +11,7 @@ function mapSearch (recv) {
 	let data       = "";
 	let dataLength = 0;
 
-	request.open('get', '/map/search?keyword='+recv.value, true);
+	request.open('get', '/api/search?keyword='+recv.value, true);
 
 	request.onload = function() {
 		if (this.status >= 200 && this.status < 400) {
@@ -28,35 +28,29 @@ function mapSearch (recv) {
 				let place = [];
 
 				for (let i=0; i < dataLength; i++) {
+
 					/*
-					 * place[locality]   : 서울특별시|Seoul
-					 * place[political1] : 동작구|Dongjak-gu
-					 * place[political2] : 흑석동|Heukseok-dong
-					 * place[political3] : 서달로|Seodal-ro (option)
+					 * Example )
+					 * global = {"address": ["Goean-dong", "Sosa-gu", "Bucheon-si", "Gyeonggi-do", "South Korea"]}
+					 * native = {"address": ["괴안동", "소사구", "부천시", "경기도", "대한민국"]}
 					*/
 
-					let tmp = data.place[i].split('&');
+					let native = JSON.parse(data.native)['address'];
+					let global = JSON.parse(data.global)['address'];
 
-					place['country'] = data.country[i];
+					//console.log(global);
 
-
-					for (let j=0; j<tmp.length; j++) {
-						place[tmp[j].split(':')[0]] =  tmp[j].split(':')[1];
+					let place_org = '';
+					for (let j=native.length-1; j>=0; j--) {
+						place_org += native[j] + ((j==0)?"":" ");
 					}
 
-					let place_org = place['country'].split('|')[0]
-						+" "+ place['locality'   ].split('|')[0]
-						+" "+ place['political1' ].split('|')[0]
-						+" "+ place['political2' ].split('|')[0]
-						+   ((place['political3' ])?" "+place['political3'].split('|')[0]:"");
+					let place_eng = '';
+					for (let j=0; j<global.length; j++) {
+						place_eng += global[j] + ((j==global.length-1)?"":", ");
+					}
 
-					let place_rev = ((place['political3'])?" "+place['political3'].split('|')[0]:"")
-						+", "+ place['political2' ].split('|')[1]
-						+", "+ place['political1' ].split('|')[1]
-						+", "+ place['locality'   ].split('|')[1]
-						+", "+ place['country'    ];
-
-					lists += "<a href='/"+data.map[i]+"'><li class='org'>"+place_org+"</li><li class='rev'>"+place_rev+"</li></a>";
+					lists += "<a href='/"+data.map[i]+"'><li>"+place_org+"<br/>"+place_eng+"</li></a>";
 				}
 			} else {
 				lists  = "<a href='#'><li>No Results</li></a>";

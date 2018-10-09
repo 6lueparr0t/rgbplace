@@ -329,6 +329,7 @@ class Map_model extends CI_Model {
 		$data = [];
 
 		$info = [
+			null,
 			$map,
 			$type,
 			$num
@@ -445,13 +446,12 @@ class Map_model extends CI_Model {
 	 */
 	public function post_select($data, $info, $option = null) {
 
+		$table = $this->db->escape_str("map_{$info[1]}_post");
+		$no = $this->db->escape_str($info[3]);
+
 		if($option == 'vote') {
-			$table = $this->db->escape_str("map_{$info[1]}_post");
-			$no = $this->db->escape_str($info[3]);
 			$field = 'up, down';
 		} else {
-			$table = $this->db->escape_str("map_{$info[0]}_post");
-			$no = $this->db->escape_str($info[2]);
 			$field = '*';
 		}
 
@@ -1100,6 +1100,8 @@ class Map_model extends CI_Model {
 	public function vote($data, $info) {
 		$no = $this->db->escape_str($info[3]);
 		$uid = $this->session->userdata('uid');
+		$level = $this->session->userdata('level');
+		$admin = $this->session->userdata('admin');
 
 		$act = strtolower($this->db->escape_str($data['act']));
 		$type = $this->db->escape_str($data['target']);
@@ -1108,20 +1110,37 @@ class Map_model extends CI_Model {
 		$update_table = $this->db->escape_str("map_{$info[1]}_{$type}");
 
 		$result = $this->vote_select($history_table, $uid, $type, $no);
+
+		if( $level > 10 || $admin === true ) { 
+			$point = 10;
+		} else if( $level > 2 && $level < 10 ) {
+			$point = 2;
+		} else {
+			$point = 1;
+		}
+
+		$post_info = $this->post_select($data, $info);
+
 		if($result->num_rows() > 0) {
 			if (!is_null($result->result()[0]->utim)) {
 				$query = "UPDATE {$history_table} SET act=?, ctim=now(), utim=NULL where uid=? and type=? and relation=? and act='n'";
 				if( $this->db->query($query, array($act, $uid, $type, $no)) ) {
-					$query = "UPDATE {$update_table} SET {$act} = {$act} + 1  where no = ?";
+					$query = "UPDATE {$update_table} SET {$act} = {$act} + {$point}  where no = ?";
 					$ret = $this->db->query($query, $no);
+
+					$query = "UPDATE user_info SET score = score + {$point} where uid = ?";
+					$ret = $this->db->query($query, $post_info->result()[0]->uid);
 				}
 			} else {
 				$act_check = $result->result();
 				if($act == $act_check[0]->act && $act_check[0]->act != 'n') {
 					$query = "UPDATE {$history_table} SET act='n', utim=now() where uid=? and type=? and relation=? and act=?";
 					if( $this->db->query($query, array($uid, $type, $no, $act)) ) {
-						$query = "UPDATE {$update_table} SET {$act} = {$act} - 1  where no = ?";
+						$query = "UPDATE {$update_table} SET {$act} = {$act} - {$point}  where no = ?";
 						$ret = $this->db->query($query, $no);
+
+						$query = "UPDATE user_info SET score = score - {$point} where uid = ?";
+						$ret = $this->db->query($query,  $post_info->result()[0]->uid);
 					}
 				} else {
 					$ret = 0;
@@ -1133,8 +1152,11 @@ class Map_model extends CI_Model {
 				VALUES
 				( ?, 'post', ?, ?)";
 			if( $this->db->query($query, array($uid, $no, $act)) ) {
-				$query = "UPDATE {$update_table} SET {$act} = {$act} + 1  where no = ?";
+				$query = "UPDATE {$update_table} SET {$act} = {$act} + {$point}  where no = ?";
 				$ret = $this->db->query($query, $no);
+
+				$query = "UPDATE user_info SET score = score + {$point} where uid = ?";
+				$ret = $this->db->query($query,  $post_info->result()[0]->uid);
 			}
 		}
 

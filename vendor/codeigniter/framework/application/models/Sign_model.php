@@ -31,6 +31,7 @@ class Sign_model extends CI_Model {
 
 				return $result = [
 					'name'  => $row->name,
+					'level' => $row->level,
 					'score' => $row->score,
 					'map'   => $row->map,
 					'atim'  => $row->atim

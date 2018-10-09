@@ -121,7 +121,24 @@ define("REPLY_LIST_ROWS_LIMIT", 20);
 //['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
 define("TYPE_LIST", ['#', 'best', 'free', 'info', 'news', 'public', 'dev']);
 
+define(
+	"LEVEL_BOUND"  ,
+	[ '0'  => -20  ,
+	  '1'  =>  20  ,
+	  '2'  =>  40  ,
+	  '3'  =>  60  ,
+	  '4'  =>  100 ,
+	  '5'  =>  140 ,
+	  '6'  =>  220 ,
+	  '7'  =>  300 ,
+	  '8'  =>  460 ,
+	  '9'  =>  620 ,
+	  '10' =>  800 ,
+	  '11' => 1000  ]
+);
+
 define("CIPHER_METHOD", "aes-128-gcm");
 define("CIPHER_KEY", "Have a nice Day!");
+
 
 define("GOOGLE_API_KEY", "AIzaSyCLfqh2kzDo3DzclIyQ5IWF8GUjGwOyjnc");

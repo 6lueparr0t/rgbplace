@@ -15,17 +15,6 @@ class Map extends CI_Controller {
 		redirect("/");
 	}
 
-	public function search()
-	{
-		if($this->input->get('keyword')) {
-			$data   = ['keyword' => $this->input->get('keyword')];
-			$output = $this->base->getMap($data['keyword']);
-		}
-
-		if(empty($output)) $output = null;
-		echo json_encode($output);
-	}
-
 	public function page($map)
 	{
 		$data['map' ] = strtolower($map);

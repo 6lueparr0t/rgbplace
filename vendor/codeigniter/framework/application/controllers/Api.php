@@ -46,6 +46,17 @@ class Api extends CI_Controller {
 		}
 	}
 
+	public function search()
+    {
+        if($this->input->get('keyword')) {
+            $data   = ['keyword' => $this->input->get('keyword')];
+            $output = $this->base->getMap($data['keyword']);
+        }
+
+        if(empty($output)) $output = null;
+        echo json_encode($output);
+    }
+
 	public function request($type=null, $val=null, $api_key=null)
 	{
 		$method = $this->input->method();
