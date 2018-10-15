@@ -232,7 +232,7 @@ class Api extends CI_Controller {
 
 		$result_type = 'administrative_area_level_1|administrative_area_level_2|sublocality_level_1|sublocality_level_2|sublocality_level_3';
 
-		$url = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&latlng='.$latlng.'&key='.GOOGLE_API_KEY.'&result_type'.$result_type;
+		$url = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&latlng='.$latlng.'&key='.GOOGLE_API_KEY.'&result_type='.$result_type;
 
 		$ko = $this->curl('GET', $url.'&language=ko', null);
 		$en = $this->curl('GET', $url.'&language=en', null);

@@ -35,6 +35,11 @@ class Admin extends CI_Controller {
 		$this->root->sview("admin/db", $data);
 	}
 
+	public function create_map()
+	{
+		$this->root->sview("admin/create_map");
+	}
+
 /*
  * ########################################
  *				Example	[exam]
@@ -88,12 +93,6 @@ class Admin extends CI_Controller {
 	{
 		$this->root->sview("admin/example/dragndrop_upload");
 	}
-
-	public function geolocation()
-	{
-		$this->root->sview("admin/example/geolocation");
-	}
-
 
 	public function socket_alert()
 	{

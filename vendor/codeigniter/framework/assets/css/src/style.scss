@@ -7,6 +7,13 @@ $target-width : "860px";
 	display: flex;
 }
 
+@mixin user-select ($value) {
+	-webkit-user-select: #{$value};  /* Chrome all / Safari all */
+	-moz-user-select: #{$value};     /* Firefox all */
+	-ms-user-select: #{$value};      /* IE 10+ */
+	user-select: #{$value};          /* Likely future */ 
+}
+
 @import "../../../node_modules/open-color/open-color.scss";
 //@import "../fonts/fontawesome/fontawesome-all.min.css";
 //@import "../../../node_modules/font-awesome/scss/font-awesome.scss";

@@ -58,7 +58,8 @@
 				display:initial !important;
 			}
 
-			&.db, &.geolocation {
+			&.db,
+			&.create_map {
 				color:$oc-gray-2;
 			}
 		}

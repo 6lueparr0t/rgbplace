@@ -4,14 +4,38 @@
 	.geocode {
 		text-align: center;
 
-		div {
+		.result-area {
 			display: inline-grid;
 			width:48%;
+
+			.result-list {
+				padding: 1rem;
+			}
+
+			div {
+				padding:1rem;
+			}
 
 			textarea {
 				margin:1rem;
 				height:600px;
+				font-size: 0.8rem;
 			}
 		}
+	}
+
+	#create_map {
+		font-family: "pixel";
+		cursor:pointer;
+
+		@include user-select('none');
+
+		border: 1px solid $oc-teal-7;
+		background-color: $oc-teal-7;
+		color:white;
+
+		margin: 5rem 2.6rem;
+		padding: 1rem;
+		border-radius: .25rem;
 	}
 }
