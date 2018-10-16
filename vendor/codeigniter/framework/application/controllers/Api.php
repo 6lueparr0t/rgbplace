@@ -245,6 +245,49 @@ class Api extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function creation() {
+
+		if($this->session->userdata('admin') !== FALSE) echo false;
+
+		$stdArray = json_decode($this->input->raw_input_stream);
+
+		/*
+			Array
+			(
+				[0] => stdClass Object
+				(
+					[ko] => Array
+					(
+						[0] => 괴안동
+						[1] => 소사구
+						[2] => 부천시
+						[3] => 경기도
+						[4] => 대한민국
+					)
+				)
+				[1] => stdClass Object
+				(
+					[en] => Array
+					(
+						[0] => Goean-dong
+						[1] => Sosa-gu
+						[2] => Bucheon-si
+						[3] => Gyeonggi-do
+						[4] => South Korea
+					)
+				)
+			)
+		 */
+
+		foreach($stdArray as $twoWayArray) {
+			foreach($twoWayArray as $key => $value) {
+				$data[$key] = (array)$value;
+			}
+		}
+
+		echo $this->base->createMap($data);
+	}
+
 	private function curl($method, $url, $data){
 
 		## Reference : https://www.weichieprojects.com/blog/curl-api-calls-with-php/

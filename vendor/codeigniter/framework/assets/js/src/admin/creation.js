@@ -47,14 +47,18 @@ function successGeolocation(data) {
 	   ]
 	*/
 
-	document.querySelector('#geolocation-list-ko').innerHTML = getResultList(data.ko.results);
-	document.querySelector('#geolocation-list-en').innerHTML = getResultList(data.en.results);
+	document.querySelector('#geolocation-list-ko').innerHTML = getResultList(data.ko.results, 'ko');
+	document.querySelector('#geolocation-list-en').innerHTML = getResultList(data.en.results, 'en');
 
-	document.querySelector('#create_map').classList.remove('none');
+	document.querySelector('#creation').classList.remove('none');
 
 }
 
-function getResultList(data) {
+function successCreation(data) {
+	alert('Map was created');
+}
+
+function getResultList(data, lang) {
 	let result = '';
 	for(let i in data) {
 		let addr = [];
@@ -70,7 +74,7 @@ function getResultList(data) {
 		//});
 
 		result +=
-			'<div class=\'row\'  data-array=\'['+addr+']\' data-id=\''+data[i].place_id+'\' >'+
+			'<div class=\'row\' data-lang=\''+lang+'\'  data-array=\'['+addr+']\' data-id=\''+data[i].place_id+'\' >'+
 			data[i].formatted_address+
 			'</div>';
 
@@ -130,13 +134,25 @@ document.querySelector(".geocode").addEventListener("click", function(event) {
 
 });
 
-document.querySelector("#create_map").addEventListener("click", function(event) {
+document.querySelector("#creation").addEventListener("click", function(event) {
 	let data = [];
 	document.querySelectorAll('.row.selected').forEach(function(element) {
-		data.push({
-			'address':JSON.parse(element.dataset.array)
-		});
+		switch (element.dataset.lang) {
+			case 'ko' :
+				data.push({
+					'ko':JSON.parse(element.dataset.array)
+				});
+				break;
+			case 'en' :
+				data.push({
+					'en':JSON.parse(element.dataset.array)
+				});
+				break;
+		}
 	});
 
 	console.log(data);
+	httpRequest('POST', '/api/creation', JSON.stringify(data), successCreation, null);
 });
+
+

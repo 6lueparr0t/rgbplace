@@ -21,8 +21,8 @@
 			 </div>
 		</div>
 
-		<div id='create_map'>
-			Create Map
+		<div id='creation'>
+			Creation
 		</div>
 	</div>
 </div>

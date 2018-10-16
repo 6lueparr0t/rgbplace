@@ -119,6 +119,16 @@ class Base_model extends CI_Model {
 		return $update;
 	}
 
+	public function createMap($data)
+	{
+
+	}
+
+	public function removeMap($data)
+	{
+
+	}
+
 	function generateKey($length = 20)
 	{
         $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~`!@#$%^&*()_-+=[]{}|\:;\'\"<>?,.";

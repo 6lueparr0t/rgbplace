@@ -133,7 +133,7 @@ class Template {
 			echo("<ul>");
 			echo("<a class='menu' href='/admin/info' target='_blank'><li>Version</li></a>");
 			echo("<a class='menu' href='/admin/db'><li>Database Management</li></a>");
-			echo("<a class='menu' href='/admin/create_map'><li>Create Map</li></a>");
+			echo("<a class='menu' href='/admin/creation'><li>Creation</li></a>");
 			//echo("<a class='menu' href='/admin/geolocation'><li>Google Geolocation Api Test</li></a>");
 			echo("</ul>");
 			echo("</label>");
