@@ -35,9 +35,9 @@ class Admin extends CI_Controller {
 		$this->root->sview("admin/db", $data);
 	}
 
-	public function creation()
+	public function map()
 	{
-		$this->root->sview("admin/creation");
+		$this->root->sview("admin/map");
 	}
 
 /*

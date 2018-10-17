@@ -47,8 +47,8 @@ function successGeolocation(data) {
 	   ]
 	*/
 
-	document.querySelector('#geolocation-list-ko').innerHTML = getResultList(data.ko.results, 'ko');
-	document.querySelector('#geolocation-list-en').innerHTML = getResultList(data.en.results, 'en');
+	document.querySelector('#geolocation-list-ko').innerHTML = getResultList(data.ko.results);
+	document.querySelector('#geolocation-list-en').innerHTML = getResultList(data.en.results);
 
 	document.querySelector('#creation').classList.remove('none');
 
@@ -58,14 +58,19 @@ function successCreation(data) {
 	alert('Map was created');
 }
 
-function getResultList(data, lang) {
+function getResultList(data) {
+	let country, code;
 	let result = '';
 	for(let i in data) {
 		let addr = [];
 		//{"address": ["괴안동", "소사구", "부천시", "경기도", "대한민국"]}
 		for(let j in data[i].address_components) {
 			//console.log(data.ko.results[i].address_components[j].long_name);
-			if(data[i].address_components[j].types[0] == 'postal_code') continue;
+			if(data[i].address_components[j].types.includes('postal_code') ) continue;
+			if(data[i].address_components[j].types.includes('country') ) {
+				country = data[i].address_components[j].long_name;
+				code = data[i].address_components[j].short_name;
+			}
 			addr.push('"'+data[i].address_components[j].long_name+'"');
 		}
 
@@ -74,7 +79,7 @@ function getResultList(data, lang) {
 		//});
 
 		result +=
-			'<div class=\'row\' data-lang=\''+lang+'\'  data-array=\'['+addr+']\' data-id=\''+data[i].place_id+'\' >'+
+			'<div class=\'row\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'['+addr+']\' data-id=\''+data[i].place_id+'\' >'+
 			data[i].formatted_address+
 			'</div>';
 
@@ -135,24 +140,24 @@ document.querySelector(".geocode").addEventListener("click", function(event) {
 });
 
 document.querySelector("#creation").addEventListener("click", function(event) {
-	let data = [];
+	let address = [];
+	let code = '';
+	let country = [];
+
 	document.querySelectorAll('.row.selected').forEach(function(element) {
-		switch (element.dataset.lang) {
-			case 'ko' :
-				data.push({
-					'ko':JSON.parse(element.dataset.array)
-				});
-				break;
-			case 'en' :
-				data.push({
-					'en':JSON.parse(element.dataset.array)
-				});
-				break;
-		}
+		country.push(element.dataset.country);
+		code = element.dataset.code;
+		address.push(JSON.parse(element.dataset.array));
 	});
 
+	let data = {
+		country:country,
+		code:code,
+		address:address
+	};
+
 	console.log(data);
-	httpRequest('POST', '/api/creation', JSON.stringify(data), successCreation, null);
+	httpRequest('POST', '/api/map/creation', JSON.stringify(data), successCreation, null);
 });
 
 

@@ -121,10 +121,27 @@ class Base_model extends CI_Model {
 
 	public function createMap($data)
 	{
+		//$result = $this->db->query("
+			//SET @p0='South Korea';
+			//SET @p1='kr';
+			//SET @p2='".json_encode($data[0], JSON_UNESCAPED_UNICODE)."';
+			//SET @p3='".json_encode($data[1])."';
+			//CALL `create_map`(@p0, @p1, @p2, @p3); 
+		//");
 
+		$query = "
+		SET @p0='".implode('|',$data['country'])."'
+		SET @p1='".$data['code']."';
+		SET @p2='".json_encode($data['address'][0], JSON_UNESCAPED_UNICODE)."';
+		SET @p3='".json_encode($data['address'][1])."';
+		CALL `create_map`(@p0, @p1, @p2, @p3);";
+
+		$result = $this->db->query($query);
+
+		return $result;
 	}
 
-	public function removeMap($data)
+	public function destroyMap($data)
 	{
 
 	}

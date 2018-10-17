@@ -245,11 +245,11 @@ class Api extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function creation() {
+	public function map($mode) {
 
 		if($this->session->userdata('admin') !== FALSE) echo false;
 
-		$stdArray = json_decode($this->input->raw_input_stream);
+		$data = (array)json_decode($this->input->raw_input_stream);
 
 		/*
 			Array
@@ -279,13 +279,20 @@ class Api extends CI_Controller {
 			)
 		 */
 
-		foreach($stdArray as $twoWayArray) {
-			foreach($twoWayArray as $key => $value) {
-				$data[$key] = (array)$value;
-			}
-		}
+		//foreach($stdArray as $twoWayArray) {
+			//foreach($twoWayArray as $key => $value) {
+				//$data[$key] = (array)$value;
+			//}
+		//}
 
-		echo $this->base->createMap($data);
+		switch($mode) {
+		case 'creation' :
+			echo $this->base->createMap($data);
+			break;
+		case 'destruction' :
+			echo $this->base->destroyMap($data);
+			break;
+		} 
 	}
 
 	private function curl($method, $url, $data){
