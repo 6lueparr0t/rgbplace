@@ -129,16 +129,15 @@ class Base_model extends CI_Model {
 			//CALL `create_map`(@p0, @p1, @p2, @p3); 
 		//");
 
-		$query = "
-		SET @p0='".implode('|',$data['country'])."'
-		SET @p1='".$data['code']."';
-		SET @p2='".json_encode($data['address'][0], JSON_UNESCAPED_UNICODE)."';
-		SET @p3='".json_encode($data['address'][1])."';
-		CALL `create_map`(@p0, @p1, @p2, @p3);";
+		$this->db->trans_start();
+		$this->db->query("SET @p0='".implode('|',$data['country'])."'");
+		$this->db->query("SET @p1='".strtolower($data['code'])."'");
+		$this->db->query("SET @p2='".json_encode($data['address'][0], JSON_UNESCAPED_UNICODE)."'");
+		$this->db->query("SET @p3='".json_encode($data['address'][1])."'");
+		$this->db->query("CALL `create_map`(@p0, @p1, @p2, @p3);");
+		$this->db->trans_complete();
 
-		$result = $this->db->query($query);
-
-		return $result;
+		return 1;
 	}
 
 	public function destroyMap($data)

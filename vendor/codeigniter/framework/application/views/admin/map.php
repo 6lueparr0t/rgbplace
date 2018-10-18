@@ -2,6 +2,11 @@
 
 <div class='admin'>
 
+	<div class='tab'>
+		<div class='creation active'>Creation</div>
+		<div class='destruction'>Destruction</div>
+	</div>
+	<div id='creation-area'>
 	<div id='key' class='none'> <?php echo GOOGLE_API_KEY; ?> </div>
 
 	<input id='geolocation-submit' type='button' value='Get Api Result'>
@@ -24,6 +29,9 @@
 		<div id='creation'>
 			Creation
 		</div>
+	</div>
+	</div>
+	<div id='destruction-area'>
 	</div>
 </div>
 

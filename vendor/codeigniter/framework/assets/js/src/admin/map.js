@@ -98,66 +98,72 @@ function getRandom(start, end) {
 
 }
 
-document.querySelector("#geolocation-submit").addEventListener("click", function(event) {
+function tabChange (element) {
+	document.querySelectorAll('.'+element.parentElement.className+' div').forEach(function(element) {
+		element.classList.remove('active');
+		document.querySelector('#'+element.className+'-area').classList.add('none');
+	});
+	document.querySelector('#'+element.className+'-area').classList.remove('none');
+	element.classList.add('active');
+}
 
-	if(navigator.geolocation) {
-
-		navigator.geolocation.getCurrentPosition(function (position) {
-
-			let latitude = position.coords.latitude;
-			let longitude = position.coords.longitude;
-
-			httpRequest('GET', '/api/geocode?latlng='+latitude+','+longitude, null, successGeolocation, null);
-
-		});
-	}
-
-});
-
-document.querySelector("#geolocation-submit-random").addEventListener("click", function(event) {
-
-	let latitude = getRandom(-90, 90);
-	let longitude = getRandom(-180, 180);
-
-	httpRequest('GET', '/api/geocode?latlng='+latitude+','+longitude, null, successGeolocation, null);
-
-});
-
-document.querySelector(".geocode").addEventListener("click", function(event) {
+document.querySelector(".admin").addEventListener("click", function(event) {
     let t = event.target;
-	//console.log(t.className);
+	console.log(t.className);
 	
-	switch(t.className) {
+	switch(t.classList.item(0)) {
 		case 'row' :
-		case 'row selected' :
 			document.querySelectorAll('#'+t.parentElement.id+' .row.selected').forEach(function(element) {
 				element.classList.remove('selected');
 			});
 			t.classList.toggle('selected');
 			break;
+		case 'creation' :
+		case 'destruction' :
+			tabChange(t);
+			break;
+	}
+
+	switch(t.id) {
+		case 'geolocation-submit-random' :
+			let latitude = getRandom(-90, 90);
+			let longitude = getRandom(-180, 180);
+
+			httpRequest('GET', '/api/geocode?latlng='+latitude+','+longitude, null, successGeolocation, null);
+			break;
+		case 'geolocation-submit' :
+			if(navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (position) {
+
+					let latitude = position.coords.latitude;
+					let longitude = position.coords.longitude;
+
+					httpRequest('GET', '/api/geocode?latlng='+latitude+','+longitude, null, successGeolocation, null);
+
+				});
+			}
+			break;
+		case 'creation' :
+			let address = [];
+			let code = '';
+			let country = [];
+
+			document.querySelectorAll('.row.selected').forEach(function(element) {
+				country.push(element.dataset.country);
+				code = element.dataset.code;
+				address.push(JSON.parse(element.dataset.array));
+			});
+
+			let data = {
+				country:country,
+				code:code,
+				address:address
+			};
+
+			console.log(data);
+			httpRequest('POST', '/api/map/creation', JSON.stringify(data), successCreation, null);
+			break;
+
 	}
 
 });
-
-document.querySelector("#creation").addEventListener("click", function(event) {
-	let address = [];
-	let code = '';
-	let country = [];
-
-	document.querySelectorAll('.row.selected').forEach(function(element) {
-		country.push(element.dataset.country);
-		code = element.dataset.code;
-		address.push(JSON.parse(element.dataset.array));
-	});
-
-	let data = {
-		country:country,
-		code:code,
-		address:address
-	};
-
-	console.log(data);
-	httpRequest('POST', '/api/map/creation', JSON.stringify(data), successCreation, null);
-});
-
-
