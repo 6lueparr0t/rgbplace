@@ -19,7 +19,7 @@
 			}
 
 			&.active {
-				background-color:$oc-gray-9;
+				background-color:$oc-gray-8;
 				color:white;
 			}
 		}
@@ -43,13 +43,42 @@
 
 			textarea {
 				margin:1rem;
-				height:400px;
+				height:200px;
 				font-size: 0.8rem;
+			}
+		}
+
+		.map-info {
+			display: inline-grid;
+			width: 95%;
+
+			input {
+				height: 4rem;
+				font-size: 1.5rem;
+				text-indent: 1rem;
+				margin: 1rem 0;
 			}
 		}
 	}
 
-	#creation {
+	.navigation {
+		text-align: center;
+
+		.result-list {
+			padding: 1rem 2rem;
+		}
+	}
+
+	.row {
+		padding:1rem;
+
+		&.row:hover {
+			background-color:$oc-gray-7;
+			color:white	
+		}
+	}
+
+	#creation, #destruction {
 		font-family: "pixel";
 		cursor:pointer;
 
@@ -59,7 +88,7 @@
 		background-color: $oc-teal-7;
 		color:white;
 
-		margin: 5rem 2.6rem;
+		margin: 2rem 2.6rem;
 		padding: 1rem;
 		border-radius: .25rem;
 	}

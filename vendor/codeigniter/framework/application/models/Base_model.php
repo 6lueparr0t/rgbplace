@@ -128,21 +128,33 @@ class Base_model extends CI_Model {
 			//SET @p3='".json_encode($data[1])."';
 			//CALL `create_map`(@p0, @p1, @p2, @p3); 
 		//");
+		
+		if(!$data['country'] || !$data['code'] || !$data['address'][0] || !$data['address'][1]) return false;
 
 		$this->db->trans_start();
 		$this->db->query("SET @p0='".implode('|',$data['country'])."'");
 		$this->db->query("SET @p1='".strtolower($data['code'])."'");
 		$this->db->query("SET @p2='".json_encode($data['address'][0], JSON_UNESCAPED_UNICODE)."'");
 		$this->db->query("SET @p3='".json_encode($data['address'][1])."'");
-		$this->db->query("CALL `create_map`(@p0, @p1, @p2, @p3);");
+		$this->db->query("SET @p4='".$data['description']."'");
+		$this->db->query("SET @p5='".$data['keyword']."'");
+		$this->db->query("CALL `createMap`(@p0, @p1, @p2, @p3, @p4, @p5);");
 		$this->db->trans_complete();
 
-		return 1;
+		return true;
 	}
 
 	public function destroyMap($data)
 	{
+		if(!$data['code'] || !$data['no']) return false;
 
+		$this->db->trans_start();
+		$this->db->query("SET @p0='".$data['code']."';");
+		$this->db->query("SET @p1='".$data['no']."';");
+		$this->db->query("CALL `destroyMap`(@p0, @p1);");
+		$this->db->trans_complete();
+
+		return true;
 	}
 
 	function generateKey($length = 20)

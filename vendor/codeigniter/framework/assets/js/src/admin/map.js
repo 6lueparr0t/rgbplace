@@ -47,44 +47,80 @@ function successGeolocation(data) {
 	   ]
 	*/
 
-	document.querySelector('#geolocation-list-ko').innerHTML = getResultList(data.ko.results);
-	document.querySelector('#geolocation-list-en').innerHTML = getResultList(data.en.results);
+	document.querySelector('#geolocation-list-ko').innerHTML = getResultList(data.ko.results, 'geo');
+	document.querySelector('#geolocation-list-en').innerHTML = getResultList(data.en.results, 'geo');
 
 	document.querySelector('#creation').classList.remove('none');
 
 }
 
-function successCreation(data) {
-	alert('Map was created');
+function successNavigation(data) {
+	console.log(data);
+	document.querySelector("#map-list").innerHTML = getResultList(data, 'navi');
 }
 
-function getResultList(data) {
+function successCreation(data) {
+
+	if(data) {
+		alert('Place was created');
+	} else {
+		alert('Empty Value!');
+	}
+
+}
+
+function successDestruction(data) {
+
+	if(data) {
+		alert('Place was destroyed');
+	} else {
+		alert('Empty Value!');
+	}
+
+	httpRequest('GET', '/api/request/map?info='+__URL__, null, successNavigation, null);
+}
+
+function getResultList(data, type) {
 	let country, code;
 	let result = '';
-	for(let i in data) {
-		let addr = [];
-		//{"address": ["괴안동", "소사구", "부천시", "경기도", "대한민국"]}
-		for(let j in data[i].address_components) {
-			//console.log(data.ko.results[i].address_components[j].long_name);
-			if(data[i].address_components[j].types.includes('postal_code') ) continue;
-			if(data[i].address_components[j].types.includes('country') ) {
-				country = data[i].address_components[j].long_name;
-				code = data[i].address_components[j].short_name;
+
+	switch(type) {
+		case 'geo' :
+			for(let i in data) {
+				let addr = [];
+				//{"address": ["괴안동", "소사구", "부천시", "경기도", "대한민국"]}
+				for(let j in data[i].address_components) {
+					//console.log(data.ko.results[i].address_components[j].long_name);
+					if(data[i].address_components[j].types.includes('postal_code') ) continue;
+					if(data[i].address_components[j].types.includes('country') ) {
+						country = data[i].address_components[j].long_name;
+						code = data[i].address_components[j].short_name;
+					}
+					addr.push('"'+data[i].address_components[j].long_name+'"');
+				}
+
+				//native.push({
+				//'address' : native_addr
+				//});
+
+				result +=
+					'<div class=\'row\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'['+addr+']\' data-id=\''+data[i].place_id+'\' >'+
+					data[i].formatted_address+
+					'</div>';
+
+				//console.log(data.ko.results[i].formatted_address);
+				//console.log(data.ko.results[i].place_id);
 			}
-			addr.push('"'+data[i].address_components[j].long_name+'"');
-		}
+			break;
+		case 'navi' :
+			for(let i in data) {
+				result += '<div class=\'row\' data-code=\''+data[i].code+'\' data-no=\''+data[i].no+'\' >' +data[i].global+'<br/>'+data[i].native+ '</div>';
 
-		//native.push({
-		//'address' : native_addr
-		//});
+				//console.log(data.ko.results[i].formatted_address);
+				//console.log(data.ko.results[i].place_id);
+			}
+			break;
 
-		result +=
-			'<div class=\'row\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'['+addr+']\' data-id=\''+data[i].place_id+'\' >'+
-			data[i].formatted_address+
-			'</div>';
-
-		//console.log(data.ko.results[i].formatted_address);
-		//console.log(data.ko.results[i].place_id);
 	}
 
 	return result;
@@ -119,11 +155,15 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 			t.classList.toggle('selected');
 			break;
 		case 'creation' :
+			tabChange(t);
+			break;
 		case 'destruction' :
 			tabChange(t);
+			httpRequest('GET', '/api/request/map?info='+__URL__, null, successNavigation, null);
 			break;
 	}
 
+	let data = '';
 	switch(t.id) {
 		case 'geolocation-submit-random' :
 			let latitude = getRandom(-90, 90);
@@ -143,10 +183,15 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 				});
 			}
 			break;
+		case 'navi-request-submit' :
+			httpRequest('GET', '/api/request/map?info='+__URL__, null, successNavigation, null);
+			break;
 		case 'creation' :
 			let address = [];
 			let code = '';
 			let country = [];
+			let description = document.querySelector('#map-description').value;
+			let keyword = document.querySelector('#map-keyword').value;
 
 			document.querySelectorAll('.row.selected').forEach(function(element) {
 				country.push(element.dataset.country);
@@ -154,16 +199,38 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 				address.push(JSON.parse(element.dataset.array));
 			});
 
-			let data = {
+			data = {
 				country:country,
 				code:code,
-				address:address
+				address:address,
+				description:description,
+				keyword:keyword
 			};
 
 			console.log(data);
 			httpRequest('POST', '/api/map/creation', JSON.stringify(data), successCreation, null);
 			break;
+		case 'destruction' :
+			let no = '';
+
+			document.querySelectorAll('.row.selected').forEach(function(element) {
+				code = element.dataset.code;
+				no = element.dataset.no;
+			});
+
+			data = {
+				code:code,
+				no:no
+			};
+
+			console.log(data);
+			httpRequest('POST', '/api/map/destruction', JSON.stringify(data), successDestruction, null);
+			break;
 
 	}
 
 });
+
+!function() {
+	document.querySelector(".creation").click();
+}();

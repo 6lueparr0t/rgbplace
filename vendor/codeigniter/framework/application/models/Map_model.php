@@ -34,6 +34,23 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
+	 * Usage : $this->map->navigation ( map code, post num )
+	 * Desc : simple link. use for redirect "$this->map->post".
+	 * ====================
+	 */
+	public function navigation () {
+
+		$query = "SELECT * FROM map_code";
+		$find = $this->db->query($query);
+
+		$data = $find->result();
+
+		return $data;
+
+	}
+
+	/*
+	 * ====================
 	 * Usage : $this->map->page ( map code, all type, limit )
 	 * Desc : get 'post' list. use only map/page.php
 	 *

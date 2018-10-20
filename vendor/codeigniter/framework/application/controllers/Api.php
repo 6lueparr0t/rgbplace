@@ -67,11 +67,17 @@ class Api extends CI_Controller {
 		}
 
 		if(!$data) redirect("/");
-
 		$info = explode('/', $data['info']);
 		unset($data['info']);
 
 		switch ($type) {
+		case 'map':
+			switch($this->input->method()) {
+			case 'get':
+				$ret = json_encode($this->map->navigation());
+				break;
+			}
+			break;
 		case 'edit':
 			if($this->session->userdata('signed_in')) {
 				switch($this->input->method()) {

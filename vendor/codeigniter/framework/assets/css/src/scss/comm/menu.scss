@@ -90,7 +90,7 @@
     /*float:left;*/
     flex          : 1;
     background    : $oc-gray-3;
-    color         : $oc-gray-9;
+    color         : $oc-gray-9 !important;
     text-align    : center;
     padding       : 1rem 0;
     display       : block;
@@ -100,7 +100,7 @@
 
     &:hover {
       background: $oc-gray-7;
-      color: $oc-gray-0;
+      color: $oc-gray-0 !important;
     }
 
     input[type='checkbox'] {
