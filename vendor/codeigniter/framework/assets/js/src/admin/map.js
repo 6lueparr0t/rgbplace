@@ -1,5 +1,44 @@
 "use strict";
 
+var map;
+var markers = [];
+
+function googleMap() {
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 10,
+	});
+
+	var marker = new google.maps.Marker({
+		map: map,
+	});
+
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function (position) {
+			var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			map.setCenter(initialLocation);
+			var marker = new google.maps.Marker({
+				position: {lat: position.coords.latitude, lng: position.coords.longitude}
+			});
+		});
+	}
+
+	map.addListener('click', function( event ){
+		var marker = new google.maps.Marker({
+			position: {lat: event.latLng.lat(), lng: event.latLng.lng()},
+			map: map
+		});
+
+		for (var i = 0; i < markers.length; i++) {
+			markers[i].setMap(null);
+		}
+
+		markers.push(marker);
+
+		document.querySelector("#geolocation-submit-custom-lat").value = event.latLng.lat();
+		document.querySelector("#geolocation-submit-custom-lng").value = event.latLng.lng();
+	});
+}
+
 /*
 Latitude : 90.00000 ~ -90.000000
 Longitude : 180.000000 ~ -180.000000
@@ -145,7 +184,7 @@ function tabChange (element) {
 
 document.querySelector(".admin").addEventListener("click", function(event) {
     let t = event.target;
-	console.log(t.className);
+	//console.log(t.className);
 	
 	switch(t.classList.item(0)) {
 		case 'row' :
@@ -164,10 +203,21 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 	}
 
 	let data = '';
+	let latitude = 0, longitude = 0;
+	//console.log(t.id);
+
 	switch(t.id) {
+		case 'geolocation-submit-custom' :
+			latitude = document.querySelector("#geolocation-submit-custom-lat").value;
+			longitude = document.querySelector("#geolocation-submit-custom-lng").value;
+
+			if(!latitude || !longitude) return false;
+
+			httpRequest('GET', '/api/geocode?latlng='+latitude+','+longitude, null, successGeolocation, null);
+			break;
 		case 'geolocation-submit-random' :
-			let latitude = getRandom(-90, 90);
-			let longitude = getRandom(-180, 180);
+			latitude = getRandom(-90, 90);
+			longitude = getRandom(-180, 180);
 
 			httpRequest('GET', '/api/geocode?latlng='+latitude+','+longitude, null, successGeolocation, null);
 			break;

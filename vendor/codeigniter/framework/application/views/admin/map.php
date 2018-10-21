@@ -6,11 +6,15 @@
 		<div class='creation'>Creation</div>
 		<div class='destruction'>Destruction</div>
 	</div>
-	<div id='key' class='none'> <?php echo GOOGLE_API_KEY; ?> </div>
+	<div id='key' class='none'><?php echo GOOGLE_API_KEY; ?></div>
 
 	<div id='creation-area' class='none'>
+		<div id="map"></div>
 		<input id='geolocation-submit' type='button' value='Get Api Result'>
 		<input id='geolocation-submit-random' type='button' value='Get Api Result (test)'>
+		<input id='geolocation-submit-custom' type='button' value='Get Api Result (custom)'>
+		<input id='geolocation-submit-custom-lat' type='text' value='' placeholder='latitude'>
+		<input id='geolocation-submit-custom-lng' type='text' value='' placeholder='longitude'>
 
 		<br/><br/>
 
@@ -49,4 +53,5 @@
 	</div>
 </div>
 
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_API_KEY; ?>&callback=googleMap"></script>
 <?php $this->root->end($path); ?>

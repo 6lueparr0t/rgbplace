@@ -26,6 +26,11 @@
 
 	}
 
+	#map {
+		width:100%;
+		height:400px;
+	}
+
 	.geocode {
 		text-align: center;
 
@@ -71,6 +76,9 @@
 
 	.row {
 		padding:1rem;
+		margin:1rem 0;
+		display:block;
+		background-color:$oc-gray-2;
 
 		&.row:hover {
 			background-color:$oc-gray-7;
