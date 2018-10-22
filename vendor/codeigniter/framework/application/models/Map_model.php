@@ -221,8 +221,8 @@ class Map_model extends CI_Model {
 				</ul>
 			</label>
 		</div>";
-		echo "<input type='search' class='search-input' value='' placeholder='Search ..'/>";
-		echo "<div class='search-button'><i class='fa fa-search'></i></div>";
+		echo "<input type='search' id='search-input' value='' placeholder='Search ..'/>";
+		echo "<div id='search-button' class='fa fa-search'></div>";
 		echo "<span class='null'></span>";
 
 		
