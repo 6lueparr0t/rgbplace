@@ -101,26 +101,28 @@ class Map_model extends CI_Model {
 	 * Desc : get classification list.
 	 * ====================
 	 */
-	public function list ($map, $type, $start=0, $rows=0, $data= null)
+	public function list ($map, $type, $start=0, $rows=0, $search = null)
 	{
 		if(!$rows) $rows = LIST_ROWS_LIMIT;
 
 		$table = $this->db->escape_str("map_{$map}_post");
 
-		$search_list = ['page', 'title', 'content', 'reply', 'name', 'tag', 'date'];
-		$search = [];
+		$category = ['title', 'content', 'reply', 'name', 'keyword', 'date'];
+		$search_list = [];
 
 		$where = "type='".$this->db->escape_str($type)."'";
 
-		if(isset($data)) {
-			for($i=0; $i<count($search_list); $i++) {
-				if(array_key_exists($search_list[$i], $data)) {
-					$search[$search_list[$i]] = $data[$search_list[$i]];
+		for($i=0; $i<count($category); $i++) {
+			if(array_key_exists($category[$i], $search)) {
+				if($search[$category[$i]]) {
+					$search_list[] = $category[$i]." like '%".$search[$category[$i]]."%'";
 				}
 			}
 		}
 
-		//$where .= " and title like '%{$data['title']}%' ";
+		if($search_list) $where .= " and (".implode(' or ', $search_list).")";
+
+		//$where .= " and title like '%{$search['title']}%' ";
 
 		$limit = ($rows)?"{$start}, {$rows}":$start;
 
@@ -212,11 +214,11 @@ class Map_model extends CI_Model {
 				<i class='open fa fa-minus'></i>
 				<i class='close fa fa-plus'></i>
 				<ul>
-					<li><label for='search-mode-title'  ><input type='checkbox' id='search-mode-title'   checked/><span><i class='fas fa-heading'>			</i></span></label></li>
+					<li><label for='search-mode-title'  ><input type='checkbox' id='search-mode-title'   checked/><span><i class='fas fa-heading'>		</i></span></label></li>
 					<li><label for='search-mode-content'><input type='checkbox' id='search-mode-content' checked/><span><i class='fas fa-file-alt'>		</i></span></label></li>
 					<li><label for='search-mode-reply'  ><input type='checkbox' id='search-mode-reply'          /><span><i class='far fa-comment-dots'>	</i></span></label></li>
 					<li><label for='search-mode-name'   ><input type='checkbox' id='search-mode-name'           /><span><i class='fa fa-user'>			</i></span></label></li>
-					<li><label for='search-mode-tag'    ><input type='checkbox' id='search-mode-tag'            /><span><i class='fa fa-hashtag'>			</i></span></label></li>
+					<li><label for='search-mode-keyword'><input type='checkbox' id='search-mode-keyword'        /><span><i class='fa fa-hashtag'>		</i></span></label></li>
 					<li><label for='search-mode-date'   ><input type='checkbox' id='search-mode-date'           /><span><i class='fa fa-calendar'>		</i></span></label></li>
 				</ul>
 			</label>
@@ -249,7 +251,26 @@ class Map_model extends CI_Model {
 		// get list count (new sql run)
 		$where = "type='".$this->db->escape_str($type)."'";
 
+		$search_list = [];
+		$search_param = [];
+		foreach($search as $key => $value) {
+			if ($key == 'page') continue;
+			if ($value) {
+				$search_list[] = "{$key} like '%{$value}%'";
+				$search_param[] = "{$key}={$value}";
+			}
+		}
+
+		if ($search_list) $where .= " and (".implode(' or ', $search_list).")";
+		if ($search_param) {
+			$param = "&".implode('&', $search_param);
+		} else {
+			$param = '';
+		}
+
 		$query = "SELECT count(*) as list_count FROM {$table} where {$where}";
+
+		//echo $query;
 		$find = $this->db->query($query);
 
 /*
@@ -320,17 +341,17 @@ class Map_model extends CI_Model {
 		echo "<div class='button-group'>";
 		echo "<div class='pagination'>";
 
-		echo "<a href='/{$map}/{$type}/list?page=1'><i class='fas fa-step-backward'></i></a>";
-		echo "<a href='/{$map}/{$type}/list?page={$min_pagination}'><i class='fas fa-backward'></i></a>";
+		echo "<a href='/{$map}/{$type}/list?page=1{$param}'><i class='fas fa-step-backward'></i></a>";
+		echo "<a href='/{$map}/{$type}/list?page={$min_pagination}{$param}'><i class='fas fa-backward'></i></a>";
 
 		for($count=0; $count<$range; $count++) {
 			$next = $pagination_start;
-			if($pagination_start <= $max && $pagination_start != 0) echo "<a href='/{$map}/{$type}/list?page=".($next)."'>".($next)."</a>";
+			if($pagination_start <= $max && $pagination_start != 0) echo "<a href='/{$map}/{$type}/list?page={$next}{$param}'>{$next}</a>";
 			$pagination_start++;
 		}
 
-		echo "<a href='/{$map}/{$type}/list?page={$max_pagination}'><i class='fas fa-forward'></i></a>";
-		echo "<a href='/{$map}/{$type}/list?page={$max}'><i class='fas fa-step-forward'></i></a>";
+		echo "<a href='/{$map}/{$type}/list?page={$max_pagination}{$param}'><i class='fas fa-forward'></i></a>";
+		echo "<a href='/{$map}/{$type}/list?page={$max}{$param}'><i class='fas fa-step-forward'></i></a>";
 		echo "</div>";
 
 	}

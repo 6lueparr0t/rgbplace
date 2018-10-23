@@ -1,7 +1,7 @@
-let searchResult = document.querySelector("#map-result");
-let searchBtn    = document.querySelector("#map-search-button");
-let searchBox    = document.querySelector("#map-search-box");
-let searchToggle = document.querySelector("#map-search");
+let mapSearchResult = document.querySelector("#map-result");
+let mapSearchBtn    = document.querySelector("#map-search-button");
+let mapSearchBox    = document.querySelector("#map-search-box");
+let mapSearchToggle = document.querySelector("#map-search");
 
 
 function mapSearch (recv) {
@@ -57,10 +57,10 @@ function mapSearch (recv) {
 			}
 
 			//console.log(lists);
-			searchResult.innerHTML = lists;
+			mapSearchResult.innerHTML = lists;
 		} else {
 			// We reached our target server, but it returned an error
-			searchResult.innerHTML = "No Results";
+			mapSearchResult.innerHTML = "No Results";
 		}
 	};
 
@@ -78,14 +78,14 @@ function mapSearch (recv) {
 	request.send();
 }
 
-if (searchBtn) searchBtn.addEventListener("click", function() { searchToggle.checked = false; mapSearch(searchBox); });
-if (searchBox) searchBox.addEventListener("keydown", function(e) {
-	if(searchBox.value == "") {
-		searchToggle.checked = false;
-		searchResult.innerHTML = "<a href='#'><li>No Results</li></a>";
+if (mapSearchBtn) mapSearchBtn.addEventListener("click", function() { mapSearchToggle.checked = false; mapSearch(mapSearchBox); });
+if (mapSearchBox) mapSearchBox.addEventListener("keydown", function(e) {
+	if(mapSearchBox.value == "") {
+		mapSearchToggle.checked = false;
+		mapSearchResult.innerHTML = "<a href='#'><li>No Results</li></a>";
 	}
 	if(e.keyCode == "13") {
-		searchToggle.checked = true;
+		mapSearchToggle.checked = true;
 		mapSearch(this)
 	}
 });
