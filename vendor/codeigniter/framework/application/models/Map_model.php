@@ -113,10 +113,8 @@ class Map_model extends CI_Model {
 		$where = "type='".$this->db->escape_str($type)."'";
 
 		for($i=0; $i<count($category); $i++) {
-			if(array_key_exists($category[$i], $search)) {
-				if($search[$category[$i]]) {
-					$search_list[] = $category[$i]." like '%".$this->db->escape_like_str($search[$category[$i]])."%'";
-				}
+			if(array_key_exists($category[$i], $search) && $search[$category[$i]]) {
+				$search_list[] = $category[$i]." like '%".$this->db->escape_like_str($search[$category[$i]])."%'";
 			}
 		}
 
