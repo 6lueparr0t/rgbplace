@@ -7,7 +7,7 @@
 
 <div id="page">
   <div id="scene">
-    <img src="/assets/img/placeholder.jpg" />
+	  <img src="<?php echo $main?>" />
   </div>
   
   <div class='type'> <!-- type start -->
