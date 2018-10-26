@@ -105,17 +105,56 @@ class Map_model extends CI_Model {
 	{
 		if(!$rows) $rows = LIST_ROWS_LIMIT;
 
-		$table = $this->db->escape_str("map_{$map}_post");
+		if($search['reply']) {
+			$table = $this->db->escape_str("map_{$map}_post post LEFT JOIN map_{$map}_reply reply ON post.no = reply.post");
+		} else {
+			$table = $this->db->escape_str("map_{$map}_post post");
+		}
 
-		$category = ['title', 'content', 'reply', 'name', 'keyword', 'date'];
+		$category = ['search', 'title', 'content', 'reply', 'name', 'keyword', 'ctim'];
 		$search_list = [];
 
-		$where = "type='".$this->db->escape_str($type)."'";
+		$where = "post.type='".$this->db->escape_str($type)."'";
 
 		for($i=0; $i<count($category); $i++) {
 			if(array_key_exists($category[$i], $search) && $search[$category[$i]]) {
-				$search_list[] = $category[$i]." like '%".$this->db->escape_like_str($search[$category[$i]])."%'";
+				$key = $category[$i];
+				$value = $this->db->escape_like_str($search[$key]);
+
+				if($key == 'search') {
+					$search_param[] = "{$key}={$value}";
+					continue;
+				}
+
+				if($search['reply']) {
+					if ($key == 'reply') {
+						$search_list[] = "reply.content like '%{$search['search']}%'";
+						$search_param[] = "{$key}={$value}";
+						$search_field[]  = "reply.no as reply_no, reply.content as reply_content";
+						continue;
+					}
+
+					if ($value == 'y') {
+						$search_list[] = "post.{$key} like '%{$search['search']}%'";
+						$search_param[] = "{$key}={$value}";
+					}
+				} else {
+					$search_list[] = $category[$i]." like '%{$search['search']}%'";
+					$search_param[] = $category[$i]."=".$value;
+				}
 			}
+		}
+
+		if (isset($search_param)) {
+			$param = "?".implode('&', $search_param);
+		} else {
+			$param = '';
+		}
+
+		if (isset($search_field)) {
+			$field = ",".implode(',', $search_field);
+		} else {
+			$field = '';
 		}
 
 		if($search_list) $where .= " and (".implode(' or ', $search_list).")";
@@ -124,7 +163,8 @@ class Map_model extends CI_Model {
 
 		$limit = ($rows)?"{$start}, {$rows}":$start;
 
-		$query = "SELECT * FROM {$table} where {$where} ORDER BY no desc LIMIT ".$this->db->escape_str($limit);
+		$query = "SELECT post.* {$field} FROM {$table} where {$where} ORDER BY post.no desc LIMIT ".$this->db->escape_str($limit);
+		//echo $query;
 		$find = $this->db->query($query);
 
 		echo "<table class='list'>";
@@ -145,19 +185,27 @@ class Map_model extends CI_Model {
 		foreach ($find->result() as $key => $row) {
 			$no = $row->no;
 
-			$title = "<a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a>";
+			$replyCount = ($row->reply > 0)?"<a href='/{$map}/{$row->type}/{$row->no}{$param}'> <i class='far fa-comment-dots'></i> {$row->reply}</a>":"";
+
+			if(isset($row->reply_no) && isset($row->reply_content)) {
+				$param2 = "&search={$row->reply_content}";
+				$reply = "<a href='/{$map}/{$row->type}/{$row->no}{$param}{$param2}'>{$row->reply_content}</a>";
+			} else {
+				$reply = '';
+			}
+
+			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>{$row->title}{$replyCount}</a>";
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
-
-			$reply = ($row->reply > 0)?"<a href='/{$map}/{$row->type}/{$row->no}'> <i class='far fa-comment-dots'></i> {$row->reply}</a>":"";
 
 			$toggle = "<div class='toggle'><span class='toggle-name'>{$row->name}</span> <span class='toggle-date'>{$date} {$time}</span></div>";
 
 			echo "<tr class='list-row'>"
 				."<td class='no'>{$row->no}</td>"
 				."<td class='title'>"
-					."{$title} {$reply}"
+					."{$title}"
 					."{$toggle}"
+					."{$reply}"
 				."</td>"
 				."<td class='hit'>{$row->hit}</td>"
 				."<td class='name'>{$row->name}</td>"
@@ -208,20 +256,20 @@ class Map_model extends CI_Model {
 
 		echo "<div class='search-select'>
 			<label class='search-select-list' for='search-select-toggle'>
-				<input type='checkbox' id='search-select-toggle' />
+				<input type='checkbox' id='search-select-toggle' ".(($this->input->get('search'))?"checked":"")." />
 				<i class='open fa fa-minus'></i>
 				<i class='close fa fa-plus'></i>
 				<ul>
-					<li><label for='search-mode-title'  ><input type='checkbox' id='search-mode-title'   checked/><span><i class='fas fa-heading'>		</i></span></label></li>
-					<li><label for='search-mode-content'><input type='checkbox' id='search-mode-content' checked/><span><i class='fas fa-file-alt'>		</i></span></label></li>
-					<li><label for='search-mode-reply'  ><input type='checkbox' id='search-mode-reply'          /><span><i class='far fa-comment-dots'>	</i></span></label></li>
-					<li><label for='search-mode-name'   ><input type='checkbox' id='search-mode-name'           /><span><i class='fa fa-user'>			</i></span></label></li>
-					<li><label for='search-mode-keyword'><input type='checkbox' id='search-mode-keyword'        /><span><i class='fa fa-hashtag'>		</i></span></label></li>
-					<li><label for='search-mode-date'   ><input type='checkbox' id='search-mode-date'           /><span><i class='fa fa-calendar'>		</i></span></label></li>
+					<li><label for='search-mode-title'  ><input type='checkbox' id='search-mode-title'   ".(($this->input->get('title'  ))?"checked":"")."/><span><i class='fas fa-heading'>		</i></span></label></li>
+					<li><label for='search-mode-content'><input type='checkbox' id='search-mode-content' ".(($this->input->get('content'))?"checked":"")."/><span><i class='fas fa-file-alt'>		</i></span></label></li>
+					<li><label for='search-mode-reply'  ><input type='checkbox' id='search-mode-reply'   ".(($this->input->get('reply'  ))?"checked":"")."/><span><i class='far fa-comment-dots'>	</i></span></label></li>
+					<li><label for='search-mode-name'   ><input type='checkbox' id='search-mode-name'    ".(($this->input->get('name'   ))?"checked":"")."/><span><i class='fa fa-user'>			</i></span></label></li>
+					<li><label for='search-mode-keyword'><input type='checkbox' id='search-mode-keyword' ".(($this->input->get('keyword'))?"checked":"")."/><span><i class='fa fa-hashtag'>		</i></span></label></li>
+					<li><label for='search-mode-ctim'   ><input type='checkbox' id='search-mode-ctim'    ".(($this->input->get('ctim'   ))?"checked":"")."/><span><i class='fa fa-calendar'>		</i></span></label></li>
 				</ul>
 			</label>
 		</div>";
-		echo "<input type='search' id='search-input' value='' placeholder='Search ..'/>";
+		echo "<input type='search' id='search-input' value='".$this->input->get('search')."' placeholder='Search ..'/>";
 		echo "<div id='search-button' class='fa fa-search'></div>";
 		echo "<span class='null'></span>";
 
@@ -244,18 +292,42 @@ class Map_model extends CI_Model {
 	public function list_pagination ($map, $type, $rows = REPLY_LIST_ROWS_LIMIT, $search = [])
 	{
 
-		$table = $this->db->escape_str("map_{$map}_post");
+		if($search['reply']) {
+			$table = $this->db->escape_str("map_{$map}_post post LEFT JOIN map_{$map}_reply reply ON post.no = reply.post");
+		} else {
+			$table = $this->db->escape_str("map_{$map}_post post");
+		}
 
 		// get list count (new sql run)
-		$where = "type='".$this->db->escape_str($type)."'";
+		$where = "post.type='".$this->db->escape_str($type)."'";
 
 		$search_list = [];
 		$search_param = [];
+
 		foreach($search as $key => $value) {
 			if ($key == 'page') continue;
-			if ($value) {
-				$search_list[] = "{$key} like '%{$value}%'";
+
+			if($key == 'search') {
 				$search_param[] = "{$key}={$value}";
+				continue;
+			}
+
+			if($search['reply']) {
+				if ($key == 'reply') {
+					$search_list[] = "reply.content like '%{$search['search']}%'";
+					$search_param[] = "{$key}={$value}";
+					continue;
+				}
+
+				if ($value == 'y') {
+					$search_list[] = "post.{$key} like '%{$search['search']}%'";
+					$search_param[] = "{$key}={$value}";
+				}
+			} else {
+				if ($value == 'y') {
+					$search_list[] = "{$key} like '%{$search['search']}%'";
+					$search_param[] = "{$key}={$value}";
+				}
 			}
 		}
 
@@ -268,7 +340,6 @@ class Map_model extends CI_Model {
 
 		$query = "SELECT count(*) as list_count FROM {$table} where {$where}";
 
-		//echo $query;
 		$find = $this->db->query($query);
 
 /*

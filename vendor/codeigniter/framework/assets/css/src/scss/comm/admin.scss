@@ -80,9 +80,14 @@
 		display:block;
 		background-color:$oc-gray-2;
 
-		&.row:hover {
+		&:hover {
 			background-color:$oc-gray-7;
 			color:white	
+		}
+
+		&.selected {
+			background-color: $oc-gray-8;
+			color: $oc-gray-0;
 		}
 	}
 

@@ -9,7 +9,7 @@ function postSearch (recv) {
 	mode['reply']   = document.querySelector("#search-mode-reply").checked;
 	mode['name']    = document.querySelector("#search-mode-name").checked;
 	mode['keyword'] = document.querySelector("#search-mode-keyword").checked;
-	mode['date']    = document.querySelector("#search-mode-date").checked;
+	mode['ctim']    = document.querySelector("#search-mode-ctim").checked;
 
 	//console.log(mode);
 	//console.log(recv);
@@ -17,12 +17,12 @@ function postSearch (recv) {
 	let where = '';
 	for(let i in mode) {
 		if(mode[i]) {
-			where += i+'='+recv+'&';
+			where += i+'=y&';
 		}
 	}
 
 	console.log(where);
-	redirect ('list?'+where);
+	redirect ('list?search='+recv+'&'+where);
 }
 
 if (postSearchBtn)postSearchBtn.addEventListener("click", function() {
