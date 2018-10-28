@@ -85,7 +85,7 @@ class Map extends CI_Controller {
 		//$data['upload'] = "[]";
 
 		if($num > 0) {
-			$info = [$map, $type, $num];
+			$info = [null, $map, $type, $num];
 			$ret = $this->map->post_select(null, $info);
 
 			if($ret->result()[0]->uid == $this->session->userdata('uid') || $this->session->userdata('admin')) {
