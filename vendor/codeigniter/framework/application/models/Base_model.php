@@ -3,12 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Base_model extends CI_Model {
 
 	public function getMainPost($map) {
-		$data = [];
-
+		
 		$query = "SELECT * FROM map_{$map}_post WHERE type = 'best' ORDER BY no desc LIMIT 1";
 		$find = $this->db->query($query);
 
-		$result = $find->result()[0];
+		if ($find->num_rows() === 0) {
+			$result = array();
+		} else {
+			$result = $find->result()[0];
+		}
 
 		return $result;
 	}

@@ -8,7 +8,11 @@
 <div id="page">
   <div id="scene">
 	  <a href="<?php echo $url; ?>">
-	    <div class='title'><?php echo $title; ?></div>
+		<?php
+			if (isset($title)) {
+				echo "<div class='title'>{$title}</div>";
+			}
+		?>
       </a>
       <img src="<?php echo $scene?>" />
   </div>
