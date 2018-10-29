@@ -17,8 +17,16 @@ class Map extends CI_Controller {
 
 	public function page($map)
 	{
-		$data['main'] = "/assets/img/placeholder.jpg";
-		$data['map' ] = strtolower($map);
+		$mainPost = $this->base->getMainPost($map);
+
+		$content = html_entity_decode($mainPost->content);
+
+		preg_match_all('/<img.*?src=[\'"](.*?)[\'"]/i', $content, $img);
+
+		$data['scene'] = $img[1][0];
+		$data['map'  ] = strtolower($map);
+		$data['title'] = "{$mainPost->title}";
+		$data['url'  ] = "/{$map}/{$mainPost->type}/{$mainPost->no}";
 
 		$this->root->view("map/page", $data);
 	}

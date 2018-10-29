@@ -7,7 +7,10 @@
 
 <div id="page">
   <div id="scene">
-	  <img src="<?php echo $main?>" />
+	  <a href="<?php echo $url; ?>">
+	    <div class='title'><?php echo $title; ?></div>
+      </a>
+      <img src="<?php echo $scene?>" />
   </div>
   
   <div class='type'> <!-- type start -->
