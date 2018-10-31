@@ -815,6 +815,9 @@ class Map_model extends CI_Model {
 				$row->depth10
 			];
 
+			$up = $row->up;
+			$down = $row->down;
+
 			$depth_no = 0;
 			for($i=0; $i<count($depth); $i++) {
 				if($depth[$i]>0) $depth_no = $i;
@@ -847,8 +850,8 @@ class Map_model extends CI_Model {
 			/* func : top */
 			$ret .= "<div class='func'>";
 
-				$ret .= "<button class='up {$btn_perm}'><i class='far fa-thumbs-up'></i></button>";
-				$ret .= "<button class='down {$btn_perm}'><i class='far fa-thumbs-down'></i></button>";
+				$ret .= "<button class='far fa-thumbs-up reply-up {$btn_perm}'> {$up} </button>";
+				$ret .= "<button class='far fa-thumbs-down reply-down {$btn_perm}'> {$down} </button>";
 
 				$ret .= "<button class='reply {$btn_perm}'><i class='fa fa-reply' style='transform: rotate3d(1, 0, 0, 180deg);'></i></button>";
 
@@ -987,6 +990,10 @@ class Map_model extends CI_Model {
 
 		$reply['mention'] = $result->name;
 		$reply['follow'] = ($result->follow)?$result->follow:$result->no;
+
+		$reply['uid'] = $result->uid;
+		$reply['up'] = $result->up;
+		$reply['down'] = $result->down;
 
 		return $reply;
 	}
@@ -1211,7 +1218,7 @@ class Map_model extends CI_Model {
 		$admin = $this->session->userdata('admin');
 
 		$act = strtolower($this->db->escape_str($data['act']));
-		$type = $this->db->escape_str($data['target']);
+		$type = strtolower($this->db->escape_str($data['target']));
 
 		$history_table = $this->db->escape_str("map_{$info[1]}_history");
 		$update_table = $this->db->escape_str("map_{$info[1]}_{$type}");
@@ -1226,7 +1233,16 @@ class Map_model extends CI_Model {
 			$point = 1;
 		}
 
-		$post_info = $this->post_select($data, $info);
+		switch($type) {
+		case 'post' :
+			$vote_info = $this->post_select($data, $info);
+			$vote_uid = $vote_info->result()[0]->uid;
+			break;
+		case 'reply' :
+			$vote_info = $this->reply_select($update_table, $no);
+			$vote_uid = $vote_info['uid'];
+			break;
+		}
 
 		if($result->num_rows() > 0) {
 			if (!is_null($result->result()[0]->utim)) {
@@ -1236,7 +1252,7 @@ class Map_model extends CI_Model {
 					$ret = $this->db->query($query, $no);
 
 					$query = "UPDATE user_info SET score = score + {$point} where uid = ?";
-					$ret = $this->db->query($query, $post_info->result()[0]->uid);
+					$ret = $this->db->query($query, $vote_uid);
 				}
 			} else {
 				$act_check = $result->result();
@@ -1247,7 +1263,7 @@ class Map_model extends CI_Model {
 						$ret = $this->db->query($query, $no);
 
 						$query = "UPDATE user_info SET score = score - {$point} where uid = ?";
-						$ret = $this->db->query($query,  $post_info->result()[0]->uid);
+						$ret = $this->db->query($query,  $vote_uid);
 					}
 				} else {
 					$ret = 0;
@@ -1257,13 +1273,13 @@ class Map_model extends CI_Model {
 			$query = "INSERT INTO {$history_table}
 				( uid, type, relation, act)
 				VALUES
-				( ?, 'post', ?, ?)";
-			if( $this->db->query($query, array($uid, $no, $act)) ) {
+				( ?, ?, ?, ?)";
+			if( $this->db->query($query, array($uid, $type, $no, $act)) ) {
 				$query = "UPDATE {$update_table} SET {$act} = {$act} + {$point}  where no = ?";
 				$ret = $this->db->query($query, $no);
 
 				$query = "UPDATE user_info SET score = score + {$point} where uid = ?";
-				$ret = $this->db->query($query,  $post_info->result()[0]->uid);
+				$ret = $this->db->query($query,  $vote_uid);
 			}
 		}
 

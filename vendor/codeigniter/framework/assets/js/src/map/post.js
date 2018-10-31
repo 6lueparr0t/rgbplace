@@ -89,7 +89,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 				'act':this.act,
 			});
 
-			httpRequest(mode, '/api/request/vote', JSON.stringify(data), successPostVote.bind(this), fail.bind(this));
+			httpRequest(mode, '/api/request/vote/post', JSON.stringify(data), successPostVote.bind(this), fail.bind(this));
 			break;
 		case "far fa-thumbs-down post-down enable" :
 		case "far fa-thumbs-down post-down enable active" :
@@ -101,7 +101,33 @@ document.querySelector("body").addEventListener("click", function(event) {
 				'act':this.act,
 			});
 
-			httpRequest(mode, '/api/request/vote', JSON.stringify(data), successPostVote.bind(this), fail.bind(this));
+			httpRequest(mode, '/api/request/vote/post', JSON.stringify(data), successPostVote.bind(this), fail.bind(this));
+			break;
+		case "far fa-thumbs-up reply-up enable" :
+		case "far fa-thumbs-up reply-up enable active" :
+			this.act = 'up';
+			reply = t.parentElement.parentElement.parentElement;
+
+			data.push({
+				'info': __URL_ARRAY__[0]+"/"+__URL_ARRAY__[1]+"/"+__URL_ARRAY__[2]+"/"+reply.querySelector('.no').innerHTML,
+				'target':'REPLY',
+				'act':this.act,
+			});
+
+			httpRequest(mode, '/api/request/vote/reply', JSON.stringify(data), successReplyVote.bind(reply), fail.bind(reply));
+			break;
+		case "far fa-thumbs-down reply-down enable" :
+		case "far fa-thumbs-down reply-down enable active" :
+			this.act = 'down';
+			reply = t.parentElement.parentElement.parentElement;
+
+			data.push({
+				'info': __URL_ARRAY__[0]+"/"+__URL_ARRAY__[1]+"/"+__URL_ARRAY__[2]+"/"+reply.querySelector('.no').innerHTML,
+				'target':'REPLY',
+				'act':this.act,
+			});
+
+			httpRequest(mode, '/api/request/vote/reply', JSON.stringify(data), successReplyVote.bind(reply), fail.bind(reply));
 			break;
 		case "reply enable" :
 		case "reply enable show" :
@@ -220,13 +246,24 @@ function successDelete (data) {
 	redirect('list');
 }
 
-function successPostVote (data) {
-	document.querySelector(".post-"+this.act+".enable").innerHTML = " "+data+" ";
-	document.querySelector(".post-"+this.act+".enable").classList.toggle('active');
+function successReplyVote (data) {
+	//document.querySelector(".post-"+this.act+".enable").innerHTML = " "+data+" ";
+	//document.querySelector(".post-"+this.act+".enable").classList.toggle('active');
+	if(data > 0) {
+		console.log(data);
+		console.log(this);
+	}
+}
 
-	if(__URL_ARRAY__[2] != 'best' && data>20) {
-		alert('😎');
-		redirect(__URL_ARRAY__[3], 'best');
+function successPostVote (data) {
+	if(data > 0) {
+		document.querySelector(".post-"+this.act+".enable").innerHTML = " "+data+" ";
+		document.querySelector(".post-"+this.act+".enable").classList.toggle('active');
+
+		if(__URL_ARRAY__[2] != 'best' && data>20) {
+			alert('😎');
+			redirect(__URL_ARRAY__[3], 'best');
+		}
 	}
 }
 

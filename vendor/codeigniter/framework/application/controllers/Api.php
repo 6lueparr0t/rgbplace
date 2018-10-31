@@ -175,14 +175,26 @@ class Api extends CI_Controller {
 			}
 			break;
 		case 'vote' :
-			$ret = false;
-			if($this->map->vote($data, $info)) {
-				$result = $this->map->post_select(null, $info, 'vote');
-				$ret = $result->result()[0]->{$data['act']};
+			switch($val) {
+			case 'post' :
+				$ret = -1;
+				if($this->map->vote($data, $info)) {
+					$result = $this->map->post_select(null, $info, 'vote');
+					$ret = $result->result()[0]->{$data['act']};
 
-				if($ret > 20) {
-					$this->map->move_to_best($data, $info);
-				}	
+					if($ret > 20) {
+						$this->map->move_to_best($data, $info);
+					}	
+				}
+				break;
+			case 'reply' :
+				$ret = -1;
+				if($this->map->vote($data, $info)) {
+					$replyTable = $this->db->escape_str("map_{$info[1]}_reply");
+					$result = $this->map->reply_select($replyTable, $info[3]);
+					$ret = $result[$data['act']];
+				}
+				break;
 			}
 			break;
 
