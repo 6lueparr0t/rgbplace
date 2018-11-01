@@ -990,6 +990,7 @@ class Map_model extends CI_Model {
 
 		$reply['mention'] = $result->name;
 		$reply['follow'] = ($result->follow)?$result->follow:$result->no;
+		$reply['post'] = $result->post;
 
 		$reply['uid'] = $result->uid;
 		$reply['up'] = $result->up;
@@ -1236,10 +1237,12 @@ class Map_model extends CI_Model {
 		switch($type) {
 		case 'post' :
 			$vote_info = $this->post_select($data, $info);
+			$post = null;
 			$vote_uid = $vote_info->result()[0]->uid;
 			break;
 		case 'reply' :
 			$vote_info = $this->reply_select($update_table, $no);
+			$post = $vote_info['post'];
 			$vote_uid = $vote_info['uid'];
 			break;
 		}
@@ -1271,10 +1274,10 @@ class Map_model extends CI_Model {
 			}
 		} else {
 			$query = "INSERT INTO {$history_table}
-				( uid, type, relation, act)
+				( uid, type, relation, post act)
 				VALUES
 				( ?, ?, ?, ?)";
-			if( $this->db->query($query, array($uid, $type, $no, $act)) ) {
+			if( $this->db->query($query, array($uid, $type, $no, $post, $act)) ) {
 				$query = "UPDATE {$update_table} SET {$act} = {$act} + {$point}  where no = ?";
 				$ret = $this->db->query($query, $no);
 
