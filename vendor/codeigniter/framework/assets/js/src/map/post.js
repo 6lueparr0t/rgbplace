@@ -105,26 +105,26 @@ document.querySelector("body").addEventListener("click", function(event) {
 			break;
 		case "far fa-thumbs-up reply-up enable" :
 		case "far fa-thumbs-up reply-up enable active" :
-			this.act = 'up';
 			reply = t.parentElement.parentElement.parentElement;
+			reply.act = 'up';
 
 			data.push({
 				'info': __URL_ARRAY__[0]+"/"+__URL_ARRAY__[1]+"/"+__URL_ARRAY__[2]+"/"+reply.querySelector('.no').innerHTML,
 				'target':'REPLY',
-				'act':this.act,
+				'act':reply.act,
 			});
 
 			httpRequest(mode, '/api/request/vote/reply', JSON.stringify(data), successReplyVote.bind(reply), fail.bind(reply));
 			break;
 		case "far fa-thumbs-down reply-down enable" :
 		case "far fa-thumbs-down reply-down enable active" :
-			this.act = 'down';
 			reply = t.parentElement.parentElement.parentElement;
+			reply.act = 'down';
 
 			data.push({
 				'info': __URL_ARRAY__[0]+"/"+__URL_ARRAY__[1]+"/"+__URL_ARRAY__[2]+"/"+reply.querySelector('.no').innerHTML,
 				'target':'REPLY',
-				'act':this.act,
+				'act':reply.act,
 			});
 
 			httpRequest(mode, '/api/request/vote/reply', JSON.stringify(data), successReplyVote.bind(reply), fail.bind(reply));
@@ -249,14 +249,14 @@ function successDelete (data) {
 function successReplyVote (data) {
 	//document.querySelector(".post-"+this.act+".enable").innerHTML = " "+data+" ";
 	//document.querySelector(".post-"+this.act+".enable").classList.toggle('active');
-	if(data > 0) {
-		console.log(data);
-		console.log(this);
+	if(data > -1) {
+		this.querySelector(".reply-"+this.act+".enable").innerHTML = " "+data+" ";
+		this.querySelector(".reply-"+this.act+".enable").classList.toggle('active');
 	}
 }
 
 function successPostVote (data) {
-	if(data > 0) {
+	if(data > -1) {
 		document.querySelector(".post-"+this.act+".enable").innerHTML = " "+data+" ";
 		document.querySelector(".post-"+this.act+".enable").classList.toggle('active');
 

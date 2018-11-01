@@ -1274,9 +1274,9 @@ class Map_model extends CI_Model {
 			}
 		} else {
 			$query = "INSERT INTO {$history_table}
-				( uid, type, relation, post act)
+				( uid, type, relation, post, act)
 				VALUES
-				( ?, ?, ?, ?)";
+				( ?, ?, ?, ?, ?)";
 			if( $this->db->query($query, array($uid, $type, $no, $post, $act)) ) {
 				$query = "UPDATE {$update_table} SET {$act} = {$act} + {$point}  where no = ?";
 				$ret = $this->db->query($query, $no);

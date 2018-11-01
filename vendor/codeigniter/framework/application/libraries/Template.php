@@ -62,8 +62,8 @@ class Template {
 				.form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true', 'minlength' => 6])
 				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10]);
 
-			echo "<button type='submit' id='login' onclick='this.setCustomValidity(\"\")'><i class='fa fa-sign-in'></i> Sign In</button>";
-			echo "<button type='button' onClick=\"location.href='/sign'\"><i class='fa fa-user-plus'></i> Sign Up</button>";
+			echo "<button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign In </button>";
+			echo "<button type='button' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button>";
 			echo form_close();
 
 		} else {
@@ -71,7 +71,10 @@ class Template {
 
 			$name = $this->CI->session->userdata('name');
 
-			echo ("<div class='sign'>{$name} <a href='/#'>Modify</a> <a href='/sign/out'>Sign Out</a></div>");
+			echo "<div class='sign'>".$name;
+			echo "<button > Modify </button>";
+			echo "<button onclick='document.location.href=\"/sign/out\";'> <i class='fas fa-sign-out-alt'></i> Sign Out </button>";
+			echo "</div>";
 
 			if($admin === TRUE) {
 				$apikey = $this->CI->base->setAdminApiKey($name);

@@ -11,6 +11,7 @@
 		}
 		height:2rem;
 		padding:1rem;
+		margin:1rem auto;
 		font-size:2rem;
 	}
 
@@ -19,9 +20,14 @@
 		min-height:50rem;
 		height:100%;
 		padding:1rem;
-		margin:1rem auto;
 		text-align:justify;
 		line-height: 2rem;
+	}
+
+	#edit-content-code {
+		@extend #edit-content;
+		font-size:1.2rem;
+		width: -webkit-fill-available;
 	}
 
 

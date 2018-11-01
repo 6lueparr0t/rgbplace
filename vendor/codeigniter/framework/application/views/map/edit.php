@@ -4,9 +4,19 @@
 <!-- map/edit/<?=$map?>/<?=$type?>/<?=$num?> -->
 <input type='hidden' id='edit-mode' name='edit-mode' value='<?=$mode?>' />
 <input type='text' id='edit-title' name='edit-title' value='<?=$title?>' />
-<div id='edit-content' name='edit-content' contenteditable='true'>
-<?=$content?>
+
+<div class='tab'>
+	<div class='view'>view</div>
+	<div class='code'>code</div>
 </div>
+
+<div class='editor' id='edit-content' name='edit-content' contenteditable='true'>
+<?php echo $content; ?>
+</div>
+
+<textarea class='editor' id='edit-content-code' name='edit-content-code'>
+<?php echo $content; ?>
+</textarea>
 
 <? echo form_open('', ['name' => 'upload', 'id' => 'upload']); ?>
   <label for="input_zone" class="drop_wait"></label>

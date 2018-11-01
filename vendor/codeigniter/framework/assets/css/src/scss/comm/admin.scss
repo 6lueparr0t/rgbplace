@@ -1,31 +1,5 @@
 .admin {
 
-	.tab {
-		font-family: "pixel";
-
-		display:flex;
-
-		div {
-			padding:1rem;
-			flex-grow:1;
-			text-align:center;
-
-			background-color:$oc-gray-3;
-			color:black;
-
-			&:hover {
-				background-color:$oc-gray-7;
-				color:white;
-			}
-
-			&.active {
-				background-color:$oc-gray-8;
-				color:white;
-			}
-		}
-
-	}
-
 	#map {
 		width:100%;
 		height:400px;

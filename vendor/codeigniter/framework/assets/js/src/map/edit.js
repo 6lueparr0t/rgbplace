@@ -220,17 +220,56 @@ function fail (data) {
 	alert('try again');
 }
 
+function tabChange (element) {
+    document.querySelectorAll('.tab div').forEach(function (element) {
+        element.classList.remove('active');
+    });
+
+    element.classList.add('active');
+}
 document.querySelector("body").addEventListener("click", function(event) {
 	let t = event.target;
+	let editor, content;
+
+	let edit_content = document.querySelector('#edit-content');
+	let edit_content_code = document.querySelector('#edit-content-code');
+
+	switch(t.classList.item(0)) {
+		case 'view' :
+			tabChange(t);
+			edit_content.innerHTML = edit_content_code.value;
+			edit_content.classList.remove('none');
+			edit_content.classList.add('active');
+
+			edit_content_code.classList.add('none');
+			edit_content_code.classList.remove('active');
+			break;
+		case 'code' :
+			tabChange(t);
+			edit_content_code.value = edit_content.innerHTML;
+			edit_content_code.classList.remove('none');
+			edit_content_code.classList.add('active');
+
+			edit_content.classList.add('none');
+			edit_content.classList.remove('active');
+			break;
+	}
 
 	switch(t.id) {
 		case 'save' :
 			let data = [];
-			
+
+			editor = document.querySelector('.editor.active');
+			if(editor.id == 'edit-content') {
+				content = editor.innerHTML;
+			} else {
+				content = editor.value;
+			}
+
 			data.push({
 				'info': __URL__,
 				'title': document.querySelector('#edit-title').value,
-				'content': document.querySelector('#edit-content').innerHTML,
+				'content': content
 			});
 
 			let mode = (document.querySelector('#edit-mode') || {value:'post'}).value;
@@ -243,3 +282,6 @@ document.querySelector("body").addEventListener("click", function(event) {
 	}
 });
 
+!function() {
+    document.querySelector(".view").click();
+}();
