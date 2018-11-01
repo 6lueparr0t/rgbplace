@@ -1,5 +1,22 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common(); ?>
+<style>
+#pac-input {
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 400px;
 
+    margin: .5rem;
+    height: 2.4rem;
+  }
+
+#pac-input:focus {
+	border-color: #4d90fe;
+}
+</style>
 <div class='admin'>
 
 	<div class='tab'>
@@ -10,6 +27,7 @@
 
 	<div id='creation-area' class='none'>
 		<div id="map"></div>
+		<input id="pac-input" class="controls" type="text" placeholder="Search">
 		<input id='geolocation-submit' type='button' value='Get Api Result'>
 		<input id='geolocation-submit-random' type='button' value='Get Api Result (test)'>
 		<input id='geolocation-submit-custom' type='button' value='Get Api Result (custom)'>
@@ -53,5 +71,5 @@
 	</div>
 </div>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_API_KEY; ?>&callback=googleMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_API_KEY; ?>&libraries=places&callback=googleMap"></script>
 <?php $this->root->end($path); ?>
