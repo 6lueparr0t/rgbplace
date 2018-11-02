@@ -152,7 +152,9 @@ class Base_model extends CI_Model {
 		$this->db->query("SET @p3='".json_encode($data['address'][1])."'");
 		$this->db->query("SET @p4='".$data['description']."'");
 		$this->db->query("SET @p5='".$data['keyword']."'");
-		$this->db->query("CALL `createMap`(@p0, @p1, @p2, @p3, @p4, @p5);");
+		$this->db->query("SET @p6='".$data['latitude']."'");
+		$this->db->query("SET @p7='".$data['longitude']."'");
+		$this->db->query("CALL `createMap`(@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);");
 		$this->db->trans_complete();
 
 		return true;

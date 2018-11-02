@@ -1,6 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common(); ?>
 <style>
 #pac-input {
+	z-index: 0;
+	position: absolute;
+	left: 152px;
+	top: 0px;
+
 	background-color: #fff;
 	font-family: Roboto;
 	font-size: 15px;
@@ -9,14 +14,15 @@
 	text-overflow: ellipsis;
 	width: 400px;
 
-    margin: .5rem;
-    height: 2.4rem;
+	margin: .5rem;
+	height: 2.4rem;
   }
 
 #pac-input:focus {
 	border-color: #4d90fe;
 }
 </style>
+
 <div class='admin'>
 
 	<div class='tab'>

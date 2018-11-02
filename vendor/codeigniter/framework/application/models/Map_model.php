@@ -557,7 +557,7 @@ class Map_model extends CI_Model {
 		$no = $this->db->escape_str($info[3]);
 
 		if($option == 'vote') {
-			$field = 'up, down';
+			$field = 'up, down, type';
 		} else {
 			$field = '*';
 		}
@@ -1198,7 +1198,7 @@ class Map_model extends CI_Model {
 	 * Desc : insert or update 'history' table, and increase up, down column to 'post' 'reply' table
 	 * ====================
 	 */
-	public function vote_select($table, $uid, $type, $no) {
+	public function vote_select ($table, $uid, $type, $no) {
 		$query = "SELECT * FROM {$table} where uid=? and type=? and relation=? and act in ('up','down','n') ";
 
 		$result = $this->db->query($query, array($uid, $type, $no));
@@ -1212,7 +1212,7 @@ class Map_model extends CI_Model {
 	 * Desc : insert or update 'history' table, and increase up, down column to 'post' 'reply' table
 	 * ====================
 	 */
-	public function vote($data, $info) {
+	public function vote ($data, $info) {
 		$no = $this->db->escape_str($info[3]);
 		$uid = $this->session->userdata('uid');
 		$level = $this->session->userdata('level');

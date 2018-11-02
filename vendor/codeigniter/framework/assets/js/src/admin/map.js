@@ -273,6 +273,9 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 			latitude = getRandom(-90, 90);
 			longitude = getRandom(-180, 180);
 
+			document.querySelector("#geolocation-submit-custom-lat").value = latitude;
+			document.querySelector("#geolocation-submit-custom-lng").value = longitude;
+
 			httpRequest('GET', '/api/geocode?latlng='+latitude+','+longitude, null, successGeolocation, null);
 			break;
 		case 'geolocation-submit' :
@@ -281,6 +284,11 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 
 					let latitude = position.coords.latitude;
 					let longitude = position.coords.longitude;
+
+					console.log(latitude);
+
+					document.querySelector("#geolocation-submit-custom-lat").value = latitude;
+					document.querySelector("#geolocation-submit-custom-lng").value = longitude;
 
 					httpRequest('GET', '/api/geocode?latlng='+latitude+','+longitude, null, successGeolocation, null);
 
@@ -296,6 +304,8 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 			let country = [];
 			let description = document.querySelector('#map-description').value;
 			let keyword = document.querySelector('#map-keyword').value;
+			latitude = document.querySelector("#geolocation-submit-custom-lat").value;
+			longitude = document.querySelector("#geolocation-submit-custom-lng").value;
 
 			document.querySelectorAll('.row.selected').forEach(function(element) {
 				country.push(element.dataset.country);
@@ -308,7 +318,9 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 				code:code,
 				address:address,
 				description:description,
-				keyword:keyword
+				keyword:keyword,
+				latitude:latitude,
+				longitude:longitude
 			};
 
 			console.log(data);
