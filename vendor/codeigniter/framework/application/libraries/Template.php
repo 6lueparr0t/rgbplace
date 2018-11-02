@@ -71,8 +71,8 @@ class Template {
 
 			$name = $this->CI->session->userdata('name');
 
-			echo "<div class='sign'>".$name;
-			echo "<button > Modify </button>";
+			echo "<div class='sign'>"
+			echo "<a href='/profile'>{$name}</a>"
 			echo "<button onclick='document.location.href=\"/sign/out\";'> <i class='fas fa-sign-out-alt'></i> Sign Out </button>";
 			echo "</div>";
 
