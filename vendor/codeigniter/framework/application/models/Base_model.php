@@ -87,7 +87,7 @@ class Base_model extends CI_Model {
 			$btim = $row->btim;
 		}
 
-		if(date("Y-m-d H:i:s") > $btim && $btim) return $btim;
+		if(date("Y-m-d H:i:s") < $btim && $btim) return $btim;
 
 		return 0;
 	}

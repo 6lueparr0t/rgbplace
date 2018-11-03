@@ -198,6 +198,14 @@ class Api extends CI_Controller {
 			}
 			break;
 
+		case 'report' :
+			if($this->map->report($data, $info)) {
+				$ret = 1;
+			} else {
+				$ret = -1;
+			}
+			break;
+
 		default :
 			break;
 		}

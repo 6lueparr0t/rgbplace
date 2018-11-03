@@ -460,7 +460,7 @@ class Map_model extends CI_Model {
 		if($user = $this->session->userdata('uid')) {
 			$activate = "enable";
 			$history_table = $this->db->escape_str("map_{$map}_history");
-			$vote_result = $this->vote_select($history_table, $user, 'post', $num);
+			$vote_result = $this->history_select($history_table, $user, 'post', $num);
 
 			$result = $vote_result->result();
 			if( $vote_result->num_rows() > 0 ) {
@@ -863,7 +863,7 @@ class Map_model extends CI_Model {
 
 				$ret .= "<button class='reply-modify {$reply_perm}'><i class='fa fa-pencil-alt'></i></button>";
 				$ret .= "<button class='reply-delete {$reply_perm}'><i class='fa fa-trash'></i></button>";
-				$ret .= "<button class='far fa-paper-plane report ' ></button>";
+				$ret .= "<button class='report {$btn_perm}' ><i class='far fa-paper-plane'></i></button>";
 
 			$ret .= "</div>";
 			/* func : end */
@@ -1194,14 +1194,27 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
-	 * Usage : $this->map->vote_select ($table, $uid, $type, $no)
+	 * Usage : $this->map->history_select ($table, $uid, $type, $no)
 	 * Desc : insert or update 'history' table, and increase up, down column to 'post' 'reply' table
 	 * ====================
 	 */
-	public function vote_select ($table, $uid, $type, $no) {
-		$query = "SELECT * FROM {$table} where uid=? and type=? and relation=? and act in ('up','down','n') ";
+	public function history_select ($table, $uid, $type, $no, $act = null) {
 
-		$result = $this->db->query($query, array($uid, $type, $no));
+		if($act) {
+			// $query = "SELECT * FROM {$table} where uid=? and type=? and relation=? and act = ? ";
+			$query = "SELECT a.*, count(distinct b.no) cnt
+						FROM {$table} a
+							left join {$table} b
+							on b.relation = a.relation and b.act = ?
+						where a.uid=?
+							and a.relation=?
+							and a.act = ?";
+			
+			$result = $this->db->query($query, array($act, $uid, $no, $act));
+		} else {
+			$query = "SELECT * FROM {$table} where uid=? and type=? and relation=? and act in ('up','down','n', 'report') ";
+			$result = $this->db->query($query, array($uid, $type, $no));
+		}
 
 		return $result;
 	}
@@ -1224,7 +1237,7 @@ class Map_model extends CI_Model {
 		$history_table = $this->db->escape_str("map_{$info[1]}_history");
 		$update_table = $this->db->escape_str("map_{$info[1]}_{$type}");
 
-		$result = $this->vote_select($history_table, $uid, $type, $no);
+		$result = $this->history_select($history_table, $uid, $type, $no);
 
 		if( $level > 10 || $admin === true ) { 
 			$point = 10;
@@ -1284,6 +1297,44 @@ class Map_model extends CI_Model {
 				$query = "UPDATE user_info SET score = score + {$point} where uid = ?";
 				$ret = $this->db->query($query,  $vote_uid);
 			}
+		}
+
+		return $ret;
+	}
+
+	/*
+	 * ====================
+	 * Usage : $this->map->report (info [domain, map, type, num] array)
+	 * Desc : insert or update 'history' table, and increase up, down column to 'post' 'reply' table
+	 * ====================
+	 */
+	public function report ($data, $info) {
+		$no = $this->db->escape_str($info[3]);
+		$uid = $this->session->userdata('uid');
+
+		$act = strtolower($this->db->escape_str($data['act']));
+		$type = strtolower($this->db->escape_str($data['target']));
+
+		$history_table = $this->db->escape_str("map_{$info[1]}_history");
+		$reply_table = $this->db->escape_str("map_{$info[1]}_reply");
+		$update_table = $this->db->escape_str("user_info");
+
+		$result = $this->history_select($history_table, $uid, $type, $no, $act);
+
+		$reply_info = $this->reply_select($reply_table, $no);
+		$post = $reply_info['post'];
+
+		if($result->result()[0]->cnt == 0) {
+			$query = "INSERT INTO {$history_table}
+				( uid, type, relation, post, act)
+				VALUES
+				( ?, ?, ?, ?, ?)";
+
+			if( $this->db->query($query, array($uid, $type, $no, $post, $act)) ) {
+				$ret = true;
+			}
+		} else {
+			$ret = false;
 		}
 
 		return $ret;

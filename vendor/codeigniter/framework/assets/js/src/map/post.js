@@ -129,6 +129,19 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 			httpRequest(mode, '/api/request/vote/reply', JSON.stringify(data), successReplyVote.bind(reply), fail.bind(reply));
 			break;
+		case "report enable":
+			reply = t.parentElement.parentElement.parentElement;
+			reply.act = 'report';
+
+			data.push({
+				'info': __URL_ARRAY__[0]+"/"+__URL_ARRAY__[1]+"/"+__URL_ARRAY__[2]+"/"+reply.querySelector('.no').innerHTML,
+				'target':'REPLY',
+				'act':reply.act,
+			});
+			console.log(data);
+
+			httpRequest(mode, '/api/request/report', JSON.stringify(data), successReport.bind(reply), fail.bind(reply));
+			break;
 		case "reply enable" :
 		case "reply enable show" :
 		case "reply-modify enable":
@@ -138,8 +151,8 @@ document.querySelector("body").addEventListener("click", function(event) {
 			no = reply.querySelector("ul .no").innerHTML;
 
 			if(t.classList.contains('reply-modify')) {
-				//message  = reply.querySelector("ul .content .text").innerHTML;
-				message  = reply.querySelector("ul .content .text").value;
+				//message  = reply.querySelector("ul .content .text").value;
+				message  = reply.querySelector("ul .content .text").innerHTML;
 				reply.querySelector("ul").classList.toggle('hide');
 				mode = 'UPDATE';
 			}
@@ -223,8 +236,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 		case "delete enable":
 
 			data.push({
-				'info': __URL__,
-				'no': no
+				'info': __URL__
 			});
 
 			httpRequest('delete', '/api/request/post', JSON.stringify(data), successDelete.bind(this), fail.bind(this));
@@ -265,6 +277,14 @@ function successPostVote (data) {
 			alert('😎');
 			redirect(__URL_ARRAY__[3], 'best');
 		}
+	}
+}
+
+function successReport (data) {
+	if(data > -1) {
+		alert('🕶️ Reply was reported ! 👊');
+	} else {
+		alert('already reported.');
 	}
 }
 

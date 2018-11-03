@@ -16,6 +16,7 @@ class Template {
     public function __construct()
     {
 		$this->CI =& get_instance();
+		$this->CI->allow=array('');
     }
 
 	public function sview($path, $data = [])
