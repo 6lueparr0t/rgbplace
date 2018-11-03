@@ -1,0 +1,31 @@
+#footer {
+	text-align: center;
+	font-family: "pixel";
+	margin: 4rem 0 0 0;
+	padding: 2rem 0 1rem 0;
+	border-top:1px solid $oc-gray-9;
+	font-size:1.4rem;
+
+	.link {
+
+		margin:1rem;
+		font-size:1rem;
+		font-weight:bold;
+
+		a.blog {
+			color:$oc-orange-6;
+
+			&:hover {
+				color:$oc-orange-4;
+			}
+		}
+
+		a.mail {
+			color:$oc-lime-7;
+
+			&:hover {
+				color:$oc-lime-5;
+			}
+		}
+	}
+}

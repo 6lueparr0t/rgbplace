@@ -101,6 +101,18 @@ class Template {
 		echo("<div id='push'></div>");
 		echo("<script src='/assets/js/comm/common.min.js'></script>");
 		echo("<script src='/assets/js/dist/{$path}.min.js'></script>");
+
+		echo("
+<div id='footer'>
+	Suggestion
+	<div class='link'>
+		<a class='blog' href='http://blog.rgbplace.com' target='_blank'>Blog</a> / <a class='mail' href='mailto:admin@rgbplace.com'>mail</a>
+	</div>
+	<div>
+	</div>
+</div>
+		");
+
 		echo("</body>");
 		echo("</html>");
 /* ---------------------------------------------------------------------- */

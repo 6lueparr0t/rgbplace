@@ -73,7 +73,7 @@ class Base_model extends CI_Model {
  *    }
  */
 
-	public function getInfo($uid)
+	public function getBannedInfo($uid)
 	{
 		$query = "SELECT * FROM user_info WHERE uid = ? LIMIT 1";
 
@@ -87,9 +87,9 @@ class Base_model extends CI_Model {
 			$btim = $row->btim;
 		}
 
-		if(date("Y-m-d H:i:s") > $btim && $btim) return false;
+		if(date("Y-m-d H:i:s") > $btim && $btim) return $btim;
 
-		return true;
+		return 0;
 	}
 
 	public function setAdminApiKey($name)

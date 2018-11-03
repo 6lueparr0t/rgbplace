@@ -863,7 +863,7 @@ class Map_model extends CI_Model {
 
 				$ret .= "<button class='reply-modify {$reply_perm}'><i class='fa fa-pencil-alt'></i></button>";
 				$ret .= "<button class='reply-delete {$reply_perm}'><i class='fa fa-trash'></i></button>";
-				$ret .= "<button class='report ' ><i class='far fa-paper-plane'></i></button>";
+				$ret .= "<button class='far fa-paper-plane report ' ></button>";
 
 			$ret .= "</div>";
 			/* func : end */
