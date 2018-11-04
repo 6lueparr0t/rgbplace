@@ -445,8 +445,12 @@ class Map_model extends CI_Model {
 		$find = $this->post_select($data, $info);
 
 		if($find->num_rows() === 0 || $find->num_rows() > 1) {
-			echo "<div class='no-post'>Not Found <i class='fa fa-frown-o'></i> </div>";
+			//echo "<div class='no-post'>Not Found <i class='fa fa-frown-o'></i> </div>";
+			return false;
+		}
 
+		if($find->result()[0]->type != $type) {
+			//echo "<div class='no-post'>Wrong Type <i class='fa fa-frown-o'></i> </div>";
 			return false;
 		}
 
