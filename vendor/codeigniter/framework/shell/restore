@@ -1,5 +1,5 @@
 #!/bin/zsh
 
-mysql -u root -p home --password='als0emffp*scallop99' < assets/sql/database.sql
+mysql -u root -p home --password='6lueparr0t@gmail.com' < assets/sql/database.sql
 
 echo "Restore : `date +%Y%m%d\ %H:%M:%S`" >> log/db
