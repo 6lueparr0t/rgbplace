@@ -15,6 +15,7 @@
  * cookie. Needs to be 32 chars long.
  */
 $cfg['blowfish_secret'] = '_alsfjaweio;mfcoqi-fmoi3r+q^3333rq23rc3R=#RQ#rfq23orjc12!@#!R23r((*(*(*c'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['TempDir'] = './tmp/';
 
 /**
  * Servers configuration
@@ -152,3 +153,4 @@ $cfg['SaveDir'] = '';
  * You can find more configuration options in the documentation
  * in the doc/ folder or at <https://docs.phpmyadmin.net/>.
  */
+

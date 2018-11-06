@@ -55,6 +55,6 @@ if (typeof configScriptLoaded !== \"undefined\" && configInlineParams) loadInlin
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "javascript/display.twig", "/usr/local/var/www/vendor/codeigniter/framework/database/templates/javascript/display.twig");
+        return new Twig_Source("", "javascript/display.twig", "/var/www/html/vendor/codeigniter/framework/database/templates/javascript/display.twig");
     }
 }

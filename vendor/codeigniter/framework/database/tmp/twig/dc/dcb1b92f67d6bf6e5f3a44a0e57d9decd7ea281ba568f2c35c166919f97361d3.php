@@ -40,6 +40,6 @@ class __TwigTemplate_698c53d98d8df5194f54422bb2b7c90a77d4d6916c4889f7ef12218d885
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "config/form_display/tabs_bottom.twig", "/usr/local/var/www/vendor/codeigniter/framework/database/templates/config/form_display/tabs_bottom.twig");
+        return new Twig_Source("", "config/form_display/tabs_bottom.twig", "/var/www/html/vendor/codeigniter/framework/database/templates/config/form_display/tabs_bottom.twig");
     }
 }

@@ -84,6 +84,6 @@ class __TwigTemplate_1c73de3d8eda43f647a3cb3a094a86d23b9c51cc2f380ca47d4784398c2
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "console/query_action.twig", "/usr/local/var/www/vendor/codeigniter/framework/database/templates/console/query_action.twig");
+        return new Twig_Source("", "console/query_action.twig", "/var/www/html/vendor/codeigniter/framework/database/templates/console/query_action.twig");
     }
 }

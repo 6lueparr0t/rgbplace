@@ -248,6 +248,6 @@ $context["record"], "timevalue", array(), "array")) : (_gettext("During current 
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "console/display.twig", "/usr/local/var/www/vendor/codeigniter/framework/database/templates/console/display.twig");
+        return new Twig_Source("", "console/display.twig", "/var/www/html/vendor/codeigniter/framework/database/templates/console/display.twig");
     }
 }
