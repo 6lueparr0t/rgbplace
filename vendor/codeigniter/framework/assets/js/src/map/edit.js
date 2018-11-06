@@ -163,43 +163,64 @@ function input_upload() {
 function addFile(data) {
 
 	let tag = '';
+	let str = '';
 	//let upload = JSON.parse(window.atob(document.querySelector('#edit-upload').value.substr(1)));
 
 	data.forEach(function(value, key) {
 		if(value['file_name']) {
 			console.log(value['file_name']);
 			tag='';
+			str='';
 
 			switch (value['file_type'].split('/')[0]) {
 				case 'image' :
 					tag = document.createElement('IMG');
 					tag.style.maxWidth = "100%";
+
+					tag.setAttribute('src', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<img style='max-width:100%;' src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
 					break;
 				case 'audio' :
 					tag = document.createElement('AUDIO');
 					tag.setAttribute('controls', 'controls');
+
+					tag.setAttribute('src', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<audio controls src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
 					break;
 				case 'video' :
 					tag = document.createElement('VIDEO');
 					tag.setAttribute('controls', 'controls');
+
+					tag.setAttribute('src', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<video controls src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
 					break;
 				default :
 					tag = document.createElement('A');
 					tag.setAttribute('download', '');
 
+					tag.setAttribute('href', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<a href='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"' download />";
 					break;
 			}
-
-			tag.setAttribute('src', value['default_path']+value['file_name']);
-			tag.setAttribute('alt', value['client_name']);
 
 			document.querySelector('#edit-content').appendChild(tag);
 			document.querySelector('#edit-content').innerHTML += '<br/><br/>';
 
+			document.querySelector('#edit-content-code').value += str + '<br/><br/>';
 			//upload.push({'file_name':value['file_name'], 'file_type':value['file_type'], 'client_name':value['client_name'], 'file_size':value['file_size']});
 
 		} else {
 			document.querySelector('#edit-content').innerHTML += value;
+
+			document.querySelector('#edit-content-code').value += value;
 		}
 		
 	});
