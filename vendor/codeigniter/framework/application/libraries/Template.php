@@ -47,7 +47,8 @@ class Template {
 		echo("<head>");
 		echo("<meta charset='UTF-8'>");
 		echo("<meta http-equiv='X-UA-Compatible' content='IE=edge'/>");
-		echo("<meta name='viewport' content='width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes'/>");
+		//content='width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes'
+		echo("<meta name='viewport' content='width=device-width'/>");
 		echo("<title>RGB place</title>");
 		echo("<link rel='icon' href='data:;base64,iVBORw0KGgo='>");
 		echo("<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>");
