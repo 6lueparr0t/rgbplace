@@ -221,9 +221,9 @@ class Api extends CI_Controller {
 		$config['allowed_types'] = 'gif|png|jpg|jpeg|bmp|txt|mp4|mp3|wmv|wav';
 		$config['encrypt_name'] = true;
 		$config['file_ext_tolower'] = true;
-		//$config['max_size']      = '102400';
+		$config['max_size']      = '102400';
 		//$config['file_name'] = "{$link}_{$count}";
-		//
+		
 		$files = $_FILES;
 		$data = [];
 		$count = count($_FILES['userfile']['name']);
