@@ -35,10 +35,20 @@ function mapSearch (recv) {
 					 * native = {"address": ["괴안동", "소사구", "부천시", "경기도", "대한민국"]}
 					*/
 
-					let native = JSON.parse(data.native)['address'];
-					let global = JSON.parse(data.global)['address'];
+					//let native = JSON.parse(data.native);
+					//let global = JSON.parse(data.global);
 
 					//console.log(global);
+
+					/*
+					for (let native_list in data.native) {
+						console.log(native_list)
+					}
+
+					for (let global_list in data.global) {
+						console.log(global_list)
+					}
+					*/
 
 					let place_org = '';
 					for (let j=native.length-1; j>=0; j--) {
