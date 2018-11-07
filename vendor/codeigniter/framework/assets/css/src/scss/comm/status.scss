@@ -83,6 +83,10 @@
 		@include status-arrow (white, $oc-gray-7);
 		select {
 			color:white;
+
+			& option {
+				background-color : $oc-gray-7;
+			}
 		}
 
 		&.none {
@@ -109,6 +113,8 @@
 		@include status-arrow ($oc-gray-7, $oc-yellow-4);
 		select {
 			color:black;
+
+			
 		}
 
 		&.none {
