@@ -52,6 +52,17 @@ class Template {
 		echo("<title>RGB place</title>");
 		echo("<link rel='icon' href='data:;base64,iVBORw0KGgo='>");
 		echo("<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>");
+
+		// Google Analytics
+		echo ('<!-- Global site tag (gtag.js) - Google Analytics -->'.
+			'<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79549126-2"></script>'.
+			'<script>'.
+			'window.dataLayer = window.dataLayer || [];'.
+			'function gtag(){dataLayer.push(arguments);}'.
+			'gtag("js", new Date());'.
+			'gtag("config", "UA-79549126-2");'.
+			'</script>');
+
 		echo("</head>");
 		echo("<body>");
 /* ---------------------------------------------------------------------- */
