@@ -209,7 +209,6 @@
 		}
 	}
 	.search-select {
-		border: 1px solid #212529;
 		font-family:"pixel";
 		font-size:1rem;
 		margin: 0 .25rem;
@@ -226,7 +225,7 @@
 			display: block;
 
 			@media screen and ($width-name : $target-width) {
-					padding: .75rem 1rem;
+					padding: .7rem 1rem;
 				}
 
 			//.search-selected {

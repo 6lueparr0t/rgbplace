@@ -5,12 +5,21 @@ class Base_model extends CI_Model {
 	public function getMainPost($map) {
 		
 		$query = "SELECT * FROM map_{$map}_post WHERE type = 'best' ORDER BY no desc LIMIT 1";
-		$find = $this->db->query($query);
 
-		if ($find->num_rows() === 0) {
-			$result = array();
+
+		if($this->db->simple_query($query)) {
+
+			$find = $this->db->query($query);
+			if ($find->num_rows() === 0) {
+				$result = array();
+			} else {
+				$result = $find->result()[0];
+			}
+
 		} else {
-			$result = $find->result()[0];
+
+			redirect("/");
+
 		}
 
 		return $result;
@@ -25,7 +34,7 @@ class Base_model extends CI_Model {
 
 		foreach ($find->result() as $key => $row) {
 			$data['country'][$key] = $row->country;
-			$data['map'][$key]    = $row->code.$row->no;
+			$data['map'][$key]    = $row->name;
 			$data['global'][$key]   = $row->global;
 			$data['native'][$key]   = $row->native;
 		}
