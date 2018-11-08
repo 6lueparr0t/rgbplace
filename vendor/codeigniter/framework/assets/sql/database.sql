@@ -56,9 +56,11 @@ DROP TABLE IF EXISTS `map_code`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_code` (
-  `country` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Country Name',
-  `code` char(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Country Code',
-  `no` int(20) NOT NULL,
+  `no` int(11) NOT NULL AUTO_INCREMENT,
+  `name` char(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` char(10) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Country Code',
+  `num` int(11) DEFAULT NULL,
+  `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Country Name',
   `native` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '로컬 표기 주소',
   `global` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '영문 표기 주소',
   `ctim` datetime NOT NULL DEFAULT current_timestamp(),
@@ -68,8 +70,8 @@ CREATE TABLE `map_code` (
   `keyword` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `latitude` double NOT NULL COMMENT '위도',
   `longitude` double NOT NULL COMMENT '경도',
-  PRIMARY KEY (`code`,`no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='장소(Code) 정보';
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='장소(Code) 정보';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,93 +134,6 @@ DROP TABLE IF EXISTS `map_kr1_reply`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `map_kr1_reply` (
-  `no` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ctim` datetime NOT NULL DEFAULT current_timestamp(),
-  `utim` datetime DEFAULT NULL,
-  `dtim` datetime DEFAULT NULL,
-  `content` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `up` int(11) NOT NULL DEFAULT 0,
-  `down` int(11) NOT NULL DEFAULT 0,
-  `post` int(11) NOT NULL,
-  `mention` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `follow` int(11) DEFAULT NULL,
-  `depth1` int(11) NOT NULL DEFAULT 0,
-  `depth2` int(11) NOT NULL DEFAULT 0,
-  `deprh3` int(11) NOT NULL DEFAULT 0,
-  `depth4` int(11) NOT NULL DEFAULT 0,
-  `depth5` int(11) NOT NULL DEFAULT 0,
-  `depth6` int(11) NOT NULL DEFAULT 0,
-  `depth7` int(11) NOT NULL DEFAULT 0,
-  `depth8` int(11) NOT NULL DEFAULT 0,
-  `depth9` int(11) NOT NULL DEFAULT 0,
-  `depth10` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`no`),
-  KEY `no` (`no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `map_kr2_history`
---
-
-DROP TABLE IF EXISTS `map_kr2_history`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `map_kr2_history` (
-  `no` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` enum('post','reply') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `relation` int(11) NOT NULL,
-  `post` int(11) NOT NULL,
-  `ctim` datetime NOT NULL DEFAULT current_timestamp(),
-  `utim` datetime DEFAULT NULL,
-  `dtim` datetime DEFAULT NULL,
-  `act` enum('up','down','view','n','report','') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`no`),
-  KEY `no` (`no`),
-  KEY `relation` (`relation`),
-  KEY `post` (`post`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `map_kr2_post`
---
-
-DROP TABLE IF EXISTS `map_kr2_post`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `map_kr2_post` (
-  `no` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ctim` datetime NOT NULL DEFAULT current_timestamp(),
-  `utim` datetime DEFAULT NULL,
-  `dtim` datetime DEFAULT NULL,
-  `title` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `reply` int(11) NOT NULL DEFAULT 0,
-  `hit` int(11) NOT NULL DEFAULT 0,
-  `up` int(11) NOT NULL DEFAULT 0,
-  `down` int(11) NOT NULL DEFAULT 0,
-  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tag` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keyword` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`no`),
-  KEY `no` (`no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `map_kr2_reply`
---
-
-DROP TABLE IF EXISTS `map_kr2_reply`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `map_kr2_reply` (
   `no` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -495,27 +410,30 @@ CREATE TABLE `user_visit` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `createMap`(IN `in_country` VARCHAR(100), IN `in_code` CHAR(2), IN `in_native` LONGTEXT, IN `in_global` LONGTEXT, IN `in_description` TEXT, IN `in_keyword` TEXT, IN `in_latitude` DOUBLE, IN `in_longitude` DOUBLE)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `createMap`(IN `in_country` VARCHAR(100), IN `in_code` CHAR(10), IN `in_native` LONGTEXT, IN `in_global` LONGTEXT, IN `in_description` TEXT, IN `in_keyword` TEXT, IN `in_latitude` DOUBLE, IN `in_longitude` DOUBLE)
 BEGIN
 
-DECLARE in_no int default 0;
-SELECT count(no) into in_no FROM map_code WHERE code = in_code;
-SET in_no = in_no + 1;
+DECLARE in_num int default 0;
+DECLARE in_name char(20) default '';
+SELECT count(num) into in_num FROM map_code WHERE code = in_code;
+SET in_num = in_num + 1;
+SET in_name = concat(in_code, in_num);
 
 
 
-INSERT INTO map_code (country, code, no, native, global, description, keyword, latitude, longitude) values(in_country, in_code, in_no, concat('{"address": ', in_native,'}'), concat('{"address": ', in_global,'}'), in_description, in_keyword, in_latitude, in_longitude );
-SET @post = CONCAT('CREATE TABLE map_', in_code, in_no, '_post (\n\tno      int not null auto_increment,\n\tuid     varchar(100) not null,\n\tcountry    varchar(100) not null,\n\tctim    datetime not null default current_timestamp,\n\tutim    datetime,\n\tdtim    datetime,\n\ttitle   varchar(1000) not null,\n\tcontent text not null,\n\treply int not null default 0,\n\thit int not null default 0,\n\tup int not null default 0,\n\tdown int not null default 0,\n\ttype    varchar(20) not null,\n\ttag     varchar(20) not null,\n\tkeyword varchar(400) not null,\n\tPRIMARY KEY (no), \n\tINDEX (no)\n)');
+INSERT INTO map_code (country, name, code, num, native, global, description, keyword, latitude, longitude) values(in_country, in_name, in_code, in_num, concat('{"address": ', in_native,'}'), concat('{"address": ', in_global,'}'), in_description, in_keyword, in_latitude, in_longitude );
+
+SET @post = CONCAT('CREATE TABLE map_', in_name, '_post (\n\tno      int not null auto_increment,\n\tuid     varchar(100) not null,\n\tcountry    varchar(100) not null,\n\tctim    datetime not null default current_timestamp,\n\tutim    datetime,\n\tdtim    datetime,\n\ttitle   varchar(1000) not null,\n\tcontent text not null,\n\treply int not null default 0,\n\thit int not null default 0,\n\tup int not null default 0,\n\tdown int not null default 0,\n\ttype    varchar(20) not null,\n\ttag     varchar(20) not null,\n\tkeyword varchar(400) not null,\n\tPRIMARY KEY (no), \n\tINDEX (no)\n)');
 
 PREPARE stmt1 FROM @post;
 EXECUTE stmt1;
 
-SET @reply = CONCAT('CREATE TABLE map_', in_code,  in_no, '_reply(\n\tno\t\tint\t\t\tnot null auto_increment,\n\tuid\t\tvarchar(100)\tnot null,\n\tname\tvarchar(100)\tnot null,\n\tctim\tdatetime\t\tnot null default current_timestamp,\n\tutim\tdatetime,\n\tdtim\tdatetime,\n\tcontent\tvarchar(2000)\tnot null,\nup int not null default 0,\ndown int not null default 0,\n\tpost\tint not null,\n\tmention\tvarchar(100) default null,\n\tfollow\tint null default null,\n\tdepth1 int not null default 0\r\n, \n\tdepth2 int not null default 0\r\n, \n\tdeprh3 int not null default 0\r\n, \n\tdepth4 int not null default 0\r\n, \n\tdepth5 int not null default 0\r\n, \n\tdepth6 int not null default 0\r\n, \n\tdepth7 int not null default 0\r\n, \n\tdepth8 int not null default 0\r\n, \n\tdepth9 int not null default 0\r\n, \n\tdepth10 int not null default 0\r\n, \n\tPRIMARY KEY (no), \n\tINDEX (no)\n)');
+SET @reply = CONCAT('CREATE TABLE map_', in_name, '_reply(\n\tno\t\tint\t\t\tnot null auto_increment,\n\tuid\t\tvarchar(100)\tnot null,\n\tname\tvarchar(100)\tnot null,\n\tctim\tdatetime\t\tnot null default current_timestamp,\n\tutim\tdatetime,\n\tdtim\tdatetime,\n\tcontent\tvarchar(2000)\tnot null,\nup int not null default 0,\ndown int not null default 0,\n\tpost\tint not null,\n\tmention\tvarchar(100) default null,\n\tfollow\tint null default null,\n\tdepth1 int not null default 0\r\n, \n\tdepth2 int not null default 0\r\n, \n\tdeprh3 int not null default 0\r\n, \n\tdepth4 int not null default 0\r\n, \n\tdepth5 int not null default 0\r\n, \n\tdepth6 int not null default 0\r\n, \n\tdepth7 int not null default 0\r\n, \n\tdepth8 int not null default 0\r\n, \n\tdepth9 int not null default 0\r\n, \n\tdepth10 int not null default 0\r\n, \n\tPRIMARY KEY (no), \n\tINDEX (no)\n)');
 
 PREPARE stmt2 FROM @reply;
 EXECUTE stmt2;
 
-SET @history = CONCAT('CREATE TABLE map_', in_code,  in_no, '_history( \n\tno      int not null auto_increment, \n\tuid     varchar(100) not null, \n\ttype    enum("post", "reply") not null, \n\trelation int not null, \n\tpost int not null, \n\tctim    datetime not null default current_timestamp, \n\tutim    datetime, \n\tdtim    datetime, \n\tact    enum("up", "down", "view", "n","report","") not null default "", \n\tPRIMARY KEY (no), \n\tINDEX (no), \n\tINDEX (relation), \n\tINDEX (post)\n)');
+SET @history = CONCAT('CREATE TABLE map_', in_name, '_history( \n\tno      int not null auto_increment, \n\tuid     varchar(100) not null, \n\ttype    enum("post", "reply") not null, \n\trelation int not null, \n\tpost int not null, \n\tctim    datetime not null default current_timestamp, \n\tutim    datetime, \n\tdtim    datetime, \n\tact    enum("up", "down", "view", "n","report","") not null default "", \n\tPRIMARY KEY (no), \n\tINDEX (no), \n\tINDEX (relation), \n\tINDEX (post)\n)');
 
 PREPARE stmt3 FROM @history;
 EXECUTE stmt3;
@@ -539,7 +457,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `destroyMap`(IN `in_code` CHAR(2), IN `in_no` INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `destroyMap`(IN `in_code` CHAR(10), IN `in_no` INT)
 BEGIN
 
 DELETE FROM map_code WHERE code = in_code AND no = in_no;
@@ -575,4 +493,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-08 21:18:56
+-- Dump completed on 2018-11-08 22:58:34
