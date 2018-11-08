@@ -190,6 +190,10 @@
 			margin: 0 .25rem;
 			flex-grow:4;
 
+			@media screen and ($width-name : $target-width) {
+			    width: 50%;
+			}
+
 		}
 
 		#search-button {
@@ -226,7 +230,7 @@
 
 			@media screen and ($width-name : $target-width) {
 					padding: .7rem 1rem;
-				}
+			}
 
 			//.search-selected {
 			//}
@@ -265,7 +269,7 @@
 
 				@media screen and ($width-name : $target-width) {
 					//left: -.26rem;
-					left: .5rem;
+					left: -.2rem;
 				}
 
 				padding-left: 0;
@@ -289,6 +293,9 @@
 							border: 1px solid black;
 							border-radius : .25rem;
 							padding:1rem;
+							@media screen and ($width-name : $target-width) {
+								padding: .8rem;
+							}
 							cursor:pointer;
 						}
 					}
