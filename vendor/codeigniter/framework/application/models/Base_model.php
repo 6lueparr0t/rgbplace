@@ -171,11 +171,11 @@ class Base_model extends CI_Model {
 
 	public function destroyMap($data)
 	{
-		if(!$data['code'] || !$data['no']) return false;
+		if(!$data['code'] || !$data['num']) return false;
 
 		$this->db->trans_start();
 		$this->db->query("SET @p0='".$data['code']."';");
-		$this->db->query("SET @p1='".$data['no']."';");
+		$this->db->query("SET @p1='".$data['num']."';");
 		$this->db->query("CALL `destroyMap`(@p0, @p1);");
 		$this->db->trans_complete();
 

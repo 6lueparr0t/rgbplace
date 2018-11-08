@@ -207,7 +207,7 @@ function getResultList(data, type) {
 			break;
 		case 'navi' :
 			for(let i in data) {
-				result += '<div class=\'row\' data-code=\''+data[i].code+'\' data-no=\''+data[i].no+'\' >' +data[i].global+'<br/>'+data[i].native+ '</div>';
+				result += '<div class=\'row\' data-code=\''+data[i].code+'\' data-num=\''+data[i].num+'\' >' +data[i].global+'<br/>'+data[i].native+ '</div>';
 
 				//console.log(data.ko.results[i].formatted_address);
 				//console.log(data.ko.results[i].place_id);
@@ -327,16 +327,16 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 			httpRequest('POST', '/api/map/creation', JSON.stringify(data), successCreation, null);
 			break;
 		case 'destruction' :
-			let no = '';
+			let num = '';
 
 			document.querySelectorAll('.row.selected').forEach(function(element) {
 				code = element.dataset.code;
-				no = element.dataset.no;
+				num = element.dataset.num;
 			});
 
 			data = {
 				code:code,
-				no:no
+				num:num
 			};
 
 			console.log(data);
