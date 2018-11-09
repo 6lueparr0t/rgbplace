@@ -503,7 +503,7 @@ class Map_model extends CI_Model {
 
 		// permission check
 		$activate = "disable";
-		if ($user === $uid || $this->session->userdata('admin')) $activate = "enable";
+		if (($user === $uid && $find->result()[0]->type != 'best') || $this->session->userdata('admin')) $activate = "enable";
 
 		// modify + delete button
 		echo "<div class='button-group'>"

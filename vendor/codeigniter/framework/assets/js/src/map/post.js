@@ -254,7 +254,7 @@ function success (data) {
 
 function successDelete (data) {
 	//console.log(data);
-	alert('Post Remove successfully');
+	alert('Post was Deleted');
 	redirect('list');
 }
 

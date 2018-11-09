@@ -100,7 +100,7 @@ class Map extends CI_Controller {
 			$info = [null, $map, $type, $num];
 			$ret = $this->map->post_select(null, $info);
 
-			if($ret->result()[0]->uid == $this->session->userdata('uid') || $this->session->userdata('admin')) {
+			if(($ret->result()[0]->uid == $this->session->userdata('uid') && $type != 'best') || $this->session->userdata('admin')) {
 				$data['mode'] = 'put';
 				$data['title'] = htmlspecialchars_decode($ret->result()[0]->title);
 				$data['content'] = htmlspecialchars_decode($ret->result()[0]->content);
