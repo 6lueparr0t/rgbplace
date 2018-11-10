@@ -154,7 +154,7 @@ function successNavigation(data) {
 
 function successCreation(data) {
 
-	if(data) {
+	if(data === true) {
 		alert('Place was created');
 	} else {
 		alert('Empty Value!');

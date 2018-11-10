@@ -42,6 +42,20 @@ class Base_model extends CI_Model {
 		return $data;
 	}
 
+	public function getMapTItle($name) {
+		$data = [];
+
+		$query = "SELECT native, global FROM map_code WHERE name = ?";
+		$find = $this->db->query($query, array($name));
+
+		foreach ($find->result() as $key => $row) {
+			$data['global'][$key]   = $row->global;
+			$data['native'][$key]   = $row->native;
+		}
+
+		return $data;
+	}
+
 	public function getStage($uid)
 	{
 		$data = [];
@@ -152,7 +166,7 @@ class Base_model extends CI_Model {
 			//CALL `create_map`(@p0, @p1, @p2, @p3); 
 		//");
 		
-		if(!$data['country'] || !$data['code'] || !$data['address'][0] || !$data['address'][1]) return false;
+		if(!$data['country'] || !$data['code'] || !isset($data['address'][0]) || !isset($data['address'][1]) ) return false;
 
 		$this->db->trans_start();
 		$this->db->query("SET @p0='".implode('|',$data['country'])."'");

@@ -16,7 +16,7 @@ function successSignUp(data) {
 	// Success!
 	if(data.valid) {
 		//console.log('this.submit();');
-		if(confirm('계속 진행하시겠습니까?\nConfirm. sign up?')) this.submit();
+		if(confirm('계속 진행하시겠습니까? 진행 후 회원가입 및 로그인 처리가 완료됩니다.\nConfirm. if you can exit, sign up success')) this.submit();
 	} else {
 		alert(data.msg);
 	}

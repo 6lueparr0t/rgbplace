@@ -315,12 +315,14 @@ class Api extends CI_Controller {
 
 		switch($mode) {
 		case 'creation' :
-			echo $this->base->createMap($data);
+			$result = $this->base->createMap($data);
 			break;
 		case 'destruction' :
-			echo $this->base->destroyMap($data);
+			$result = $this->base->destroyMap($data);
 			break;
 		} 
+
+		echo json_encode($result);
 	}
 
 	private function curl($method, $url, $data){

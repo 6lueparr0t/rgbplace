@@ -1,38 +1,42 @@
 #sign-up {
-  margin-top:2rem;
+	margin-top:2rem;
 
-  & input {
-    display:block;
-    margin:1rem auto;
-    padding:.5rem;
-    width: 90%;
-    height: 3rem;
-    font-size:1.5rem;
-    border-radius: 1rem;
+	& input {
+		display:block;
+		margin:1rem auto;
+		padding:.5rem;
+		width: 80%;
+		max-width:800px;
+		height: 3rem;
+		font-size:1.5rem;
+		border-radius: 1rem;
 
-	&:focus{
-      outline:none;
+		border:1px solid black;
+
+		&:focus{
+			outline:none;
+		}
 	}
-  }
 
-  & button {
-    background: $oc-gray-3;
-    color: $oc-gray-9;
-    display:block;
-	border:none;
-    margin:1rem auto;
-    padding:.5rem;
-    width: 51.5%;
-    height: 3rem;
-    font-size:1.5rem;
-    border-radius: 1rem;
+	& button {
+		background: $oc-gray-3;
+		color: $oc-gray-9;
+		display:block;
+		border:none;
+		margin:1rem auto;
+		padding:.5rem;
+		width: 80%;
+		max-width:800px;
+		height: 3rem;
+		font-size:1.5rem;
+		border-radius: 1rem;
 
-	&:hover{
-      background: $oc-gray-7;
-      color: $oc-gray-0;
+		&:hover{
+			background: $oc-gray-7;
+			color: $oc-gray-0;
+		}
+		&:focus{
+			outline:none;
+		}
 	}
-	&:focus{
-      outline:none;
-	}
-  }
 }

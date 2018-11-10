@@ -10,11 +10,13 @@ class Profile extends CI_Controller {
 
 	public function index()
 	{
-		$this->root->view("profile/info");
+		//show profile
+		$this->root->view("profile/main");
 	}
 
 	public function config()
 	{
+		//set config
 		$this->root->view("profile/config");
 	}
 }
