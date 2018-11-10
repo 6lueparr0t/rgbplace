@@ -3,8 +3,6 @@
 #pac-input {
 	z-index: 0;
 	position: absolute;
-	left: 152px;
-	top: 0px;
 
 	background-color: #fff;
 	font-family: Roboto;
