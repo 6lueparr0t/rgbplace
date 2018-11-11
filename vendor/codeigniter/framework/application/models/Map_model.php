@@ -705,19 +705,31 @@ class Map_model extends CI_Model {
 		$type = $info[2];
 		$no = $info[3];
 
-		$query = "delete from {$table}
-			where 
+		if($this->session->userdata('admin') === true) {
+			$query = "delete from {$table}
+				where 
+				type = ?
+				and no = ?";
+
+			$values = array(
+				$type,
+				$no
+			);
+		} else {
+			$query = "delete from {$table}
+				where 
 				type = ?
 				and no = ?
 				and uid = ?
 				and name = ? ";
 
-		$values = array(
-            $type,
-            $no,
-            $this->session->userdata('uid'),
-            $this->session->userdata('name')
-		);
+			$values = array(
+				$type,
+				$no,
+				$this->session->userdata('uid'),
+				$this->session->userdata('name')
+			);
+		}
 
 		$ret = $this->db->query($query, $values);
 
