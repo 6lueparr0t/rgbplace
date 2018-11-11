@@ -6,12 +6,17 @@ class Profile extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Profile_model','profile');
 	}
 
 	public function index()
 	{
-		//show profile
-		$this->root->view("profile/main");
+		if($this->session->userdata('signed_in') === true) {
+			$data = $this->profile->info();
+			$this->root->view("profile/main", $data);
+		} else {
+			redirect("/");
+		}
 	}
 
 	public function config()

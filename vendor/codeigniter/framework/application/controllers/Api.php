@@ -88,6 +88,7 @@ class Api extends CI_Controller {
 					$ret = $this->map->post_insert($data, $info);
 					break;
 				case 'put':
+				case 'update':
 					$ret = $this->map->post_update($data, $info);
 					break;
 				case 'delete':

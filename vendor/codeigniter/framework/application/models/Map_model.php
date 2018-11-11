@@ -662,29 +662,53 @@ class Map_model extends CI_Model {
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword = implode('|',$keyword[1]);
 
-		$query = "update {$table}
-			set
-				title = ?,
-				content = ?,
-				tag = ?,
-				keyword = ?
-			where
-				type = ?
-				and no = ?
-				and uid = ?
-				and name = ?";
-			
-		$values = array(
-            $title,
-            $content,
-            $tag,
-			$keyword,
+		if($this->session->userdata('admin') === true) {
+			$query = "update {$table}
+				set
+					title = ?,
+					content = ?,
+					tag = ?,
+					keyword = ?
 
-            $type,
-            $no,
-			$this->session->userdata('uid'),
-            $this->session->userdata('name')
-		);
+				where
+					type = ?
+					and no = ?";
+
+			$values = array(
+				$title,
+				$content,
+				$tag,
+				$keyword,
+
+				$type,
+				$no,
+			);
+		} else {
+			$query = "update {$table}
+				set
+					title = ?,
+					content = ?,
+					tag = ?,
+					keyword = ?
+
+				where
+					type = ?
+					and no = ?
+					and uid = ?
+					and name = ?";
+
+			$values = array(
+				$title,
+				$content,
+				$tag,
+				$keyword,
+
+				$type,
+				$no,
+				$this->session->userdata('uid'),
+				$this->session->userdata('name')
+			);
+		}
 
 		if($this->db->query($query, $values)) {
 			$ret = $no;	

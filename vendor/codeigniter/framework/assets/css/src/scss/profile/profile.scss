@@ -1,0 +1,100 @@
+#profile {
+	font-family: "pixel";
+
+	.info {
+		display: table;
+		padding: 0 1rem;
+		margin: 1rem auto;
+		max-width: 800px;
+		width: 90%;
+
+		.tr {
+			display:table-row;
+		}
+
+		.th {
+			display:table-cell;
+			padding:1rem;
+			text-align:right;
+			vertical-align: middle;
+
+			border:1px solid $oc-gray-9;
+			background-color:$oc-gray-2;
+		}
+
+		.td {
+			display:table-cell;
+			padding:1rem;
+			text-align:left;
+
+			border:1px solid $oc-gray-9;
+
+			&.name, &.email {
+				font-family: "normal";
+			}
+		}
+	}
+
+	.button-group {
+		margin: 2.5rem 0 0 0;
+		@include flex ();
+		text-align:center;
+		user-select: none;
+
+		#save {
+			color : black;
+			padding: .5rem 1rem;
+			border-radius : .25rem;
+			flex-grow:1;
+			margin:0 1rem;
+			cursor:pointer;
+
+			&.enable {
+				border: 1px solid $oc-indigo-5;
+				background-color: $oc-indigo-5;
+				color:white;
+				&:hover {
+					background-color: white;
+					color: $oc-green-5;
+					transition:all .1s ease-out;
+				}
+			}
+
+			&.disable {
+				border: 1px solid $oc-indigo-2;
+				pointer-events: none;
+				cursor: default;
+				color : $oc-indigo-2;
+			}
+		}
+
+		#cancel {
+			color : black;
+			padding: .5rem 1rem;
+			border-radius : .25rem;
+			flex-grow:1;
+			margin:0 1rem;
+			cursor:pointer;
+
+			&.enable {
+				border: 1px solid $oc-gray-6;
+				background-color: $oc-gray-6;
+				color:white;
+				&:hover {
+					background-color: white;
+					color: $oc-gray-6;
+					transition:all .1s ease-out;
+				}
+			}
+
+			&.disable {
+				border: 1px solid $oc-gray-2;
+				pointer-events: none;
+				cursor: default;
+				color : $oc-gray-2;
+			}
+		}
+
+	}
+
+}
