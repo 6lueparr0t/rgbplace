@@ -4,7 +4,7 @@
 	.info {
 		display: table;
 		padding: 0 1rem;
-		margin: 1rem auto;
+		margin: 2rem auto;
 		max-width: 800px;
 		width: 90%;
 
@@ -82,7 +82,7 @@
 				color:white;
 				&:hover {
 					background-color: white;
-					color: $oc-gray-6;
+					color: $oc-red-6;
 					transition:all .1s ease-out;
 				}
 			}
