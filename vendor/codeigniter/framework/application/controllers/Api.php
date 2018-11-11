@@ -215,7 +215,7 @@ class Api extends CI_Controller {
 
 	public function upload()
 	{
-		if ($this->CI->session->userdata('signed_in') === true) {
+		if ($this->session->userdata('signed_in') === true) {
 			$this->load->library('upload');
 
 			$config['upload_path'] = './upload';
