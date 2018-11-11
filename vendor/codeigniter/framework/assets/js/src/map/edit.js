@@ -238,7 +238,7 @@ function done (data) {
 
 function fail (data) {
 	console.log(data);
-	alert('try again');
+	alert('session lost. sign in please.');
 }
 
 function tabChange (element) {

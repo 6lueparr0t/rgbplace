@@ -215,38 +215,42 @@ class Api extends CI_Controller {
 
 	public function upload()
 	{
-		$this->load->library('upload');
+		if ($this->CI->session->userdata('signed_in') === true) {
+			$this->load->library('upload');
 
-		$config['upload_path'] = './upload';
-		$config['allowed_types'] = 'gif|png|jpg|jpeg|bmp|txt|mp4|mp3|wmv|wav';
-		$config['encrypt_name'] = true;
-		$config['file_ext_tolower'] = true;
-		$config['max_size']      = '102400';
-		//$config['file_name'] = "{$link}_{$count}";
-		
-		$files = $_FILES;
-		$data = [];
-		$count = count($_FILES['userfile']['name']);
-		for($i=0; $i<$count; $i++) {
-			$_FILES['userfile']['name']= $files['userfile']['name'][$i];
-			$_FILES['userfile']['type']= $files['userfile']['type'][$i];
-			$_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
-			$_FILES['userfile']['error']= $files['userfile']['error'][$i];
-			$_FILES['userfile']['size']= $files['userfile']['size'][$i];
+			$config['upload_path'] = './upload';
+			$config['allowed_types'] = 'gif|png|jpg|jpeg|bmp|txt|mp4|mp3|wmv|wav';
+			$config['encrypt_name'] = true;
+			$config['file_ext_tolower'] = true;
+			$config['max_size']      = '102400';
+			//$config['file_name'] = "{$link}_{$count}";
 
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
-			if(!$this->upload->do_upload())
-			{
-				array_push($data, $this->upload->display_errors());
-			} else {
-				array_push($data, $this->upload->data());
-				$data[$i]['file_path'] = $data[$i]['full_path'] = null;
-				$data[$i]['default_path'] = UPLOAD_PATH;
+			$files = $_FILES;
+			$data = [];
+			$count = count($_FILES['userfile']['name']);
+			for($i=0; $i<$count; $i++) {
+				$_FILES['userfile']['name']= $files['userfile']['name'][$i];
+				$_FILES['userfile']['type']= $files['userfile']['type'][$i];
+				$_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+				$_FILES['userfile']['error']= $files['userfile']['error'][$i];
+				$_FILES['userfile']['size']= $files['userfile']['size'][$i];
 
-				$this->base->setUploadList($data[$i], $this->session->userdata('admin'));
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				if(!$this->upload->do_upload())
+				{
+					array_push($data, $this->upload->display_errors());
+				} else {
+					array_push($data, $this->upload->data());
+					$data[$i]['file_path'] = $data[$i]['full_path'] = null;
+					$data[$i]['default_path'] = UPLOAD_PATH;
+
+					$this->base->setUploadList($data[$i], $this->session->userdata('admin'));
+				}
+
 			}
-
+		} else {
+			$data = 'session lost. sign in please.';
 		}
 
 		echo json_encode($data);
