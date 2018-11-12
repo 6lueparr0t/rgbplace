@@ -8,6 +8,7 @@ class Api extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Api_model', 'api');
 		$this->load->model('Map_model', 'map');
+		$this->load->model('Profile_model', 'profile');
 	}
 
 	public function index()
@@ -204,6 +205,28 @@ class Api extends CI_Controller {
 				$ret = 1;
 			} else {
 				$ret = -1;
+			}
+			break;
+		case 'profile' :
+			if($this->session->userdata('signed_in')) {
+				switch($this->input->method()) {
+				case 'get' :
+					break;
+				case 'post' :
+					break;
+				case 'put':
+				case 'update':
+					$ret = $this->profile->update($data, $info);
+					break;
+				case 'delete':
+					break;
+				default :
+					break;
+				}
+			} else {
+				header('HTTP/1.1 401 Unauthorized');
+				header('Content-Type: application/json; charset=UTF-8');
+				$ret = 'login please';
 			}
 			break;
 

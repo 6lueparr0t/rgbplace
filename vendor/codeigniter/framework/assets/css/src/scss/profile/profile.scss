@@ -29,8 +29,16 @@
 
 			border:1px solid $oc-gray-9;
 
-			&.name, &.email {
+			&.name, &.email, &.pswd, &.conf {
 				font-family: "normal";
+				padding: 0;
+
+				input {
+					border: none;
+					font-size: 1.2rem;
+					padding: 1rem;
+					width: 80%;
+				}
 			}
 		}
 	}
