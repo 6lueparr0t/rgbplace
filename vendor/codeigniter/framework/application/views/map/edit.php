@@ -20,7 +20,7 @@
 
 <? echo form_open('', ['name' => 'upload', 'id' => 'upload']); ?>
   <label for="input_zone" class="drop_wait"></label>
-  <input type="file" id="input_zone" name="userfile[]" multiple />
+  <input type="file" id="input_zone" name="userfile[]" accept="image/*" multiple />
 <? echo form_close(); ?>
 
 <div class="button-group">
