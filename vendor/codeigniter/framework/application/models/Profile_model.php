@@ -42,12 +42,16 @@ class Profile_model extends CI_Model {
 		//$query = "UPDATE user_info SET name = ?, email = ?, utim = now() WHERE uid = ? and DATE_FORMAT(utim , '%Y-%m-%d') < DATE_FORMAT(now(), '%Y-%m-%d')";
 		
 		$set = '';
-		if(isset($data['name'])) {
+		if(isset($data['name']) && $data['name'] != '') {
 			$set .= "name = '".$this->db->escape_str($data['name'])."', ";
 		}
 
-		if(isset($data['email'])) {
+		if(isset($data['email']) && $data['email'] != '') {
 			$set .= "email = '".$this->db->escape_str($data['email'])."', ";
+		}
+
+		if(isset($data['pswd']) && $data['pswd'] != '') {
+			$set .= "pswd = '".base64_encode(password_hash($this->db->escape_str($data['pswd']), PASSWORD_DEFAULT, ['cost' => 12]))."', ";
 		}
 
 		$query = "UPDATE user_info SET {$set} utim = now() WHERE uid = ?";
