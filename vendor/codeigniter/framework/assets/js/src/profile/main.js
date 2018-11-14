@@ -72,13 +72,13 @@ document.querySelector("body").addEventListener("click", function(event) {
 				break;
 			}
 
-			if(pswd.value && conf.value) {
+			if(pswd.value || conf.value) {
 				if(pswd.value != conf.value) {
 					conf.reportValidity();
 					break;
 				} else {
-					if (pswd.value.length > 0 && pswd.value.length < 10) {
-						pswd.setCustomValidity('패스워드는 최대 10자 이상 넣어주세요. \nPassword must be at least 10 characters.');
+					if ( (pswd.value.length > 0 && pswd.value.length < 10) || (conf.value.length > 0 && conf.value.length < 10) ) {
+						pswd.setCustomValidity('패스워드는 최대 10자 이상 넣어주세요. Password must be at least 10 characters.');
 						pswd.reportValidity();
 						break;
 					}
