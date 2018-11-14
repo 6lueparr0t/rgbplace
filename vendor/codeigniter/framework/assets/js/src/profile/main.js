@@ -77,6 +77,11 @@ document.querySelector("body").addEventListener("click", function(event) {
 					conf.reportValidity();
 					break;
 				} else {
+					if (pswd.value.length > 0 && pswd.value.length < 10) {
+						pswd.setCustomValidity('패스워드는 최대 10자 이상 넣어주세요. \nPassword must be at least 10 characters.');
+						pswd.reportValidity();
+						break;
+					}
 					pswd_conf = pswd.value;
 				}
 			}
