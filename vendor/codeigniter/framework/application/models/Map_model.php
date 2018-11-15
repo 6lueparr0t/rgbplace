@@ -80,9 +80,11 @@ class Map_model extends CI_Model {
 
 		echo "<table class='page'>";
 		foreach ($find->result() as $key => $row) {
+			$title = stripslashes(htmlspecialchars_decode($row->title));
+
 			echo "<tr>"
 				."<td class='date'>".date("Y-m-d", strtotime($row->ctim))."</td>"
-				."<td class='title'><div><a href='/{$map}/{$row->type}/{$row->no}'>{$row->title}</a></div></td>"
+				."<td class='title'><div><a href='/{$map}/{$row->type}/{$row->no}'>{$title}</a></div></td>"
 				."<td class='reply count'>[<a href='/{$map}/{$row->type}/{$row->no}#reply'>{$row->reply}</a>]</td>"
 			."</tr>";
 
@@ -194,7 +196,7 @@ class Map_model extends CI_Model {
 				$reply = '';
 			}
 
-			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".stripslashes($row->title)."{$replyCount}</a>";
+			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".stripslashes(htmlspecialchars_decode($row->title))."{$replyCount}</a>";
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 
