@@ -194,7 +194,7 @@ class Map_model extends CI_Model {
 				$reply = '';
 			}
 
-			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>{$row->title}{$replyCount}</a>";
+			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".stripslashes($row->title)."{$replyCount}</a>";
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 
@@ -478,9 +478,10 @@ class Map_model extends CI_Model {
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 			$no   = $row->no;
 			$uid  = $row->uid;
-			$content = htmlspecialchars_decode($row->content);
+			$title = stripslashes(htmlspecialchars_decode($row->title));
+			$content = stripslashes(htmlspecialchars_decode($row->content));
 
-			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$row->title}</a></div>";
+			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
 			echo "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
 
 			//."<span class='vote'>{$row->vote}</span>"
