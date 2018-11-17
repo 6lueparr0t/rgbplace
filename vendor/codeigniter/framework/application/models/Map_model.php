@@ -866,7 +866,7 @@ class Map_model extends CI_Model {
 				if($depth[$i]>0) $depth_no = $i;
 			}
 
-			$ret .= "<li class='depth-{$depth_no}'>";
+			$ret .= "<li class='depth-{$depth_no}' id='reply-{$no}'>";
 			$ret .= "<ul>";
 
 			$ret .= "<span class='no'>{$no}</span>";
@@ -1013,7 +1013,7 @@ class Map_model extends CI_Model {
 	}
 
 	public function reply_select ($table, $no) {
-		//$this->monolog->debug('reply_insert', print_r($data,1));
+		//$this->monolog->debug('reply_select', print_r($data,1));
 		$table = $this->db->escape_str($table);
 		$select = $this->db->query("select * from {$table} where no = ?", $no);
 

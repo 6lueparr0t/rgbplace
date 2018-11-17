@@ -7,16 +7,11 @@ let replyBoxYes  = document.querySelectorAll(".reply-button.yes");
 
 //console.log(replyBox);
 
-//when start, get reply
-!function () {
-	httpRequest('GET', '/api/request/reply?info='+__URL__, null, refresh.bind(this), fail.bind(this));
-}();
-
 function replyTemplate(no, mode, message) {
 	let node = document.createElement("li");
 	node.className = "reply-container";
 	node.innerHTML =
-		"<div class='reply-addon block' id='reply-"+no+"' name='reply-"+no+"'>"
+		"<div class='reply-addon block'>"
 		+"<input type='hidden' class='reply-no' value='"+no+"'/>"
 		+"<input type='hidden' class='reply-mode' value='"+mode+"'/>"
 		+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;'>"+message+"</textarea>"
@@ -247,7 +242,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 });
 
 function success (data) {
-	//console.log(data);
+	console.log(data);
 	//httpRequest('GET', '/api/request/reply?page='+this.page+'&info='+__URL__, null, refresh.bind(this), fail.bind(this));
 	getReplyPaging(data);
 }
@@ -298,4 +293,9 @@ function fail (data) {
 	e.setCustomValidity(data.responseText);
 	e.reportValidity();
 }
+
+//when start, get reply
+!function () {
+	httpRequest('GET', '/api/request/reply?info='+__URL__, null, refresh.bind(this), fail.bind(this));
+}();
 

@@ -232,7 +232,7 @@ function addFile(data) {
 
 function done (data) {
 	let num = data;
-	alert('save');
+	alert('Done !');
 	redirect(num);
 }
 

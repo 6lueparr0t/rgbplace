@@ -122,7 +122,7 @@ class Api extends CI_Controller {
 				break;
 			case 'post':
 				if($this->session->userdata('signed_in')) {
-					if($ret = $this->map->reply_insert($data, $info) && $data['message']) {
+					if(($ret = $this->map->reply_insert($data, $info)) && $data['message']) {
 						$this->map->reply_count_update('up', $info);
 					} else {
 						$ret = 'Input Text Message';
@@ -132,6 +132,7 @@ class Api extends CI_Controller {
 					header('Content-Type: application/json; charset=UTF-8');
 					$ret = 'login please';
 				}
+				//$this->monolog->debug('api', $ret);
 				break;
 			case 'put':
 			case 'update' :
