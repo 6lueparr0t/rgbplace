@@ -21,6 +21,8 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 database/tmp/*
 
+log/*
+
 # IDE Files
 #-------------------------
 /nbproject/
