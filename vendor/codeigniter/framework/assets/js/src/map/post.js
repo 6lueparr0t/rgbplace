@@ -239,6 +239,22 @@ document.querySelector("body").addEventListener("click", function(event) {
 			break;
 	}
 
+	switch (t.id) {
+		case "link-copy" :
+			let clip = document.getElementById(t.id);
+
+			let selection = window.getSelection();
+			let range = document.createRange();
+			range.selectNodeContents(clip);
+			selection.removeAllRanges();
+			selection.addRange(range);
+			document.execCommand("Copy");
+			alert("Copied link to clipboard");
+			selection.removeAllRanges();
+
+			break;
+	}
+
 });
 
 function success (data) {

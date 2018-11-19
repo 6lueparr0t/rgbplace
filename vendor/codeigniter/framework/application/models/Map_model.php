@@ -491,8 +491,8 @@ class Map_model extends CI_Model {
 				."<span class='name' ><i class='fa fa-user'></i> {$row->name} </span>"
 				."<span class='hit'  ><i class='fa fa-eye'></i> {$row->hit} </span>"
 				."<span class='reply'><i class='far fa-comment-dots'></i> {$row->reply} </span>"
+				."<div class='link'><span id='link-copy'>".base_url()."{$map}/{$no}</span></div>"
 			."</div>"
-
 			."<div id='post-conetent'>{$content}</div>";
 
 			echo "<div class='vote button-group'>"
