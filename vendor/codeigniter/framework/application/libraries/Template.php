@@ -119,7 +119,7 @@ class Template {
 <div id='footer'>
 	Suggestion
 	<div class='link'>
-		<a class='blog' href='http://git.rgbplace.com' target='_blank'>Blog</a> / ".safe_mailto('admin@rgbplace.com', 'mail', array('class'=>'mail'))."
+		<a class='page' href='http://git.rgbplace.com' target='_blank'>page</a> / ".safe_mailto('admin@rgbplace.com', 'mail', array('class'=>'mail'))."
 	</div>
 	<div>
 	</div>

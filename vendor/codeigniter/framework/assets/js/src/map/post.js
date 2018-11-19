@@ -243,14 +243,24 @@ document.querySelector("body").addEventListener("click", function(event) {
 		case "link-copy" :
 			let clip = document.getElementById(t.id);
 
-			let selection = window.getSelection();
-			let range = document.createRange();
-			range.selectNodeContents(clip);
-			selection.removeAllRanges();
-			selection.addRange(range);
-			document.execCommand("Copy");
-			alert("Copied link to clipboard");
-			selection.removeAllRanges();
+			if(document.body.createTextRange) {
+				let range = document.body.createTextRange();
+				range.moveToElementText(clip);
+				range.select();
+				document.execCommand("Copy");
+				alert("Copied link to clipboard");
+				document.selection.empty();
+			}
+			else if(window.getSelection) {
+				let selection = window.getSelection();
+				let range = document.createRange();
+				range.selectNodeContents(clip);
+				selection.removeAllRanges();
+				selection.addRange(range);
+				document.execCommand("Copy");
+				alert("Copied link to clipboard");
+				selection.removeAllRanges();
+			}
 
 			break;
 	}

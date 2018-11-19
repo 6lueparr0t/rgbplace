@@ -12,19 +12,19 @@
 		font-size:1rem;
 		font-weight:bold;
 
-		a.blog {
-			color:$oc-orange-6;
+		a.page {
+			color:$oc-gray-6;
 
 			&:hover {
-				color:$oc-orange-4;
+				color:$oc-gray-4;
 			}
 		}
 
 		a.mail {
-			color:$oc-lime-7;
+			color:$oc-red-7;
 
 			&:hover {
-				color:$oc-lime-5;
+				color:$oc-red-5;
 			}
 		}
 	}
