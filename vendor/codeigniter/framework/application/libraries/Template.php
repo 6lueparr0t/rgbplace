@@ -119,7 +119,7 @@ class Template {
 <div id='footer'>
 	Suggestion
 	<div class='link'>
-		<a class='blog' href='http://git.rgbplace.com' target='_blank'>Blog</a> / <a class='mail' href='mailto:admin@rgbplace.com'>mail</a>
+		<a class='page' href='http://git.rgbplace.com' target='_blank'>page</a> / <a class='mail' href='mailto:admin@rgbplace.com'>mail</a>
 	</div>
 	<div>
 	</div>
