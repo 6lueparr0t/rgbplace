@@ -3,6 +3,10 @@
 	margin:1rem 0;
 	text-align:center;
 
+	.none {
+		display:none;
+	}
+
 	#edit-title {
 		border:1px solid $oc-gray-6;
 		width: 96%;
