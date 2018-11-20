@@ -16,7 +16,7 @@ function fail (data) {
 
 function validateName(name) {
 	let result = false;
-	let re = /^.{2,20}[^\s\x22\x27](?!.*[\s\x22\x27])/;
+	let re = /^(?=[^\s\x22\x27])(?!.*[\s\x22\x27]).{2,20}$/;
 	result = re.test(String(name).toLowerCase());
 
 	return result;
