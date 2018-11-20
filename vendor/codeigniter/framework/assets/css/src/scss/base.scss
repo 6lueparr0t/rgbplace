@@ -1,16 +1,19 @@
 @font-face {
 	font-family: 'logo';
-	src: url("/assets/css/fonts/04b_20__.ttf") format('truetype');
+	src: url("/assets/css/fonts/04b_20__.ttf") format('truetype'),
+  url("/assets/css/fonts/04b_20__.woff") format('woff');
 }
 
 @font-face {
 	font-family: 'pixel';
-	src: url("/assets/css/fonts/slkscr.ttf") format('truetype');
+	src: url("/assets/css/fonts/slkscr.ttf") format('truetype'),
+  url("/assets/css/fonts/slkscr.woff") format('woff');
 }
 
 @font-face {
 	font-family: 'normal';
-	src: url("/assets/css/fonts/NanumBarunGothic.ttf") format('truetype');
+	src: url("/assets/css/fonts/NanumBarunGothic.ttf") format('truetype'),
+  url("/assets/css/fonts/NanumBarunGothic.woff") format('woff');
 }
 
 body {
