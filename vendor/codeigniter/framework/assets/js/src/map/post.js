@@ -311,6 +311,7 @@ function successReport (data) {
 
 function refresh (data) {
 	if(data) document.querySelector(".reply-root").innerHTML = data;
+	if(this) move("#reply-"+this, -200);
 }
 
 function fail (data) {
@@ -327,6 +328,7 @@ function fail (data) {
 
 	let param = (no)?'&no='+no:'';
 
-	httpRequest('GET', '/api/request/reply?info='+__URL__+param, null, refresh.bind(this), fail.bind(this));
+	httpRequest('GET', '/api/request/reply?info='+__URL__+param, null, refresh.bind(no), fail.bind(this));
+
 }();
 
