@@ -108,7 +108,13 @@ class Api extends CI_Controller {
 			switch($this->input->method()) {
 			case 'get':
 				if(!isset($data['page'])) {
-					$start = $page = 'last';
+					if(isset($data['no'])) {
+						// table, post_no, reply_no
+						$page = $this->map->reply_getPageNum('map_'.$info[1].'_reply', $info[3], $data['no']);
+						$start = (($page>1)?$page-1:0)*REPLY_LIST_ROWS_LIMIT;
+					} else {
+						$start = $page = 'last';
+					}
 				} else {
 					$page = $data['page'];
 					$start = (($page>1)?$page-1:0)*REPLY_LIST_ROWS_LIMIT;
@@ -137,9 +143,7 @@ class Api extends CI_Controller {
 			case 'put':
 			case 'update' :
 				if($this->session->userdata('signed_in')) {
-					if($this->map->reply_update($data, $info)) {
-						$ret = true;
-					}
+					$ret = $this->map->reply_update($data, $info);
 				} else {
 					header('HTTP/1.1 401 Unauthorized');
 					header('Content-Type: application/json; charset=UTF-8');

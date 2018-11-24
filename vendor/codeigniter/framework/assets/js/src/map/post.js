@@ -322,6 +322,11 @@ function fail (data) {
 
 //when start, get reply
 !function () {
-	httpRequest('GET', '/api/request/reply?info='+__URL__, null, refresh.bind(this), fail.bind(this));
+	let url = new URL(window.location);
+	let no = url.searchParams.get("no");
+
+	let param = (no)?'&no='+no:'';
+
+	httpRequest('GET', '/api/request/reply?info='+__URL__+param, null, refresh.bind(this), fail.bind(this));
 }();
 

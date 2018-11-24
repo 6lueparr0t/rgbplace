@@ -190,7 +190,7 @@ class Map_model extends CI_Model {
 			$replyCount = ($row->reply > 0)?"<a href='/{$map}/{$row->type}/{$row->no}{$param}'> <i class='far fa-comment-dots'></i> {$row->reply}</a>":"";
 
 			if(isset($row->reply_no) && isset($row->reply_content)) {
-				$param2 = "&search={$row->reply_content}";
+				$param2 = "&no={$row->reply_no}";
 				$reply = "<a href='/{$map}/{$row->type}/{$row->no}{$param}{$param2}'>{$row->reply_content}</a>";
 			} else {
 				$reply = '';
@@ -787,8 +787,8 @@ class Map_model extends CI_Model {
 		}
 
 		if($start === "last") {
-			$reply_count = $this->db->query("SELECT count(*) as list_count FROM {$table} where post=?", $num);
-			$start = (floor($reply_count->result()[0]->list_count/$rows)*REPLY_LIST_ROWS_LIMIT);
+			$reply_count = $this->db->query("SELECT count(*) as list_count FROM {$table} where post={$num}");
+			$start = ((ceil($reply_count->result()[0]->list_count/$rows)-1)*REPLY_LIST_ROWS_LIMIT);
 		}
 
 		$query = "SELECT @IDX := @IDX + 1 AS idx, reply.* FROM {$table} reply, (SELECT @IDX := 0 ) idx
@@ -809,8 +809,33 @@ class Map_model extends CI_Model {
 
 			LIMIT {$start}, {$rows} ";
 
-
 		$find = $this->db->query($query, $num);
+
+		if($find->num_rows()<=0) {
+			$reply_count = $this->db->query("SELECT count(*) as list_count FROM {$table} where post={$num}");
+			$start = ((ceil($reply_count->result()[0]->list_count/$rows)-1)*REPLY_LIST_ROWS_LIMIT);
+			$search['page'] = 'last';
+
+			$query = "SELECT @IDX := @IDX + 1 AS idx, reply.* FROM {$table} reply, (SELECT @IDX := 0 ) idx
+				where post=?
+				order by
+				if(isnull(follow), no, follow),
+					depth1,
+					depth2,
+					depth3,
+					depth4,
+					depth5,
+					depth6,
+					depth7,
+					depth8,
+					depth9,
+					depth10,
+					ctim
+
+					LIMIT {$start}, {$rows} ";
+
+			$find = $this->db->query($query, $num);
+		};
 
 		$ret = '';
 
@@ -1152,7 +1177,7 @@ class Map_model extends CI_Model {
 		return $result;
 	}
 
-	private function reply_getPageNum($table, $post_no, $no) {
+	public function reply_getPageNum($table, $post_no, $no) {
 		$query = "select reply.idx
 					from
 						(
@@ -1206,7 +1231,14 @@ class Map_model extends CI_Model {
 			$no
 		);
 
-		return $this->db->query($query, $values);
+		$back = $this->reply_getPageNum($table, $info[3], $no);
+		if($this->db->query($query, $values)) {
+			$result = $back;
+		} else {
+			$result = false;
+		}
+
+		return $result;
 	}
 
 	/*
@@ -1232,7 +1264,14 @@ class Map_model extends CI_Model {
 			$no
 		);
 
-		return $this->db->query($query, $values);
+		$back = $this->reply_getPageNum($table, $info[3], $no);
+		if($this->db->query($query, $values)) {
+			$result = $back;
+		} else {
+			$result = false;
+		}
+
+		return $result;
 	}
 
 	/*
