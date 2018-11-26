@@ -27,7 +27,7 @@ class Map_model extends CI_Model {
 		 *}
 		 */
 
-		$data = $find->result()[0]->type;
+		$data = $find->row()->type;
 
 		return $data;
 	}
@@ -451,7 +451,7 @@ class Map_model extends CI_Model {
 			return false;
 		}
 
-		if($find->result()[0]->type != $type) {
+		if($find->row()->type != $type) {
 			//echo "<div class='no-post'>Wrong Type <i class='fa fa-frown-o'></i> </div>";
 			return false;
 		}
@@ -480,8 +480,8 @@ class Map_model extends CI_Model {
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 			$no   = $row->no;
 			$uid  = $row->uid;
-			$title = stripslashes(htmlspecialchars_decode($row->title));
-			$content = stripslashes(htmlspecialchars_decode($row->content));
+			$title = xss_clean(stripslashes(htmlspecialchars_decode($row->title)));
+			$content = strip_tags(stripslashes(htmlspecialchars_decode($row->content)), "<a><img><br><div><p><iframe>");
 
 			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
 			echo "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
@@ -506,7 +506,7 @@ class Map_model extends CI_Model {
 
 		// permission check
 		$activate = "disable";
-		if (($user === $uid && $find->result()[0]->type != 'best') || $this->session->userdata('admin')) $activate = "enable";
+		if (($user === $uid && $find->row()->type != 'best') || $this->session->userdata('admin')) $activate = "enable";
 
 		// modify + delete button
 		echo "<div class='button-group'>"
@@ -788,7 +788,8 @@ class Map_model extends CI_Model {
 
 		if($start === "last") {
 			$reply_count = $this->db->query("SELECT count(*) as list_count FROM {$table} where post={$num}");
-			$start = ((ceil($reply_count->result()[0]->list_count/$rows)-1)*REPLY_LIST_ROWS_LIMIT);
+			$start = ((ceil($reply_count->row()->list_count/$rows)-1)*REPLY_LIST_ROWS_LIMIT);
+			$start = ($start<0)?0:$start;
 		}
 
 		$query = "SELECT @IDX := @IDX + 1 AS idx, reply.* FROM {$table} reply, (SELECT @IDX := 0 ) idx
@@ -811,9 +812,10 @@ class Map_model extends CI_Model {
 
 		$find = $this->db->query($query, $num);
 
-		if($find->num_rows()<=0) {
+		if($find->num_rows() <= 0) {
 			$reply_count = $this->db->query("SELECT count(*) as list_count FROM {$table} where post={$num}");
-			$start = ((ceil($reply_count->result()[0]->list_count/$rows)-1)*REPLY_LIST_ROWS_LIMIT);
+			$start = ((ceil($reply_count->row()->list_count/$rows)-1)*REPLY_LIST_ROWS_LIMIT);
+			$start = ($start<0)?0:$start;
 			$search['page'] = 'last';
 
 			$query = "SELECT @IDX := @IDX + 1 AS idx, reply.* FROM {$table} reply, (SELECT @IDX := 0 ) idx
@@ -967,7 +969,7 @@ class Map_model extends CI_Model {
 		$find = $this->db->query($query, $num);
 
 		// all list count / 30 (default)
-		$max = ceil($find->result()[0]->list_count/$rows);
+		$max = ceil($find->row()->list_count/$rows);
 		if($max == 0) $max=1;
 
 		// 'page' option check
@@ -1042,7 +1044,7 @@ class Map_model extends CI_Model {
 		$table = $this->db->escape_str($table);
 		$select = $this->db->query("select * from {$table} where no = ?", $no);
 
-		$result = $select->result()[0];
+		$result = $select->row();
 
 		$depth = [
 			$result->depth1, $result->depth2, $result->depth3,
@@ -1126,7 +1128,7 @@ class Map_model extends CI_Model {
 			//exit();
 
 			if($select->num_rows() != 0) {
-				$row = $select->result()[0];
+				$row = $select->row();
 				for($i=0; $i<count($depth_array); $i++) {
 					$depth_array[$i] = (isset($row->{'depth'.($i+1)}))?$row->{'depth'.($i+1)}:0;
 				}
@@ -1135,7 +1137,7 @@ class Map_model extends CI_Model {
 		//}
 
 		$depth_array[$depth] = 
-			$this->db->query("select count(no) cnt from {$table} where relation = ?", $no)->result()[0]->cnt+1;
+			$this->db->query("select count(no) cnt from {$table} where relation = ?", $no)->row()->cnt+1;
 
 		$content = addslashes(htmlspecialchars($data['message']));
 
@@ -1200,7 +1202,7 @@ class Map_model extends CI_Model {
 					where
 						reply.no=? ";
 
-		return ceil($this->db->query($query, array($post_no, $no))->result()[0]->idx/REPLY_LIST_ROWS_LIMIT);
+		return ceil($this->db->query($query, array($post_no, $no))->row()->idx/REPLY_LIST_ROWS_LIMIT);
 	}
 
 	/*
@@ -1333,7 +1335,7 @@ class Map_model extends CI_Model {
 		case 'post' :
 			$vote_info = $this->post_select($data, $info);
 			$post = null;
-			$vote_uid = $vote_info->result()[0]->uid;
+			$vote_uid = $vote_info->row()->uid;
 			break;
 		case 'reply' :
 			$vote_info = $this->reply_select($update_table, $no);
@@ -1343,7 +1345,7 @@ class Map_model extends CI_Model {
 		}
 
 		if($result->num_rows() > 0) {
-			if (!is_null($result->result()[0]->utim)) {
+			if (!is_null($result->row()->utim)) {
 				$query = "UPDATE {$history_table} SET act=?, ctim=now(), utim=NULL where uid=? and type=? and relation=? and act='n'";
 				if( $this->db->query($query, array($act, $uid, $type, $no)) ) {
 					$query = "UPDATE {$update_table} SET {$act} = {$act} + {$point}  where no = ?";
@@ -1406,7 +1408,7 @@ class Map_model extends CI_Model {
 		$reply_info = $this->reply_select($reply_table, $no);
 		$post = $reply_info['post'];
 
-		if($result->result()[0]->cnt == 0) {
+		if($result->row()->cnt == 0) {
 			$query = "INSERT INTO {$history_table}
 				( uid, type, relation, post, act)
 				VALUES

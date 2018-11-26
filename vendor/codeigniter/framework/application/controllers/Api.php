@@ -68,7 +68,8 @@ class Api extends CI_Controller {
 		}
 
 		if(!$data) redirect("/");
-		$info = explode('/', $data['info']);
+		$data = $this->db->escape_str($data);
+		$info = explode('/', $this->db->escape_str($data['info']));
 		unset($data['info']);
 
 		switch ($type) {

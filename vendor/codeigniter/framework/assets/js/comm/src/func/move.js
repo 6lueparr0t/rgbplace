@@ -11,9 +11,9 @@ function move (selector, position) {
 
 	element = element.offsetParent;
 
-	let position = {x: xPos, y: yPos};
+	let moveTo = {x: xPos, y: yPos};
 
 	setTimeout(function() {
 		window.scrollTo(this.x, this.y);
-	}.bind(position), 200);
+	}.bind(moveTo), 200);
 }
