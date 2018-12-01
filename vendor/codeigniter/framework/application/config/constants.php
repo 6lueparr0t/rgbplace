@@ -119,7 +119,7 @@ define("REPLY_LIST_ROWS_LIMIT", 20);
 /* !!!!! if you modify, codeigniter/framework/assets/js/comm/src/0.js check !!!!! */
 
 //['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
-define("TYPE_LIST", ['#', 'best', 'free', 'info', 'news', 'public', 'dev']);
+define("TYPE_LIST", ['#', 'best', 'free', 'info', 'game', 'food', 'life', 'news', 'public', 'dev']);
 
 define(
 	"LEVEL_BOUND"  ,

@@ -21,3 +21,11 @@ document.querySelector("body").addEventListener("click", function(event) {
 		});
 	}
 });
+
+console.log(
+	'%cR%cG%cB %cPLACE',
+	'color: #ff6b6b;font-size:2rem;font-weight:bold',
+	'color: #51cf66;font-size:2rem;font-weight:bold',
+	'color: #339af0;font-size:2rem;font-weight:bold',
+	'color: #000000;font-size:2rem;font-weight:bold'
+);
