@@ -133,7 +133,6 @@ document.querySelector("body").addEventListener("click", function(event) {
 				'target':'REPLY',
 				'act':reply.act,
 			});
-			console.log(data);
 
 			httpRequest(mode, '/api/request/report', JSON.stringify(data), successReport.bind(reply), fail.bind(reply));
 			break;
@@ -248,7 +247,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 				range.moveToElementText(clip);
 				range.select();
 				document.execCommand("Copy");
-				alert("Copied link to clipboard");
+				alert("copy link !");
 				document.selection.empty();
 			}
 			else if(window.getSelection) {
@@ -258,7 +257,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 				selection.removeAllRanges();
 				selection.addRange(range);
 				document.execCommand("Copy");
-				alert("Copied link to clipboard");
+				alert("copy link !");
 				selection.removeAllRanges();
 			}
 
@@ -305,7 +304,7 @@ function successReport (data) {
 	if(data > -1) {
 		alert('🕶️ Reply was reported ! 👊');
 	} else {
-		alert('already reported.');
+		alert('you can not report it anymore.');
 	}
 }
 

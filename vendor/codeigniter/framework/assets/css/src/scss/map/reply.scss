@@ -11,6 +11,14 @@
 			display:none;
 		}
 
+		div.head {
+			margin-bottom:1rem;
+
+			span.date {
+				font-size:.6rem;
+			}
+		}
+
 		li {
 			@include flex ();
 
@@ -32,14 +40,6 @@
 
 			.follow {
 				display:none;
-			}
-
-			.name {
-				font-size:1rem;
-			}
-
-			.date {
-				font-size:1rem;
 			}
 		}
 

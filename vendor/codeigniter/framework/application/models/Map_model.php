@@ -897,6 +897,7 @@ class Map_model extends CI_Model {
 			$ret .= "<ul>";
 
 			$ret .= "<span class='no'>{$no}</span>";
+			$ret .= "<div class='head'>{$name} <span class='date'>{$date} {$time}</span></div>";
 			$ret .= "<li class='content'>";
 
 			/* depth arrow output : top */
@@ -911,10 +912,8 @@ class Map_model extends CI_Model {
 
 			// reply info start
 			$ret .= "<div class='reply-info'>";
-			$ret .= "<div class='name'>{$name}</div>";
 			$ret .= "<div class='depth'>{$depth_no}</div>";
 			$ret .= "<div class='follow'>{$follow}</div>";
-			$ret .= "<div class='date'> {$date} {$time} </div>";
 
 			// daihyun99 to do : button class setting color
 			/* func : top */
@@ -1406,6 +1405,10 @@ class Map_model extends CI_Model {
 		$result = $this->history_select($history_table, $uid, $type, $no, $act);
 
 		$reply_info = $this->reply_select($reply_table, $no);
+		if($uid == $reply_info['uid']) {
+			return false;
+		}
+
 		$post = $reply_info['post'];
 
 		if($result->row()->cnt == 0) {

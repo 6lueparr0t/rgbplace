@@ -6,6 +6,7 @@ let conf = document.querySelector("#conf");
 function done (data) {
 	let num = data;
 	alert('save done');
+	location.reload();
 	//redirect(num);
 }
 
@@ -57,7 +58,6 @@ document.querySelector("body").addEventListener("click", function(event) {
 		case 'save' :
 			let data = [];
 
-
 			if(validateName(document.querySelector('#name').value)) {
 				name = document.querySelector('#name').value;
 			} else {
@@ -65,11 +65,13 @@ document.querySelector("body").addEventListener("click", function(event) {
 				break;
 			}
 
-			if(validateEmail(document.querySelector('#email').value)) {
-				email = document.querySelector('#email').value;
-			} else {
-				alert('check your email pattern');
-				break;
+			if(document.querySelector('#email') != null) {
+				if(validateEmail(document.querySelector('#email').value)) {
+					email = document.querySelector('#email').value;
+				} else {
+					alert('check your email pattern');
+					break;
+				}
 			}
 
 			if(pswd.value || conf.value) {
