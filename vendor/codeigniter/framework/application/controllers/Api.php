@@ -275,7 +275,7 @@ class Api extends CI_Controller {
 					$data[$i]['file_path'] = $data[$i]['full_path'] = null;
 					$data[$i]['default_path'] = UPLOAD_PATH;
 
-					$this->base->setUploadList($data[$i], $this->session->userdata('admin'));
+					$this->base->updateUploadList($data[$i], $this->session->userdata('admin'));
 				}
 
 			}

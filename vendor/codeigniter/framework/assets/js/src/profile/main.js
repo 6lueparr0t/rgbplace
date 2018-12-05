@@ -46,6 +46,16 @@ function passwordCheck () {
 	this.reportValidity();
 }
 
+function tabChange (element) {
+	console.log('.'+element.parentElement.className+' div');
+    document.querySelectorAll('.'+element.parentElement.className+' div').forEach(function(element) {
+        element.classList.remove('active');
+        document.querySelector('#'+element.className+'-area').classList.add('none');
+    });
+    document.querySelector('#'+element.className+'-area').classList.remove('none');
+    element.classList.add('active');
+}
+
 document.querySelector("body").addEventListener("click", function(event) {
 	let t = event.target;
 
@@ -53,6 +63,17 @@ document.querySelector("body").addEventListener("click", function(event) {
 	//}
 
 	let name = '', email = '', pswd_conf = '';
+
+	switch(t.classList.item(0)) {
+        case 'info' :
+        case 'upload' :
+        case 'post' :
+        case 'reply' :
+        case 'vote' :
+        case 'report' :
+            tabChange(t);
+            break;
+    }
 
 	switch(t.id) {
 		case 'save' :
@@ -107,5 +128,5 @@ document.querySelector("body").addEventListener("click", function(event) {
 if (conf) conf.addEventListener("input", passwordCheck);
 
 !function() {
-    //document.querySelector(".view").click();
+	document.querySelector(".info").click();
 }();

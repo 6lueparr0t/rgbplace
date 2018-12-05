@@ -1,6 +1,15 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
 <div id='profile'>
-	<div class='info'>
+	<div class='tab'>
+		<div class='info'>info</div>
+		<div class='upload'>upload</div>
+		<div class='post'  >post</div>
+		<div class='reply' >reply</div>
+		<div class='vote'  >vote</div>
+		<div class='report'>report</div>
+	</div>
+	<div id='info-area' class='none'>
+		<div class='info'>
 <?php
 
 	echo ("<div class='tr'>");
@@ -40,11 +49,24 @@ if($this->session->userdata("admin") === false) {
 		//echo ("<div class='td conf'><input type='text' id='conf' value='Not Yet ..'/></div>");
 	echo ("</div>");
 ?>
+		</div>
+
+		<div class="button-group">
+			<div class='enable' id='save' name='save'>SAVE</div>
+			<div class='enable' id='cancel' name='cancel'>CANCEL</div>
+		</div>
 	</div>
 
-	<div class="button-group">
-		<div class='enable' id='save' name='save'>SAVE</div>
-		<div class='enable' id='cancel' name='cancel'>CANCEL</div>
+	<div id='upload-area'>
 	</div>
+	<div id='post-area'  >
+	</div>
+	<div id='reply-area' >
+	</div>
+	<div id='vote-area'  >
+	</div>
+	<div id='report-area'>
+	</div>
+
 </div>
 <?php $this->root->end($path); ?>

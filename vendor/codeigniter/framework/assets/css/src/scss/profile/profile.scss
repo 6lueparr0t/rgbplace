@@ -1,47 +1,54 @@
 #profile {
+
+	.none {
+        display:none;
+    }
+
 	font-family: "pixel";
 	font-size: 1rem;
 
-	.info {
-		display: table;
-		padding: 0 1rem;
-		margin: 2rem auto;
-		max-width: 800px;
-		width: 90%;
+	#info-area {
+		.info {
+			display: table;
+			padding: 0 1rem;
+			margin: 2rem auto;
+			max-width: 800px;
+			width: 90%;
 
-		.tr {
-			display:table-row;
-		}
+			.tr {
+				display:table-row;
+			}
 
-		.th {
-			display:table-cell;
-			padding:1rem;
-			text-align:right;
-			vertical-align: middle;
+			.th {
+				display:table-cell;
+				padding:1rem;
+				text-align:right;
+				vertical-align: middle;
 
-			border:1px solid $oc-gray-9;
-			background-color:$oc-gray-2;
-		}
+				border:1px solid $oc-gray-9;
+				background-color:$oc-gray-2;
+			}
 
-		.td {
-			display:table-cell;
-			padding:1rem;
-			text-align:left;
+			.td {
+				display:table-cell;
+				padding:1rem;
+				text-align:left;
 
-			border:1px solid $oc-gray-9;
+				border:1px solid $oc-gray-9;
 
-			&.name, &.email, &.pswd, &.conf {
-				font-family: "normal";
-				padding: 0;
+				&.name, &.email, &.pswd, &.conf {
+					font-family: "normal";
+					padding: 0;
 
-				input {
-					border: none;
-					font-size: 1.2rem;
-					padding: 1rem;
-					width: 80%;
+					input {
+						border: none;
+						font-size: 1.2rem;
+						padding: 1rem;
+						width: 80%;
 
-					&:disabled {
-						background-color: white;
+						&:disabled {
+							background-color: white;
+						}
 					}
 				}
 			}
