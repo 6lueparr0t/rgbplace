@@ -258,7 +258,9 @@ document.querySelector("body").addEventListener("click", function(event) {
 	switch(t.classList.item(0)) {
 		case 'view' :
 			tabChange(t);
+			edit_content_code.value = edit_content.innerHTML;
 			edit_content.innerHTML = edit_content_code.value;
+
 			edit_content.classList.remove('none');
 			edit_content.classList.add('active');
 
@@ -267,7 +269,9 @@ document.querySelector("body").addEventListener("click", function(event) {
 			break;
 		case 'code' :
 			tabChange(t);
+			edit_content.innerHTML = edit_content_code.value;
 			edit_content_code.value = edit_content.innerHTML;
+
 			edit_content_code.classList.remove('none');
 			edit_content_code.classList.add('active');
 
