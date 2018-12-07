@@ -100,12 +100,12 @@ class Map extends CI_Controller {
 			$info = [null, $map, $type, $num];
 			$ret = $this->map->post_select(null, $info);
 
-			if(($ret->result()[0]->uid == $this->session->userdata('uid') && $type != 'best') || $this->session->userdata('admin')) {
+			if(($ret->row()->uid == $this->session->userdata('uid') && $type != 'best') || $this->session->userdata('admin')) {
 				//$data['mode'] = 'update';
 				$data['mode'] = 'put';
-				$data['title'] = htmlspecialchars_decode($ret->result()[0]->title);
-				$data['content'] = htmlspecialchars_decode($ret->result()[0]->content);
-				//$data['upload'] = htmlspecialchars_decode($ret->result()[0]->upload);
+				$data['title'] = xss_clean(stripslashes(htmlspecialchars_decode($ret->row()->title)));
+				$data['content'] = strip_tags(stripslashes(htmlspecialchars_decode($ret->row()->content)), "<a><img><br><div><p><iframe>");
+				//$data['upload'] = htmlspecialchars_decode($ret->row()->upload);
 			} else {
 				redirect("/{$map}/{$type}/{$num}");
 			}

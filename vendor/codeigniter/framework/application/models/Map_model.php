@@ -591,8 +591,8 @@ class Map_model extends CI_Model {
 		$table = $this->db->escape_str("map_{$info[1]}_post");
 		$type = $info[2];
 
-		$title = addslashes(htmlspecialchars($data['title']));
-		$content = addslashes(htmlspecialchars($data['content']));
+		$title = htmlspecialchars($data['title']);
+		$content = htmlspecialchars($data['content']);
 		//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
@@ -652,8 +652,8 @@ class Map_model extends CI_Model {
 		$type = $info[2];
 		$no = $info[3];
 
-		$title = addslashes(htmlspecialchars($data['title']));
-		$content = addslashes(htmlspecialchars($data['content']));
+		$title = htmlspecialchars($data['title']);
+		$content = htmlspecialchars($data['content']);
 		//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);

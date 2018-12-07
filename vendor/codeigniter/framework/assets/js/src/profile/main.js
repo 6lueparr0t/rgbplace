@@ -11,7 +11,7 @@ function done (data) {
 }
 
 function fail (data) {
-	console.log(data);
+	//console.log(data);
 	alert('fail');
 }
 
@@ -47,7 +47,7 @@ function passwordCheck () {
 }
 
 function tabChange (element) {
-	console.log('.'+element.parentElement.className+' div');
+	//console.log('.'+element.parentElement.className+' div');
     document.querySelectorAll('.'+element.parentElement.className+' div').forEach(function(element) {
         element.classList.remove('active');
         document.querySelector('#'+element.className+'-area').classList.add('none');

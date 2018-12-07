@@ -21,8 +21,8 @@ function postSearch (recv) {
 		}
 	}
 
-	console.log(where);
-	redirect ('list?search='+recv+'&'+where);
+	//console.log(where);
+	redirect ('list?search='+recv.trim()+'&'+where);
 }
 
 if (postSearchBtn)postSearchBtn.addEventListener("click", function() {
