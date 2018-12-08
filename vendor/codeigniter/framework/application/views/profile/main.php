@@ -43,7 +43,7 @@ echo("
 		<div class='td'>{$atim}</div>
 	</div>
 	<div class='tr'>
-		<div class='th'>Password</div>
+		<div class='th'>Pass word</div>
 		<div class='td pswd'><input type='password' id='pswd' maxlength='255' value=''/></div>
 	</div>
 	<div class='tr'>
@@ -63,19 +63,24 @@ echo("
 		<div class='table'>
 		<div class='tr'>
 			<div class='th center'>No</div>
-			<div class='th center'>Name</div>
-			<div class='th center'>Type</div>
-			<div class='th center'>Size (KB)</div>
+			<div class='th center'>Info</div>
 		</div>
 <?php
 $upload_array = (array)json_decode($upload)->history;
 for ( $i = count($upload_array)-1; $i >= 0; $i--) {
+	if(!isset($upload_array[$i]->date)) {
+		$upload_array[$i]->date = '';
+	}
+
 	echo("
 		<div class='tr'>
-			<div class='td center'>{$i}</div>
-			<div class='td'>{$upload_array[$i]->client_name}</div>
-			<div class='td'>{$upload_array[$i]->file_type}</div>
-			<div class='td'>{$upload_array[$i]->file_size}</div>
+			<div class='td center width-50'>{$i}</div>
+			<div class='td'>
+				{$upload_array[$i]->client_name}<br/>
+				{$upload_array[$i]->file_type}<br/>
+				{$upload_array[$i]->file_size}<br/>
+				{$upload_array[$i]->date}<br/>
+			</div>
 		</div>
 	");
 }

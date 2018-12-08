@@ -5,6 +5,11 @@
 
 	div {
 		padding:1rem;
+
+		@media screen and ($width-name : $target-width) {
+			padding: 1rem 0;
+		}
+
 		flex-grow:1;
 		text-align:center;
 

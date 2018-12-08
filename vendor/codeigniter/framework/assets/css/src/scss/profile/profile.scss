@@ -8,11 +8,10 @@
 	font-size: 1rem;
 
 
-	.page,
-	{
+	.page {
 		.table {
 			display: table;
-			padding: 0 1rem;
+			padding: 1rem;
 			margin: 2rem auto;
 			max-width: 800px;
 			width: 90%;
@@ -24,6 +23,12 @@
 			.th {
 				display:table-cell;
 				padding:1rem;
+
+				@media screen and ($width-name : $target-width) {
+					padding: .4rem;
+					word-break: break-word;
+				}
+
 				text-align:right;
 				vertical-align: middle;
 
@@ -40,7 +45,21 @@
 				padding:1rem;
 				text-align:left;
 
+				@media screen and ($width-name : $target-width) {
+					padding: .2rem;
+					word-break: break-word;
+				}
+
 				border:1px solid $oc-gray-9;
+
+				&.center {
+					text-align: center;
+					vertical-align: middle;
+				}
+
+				&.width-50 {
+					width: 50px;
+				}
 
 				&.center {
 					text-align:center;

@@ -10,7 +10,7 @@
 	font-weight: 300;
 	padding: 0 11px 0 13px;
 	text-overflow: ellipsis;
-	width: 400px;
+	width: 40% !important;
 
 	margin: .5rem;
 	height: 2.4rem;

@@ -81,7 +81,7 @@ class Profile_model extends CI_Model {
 	public function add_upload($data) {
 		$this->setting($table, $col, $uid);
 
-		$json = "{\"file_name\":\"{$data['file_name']}\", \"file_type\":\"{$data['file_type']}\", \"client_name\":\"{$data['client_name']}\", \"file_size\":\"{$data['file_size']}\"}";
+		$json = "{\"file_name\":\"{$data['file_name']}\", \"file_type\":\"{$data['file_type']}\", \"client_name\":\"{$data['client_name']}\", \"file_size\":\"{$data['file_size']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
 
 		//select json_merge('{"fileList": []}', JSON_QUERY('{"fileList":[{"date":"2018-09-03","text":"mmmmmmm"}]}', '$')) ;
 
