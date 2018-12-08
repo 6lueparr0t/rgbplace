@@ -9,13 +9,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Profile_model extends CI_Model {
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
-	public function info()
-	{
+	public function info() {
 		if($this->session->userdata('admin') === true) {
 
 			$name = $this->session->userdata('name');
@@ -33,8 +31,7 @@ class Profile_model extends CI_Model {
 		return (array)$find->row();
 	}
 
-	public function update($data)
-	{
+	public function update($data) {
 		$uid = $this->session->userdata('uid');
 		$admin = $this->session->userdata('admin');
 
@@ -79,6 +76,32 @@ class Profile_model extends CI_Model {
 		$this->session->set_userdata( array('name' => $data['name']) );
 
 		return $result;
+	}
+
+	public function add_upload($data) {
+		$this->setting($table, $col, $uid);
+
+		$json = "{\"file_name\":\"{$data['file_name']}\", \"file_type\":\"{$data['file_type']}\", \"client_name\":\"{$data['client_name']}\", \"file_size\":\"{$data['file_size']}\"}";
+
+		//select json_merge('{"fileList": []}', JSON_QUERY('{"fileList":[{"date":"2018-09-03","text":"mmmmmmm"}]}', '$')) ;
+
+		$update = $this->db->query("UPDATE {$table} SET upload = JSON_MERGE(upload, JSON_QUERY('{\"history\":[".$json."]}', '$')) where {$col} = ? ", $uid);
+
+		return $update;
+	}
+
+	function setting(&$table, &$col, &$uid) {
+		$admin = $this->session->userdata('admin');
+
+		if ($admin === true) {
+			$table = 'admin_info';
+			$col = 'name';
+			$uid = explode('@', $this->session->userdata('uid'))[1];
+		} else {
+			$table = 'user_info';
+			$col = 'uid';
+			$uid = $this->session->userdata('uid');
+		}
 	}
 
 }
