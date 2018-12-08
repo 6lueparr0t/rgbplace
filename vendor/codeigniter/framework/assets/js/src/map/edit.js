@@ -297,7 +297,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 				'content': content
 			});
 
-			let mode = (document.querySelector('#edit-mode') || {value:'post'}).value;
+			let mode = ({value:'post'}).value;
 
 			httpRequest(mode, '/api/request/edit/save', JSON.stringify(data), done, fail);
 			break;

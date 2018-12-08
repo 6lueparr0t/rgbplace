@@ -91,7 +91,7 @@ class Map extends CI_Controller {
 			} 
 		}
 
-		$data['mode'] = 'post';
+		$this->session->set_userdata(['mode' => 'post']);
 		$data['title'] = "";
 		$data['content'] = "";
 		//$data['upload'] = "[]";
@@ -102,7 +102,7 @@ class Map extends CI_Controller {
 
 			if(($ret->row()->uid == $this->session->userdata('uid') && $type != 'best') || $this->session->userdata('admin')) {
 				//$data['mode'] = 'update';
-				$data['mode'] = 'put';
+				$this->session->set_userdata(['mode' => 'put']);
 				$data['title'] = xss_clean(stripslashes(htmlspecialchars_decode($ret->row()->title)));
 				$data['content'] = strip_tags(stripslashes(htmlspecialchars_decode($ret->row()->content)), "<a><img><br><div><p><iframe>");
 				//$data['upload'] = htmlspecialchars_decode($ret->row()->upload);

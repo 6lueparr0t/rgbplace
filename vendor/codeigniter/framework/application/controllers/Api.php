@@ -82,16 +82,18 @@ class Api extends CI_Controller {
 			break;
 		case 'edit':
 			if($this->session->userdata('signed_in')) {
-				switch($this->input->method()) {
+				switch($this->session->userdata('mode')) {
 				case 'get' :
 					break;
 				case 'post' :
 					//save
 					$ret = $this->map->post_insert($data, $info);
+					$this->session->unset_userdata(['mode']);
 					break;
 				case 'put':
 				case 'update':
 					$ret = $this->map->post_update($data, $info);
+					$this->session->unset_userdata(['mode']);
 					break;
 				case 'delete':
 					break;
