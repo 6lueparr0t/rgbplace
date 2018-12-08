@@ -78,6 +78,16 @@ class Profile_model extends CI_Model {
 		return $result;
 	}
 
+	public function add_post($data) {
+		$this->setting($table, $col, $uid);
+
+		$json = "{\"no\":\"{$data['no']}\", \"map\":\"{$data['map']}\", \"title\":\"{$data['title']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
+
+		$update = $this->db->query("UPDATE {$table} SET post = JSON_MERGE(post, JSON_QUERY('{\"history\":[".$json."]}', '$')) where {$col} = ? ", $uid);
+
+		return $update;
+	}
+
 	public function add_upload($data) {
 		$this->setting($table, $col, $uid);
 
@@ -86,6 +96,58 @@ class Profile_model extends CI_Model {
 		//select json_merge('{"fileList": []}', JSON_QUERY('{"fileList":[{"date":"2018-09-03","text":"mmmmmmm"}]}', '$')) ;
 
 		$update = $this->db->query("UPDATE {$table} SET upload = JSON_MERGE(upload, JSON_QUERY('{\"history\":[".$json."]}', '$')) where {$col} = ? ", $uid);
+
+		return $update;
+	}
+
+	public function add_reply($data) {
+		$this->setting($table, $col, $uid);
+
+		$update = $this->db->query("UPDATE {$table} SET reply = JSON_REMOVE(post, '$.history[{$data['no']}]') where {$col} = ? ", $uid);
+
+		return $update;
+	}
+
+	public function add_vote($data) {
+		$this->setting($table, $col, $uid);
+
+		$json = "{\"no\":\"{$data['no']}\", \"map\":\"{$data['map']}\", \"content\":\"{$data['content']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
+
+		$update = $this->db->query("UPDATE {$table} SET vote = JSON_MERGE(vote, JSON_QUERY('{\"history\":[".$json."]}', '$')) where {$col} = ? ", $uid);
+
+		return $update;
+	}
+
+	public function update_info($field, $data) {
+		$this->setting($table, $col, $uid);
+
+		$history = (array)json_decode($this->db->query("select {$field} from {$table} where {$col} = ? ", $uid)->row()->{$field})->history;
+
+		for($i=count($history); $i>=0; $i--) {
+			if($history[$i]->no == $data['no']) {
+				$no = $i;
+				break;
+			}
+		}
+
+		$update = $this->db->query("UPDATE {$table} SET {$field} = JSON_REPLACE({$field}, '$.history[{$no}].title', '{$data['title']}', '$.history[{$no}].date', '{$data['date']}') where {$col} = ? ", $uid);
+
+		return $update;
+	}
+
+	public function remove_info($field, $data) {
+		$this->setting($table, $col, $uid);
+
+		$history = (array)json_decode($this->db->query("select {$field} from {$table} where {$col} = ? ", $uid)->row()->{$field})->history;
+
+		for($i=0; $i<count($history); $i++) {
+			if($history[$i]->no == $data['no']) {
+				$no = $i;
+				break;
+			}
+		}
+
+		$update = $this->db->query("UPDATE {$table} SET {$field} = JSON_REMOVE({$field}, '$.history[{$no}]') where {$col} = ? ", $uid);
 
 		return $update;
 	}

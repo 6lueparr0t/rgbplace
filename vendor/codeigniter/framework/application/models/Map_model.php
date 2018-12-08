@@ -635,7 +635,14 @@ class Map_model extends CI_Model {
 		);
 
 		$this->db->query($query, $values);
-		$ret = $this->db->insert_id(); 
+		$ret = $this->db->insert_id();
+
+		$data = array (
+			'map' => $info[1],
+			'no' => $ret,
+			'title' => $title,
+		);
+		@$this->profile->add_post($data);
 
 		return $ret;
 	}
@@ -717,6 +724,13 @@ class Map_model extends CI_Model {
 			$ret = $no;	
 		}
 
+		$data = array (
+			'no' => $no,
+			'title' => $title,
+			'date' => date('Y-m-d H:i:s')
+		);
+		@$this->profile->update_info('post', $data);
+
 		return $ret;
 	}
 
@@ -759,6 +773,11 @@ class Map_model extends CI_Model {
 		}
 
 		$ret = $this->db->query($query, $values);
+
+		$data = array (
+			'no' => $no,
+		);
+		@$this->profile->remove_info('post', $data);
 
 		return $ret;
 	}

@@ -5,7 +5,6 @@
 		<div class='post'  >post</div>
 		<div class='upload'>upload</div>
 		<div class='reply' >reply</div>
-		<div class='vote'  >vote</div>
 	</div>
 	<div id='info-area' class='page none'>
 		<div class='table'>
@@ -59,9 +58,32 @@ echo("
 ");
 ?>
 	<div id='post-area' class='page'>
+		<div class='table'>
+		<div class='tr'>
+			<div class='th center'>No</div>
+			<div class='th center'>Map</div>
+			<div class='th center'>Info</div>
+		</div>
 <?php
-	//echo $post;
+$post_array = (array)json_decode($post)->history;
+for ( $i = count($post_array)-1; $i >= 0; $i--) {
+	if(!isset($post_array[$i]->date)) {
+		$post_array[$i]->date = '';
+	}
+
+	echo("
+		<div class='tr'>
+			<div class='td center width-50'>{$i}</div>
+			<div class='td center width-50'>{$post_array[$i]->map}</div>
+			<div class='td'>
+				{$post_array[$i]->title}<br/>
+				{$post_array[$i]->date}<br/>
+			</div>
+		</div>
+	");
+}
 ?>
+	</div>
 	</div>
 	<div id='upload-area' class='page'>
 		<div class='table'>
@@ -89,16 +111,12 @@ for ( $i = count($upload_array)-1; $i >= 0; $i--) {
 	");
 }
 ?>
-		</div>
+	</div>
 	</div>
 	<div id='reply-area' class='page'>
 <?php
 	//echo $reply;
-?>
-	</div>
-	<div id='vote-area' class='page'>
-<?php
-	//echo $vote;
+	echo "not yet";
 ?>
 	</div>
 
