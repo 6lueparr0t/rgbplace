@@ -89,22 +89,22 @@ for ( $i = count($upload_array)-1; $i >= 0; $i--) {
 	</div>
 	<div id='post-area'  >
 <?php
-	echo $post;
+	//echo $post;
 ?>
 	</div>
 	<div id='reply-area' >
 <?php
-	echo $reply;
+	//echo $reply;
 ?>
 	</div>
 	<div id='vote-area'  >
 <?php
-	echo $vote;
+	//echo $vote;
 ?>
 	</div>
 	<div id='report-area'>
 <?php
-	echo $report;
+	//echo $report;
 ?>
 	</div>
 
