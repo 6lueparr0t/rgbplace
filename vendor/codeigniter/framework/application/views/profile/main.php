@@ -2,11 +2,10 @@
 <div id='profile'>
 	<div class='tab'>
 		<div class='info'>info</div>
-		<div class='upload'>upload</div>
 		<div class='post'  >post</div>
+		<div class='upload'>upload</div>
 		<div class='reply' >reply</div>
 		<div class='vote'  >vote</div>
-		<div class='report'>report</div>
 	</div>
 	<div id='info-area' class='page none'>
 		<div class='table'>
@@ -59,6 +58,11 @@ echo("
 	</div>
 ");
 ?>
+	<div id='post-area' class='page'>
+<?php
+	//echo $post;
+?>
+	</div>
 	<div id='upload-area' class='page'>
 		<div class='table'>
 		<div class='tr'>
@@ -78,7 +82,7 @@ for ( $i = count($upload_array)-1; $i >= 0; $i--) {
 			<div class='td'>
 				{$upload_array[$i]->client_name}<br/>
 				{$upload_array[$i]->file_type}<br/>
-				{$upload_array[$i]->file_size}<br/>
+				{$upload_array[$i]->file_size} KB<br/>
 				{$upload_array[$i]->date}<br/>
 			</div>
 		</div>
@@ -87,24 +91,14 @@ for ( $i = count($upload_array)-1; $i >= 0; $i--) {
 ?>
 		</div>
 	</div>
-	<div id='post-area'  >
-<?php
-	//echo $post;
-?>
-	</div>
-	<div id='reply-area' >
+	<div id='reply-area' class='page'>
 <?php
 	//echo $reply;
 ?>
 	</div>
-	<div id='vote-area'  >
+	<div id='vote-area' class='page'>
 <?php
 	//echo $vote;
-?>
-	</div>
-	<div id='report-area'>
-<?php
-	//echo $report;
 ?>
 	</div>
 
