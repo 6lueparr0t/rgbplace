@@ -4,7 +4,7 @@
 		<div class='info'>info</div>
 		<div class='post'  >post</div>
 		<div class='upload'>upload</div>
-		<div class='reply' >reply</div>
+		<!-- <div class='reply' >reply</div> -->
 	</div>
 	<div id='info-area' class='page none'>
 		<div class='table'>
@@ -76,7 +76,7 @@ for ( $i = count($post_array)-1; $i >= 0; $i--) {
 			<div class='td center width-50'>{$i}</div>
 			<div class='td center width-50'>{$post_array[$i]->map}</div>
 			<div class='td'>
-				{$post_array[$i]->title}<br/>
+				<a href='/{$post_array[$i]->map}/{$post_array[$i]->no}' target='_blank'>{$post_array[$i]->title}</a><br/>
 				{$post_array[$i]->date}<br/>
 			</div>
 		</div>
@@ -102,7 +102,7 @@ for ( $i = count($upload_array)-1; $i >= 0; $i--) {
 		<div class='tr'>
 			<div class='td center width-50'>{$i}</div>
 			<div class='td'>
-				{$upload_array[$i]->client_name}<br/>
+				<a href='/upload/{$upload_array[$i]->file_name}' target='_blank'>{$upload_array[$i]->client_name}</a><br/>
 				{$upload_array[$i]->file_type}<br/>
 				{$upload_array[$i]->file_size} KB<br/>
 				{$upload_array[$i]->date}<br/>
@@ -113,12 +113,13 @@ for ( $i = count($upload_array)-1; $i >= 0; $i--) {
 ?>
 	</div>
 	</div>
+<!--
 	<div id='reply-area' class='page'>
 <?php
 	//echo $reply;
 	echo "not yet";
 ?>
 	</div>
-
+-->
 </div>
 <?php $this->root->end($path); ?>
