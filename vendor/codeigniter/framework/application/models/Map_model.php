@@ -724,12 +724,14 @@ class Map_model extends CI_Model {
 			$ret = $no;	
 		}
 
-		$data = array (
-			'no' => $no,
-			'title' => $title,
-			'date' => date('Y-m-d H:i:s')
-		);
-		@$this->profile->update_info('post', $data);
+		if ($ret) {
+			$data = array (
+				'no' => $no,
+				'title' => $title,
+				'date' => date('Y-m-d H:i:s')
+			);
+			@$this->profile->update_info('post', $data);
+		}
 
 		return $ret;
 	}
@@ -774,10 +776,12 @@ class Map_model extends CI_Model {
 
 		$ret = $this->db->query($query, $values);
 
-		$data = array (
-			'no' => $no,
-		);
-		@$this->profile->remove_info('post', $data);
+		if ($ret) {
+			$data = array (
+				'no' => $no,
+			);
+			@$this->profile->remove_info('post', $data);
+		}
 
 		return $ret;
 	}
@@ -1093,8 +1097,7 @@ class Map_model extends CI_Model {
 	 * Desc : 
 	 * ====================
 	 */
-	public function reply_insert ($data, $info)
-	{
+	public function reply_insert ($data, $info) {
 		//$this->monolog->debug('reply_insert', print_r($data,1));
 		$table = $this->db->escape_str("map_{$info[1]}_reply");
 		$post_no = $info[3];
@@ -1190,11 +1193,22 @@ class Map_model extends CI_Model {
 		//$this->monolog->debug('reply_insert', $query);
 		//exit();	
 		$this->db->query($query, $values);
-		$result = $this->reply_getPageNum($table, $post_no, $this->db->insert_id());
+		$reply_no = $this->db->insert_id();
+		$ret = $this->reply_getPageNum($table, $post_no, $reply_no);
+
+		if ($ret) {
+			$data = array (
+				'post' => $post_no,
+				'map' => $info[1],
+				'no' => $reply_no,
+				'content' => $content,
+			);
+			@$this->profile->add_reply($data);
+		}
 
 		//$this->monolog->debug('reply_insert', $result);
 
-		return $result;
+		return $ret;
 	}
 
 	public function reply_getPageNum($table, $post_no, $no) {
@@ -1253,12 +1267,21 @@ class Map_model extends CI_Model {
 
 		$back = $this->reply_getPageNum($table, $info[3], $no);
 		if($this->db->query($query, $values)) {
-			$result = $back;
+			$ret = $back;
 		} else {
-			$result = false;
+			$ret = false;
 		}
 
-		return $result;
+		if ($ret) {
+			$data = array (
+				'no' => $no,
+				'content' => $content,
+				'date' => date('Y-m-d H:i:s')
+			);
+			@$this->profile->update_info('reply', $data);
+		}
+
+		return $ret;
 	}
 
 	/*
@@ -1267,8 +1290,7 @@ class Map_model extends CI_Model {
 	 * Desc : 
 	 * ====================
 	 */
-	public function reply_delete ($data, $info)
-	{
+	public function reply_delete ($data, $info) {
 		$table = $this->db->escape_str("map_{$info[1]}_reply");
 		$no = $data['no'];
 
@@ -1286,12 +1308,19 @@ class Map_model extends CI_Model {
 
 		$back = $this->reply_getPageNum($table, $info[3], $no);
 		if($this->db->query($query, $values)) {
-			$result = $back;
+			$ret = $back;
 		} else {
-			$result = false;
+			$ret = false;
 		}
 
-		return $result;
+		if ($ret) {
+            $data = array (
+                'no' => $no,
+            );
+            @$this->profile->remove_info('reply', $data);
+        }
+
+		return $ret;
 	}
 
 	/*

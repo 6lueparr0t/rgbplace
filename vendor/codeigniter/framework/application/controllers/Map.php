@@ -41,11 +41,16 @@ class Map extends CI_Controller {
 		$type = $this->map->link($map, $num);
 		$num  = $num;
 
+		$get = '';
+		if($_SERVER['QUERY_STRING']) {
+			$get = "?".$_SERVER['QUERY_STRING'];	
+		}
+
 		if(!$type) {
-			redirect("/{$map}");
+			redirect("/{$map}{$get}");
 			exit();
 		}
-		redirect("/{$map}/{$type}/{$num}");
+		redirect("/{$map}/{$type}/{$num}{$get}");
 	}
 
 	public function list($map, $type)

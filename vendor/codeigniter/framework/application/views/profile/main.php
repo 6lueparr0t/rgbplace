@@ -4,7 +4,7 @@
 		<div class='info'>info</div>
 		<div class='post'  >post</div>
 		<div class='upload'>upload</div>
-		<!-- <div class='reply' >reply</div> -->
+		<div class='reply' >reply</div>
 	</div>
 	<div id='info-area' class='page none'>
 		<div class='table'>
@@ -113,13 +113,35 @@ for ( $i = count($upload_array)-1; $i >= 0; $i--) {
 ?>
 	</div>
 	</div>
-<!--
 	<div id='reply-area' class='page'>
+		<div class='table'>
+		<div class='tr'>
+			<div class='th center'>No</div>
+			<div class='th center'>Map</div>
+			<div class='th center'>Info</div>
+		</div>
 <?php
-	//echo $reply;
-	echo "not yet";
+$reply_array = (array)json_decode($reply)->history;
+for ( $i = count($reply_array)-1; $i >= 0; $i--) {
+	if(!isset($reply_array[$i]->date)) {
+		$reply_array[$i]->date = '';
+	}
+
+	echo("
+		<div class='tr'>
+			<div class='td center width-50'>{$i}</div>
+			<div class='td center width-50'>{$reply_array[$i]->map}</div>
+			<div class='td font-normal'>
+				<a href='/{$reply_array[$i]->map}/{$reply_array[$i]->post}?reply=y&no={$reply_array[$i]->no}' target='_blank'>{$reply_array[$i]->content}</a><br/>
+				{$reply_array[$i]->date}<br/>
+			</div>
+		</div>
+	");
+}
 ?>
 	</div>
--->
+	</div>
+
+	</div>
 </div>
 <?php $this->root->end($path); ?>

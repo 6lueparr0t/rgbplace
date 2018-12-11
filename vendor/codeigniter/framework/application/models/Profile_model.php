@@ -103,11 +103,13 @@ class Profile_model extends CI_Model {
 	public function add_reply($data) {
 		$this->setting($table, $col, $uid);
 
-		$update = $this->db->query("UPDATE {$table} SET reply = JSON_REMOVE(post, '$.history[{$data['no']}]') where {$col} = ? ", $uid);
+		$json = "{\"post\":\"{$data['post']}\", \"map\":\"{$data['map']}\", \"no\":\"{$data['no']}\", \"content\":\"{$data['content']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
+
+		$update = $this->db->query("UPDATE {$table} SET reply = JSON_MERGE(reply, JSON_QUERY('{\"history\":[".$json."]}', '$')) where {$col} = ? ", $uid);
 
 		return $update;
 	}
-
+/*
 	public function add_vote($data) {
 		$this->setting($table, $col, $uid);
 
@@ -117,7 +119,7 @@ class Profile_model extends CI_Model {
 
 		return $update;
 	}
-
+*/
 	public function update_info($field, $data) {
 		$this->setting($table, $col, $uid);
 
@@ -130,7 +132,13 @@ class Profile_model extends CI_Model {
 			}
 		}
 
-		$update = $this->db->query("UPDATE {$table} SET {$field} = JSON_REPLACE({$field}, '$.history[{$no}].title', '{$data['title']}', '$.history[{$no}].date', '{$data['date']}') where {$col} = ? ", $uid);
+		if (isset($data['title'])) {
+			$update = $this->db->query("UPDATE {$table} SET {$field} = JSON_REPLACE({$field}, '$.history[{$no}].title', '{$data['title']}', '$.history[{$no}].date', '{$data['date']}') where {$col} = ? ", $uid);
+		}
+
+		if (isset($data['content'])) {
+			$update = $this->db->query("UPDATE {$table} SET {$field} = JSON_REPLACE({$field}, '$.history[{$no}].content', '{$data['content']}', '$.history[{$no}].date', '{$data['date']}') where {$col} = ? ", $uid);
+		}
 
 		return $update;
 	}
