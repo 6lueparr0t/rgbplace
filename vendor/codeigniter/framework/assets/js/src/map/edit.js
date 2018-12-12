@@ -257,26 +257,28 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 	switch(t.classList.item(0)) {
 		case 'view' :
-			tabChange(t);
-			edit_content_code.value = edit_content.innerHTML;
-			edit_content.innerHTML = edit_content_code.value;
+			if(t.classList[1] === undefined) {
+				tabChange(t);
+				edit_content.innerHTML = edit_content_code.value;
 
-			edit_content.classList.remove('none');
-			edit_content.classList.add('active');
+				edit_content.classList.remove('none');
+				edit_content.classList.add('active');
 
-			edit_content_code.classList.add('none');
-			edit_content_code.classList.remove('active');
+				edit_content_code.classList.add('none');
+				edit_content_code.classList.remove('active');
+			}
 			break;
 		case 'code' :
-			tabChange(t);
-			edit_content.innerHTML = edit_content_code.value;
-			edit_content_code.value = edit_content.innerHTML;
+			if(t.classList[1] === undefined) {
+				tabChange(t);
+				edit_content_code.value = edit_content.innerHTML;
 
-			edit_content_code.classList.remove('none');
-			edit_content_code.classList.add('active');
+				edit_content_code.classList.remove('none');
+				edit_content_code.classList.add('active');
 
-			edit_content.classList.add('none');
-			edit_content.classList.remove('active');
+				edit_content.classList.add('none');
+				edit_content.classList.remove('active');
+			}
 			break;
 	}
 

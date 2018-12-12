@@ -480,8 +480,8 @@ class Map_model extends CI_Model {
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 			$no   = $row->no;
 			$uid  = $row->uid;
-			$title = xss_clean(stripslashes(htmlspecialchars_decode($row->title)));
-			$content = strip_tags(stripslashes(htmlspecialchars_decode($row->content)), "<a><img><br><div><p><iframe>");
+			$title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $row->title))));
+			$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$row->content))), "<a><img><br><div><p><iframe>");
 
 			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
 			echo "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";

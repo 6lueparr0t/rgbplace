@@ -108,8 +108,8 @@ class Map extends CI_Controller {
 			if(($ret->row()->uid == $this->session->userdata('uid') && $type != 'best') || $this->session->userdata('admin')) {
 				//$data['mode'] = 'update';
 				$this->session->set_userdata(['mode' => 'put']);
-				$data['title'] = xss_clean(stripslashes(htmlspecialchars_decode($ret->row()->title)));
-				$data['content'] = strip_tags(stripslashes(htmlspecialchars_decode($ret->row()->content)), "<a><img><br><div><p><iframe>");
+				$data['title'] = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n',$ret->row()->title))));
+				$data['content'] = htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$ret->row()->content)));
 				//$data['upload'] = htmlspecialchars_decode($ret->row()->upload);
 			} else {
 				redirect("/{$map}/{$type}/{$num}");
