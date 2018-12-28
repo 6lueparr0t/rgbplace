@@ -83,7 +83,7 @@ class Profile_model extends CI_Model {
 
 		$json = "{\"no\":\"{$data['no']}\", \"map\":\"{$data['map']}\", \"title\":\"{$data['title']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
 
-		$update = $this->db->query("UPDATE {$table} SET post = JSON_MERGE(post, JSON_QUERY('{\"history\":[".$json."]}', '$')) where {$col} = ? ", $uid);
+		$update = $this->db->query("UPDATE {$table} SET post = ifnull(JSON_MERGE(post, JSON_QUERY('{\"history\":[".$json."]}', '$')), '{\"history\":[]}') where {$col} = ? ", $uid);
 
 		return $update;
 	}
@@ -95,7 +95,7 @@ class Profile_model extends CI_Model {
 
 		//select json_merge('{"fileList": []}', JSON_QUERY('{"fileList":[{"date":"2018-09-03","text":"mmmmmmm"}]}', '$')) ;
 
-		$update = $this->db->query("UPDATE {$table} SET upload = JSON_MERGE(upload, JSON_QUERY('{\"history\":[".$json."]}', '$')) where {$col} = ? ", $uid);
+		$update = $this->db->query("UPDATE {$table} SET upload = ifnull(JSON_MERGE(upload, JSON_QUERY('{\"history\":[".$json."]}', '$')), '{\"history\":[]}') where {$col} = ? ", $uid);
 
 		return $update;
 	}
@@ -105,7 +105,7 @@ class Profile_model extends CI_Model {
 
 		$json = "{\"post\":\"{$data['post']}\", \"map\":\"{$data['map']}\", \"no\":\"{$data['no']}\", \"content\":\"{$data['content']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
 
-		$update = $this->db->query("UPDATE {$table} SET reply = JSON_MERGE(reply, JSON_QUERY('{\"history\":[".$json."]}', '$')) where {$col} = ? ", $uid);
+		$update = $this->db->query("UPDATE {$table} SET reply = ifnull(JSON_MERGE(reply, JSON_QUERY('{\"history\":[".$json."]}', '$')), '{\"history\":[]}') where {$col} = ? ", $uid);
 
 		return $update;
 	}
@@ -133,11 +133,11 @@ class Profile_model extends CI_Model {
 		}
 
 		if (isset($data['title'])) {
-			$update = $this->db->query("UPDATE {$table} SET {$field} = JSON_REPLACE({$field}, '$.history[{$no}].title', '{$data['title']}', '$.history[{$no}].date', '{$data['date']}') where {$col} = ? ", $uid);
+			$update = $this->db->query("UPDATE {$table} SET {$field} = ifnull(JSON_REPLACE({$field}, '$.history[{$no}].title', '{$data['title']}', '$.history[{$no}].date', '{$data['date']}'), '{\"history\":[]}') where {$col} = ? ", $uid);
 		}
 
 		if (isset($data['content'])) {
-			$update = $this->db->query("UPDATE {$table} SET {$field} = JSON_REPLACE({$field}, '$.history[{$no}].content', '{$data['content']}', '$.history[{$no}].date', '{$data['date']}') where {$col} = ? ", $uid);
+			$update = $this->db->query("UPDATE {$table} SET {$field} = ifnull(JSON_REPLACE({$field}, '$.history[{$no}].content', '{$data['content']}', '$.history[{$no}].date', '{$data['date']}'), '{\"history\":[]}') where {$col} = ? ", $uid);
 		}
 
 		return $update;
@@ -155,7 +155,7 @@ class Profile_model extends CI_Model {
 			}
 		}
 
-		$update = $this->db->query("UPDATE {$table} SET {$field} = JSON_REMOVE({$field}, '$.history[{$no}]') where {$col} = ? ", $uid);
+		$update = $this->db->query("UPDATE {$table} SET {$field} = ifnull(JSON_REMOVE({$field}, '$.history[{$no}]'), '{\"history\":[]}') where {$col} = ? ", $uid);
 
 		return $update;
 	}
