@@ -295,29 +295,29 @@ class Template {
 						'map' => $this->CI->uri->segment(1)
 					)
 				);
+			}
 
+			if(!$this->CI->session->userdata('map_detail')) {
 				$map_name = $this->CI->session->userdata('map');
 				$address = $this->CI->base->getMapTItle($map_name);
-				if($address) {
-					$this->CI->session->set_userdata(array('map_detail' => $address));
-
-					$map_detail = $this->CI->session->userdata('map_detail');
-
-					$native = (array)json_decode($map_detail['native'][0]);
-					$global = (array)json_decode($map_detail['global'][0]);
-
-					$native_address =  implode(" ", array_reverse($native['address']) );
-					$global_address =  implode(", ", $global['address'] );
-
-						echo ("<div id='native-address'>");
-						echo ($native_address);
-						echo ("</div>");
-
-						echo ("<div id='global-address'>");
-						echo ($global_address);
-						echo ("</div>");
-				}
+				if($address) $this->CI->session->set_userdata(array('map_detail' => $address));
 			}
+
+			$map_detail = $this->CI->session->userdata('map_detail');
+
+			$native = (array)json_decode($map_detail['native'][0]);
+			$global = (array)json_decode($map_detail['global'][0]);
+
+			$native_address =  implode(" ", array_reverse($native['address']) );
+			$global_address =  implode(", ", $global['address'] );
+
+			echo ("<div id='native-address'>");
+			echo ($native_address);
+			echo ("</div>");
+
+			echo ("<div id='global-address'>");
+			echo ($global_address);
+			echo ("</div>");
 
 		}
 		echo ("</div>");

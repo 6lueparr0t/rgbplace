@@ -132,7 +132,7 @@ for ( $i = count($reply_array)-1; $i >= 0; $i--) {
 			<div class='td center width-50'>{$i}</div>
 			<div class='td center width-50'>{$reply_array[$i]->map}</div>
 			<div class='td font-normal'>
-				<a href='/{$reply_array[$i]->map}/{$reply_array[$i]->post}?reply=y&no={$reply_array[$i]->no}' target='_blank'>{$reply_array[$i]->content}</a><br/>
+				<a href='/{$reply_array[$i]->map}/{$reply_array[$i]->post}?no={$reply_array[$i]->no}' target='_blank'>{$reply_array[$i]->content}</a><br/>
 				{$reply_array[$i]->date}<br/>
 			</div>
 		</div>
