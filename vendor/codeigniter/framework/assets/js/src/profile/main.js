@@ -46,14 +46,16 @@ function passwordCheck () {
 	this.reportValidity();
 }
 
-function tabChange (element) {
-	//console.log('.'+element.parentElement.className+' div');
-    document.querySelectorAll('.'+element.parentElement.className+' div').forEach(function(element) {
+window.onpopstate = event => tabChange(event.state.className);
+
+function tabChange (className) {
+    document.querySelectorAll('.tab div').forEach(function(element) {
         element.classList.remove('active');
         document.querySelector('#'+element.className+'-area').classList.add('none');
     });
-    document.querySelector('#'+element.className+'-area').classList.remove('none');
-    element.classList.add('active');
+
+    document.querySelector('.'+className).classList.add('active');
+    document.querySelector('#'+className+'-area').classList.remove('none');
 }
 
 document.querySelector("body").addEventListener("click", function(event) {
@@ -71,7 +73,8 @@ document.querySelector("body").addEventListener("click", function(event) {
         case 'reply' :
         case 'vote' :
         case 'report' :
-            tabChange(t);
+			history.pushState({className: t.className}, '', '?mode='+t.className)
+            tabChange(t.className);
             break;
     }
 
@@ -127,6 +130,8 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 if (conf) conf.addEventListener("input", passwordCheck);
 
-!function() {
-	document.querySelector(".info").click();
-}();
+!(() => {
+	let params = new URLSearchParams(window.location.search);
+	let mode = (params.get('mode'))?params.get('mode'):'info';
+	document.querySelector("."+mode).click();
+})();

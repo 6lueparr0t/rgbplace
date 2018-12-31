@@ -57,7 +57,7 @@ echo("
 	</div>
 ");
 ?>
-	<div id='post-area' class='page'>
+	<div id='post-area' class='page none'>
 		<div class='table'>
 		<div class='tr'>
 			<div class='th center'>No</div>
@@ -87,7 +87,7 @@ echo("
 ?>
 	</div>
 	</div>
-	<div id='upload-area' class='page'>
+	<div id='upload-area' class='page none'>
 		<div class='table'>
 		<div class='tr'>
 			<div class='th center'>No</div>
@@ -117,7 +117,7 @@ echo("
 ?>
 	</div>
 	</div>
-	<div id='reply-area' class='page'>
+	<div id='reply-area' class='page none'>
 		<div class='table'>
 		<div class='tr'>
 			<div class='th center'>No</div>
