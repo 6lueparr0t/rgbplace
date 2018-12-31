@@ -79,35 +79,53 @@ class Profile_model extends CI_Model {
 	}
 
 	public function add_post($data) {
-		$this->setting($table, $col, $uid);
+		$table = 'total_post';
+		$this->setting($uid, $name);
 
-		$json = "{\"no\":\"{$data['no']}\", \"map\":\"{$data['map']}\", \"title\":\"{$data['title']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
+		$query = $this->db->query("INSERT INTO {$table}
+			(
+				`uid`,
+				`name`,
+				`post`,
+				`map`,
+				`title`
+			) VALUES (?, ?, ?, ?, ?);", array($uid, $name, $data['no'], $data['map'], $data['title']));
 
-		$update = $this->db->query("UPDATE {$table} SET post = ifnull(JSON_MERGE(post, JSON_QUERY('{\"history\":[".$json."]}', '$')), '{\"history\":[]}') where {$col} = ? ", $uid);
-
-		return $update;
+		return $query;
 	}
 
 	public function add_upload($data) {
-		$this->setting($table, $col, $uid);
+		$table = 'total_upload';
+		$this->setting($uid, $name);
 
-		$json = "{\"file_name\":\"{$data['file_name']}\", \"file_type\":\"{$data['file_type']}\", \"client_name\":\"{$data['client_name']}\", \"file_size\":\"{$data['file_size']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
+		$query = $this->db->query("INSERT INTO {$table}
+		(
+			`uid`,
+			`name`,
+			`client_name`,
+			`file_name`,
+			`file_type`,
+			`file_size`
+		) VALUES (?, ?, ?, ?, ?, ?);", array($uid, $name, $data['client_name'], $data['file_name'], $data['file_type'], $data['file_size']) );
 
-		//select json_merge('{"fileList": []}', JSON_QUERY('{"fileList":[{"date":"2018-09-03","text":"mmmmmmm"}]}', '$')) ;
-
-		$update = $this->db->query("UPDATE {$table} SET upload = ifnull(JSON_MERGE(upload, JSON_QUERY('{\"history\":[".$json."]}', '$')), '{\"history\":[]}') where {$col} = ? ", $uid);
-
-		return $update;
+		return $query;
 	}
 
 	public function add_reply($data) {
-		$this->setting($table, $col, $uid);
+		$table = 'total_reply';
+		$this->setting($uid, $name);
 
-		$json = "{\"post\":\"{$data['post']}\", \"map\":\"{$data['map']}\", \"no\":\"{$data['no']}\", \"content\":\"{$data['content']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
+		$query = $this->db->query("INSERT INTO {$table}
+		(
+			`uid`,
+			`name`,
+			`post`,
+			`reply`,
+			`map`,
+			`content`
+		) VALUES (?, ?, ?, ?, ?, ?);", array($uid, $name, $data['post'], $data['no'], $data['map'], $data['content']) );
 
-		$update = $this->db->query("UPDATE {$table} SET reply = ifnull(JSON_MERGE(reply, JSON_QUERY('{\"history\":[".$json."]}', '$')), '{\"history\":[]}') where {$col} = ? ", $uid);
-
-		return $update;
+		return $query;
 	}
 /*
 	public function add_vote($data) {
@@ -121,56 +139,47 @@ class Profile_model extends CI_Model {
 	}
 */
 	public function update_info($field, $data) {
-		$this->setting($table, $col, $uid);
-
-		$history = (array)json_decode($this->db->query("select {$field} from {$table} where {$col} = ? ", $uid)->row()->{$field})->history;
-
-		for($i=count($history); $i>=0; $i--) {
-			if($history[$i]->no == $data['no']) {
-				$no = $i;
-				break;
-			}
-		}
+		$table = 'total_'.$field;
+		$this->setting($uid, $name);
 
 		if (isset($data['title'])) {
-			$update = $this->db->query("UPDATE {$table} SET {$field} = ifnull(JSON_REPLACE({$field}, '$.history[{$no}].title', '{$data['title']}', '$.history[{$no}].date', '{$data['date']}'), '{\"history\":[]}') where {$col} = ? ", $uid);
+			$update = $this->db->query("UPDATE {$table}
+				SET
+					title = ?,
+					date = ? where uid = ? and map = ? and post = ? ",
+			array($data['title'], $data['date'], $uid, $data['map'], $data['no']) );
 		}
 
 		if (isset($data['content'])) {
-			$update = $this->db->query("UPDATE {$table} SET {$field} = ifnull(JSON_REPLACE({$field}, '$.history[{$no}].content', '{$data['content']}', '$.history[{$no}].date', '{$data['date']}'), '{\"history\":[]}') where {$col} = ? ", $uid);
+			$update = $this->db->query("UPDATE {$table}
+				SET
+					content = ?,
+					date = ? where uid = ? and map = ? and reply = ? ",
+			array($data['content'], $data['date'], $uid, $data['map'], $data['no']) );
 		}
 
 		return $update;
 	}
 
 	public function remove_info($field, $data) {
-		$this->setting($table, $col, $uid);
+		$table = 'total_'.$field;
+		$this->setting($uid, $name);
 
-		$history = (array)json_decode($this->db->query("select {$field} from {$table} where {$col} = ? ", $uid)->row()->{$field})->history;
-
-		for($i=0; $i<count($history); $i++) {
-			if($history[$i]->no == $data['no']) {
-				$no = $i;
-				break;
-			}
-		}
-
-		$update = $this->db->query("UPDATE {$table} SET {$field} = ifnull(JSON_REMOVE({$field}, '$.history[{$no}]'), '{\"history\":[]}') where {$col} = ? ", $uid);
+		$update = $this->db->query("DELETE FROM {$table} where uid = ? and map = ? and {$field} = ? ", array($uid, $data['map'], $data['no']) );
 
 		return $update;
 	}
 
-	function setting(&$table, &$col, &$uid) {
+	function setting(&$uid, &$name) {
 		$admin = $this->session->userdata('admin');
 
 		if ($admin === true) {
-			$table = 'admin_info';
-			$col = 'name';
-			$uid = explode('@', $this->session->userdata('uid'))[1];
+			$info = explode('@', $this->session->userdata('uid'));
+			$uid = $info[0];
+			$name = $this->session->userdata('name');
 		} else {
-			$table = 'user_info';
-			$col = 'uid';
 			$uid = $this->session->userdata('uid');
+			$name = $this->session->userdata('name');
 		}
 	}
 

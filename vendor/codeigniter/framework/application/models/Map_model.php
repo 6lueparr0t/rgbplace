@@ -726,6 +726,7 @@ class Map_model extends CI_Model {
 
 		if ($ret) {
 			$data = array (
+				'map' => $info[1],
 				'no' => $no,
 				'title' => $title,
 				'date' => date('Y-m-d H:i:s')
@@ -1274,6 +1275,7 @@ class Map_model extends CI_Model {
 
 		if ($ret) {
 			$data = array (
+				'map' => $info[1],
 				'no' => $no,
 				'content' => $content,
 				'date' => date('Y-m-d H:i:s')
@@ -1315,6 +1317,7 @@ class Map_model extends CI_Model {
 
 		if ($ret) {
             $data = array (
+				'map' => $info[1],
                 'no' => $no,
             );
             @$this->profile->remove_info('reply', $data);
