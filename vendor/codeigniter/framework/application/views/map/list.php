@@ -17,7 +17,7 @@ $reply   = $this->input->get('reply', TRUE);
 $keyword = $this->input->get('keyword', TRUE);
 $ctim    = $this->input->get('ctim', TRUE);
 
-$start = ($page>1)?$page-1:0;
+$start = (($page>1)?$page-1:0)*LIST_ROWS_LIMIT;
 
 $search = [
 	'page'    => $page,
@@ -31,7 +31,7 @@ $search = [
 	'ctim'    => $ctim,
 ];
 
-$this->map->list($map, $type, $start*LIST_ROWS_LIMIT, 0, $search);
+$this->map->list($map, $type, $start, 0, $search);
 ?>
 </div>
 

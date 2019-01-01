@@ -3,6 +3,8 @@
 let pswd = document.querySelector("#pswd");
 let conf = document.querySelector("#conf");
 
+let params = new URLSearchParams(window.location.search);
+
 function done (data) {
 	let num = data;
 	alert('save done');
@@ -61,22 +63,32 @@ function tabChange (tab) {
 document.querySelector("body").addEventListener("click", function(event) {
 	let t = event.target;
 
-	//switch(t.classList.item(0)) {
-	//}
-
 	let name = '', email = '', pswd_conf = '';
 
-	switch(t.classList.item(0)) {
-        case 'info' :
-        case 'upload' :
-        case 'post' :
-        case 'reply' :
-        case 'vote' :
-        case 'report' :
-			history.pushState({tab: t.className}, '', '?tab='+t.className)
-            tabChange(t.className);
-            break;
-    }
+	if(t.classList.item(0)) {
+		let data = {
+			'info': __URL__,
+			'field': t.classList.item(0),
+			'page': (params.get('page'))?params.get('page'):0
+		};
+
+		switch(data['field']) {
+			case 'info' :
+				history.pushState({tab: data['field']}, '', '?tab='+data['field']);
+				tabChange(data['field']);
+				break;
+			case 'upload' :
+			case 'post' :
+			case 'reply' :
+			case 'vote' :
+			case 'report' :
+				history.pushState({tab: data['field']}, '', '?tab='+data['field']+'&page='+data['page']);
+				tabChange(data['field']);
+
+				httpRequest('get', '/api/request/profile?info='+data['info']+'&field='+data['field']+'&page='+data['page'], null, data => { console.log(data) }, fail);
+				break;
+		}
+	}
 
 	switch(t.id) {
 		case 'save' :
@@ -131,7 +143,6 @@ document.querySelector("body").addEventListener("click", function(event) {
 if (conf) conf.addEventListener("input", passwordCheck);
 
 !(() => {
-	let params = new URLSearchParams(window.location.search);
-	let mode = (params.get('tab'))?params.get('tab'):'info';
-	document.querySelector("."+mode).click();
+	let tab = (params.get('tab'))?params.get('tab'):'info';
+	document.querySelector("."+tab).click();
 })();

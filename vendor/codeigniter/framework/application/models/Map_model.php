@@ -344,39 +344,6 @@ class Map_model extends CI_Model {
 
 		$find = $this->db->query($query);
 
-/*
- *
- *        $result = $this->sql("select count(*) from board");
- *
- *        foreach($result as $row) {
- *            $max = ceil($row[0]/$range);
- *            if($max == 0) $max=1;
- *        }
- *
- *        if($current>5) {
- *            $cur_page=$current-5;
- *        } else {
- *            $cur_page=1;
- *        }
- *
- *        echo "<a href='/board/list.php?page=1'><li><i class='fa fa-step-backward'></i></li></a>";
- *        for($count=0; $count<10; $count++) {
- *            $next = $cur_page;
- *
- *            if($cur_page++>$max) {
- *                echo "<li class='page-item'></li>";
- *            } else {
- *                echo "<a class='page-link' href='/board/list.php?page={$next}'><li class='page-item'>{$next}</li></a>";
- *            }
- *
- *        }
- *        echo "<a href='/board/list.php?page={$max}'><li><i class='fa fa-step-forward'></i></li></a>";
- *
- *        return true;
- *
- */
-
-
 		// all list count / 30 (default)
 		foreach ($find->result() as $key => $row) {
 			$max = ceil($row->list_count/$rows);
@@ -779,6 +746,7 @@ class Map_model extends CI_Model {
 
 		if ($ret) {
 			$data = array (
+				'map' => $info[1],
 				'no' => $no,
 			);
 			@$this->profile->remove_info('post', $data);

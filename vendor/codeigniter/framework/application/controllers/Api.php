@@ -219,6 +219,7 @@ class Api extends CI_Controller {
 			if($this->session->userdata('signed_in')) {
 				switch($this->input->method()) {
 				case 'get' :
+					$ret = $this->profile->select_info($data, $info);
 					break;
 				case 'post' :
 					break;

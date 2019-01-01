@@ -64,27 +64,8 @@ echo("
 			<div class='th center'>Map</div>
 			<div class='th center'>Info</div>
 		</div>
-<?php
-/*
- *$post_array = (array)json_decode($post)->history;
- *for ( $i = count($post_array)-1; $i >= 0; $i--) {
- *    if(!isset($post_array[$i]->date)) {
- *        $post_array[$i]->date = '';
- *    }
- *
- *    echo("
- *        <div class='tr'>
- *            <div class='td center width-50'>{$i}</div>
- *            <div class='td center width-50'>{$post_array[$i]->map}</div>
- *            <div class='td'>
- *                <a href='/{$post_array[$i]->map}/{$post_array[$i]->no}' target='_blank'>{$post_array[$i]->title}</a><br/>
- *                {$post_array[$i]->date}<br/>
- *            </div>
- *        </div>
- *    ");
- *}
- */
-?>
+		<div id='post-list' class='tr'>
+		</div>
 	</div>
 	</div>
 	<div id='upload-area' class='page none'>
@@ -93,28 +74,8 @@ echo("
 			<div class='th center'>No</div>
 			<div class='th center'>Info</div>
 		</div>
-<?php
-/*
- *$upload_array = (array)json_decode($upload)->history;
- *for ( $i = count($upload_array)-1; $i >= 0; $i--) {
- *    if(!isset($upload_array[$i]->date)) {
- *        $upload_array[$i]->date = '';
- *    }
- *
- *    echo("
- *        <div class='tr'>
- *            <div class='td center width-50'>{$i}</div>
- *            <div class='td'>
- *                <a href='/upload/{$upload_array[$i]->file_name}' target='_blank'>{$upload_array[$i]->client_name}</a><br/>
- *                {$upload_array[$i]->file_type}<br/>
- *                {$upload_array[$i]->file_size} KB<br/>
- *                {$upload_array[$i]->date}<br/>
- *            </div>
- *        </div>
- *    ");
- *}
- */
-?>
+		<div id='upload-list'class='tr'>
+		</div>
 	</div>
 	</div>
 	<div id='reply-area' class='page none'>
@@ -124,27 +85,8 @@ echo("
 			<div class='th center'>Map</div>
 			<div class='th center'>Info</div>
 		</div>
-<?php
-/*
- *$reply_array = (array)json_decode($reply)->history;
- *for ( $i = count($reply_array)-1; $i >= 0; $i--) {
- *    if(!isset($reply_array[$i]->date)) {
- *        $reply_array[$i]->date = '';
- *    }
- *
- *    echo("
- *        <div class='tr'>
- *            <div class='td center width-50'>{$i}</div>
- *            <div class='td center width-50'>{$reply_array[$i]->map}</div>
- *            <div class='td font-normal'>
- *                <a href='/{$reply_array[$i]->map}/{$reply_array[$i]->post}?no={$reply_array[$i]->no}' target='_blank'>{$reply_array[$i]->content}</a><br/>
- *                {$reply_array[$i]->date}<br/>
- *            </div>
- *        </div>
- *    ");
- *}
- */
-?>
+		<div id='reply-list' class='tr'>
+		</div>
 	</div>
 	</div>
 
