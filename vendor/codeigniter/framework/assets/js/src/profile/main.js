@@ -48,9 +48,10 @@ function passwordCheck () {
 	this.reportValidity();
 }
 
-window.onpopstate = event => tabChange(event.state.tab);
+window.onpopstate = event => (event.state)? tabChange(event.state.tab):history.go(-1);
 
 function tabChange (tab) {
+	params.delete('page');
     document.querySelectorAll('.tab div').forEach(function(element) {
         element.classList.remove('active');
         document.querySelector('#'+element.className+'-area').classList.add('none');
@@ -65,14 +66,14 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 	let name = '', email = '', pswd_conf = '';
 
-	if(t.classList.item(0)) {
+	if(t.parentElement.className == 'tab') {
 		let data = {
 			'info': __URL__,
 			'field': t.classList.item(0)
 		};
 
 		let search = {
-			'page':(params.get('page'))?'page='+params.get('page'):''
+			'page':(params.get('page'))?'&page='+params.get('page'):''
 		}
 
 		switch(data['field']) {
@@ -85,16 +86,16 @@ document.querySelector("body").addEventListener("click", function(event) {
 			case 'reply' :
 			case 'vote' :
 			case 'report' :
-				history.pushState({tab: data['field']}, '', '?tab='+data['field']+'&'+search['page']);
+				history.pushState({tab: data['field']}, '', '?tab='+data['field']+search['page']);
 				tabChange(data['field']);
 
-				httpRequest('get', '/api/request/profile?info='+data['info']+'&field='+data['field']+'&'+search['page'], null,
-				data => {
+				httpRequest('get', '/api/request/profile?info='+data['info']+'&field='+data['field']+search['page'], null,
+				ret => {
 					let list = document.querySelector('#'+data['field']+'-list');
 					let page = document.querySelector('#'+data['field']+'-page');
 					
-					list.innerHTML = data['list'];
-					page.innerHTML = data['page'];
+					list.innerHTML = ret['list'];
+					page.innerHTML = ret['page'];
 				}, fail);
 				break;
 		}

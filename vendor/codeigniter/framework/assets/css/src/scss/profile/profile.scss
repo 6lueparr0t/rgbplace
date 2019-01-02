@@ -12,12 +12,16 @@
 		.table {
 			display: table;
 			padding: 1rem;
-			margin: 2rem auto;
+			margin: 1rem auto;
 			max-width: 800px;
 			width: 90%;
 
 			.tr {
 				display:table-row;
+			}
+
+			.tr-group {
+				display:table-row-group;
 			}
 
 			.th {
@@ -148,6 +152,14 @@
 			}
 		}
 
+	}
+
+	.page {
+		text-align:center;
+
+		a {
+			margin:0 1rem;
+		}	
 	}
 
 }

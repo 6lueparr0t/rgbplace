@@ -64,11 +64,10 @@ echo("
 				<div class='th center'>Map</div>
 				<div class='th center'>Info</div>
 			</div>
-			<div id='post-list' class='tr'>
-			</div>
-			<div id='post-page' class='tr'>
+			<div id='post-list' class='tr-group'>
 			</div>
 		</div>
+		<div id='post-page' class='page'></div>
 	</div>
 	<div id='reply-area' class='page none'>
 		<div class='table'>
@@ -77,11 +76,10 @@ echo("
 				<div class='th center'>Map</div>
 				<div class='th center'>Info</div>
 			</div>
-			<div id='reply-list' class='tr'>
-			</div>
-			<div id='reply-page' class='tr'>
+			<div id='reply-list' class='tr-group'>
 			</div>
 		</div>
+		<div id='reply-page' class='page'></div>
 	</div>
 	<div id='upload-area' class='page none'>
 		<div class='table'>
@@ -89,11 +87,10 @@ echo("
 				<div class='th center'>No</div>
 				<div class='th center'>Info</div>
 			</div>
-			<div id='upload-list'class='tr'>
-			</div>
-			<div id='upload-page' class='tr'>
+			<div id='upload-list'class='tr-group'>
 			</div>
 		</div>
+		<div id='upload-page' class='page'></div>
 	</div>
 </div>
 <?php $this->root->end($path); ?>

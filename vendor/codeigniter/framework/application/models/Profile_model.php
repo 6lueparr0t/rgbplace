@@ -148,7 +148,7 @@ class Profile_model extends CI_Model {
 		$table = $this->db->escape_str('total_'.$field);
 		$this->setting($uid, $name);
 
-		$start = (($data['page']>1)?$data['page']-1:0)*LIST_ROWS_LIMIT;
+		$start = (($search['page']>1)?$search['page']-1:0)*LIST_ROWS_LIMIT;
 		$rows = LIST_ROWS_LIMIT;
 		$limit = "{$start}, {$rows}";
 
@@ -187,9 +187,9 @@ class Profile_model extends CI_Model {
 		// end page
 		$max_pagination = ((int)$current+(int)$range>$max)?$max:(int)$current+(int)$range;
 
+		// NEED pushstate adaptive
         // ** button-group class start
-        $ret['page'] = "<div class='button-group'>";
-        $ret['page'].= "<div class='pagination'>";
+        $ret['page'] = "<div class='pagination'>";
 
         $ret['page'].= "<a class='fas fa-step-backward' href='/profile?tab={$field}&page=1'></a>";
         $ret['page'].= "<a class='fas fa-backward' href='/profile?tab={$field}&page={$min_pagination}'></a>";
@@ -203,13 +203,12 @@ class Profile_model extends CI_Model {
         $ret['page'].= "<a class='fas fa-forward' href='/profile?tab={$field}&page={$max_pagination}'></a>";
 		$ret['page'].= "<a class='fas fa-step-forward' href='/profile?tab={$field}&page={$max}'></a>";
 
-        $ret['page'].="</div>";
 		$ret['page'].="</div>";
 
 		//####################################################################################################
 		
 		// list
-		$idx_start = $MAX_LIST_COUNT - ((($data['page']>0?$data['page']:1)-1)*LIST_ROWS_LIMIT) + 1; 
+		$idx_start = $MAX_LIST_COUNT - ((($search['page']>0?$search['page']:1)-1)*LIST_ROWS_LIMIT) + 1; 
 
 		$ret['list'] = '';
 		switch ($field) {
@@ -218,11 +217,13 @@ class Profile_model extends CI_Model {
 				uid, name, map, post, title, date FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
 				WHERE uid = ? ORDER BY no DESC LIMIT ".$this->db->escape_str($limit), array($uid));
 			foreach ($query->result() as $key => $row) {
-				$tmp  = "<div class='td center width-50'>{$row->idx}</div>";
+				$tmp  = "<div class='tr'>";
+				$tmp .= "<div class='td center width-50'>{$row->idx}</div>";
 				$tmp .= "<div class='td center width-50'>{$row->map}</div>";
 				$tmp .= "<div class='td'>";
 				$tmp .= "<a href='/{$row->map}/{$row->post}' target='_blank'>{$row->title}</a><br/>";
 				$tmp .= "{$row->date}<br/>";
+				$tmp .= "</div>";
 				$tmp .= "</div>";
 
 				$ret['list'] .= $tmp;
@@ -233,11 +234,13 @@ class Profile_model extends CI_Model {
 				uid, name, map, post, reply, content, date FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
 				WHERE uid = ? ORDER BY no DESC LIMIT ".$this->db->escape_str($limit), array($uid));
 			foreach ($query->result() as $key => $row) {
-				$tmp  = "<div class='td center width-50'>{$i}</div>";
+				$tmp  = "<div class='tr'>";
+				$tmp .= "<div class='td center width-50'>{$i}</div>";
 				$tmp .= "<div class='td center width-50'>{$row->map}</div>";
 				$tmp .= "<div class='td font-normal'>";
 				$tmp .= "<a href='/{$row->map}/{$row->post}?no={$row->reply}' target='_blank'>{$row->content}</a><br/>";
 				$tmp .= "{$row->date}<br/>";
+				$tmp .= "</div>";
 				$tmp .= "</div>";
 
 				$ret['list'] .= $tmp;
@@ -248,12 +251,14 @@ class Profile_model extends CI_Model {
 				uid, name, client_name, file_name, file_type, file_size, date FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
 			   	WHERE uid = ? ORDER BY no DESC LIMIT ".$this->db->escape_str($limit), array($uid));
 			foreach ($query->result() as $key => $row) {
-				$tmp  = "<div class='td center width-50'>{$row->idx}</div>";
+				$tmp  = "<div class='tr'>";
+				$tmp .= "<div class='td center width-50'>{$row->idx}</div>";
 				$tmp .= "<div class='td'>";
 				$tmp .= "<a href='/upload/{$row->file_name}' target='_blank'>{$row->client_name}</a><br/>";
 				$tmp .= "{$row->file_type}<br/>";
 				$tmp .= "{$row->file_size} KB<br/>";
 				$tmp .= "{$row->date}<br/>";
+				$tmp .= "</div>";
 				$tmp .= "</div>";
 
 				$ret['list'] .= $tmp;
