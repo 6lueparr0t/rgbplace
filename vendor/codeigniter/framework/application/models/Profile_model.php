@@ -143,7 +143,7 @@ class Profile_model extends CI_Model {
 	public function select_info($data, $info) {
 
 		$field = $data['field'];
-		$search['page'] = $data['page'];
+		$search['page'] = isset($data['page'])?$data['page']:0;
 
 		$table = $this->db->escape_str('total_'.$field);
 		$this->setting($uid, $name);
@@ -207,7 +207,8 @@ class Profile_model extends CI_Model {
 		$ret['page'].="</div>";
 
 		//####################################################################################################
-
+		
+		// list
 		$idx_start = $MAX_LIST_COUNT - ((($data['page']>0?$data['page']:1)-1)*LIST_ROWS_LIMIT) + 1; 
 
 		$ret['list'] = '';

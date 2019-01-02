@@ -68,9 +68,12 @@ document.querySelector("body").addEventListener("click", function(event) {
 	if(t.classList.item(0)) {
 		let data = {
 			'info': __URL__,
-			'field': t.classList.item(0),
-			'page': (params.get('page'))?params.get('page'):0
+			'field': t.classList.item(0)
 		};
+
+		let search = {
+			'page':(params.get('page'))?'page='+params.get('page'):''
+		}
 
 		switch(data['field']) {
 			case 'info' :
@@ -82,10 +85,17 @@ document.querySelector("body").addEventListener("click", function(event) {
 			case 'reply' :
 			case 'vote' :
 			case 'report' :
-				history.pushState({tab: data['field']}, '', '?tab='+data['field']+'&page='+data['page']);
+				history.pushState({tab: data['field']}, '', '?tab='+data['field']+'&'+search['page']);
 				tabChange(data['field']);
 
-				httpRequest('get', '/api/request/profile?info='+data['info']+'&field='+data['field']+'&page='+data['page'], null, data => { console.log(data) }, fail);
+				httpRequest('get', '/api/request/profile?info='+data['info']+'&field='+data['field']+'&'+search['page'], null,
+				data => {
+					let list = document.querySelector('#'+data['field']+'-list');
+					let page = document.querySelector('#'+data['field']+'-page');
+					
+					list.innerHTML = data['list'];
+					page.innerHTML = data['page'];
+				}, fail);
 				break;
 		}
 	}
