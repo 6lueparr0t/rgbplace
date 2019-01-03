@@ -34,7 +34,7 @@ $ctim    = $this->input->get('ctim', TRUE);
 
 $start = ($page>1)?$page-1:0;
 
-$search = [
+$param = [
 	'page'    => $page,
 	'search'  => $search,
 
@@ -46,7 +46,7 @@ $search = [
     'ctim'    => $ctim,
 ];
 
-$this->map->list($map, $type, $start*LIST_ROWS_LIMIT, 0, $search);
+$this->map->list($map, $type, $start*LIST_ROWS_LIMIT, 0, $param);
 ?>
 </div>
 

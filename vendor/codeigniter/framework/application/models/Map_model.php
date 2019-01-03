@@ -130,18 +130,18 @@ class Map_model extends CI_Model {
 
 				if($search['reply']) {
 					if ($key == 'reply') {
-						$search_list[] = "reply.content like '%{$search['search']}%'";
+						$search_list[] = "reply.content like '%".$this->db->escape_like_str($search['search'])."%'";
 						$search_param[] = "{$key}={$value}";
 						$search_field[]  = "reply.no as reply_no, reply.content as reply_content";
 						continue;
 					}
 
 					if ($value == 'y') {
-						$search_list[] = "post.{$key} like '%{$search['search']}%'";
+						$search_list[] = "post.{$key} like '%".$this->db->escape_like_str($search['search'])."%'";
 						$search_param[] = "{$key}={$value}";
 					}
 				} else {
-					$search_list[] = $category[$i]." like '%{$search['search']}%'";
+					$search_list[] = $category[$i]." like '%".$this->db->escape_like_str($search['search'])."%'";
 					$search_param[] = $category[$i]."=".$value;
 				}
 			}

@@ -19,7 +19,7 @@ $ctim    = $this->input->get('ctim', TRUE);
 
 $start = (($page>1)?$page-1:0)*LIST_ROWS_LIMIT;
 
-$search = [
+$param = [
 	'page'    => $page,
 	'search'  => $search,
 
@@ -31,7 +31,7 @@ $search = [
 	'ctim'    => $ctim,
 ];
 
-$this->map->list($map, $type, $start, 0, $search);
+$this->map->list($map, $type, $start, 0, $param);
 ?>
 </div>
 
