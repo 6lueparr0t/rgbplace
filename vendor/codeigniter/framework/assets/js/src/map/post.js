@@ -61,7 +61,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 	// reply button event
 
-	if (t.parentElement.className.search("reply-pagination") === 0) {
+	if (t.parentElement.className === 'reply-pagination') {
 		let page = t.getAttribute('data');
 		getReplyPaging(page);
 	}

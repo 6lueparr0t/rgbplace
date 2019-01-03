@@ -992,8 +992,8 @@ class Map_model extends CI_Model {
 		// ** button-group class start
 		$ret = "<div class='reply-pagination'>";
 
-		$ret .= "<span data='1'><i class='fas fa-step-backward'></i></span>";
-		$ret .= "<span data='{$min_pagination}'><i class='fas fa-backward'></i></span>";
+		$ret .= "<span class='fas fa-step-backward' data='1'></span>";
+		$ret .= "<span class='fas fa-backward' data='{$min_pagination}'></span>";
 
 		for($count=0; $count<$range; $count++) {
 			$next = $pagination_start;
@@ -1003,8 +1003,8 @@ class Map_model extends CI_Model {
 			$pagination_start++;
 		}
 
-		$ret .= "<span data='{$max_pagination}'><i class='fas fa-forward'></i></span>";
-		$ret .= "<span data='{$max}'><i class='fas fa-step-forward'></i></span>";
+		$ret .= "<span class='fas fa-forward' data='{$max_pagination}'></span>";
+		$ret .= "<span class='fas fa-step-forward' data='{$max}'></span>";
 		$ret .= "</div>";
 
 		return $ret;

@@ -142,7 +142,7 @@ class Profile_model extends CI_Model {
 	//public function select_info($field, $start=0, $rows=0, $search = array()) {
 	public function select_info($data, $info) {
 
-		$field = $data['field'];
+		$field = $data['tab'];
 		$search['page'] = isset($data['page'])?$data['page']:0;
 
 		$table = $this->db->escape_str('total_'.$field);
@@ -189,19 +189,19 @@ class Profile_model extends CI_Model {
 
 		// NEED pushstate adaptive
         // ** button-group class start
-        $ret['page'] = "<div class='pagination'>";
+        $ret['page'] = "<div class='profile-pagination'>";
 
-        $ret['page'].= "<a class='fas fa-step-backward' href='/profile?tab={$field}&page=1'></a>";
-        $ret['page'].= "<a class='fas fa-backward' href='/profile?tab={$field}&page={$min_pagination}'></a>";
+        $ret['page'].= "<span class='fas fa-step-backward' data-tab='{$field}' data-page='1'></span>";
+        $ret['page'].= "<span class='fas fa-backward' data-tab='{$field}' data-page='{$min_pagination}'></span>";
 
         for($count=0; $count<$range; $count++) {
             $next = $pagination_start;
-            if($pagination_start <= $max && $pagination_start != 0) $ret['page'].= "<a href='/profile?tab={$field}&page={$next}'>{$next}</a>";
+            if($pagination_start <= $max && $pagination_start != 0) $ret['page'].= "<span data-tab='{$field}' data-page='{$next}'>{$next}</a>";
             $pagination_start++;
         }
 
-        $ret['page'].= "<a class='fas fa-forward' href='/profile?tab={$field}&page={$max_pagination}'></a>";
-		$ret['page'].= "<a class='fas fa-step-forward' href='/profile?tab={$field}&page={$max}'></a>";
+        $ret['page'].= "<span class='fas fa-forward' data-tab='{$field}' data-page='{$max_pagination}'></span>";
+		$ret['page'].= "<span class='fas fa-step-forward' data-tab='{$field}' data-page='{$max}'></span>";
 
 		$ret['page'].="</div>";
 

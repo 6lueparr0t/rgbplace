@@ -69,36 +69,52 @@ document.querySelector("body").addEventListener("click", function(event) {
 	if(t.parentElement.className == 'tab') {
 		let data = {
 			'info': __URL__,
-			'field': t.classList.item(0)
+			'tab': t.classList.item(0)
 		};
 
 		let search = {
 			'page':(params.get('page'))?'&page='+params.get('page'):''
 		}
 
-		switch(data['field']) {
+		switch(data['tab']) {
 			case 'info' :
-				history.pushState({tab: data['field']}, '', '?tab='+data['field']);
-				tabChange(data['field']);
+				history.pushState({tab: data['tab']}, '', '?tab='+data['tab']);
+				tabChange(data['tab']);
 				break;
 			case 'upload' :
 			case 'post' :
 			case 'reply' :
 			case 'vote' :
 			case 'report' :
-				history.pushState({tab: data['field']}, '', '?tab='+data['field']+search['page']);
-				tabChange(data['field']);
+				history.pushState({tab: data['tab']}, '', '?tab='+data['tab']+search['page']);
+				tabChange(data['tab']);
 
-				httpRequest('get', '/api/request/profile?info='+data['info']+'&field='+data['field']+search['page'], null,
+				httpRequest('get', '/api/request/profile?info='+data['info']+'&tab='+data['tab']+search['page'], null,
 				ret => {
-					let list = document.querySelector('#'+data['field']+'-list');
-					let page = document.querySelector('#'+data['field']+'-page');
+					let list = document.querySelector('#'+data['tab']+'-list');
+					let page = document.querySelector('#'+data['tab']+'-page');
 					
 					list.innerHTML = ret['list'];
 					page.innerHTML = ret['page'];
 				}, fail);
 				break;
 		}
+	}
+
+	if (t.parentElement.className === 'profile-pagination') {
+		let tab  = t.getAttribute('data-tab');
+		let page = t.getAttribute('data-page');
+		let param  = '&tab='+tab+'&page='+page;
+		
+		history.pushState({tab: tab}, '', '?tab='+'&page='+page);
+		httpRequest('get', '/api/request/profile?info='+__URL__+param, null,
+				ret => {
+					let list = document.querySelector('#'+tab+'-list');
+					let page = document.querySelector('#'+tab+'-page');
+					
+					list.innerHTML = ret['list'];
+					page.innerHTML = ret['page'];
+				}, fail);
 	}
 
 	switch(t.id) {
