@@ -196,7 +196,7 @@ class Profile_model extends CI_Model {
 
         for($count=0; $count<$range; $count++) {
             $next = $pagination_start;
-            if($pagination_start <= $max && $pagination_start != 0) $ret['page'].= "<span data-tab='{$field}' data-page='{$next}'>{$next}</a>";
+            if($pagination_start <= $max && $pagination_start != 0) $ret['page'].= "<span data-tab='{$field}' data-page='{$next}'>{$next}</span>";
             $pagination_start++;
         }
 

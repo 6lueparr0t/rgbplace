@@ -154,7 +154,7 @@
 				font-family:'pixel';
 				text-align:center;
 				@include flex ();
-				user-select: none;
+				@include user-select('none');
 
 				.reply-button {
 					margin-top       : .5rem;
@@ -262,7 +262,8 @@
 			flex-grow:10;
 			text-align:center;
 			margin: .5rem 1rem;
-			user-select: none;
+			@include user-select('none');
+
 			span {
 				cursor:pointer;
 				padding: .5rem 1rem;

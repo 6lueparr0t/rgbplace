@@ -39,8 +39,8 @@
 		font-family: "pixel";
 		margin: 2.5rem 0 0 0;
 		@include flex ();
+		@include user-select('none');
 		text-align:center;
-		user-select: none;
 
 		#save {
 			color : black;

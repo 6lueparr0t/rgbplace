@@ -102,11 +102,12 @@ document.querySelector("body").addEventListener("click", function(event) {
 	}
 
 	if (t.parentElement.className === 'profile-pagination') {
+	console.log(t.parentElement.className);
 		let tab  = t.getAttribute('data-tab');
 		let page = t.getAttribute('data-page');
 		let param  = '&tab='+tab+'&page='+page;
 		
-		history.pushState({tab: tab}, '', '?tab='+'&page='+page);
+		history.pushState({tab: tab}, '', '?tab='+tab+'&page='+page);
 		httpRequest('get', '/api/request/profile?info='+__URL__+param, null,
 				ret => {
 					let list = document.querySelector('#'+tab+'-list');

@@ -83,8 +83,9 @@
 		margin: 2.5rem 0 0 0;
 		width:100%;
 		@include flex ();
+		@include user-select('none');
+
 		text-align:center;
-		user-select: none;
 
 		span.null {
 			flex-grow:8;

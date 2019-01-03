@@ -113,8 +113,9 @@
 		margin: 2.5rem 0;
 		width:100%;
 		@include flex ();
+		@include user-select('none');
+
 		text-align:center;
-		user-select: none;
 
 		a {
 			color : black;
@@ -173,7 +174,6 @@
 		width:100%;
 		@include flex ();
 		text-align:center;
-		//user-select: none;
 
 		a {
 			color : black;
@@ -216,7 +216,7 @@
 		font-family:"pixel";
 		font-size:1rem;
 		margin: 0 .25rem;
-		user-select:none;
+		@include user-select('none');
 		width:3.12rem;
 
 		.search-select-list{

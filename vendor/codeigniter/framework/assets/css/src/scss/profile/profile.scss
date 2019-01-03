@@ -157,8 +157,10 @@
 	.page {
 		text-align:center;
 
-		a {
+		span {
 			margin:0 1rem;
+			@include user-select('none');
+			cursor:pointer;
 		}	
 	}
 
