@@ -124,26 +124,37 @@ class Map_model extends CI_Model {
 				$value = $this->db->escape_like_str($search[$key]);
 
 				if($key == 'search') {
+					$search['search'] = $this->db->escape_like_str;
 					$search_param[] = "{$key}={$value}";
 					continue;
 				}
 
-				if($search['reply']) {
-					if ($key == 'reply') {
-						$search_list[] = "reply.content like '%".$this->db->escape_like_str($search['search'])."%'";
+				switch($key) {
+					case 'search' :
+						$search_param[] = "{$key}={$value}";
+						break;
+					case 'reply' :
+						$search_list[] = "reply.content like '%".$search['search']."%'";
 						$search_param[] = "{$key}={$value}";
 						$search_field[]  = "reply.no as reply_no, reply.content as reply_content";
-						continue;
-					}
+						break;
+					case 'ctim' :
+						$date = explode(',', $search['search']);
 
-					if ($value == 'y') {
-						$search_list[] = "post.{$key} like '%".$this->db->escape_like_str($search['search'])."%'";
+						if(is_array($date)) {
+							$search_list[] = "post.{$key} BETWEEN '".$date[0]."' AND '".$date[1]."'";
+							$search_param[] = "{$key}={$value}";
+						} else {
+							$search_list[] = "post.{$key} like '%".$search['search']."%'";
+							$search_param[] = "{$key}={$value}";
+						}
+						break;
+					default :
+						$search_list[] = "post.{$key} like '%".$search['search']."%'";
 						$search_param[] = "{$key}={$value}";
-					}
-				} else {
-					$search_list[] = $category[$i]." like '%".$this->db->escape_like_str($search['search'])."%'";
-					$search_param[] = $category[$i]."=".$value;
+						break;
 				}
+
 			}
 		}
 
