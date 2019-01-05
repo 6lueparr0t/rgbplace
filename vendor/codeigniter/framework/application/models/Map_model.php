@@ -124,7 +124,7 @@ class Map_model extends CI_Model {
 				$value = $this->db->escape_like_str($search[$key]);
 
 				if($key == 'search') {
-					$search['search'] = $this->db->escape_like_str;
+					$search['search'] = $this->db->escape_like_str($search['search']);
 					$search_param[] = "{$key}={$value}";
 					continue;
 				}
@@ -141,8 +141,8 @@ class Map_model extends CI_Model {
 					case 'ctim' :
 						$date = explode(',', $search['search']);
 
-						if(is_array($date)) {
-							$search_list[] = "post.{$key} BETWEEN '".$date[0]."' AND '".$date[1]."'";
+						if(count($date) > 1) {
+							$search_list[] = "post.{$key} BETWEEN '".$date[0]." 00:00:00' AND '".$date[1]." 23:59:59'";
 							$search_param[] = "{$key}={$value}";
 						} else {
 							$search_list[] = "post.{$key} like '%".$search['search']."%'";
@@ -723,27 +723,37 @@ class Map_model extends CI_Model {
 	 */
 	public function post_delete ($info)
 	{
-		$table = $this->db->escape_str("map_{$info[1]}_post");
-		$type = $info[2];
-		$no = $info[3];
+		$map = $this->db->escape_str($info[1]);
+		$type = $this->db->escape_str($info[2]);
+		$no = $this->db->escape_str($info[3]);
+
+		$table_post        = "map_{$map}_post post";
+		$table_reply       = "map_{$map}_reply reply";
+		$table_total_reply = "total_reply total";
 
 		if($this->session->userdata('admin') === true) {
-			$query = "delete from {$table}
-				where 
-				type = ?
-				and no = ?";
+			$query = "DELETE post.*, reply.*, total.* FROM {$table_post}
+				INNER JOIN {$table_reply} ON reply.post = post.no
+				INNER JOIN {$table_total_reply} ON total.post = post.no AND total.map = '{$map}'
+
+				WHERE 
+				post.type = ? AND
+				post.no = ?";
 
 			$values = array(
 				$type,
 				$no
 			);
 		} else {
-			$query = "delete from {$table}
-				where 
-				type = ?
-				and no = ?
-				and uid = ?
-				and name = ? ";
+			$query = "DELETE post.*, reply.*, total.* FROM {$table_post}
+				INNER JOIN {$table_reply} ON reply.post = post.no
+				INNER JOIN {$table_total_reply} ON total.post = post.no AND total.map = '{$map}'
+
+				WHERE 
+				post.type = ? AND
+				post.no = ? AND
+				post.uid = ? AND
+				post.name = ? ";
 
 			$values = array(
 				$type,
@@ -757,7 +767,7 @@ class Map_model extends CI_Model {
 
 		if ($ret) {
 			$data = array (
-				'map' => $info[1],
+				'map' => $map,
 				'no' => $no,
 			);
 			@$this->profile->remove_info('post', $data);

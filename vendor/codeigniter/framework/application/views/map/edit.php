@@ -17,6 +17,16 @@
 <?php echo $content; ?>
 </textarea>
 
+<div class='upload-list-group' style='display:none;'>
+	<div class='' id='upload-toggle'>Upload List</div>
+	<select id='upload-list' size='10'>
+		<option value='' data=''></option>
+	</select>
+	<div id='upload-preview'>
+		<img id='upload-preview-img'src='' />
+	</div>
+</div>
+
 <? echo form_open('', ['name' => 'upload', 'id' => 'upload']); ?>
   <label for="input_zone" class="drop_wait"></label>
   <input type="file" id="input_zone" name="userfile[]" accept="image/*" multiple />

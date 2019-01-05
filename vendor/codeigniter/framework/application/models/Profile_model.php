@@ -196,7 +196,9 @@ class Profile_model extends CI_Model {
 
         for($count=0; $count<$range; $count++) {
             $next = $pagination_start;
-            if($pagination_start <= $max && $pagination_start != 0) $ret['page'].= "<span data-tab='{$field}' data-page='{$next}'>{$next}</span>";
+			if($pagination_start <= $max && $pagination_start != 0) {
+				$ret['page'].= "<span class='".(($next == $search['page'] || ($next == 1 && $search['page'] == 0))?'active':'')."' data-tab='{$field}' data-page='{$next}'>{$next}</span>";
+			}
             $pagination_start++;
         }
 
@@ -235,7 +237,7 @@ class Profile_model extends CI_Model {
 				WHERE uid = ? ORDER BY no DESC LIMIT ".$this->db->escape_str($limit), array($uid));
 			foreach ($query->result() as $key => $row) {
 				$tmp  = "<div class='tr'>";
-				$tmp .= "<div class='td center width-50'>{$i}</div>";
+				$tmp .= "<div class='td center width-50'>{$row->idx}</div>";
 				$tmp .= "<div class='td center width-50'>{$row->map}</div>";
 				$tmp .= "<div class='td font-normal'>";
 				$tmp .= "<a href='/{$row->map}/{$row->post}?no={$row->reply}' target='_blank'>{$row->content}</a><br/>";

@@ -247,20 +247,19 @@ document.querySelector("body").addEventListener("click", function(event) {
 				range.moveToElementText(clip);
 				range.select();
 				document.execCommand("Copy");
-				alert("copy link !");
 				document.selection.empty();
-			}
-			else if(window.getSelection) {
+			} else if(window.getSelection) {
 				let selection = window.getSelection();
 				let range = document.createRange();
 				range.selectNodeContents(clip);
 				selection.removeAllRanges();
 				selection.addRange(range);
 				document.execCommand("Copy");
-				alert("copy link !");
 				selection.removeAllRanges();
+			} else {
+				break;
 			}
-
+			alert("copy link : " + clip.innerHTML);
 			break;
 	}
 
