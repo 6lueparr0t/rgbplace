@@ -63,6 +63,7 @@
 					&:hover {
 						color : $oc-gray-6;
 					}
+
 				}
 
 				div.toggle {
@@ -79,6 +80,10 @@
 						}
 					}
 				}
+			}
+
+			.up {
+				color : $oc-red-6;
 			}
 
 			.hit {

@@ -77,13 +77,13 @@ function mapSearch (recv) {
 }
 
 if (mapSearchBtn) mapSearchBtn.addEventListener("click", function() { mapSearchToggle.checked = false; mapSearch(mapSearchBox); });
-if (mapSearchBox) mapSearchBox.addEventListener("keydown", function(e) {
+if (mapSearchBox) mapSearchBox.addEventListener("keyup", function(e) {
 	if(mapSearchBox.value == "") {
 		mapSearchToggle.checked = false;
 		mapSearchResult.innerHTML = "<a href='#'><li>No Results</li></a>";
 	}
-	if(e.keyCode == "13") {
+	//if(e.keyCode == "13") {
 		mapSearchToggle.checked = true;
 		mapSearch(this)
-	}
+	//}
 });

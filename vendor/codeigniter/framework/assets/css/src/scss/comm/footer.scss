@@ -4,6 +4,7 @@
 	margin: 4rem 0 0 0;
 	padding: 2rem 0 1rem 0;
 	border-top:1px solid $oc-gray-9;
+	background-color:$oc-gray-1;
 	font-size:1.4rem;
 
 	.link {
@@ -13,10 +14,10 @@
 		font-weight:bold;
 
 		a.page {
-			color:$oc-gray-6;
+			color:$oc-blue-4;
 
 			&:hover {
-				color:$oc-gray-4;
+				color:$oc-blue-2;
 			}
 		}
 

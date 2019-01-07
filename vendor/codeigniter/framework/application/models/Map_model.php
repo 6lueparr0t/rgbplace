@@ -207,7 +207,9 @@ class Map_model extends CI_Model {
 				$reply = '';
 			}
 
-			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".stripslashes(htmlspecialchars_decode($row->title))."{$replyCount}</a>";
+			$up = ($row->up>0)?(($row->up>10)?"<span class='up'>+ {$row->up}</span>":"+ {$row->up}"):"";
+
+			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".stripslashes(htmlspecialchars_decode($row->title))."</a> {$replyCount} {$up}";
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 
