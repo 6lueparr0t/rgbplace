@@ -178,15 +178,35 @@ class Sign extends CI_Controller {
 				return true;
 			} 
 
-			if ($check === "" && $this->sign->userMake($data)) {
+			if ($check === "") {
+				// Build POST request:
+				$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+				$recaptcha_secret = '6LftwYcUAAAAAKvG_NpHlJlfETPH8a7mPT1vrivf';
+				$recaptcha_response = $this->input->post('recaptcha_response');
 
-				$user = [
-					'uid'  => $data['uid'],
-					'name'  => $data['name'],
-					'signed_in' => TRUE
-				];
+				// Make and decode POST request:
+				$recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+				$recaptcha = json_decode($recaptcha);
 
-				$this->session->set_userdata($user);
+				// Take action based on the score returned:
+				if ($recaptcha->score >= 0.5) {
+					$this->sign->userMake($data)
+
+					$user = [
+						'uid'  => $data['uid'],
+						'name'  => $data['name'],
+						'signed_in' => TRUE
+					];
+
+					$this->session->set_userdata($user);
+				} else {
+					$output['valid'] = false;
+					$output['msg'] = "로봇인가요?\nAre you bot?";
+
+					echo json_encode($output);
+
+					return false;
+				}
 			}
 		//validation === false
 		} else if($check === "check") {

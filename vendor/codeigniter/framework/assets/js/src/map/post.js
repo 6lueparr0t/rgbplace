@@ -165,17 +165,19 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 		case "reply-delete enable":
 
-			reply = t.parentElement.parentElement.parentElement.parentElement;
+			if(confirm("삭제 ㄱㄱ?\nRemove this reply?")) {
+				reply = t.parentElement.parentElement.parentElement.parentElement;
 
-			no = reply.querySelector("ul .no").innerHTML;
-			mode = 'DELETE';
+				no = reply.querySelector("ul .no").innerHTML;
+				mode = 'DELETE';
 
-			data.push({
-				'info': __URL__,
-				'no': no
-			});
+				data.push({
+					'info': __URL__,
+					'no': no
+				});
 
-			httpRequest(mode, '/api/request/reply', JSON.stringify(data), success.bind(this), fail.bind(this));
+				httpRequest(mode, '/api/request/reply', JSON.stringify(data), success.bind(this), fail.bind(this));
+			}
 
 			break;
 
@@ -229,11 +231,13 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 		case "delete enable":
 
-			data.push({
-				'info': __URL__
-			});
+			if(confirm("글을 삭제하겠습니까? 복구가 되지 않습니다!\nRemove this post? can not restore it!")) {
+				data.push({
+					'info': __URL__
+				});
 
-			httpRequest('delete', '/api/request/post', JSON.stringify(data), successDelete.bind(this), fail.bind(this));
+				httpRequest('delete', '/api/request/post', JSON.stringify(data), successDelete.bind(this), fail.bind(this));
+			}
 
 			break;
 	}
@@ -301,9 +305,9 @@ function successPostVote (data) {
 
 function successReport (data) {
 	if(data > -1) {
-		alert('🕶️ Reply was reported ! 👊');
+		alert('🕶️ 신고 완료 ! 👊\nReport Success!');
 	} else {
-		alert('you can not report it anymore.');
+		alert('신고 ㄴㄴ\nCould not report');
 	}
 }
 
