@@ -79,7 +79,7 @@
 		@include status-arrow ($oc-gray-9, $oc-gray-2);
 	}
 
-	.type.free, .type.info {
+	.type.notice, .type.free, .type.info {
 		@include status-arrow (white, $oc-gray-7);
 		select {
 			color:white;

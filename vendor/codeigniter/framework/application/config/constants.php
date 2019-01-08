@@ -119,7 +119,7 @@ define("REPLY_LIST_ROWS_LIMIT", 20);
 /* !!!!! if you modify, codeigniter/framework/assets/js/comm/src/0.js check !!!!! */
 
 //['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
-define("TYPE_LIST", ['#', 'best', 'free', 'info', 'game', 'food', 'life', 'news', 'public', 'dev']);
+define("TYPE_LIST", ['#', 'notice', 'best', 'free', 'info', 'game', 'food', 'life', 'news', 'public', 'dev']);
 
 define(
 	"LEVEL_BOUND"  ,
@@ -139,6 +139,5 @@ define(
 
 define("CIPHER_METHOD", "aes-128-gcm");
 define("CIPHER_KEY", "Have a nice Day!");
-
 
 define("GOOGLE_API_KEY", "AIzaSyCLfqh2kzDo3DzclIyQ5IWF8GUjGwOyjnc");

@@ -190,7 +190,7 @@ class Sign extends CI_Controller {
 
 				// Take action based on the score returned:
 				if ($recaptcha->score >= 0.5) {
-					$this->sign->userMake($data)
+					$this->sign->userMake($data);
 
 					$user = [
 						'uid'  => $data['uid'],

@@ -16,6 +16,16 @@
       </a>
       <img src="<?php echo $scene?>" />
   </div>
+
+  <div class='notice'>
+<?php
+	echo "<a href='{$map}/notice/list'><span id='notice'>".strtoupper('notice')."</span></a>";
+
+	echo "<div class='type-list'>";
+    $this->map->page($map, 'notice', 5);
+    echo "</div>";
+?>
+  </div>
   
   <div class='type'> <!-- type start -->
 <?
@@ -24,8 +34,8 @@ $type = TYPE_LIST;
 
 echo "<div class='type-row'>";
 for($i=1; $i<count($type); $i++) {
-
-	if(($i-1)%3 == 0) {
+	if($type[$i] == 'notice') continue;
+	if(($i-2)%3 == 0) {
 		echo "</div>";
 		echo "<div class='type-row'>";
 	}

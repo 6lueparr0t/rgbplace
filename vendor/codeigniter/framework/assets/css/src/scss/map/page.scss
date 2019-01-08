@@ -36,7 +36,64 @@
 		}
 	}
 
-	& .type {
+	.notice {
+		& #notice {
+			font-family   : pixel !important;
+			font-size     : 2rem;
+			text-align    : center;
+			background-color:$oc-gray-8;
+			color      : white;
+			text-align:center;
+			display: block;
+			padding: .5rem 0;
+			border: 1px solid #212529;
+			border-radius: .25rem;
+			margin: .5rem 1rem;
+		}
+
+		& .type-list {
+			font-family   : "normal";
+			font-size     : 1rem;
+			margin        : .5rem 1rem;
+			border-radius : .25rem;
+			border        : 1px solid $oc-gray-9;
+			min-height    : 10rem;
+
+			@media screen and ($width-name : $target-width) {
+				margin-bottom : 4rem;
+			}
+			& .no-page {
+				margin  : auto;
+				height  : 14rem;
+			}
+
+			& .page {
+				display : block;
+				margin  : .5rem;
+				width   : 90%;
+
+				& tr {
+					& td:nth-child(1) {
+						font-size: .5rem;
+						width: 4rem;
+					}
+				}
+
+				& div {
+					display: grid;
+
+					& a {
+						text-overflow: ellipsis; 
+						overflow: hidden; 
+						white-space: nowrap;
+						text-align:justify;
+					}
+				}
+			}
+		}
+	}
+
+& .type {
 		font-family   : pixel !important;
 		font-size     : 2rem;
 		text-align    : center;

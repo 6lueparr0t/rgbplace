@@ -9,7 +9,7 @@
 		max-width:800px;
 		height: 3rem;
 		font-size:1.5rem;
-		border-radius: 1rem;
+		border-radius: .8rem;
 
 		border:1px solid black;
 
@@ -23,13 +23,13 @@
 		color: $oc-gray-9;
 		display:block;
 		border:none;
-		margin:1rem auto;
+		margin:4rem auto 0 auto;
 		padding:.5rem;
-		width: 80%;
+		width: 50%;
 		max-width:800px;
 		height: 3rem;
 		font-size:1.5rem;
-		border-radius: 1rem;
+		border-radius: .8rem;
 
 		&:hover{
 			background: $oc-gray-7;
