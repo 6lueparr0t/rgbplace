@@ -18,7 +18,7 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 		.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10, 'maxlength' => 255])
 		.form_password('conf', '', ['placeholder' => 'Confirm Password', 'required' => 'true', 'minlength' => 10, 'maxlength' => 255]);
 
-	echo form_hidden('recaptcha_response', '', ['id'=>'recaptchaResponse'])
+	echo form_hidden('recaptcha_response', '', ['id'=>'recaptchaResponse']);
 	echo "<button type='submit'>"
 			."<i class='fa fa-user-plus' aria-hidden='true'></i> Sign Up"
 		."</button>";
