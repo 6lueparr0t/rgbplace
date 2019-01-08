@@ -93,7 +93,9 @@ class Map extends CI_Controller {
 		} else {
 			if(!$this->session->userdata('signed_in')) {
 				redirect("/{$type}/list");
-			} 
+			} else if( in_array($type, array("best", "notice")) && !$this->session->userdata('admin')) {
+				redirect("/");
+			}
 		}
 
 		$this->session->set_userdata(['mode' => 'post']);
@@ -105,7 +107,7 @@ class Map extends CI_Controller {
 			$info = [null, $map, $type, $num];
 			$ret = $this->map->post_select(null, $info);
 
-			if(($ret->row()->uid == $this->session->userdata('uid') && $type != 'best') || $this->session->userdata('admin')) {
+			if( ( $ret->row()->uid == $this->session->userdata('uid') && !in_array($type, array("best", "notice")) ) || $this->session->userdata('admin')) {
 				//$data['mode'] = 'update';
 				$this->session->set_userdata(['mode' => 'put']);
 				$data['title'] = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n',$ret->row()->title))));
