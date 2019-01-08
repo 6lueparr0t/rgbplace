@@ -240,7 +240,7 @@ class Map_model extends CI_Model {
 
 		echo "<span class='null'></span>";
 
-		if($type == "best" || !$this->session->userdata('signed_in')) {
+		if(in_array($type, array("best","notice")) || !$this->session->userdata('signed_in')) {
 			$activate = "disable";
 		} else {
 			$activate = "enable";
@@ -486,7 +486,7 @@ class Map_model extends CI_Model {
 
 		// permission check
 		$activate = "disable";
-		if (($user === $uid && $find->row()->type != 'best') || $this->session->userdata('admin')) $activate = "enable";
+		if (($user === $uid && !in_array($find->row()->type, array('best', 'notice')) || $this->session->userdata('admin')) $activate = "enable";
 
 		// modify + delete button
 		echo "<div class='button-group'>"
@@ -568,23 +568,24 @@ class Map_model extends CI_Model {
 	 */
 	public function post_insert ($data, $info)
 	{
-		$table = $this->db->escape_str("map_{$info[1]}_post");
-		$type = $info[2];
+		if( !in_array($info[2], array("best", "notice")) || $this->session->userdata('admin')) {
+			$table = $this->db->escape_str("map_{$info[1]}_post");
+			$type = $info[2];
 
-		$title = htmlspecialchars($data['title']);
-		$content = htmlspecialchars($data['content']);
-		//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
+			$title = htmlspecialchars($data['title']);
+			$content = htmlspecialchars($data['content']);
+			//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
-		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
-		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
+			preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
+			preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
 
-		//$tag[0] => array : [tag], $tag[1] => array : tag 
-		$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
+			//$tag[0] => array : [tag], $tag[1] => array : tag 
+			$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
-		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
-		$keyword = implode('|',$keyword[1]);
+			//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
+			$keyword = implode('|',$keyword[1]);
 
-		$query = "INSERT INTO {$table}
+			$query = "INSERT INTO {$table}
 			(
 				uid,
 				name,
@@ -604,25 +605,28 @@ class Map_model extends CI_Model {
 				?
 			)";
 
-		$values = array(
-			$this->session->userdata('uid'),
-            $this->session->userdata('name'),
-            $title,
-            $content,
-            $type,
-            $tag,
-            $keyword
-		);
+			$values = array(
+				$this->session->userdata('uid'),
+				$this->session->userdata('name'),
+				$title,
+				$content,
+				$type,
+				$tag,
+				$keyword
+			);
 
-		$this->db->query($query, $values);
-		$ret = $this->db->insert_id();
+			$this->db->query($query, $values);
+			$ret = $this->db->insert_id();
 
-		$data = array (
-			'map' => $info[1],
-			'no' => $ret,
-			'title' => $title,
-		);
-		@$this->profile->add_post($data);
+			$data = array (
+				'map' => $info[1],
+				'no' => $ret,
+				'title' => $title,
+			);
+			@$this->profile->add_post($data);
+		} else {
+			$ret = false;
+		}
 
 		return $ret;
 	}
