@@ -38,17 +38,16 @@
 
 	.notice {
 		& #notice {
-			font-family   : pixel !important;
-			font-size     : 2rem;
-			text-align    : center;
-			background-color:$oc-gray-8;
-			color      : white;
-			text-align:center;
-			display: block;
-			padding: .5rem 0;
-			border: 1px solid $oc-red-7;
-			border-radius: .25rem;
-			margin: 2.5rem 1rem 1rem 1rem;
+			font-family      : pixel !important;
+			font-size        : 2rem;
+			text-align       : center;
+			background-color : $oc-gray-8;
+			color            : white;
+			text-align       : center;
+			display          : block;
+			padding          : .5rem 0;
+			border-radius    : .25rem;
+			margin           : 2.5rem 1rem 0rem 1rem;
 		}
 
 		& .type-list {
@@ -56,7 +55,7 @@
 			font-size     : 1rem;
 			margin        : .5rem 1rem;
 			border-radius : .25rem;
-			border        : 1px solid $oc-gray-9;
+			border        : 1px solid $oc-red-7;
 			min-height    : 10rem;
 
 			@media screen and ($width-name : $target-width) {

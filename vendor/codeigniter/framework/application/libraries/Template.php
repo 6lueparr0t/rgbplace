@@ -215,14 +215,19 @@ class Template {
 		echo("<div class='menu' id='menu-favorite-box'>");
 		echo("</div>");
 		echo("</label>");
+
 		echo("<label class='menu' for='menu-config'><i class='fa fa-cog'></i>");
-		echo("<input class='menu' type='checkbox' id='menu-config' />");
-		echo("<i class='open fa fa-caret-up'></i>");
-		echo("<i class='close fa fa-caret-down'></i>");
-		echo("<ul>");
-		echo("<label class='menu' for='menu-config-1'>Fix On</label>");
-		echo("</ul>");
+			echo("<input class='menu' type='checkbox' id='menu-config' />");
+				echo("<i class='open fa fa-caret-up'></i>");
+				echo("<i class='close fa fa-caret-down'></i>");
+			echo("<ul>");
+				echo("<label class='menu switch'>dark mode");
+					echo("<input class='switch' type='checkbox'>");
+					echo("<span class='switch slider round'></span>");
+				echo("</label>");
+			echo("</ul>");
 		echo("</label>");
+
 		echo("</ul>");
 		/* -------------------------------------------------- MENU End -------------------------------------------------- */
 

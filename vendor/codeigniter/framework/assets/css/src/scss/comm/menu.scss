@@ -81,140 +81,200 @@
   }
 
   label, a {
-    /*float:left;*/
-    flex          : 1;
-    background    : $oc-gray-3;
-    color         : $oc-gray-9 !important;
-    text-align    : center;
-    padding       : 1rem 0;
-    display       : block;
-    position      : relative;
-    cursor        : pointer;
-	border-bottom : 1px solid $oc-gray-6;
+	  /*float:left;*/
+	  flex          : 1;
+	  background    : $oc-gray-3;
+	  color         : $oc-gray-9 !important;
+	  text-align    : center;
+	  padding       : 1rem 0;
+	  display       : block;
+	  position      : relative;
+	  cursor        : pointer;
+	  border-bottom : 1px solid $oc-gray-6;
 
-    &:hover {
-      background: $oc-gray-7;
-      color: $oc-gray-0 !important;
-    }
+	  &:hover {
+		  background: $oc-gray-7;
+		  color: $oc-gray-0 !important;
+	  }
 
-    input[type='checkbox'] {
-      display:none;
 
-      & ~ .open {
-        display:none;
-      }
+	  input[type='checkbox'] {
+		  display:none;
 
-      & ~ .close {
-        display:initial;
-        position:absolute;
-		float: right;
-		margin-left:.5rem;
-      }
+		  & ~ .open {
+			  display:none;
+		  }
 
-      &:checked ~ .close {
-        display:none;
-      }
+		  & ~ .close {
+			  display:initial;
+			  position:absolute;
+			  float: right;
+			  margin-left:.5rem;
+		  }
 
-      &:checked ~ .open {
-        display:initial;
-        position:absolute;
-		float: right;
-		margin-left:.5rem;
-      }
+		  &:checked ~ .close {
+			  display:none;
+		  }
 
-      &:checked ~ ul {
-        left: 0;
-        padding: 0;
-        width: 100%;
-        display: block;
-        font-size: 0.8rem;
-        position:absolute;
-		top:100%;
-        @media screen and ($width-name : $target-width) {
-          top:1.05rem;
-          position:relative;
-		  z-index:1;
-        }
+		  &:checked ~ .open {
+			  display:initial;
+			  position:absolute;
+			  float: right;
+			  margin-left:.5rem;
+		  }
 
-		label:first-child {
-		  border-top:1px solid $oc-gray-6;
-		}
+		  &:checked ~ ul {
+			  left: 0;
+			  padding: 0;
+			  width: 100%;
+			  display: block;
+			  font-size: 0.8rem;
+			  position:absolute;
+			  top:100%;
+			  @media screen and ($width-name : $target-width) {
+				  top:1.05rem;
+				  position:relative;
+				  z-index:1;
+			  }
 
-        label {
-          background: $oc-gray-4;
-          display: block;
-          padding: 1rem 0;
+			  label:first-child {
+				  border-top:1px solid $oc-gray-6;
+			  }
 
-          @media screen and ($width-name : $target-width) {
-            top: 0;
-          }
+			  label {
+				  background: $oc-gray-4;
+				  display: block;
+				  padding: 1rem 0;
 
-          &:hover {
-            background: $oc-gray-8;
-            color: $oc-gray-0;
-          }
+				  @media screen and ($width-name : $target-width) {
+					  top: 0;
+				  }
 
-          input[type='checkbox'] {
-            &:checked ~ ul {
-              left: 100%;
-              top: 0;
-              padding: 0;
-              width: 100%;
-              display: block;
-              z-index: 1;
+				  &:hover {
+					  background: $oc-gray-8;
+					  color: $oc-gray-0;
+				  }
 
-              @media screen and ($width-name : $target-width) {
-                left: 0;
-                top: 1rem;
-                position:relative;
-              }
+				  input[type='checkbox'] {
+					  &:checked ~ ul {
+						  left: 100%;
+						  top: 0;
+						  padding: 0;
+						  width: 100%;
+						  display: block;
+						  z-index: 1;
 
-              a {
-                padding: 0;
-                li {
-                  background: $oc-gray-5;
+						  @media screen and ($width-name : $target-width) {
+							  left: 0;
+							  top: 1rem;
+							  position:relative;
+						  }
 
-                  &:hover {
-                    background: $oc-gray-9;
-                    color: $oc-gray-0;
-                  }
-                }
-              }
+						  a {
+							  padding: 0;
+							  li {
+								  background: $oc-gray-5;
 
-            }
-          }
+								  &:hover {
+									  background: $oc-gray-9;
+									  color: $oc-gray-0;
+								  }
+							  }
+						  }
 
-          ul {
-            position: absolute;
-            display: none;
-            list-style-type: none;
+					  }
+				  }
 
-            @media screen and ($width-name : $target-width) {
-              top:1rem;
-              position:relative;
-            }
-          }
-        }
+				  ul {
+					  position: absolute;
+					  display: none;
+					  list-style-type: none;
 
-      }
-    }
+					  @media screen and ($width-name : $target-width) {
+						  top:1rem;
+						  position:relative;
+					  }
+				  }
 
-    &:last-child {
-      input[type='checkbox'] {
-        &:checked ~ ul {
-          label {
-            input[type='checkbox'] {
-              &:checked ~ ul {
-                left: -100%;
-              }
-            }
-          }
-        }
-      }
-    }
+				  &.switch {
+					  padding: 1rem 0 1rem 6rem;
+					  text-align:left;
+					  input[type='checkbox'].switch {
+						  display: none;
+
+						  &:checked + .slider {
+							  background-color: $oc-gray-7;
+						  }
+
+						  &:focus + .slider {
+							  box-shadow: 0 0 1px white;
+						  }
+
+						  &:checked + .slider:before {
+							  background-color: $oc-blue-4;
+							  -webkit-transform: translateX(2.4rem);
+							  -ms-transform: translateX(2.4rem);
+							  transform: translateX(2.4rem);
+						  }
+					  }
+
+					  .slider {
+						  position: absolute;
+						  cursor: pointer;
+						  margin: .4rem;
+						  top: 0;
+						  left:11.4rem;
+						  right: 0;
+						  bottom: 0;
+						  background-color: $oc-gray-5;
+						  -webkit-transition: .4s;
+						  transition: .4s;
+
+						  &:before {
+							  position: absolute;
+							  content: "";
+							  height: 1.5rem; 
+							  width: 1.5rem;
+							  left: 4px;
+							  bottom: 4px;
+							  background-color: $oc-gray-7;
+							  -webkit-transition: .4s;
+							  transition: .4s;
+						  }
+
+						  &.round {
+							  border-radius: 1rem;
+							  width:4.4rem;
+
+							  &:before {
+								  border-radius: 50%;
+
+							  }
+						  }
+					  }
+				  }
+			  }
+
+		  }
+	  }
+
+	  &:last-child {
+		  input[type='checkbox'] {
+			  &:checked ~ ul {
+				  label {
+					  input[type='checkbox'] {
+						  &:checked ~ ul {
+							  left: -100%;
+						  }
+					  }
+				  }
+			  }
+		  }
+	  }
 
   }
 
+  
 
   li {
     /*float:left;*/
