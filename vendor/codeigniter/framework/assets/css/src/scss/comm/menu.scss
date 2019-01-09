@@ -197,7 +197,7 @@
 				  }
 
 				  &.switch {
-					  padding: 1rem 0 1rem 6rem;
+					  padding: 1rem 0 1rem 35%;
 					  text-align:left;
 					  input[type='checkbox'].switch {
 						  display: none;
@@ -212,18 +212,18 @@
 
 						  &:checked + .slider:before {
 							  background-color: $oc-blue-4;
-							  -webkit-transform: translateX(2.4rem);
-							  -ms-transform: translateX(2.4rem);
-							  transform: translateX(2.4rem);
+							  -webkit-transform: translateX(1.4rem);
+							  -ms-transform: translateX(1.4rem);
+							  transform: translateX(1.4rem);
 						  }
 					  }
 
 					  .slider {
 						  position: absolute;
 						  cursor: pointer;
-						  margin: .4rem;
+						  margin: .6rem;
 						  top: 0;
-						  left:11.4rem;
+						  left:57.5%;
 						  right: 0;
 						  bottom: 0;
 						  background-color: $oc-gray-5;
@@ -233,8 +233,8 @@
 						  &:before {
 							  position: absolute;
 							  content: "";
-							  height: 1.5rem; 
-							  width: 1.5rem;
+							  height: 1.2rem; 
+							  width: 1.2rem;
 							  left: 4px;
 							  bottom: 4px;
 							  background-color: $oc-gray-7;
@@ -244,7 +244,7 @@
 
 						  &.round {
 							  border-radius: 1rem;
-							  width:4.4rem;
+							  width:3rem;
 
 							  &:before {
 								  border-radius: 50%;
