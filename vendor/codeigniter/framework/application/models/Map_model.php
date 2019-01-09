@@ -1394,7 +1394,7 @@ class Map_model extends CI_Model {
 					$query = "UPDATE {$update_table} SET {$act} = {$act} + {$point}  where no = ?";
 					$ret = $this->db->query($query, $no);
 
-					if($type != 'reply' || $uid != $vote_uid) {
+					if($type != 'reply' && $uid != $vote_uid) {
 						$query = "UPDATE user_info SET score = score + {$point} where uid = ?";
 						$ret = $this->db->query($query, $vote_uid);
 					}
@@ -1407,7 +1407,7 @@ class Map_model extends CI_Model {
 						$query = "UPDATE {$update_table} SET {$act} = {$act} - {$point}  where no = ?";
 						$ret = $this->db->query($query, $no);
 
-						if($type != 'reply' || $uid != $vote_uid ) {
+						if($type != 'reply' && $uid != $vote_uid ) {
 							$query = "UPDATE user_info SET score = score - {$point} where uid = ?";
 							$ret = $this->db->query($query,  $vote_uid);
 						}
