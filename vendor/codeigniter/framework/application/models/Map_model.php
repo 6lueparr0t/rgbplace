@@ -242,7 +242,7 @@ class Map_model extends CI_Model {
 
 		$activate = ($this->session->userdata('signed_in'))?"enable":"disable";
 		
-		if( in_array($type, array("best","notice")) )
+		if( in_array($type, array("best","notice")) ) {
 			if( $this->session->userdata('admin') ) {
 				$activate = "enable";
 			} else {
