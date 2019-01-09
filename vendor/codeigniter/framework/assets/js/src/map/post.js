@@ -277,7 +277,7 @@ function success (data) {
 
 function successDelete (data) {
 	//console.log(data);
-	alert('Post was Deleted');
+	alert('삭제되었습니다.\nPost was Deleted');
 	redirect('list');
 }
 

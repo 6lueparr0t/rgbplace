@@ -232,7 +232,7 @@ function addFile(data) {
 
 function done (data) {
 	let num = data;
-	alert('Done !');
+	alert('등록 완료\nSave and Post Done!');
 	redirect(num);
 }
 
@@ -284,24 +284,26 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 	switch(t.id) {
 		case 'save' :
-			let data = [];
+			if(confirm('등록 하시겠습니까?\nAre you sure you want to post it?')) {
+				let data = [];
 
-			editor = document.querySelector('.editor.active');
-			if(editor.id == 'edit-content') {
-				content = editor.innerHTML;
-			} else {
-				content = editor.value;
+				editor = document.querySelector('.editor.active');
+				if(editor.id == 'edit-content') {
+					content = editor.innerHTML;
+				} else {
+					content = editor.value;
+				}
+
+				data.push({
+					'info': __URL__,
+					'title': document.querySelector('#edit-title').value,
+					'content': content
+				});
+
+				let mode = ({value:'post'}).value;
+
+				httpRequest(mode, '/api/request/edit/save', JSON.stringify(data), done, fail);
 			}
-
-			data.push({
-				'info': __URL__,
-				'title': document.querySelector('#edit-title').value,
-				'content': content
-			});
-
-			let mode = ({value:'post'}).value;
-
-			httpRequest(mode, '/api/request/edit/save', JSON.stringify(data), done, fail);
 			break;
 		case 'cancel' :
 			back();

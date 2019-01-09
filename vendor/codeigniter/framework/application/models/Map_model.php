@@ -739,8 +739,8 @@ class Map_model extends CI_Model {
 
 		if($this->session->userdata('admin') === true) {
 			$query = "DELETE post.*, reply.*, total.* FROM {$table_post}
-				INNER JOIN {$table_reply} ON reply.post = post.no
-				INNER JOIN {$table_total_reply} ON total.post = post.no AND total.map = '{$map}'
+				LEFT JOIN {$table_reply} ON reply.post = post.no
+				LEFT JOIN {$table_total_reply} ON total.post = post.no AND total.map = '{$map}'
 
 				WHERE 
 				post.type = ? AND
@@ -752,20 +752,18 @@ class Map_model extends CI_Model {
 			);
 		} else {
 			$query = "DELETE post.*, reply.*, total.* FROM {$table_post}
-				INNER JOIN {$table_reply} ON reply.post = post.no
-				INNER JOIN {$table_total_reply} ON total.post = post.no AND total.map = '{$map}'
+				LEFT JOIN {$table_reply} ON reply.post = post.no
+				LEFT JOIN {$table_total_reply} ON total.post = post.no AND total.map = '{$map}'
 
 				WHERE 
 				post.type = ? AND
 				post.no = ? AND
-				post.uid = ? AND
-				post.name = ? ";
+				post.uid = ?";
 
 			$values = array(
 				$type,
 				$no,
-				$this->session->userdata('uid'),
-				$this->session->userdata('name')
+				$this->session->userdata('uid')
 			);
 		}
 
