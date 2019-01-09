@@ -240,11 +240,11 @@ class Map_model extends CI_Model {
 
 		echo "<span class='null'></span>";
 
-		if(in_array($type, array("best","notice")) || !$this->session->userdata('signed_in')) {
-			$activate = "disable";
-		} else {
+		$activate = ($this->session->userdata('signed_in'))?"enable":"disable";
+		if( in_array($type, array("best","notice")) && $this->session->userdata('admin') ) {
 			$activate = "enable";
 		}
+		
 		echo "<a class='edit {$activate}' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
 		echo "</div>";
 		// ****************
