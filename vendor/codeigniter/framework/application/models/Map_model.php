@@ -241,8 +241,13 @@ class Map_model extends CI_Model {
 		echo "<span class='null'></span>";
 
 		$activate = ($this->session->userdata('signed_in'))?"enable":"disable";
-		if( in_array($type, array("best","notice")) && $this->session->userdata('admin') ) {
-			$activate = "enable";
+		
+		if( in_array($type, array("best","notice")) )
+			if( $this->session->userdata('admin') ) {
+				$activate = "enable";
+			} else {
+				$activate = "disable";
+			}
 		}
 		
 		echo "<a class='edit {$activate}' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
