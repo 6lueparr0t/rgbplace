@@ -79,6 +79,7 @@ class Sign extends CI_Controller {
 					'name' => $result['name'],
 					'score'=> $result['score'],
 					//'map' => $result['map'],
+					'darkmode'=> $result['dark_sw'],
 					'signed_in' => TRUE
 				];
 				$this->session->set_userdata($user);

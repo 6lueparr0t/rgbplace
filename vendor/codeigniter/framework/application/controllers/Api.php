@@ -8,6 +8,7 @@ class Api extends CI_Controller {
 		$this->load->model('Api_model', 'api');
 		$this->load->model('Map_model', 'map');
 		$this->load->model('Profile_model', 'profile');
+		$this->load->model('Config_model', 'conf');
 	}
 
 	public function index() {
@@ -366,8 +367,14 @@ class Api extends CI_Controller {
 		case 'dark' :
 			if ($data['mode'] === 'on') {
 				$this->session->set_userdata(array('darkmode'=>'on'));
+				if(!$this->session->userdata('admin') && $this->session->userdata('signed_in')) {
+					$this->conf->darkmodeOnOff( array('darkmode' => '1', 'uid' => $this->session->userdata('uid')) );
+				}
 			} else {
 				$this->session->unset_userdata('darkmode');
+				if(!$this->session->userdata('admin') && $this->session->userdata('signed_in')) {
+					$this->conf->darkmodeOnOff( array('darkmode' => '0', 'uid' => $this->session->userdata('uid')) );
+				}
 			}	
 			break;
 		}

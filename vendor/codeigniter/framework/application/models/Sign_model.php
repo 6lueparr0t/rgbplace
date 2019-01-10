@@ -19,7 +19,7 @@ class Sign_model extends CI_Model {
 		$uid = $data['uid'];
 		$pswd= $data['pswd'];
 
-		$query = "SELECT * FROM user_info WHERE uid = ? AND fail < 20 LIMIT 1";
+		$query = "SELECT user.*, conf.* FROM user_info user INNER JOIN user_conf conf ON user.uid = conf.uid WHERE user.uid = ? AND user.fail < 20 LIMIT 1";
 		$find = $this->db->query($query, $uid);
 
 		foreach ($find->result() as $row) {
@@ -34,7 +34,8 @@ class Sign_model extends CI_Model {
 					'level' => $row->level,
 					'score' => $row->score,
 					'map'   => $row->map,
-					'atim'  => $row->atim
+					'atim'  => $row->atim,
+					'dark_sw'  => ($row->dark_sw)?'on':'off'
 				];
 			} else {
 				//fail count increase
