@@ -64,7 +64,9 @@ class Template {
 			"<!-- End Google Tag Manager -->");
 
 		echo("</head>");
-		echo("<body>");
+
+		$darkmode = ($this->CI->session->userdata('darkmode')==='on')?'dark':'';
+		echo("<body class='{$darkmode}'>");
 /* ---------------------------------------------------------------------- */
 
 		echo ("<div id='sign'>");
@@ -222,7 +224,9 @@ class Template {
 				echo("<i class='close fa fa-caret-down'></i>");
 			echo("<ul>");
 				echo("<label class='menu switch'>dark mode");
-					echo("<input class='switch' type='checkbox'>");
+
+					$darkmode_checked = ($this->CI->session->userdata('darkmode')==='on')?'checked':'';
+					echo("<input class='switch' id='dark-mode' type='checkbox' {$darkmode_checked}>");
 					echo("<span class='switch slider round'></span>");
 				echo("</label>");
 			echo("</ul>");

@@ -3,29 +3,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api extends CI_Controller {
 
-	public function __construct()
-	{
+	public function __construct() {
 		parent::__construct();
 		$this->load->model('Api_model', 'api');
 		$this->load->model('Map_model', 'map');
 		$this->load->model('Profile_model', 'profile');
 	}
 
-	public function index()
-	{
+	public function index() {
 		redirect("/");
 	}
 
-	public function check()
-	{
+	public function check() {
 		$data = ['request' => $this->input->server('REQUEST_METHOD'), 'author' => $this->input->get_request_header('Authorization')];
 		echo json_encode($data);
 
 		return true;
 	}
 
-	public function admin($target = "", $data1 = "", $data2 = "", $data3 = "", $data4 = "")
-	{
+	public function admin($target = "", $data1 = "", $data2 = "", $data3 = "", $data4 = "") {
 		$data = ['request' => $this->input->server('REQUEST_METHOD'), 'target' => $target, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3 , 'data4' => $data4];
 
 		if($this->session->userdata('admin') !== FALSE) redirect("/");
@@ -47,8 +43,7 @@ class Api extends CI_Controller {
 		}
 	}
 
-	public function search()
-    {
+	public function search() {
         if($this->input->get('keyword')) {
             $data   = ['keyword' => $this->input->get('keyword')];
             $output = $this->base->getMap($data['keyword']);
@@ -58,8 +53,7 @@ class Api extends CI_Controller {
         echo json_encode($output);
     }
 
-	public function request($type=null, $val=null, $api_key=null)
-	{
+	public function request($type=null, $val=null, $api_key=null) {
 		$method = $this->input->method();
 		if($method == 'get') {
 			$data = $this->input->get();
@@ -246,8 +240,7 @@ class Api extends CI_Controller {
 		echo $ret;
 	}
 
-	public function upload()
-	{
+	public function upload() {
 		if ($this->session->userdata('signed_in') === true) {
 			$this->load->library('upload');
 
@@ -289,8 +282,7 @@ class Api extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function geocode()
-	{
+	public function geocode() {
 		$latlng = $this->input->get('latlng');
 
 		$result_type = 'administrative_area_level_1|administrative_area_level_2|sublocality_level_1|sublocality_level_2|sublocality_level_3';
@@ -362,7 +354,28 @@ class Api extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	private function curl($method, $url, $data){
+	public function config ($type = null) {
+		$method = $this->input->method();
+		if($method == 'get') {
+			$data = $this->input->get();
+		} else {
+			$data = (array)json_decode($this->input->raw_input_stream)[0];
+		}
+
+		switch($type) {
+		case 'dark' :
+			if ($data['mode'] === 'on') {
+				$this->session->set_userdata(array('darkmode'=>'on'));
+			} else {
+				$this->session->unset_userdata('darkmode');
+			}	
+			break;
+		}
+
+		echo json_encode(true);
+	}
+
+	private function curl ($method, $url, $data) {
 
 		## Reference : https://www.weichieprojects.com/blog/curl-api-calls-with-php/
 
