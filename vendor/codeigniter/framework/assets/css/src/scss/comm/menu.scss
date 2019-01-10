@@ -197,7 +197,16 @@
 				  }
 
 				  &.switch {
-					  padding: 1rem 0 1rem 35%;
+					  padding: 1rem 0 1rem 26%;
+
+					  @media screen and ($width-name : 1080px) {
+						  padding: 1rem 0 1rem 15%;
+					  }
+
+					  @media screen and ($width-name : $target-width) {
+						  padding: 1rem 0 1rem 35%;
+					  }
+					  
 					  text-align:left;
 					  input[type='checkbox'].switch {
 						  display: none;
@@ -223,12 +232,16 @@
 						  cursor: pointer;
 						  margin: .6rem;
 						  top: 0;
-						  left:57.5%;
+						  left:60%;
 						  right: 0;
 						  bottom: 0;
 						  background-color: $oc-gray-5;
 						  -webkit-transition: .4s;
 						  transition: .4s;
+
+						  @media screen and ($width-name : $target-width) {
+							  right: 0;
+						  }
 
 						  &:before {
 							  position: absolute;
