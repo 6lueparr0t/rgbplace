@@ -202,6 +202,10 @@
 					  @media screen and ($width-name : 1280px) {
 						  padding: 1rem 0 1rem 25%;
 					  }
+					  
+					  @media screen and ($width-name : 1080px) {
+						  padding: 1rem 0 1rem 16%;
+					  }
 
 					  @media screen and ($width-name : $target-width) {
 						  padding: 1rem 0 1rem 32.5%;
