@@ -223,6 +223,7 @@ class Api extends CI_Controller {
 					$ret = $this->profile->update($data, $info);
 					break;
 				case 'delete':
+					$ret = $this->profile->delete($data, $info);
 					break;
 				default :
 					break;

@@ -87,5 +87,14 @@ body.dark {
 		& .page .table .th {
 			background-color: $oc-gray-9;
 		}
+
+		& .page .table .td input {
+			background-color: black;
+
+			&:disabled {
+				background-color: black;
+				color:$oc-gray-5;
+			}
+		}
 	}
 }

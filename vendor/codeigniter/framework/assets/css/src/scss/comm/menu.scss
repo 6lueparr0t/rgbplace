@@ -197,13 +197,13 @@
 				  }
 
 				  &.switch {
-					  padding: 1rem 0 1rem 28%;
+					  padding: 1rem 0 1rem 30%;
 
-					  @media screen and ($width-name : 1400px) {
-						  padding: 1rem 0 1rem 22%;
+					  @media screen and ($width-name : 1440px) {
+						  padding: 1rem 0 1rem 24%;
 					  }
 					  
-					  @media screen and ($width-name : 1200px) {
+					  @media screen and ($width-name : 1024px) {
 						  padding: 1rem 0 1rem 16%;
 					  }
 
@@ -236,16 +236,12 @@
 						  cursor: pointer;
 						  margin: .6rem;
 						  top: 0;
-						  left:55%;
+						  left:60%;
 						  right: 0;
 						  bottom: 0;
 						  background-color: $oc-gray-5;
 						  -webkit-transition: .4s;
 						  transition: .4s;
-
-						  @media screen and ($width-name : 1280px) {
-							  left:60%;
-						  }
 
 						  @media screen and ($width-name : $target-width) {
 							  left:57.5%;

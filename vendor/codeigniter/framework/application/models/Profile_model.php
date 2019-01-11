@@ -78,6 +78,29 @@ class Profile_model extends CI_Model {
 		return $result;
 	}
 
+	public function delete($data) {
+		$uid = $this->session->userdata('uid');
+		$admin = $this->session->userdata('admin');
+
+		if ($admin === true) {
+			$name = $this->session->userdata('name');
+
+			$query = "DELETE FROM admin_info WHERE uid = 'admin' and name = ?";
+			$result = $this->db->query( $query, $name );
+
+		} else {
+			$query = "DELETE user.*, conf.* FROM user_info user LEFT JOIN user_conf conf ON user.uid = conf.uid WHERE user.uid = ?";
+			$result = $this->db->query( $query, $uid );
+		}
+
+		if ($result) {
+			$config = ['admin', 'uid', 'name', 'signed_in'];
+			$this->session->unset_userdata($config);
+		}
+
+		return $result;
+	}
+
 	public function add_post($data) {
 		$table = 'total_post';
 		$this->setting($uid, $name);

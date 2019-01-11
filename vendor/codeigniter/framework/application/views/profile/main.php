@@ -53,6 +53,7 @@ echo("
 		<div class='button-group'>
 			<div class='enable' id='save' name='save'>SAVE</div>
 			<div class='enable' id='cancel' name='cancel'>CANCEL</div>
+			<div class='enable' id='delete' name='delete'>DEL</div>
 		</div>
 ");
 ?>

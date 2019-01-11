@@ -128,10 +128,13 @@
 
 			.reply-box {
 				font-family:normal, 'Font Awesome 5 free';
+				font-weight:600;
 
-				font-size:1rem;
+				font-size:1.4rem;
+				word-spacing:.6rem;
 				padding:1rem;
 				min-height: 10rem;
+				line-height:2.4rem;
 				//height:100%;
 				width:96.75%;
 				border: 1px solid $oc-gray-9;

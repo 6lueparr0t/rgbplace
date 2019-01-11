@@ -7,7 +7,7 @@ let params = new URLSearchParams(window.location.search);
 
 function done (data) {
 	let num = data;
-	alert('save done');
+	alert('수정되었습니다.\nDone !');
 	location.reload();
 	//redirect(num);
 }
@@ -65,6 +65,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 	let t = event.target;
 
 	let name = '', email = '', pswd_conf = '';
+	let data = [];
 
 	if(t.parentElement.className == 'tab') {
 		let data = {
@@ -120,8 +121,6 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 	switch(t.id) {
 		case 'save' :
-			let data = [];
-
 			if(validateName(document.querySelector('#name').value)) {
 				name = document.querySelector('#name').value;
 			} else {
@@ -164,6 +163,16 @@ document.querySelector("body").addEventListener("click", function(event) {
 			break;
 		case 'cancel' :
 			back();
+			break;
+		case 'delete' :
+			if(confirm('계정을 삭제하시겠습니까? 계정 삭제 시, 게시물은 남아있을 수 있습니다. \n Delete Your Account? your post & reply will be remain')) {
+				data.push({
+					'info': __URL__
+				});
+
+				//console.log(data);
+				httpRequest('delete', '/api/request/profile', JSON.stringify(data), ret => {alert('Bye Bye Badman !'); back(); }, fail);
+			}
 			break;
 	}
 });
