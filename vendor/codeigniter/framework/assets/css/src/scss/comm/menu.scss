@@ -197,13 +197,13 @@
 				  }
 
 				  &.switch {
-					  padding: 1rem 0 1rem 32%;
+					  padding: 1rem 0 1rem 28%;
 
-					  @media screen and ($width-name : 1280px) {
-						  padding: 1rem 0 1rem 25%;
+					  @media screen and ($width-name : 1400px) {
+						  padding: 1rem 0 1rem 22%;
 					  }
 					  
-					  @media screen and ($width-name : 1080px) {
+					  @media screen and ($width-name : 1200px) {
 						  padding: 1rem 0 1rem 16%;
 					  }
 
