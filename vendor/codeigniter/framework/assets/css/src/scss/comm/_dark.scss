@@ -42,18 +42,6 @@ body.dark {
 		color:white;
 	}
 
-	#list .list .list-row {
-
-		&:hover {
-			background: $oc-gray-8;
-		}
-
-		& .title a {
-			color:white;
-		}
-
-	}
-
 	#reply .reply-root .reply-addon .reply-box {
 		background-color:$oc-gray-9;
 		color:white;
@@ -69,17 +57,35 @@ body.dark {
 		color: white;
 	}
 
-	#list .button-group {
-		.refresh {
-			color:white;
+	#list {
+		& .list .list-row {
+			&:hover {
+				background: $oc-gray-8;
+			}
+
+			& .title a {
+				color:white;
+			}
 		}
 
-		.edit.enable {
-			color:white;
+		& .button-group {
+			.refresh {
+				color:white;
+			}
+
+			.edit.enable {
+				color:white;
+			}
+		}
+
+		& .search-select .search-select-list ul li label span {
+			border: 1px solid white;
 		}
 	}
 
-	#list .search-select .search-select-list ul li label span {
-		border: 1px solid white;
+	#profile {
+		& .page .table .th {
+			background-color: $oc-gray-9;
+		}
 	}
 }

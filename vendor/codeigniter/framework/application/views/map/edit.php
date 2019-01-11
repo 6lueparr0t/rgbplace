@@ -17,13 +17,17 @@
 <?php echo $content; ?>
 </textarea>
 
-<div class='upload-list-group' style='display:none;'>
-	<div class='' id='upload-toggle'>Upload List</div>
-	<select id='upload-list' size='10'>
-		<option value='' data=''></option>
-	</select>
-	<div id='upload-preview'>
-		<img id='upload-preview-img'src='' />
+<div class='upload-list' style='display:none;'>
+	<div id='upload-toggle'>Upload List</div>
+	<div class='upload-list table'>
+		<div id='upload-list'>
+			<ul>
+				<li data-no=''></li>
+			</ul>
+		</div>
+		<div id='upload-preview'>
+			<img id='upload-preview-img' src='' />
+		</div>
 	</div>
 </div>
 
