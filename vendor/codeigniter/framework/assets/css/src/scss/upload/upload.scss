@@ -1,50 +1,86 @@
 @mixin upload_content ($text) {
-  content     : $text;
-  font-weight : bold;
+	content     : $text;
+	font-weight : bold;
 }
 
 #upload {
-  text-align  : center;
-  border      : 4px dashed gray;
-  height      : 150px;
-  font-family : "pixel";
-  cursor : pointer;
+	text-align  : center;
+	border      : 4px dashed gray;
+	height      : 150px;
+	font-family : "pixel";
+	cursor : pointer;
 
-  label[for="input_zone"] {
-	position : relative;
-    display: block;
-    padding-top: 1.5rem;
-	width: 100%;
-    height: 84%;
-	cursor:pointer;
+	label[for="input_zone"] {
+		position : relative;
+		display: block;
+		padding-top: 1.5rem;
+		width: 100%;
+		height: 84%;
+		cursor:pointer;
 
-	&.drop_wait {
-		&::after {
-			@include upload_content("Choose \a\a or \a\a Drag & Drop your files");
-			cursor : pointer;
-			white-space : pre-wrap;
+		&.drop_wait {
+			&::after {
+				@include upload_content("Choose \a\a or \a\a Drag & Drop your files");
+				cursor : pointer;
+				white-space : pre-wrap;
+			}
+		}
+
+		&.drop_hover {
+			top:2.5rem;
+			&::after {
+				@include upload_content("Here!");
+			}
+		}
+
+		&.drop_it {
+			top:2.5rem;
+			&::after {
+				@include upload_content("Done! More?");
+				cursor : pointer;
+			}
 		}
 	}
 
-	&.drop_hover {
-		top:2.5rem;
-		&::after {
-			@include upload_content("Here!");
-		}
+	#input_zone {
+		display: none;
 	}
-
-	&.drop_it {
-		top:2.5rem;
-		&::after {
-			@include upload_content("Done! More?");
-			cursor : pointer;
-		}
-	}
-  }
-
-  #input_zone {
-    display: none;
-  }
 
 }
 
+
+#upload-list {
+	font-family: "pixel";
+	border: 4px solid $oc-green-6;
+	background-color: 4px solid $oc-green-6;
+	margin:1rem 0;
+
+	#upload-list-toggle {
+		margin:1rem 0;
+	}
+
+	& .group {
+		&.open {
+			display:initial;
+		}
+
+		&.close {
+			display:none;
+		}
+	}
+
+	&.table {
+
+	}
+
+	#upload-list-result {
+
+	}
+
+	#upload-preview {
+		#upload-preview-img {
+
+		}
+	}
+
+}

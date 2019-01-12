@@ -17,21 +17,23 @@
 <?php echo $content; ?>
 </textarea>
 
-<div class='upload-list' style='display:none;'>
-	<div id='upload-toggle'>Upload List</div>
-	<div class='upload-list table'>
-		<div id='upload-list'>
-			<ul>
-				<li data-no=''></li>
-			</ul>
-		</div>
-		<div id='upload-preview'>
-			<img id='upload-preview-img' src='' />
+<div id='upload-list'>
+	<div id='upload-list-toggle'>Upload History <i class="close fa fa-caret-down"></i><i class="open fas fa-caret-open"></i></div>
+	<div class='upload-list group close'>
+		<div class='upload-list table'>
+			<div class='upload-list-result'>
+				<ul>
+					<li data-no=''></li>
+				</ul>
+			</div>
+			<div id='upload-preview'>
+				<img id='upload-preview-img' src='' />
+			</div>
 		</div>
 	</div>
 </div>
 
-<? echo form_open('', ['name' => 'upload', 'id' => 'upload']); ?>
+<? echo form_open('', ['class' => 'upload', 'name' => 'upload', 'id' => 'upload']); ?>
   <label for="input_zone" class="drop_wait"></label>
   <input type="file" id="input_zone" name="userfile[]" accept="image/*" multiple />
 <? echo form_close(); ?>
