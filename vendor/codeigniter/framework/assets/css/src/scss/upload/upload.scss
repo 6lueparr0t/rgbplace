@@ -49,14 +49,19 @@
 }
 
 
-#upload-list {
+#upload-history {
 	font-family: "pixel";
 	border: 4px solid $oc-green-6;
 	background-color: 4px solid $oc-green-6;
 	margin:1rem 0;
+	cursor:pointer;
 
-	#upload-list-toggle {
+	#upload-history-toggle {
 		margin:1rem 0;
+
+		&.none {
+			display:none;
+		}
 	}
 
 	& .group {
@@ -73,7 +78,7 @@
 
 	}
 
-	#upload-list-result {
+	#upload-history-result {
 
 	}
 

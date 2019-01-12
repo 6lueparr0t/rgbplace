@@ -17,11 +17,11 @@
 <?php echo $content; ?>
 </textarea>
 
-<div id='upload-list'>
-	<div id='upload-list-toggle'>Upload History <i class="close fa fa-caret-down"></i><i class="open fas fa-caret-open"></i></div>
-	<div class='upload-list group close'>
-		<div class='upload-list table'>
-			<div class='upload-list-result'>
+<div id='upload-history'>
+	<div id='upload-history-toggle'>Upload History <i class="fa fa-caret-down"></i> <i class="fas fa-caret-up none"></i></div>
+	<div class='upload-history group close'>
+		<div class='upload-history table'>
+			<div class='upload-history-result'>
 				<ul>
 					<li data-no=''></li>
 				</ul>
