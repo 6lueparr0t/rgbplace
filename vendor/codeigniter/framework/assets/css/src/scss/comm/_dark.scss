@@ -1,6 +1,7 @@
 body.dark {
 	background-color: black;
-	color: white;
+	color: $oc-gray-0;
+	transition: all .2s ease-out;
 
 	#logo .place {
 		color:white;
@@ -8,15 +9,15 @@ body.dark {
 
 	#menu {
 		background-color: $oc-gray-7;
-		color:white;
+		color:$oc-gray-0;
 
 		& a, & label {
 			background-color: $oc-gray-7;
-			color:white !important;
+			color:$oc-gray-0 !important;
 
 			& input[type=checkbox]:checked~ul label.switch, & input[type=checkbox]:checked~ul label.switch {
 				background-color: $oc-gray-8;
-				color:white;
+				color:$oc-gray-0;
 			}
 		}
 	}
@@ -25,36 +26,52 @@ body.dark {
 
 		& #map-search-box {
 			background-color: $oc-gray-9;
-			color: white !important;
+			color: $oc-gray-0 !important;
 		}
 
 		& i {
-			color:white !important;
+			color:$oc-gray-0 !important;
 		}
 
 		& #map-result li {
 			background-color: $oc-gray-9 !important;
-			color: white !important;
+			color: $oc-gray-0 !important;
 		}
 	}
 
 	#post .post .post-title a {
-		color:white;
+		color:$oc-gray-0;
 	}
 
-	#reply .reply-root .reply-addon .reply-box {
-		background-color:$oc-gray-9;
-		color:white;
+	#reply .reply-root {
+
+		& .reply-addon .reply-box {
+			background-color:$oc-gray-9;
+			color:$oc-gray-0;
+		}
+
+		& ul li .func button {
+			background-color:black;
+			color:$oc-gray-7;
+
+			&.disable {
+				background-color:black;
+				border:1px solid $oc-gray-9;
+				color:$oc-gray-9;
+			}
+		}
 	}
 
-	#edit #edit-title {
-		background-color: $oc-gray-9;
-		color: white;
-	}
+	#edit {
+		& #edit-title {
+			background-color: $oc-gray-9;
+			color: $oc-gray-0;
+		}
 
-	#edit #edit-content, #edit #edit-content-code {
-		background-color: $oc-gray-9;
-		color: white;
+		& #edit-content, & #edit-content-code {
+			background-color: $oc-gray-9;
+			color: $oc-gray-0;
+		}
 	}
 
 	#list {
@@ -64,22 +81,40 @@ body.dark {
 			}
 
 			& .title a {
-				color:white;
+				color:$oc-gray-0;
 			}
 		}
 
 		& .button-group {
+
 			.refresh {
-				color:white;
+				border:1px solid $oc-gray-6;
+				color:$oc-gray-0;
 			}
 
-			.edit.enable {
-				color:white;
+			.edit {
+				&.enable {
+					border:1px solid $oc-gray-6;
+					color:$oc-gray-0;
+				}
+
+				&.disable {
+					border:1px solid $oc-gray-9;
+					color:$oc-gray-9;
+				}
 			}
 		}
 
-		& .search-select .search-select-list ul li label span {
-			border: 1px solid white;
+		& .search-select .search-select-list {
+			border: 1px solid $oc-gray-6;
+
+			& ul li label span {
+				border: 1px solid $oc-gray-6;
+			}
+		}
+
+		& .search-group #search-button {
+			border: 1px solid $oc-gray-6;
 		}
 	}
 

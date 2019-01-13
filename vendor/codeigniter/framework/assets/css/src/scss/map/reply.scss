@@ -55,6 +55,7 @@
 			background:white;
 			margin:0 .2rem;
 			flex-grow: 2;
+			cursor:pointer;
 
 			&.modify {
 				flex-grow: 1;
@@ -72,6 +73,14 @@
 				background-color: $oc-gray-9;
 				color:white;
 				transition:all .1s ease-out;
+			}
+
+			&.reply-up {
+				color:$oc-red-6 !important;
+			}
+
+			&.reply-down {
+				color:$oc-blue-6 !important;
 			}
 		}
 
