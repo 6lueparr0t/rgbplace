@@ -162,7 +162,6 @@ class Profile_model extends CI_Model {
 	}
  */
 
-	//public function select_info($field, $start=0, $rows=0, $search = array()) {
 	public function select_info($data, $info) {
 
 		$field = $data['tab'];

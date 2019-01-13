@@ -134,6 +134,7 @@ function input_upload() {
 			state.classList.add("drop_it");
 
 			addFile(data);
+			addList(data);
 			input_zone.value = '';
 		} else {
 			//We reached our target server, but it returned an error
@@ -160,11 +161,41 @@ function input_upload() {
 	request.send(formData);
 }
 
+function addList(data) {
+
+	let tag = '';
+	//let upload = JSON.parse(window.atob(document.querySelector('#edit-upload').value.substr(1)));
+	//console.log(data);
+	let list = document.querySelector('.file-list');
+
+	if(list.classList.contains('no-file')) {
+		list.classList.remove('no-file');
+		list.innerHTML = '';
+		document.querySelector("#upload-list-toggle").click();
+	}
+
+	data.forEach(function(value, key) {
+		tag = "<li class='file' ";
+		tag += "data-default-path='"+value['default_path']+"' ";
+		tag += "data-file-name='"+value['file_name']+"' ";
+		tag += "data-client-name='"+value['client_name']+"' ";
+		tag += "data-file-type='"+value['file_type']+"' ";
+		tag += "data-size='"+value['file_size']+"' ";
+		tag += "data-datetime='"+value['datetime']+"'>";
+		tag += value['client_name'];
+		tag += "<span class='add fas fa-check'></span>";
+		tag += "</li>";
+
+		list.innerHTML += tag;
+	});
+}
+
 function addFile(data) {
 
 	let tag = '';
 	let str = '';
 	//let upload = JSON.parse(window.atob(document.querySelector('#edit-upload').value.substr(1)));
+	//console.log(data);
 
 	data.forEach(function(value, key) {
 		if(value['file_name']) {
@@ -248,13 +279,16 @@ function tabChange (element) {
 
     element.classList.add('active');
 }
-document.querySelector("body").addEventListener("click", function(event) {
+
+document.querySelector("#edit").addEventListener("click", function(event) {
 	let t = event.target;
 	let editor, content;
 
 	let edit_content = document.querySelector('#edit-content');
 	let edit_content_code = document.querySelector('#edit-content-code');
 
+	let data = [];
+	//console.log(t);
 	switch(t.classList.item(0)) {
 		case 'view' :
 			if(t.classList[1] === undefined) {
@@ -280,13 +314,28 @@ document.querySelector("body").addEventListener("click", function(event) {
 				edit_content.classList.remove('active');
 			}
 			break;
+		case 'add' :
+			data.push({
+				'default_path' : t.parentElement.getAttribute('data-default-path'),
+				'file_name' : t.parentElement.getAttribute('data-file-name'),
+				'client_name' : t.parentElement.getAttribute('data-client-name'),
+				'file_type' : t.parentElement.getAttribute('data-file-type')
+			});
+
+			//console.log(data);
+			addFile(data);
+			move("#upload-list", -15);
+			break
+		case 'file' :
+			if(t.getAttribute('data-default-path') && t.getAttribute('data-file-name')) {
+				document.querySelector("#upload-preview-img").src = t.getAttribute('data-default-path') + t.getAttribute('data-file-name');
+			}
+			break;
 	}
 
 	switch(t.id) {
 		case 'save' :
 			if(confirm('등록 하시겠습니까?\nAre you sure you want to post it?')) {
-				let data = [];
-
 				editor = document.querySelector('.editor.active');
 				if(editor.id == 'edit-content') {
 					content = editor.innerHTML;
@@ -307,6 +356,18 @@ document.querySelector("body").addEventListener("click", function(event) {
 			break;
 		case 'cancel' :
 			back();
+			break;
+		case 'upload-list-toggle' :
+			let sw = t.querySelector('#upload-list-switch');
+
+			t.classList.toggle('show');
+			t.nextSibling.nextSibling.classList.toggle('close');
+
+			if (t.classList.contains('show')) {
+				sw.className = 'fa fa-caret-up';
+			} else {
+				sw.className = 'fas fa-caret-down';
+			}
 			break;
 	}
 });

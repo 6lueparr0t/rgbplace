@@ -132,4 +132,8 @@ body.dark {
 			}
 		}
 	}
+
+	#upload-list .table .upload-list-result ul.file-list li:hover {
+		background-color:$oc-gray-9;
+	}
 }

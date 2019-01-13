@@ -14,6 +14,12 @@ $target-width : "860px";
 	user-select: #{$value};          /* Likely future */ 
 }
 
+@mixin column-count ($value) {
+	-webkit-column-count: #{$value}; /* Chrome, Safari, Opera */
+	-moz-column-count: #{$value}; /* Firefox */
+	column-count: #{$value};
+}
+
 @import "../../../node_modules/open-color/open-color.scss";
 //@import "../fonts/fontawesome/fontawesome-all.min.css";
 //@import "../../../node_modules/font-awesome/scss/font-awesome.scss";

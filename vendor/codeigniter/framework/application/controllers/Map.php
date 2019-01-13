@@ -124,6 +124,8 @@ class Map extends CI_Controller {
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
 
+		$data['upload_list'] = $this->session->userdata('upload_list'); 
+
 		$this->root->view("map/edit", $data);
 	}
 

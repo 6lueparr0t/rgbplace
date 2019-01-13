@@ -4,16 +4,18 @@
 }
 
 #upload {
-	text-align  : center;
-	border      : 4px dashed gray;
-	height      : 150px;
-	font-family : "pixel";
-	cursor : pointer;
+	text-align   : center;
+	border-left  : 4px dashed $oc-gray-7;
+	border-right : 4px dashed $oc-gray-7;
+	border-bottom: 4px dashed $oc-gray-7;
+	height       : 150px;
+	font-family  : "pixel";
+	cursor       : pointer;
 
 	label[for="input_zone"] {
 		position : relative;
 		display: block;
-		padding-top: 1.5rem;
+		padding-top: 2rem;
 		width: 100%;
 		height: 84%;
 		cursor:pointer;
@@ -49,42 +51,94 @@
 }
 
 
-#upload-history {
+#upload-list {
+	@include user-select('none');
 	font-family: "pixel";
-	border: 4px solid $oc-green-6;
-	background-color: 4px solid $oc-green-6;
-	margin:1rem 0;
-	cursor:pointer;
+	font-weight: 700;
+	border : 4px dashed $oc-gray-7;
+	margin-top:1rem;
 
-	#upload-history-toggle {
+	#upload-list-toggle {
+		cursor:pointer;
 		margin:1rem 0;
-
-		&.none {
-			display:none;
-		}
 	}
 
 	& .group {
-		&.open {
-			display:initial;
-		}
-
 		&.close {
 			display:none;
 		}
 	}
 
-	&.table {
+	& .table {
+		padding:.5rem;
+		border-top: 4px solid $oc-gray-7;
+		//column-rule: 4px solid black;
+		display:flex;
 
-	}
+		@media screen and ($width-name : $target-width) {
+			display:block;
+		}
 
-	#upload-history-result {
+		.upload-list-result {
+			display: inline-flex;
+			width:60%;
+			height:200px;
+			padding:0 .5rem 0 0;
+			overflow-y:scroll;
+			border-right:4px solid black;
 
-	}
+			@media screen and ($width-name : $target-width) {
+				margin-bottom:.5rem;
+				border-right:none;
+				width: 100%;
+			}
 
-	#upload-preview {
-		#upload-preview-img {
+			ul {
+				list-style: none;
+				margin:0;
+				padding:0;
+				width:100%;
 
+				&.file-list {
+
+					& li {
+						text-align:left;
+						padding:1rem;
+						border-bottom: 1px solid $oc-gray-9;
+
+						span {
+							float:right;
+							cursor:pointer;
+
+							&:hover {
+								color:$oc-gray-4;
+							}
+						}
+
+						&:hover{
+							background-color:$oc-gray-1;
+						}
+					}
+
+				}
+			}
+		}
+		.upload-preview {
+			display: inline-flex;
+			width:40%;
+			padding:.5rem;
+
+			@media screen and ($width-name : $target-width) {
+				border-top:4px solid black;
+				width: 94%;
+			}
+
+			#upload-preview-img {
+				height:200px;
+				width: 100%;
+				max-width: 300px;
+				margin:auto;
+			}
 		}
 	}
 

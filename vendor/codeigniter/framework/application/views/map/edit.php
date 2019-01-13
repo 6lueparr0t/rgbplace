@@ -17,17 +17,17 @@
 <?php echo $content; ?>
 </textarea>
 
-<div id='upload-history'>
-	<div id='upload-history-toggle'>Upload History <i class="fa fa-caret-down"></i> <i class="fas fa-caret-up none"></i></div>
-	<div class='upload-history group close'>
-		<div class='upload-history table'>
-			<div class='upload-history-result'>
-				<ul>
-					<li data-no=''></li>
+<div id='upload-list'>
+	<div id='upload-list-toggle'>Upload List <i id='upload-list-switch' class="fa fa-caret-down"></i></div>
+	<div class='upload-list group close'>
+		<div class='upload-list table'>
+			<div class='upload-list-result'>
+				<ul class='file-list no-file'>
+					<li class='file'>No File.</li>
 				</ul>
 			</div>
-			<div id='upload-preview'>
-				<img id='upload-preview-img' src='' />
+			<div class='upload-preview'>
+				<img id='upload-preview-img' src='/assets/img/placeholder.jpg' />
 			</div>
 		</div>
 	</div>
