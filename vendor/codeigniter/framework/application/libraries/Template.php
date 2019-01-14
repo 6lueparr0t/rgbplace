@@ -296,7 +296,7 @@ class Template {
 		echo("</div>");
 
 		// get map title
-		echo ("<div class='address none'>");
+		echo ("<div class='address'>");
 		if($this->CI->session->userdata('map') != $this->CI->uri->segment(1)) {
 			$this->CI->session->set_userdata(
 				array(

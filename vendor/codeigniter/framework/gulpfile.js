@@ -166,15 +166,15 @@ function watch() {
 }
 
 exports.watch = watch;
-//gulp.task('watch', watch);
+gulp.task('watch', watch);
 
-// function browser_sync () {
-//     //files: ["assets/js/**/*.*", "assets/css/*.*"],
-//     browserSync.init(null, {
-//         proxy: "http://localhost",
-//         files: ["application/**/*.*", "assets/js/**/*.*", "assets/css/*.*"],
-//         port: 3000
-//     });
-// }
-//
-// gulp.task('browser-sync', browser_sync);
+ function browser_sync () {
+	 //files: ["assets/js/**/*.*", "assets/css/*.*"],
+	 browserSync.init(null, {
+		 proxy: "http://localhost",
+		 files: ["application/**/*.*", "assets/js/**/*.*", "assets/css/*.*"],
+		 port: 3000
+	 });
+ }
+
+ gulp.task('browser-sync', browser_sync);

@@ -8,6 +8,7 @@
 	</div>
 	<div id='info-area' class='page none'>
 <?
+$sw = ($no && $this->session->userdata("admin") == false)?'disabled':'enabled';
 echo("
 		<div class='table'>
 			<div class='tr'>
@@ -16,10 +17,11 @@ echo("
 			</div>
 			<div class='tr'>
 				<div class='th'>Name</div>
-				<div class='td name'><input type='text' id='name' maxlength='20' value='{$name}' ".(($this->session->userdata("admin"))?'disabled':'')."/></div>
+				<div class='td name'><input type='text' id='name' maxlength='20' value='{$name}' {$sw} /></div>
 			</div>
-");
-if($this->session->userdata("admin") === false) {
+			");
+
+if($this->session->userdata("admin") === false || $no) {
 	echo ("
 			<div class='tr'>
 				<div class='th'>Info</div>
@@ -27,19 +29,23 @@ if($this->session->userdata("admin") === false) {
 			</div>
 			<div class='tr'>
 				<div class='th'>email</div>
-				<div class='td email'><input type='email' id='email' maxlength='400' value='{$email}'/></div>
+				<div class='td email'><input type='email' id='email' maxlength='400' value='{$email}' {$sw} /></div>
 			</div>
 			<div class='tr'>
 				<div class='th'>First Date</div>
 				<div class='td'>{$ctim}</div>
 			</div>
-");
+	");
 }
-echo("
+	echo("
 			<div class='tr'>
 				<div class='th'>Last Date</div>
 				<div class='td'>{$atim}</div>
 			</div>
+	");
+
+if($this->session->userdata("admin") === true || !$no) {
+	echo("
 			<div class='tr'>
 				<div class='th'>Pass word</div>
 				<div class='td pswd'><input type='password' id='pswd' maxlength='255' value=''/></div>
@@ -48,12 +54,18 @@ echo("
 				<div class='th'>Confirm</div>
 				<div class='td conf'><input type='password' id='conf' maxlength='255' value=''/></div>
 			</div>
-		</div>
+	");
+}
 
+	echo("
+		</div>
+	");
+
+echo("
 		<div class='button-group'>
-			<div class='enable' id='save' name='save'>SAVE</div>
-			<div class='enable' id='cancel' name='cancel'>CANCEL</div>
-			<div class='enable' id='delete' name='delete'>DEL</div>
+			<div class='{$sw}' id='save' name='save'>SAVE</div>
+			<div class='{$sw}' id='cancel' name='cancel'>CANCEL</div>
+			<div class='{$sw}' id='delete' name='delete'>DEL</div>
 		</div>
 ");
 ?>

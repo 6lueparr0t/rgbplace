@@ -108,7 +108,7 @@
 			&#save {
 				flex-grow:50;
 
-				&.enable {
+				&.enabled {
 					border: 1px solid $oc-indigo-5;
 					background-color: $oc-indigo-5;
 					color:white;
@@ -119,8 +119,8 @@
 					}
 				}
 
-				&.disable {
-					border: 1px solid $oc-indigo-2;
+				&.disabled {
+					border: 1px solid $oc-indigo-5;
 					pointer-events: none;
 					cursor: default;
 					color : $oc-indigo-2;
@@ -130,7 +130,7 @@
 			&#cancel {
 				flex-grow:49;
 
-				&.enable {
+				&.enabled {
 					border: 1px solid $oc-gray-6;
 					background-color: $oc-gray-6;
 					color:white;
@@ -141,8 +141,8 @@
 					}
 				}
 
-				&.disable {
-					border: 1px solid $oc-gray-2;
+				&.disabled {
+					border: 1px solid $oc-gray-6;
 					pointer-events: none;
 					cursor: default;
 					color : $oc-gray-2;
@@ -156,7 +156,7 @@
 				margin:0 .5rem;
 				text-align: center;
 
-				&.enable {
+				&.enabled {
 					border: 1px solid $oc-red-6;
 					background-color: $oc-red-6;
 					color:white;
@@ -167,8 +167,8 @@
 					}
 				}
 
-				&.disable {
-					border: 1px solid $oc-gray-2;
+				&.disabled {
+					border: 1px solid $oc-red-6;
 					pointer-events: none;
 					cursor: default;
 					color : $oc-gray-2;

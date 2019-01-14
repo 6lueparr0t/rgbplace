@@ -13,20 +13,26 @@ class Profile_model extends CI_Model {
         parent::__construct();
     }
 
-	public function info() {
-		if($this->session->userdata('admin') === true) {
+	public function info($no = null) {
 
-			$name = $this->session->userdata('name');
-			$query = "SELECT * FROM admin_info WHERE name = ? LIMIT 1";
-			$find = $this->db->query($query, $name);
+		if($no) {
+
+			$query = "SELECT * FROM user_info WHERE no = ? LIMIT 1";
+			$find = $this->db->query($query, $no);
 
 		} else {
 
-			$uid = $this->session->userdata('uid');
-			$query = "SELECT * FROM user_info WHERE uid = ? LIMIT 1";
-			$find = $this->db->query($query, $uid);
+			if($this->session->userdata('admin') === true) {
+				$name = $this->session->userdata('name');
+				$query = "SELECT * FROM admin_info WHERE name = ? LIMIT 1";
+				$find = $this->db->query($query, $name);
+			} else {
+				$uid = $this->session->userdata('uid');
+				$query = "SELECT * FROM user_info WHERE uid = ? LIMIT 1";
+				$find = $this->db->query($query, $uid);
+			}	
 
-		}
+		} 
 
 		return (array)$find->row();
 	}
@@ -35,20 +41,41 @@ class Profile_model extends CI_Model {
 		$uid = $this->session->userdata('uid');
 		$admin = $this->session->userdata('admin');
 
+		$where_field = isset($data['no'])?'no':'uid';
+		$where_value = isset($data['no'])?$data['no']:$uid;
+
 		if ($admin === true) {
 
-			$set = '';
-			if(isset($data['name']) && $data['name'] != '') {
-				$name = $this->session->userdata('name');
-				$set .= "name = '".$this->db->escape_str($data['name'])."', ";
-			}
+			if($where_field == 'uid') {
+				$set = '';
+				if(isset($data['name']) && $data['name'] != '') {
+					$name = $this->session->userdata('name');
+					$set .= "name = '".$this->db->escape_str($data['name'])."', ";
+				}
 
-			if(isset($data['pswd']) && $data['pswd'] != '') {
-				$set .= "pswd = '".base64_encode(password_hash($this->db->escape_str($data['pswd']), PASSWORD_DEFAULT, ['cost' => 12]))."', ";
-			}
+				if(isset($data['pswd']) && $data['pswd'] != '') {
+					$set .= "pswd = '".base64_encode(password_hash($this->db->escape_str($data['pswd']), PASSWORD_DEFAULT, ['cost' => 12]))."', ";
+				}
 
-			$query = "UPDATE admin_info SET {$set} atim = now() WHERE uid = 'admin' and name = ?";
-			$result = $this->db->query( $query, $name );
+				$query = "UPDATE admin_info SET {$set} atim = now() WHERE uid = 'admin' and name = ?";
+				$result = $this->db->query( $query, $name );
+			} else {
+				$set = '';
+				if(isset($data['name']) && $data['name'] != '') {
+					$set .= "name = '".$this->db->escape_str($data['name'])."', ";
+				}
+
+				if(isset($data['email']) && $data['email'] != '') {
+					$set .= "email = '".$this->db->escape_str($data['email'])."', ";
+				}
+
+				if(isset($data['pswd']) && $data['pswd'] != '') {
+					$set .= "pswd = '".base64_encode(password_hash($this->db->escape_str($data['pswd']), PASSWORD_DEFAULT, ['cost' => 12]))."', ";
+				}
+
+				$query = "UPDATE user_info SET {$set} utim = now() WHERE {$where_field} = ?";
+				$result = $this->db->query( $query, $where_value);
+			}
 
 		} else {
 			if(!$data['name']) return false;
@@ -72,8 +99,10 @@ class Profile_model extends CI_Model {
 			$result = $this->db->query( $query, $uid );
 		}
 
-		$this->session->unset_userdata( array('name') );
-		$this->session->set_userdata( array('name' => $data['name']) );
+		if($where_field == 'uid') {
+			$this->session->unset_userdata( array('name') );
+			$this->session->set_userdata( array('name' => $data['name']) );
+		}
 
 		return $result;
 	}
@@ -82,18 +111,27 @@ class Profile_model extends CI_Model {
 		$uid = $this->session->userdata('uid');
 		$admin = $this->session->userdata('admin');
 
-		if ($admin === true) {
-			$name = $this->session->userdata('name');
+		$where_field = isset($data['no'])?'no':'uid';
+		$where_value = isset($data['no'])?$data['no']:$uid;
 
-			$query = "DELETE FROM admin_info WHERE uid = 'admin' and name = ?";
-			$result = $this->db->query( $query, $name );
+		if ($admin === true) {
+
+			if($where_field == 'uid') {
+				$name = $this->session->userdata('name');
+
+				$query = "DELETE FROM admin_info WHERE uid = 'admin' and name = ?";
+				$result = $this->db->query( $query, $name );
+			} else {
+				$query = "DELETE user.*, conf.* FROM user_info user LEFT JOIN user_conf conf ON user.uid = conf.uid WHERE user.{$where_field}= ?";
+				$result = $this->db->query( $query, $where_value );
+			}
 
 		} else {
 			$query = "DELETE user.*, conf.* FROM user_info user LEFT JOIN user_conf conf ON user.uid = conf.uid WHERE user.uid = ?";
 			$result = $this->db->query( $query, $uid );
 		}
 
-		if ($result) {
+		if ($result && $where_field == 'uid') {
 			$config = ['admin', 'uid', 'name', 'signed_in'];
 			$this->session->unset_userdata($config);
 		}
@@ -165,10 +203,19 @@ class Profile_model extends CI_Model {
 	public function select_info($data, $info) {
 
 		$field = $data['tab'];
+		$search['no'] = isset($data['no'])?$data['no']:0;
 		$search['page'] = isset($data['page'])?$data['page']:0;
 
-		$table = $this->db->escape_str('total_'.$field);
+		if(!isset($data['no']) && $this->session->userdata('admin') == true) {
+			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN admin_info user ON user.name = total.name');
+		} else {
+			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN user_info user ON user.uid = total.uid');
+		}
+
 		$this->setting($uid, $name);
+
+		$where_field = ($search['no'])?'no':(($this->session->userdata('admin'))?'name':'uid');
+		$where_value = ($search['no'])?$search['no']:(($this->session->userdata('admin'))?$name:$uid);
 
 		$start = (($search['page']>1)?$search['page']-1:0)*LIST_ROWS_LIMIT;
 		$rows = LIST_ROWS_LIMIT;
@@ -177,7 +224,7 @@ class Profile_model extends CI_Model {
 		//####################################################################################################
 
 		// paging
-		$query = $this->db->query("SELECT COUNT(*) as list_count FROM {$table} WHERE uid = ? ", array($uid));
+			$query = $this->db->query("SELECT COUNT(*) as list_count FROM {$table} WHERE user.{$where_field} = ? ", $where_value);
 
 		// all list count / 30 (default)
 		$MAX_LIST_COUNT = $query->row()->list_count;
@@ -235,11 +282,14 @@ class Profile_model extends CI_Model {
 		$idx_start = $MAX_LIST_COUNT - ((($search['page']>0?$search['page']:1)-1)*LIST_ROWS_LIMIT) + 1; 
 
 		$ret['list'] = '';
+
 		switch ($field) {
 		case 'post' :
 			$query = $this->db->query("SELECT @IDX := @IDX - 1 AS idx,
-				uid, name, map, post, title, date FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
-				WHERE uid = ? ORDER BY no DESC LIMIT ".$this->db->escape_str($limit), array($uid));
+				total.uid, total.name, total.map, total.post, total.title, total.date
+				FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
+				WHERE user.{$where_field} = ? ORDER BY total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
+
 			foreach ($query->result() as $key => $row) {
 				$tmp  = "<div class='tr'>";
 				$tmp .= "<div class='td center width-50'>{$row->idx}</div>";
@@ -255,8 +305,10 @@ class Profile_model extends CI_Model {
 			break;
 		case 'reply' : 
 			$query = $this->db->query("SELECT @IDX := @IDX - 1 AS idx,
-				uid, name, map, post, reply, content, date FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
-				WHERE uid = ? ORDER BY no DESC LIMIT ".$this->db->escape_str($limit), array($uid));
+				total.uid, total.name, total.map, total.post, total.reply, total.content, total.date
+				FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
+				WHERE user.{$where_field} = ? ORDER BY total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
+
 			foreach ($query->result() as $key => $row) {
 				$tmp  = "<div class='tr'>";
 				$tmp .= "<div class='td center width-50'>{$row->idx}</div>";
@@ -272,8 +324,10 @@ class Profile_model extends CI_Model {
 			break;
 		case 'upload' :
 			$query = $this->db->query("SELECT @IDX := @IDX - 1 AS idx,
-				uid, name, client_name, file_name, file_type, file_size, date FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
-			   	WHERE uid = ? ORDER BY no DESC LIMIT ".$this->db->escape_str($limit), array($uid));
+				total.uid, total.name, total.client_name, total.file_name, total.file_type, total.file_size, total.date
+				FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
+				WHERE user.{$where_field} = ? ORDER BY total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
+
 			foreach ($query->result() as $key => $row) {
 				$tmp  = "<div class='tr'>";
 				$tmp .= "<div class='td center width-50'>{$row->idx}</div>";

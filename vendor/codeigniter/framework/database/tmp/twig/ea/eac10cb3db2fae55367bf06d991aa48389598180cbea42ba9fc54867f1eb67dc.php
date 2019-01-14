@@ -87,6 +87,6 @@ $context["bookmark"], "getDatabase", array(), "method")))));
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "console/bookmark_content.twig", "/var/www/html/vendor/codeigniter/framework/database/templates/console/bookmark_content.twig");
+        return new Twig_Source("", "console/bookmark_content.twig", "/usr/local/var/www/vendor/codeigniter/framework/database/templates/console/bookmark_content.twig");
     }
 }

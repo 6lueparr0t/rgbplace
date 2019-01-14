@@ -61,7 +61,7 @@ function tabChange (tab) {
     document.querySelector('#'+tab+'-area').classList.remove('none');
 }
 
-document.querySelector("body").addEventListener("click", function(event) {
+document.querySelector("#profile").addEventListener("click", function(event) {
 	let t = event.target;
 
 	let name = '', email = '', pswd_conf = '';
@@ -74,12 +74,13 @@ document.querySelector("body").addEventListener("click", function(event) {
 		};
 
 		let search = {
+			'no':(params.get('no'))?'&no='+params.get('no'):'',
 			'page':(params.get('page'))?'&page='+params.get('page'):''
 		}
 
 		switch(data['tab']) {
 			case 'info' :
-				history.pushState({tab: data['tab']}, '', '?tab='+data['tab']);
+				history.pushState({tab: data['tab']}, '', '?tab='+data['tab']+search['no']);
 				tabChange(data['tab']);
 				break;
 			case 'upload' :
@@ -87,10 +88,10 @@ document.querySelector("body").addEventListener("click", function(event) {
 			case 'reply' :
 			case 'vote' :
 			case 'report' :
-				history.pushState({tab: data['tab']}, '', '?tab='+data['tab']+search['page']);
+				history.pushState({tab: data['tab']}, '', '?tab='+data['tab']+search['no']+search['page']);
 				tabChange(data['tab']);
 
-				httpRequest('get', '/api/request/profile?info='+data['info']+'&tab='+data['tab']+search['page'], null,
+				httpRequest('get', '/api/request/profile?info='+data['info']+'&tab='+data['tab']+search['no']+search['page'], null,
 				ret => {
 					let list = document.querySelector('#'+data['tab']+'-list');
 					let page = document.querySelector('#'+data['tab']+'-page');
@@ -103,12 +104,12 @@ document.querySelector("body").addEventListener("click", function(event) {
 	}
 
 	if (t.parentElement.className === 'profile-pagination') {
-	console.log(t.parentElement.className);
+		//console.log(t.parentElement.className);
 		let tab  = t.getAttribute('data-tab');
 		let page = t.getAttribute('data-page');
 		let param  = '&tab='+tab+'&page='+page;
 		
-		history.pushState({tab: tab}, '', '?tab='+tab+'&page='+page);
+		history.pushState({tab: tab}, '', '?tab='+tab +search['no'] +'&page='+page);
 		httpRequest('get', '/api/request/profile?info='+__URL__+param, null,
 				ret => {
 					let list = document.querySelector('#'+tab+'-list');
@@ -153,6 +154,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 			data.push({
 				'info': __URL__,
+				'no':(params.get('no'))?params.get('no'):0,
 				'name': name,
 				'email': email,
 				'pswd': pswd_conf
@@ -167,7 +169,8 @@ document.querySelector("body").addEventListener("click", function(event) {
 		case 'delete' :
 			if(confirm('계정을 삭제하시겠습니까? 계정 삭제 시, 게시물은 남아있을 수 있습니다. \n Delete Your Account? your post & reply will be remain')) {
 				data.push({
-					'info': __URL__
+					'info': __URL__,
+					'no':(params.get('no'))?params.get('no'):0
 				});
 
 				//console.log(data);

@@ -125,10 +125,11 @@ body.dark {
 
 		& .page .table .td input {
 			background-color: black;
+			color:$oc-gray-0;
 
 			&:disabled {
 				background-color: black;
-				color:$oc-gray-5;
+				color:$oc-gray-7;
 			}
 		}
 	}
