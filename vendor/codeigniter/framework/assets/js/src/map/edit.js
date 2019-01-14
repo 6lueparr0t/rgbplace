@@ -324,7 +324,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 
 			//console.log(data);
 			addFile(data);
-			move("#upload-list", -15);
+			move("#upload-list", -15, 0);
 			break
 		case 'file' :
 			if(t.getAttribute('data-default-path') && t.getAttribute('data-file-name')) {

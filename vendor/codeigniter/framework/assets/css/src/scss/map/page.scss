@@ -9,7 +9,7 @@
 		}
 
 		& .title {
-			position: absolute;
+			position: relative;
 			left: 50%;
 			transform: translate(-50%, 0%);
 			background-color: rgba(255,255,255,0.6);
@@ -29,6 +29,8 @@
 			height: 600px;
 			position: relative;
 			z-index: 1;
+			max-width: initial;
+    		margin-top: -3.2rem;
 
 			@media screen and ($width-name : $target-width) {
 				display: table;

@@ -1,5 +1,6 @@
-function move (selector, position) {
+function move (selector, position, time) {
 	if(position === undefined) position = 0;
+	if(time === undefined) time = 200;
 
 	let element = document.querySelector(selector); 
 
@@ -15,5 +16,5 @@ function move (selector, position) {
 
 	setTimeout(function() {
 		window.scrollTo(this.x, this.y);
-	}.bind(moveTo), 200);
+	}.bind(moveTo), time);
 }
