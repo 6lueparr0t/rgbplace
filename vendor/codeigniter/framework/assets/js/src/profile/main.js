@@ -107,9 +107,10 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 		//console.log(t.parentElement.className);
 		let tab  = t.getAttribute('data-tab');
 		let page = t.getAttribute('data-page');
-		let param  = '&tab='+tab+'&page='+page;
+		let no = (t.getAttribute('data-no'))?t.getAttribute('data-no'):'';
+		let param  = '&tab='+tab+'&page='+page+'&no='+no;
 		
-		history.pushState({tab: tab}, '', '?tab='+tab +search['no'] +'&page='+page);
+		history.pushState({tab: tab}, '', '?tab='+tab+'&page='+page+'&no='+no);
 		httpRequest('get', '/api/request/profile?info='+__URL__+param, null,
 				ret => {
 					let list = document.querySelector('#'+tab+'-list');

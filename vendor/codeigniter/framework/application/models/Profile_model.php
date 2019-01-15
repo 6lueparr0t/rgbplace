@@ -260,19 +260,20 @@ class Profile_model extends CI_Model {
         // ** button-group class start
         $ret['page'] = "<div class='profile-pagination'>";
 
-        $ret['page'].= "<span class='fas fa-step-backward' data-tab='{$field}' data-page='1'></span>";
-        $ret['page'].= "<span class='fas fa-backward' data-tab='{$field}' data-page='{$min_pagination}'></span>";
+		$no = ($search['no'])?$search['no']:''
+        $ret['page'].= "<span class='fas fa-step-backward' data-tab='{$field}' data-no='{$no}' data-page='1'></span>";
+        $ret['page'].= "<span class='fas fa-backward' data-tab='{$field}' data-page='{$min_pagination}' data-no='{$no}'></span>";
 
         for($count=0; $count<$range; $count++) {
             $next = $pagination_start;
 			if($pagination_start <= $max && $pagination_start != 0) {
-				$ret['page'].= "<span class='".(($next == $search['page'] || ($next == 1 && $search['page'] == 0))?'active':'')."' data-tab='{$field}' data-page='{$next}'>{$next}</span>";
+				$ret['page'].= "<span class='".(($next == $search['page'] || ($next == 1 && $search['page'] == 0))?'active':'')."' data-tab='{$field}' data-page='{$next}' data-no='{$no}'>{$next}</span>";
 			}
             $pagination_start++;
         }
 
-        $ret['page'].= "<span class='fas fa-forward' data-tab='{$field}' data-page='{$max_pagination}'></span>";
-		$ret['page'].= "<span class='fas fa-step-forward' data-tab='{$field}' data-page='{$max}'></span>";
+        $ret['page'].= "<span class='fas fa-forward' data-tab='{$field}' data-page='{$max_pagination}' data-no='{$no}'></span>";
+		$ret['page'].= "<span class='fas fa-step-forward' data-tab='{$field}' data-page='{$max}' data-no='{$no}'></span>";
 
 		$ret['page'].="</div>";
 
