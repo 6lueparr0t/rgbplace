@@ -11,20 +11,25 @@ function stageSave() {
 
 	let background = (document.querySelector('body').classList.contains('dark'))?'#495057':'#fff';
 
-	httpRequest('post', '/api/config/map/save', JSON.stringify(data), data => {
-		const toast = Swal.mixin({
-			toast: true,
-			position: 'bottom-end',
-			background: background,
-			showConfirmButton: false,
-			timer: 3000
-		});
+	const toast = Swal.mixin({
+		toast: true,
+		position: 'bottom-end',
+		background: background,
+		showConfirmButton: false,
+		timer: 3000
+	});
 
+	httpRequest('post', '/api/config/map/save', JSON.stringify(data), data => {
 		toast({
 			type: 'success',
 			title: "stage changed '"+__URL_ARRAY__[1]+"'"
 		});
-	}, null);
+	}, data => {
+		toast({
+			type: 'error',
+			title: "Sign in Please"
+		});
+	});
 }
 
 function darkModeOnOff() {

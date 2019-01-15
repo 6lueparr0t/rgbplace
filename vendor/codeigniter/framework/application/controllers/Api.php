@@ -98,7 +98,7 @@ class Api extends CI_Controller {
 			} else {
 				header('HTTP/1.1 401 Unauthorized');
 				header('Content-Type: application/json; charset=UTF-8');
-				$ret = 'login please';
+				$ret = 'sign in please';
 			}
 			break;
 		case 'reply': 
@@ -134,7 +134,7 @@ class Api extends CI_Controller {
 				} else {
 					header('HTTP/1.1 401 Unauthorized');
 					header('Content-Type: application/json; charset=UTF-8');
-					$ret = 'login please';
+					$ret = 'sign in please';
 				}
 				//$this->monolog->debug('api', $ret);
 				break;
@@ -145,7 +145,7 @@ class Api extends CI_Controller {
 				} else {
 					header('HTTP/1.1 401 Unauthorized');
 					header('Content-Type: application/json; charset=UTF-8');
-					$ret = 'login please';
+					$ret = 'sign in please';
 				}
 				break;
 			case 'delete':
@@ -156,7 +156,7 @@ class Api extends CI_Controller {
 				} else {
 					header('HTTP/1.1 401 Unauthorized');
 					header('Content-Type: application/json; charset=UTF-8');
-					$ret = 'login please';
+					$ret = 'sign in please';
 				}
 				break;
 			default :
@@ -176,7 +176,7 @@ class Api extends CI_Controller {
 			} else {
 				header('HTTP/1.1 401 Unauthorized');
 				header('Content-Type: application/json; charset=UTF-8');
-				$ret = 'login please';
+				$ret = 'sign in please';
 			}
 			break;
 		case 'vote' :
@@ -231,7 +231,7 @@ class Api extends CI_Controller {
 			} else {
 				header('HTTP/1.1 401 Unauthorized');
 				header('Content-Type: application/json; charset=UTF-8');
-				$ret = 'login please';
+				$ret = 'sign in please';
 			}
 			break;
 
@@ -369,7 +369,13 @@ class Api extends CI_Controller {
 		case 'map' :
 			switch($act) {
 			case 'save' :
-				$this->conf->stageSave( array('map' => $data['map'], 'uid' => $this->session->userdata('uid')) );
+				if ($this->session->userdata('signed_in')) {
+					$ret = $this->conf->stageSave( array('map' => $data['map'], 'uid' => $this->session->userdata('uid')) );
+				} else {
+					header('HTTP/1.1 401 Unauthorized');
+					header('Content-Type: application/json; charset=UTF-8');
+					$ret = 'sign in please';
+				}
 				break;
 			}
 			break;
@@ -377,18 +383,18 @@ class Api extends CI_Controller {
 			if ($data['mode'] === 'on') {
 				$this->session->set_userdata(array('darkmode'=>'on'));
 				if(!$this->session->userdata('admin') && $this->session->userdata('signed_in')) {
-					$this->conf->darkmodeOnOff( array('darkmode' => '1', 'uid' => $this->session->userdata('uid')) );
+					$ret = $this->conf->darkmodeOnOff( array('darkmode' => '1', 'uid' => $this->session->userdata('uid')) );
 				}
 			} else {
 				$this->session->unset_userdata('darkmode');
 				if(!$this->session->userdata('admin') && $this->session->userdata('signed_in')) {
-					$this->conf->darkmodeOnOff( array('darkmode' => '0', 'uid' => $this->session->userdata('uid')) );
+					$ret = $this->conf->darkmodeOnOff( array('darkmode' => '0', 'uid' => $this->session->userdata('uid')) );
 				}
 			}	
 			break;
 		}
 
-		echo json_encode(true);
+		echo json_encode($ret);
 	}
 
 	private function curl ($method, $url, $data) {
