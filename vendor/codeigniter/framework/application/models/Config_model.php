@@ -14,6 +14,14 @@ class Config_model extends CI_Model {
         parent::__construct();
     }
 
+	public function stageSave($data)
+	{
+		$query = "UPDATE user_info SET map = ? WHERE uid = ?";
+		$result = $this->db->query($query, array($data['map'], $data['uid']));
+
+		return $result;
+	}
+
 	public function darkmodeOnOff($data)
 	{
 		$query = "UPDATE user_conf SET dark_sw = ? WHERE uid = ?";

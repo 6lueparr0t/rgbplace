@@ -137,4 +137,14 @@ body.dark {
 	#upload-list .table .upload-list-result ul.file-list li:hover {
 		background-color:$oc-gray-9;
 	}
+
+	.swal2-popup.swal2-toast {
+		font-family : 'pixel';
+		box-shadow : none;
+		border : 1px solid $oc-gray-0;
+
+		& .swal2-title {
+			color : $oc-gray-0;
+		}
+}
 }

@@ -357,7 +357,7 @@ class Api extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	public function config ($type = null) {
+	public function config ($type = null, $act = null) {
 		$method = $this->input->method();
 		if($method == 'get') {
 			$data = $this->input->get();
@@ -366,6 +366,13 @@ class Api extends CI_Controller {
 		}
 
 		switch($type) {
+		case 'map' :
+			switch($act) {
+			case 'save' :
+				$this->conf->stageSave( array('map' => $data['map'], 'uid' => $this->session->userdata('uid')) );
+				break;
+			}
+			break;
 		case 'dark' :
 			if ($data['mode'] === 'on') {
 				$this->session->set_userdata(array('darkmode'=>'on'));

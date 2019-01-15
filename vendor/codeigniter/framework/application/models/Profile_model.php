@@ -260,7 +260,7 @@ class Profile_model extends CI_Model {
         // ** button-group class start
         $ret['page'] = "<div class='profile-pagination'>";
 
-		$no = ($search['no'])?$search['no']:''
+		$no = ($search['no'])?$search['no']:'';
         $ret['page'].= "<span class='fas fa-step-backward' data-tab='{$field}' data-no='{$no}' data-page='1'></span>";
         $ret['page'].= "<span class='fas fa-backward' data-tab='{$field}' data-page='{$min_pagination}' data-no='{$no}'></span>";
 

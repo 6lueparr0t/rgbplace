@@ -19,6 +19,7 @@
     "gulp-wait2": "^0.0.5",
     "npm": "^6.5.0",
     "open-color": "^1.6.3",
+    "sweetalert2": "^7.33.1",
     "yargs": "^6.6.0"
   },
   "devDependencies": {

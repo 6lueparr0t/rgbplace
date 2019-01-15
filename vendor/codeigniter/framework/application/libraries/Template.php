@@ -52,6 +52,7 @@ class Template {
 		echo("<meta name='viewport' content='width=device-width'/>");
 		echo("<title>RGB place</title>");
 		echo("<link rel='icon' href='data:;base64,iVBORw0KGgo='>");
+		echo("<link rel='stylesheet' href='/assets/ext/sweetalert2.min.css'/>");
 		echo("<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>");
 
 		// Google Tag Manager
@@ -116,6 +117,7 @@ class Template {
 		echo("<div id='push'></div>");
 		echo("<script src='/assets/js/comm/common.min.js'></script>");
 		echo("<script src='/assets/js/dist/{$path}.min.js'></script>");
+		echo("<script src='/assets/ext/sweetalert2.min.js'></script>");
 
 		echo("
 <div id='footer'>
@@ -199,9 +201,7 @@ class Template {
 		echo("</label>");
 		echo("</ul>");
 		echo("</label>");
-		echo("<a class='menu' href='/stage'>");
-		echo("<i class='fa fa-street-view'></i> Stage");
-		echo("</a>");
+		echo("<a class='menu' href='/stage'><i class='fa fa-street-view'></i> Stage</a>");
 		echo("<!-- <label for='menu-stage'><i class='fa fa-street-view'></i> Stage");
 		echo("<input class='menu' type='checkbox' id='menu-stage' />");
 		echo("<div class='menu' id='menu-stage-box'>");
@@ -212,11 +212,7 @@ class Template {
 		echo("<div class='menu' id='menu-comments-box'>");
 		echo("</div>");
 		echo("</label> -->");
-		echo("<label class='menu' for='menu-favorite'><i class='far fa-thumbs-up'></i>");
-		echo("<input class='menu' type='checkbox' id='menu-favorite' /> Like");
-		echo("<div class='menu' id='menu-favorite-box'>");
-		echo("</div>");
-		echo("</label>");
+		echo("<a class='menu' id='menu-favorite'><i class='far fa-thumbs-up'></i> Like</a>");
 
 		echo("<label class='menu' for='menu-config'><i class='fa fa-cog'></i>");
 			echo("<input class='menu' type='checkbox' id='menu-config' />");
