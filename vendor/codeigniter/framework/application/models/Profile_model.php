@@ -347,7 +347,7 @@ class Profile_model extends CI_Model {
 
 		//####################################################################################################
 
-		echo json_encode($ret);
+		return json_encode($ret);
 	}
 
 
@@ -381,6 +381,65 @@ class Profile_model extends CI_Model {
 		$query = $this->db->query("DELETE FROM {$table} where uid = ? and map = ? and {$field} = ? ", array($uid, $data['map'], $data['no']) );
 
 		return $query;
+	}
+
+	public function message($type, $idx = null) {
+		$this->setting($uid, $name);
+
+		if($this->session->userdata('admin') === true) {
+			$table = 'admin_info';
+			$field = 'name';
+		} else {
+			$table = 'user_info';
+			$field = 'uid';
+		}
+
+		switch($type) {
+
+		case 'add' :
+			// Insert
+			$msg = (array)json_decode($this->db->query("select msg from {$table} where {$field} = ? ", ${$field})->row()->msg)->total;
+
+			// 100건 넘으면 앞에서 부터 삭제
+			if(count($msg) > 100) {
+				$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[0]'), '{\"total\":[]}') where {$field} = ? ", ${$field});
+			}
+
+			$json = "{\"type\":\"{$data['type']}\", \"map\":\"{$data['map']}\", \"post\":\"{$data['post']}\", \"reply\":\"{$data['reply']}\", \"content\":\"{$data['content']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
+
+			$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where {$field} = ? ", ${$field});
+			break;
+
+		case 'remove' :
+			// Delete
+			$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[{$idx}]'), '{\"total\":[]}') where {$field} = ? ", ${$field});
+			break;
+
+		case 'show' :
+			// Select
+			$msg = (array)json_decode($this->db->query("select msg from {$table} where {$field} = ? ", ${$field})->row()->msg)->total;
+
+			for ( $i = count($msg)-1; $i >= 0; $i--) {
+				if(!isset($msg[$i]->date)) {
+					$msg[$i]->date = '';
+				}
+
+				$tmp = "<div class='tr'>";
+				$tmp.= "<div class='td center width-50'>{$i}</div>";
+				$tmp.= "<div class='td center width-50'>{$msg[$i]->map}</div>";
+				$tmp.= "<div class='td font-normal'>";
+				$tmp.= "<a href='/{$msg[$i]->map}/{$msg[$i]->post}?reply=y&no={$msg[$i]->no}' target='_blank'>{$msg[$i]->content}</a><br/>";
+				$tmp.= "{$msg[$i]->date}<br/>";
+				$tmp.= "</div>";
+				$tmp.= "</div>";
+
+				$ret['list'] .= $tmp;
+			}
+			break;
+
+		}
+
+		return $ret;
 	}
 
 	function setting(&$uid, &$name) {
