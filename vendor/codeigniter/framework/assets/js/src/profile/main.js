@@ -86,7 +86,7 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 			case 'upload' :
 			case 'post' :
 			case 'reply' :
-			case 'vote' :
+			case 'message' :
 			case 'report' :
 				history.pushState({tab: data['tab']}, '', '?tab='+data['tab']+search['no']+search['page']);
 				tabChange(data['tab']);
@@ -96,8 +96,8 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 					let list = document.querySelector('#'+data['tab']+'-list');
 					let page = document.querySelector('#'+data['tab']+'-page');
 					
-					list.innerHTML = ret['list'];
-					page.innerHTML = ret['page'];
+					list.innerHTML = (ret['list'])?ret['list']:'';
+					page.innerHTML = (ret['page'])?ret['page']:'';
 				}, fail);
 				break;
 		}

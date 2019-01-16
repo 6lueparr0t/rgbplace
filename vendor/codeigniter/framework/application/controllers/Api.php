@@ -214,7 +214,11 @@ class Api extends CI_Controller {
 			if($this->session->userdata('signed_in')) {
 				switch($this->input->method()) {
 				case 'get' :
-					$ret = $this->profile->select_info($data, $info);
+					if($data['tab'] === 'message') {
+						$ret = $this->profile->message('show');
+					} else {
+						$ret = $this->profile->select_info($data, $info);
+					}
 					break;
 				case 'post' :
 					break;
@@ -223,7 +227,11 @@ class Api extends CI_Controller {
 					$ret = $this->profile->update($data, $info);
 					break;
 				case 'delete':
-					$ret = $this->profile->delete($data, $info);
+					if($data['tab'] === 'message') {
+						$ret = $this->profile->message('remove', null, $data['idx']);
+					} else {
+						$ret = $this->profile->delete($data, $info);
+					}
 					break;
 				default :
 					break;

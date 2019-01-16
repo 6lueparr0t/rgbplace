@@ -1079,7 +1079,7 @@ class Map_model extends CI_Model {
 			if($depth[$i]>0) $reply['depth'] = $i;
 		}
 
-		$reply['mention'] = $result->name;
+		$reply['name'] = $result->name;
 		$reply['follow'] = ($result->follow)?$result->follow:$result->no;
 		$reply['post'] = $result->post;
 
@@ -1104,7 +1104,7 @@ class Map_model extends CI_Model {
 
 		$reply = [
 			'depth' => 0,
-			'mention' => '',
+			'name' => '',
 			'follow' => '',
 		];
 
@@ -1114,7 +1114,7 @@ class Map_model extends CI_Model {
 		}
 
 		$depth = ($reply['depth']<10)?$reply['depth']:9;
-		$mention = $reply['mention'];
+		$mention = $reply['name'];
 
 		$depth_array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -1203,6 +1203,18 @@ class Map_model extends CI_Model {
 				'content' => $content,
 			);
 			@$this->profile->add_reply($data);
+
+			if($reply['uid']) {
+				$data = array (
+					'uid' => $reply['uid'],
+					'type' => 'reply',
+					'map' => $info[1],
+					'post' => $post_no,
+					'reply' => $reply_no,
+					'content' => $content
+				);
+				@$this->profile->message('add', $data, null);
+			}
 		}
 
 		//$this->monolog->debug('reply_insert', $result);

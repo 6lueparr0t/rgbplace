@@ -383,7 +383,7 @@ class Profile_model extends CI_Model {
 		return $query;
 	}
 
-	public function message($type, $idx = null) {
+	public function message($type, $data = array(), $idx = null) {
 		$this->setting($uid, $name);
 
 		if($this->session->userdata('admin') === true) {
@@ -407,18 +407,21 @@ class Profile_model extends CI_Model {
 
 			$json = "{\"type\":\"{$data['type']}\", \"map\":\"{$data['map']}\", \"post\":\"{$data['post']}\", \"reply\":\"{$data['reply']}\", \"content\":\"{$data['content']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
 
-			$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where {$field} = ? ", ${$field});
+			if(${$field} != $data['uid']) {
+				$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where {$field} = ? ", ${$field});
+			}
 			break;
 
 		case 'remove' :
 			// Delete
-			$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[{$idx}]'), '{\"total\":[]}') where {$field} = ? ", ${$field});
+			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[{$idx}]'), '{\"total\":[]}') where {$field} = ? ", ${$field});
 			break;
 
 		case 'show' :
 			// Select
 			$msg = (array)json_decode($this->db->query("select msg from {$table} where {$field} = ? ", ${$field})->row()->msg)->total;
 
+			$ret['list'] = '';
 			for ( $i = count($msg)-1; $i >= 0; $i--) {
 				if(!isset($msg[$i]->date)) {
 					$msg[$i]->date = '';
@@ -428,7 +431,7 @@ class Profile_model extends CI_Model {
 				$tmp.= "<div class='td center width-50'>{$i}</div>";
 				$tmp.= "<div class='td center width-50'>{$msg[$i]->map}</div>";
 				$tmp.= "<div class='td font-normal'>";
-				$tmp.= "<a href='/{$msg[$i]->map}/{$msg[$i]->post}?reply=y&no={$msg[$i]->no}' target='_blank'>{$msg[$i]->content}</a><br/>";
+				$tmp.= "<a href='/{$msg[$i]->map}/{$msg[$i]->post}?reply=y&no={$msg[$i]->reply}' target='_blank'>{$msg[$i]->content}</a><br/>";
 				$tmp.= "{$msg[$i]->date}<br/>";
 				$tmp.= "</div>";
 				$tmp.= "</div>";
@@ -439,7 +442,7 @@ class Profile_model extends CI_Model {
 
 		}
 
-		return $ret;
+		return json_encode($ret);
 	}
 
 	function setting(&$uid, &$name) {

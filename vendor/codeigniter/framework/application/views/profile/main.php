@@ -5,6 +5,9 @@
 		<div class='post'  >post</div>
 		<div class='reply' >reply</div>
 		<div class='upload'>upload</div>
+<?php
+		if(!$no) echo "<div class='message'>message</div>";
+?>
 	</div>
 	<div id='info-area' class='page none'>
 <?
@@ -105,5 +108,21 @@ echo("
 		</div>
 		<div id='upload-page' class='page'></div>
 	</div>
+<?php
+	if(!$no) {
+echo("<div id='message-area' class='page none'>");
+echo("	<div class='table'>");
+echo("		<div class='tr'>");
+echo("			<div class='th center'>No</div>");
+echo("			<div class='th center'>Map</div>");
+echo("			<div class='th center'>Info</div>");
+echo("		</div>");
+echo("		<div id='message-list'class='tr-group'>");
+echo("		</div>");
+echo("	</div>");
+echo("	<div id='message-page' class='page'></div>");
+echo("</div>");
+	}
+?>
 </div>
 <?php $this->root->end($path); ?>
