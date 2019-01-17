@@ -1,11 +1,5 @@
 let signin = document.querySelector("#sign-in");
 
-const gapiOnLoad = () => {
-    gapi.load('auth2', function() {
-        gapi.auth2.init();
-    });
-}
-
 const onSignIn = googleUser => {
     var profile = googleUser.getBasicProfile();
 

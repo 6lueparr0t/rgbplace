@@ -89,7 +89,7 @@ class Template {
 			echo "<button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign In </button>";
 
 			// Google Sign-in Tag
-			echo "<div class='g-signin2' data-onsuccess='onSignIn' data-width='65' data-height='17'></div>";
+			echo "<div class='g-signin2' data-onsuccess='onSignIn' data-width='65' data-height='17'> </div>";
 
 			echo "<button type='button' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button>";
 			echo form_close();
