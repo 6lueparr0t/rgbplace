@@ -103,6 +103,7 @@ class Template {
 			echo "<a href='/profile'>{$name}</a>";
 
 			if($this->CI->session->userdata('google')) {
+				echo "<div class='g-signin2' style='display:none;'></div>";
 				echo "<button onclick='signOut();document.location.href=\"/sign/out\";'> <i class='fas fa-sign-out-alt'></i> Sign Out </button>";
 			} else {
 				echo "<button onclick='document.location.href=\"/sign/out\";'> <i class='fas fa-sign-out-alt'></i> Sign Out </button>";
