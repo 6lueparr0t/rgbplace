@@ -90,7 +90,7 @@ class Template {
 			echo "<button type='button' id='logout' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button>";
 
 			// Google Sign-in Tag
-			echo "<br/><div id='google' class='g-signin2' data-onsuccess='onSignIn' data-width='174' data-height='20' data-longtitle='true' > </div>";
+			echo "<br/><div id='google' class='g-signin2' data-onsuccess='onSignIn' data-width='164' data-height='20' data-longtitle='true' > </div>";
 			echo form_close();
 
 		} else {
