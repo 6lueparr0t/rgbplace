@@ -1,7 +1,7 @@
 #sign { 
 	position: relative;
 	top: .5rem;
-	height: 3rem;
+	height: 5rem;
 	text-align:right;
 	font-size:1.2rem;
 
@@ -19,10 +19,6 @@
 		}
 	}
 
-	@media screen and ($width-name : $target-width) {
-		text-align:left;
-	}
-
 	& button{
 		margin-left:1rem;
 		background-color: white;
@@ -30,13 +26,14 @@
 		@media screen and ($width-name : $target-width) {
 			margin-left: .5rem;
 		}
+
 	}
 }
 
 .g-signin2 {
 	display: inline-block;
 	position: relative;
-	margin-left: 1rem;
+	margin: 1rem 0;
 	top: .3rem;
 
 	@media screen and ($width-name : $target-width) {
@@ -45,12 +42,12 @@
 
 	.abcRioButtonContents {
 		vertical-align: text-top;
-		font-size: 8px !important;
+		font-size: 12px !important;
 		line-height: 18px !important;
 	}
 
 	svg {
-		height: 10px;
+		height: 14px;
 		margin: 3.4px;
 	}
 }

@@ -87,11 +87,10 @@ class Template {
 				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10]);
 
 			echo "<button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign In </button>";
+			echo "<button type='button' id='logout' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button>";
 
 			// Google Sign-in Tag
-			echo "<div class='g-signin2' data-onsuccess='onSignIn' data-width='65' data-height='17'> </div>";
-
-			echo "<button type='button' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button>";
+			echo "<br/><div id='google' class='g-signin2' data-onsuccess='onSignIn' data-width='174' data-height='20' data-longtitle='true' > </div>";
 			echo form_close();
 
 		} else {
