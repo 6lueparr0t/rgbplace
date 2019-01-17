@@ -61,7 +61,7 @@ class Template {
 		echo("<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>");
 
 		// Google Sign-in API
-		echo("<script src='https://apis.google.com/js/platform.js' async defer></script>");
+		echo("<script src='https://apis.google.com/js/platform.js?onload=gapiOnLoad' async defer></script>");
 
 		// Google Tag Manager
 		echo ("<!-- Google Tag Manager -->".
