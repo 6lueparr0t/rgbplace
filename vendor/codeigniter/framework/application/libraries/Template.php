@@ -52,7 +52,7 @@ class Template {
 		echo("<meta name='viewport' content='width=device-width'/>");
 
 		// Google Sign-in META
-		echo("<meta name='google-signin-client_id' content='192892403850-r1esspcm1jq3piuds1u0hc0ulm63oei7.apps.googleusercontent.com'>");
+		echo("<meta name='google-signin-client_id' content='192892403850-r1esspcm1jq3piuds1u0hc0ulm63oei7.apps.googleusercontent.com.apps.googleusercontent.com'>");
 
 		echo("<title>RGB place</title>");
 
@@ -61,7 +61,7 @@ class Template {
 		echo("<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>");
 
 		// Google Sign-in API
-		echo("<script src='https://apis.google.com/js/platform.js?onload=init' async defer></script> ");
+		echo("<script src='https://apis.google.com/js/platform.js' async defer></script>");
 
 		// Google Tag Manager
 		echo ("<!-- Google Tag Manager -->".
@@ -89,11 +89,7 @@ class Template {
 			echo "<button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign In </button>";
 
 			// Google Sign-in Tag
-			// 이후 아래 링크 참고하여 sign in, sign out 부분 수정 (로그인 AJAX & 세션 추가, 버튼 디자인)
-			// https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin
-			// https://developers.google.com/identity/sign-in/web/build-button
-			// https://developers.google.com/identity/sign-in/web/reference
-			echo "<div class='g-signin2' data-onsuccess='onSignIn'></div>";
+			echo "<div class='g-signin2' data-onsuccess='onSignIn' data-width='100' data-height='18'></div>";
 
 			echo "<button type='button' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button>";
 			echo form_close();
