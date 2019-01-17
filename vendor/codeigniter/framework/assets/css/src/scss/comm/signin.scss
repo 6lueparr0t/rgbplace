@@ -8,14 +8,14 @@
 	input[name='uid'] {
 		width:10%;	
 		@media screen and ($width-name : $target-width) {
-			width:20%;	
+			width:15%;	
 		}
 	}
 
 	input[name='pswd'] {
 		width:10%;	
 		@media screen and ($width-name : $target-width) {
-			width:20%;	
+			width:15%;	
 		}
 	}
 
@@ -26,6 +26,10 @@
 	& button{
 		margin-left:1rem;
 		background-color: white;
+
+		@media screen and ($width-name : $target-width) {
+			margin-left: .5rem;
+		}
 	}
 }
 
@@ -34,6 +38,10 @@
 	position: relative;
 	margin-left: 1rem;
 	top: .3rem;
+
+	@media screen and ($width-name : $target-width) {
+		margin-left: .5rem;
+	}
 
 	.abcRioButtonContents {
 		vertical-align: text-top;
