@@ -31,7 +31,7 @@ const onSignIn = googleUser => {
 		mail : profile.getEmail()
 	}];
 
-	httpRequest(mode, '/api/google', JSON.stringify(data), successPostVote.bind(this), fail.bind(this));
+	httpRequest('post', '/api/google', JSON.stringify(data), data => { location.reload(); }, null);
 }
 
 console.log(
