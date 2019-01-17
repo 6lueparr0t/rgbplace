@@ -31,7 +31,7 @@ const onSignIn = googleUser => {
 		mail : profile.getEmail()
 	}];
 
-	httpRequest('post', '/api/google', JSON.stringify(data), data => { location.reload(); }, null);
+	httpRequest('post', '/api/google', JSON.stringify(data), data => { location.reload(); }, data => { console.log(data); });
 }
 
 console.log(
