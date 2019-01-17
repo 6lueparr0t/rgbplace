@@ -405,6 +405,25 @@ class Api extends CI_Controller {
 		echo json_encode($ret);
 	}
 
+	public function google()
+	{
+		$method = $this->input->method();
+		if($method == 'post') {
+			$data = (array)json_decode($this->input->raw_input_stream)[0];
+			
+			$name = explode(' ', $data['name']);
+			$uid = explode('@', $data['mail'])[0];
+
+			$googleUser = [
+				'uid'  => $uid,
+				'name'  => $name[0].'_'$name[1],
+				'signed_in' => TRUE
+			];
+
+			$this->session->set_userdata($googleUser);
+		}
+	}
+
 	private function curl ($method, $url, $data) {
 
 		## Reference : https://www.weichieprojects.com/blog/curl-api-calls-with-php/

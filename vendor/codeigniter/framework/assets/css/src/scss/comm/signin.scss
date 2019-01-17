@@ -36,6 +36,13 @@
 	top: .3rem;
 
 	.abcRioButtonContents {
-		font-size: initial !important;
+		vertical-align: text-top;
+		font-size: 8px !important;
+		line-height: 18px !important;
+	}
+
+	svg {
+		height: 10px;
+		margin: 3.4px;
 	}
 }
