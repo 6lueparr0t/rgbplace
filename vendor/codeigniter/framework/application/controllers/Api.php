@@ -422,7 +422,11 @@ class Api extends CI_Controller {
 			];
 
 			$this->session->set_userdata($googleUser);
+
+			$ret = 'success';
 		}
+
+		echo json_encode($ret);
 	}
 
 	private function curl ($method, $url, $data) {
