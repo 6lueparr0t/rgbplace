@@ -52,7 +52,7 @@ class Template {
 		echo("<meta name='viewport' content='width=device-width'/>");
 
 		// Google Sign-in META
-		//echo("<meta name='google-signin-client_id' content='192892403850-r1esspcm1jq3piuds1u0hc0ulm63oei7.apps.googleusercontent.com.apps.googleusercontent.com'>")
+		echo("<meta name='google-signin-client_id' content='192892403850-r1esspcm1jq3piuds1u0hc0ulm63oei7.apps.googleusercontent.com'>");
 
 		echo("<title>RGB place</title>");
 
@@ -61,7 +61,7 @@ class Template {
 		echo("<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>");
 
 		// Google Sign-in API
-		//echo("<script src='https://apis.google.com/js/platform.js' async defer></script>");
+		echo("<script src='https://apis.google.com/js/platform.js?onload=init' async defer></script> ");
 
 		// Google Tag Manager
 		echo ("<!-- Google Tag Manager -->".
