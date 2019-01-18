@@ -16,7 +16,7 @@ const startApp = function() {
 const attachSignin = element => {
 	auth2.attachClickHandler(element, {},
 		function(googleUser) {
-
+			let profile = googleUser.getBasicProfile();
 			let data = [{
 				name : profile.getName(),
 				mail : profile.getEmail()
