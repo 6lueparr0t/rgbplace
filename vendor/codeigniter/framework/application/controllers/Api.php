@@ -381,14 +381,14 @@ class Api extends CI_Controller {
 					if($this->session->userdata('google')) {
 						header('HTTP/1.1 401 Unauthorized');
 						header('Content-Type: application/json; charset=UTF-8');
-						$ret = '회원가입 후 이용해주세요.\nPlease Sign up';
+						$ret = '회원가입 후 이용해주세요.<br/>Please Sign up<br/>*not google*';
 					} else {
 						$ret = $this->conf->stageSave( array('map' => $data['map'], 'uid' => $this->session->userdata('uid')) );
 					}
 				} else {
 					header('HTTP/1.1 401 Unauthorized');
 					header('Content-Type: application/json; charset=UTF-8');
-					$ret = 'sign in please';
+					$ret = '로그인 해주세요.<br/>sign in please';
 				}
 				break;
 			}

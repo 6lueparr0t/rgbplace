@@ -16,7 +16,7 @@ function stageSave() {
 		position: 'bottom-end',
 		background: background,
 		showConfirmButton: false,
-		timer: 3000
+		timer: 5000
 	});
 
 	httpRequest('post', '/api/config/map/save', JSON.stringify(data), data => {
