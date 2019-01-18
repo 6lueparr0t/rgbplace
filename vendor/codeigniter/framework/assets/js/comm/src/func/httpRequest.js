@@ -4,11 +4,13 @@ function httpRequest(method, url, data, success, fail, error = null, progress = 
 	request.open(method, url, true);
 
 	request.onload = function() {
+		let ret; 
 		if (this.status >= 200 && this.status < 400) {
-			let ret = JSON.parse(this.response);
+			ret = JSON.parse(this.response);
 			// Success!
 			success(ret);
 		} else {
+			// fail..
 			fail(this);
 		}
 	};
