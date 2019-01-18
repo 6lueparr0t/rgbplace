@@ -51,17 +51,11 @@ class Template {
 		//content='width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes'
 		echo("<meta name='viewport' content='width=device-width'/>");
 
-		// Google Sign-in META
-		echo("<meta name='google-signin-client_id' content='192892403850-r1esspcm1jq3piuds1u0hc0ulm63oei7.apps.googleusercontent.com'>");
-
 		echo("<title>RGB place</title>");
 
 		echo("<link rel='icon' href='data:;base64,iVBORw0KGgo='>");
 		echo("<link rel='stylesheet' href='/assets/ext/sweetalert2.min.css'/>");
 		echo("<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>");
-
-		// Google Sign-in API
-		echo("<script src='https://apis.google.com/js/platform.js?onload=gapiOnLoad' async defer></script>");
 
 		// Google Tag Manager
 		echo ("<!-- Google Tag Manager -->".
@@ -87,10 +81,14 @@ class Template {
 				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10]);
 
 			echo "<button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign In </button>";
-			echo "<button type='button' id='logout' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button>";
+			echo "<button type='button' id='logout' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button><br/>";
 
 			// Google Sign-in Tag
-			echo "<br/><div id='google' class='g-signin2' data-onsuccess='onSignIn' data-width='164' data-height='20' data-longtitle='true' > </div>";
+			//echo "<div id='google' class='g-signin2' data-onsuccess='onSignIn' data-width='164' data-height='20' data-longtitle='true' > </div>";
+			echo '<div id="google" class="customGPlusSignIn">'
+					.'<span class="icon"></span>'
+					.'<span class="buttonText">Google</span>'
+				.'</div>';
 			echo form_close();
 
 		} else {
@@ -132,9 +130,11 @@ class Template {
 
 /* ---------------------------------------------------------------------- */
 		echo("<div id='push'></div>");
-		echo("<script src='/assets/js/comm/common.min.js'></script>");
-		echo("<script src='/assets/js/dist/{$path}.min.js'></script>");
-		echo("<script src='/assets/ext/sweetalert2.min.js'></script>");
+		echo"<script src='/assets/js/comm/common.min.js'></script>"
+		."<script src='/assets/js/dist/{$path}.min.js'></script>"
+		."<script src='/assets/ext/sweetalert2.min.js'></script>"
+		/* Google Sign-in js */
+		."<script src='https://apis.google.com/js/api:client.js'></script>";
 
 		echo("
 <div id='footer'>

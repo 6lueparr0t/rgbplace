@@ -417,7 +417,7 @@ class Api extends CI_Controller {
 			$googleUser = [
 				'uid'  => $uid,
 				'fullname' => $name,
-				'name'  => (count($name)>1)?$name[0].'_'.$name[1]:$name[0],
+				'name'  => $uid,
 				'google' => TRUE,
 				'signed_in' => TRUE
 			];

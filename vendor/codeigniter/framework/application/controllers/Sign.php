@@ -113,7 +113,7 @@ class Sign extends CI_Controller {
 
 	public function out()
 	{
-		$config = ['admin', 'uid', 'name', 'signed_in'];
+		$config = ['admin', 'uid', 'name', 'signed_in', 'google'];
 		$this->session->unset_userdata($config);
 
 		header('Location: '.$_SERVER['HTTP_REFERER']);
