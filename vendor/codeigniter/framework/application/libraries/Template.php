@@ -85,10 +85,13 @@ class Template {
 
 			// Google Sign-in Tag
 			//echo "<div id='google' class='g-signin2' data-onsuccess='onSignIn' data-width='164' data-height='20' data-longtitle='true' > </div>";
-			echo '<div id="google" class="customGPlusSignIn">'
+
+			echo '<div id="gSignInWrapper">'
+				.'<div id="google" class="customGPlusSignIn">'
 					.'<span class="icon"></span>'
 					.'<span class="buttonText">Google</span>'
-				.'</div>';
+				.'</div>'
+			.'</div>';
 			echo form_close();
 
 		} else {
@@ -129,12 +132,13 @@ class Template {
 		}
 
 /* ---------------------------------------------------------------------- */
-		echo("<div id='push'></div>");
-		echo"<script src='/assets/js/comm/common.min.js'></script>"
-		."<script src='/assets/js/dist/{$path}.min.js'></script>"
-		."<script src='/assets/ext/sweetalert2.min.js'></script>"
+		echo "<div id='push'></div>";
+
 		/* Google Sign-in js */
-		."<script src='https://apis.google.com/js/api:client.js'></script>";
+		echo "<script src='https://apis.google.com/js/api:client.js'></script>";
+		echo "<script src='/assets/js/comm/common.min.js'></script>"
+		."<script src='/assets/js/dist/{$path}.min.js'></script>"
+		."<script src='/assets/ext/sweetalert2.min.js'></script>";
 
 		echo("
 <div id='footer'>

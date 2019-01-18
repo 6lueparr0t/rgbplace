@@ -33,10 +33,14 @@
 #google {
 	display: inline-block;
 	position: relative;
-	width:5rem;
-	height:1rem;
+	width: 9.6rem;
+	height: 1.28rem;
 	margin: 1rem 0;
 	top: .3rem;
+	border:1px solid $oc-gray-9;
+	border-radius: .25rem;
+	@include user-select('none');
+
 
 	&:hover {
       cursor: pointer;
@@ -47,23 +51,23 @@
 	}
 
     span{
-		
 		&.icon {
-			background: url('https://developers.google.com/identity/images/g-logo.png') transparent 5px 50% no-repeat;
-			display: inline-block;
+			background: url(https://developers.google.com/identity/images/g-logo.png) transparent 5px 50% no-repeat;
 			vertical-align: middle;
-			width: 42px;
-			height: 42px;
+			width: 2rem;
+			height: 1.2rem;
+			background-size: 1rem 1rem;
+			position: absolute;
 		}
 
 		&.buttonText {
-			font-family: 'pixel';
+			font-family: pixel;
 			display: inline-block;
 			vertical-align: middle;
-			padding-left: 42px;
-			padding-right: 42px;
+			padding-left: 2rem;
+			padding-right: 2.2rem;
 			font-size: 14px;
-			font-weight: bold;
+			font-weight: 700;
 		}
 	}
 }
