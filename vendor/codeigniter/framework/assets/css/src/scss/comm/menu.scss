@@ -71,7 +71,7 @@
   display         : flex;
   font-size       : 1.0rem;
   position        : relative;
-  z-index         : 1;
+  z-index         : 3;
 
   //top             : 0;
   //position        : sticky;
@@ -134,7 +134,7 @@
 			  @media screen and ($width-name : $target-width) {
 				  top:1.05rem;
 				  position:relative;
-				  z-index:1;
+				  z-index:3;
 			  }
 
 			  label:first-child {
@@ -162,7 +162,7 @@
 						  padding: 0;
 						  width: 100%;
 						  display: block;
-						  z-index: 1;
+						  z-index: 3;
 
 						  @media screen and ($width-name : $target-width) {
 							  left: 0;
