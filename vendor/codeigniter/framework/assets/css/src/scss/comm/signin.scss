@@ -33,9 +33,9 @@
 #google {
 	display: inline-block;
 	position: relative;
-	width: 10.6rem;
+	padding-left: 2rem;
 	@media screen and ($width-name : $target-width) {
-		width: 10.2rem;
+		padding-left: 1.6rem;
 	}
 	margin: 1rem 0;
 	top: .3rem;

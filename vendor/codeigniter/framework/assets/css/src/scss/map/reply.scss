@@ -14,6 +14,10 @@
 		div.head {
 			margin-bottom:1rem;
 
+			&.owner {
+				color:$oc-green-7;
+			}
+
 			span.date {
 				font-size:.6rem;
 			}
@@ -27,6 +31,10 @@
 				margin-bottom:1rem;
 				white-space: pre-line;
 				display: contents;
+
+				&.owner {
+					color:$oc-green-7;
+				}
 			}
 		}
 

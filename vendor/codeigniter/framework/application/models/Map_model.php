@@ -500,6 +500,8 @@ class Map_model extends CI_Model {
 			."<span class='delete {$activate}' >delete</span>"
 		."</div>";
 
+		$this->session->set_userdata(array('post_uid' => $uid));
+
 		return true;
 	}
 
@@ -884,6 +886,7 @@ class Map_model extends CI_Model {
 			$btn_perm = 'disable';
 		}
 
+		$post_uid = $this->session->userdata('post_uid');
 		foreach ($find->result() as $key => $row) {
 			$cnt++;
 
@@ -919,8 +922,9 @@ class Map_model extends CI_Model {
 			$ret .= "<ul>";
 
 			$ret .= "<span class='no'>{$no}</span>";
-			$ret .= "<div class='head'>{$name} <span class='date'>{$date} {$time}</span></div>";
-			$ret .= "<li class='content'>";
+			$ret .= "<div class='head ".(($post_uid==$reply_uid)?'owner':'')."'>{$name} <span class='date'>{$date} {$time}</span></div>";
+
+			$ret .= "<li class='content ".(($post_uid==$reply_uid)?'owner':'')."'>";
 
 			/* depth arrow output : top */
 			$ret .= "<span name='space' id='space'>";
