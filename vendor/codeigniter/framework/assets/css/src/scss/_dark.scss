@@ -43,7 +43,7 @@ body.dark {
 		.post {
 			.post-info {
 				.name {
-					color:white;
+					color:$oc-gray-0;
 				}
 			}
 
@@ -60,14 +60,33 @@ body.dark {
 			color:$oc-gray-0;
 		}
 
-		& ul li .func button {
-			background-color:black;
-			color:$oc-gray-7;
+		& ul li {
 
-			&.disable {
+			ul div.head {
+				a {
+					color:$oc-gray-0;
+				}
+
+				&.owner {
+					color:$oc-green-7;
+
+					a {
+						color:$oc-green-7;
+					}
+
+				}
+			}
+
+			.func button {
 				background-color:black;
-				border:1px solid $oc-gray-9;
-				color:$oc-gray-9;
+				color:$oc-gray-7;
+
+				&.disable {
+					background-color:black;
+					border:1px solid $oc-gray-9;
+					color:$oc-gray-9;
+				}
+
 			}
 		}
 	}

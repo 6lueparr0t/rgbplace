@@ -14,8 +14,17 @@
 		div.head {
 			margin-bottom:1rem;
 
+			a {
+				color:black;
+			}
+
 			&.owner {
 				color:$oc-green-7;
+
+				a {
+					color:$oc-green-7;
+				}
+
 			}
 
 			span.date {
