@@ -465,6 +465,7 @@ class Map_model extends CI_Model {
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 			$no   = $row->no;
 			$uid  = $row->uid;
+			$uno   = $row->uno;
 			$title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $row->title))));
 			$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$row->content))), "<a><img><br><div><p><iframe>");
 
@@ -473,7 +474,9 @@ class Map_model extends CI_Model {
 
 			//."<span class='vote'>{$row->vote}</span>"
 			echo "<div class='post-info'>"
-				."<span class='name' ><i class='fa fa-user'></i> {$row->name} </span>"
+				."<span class='name' >"
+					."<i class='fa fa-user'></i>".(($uno)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($uno) ) ."' target='_blank' > ".$row->name." </a>":$row->name)
+				."</span>"
 				."<span class='hit'  ><i class='fa fa-eye'></i> {$row->hit} </span>"
 				."<span class='reply'><i class='far fa-comment-dots'></i> {$row->reply} </span>"
 				."<div class='link'><span id='link-copy'>".base_url()."{$map}/{$no}</span></div>"
@@ -547,16 +550,16 @@ class Map_model extends CI_Model {
 	 */
 	public function post_select($data, $info, $option = null) {
 
-		$table = $this->db->escape_str("map_{$info[1]}_post");
+		$table = $this->db->escape_str("map_{$info[1]}_post post");
 		$no = $this->db->escape_str($info[3]);
 
 		if($option == 'vote') {
-			$field = 'up, down, type';
+			$field = 'post.up, post.down, post.type, user.no uno';
 		} else {
-			$field = '*';
+			$field = 'post.*, user.no uno';
 		}
 
-		$query = "SELECT {$field} FROM {$table} where no='{$no}' and (dtim = 0 or dtim is null)";
+		$query = "SELECT {$field} FROM {$table} LEFT JOIN user_info user ON post.uid = user.uid where post.no='{$no}' and (post.dtim = 0 or post.dtim is null)";
 
         if($this->db->simple_query($query)) {
 			$ret = $this->db->query($query);
@@ -816,21 +819,21 @@ class Map_model extends CI_Model {
 			$start = ($start<0)?0:$start;
 		}
 
-		$query = "SELECT @IDX := @IDX + 1 AS idx, reply.* FROM {$table} reply, (SELECT @IDX := 0 ) idx
-			where post=?
+		$query = "SELECT @IDX := @IDX + 1 AS idx, reply.*, user.no uno FROM {$table} reply LEFT JOIN user_info user ON reply.uid = user.uid, (SELECT @IDX := 0 ) idx
+			where reply.post=?
 			order by
-				if(isnull(follow), no, follow),
-				depth1,
-				depth2,
-				depth3,
-				depth4,
-				depth5,
-				depth6,
-				depth7,
-				depth8,
-				depth9,
-				depth10,
-				ctim
+				if(isnull(reply.follow), reply.no, reply.follow),
+				reply.depth1,
+				reply.depth2,
+				reply.depth3,
+				reply.depth4,
+				reply.depth5,
+				reply.depth6,
+				reply.depth7,
+				reply.depth8,
+				reply.depth9,
+				reply.depth10,
+				reply.ctim
 
 			LIMIT {$start}, {$rows} ";
 
@@ -842,21 +845,21 @@ class Map_model extends CI_Model {
 			$start = ($start<0)?0:$start;
 			$search['page'] = 'last';
 
-			$query = "SELECT @IDX := @IDX + 1 AS idx, reply.* FROM {$table} reply, (SELECT @IDX := 0 ) idx
-				where post=?
+			$query = "SELECT @IDX := @IDX + 1 AS idx, reply.*, user.no uno FROM {$table} reply LEFT JOIN user_info user ON reply.uid = user.uid, (SELECT @IDX := 0 ) idx
+				where reply.post=?
 				order by
-				if(isnull(follow), no, follow),
-					depth1,
-					depth2,
-					depth3,
-					depth4,
-					depth5,
-					depth6,
-					depth7,
-					depth8,
-					depth9,
-					depth10,
-					ctim
+				if(isnull(reply.follow), reply.no, reply.follow),
+					reply.depth1,
+					reply.depth2,
+					reply.depth3,
+					reply.depth4,
+					reply.depth5,
+					reply.depth6,
+					reply.depth7,
+					reply.depth8,
+					reply.depth9,
+					reply.depth10,
+					reply.ctim
 
 					LIMIT {$start}, {$rows} ";
 
@@ -899,6 +902,7 @@ class Map_model extends CI_Model {
 			$reply_uid = $row->uid;
 
 			$name    = $row->name;
+			$uno    = $row->uno;
 			$mention = ($row->mention)? "@".$row->mention:"";
 
 			$content = stripslashes($row->content);
@@ -922,7 +926,9 @@ class Map_model extends CI_Model {
 			$ret .= "<ul>";
 
 			$ret .= "<span class='no'>{$no}</span>";
-			$ret .= "<div class='head ".(($post_uid==$reply_uid)?'owner':'')."'>{$name} <span class='date'>{$date} {$time}</span></div>";
+			$ret .= "<div class='head ".(($post_uid==$reply_uid)?'owner':'')."'> "
+				.(($uno)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($uno) ) ."' target='_blank' >".$name."</a>":$name)
+				." <span class='date'>{$date} {$time}</span></div>";
 
 			$ret .= "<li class='content ".(($post_uid==$reply_uid)?'owner':'')."'>";
 

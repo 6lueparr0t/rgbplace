@@ -373,6 +373,7 @@ class Api extends CI_Controller {
 			$data = (array)json_decode($this->input->raw_input_stream)[0];
 		}
 
+		$ret = '';
 		switch($type) {
 		case 'map' :
 			switch($act) {

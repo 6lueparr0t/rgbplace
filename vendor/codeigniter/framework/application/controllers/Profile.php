@@ -12,11 +12,15 @@ class Profile extends CI_Controller {
 	{
 		if($this->session->userdata('signed_in') === true) {
 
-			$data = $this->profile->info($this->input->get('no'));
-			if(!$data) redirect("/");
-			$data['no'] = $this->input->get('no');
+			$no = base64_decode( urldecode($this->input->get('no')) );
+			$data = $this->profile->info($no);
+			if(!$data) {
+				redirect("/");
+			} else {
+				$data['no'] = $no;
+				$this->root->view("profile/main", $data);
+			}
 
-			$this->root->view("profile/main", $data);
 		} else {
 			redirect("/");
 		}
