@@ -1,0 +1,160 @@
+body.dark {
+	background-color: black;
+	color: $oc-gray-0;
+	transition: all .2s ease-out;
+
+	#logo .place {
+		color:white;
+	}
+
+	#menu {
+		background-color: $oc-gray-7;
+		color:$oc-gray-0;
+
+		& a, & label {
+			background-color: $oc-gray-7;
+			color:$oc-gray-0 !important;
+
+			& input[type=checkbox]:checked~ul label.switch, & input[type=checkbox]:checked~ul label.switch {
+				background-color: $oc-gray-8;
+				color:$oc-gray-0;
+			}
+		}
+	}
+
+	#menu-map {
+
+		& #map-search-box {
+			background-color: $oc-gray-9;
+			color: $oc-gray-0 !important;
+		}
+
+		& i {
+			color:$oc-gray-0 !important;
+		}
+
+		& #map-result li {
+			background-color: $oc-gray-9 !important;
+			color: $oc-gray-0 !important;
+		}
+	}
+
+	#post {
+		.post {
+			.post-info {
+				.name {
+					color:white;
+				}
+			}
+
+			.post-title a {
+				color:$oc-gray-0;
+			}
+		}
+	}
+
+	#reply .reply-root {
+
+		& .reply-addon .reply-box {
+			background-color:$oc-gray-9;
+			color:$oc-gray-0;
+		}
+
+		& ul li .func button {
+			background-color:black;
+			color:$oc-gray-7;
+
+			&.disable {
+				background-color:black;
+				border:1px solid $oc-gray-9;
+				color:$oc-gray-9;
+			}
+		}
+	}
+
+	#edit {
+		& #edit-title {
+			background-color: $oc-gray-9;
+			color: $oc-gray-0;
+		}
+
+		& #edit-content, & #edit-content-code {
+			background-color: $oc-gray-9;
+			color: $oc-gray-0;
+		}
+	}
+
+	#list {
+		& .list .list-row {
+			&:hover {
+				background: $oc-gray-8;
+			}
+
+			& .title a {
+				color:$oc-gray-0;
+			}
+		}
+
+		& .button-group {
+
+			.refresh {
+				border:1px solid $oc-gray-6;
+				color:$oc-gray-0;
+			}
+
+			.edit {
+				&.enable {
+					border:1px solid $oc-gray-6;
+					color:$oc-gray-0;
+				}
+
+				&.disable {
+					border:1px solid $oc-gray-9;
+					color:$oc-gray-9;
+				}
+			}
+		}
+
+		& .search-select .search-select-list {
+			border: 1px solid $oc-gray-6;
+
+			& ul li label span {
+				border: 1px solid $oc-gray-6;
+			}
+		}
+
+		& .search-group #search-button {
+			border: 1px solid $oc-gray-6;
+		}
+	}
+
+	#profile {
+		& .page .table .th {
+			background-color: $oc-gray-9;
+		}
+
+		& .page .table .td input {
+			background-color: black;
+			color:$oc-gray-0;
+
+			&:disabled {
+				background-color: black;
+				color:$oc-gray-7;
+			}
+		}
+	}
+
+	#upload-list .table .upload-list-result ul.file-list li:hover {
+		background-color:$oc-gray-9;
+	}
+
+	.swal2-popup.swal2-toast {
+		font-family : 'pixel';
+		box-shadow : none;
+		border : 1px solid $oc-gray-0;
+
+		& .swal2-title {
+			color : $oc-gray-0;
+		}
+}
+}
