@@ -40,7 +40,7 @@ class Map_model extends CI_Model {
 	 */
 	public function navigation () {
 
-		$query = "SELECT * FROM map_code";
+		$query = "SELECT * FROM map_code ORDER BY no DESC LIMIT 20";
 		$find = $this->db->query($query);
 
 		$data = $find->result();
