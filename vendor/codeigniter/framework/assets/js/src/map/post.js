@@ -270,7 +270,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 });
 
 function success (data) {
-	console.log(data);
+	//console.log(data);
 	//httpRequest('GET', '/api/request/reply?page='+this.page+'&info='+__URL__, null, refresh.bind(this), fail.bind(this));
 	getReplyPaging(data);
 }

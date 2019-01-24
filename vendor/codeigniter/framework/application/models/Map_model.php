@@ -1214,7 +1214,7 @@ class Map_model extends CI_Model {
 			);
 			@$this->profile->add_reply($data);
 
-			if($reply['uid']) {
+			if(isset($reply['uid'])) {
 				$data = array (
 					'uid' => $reply['uid'],
 					'type' => 'reply',
@@ -1316,17 +1316,26 @@ class Map_model extends CI_Model {
 		$table = $this->db->escape_str("map_{$info[1]}_reply");
 		$no = $data['no'];
 
-		$query = "delete from {$table}
-				where
-					uid = ?
-					and name = ?
-					and no = ?";
+		$reply_before_remove = $this->reply_select($table, $no);
+		if($this->session->userdata('admin') === true) {
+			$query = "delete from {$table}
+					where
+					no = ?";
 
-		$values = array(
-			$this->session->userdata('uid'),
-			$this->session->userdata('name'),
-			$no
-		);
+			$values = array($no);
+		} else {
+			$query = "delete from {$table}
+					where
+						uid = ?
+						and name = ?
+						and no = ?";
+
+			$values = array(
+				$this->session->userdata('uid'),
+				$this->session->userdata('name'),
+				$no
+			);
+		}
 
 		$back = $this->reply_getPageNum($table, $info[3], $no);
 		if($this->db->query($query, $values)) {
@@ -1339,6 +1348,7 @@ class Map_model extends CI_Model {
             $data = array (
 				'map' => $info[1],
                 'no' => $no,
+                'uid' => $reply_before_remove['uid'],
             );
             @$this->profile->remove_info('reply', $data);
         }

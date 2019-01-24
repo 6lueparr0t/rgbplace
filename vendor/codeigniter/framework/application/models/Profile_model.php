@@ -376,17 +376,16 @@ class Profile_model extends CI_Model {
 
 	public function remove_info($field, $data) {
 		$table = 'total_'.$field;
-		$this->setting($uid, $name);
 
-		$query = $this->db->query("DELETE FROM {$table} where uid = ? and map = ? and {$field} = ? ", array($uid, $data['map'], $data['no']) );
+		$query = $this->db->query("DELETE FROM {$table} where uid = ? and map = ? and {$field} = ? ", array($data['uid'], $data['map'], $data['no']) );
 
 		return $query;
 	}
 
-	public function message($type, $data = array(), $idx = null) {
+	public function message($type, $data = array('uid' => ''), $idx = null) {
 		$this->setting($uid, $name);
 
-		if($this->session->userdata('admin') === true) {
+		if(strpos($data['uid'], '@') !== false) {
 			$table = 'admin_info';
 			$field = 'name';
 		} else {
@@ -402,14 +401,12 @@ class Profile_model extends CI_Model {
 
 			// 100건 넘으면 앞에서 부터 삭제
 			if(count($msg) > 100) {
-				$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[0]'), '{\"total\":[]}') where {$field} = ? ", ${$field});
+				$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[0]'), '{\"total\":[]}') where {$field} = ? ", $data['uid']);
 			}
 
 			$json = "{\"type\":\"{$data['type']}\", \"map\":\"{$data['map']}\", \"post\":\"{$data['post']}\", \"reply\":\"{$data['reply']}\", \"content\":\"{$data['content']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
 
-			if(${$field} != $data['uid']) {
-				$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where {$field} = ? ", ${$field});
-			}
+			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where {$field} = ? ", $data['uid']);
 			break;
 
 		case 'remove' :
