@@ -905,7 +905,7 @@ class Map_model extends CI_Model {
 			$uno    = $row->uno;
 			$mention = ($row->mention)? "@".$row->mention:"";
 
-			$content = stripslashes($row->content);
+			$content = preg_replace('/\v+|\\\n/Ui','<br/>', htmlspecialchars_decode(stripslashes($row->content)) );
 
 			$depth = [
 				$row->depth1, $row->depth2, $row->depth3,
