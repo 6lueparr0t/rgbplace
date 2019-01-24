@@ -905,7 +905,7 @@ class Map_model extends CI_Model {
 			$uno    = $row->uno;
 			$mention = ($row->mention)? "@".$row->mention:"";
 
-			$content = preg_replace('/\v+|\\\n/Ui','<br/>', htmlspecialchars_decode(stripslashes($row->content)) );
+			$content = stripslashes(preg_replace('/\\\n/i','<br/>', htmlspecialchars($row->content )));
 
 			$depth = [
 				$row->depth1, $row->depth2, $row->depth3,
@@ -1169,7 +1169,7 @@ class Map_model extends CI_Model {
 		$depth_array[$depth] = 
 			$this->db->query("select count(no) cnt from {$table} where relation = ?", $no)->row()->cnt+1;
 
-		$content = addslashes(htmlspecialchars($data['message']));
+		$content = $data['message'];
 
 		$query= "insert into {$table} (uid, name,
 			content, mention, post,
