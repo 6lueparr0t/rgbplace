@@ -39,6 +39,7 @@
 				font-size:1rem;
 				margin-bottom:1rem;
 				white-space: pre-line;
+				line-height: 1.6rem;
 
 				&.owner {
 					color:$oc-green-9;
@@ -152,8 +153,7 @@
 			}
 
 			.reply-box {
-				font-family:normal, 'Font Awesome 5 free';
-				font-weight:600;
+				font-family:'pixel';
 
 				font-size:1.4rem;
 				word-spacing:.6rem;

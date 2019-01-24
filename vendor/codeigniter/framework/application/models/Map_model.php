@@ -1533,7 +1533,7 @@ class Map_model extends CI_Model {
 		$ret = "<div class='reply-addon {$status}' id='reply-{$id}' name='reply-{$id}'>"
 				."<input type='hidden' class='reply-no' value='{$id}'>"
 				."<input type='hidden' class='reply-mode' value='POST'/>"
-				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message .. &#xf303;'></textarea>"
+				."<textarea class='reply-box' id='reply-box-{$id}' placeholder='Leave a Message ...'></textarea>"
 				."<div class='reply-button-group'>"
 					."<div class='reply-button send'>Send Message &#xf11c; </div>"
 					."<div class='reply-button yes'>yes</div>"
