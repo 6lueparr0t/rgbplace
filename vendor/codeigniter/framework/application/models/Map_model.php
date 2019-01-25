@@ -80,7 +80,7 @@ class Map_model extends CI_Model {
 
 		echo "<table class='page'>";
 		foreach ($find->result() as $key => $row) {
-			$title = stripslashes(htmlspecialchars_decode($row->title));
+			$title = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->title)), "<a><img><br><div><p><iframe><script>");
 
 			echo "<tr>"
 				."<td class='date'>".date("Y-m-d", strtotime($row->ctim))."</td>"
@@ -209,7 +209,7 @@ class Map_model extends CI_Model {
 
 			$up = ($row->up>0)?(($row->up>10)?"<span class='up'>+ {$row->up}</span>":"+ {$row->up}"):"";
 
-			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".stripslashes(htmlspecialchars_decode($row->title))."</a> {$replyCount} {$up}";
+			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->title)), "<a><img><br><div><p><iframe><script>")."</a> {$replyCount} {$up}";
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 

@@ -2,7 +2,7 @@
 <div id='edit'>
 
 <!-- map/edit/<?=$map?>/<?=$type?>/<?=$num?> -->
-<input type='text' id='edit-title' name='edit-title' value='<?=$title?>' />
+<input type='text' id='edit-title' name='edit-title' value="<?php echo $title; ?>" />
 
 <div class='tab'>
 	<div class='view'>view</div>
