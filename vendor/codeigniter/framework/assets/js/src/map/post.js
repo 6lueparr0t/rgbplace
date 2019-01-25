@@ -146,7 +146,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 
 			if(t.classList.contains('reply-modify')) {
 				//message  = reply.querySelector("ul .content .text").value;
-				message  = reply.querySelector("ul .content .text").innerHTML;
+				message  = reply.querySelector("ul .content .text").innerHTML.replace(/<br\s*\/?>/mg,"\n");
 				reply.querySelector("ul").classList.toggle('hide');
 				mode = 'UPDATE';
 			}

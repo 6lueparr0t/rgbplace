@@ -1267,7 +1267,7 @@ class Map_model extends CI_Model {
 	public function reply_update ($data, $info)
 	{
 		$table = $this->db->escape_str("map_{$info[1]}_reply");
-		$content = addslashes(htmlspecialchars($data['message']));
+		$content = $data['message'];
 		$no = $data['no'];
 
 		$query = "update {$table}
