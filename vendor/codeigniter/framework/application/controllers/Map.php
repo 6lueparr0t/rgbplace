@@ -110,8 +110,9 @@ class Map extends CI_Controller {
 			if( ( $ret->row()->uid == $this->session->userdata('uid') && !in_array($type, array("best", "notice")) ) || $this->session->userdata('admin')) {
 				//$data['mode'] = 'update';
 				$this->session->set_userdata(['mode' => 'put']);
-				$data['title'] = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n',$ret->row()->title))));
-				$data['content'] = htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$ret->row()->content)));
+				$data['title'] = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/i','\n',$ret->row()->title))));
+				//$data['content'] = htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$ret->row()->content)));
+				$data['content'] = stripslashes( preg_replace('/\\\n/i','<br/>', htmlspecialchars($ret->row()->content) ) );
 				//$data['upload'] = htmlspecialchars_decode($ret->row()->upload);
 			} else {
 				redirect("/{$map}/{$type}/{$num}");

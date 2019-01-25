@@ -583,7 +583,7 @@ class Map_model extends CI_Model {
 			$type = $info[2];
 
 			$title = htmlspecialchars($data['title']);
-			$content = htmlspecialchars($data['content']);
+			$content = $data['content'];
 			//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 			preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
