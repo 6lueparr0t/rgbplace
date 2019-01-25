@@ -80,18 +80,18 @@ class Map_model extends CI_Model {
 
 		echo "<table class='page'>";
 		foreach ($find->result() as $key => $row) {
-			$title = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->title)), "<a><img><br><div><p><iframe><script>");
+			$title = xss_clean(htmlspecialchars_decode(stripslashes($row->title)));
 
 			echo "<tr>"
-				."<td class='date'>".date("Y-m-d", strtotime($row->ctim))."</td>"
-				."<td class='title'><div><a href='/{$map}/{$row->type}/{$row->no}'>".xss_clean($title)."</a></div></td>"
-				."<td class='reply count'>[<a href='/{$map}/{$row->type}/{$row->no}#reply'>{$row->reply}</a>]</td>"
+					."<td class='date'>".date("Y-m-d", strtotime($row->ctim))."</td>"
+					."<td class='title'><div><a href='/{$map}/{$row->type}/{$row->no}'>{$title}</a></div></td>"
+					."<td class='reply count'>[<a href='/{$map}/{$row->type}/{$row->no}#reply'>{$row->reply}</a>]</td>"
 			."</tr>";
 
 			//$data['title'][$key]   = $row->title;
 			//$data['content'][$key] = $row->content;
 			//$data['ctim'][$key]    = $row->ctim;
-		}
+                }
 		echo "</table>";
 
 		return true;
