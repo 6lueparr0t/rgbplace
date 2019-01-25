@@ -209,7 +209,7 @@ class Map_model extends CI_Model {
 
 			$up = ($row->up>0)?(($row->up>10)?"<span class='up'>+ {$row->up}</span>":"+ {$row->up}"):"";
 
-			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->title)), "<a><img><br><div><p><iframe><script>")."</a> {$replyCount} {$up}";
+			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->title)), "<a><img><br><div><p><iframe>")."</a> {$replyCount} {$up}";
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 
@@ -468,7 +468,7 @@ class Map_model extends CI_Model {
 			$uno   = $row->uno;
 			$title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $row->title))));
 			//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$row->content))), "<a><img><br><div><p><iframe>");
-			$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->content)), "<a><img><br><div><p><iframe><script>");
+			$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->content)), "<a><img><br><div><p><iframe>");
 
 			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
 			echo "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
@@ -584,7 +584,7 @@ class Map_model extends CI_Model {
 			$type = $info[2];
 
 			$title = htmlspecialchars($data['title']);
-			$content = htmlspecialchars($data['content']);
+			$content = $data['content'];
 			//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 			preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
