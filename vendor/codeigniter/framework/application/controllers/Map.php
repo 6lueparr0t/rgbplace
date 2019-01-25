@@ -111,7 +111,7 @@ class Map extends CI_Controller {
 				//$data['mode'] = 'update';
 				$this->session->set_userdata(['mode' => 'put']);
 				//$data['title'] = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/i','\n',$ret->row()->title))));
-				$data['title'] = htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/i','\n',$ret->row()->title)));
+				$data['title'] = stripslashes(preg_replace('/\\\n/i','\n',$ret->row()->title));
 				//$data['content'] = htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$ret->row()->content)));
 				$data['content'] = stripslashes( preg_replace('/\\\n/i','<br/>', htmlspecialchars($ret->row()->content) ) );
 				//$data['upload'] = htmlspecialchars_decode($ret->row()->upload);
