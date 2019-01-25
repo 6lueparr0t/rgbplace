@@ -84,7 +84,7 @@ class Map_model extends CI_Model {
 
 			echo "<tr>"
 				."<td class='date'>".date("Y-m-d", strtotime($row->ctim))."</td>"
-				."<td class='title'><div><a href='/{$map}/{$row->type}/{$row->no}'>{$title}</a></div></td>"
+				."<td class='title'><div><a href='/{$map}/{$row->type}/{$row->no}'>".xss_clean($title)."</a></div></td>"
 				."<td class='reply count'>[<a href='/{$map}/{$row->type}/{$row->no}#reply'>{$row->reply}</a>]</td>"
 			."</tr>";
 
@@ -218,9 +218,9 @@ class Map_model extends CI_Model {
 			echo "<tr class='list-row'>"
 				."<td class='no'>{$row->no}</td>"
 				."<td class='title'>"
-					."{$title}"
-					."{$toggle}"
-					."{$reply}"
+					.xss_clean($title)
+					.$toggle
+					.$reply
 				."</td>"
 				."<td class='hit'>{$row->hit}</td>"
 				."<td class='name'>{$row->name}</td>"
@@ -468,7 +468,7 @@ class Map_model extends CI_Model {
 			$uno   = $row->uno;
 			$title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $row->title))));
 			//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$row->content))), "<a><img><br><div><p><iframe>");
-			$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->content)), "<a><img><br><div><p><iframe>");
+			$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->content)), "<a><img><br><div><p><iframe><script>");
 
 			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
 			echo "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
