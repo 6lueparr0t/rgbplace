@@ -22,7 +22,7 @@ class Map extends CI_Controller {
 		if($mainPost) {
 			$title = $mainPost->title;
 			$content = html_entity_decode($mainPost->content);
-			preg_match_all('/<img.*?src=[\'"](.*?)[\'"]/i', $content, $img);
+			preg_match_all('/<img.*?src=.[\'"](.*?).[\'"]/i', $content, $img);
 
 			$url = "/{$map}/{$mainPost->type}/{$mainPost->no}";
 		}
