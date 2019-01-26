@@ -14,7 +14,7 @@ function replyTemplate(no, mode, message) {
 		"<div class='reply-addon block'>"
 		+"<input type='hidden' class='reply-no' value='"+no+"'/>"
 		+"<input type='hidden' class='reply-mode' value='"+mode+"'/>"
-		+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message .. &#xf303;'>"+message+"</textarea>"
+		+"<textarea class='reply-box' id='reply-box-"+no+"' placeholder='Leave a Message ...'>"+message+"</textarea>"
 
 		+"<div class='reply-button-group'>"
 		+"<div class='reply-button send to'>Reply on Message <span style='font-weight:900;transform: translate(.4rem,.1rem);'>&#xf11c;</span></div>"

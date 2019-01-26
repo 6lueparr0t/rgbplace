@@ -124,7 +124,8 @@
 		.mention {
 			color:black;
 			background-color:$oc-yellow-3;
-			display:inline-block;
+			display: table;
+			margin-right: .5rem;
 		}
 
 		ul {

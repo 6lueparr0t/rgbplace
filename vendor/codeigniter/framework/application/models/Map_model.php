@@ -700,8 +700,7 @@ class Map_model extends CI_Model {
 				where
 					type = ?
 					and no = ?
-					and uid = ?
-					and name = ?";
+					and uid = ?";
 
 			$values = array(
 				$title,
@@ -711,8 +710,7 @@ class Map_model extends CI_Model {
 
 				$type,
 				$no,
-				$this->session->userdata('uid'),
-				$this->session->userdata('name')
+				$this->session->userdata('uid')
 			);
 		}
 
@@ -1272,21 +1270,32 @@ class Map_model extends CI_Model {
 		$content = $data['message'];
 		$no = $data['no'];
 
-		$query = "update {$table}
-			set
-				content = ?
-			where
-				uid = ?
-				and name = ?
-				and no = ?";
+		$reply_before_update = $this->reply_select($table, $no);
+		if($this->session->userdata('admin') === true) {
+			$query = "update {$table}
+				set
+					content = ?
+				where
+					no = ?";
+			$values = array(
+				$content,
 
-		$values = array(
-			$content,
+				$no
+			);
+		} else {
+			$query = "update {$table}
+				set
+					content = ?
+				where
+					uid = ?
+					and no = ?";
+			$values = array(
+				$content,
 
-			$this->session->userdata('uid'),
-			$this->session->userdata('name'),
-			$no
-		);
+				$this->session->userdata('uid'),
+				$no
+			);
+		}
 
 		$back = $this->reply_getPageNum($table, $info[3], $no);
 		if($this->db->query($query, $values)) {
@@ -1299,6 +1308,7 @@ class Map_model extends CI_Model {
 			$data = array (
 				'map' => $info[1],
 				'no' => $no,
+                'uid' => $reply_before_update['uid'],
 				'content' => $content,
 				'date' => date('Y-m-d H:i:s')
 			);
@@ -1329,12 +1339,10 @@ class Map_model extends CI_Model {
 			$query = "delete from {$table}
 					where
 						uid = ?
-						and name = ?
 						and no = ?";
 
 			$values = array(
 				$this->session->userdata('uid'),
-				$this->session->userdata('name'),
 				$no
 			);
 		}

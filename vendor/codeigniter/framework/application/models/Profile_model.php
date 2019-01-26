@@ -315,7 +315,9 @@ class Profile_model extends CI_Model {
 				$tmp .= "<div class='td center width-50'>{$row->idx}</div>";
 				$tmp .= "<div class='td center width-50'>{$row->map}</div>";
 				$tmp .= "<div class='td font-normal'>";
-				$tmp .= "<a href='/{$row->map}/{$row->post}?no={$row->reply}' target='_blank'>{$row->content}</a><br/>";
+
+				$content = stripslashes( preg_replace('/\\\n/i','<br/>', htmlspecialchars($row->content)) );
+				$tmp .= "<a href='/{$row->map}/{$row->post}?no={$row->reply}' target='_blank'>{$content}</a><br/>";
 				$tmp .= "{$row->date}<br/>";
 				$tmp .= "</div>";
 				$tmp .= "</div>";
@@ -353,14 +355,13 @@ class Profile_model extends CI_Model {
 
 	public function update_info($field, $data) {
 		$table = 'total_'.$field;
-		$this->setting($uid, $name);
 
 		if (isset($data['title'])) {
 			$query = $this->db->query("UPDATE {$table}
 				SET
 					title = ?,
 					date = ? where uid = ? and map = ? and post = ? ",
-			array($data['title'], $data['date'], $uid, $data['map'], $data['no']) );
+			array($data['title'], $data['date'], $data['uid'], $data['map'], $data['no']) );
 		}
 
 		if (isset($data['content'])) {
@@ -368,7 +369,7 @@ class Profile_model extends CI_Model {
 				SET
 					content = ?,
 					date = ? where uid = ? and map = ? and reply = ? ",
-			array($data['content'], $data['date'], $uid, $data['map'], $data['no']) );
+			array($data['content'], $data['date'], $data['uid'], $data['map'], $data['no']) );
 		}
 
 		return $query;
@@ -385,7 +386,7 @@ class Profile_model extends CI_Model {
 	public function message($type, $data = array('uid' => ''), $idx = null) {
 		$this->setting($uid, $name);
 
-		if(strpos($data['uid'], '@') !== false) {
+		if(strpos($this->session->userdata('uid'), '@') !== false) {
 			$table = 'admin_info';
 			$field = 'name';
 		} else {
@@ -425,10 +426,12 @@ class Profile_model extends CI_Model {
 				}
 
 				$tmp = "<div class='tr'>";
-				$tmp.= "<div class='td center width-50'>{$i}</div>";
+				$tmp.= "<div class='td center width-50'>".($i+1)."</div>";
 				$tmp.= "<div class='td center width-50'>{$msg[$i]->map}</div>";
 				$tmp.= "<div class='td font-normal'>";
-				$tmp.= "<a href='/{$msg[$i]->map}/{$msg[$i]->post}?reply=y&no={$msg[$i]->reply}' target='_blank'>{$msg[$i]->content}</a><br/>";
+
+				$content = stripslashes( preg_replace('/\\\n/i','<br/>', htmlspecialchars($msg[$i]->content)) );
+				$tmp.= "<a href='/{$msg[$i]->map}/{$msg[$i]->post}?reply=y&no={$msg[$i]->reply}' target='_blank'>{$content}</a><br/>";
 				$tmp.= "{$msg[$i]->date}<br/>";
 				$tmp.= "</div>";
 				$tmp.= "</div>";
