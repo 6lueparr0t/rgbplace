@@ -1223,6 +1223,7 @@ class Map_model extends CI_Model {
 					'reply' => $reply_no,
 					'content' => $content
 				);
+
 				@$this->profile->message('add', $data, null);
 			}
 		}
@@ -1255,7 +1256,13 @@ class Map_model extends CI_Model {
 					where
 						reply.no=? ";
 
-		return ceil($this->db->query($query, array($post_no, $no))->row()->idx/REPLY_LIST_ROWS_LIMIT);
+		if( $this->db->simple_query($query, array($post_no, $no)) ) {
+			$ret = ceil($this->db->query($query, array($post_no, $no))->row()->idx/REPLY_LIST_ROWS_LIMIT);
+		} else {
+			$ret = true;
+		}
+
+		return $ret;
 	}
 
 	/*
@@ -1326,18 +1333,19 @@ class Map_model extends CI_Model {
 	 */
 	public function reply_delete ($data, $info) {
 		$table = $this->db->escape_str("map_{$info[1]}_reply");
+
 		$no = $data['no'];
 
 		$reply_before_remove = $this->reply_select($table, $no);
 		if($this->session->userdata('admin') === true) {
-			$query = "delete from {$table}
-					where
+			$query = "DELETE FROM {$table}
+					WHERE
 					no = ?";
 
 			$values = array($no);
 		} else {
-			$query = "delete from {$table}
-					where
+			$query = "DELETE FROM {$table}
+					WHERE
 						uid = ?
 						and no = ?";
 

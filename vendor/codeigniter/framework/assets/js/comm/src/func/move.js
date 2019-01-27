@@ -4,17 +4,21 @@ function move (selector, position, time) {
 
 	let element = document.querySelector(selector); 
 
-	let xPos = 0;
-	let yPos = 0;
+	if(element) {
+		let xPos = 0;
+		let yPos = 0;
 
-	xPos += (element.offsetLeft - element.scrollLeft + element.clientLeft);
-	yPos += (element.offsetTop - element.scrollTop + element.clientTop) + position;
+		xPos += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+		yPos += (element.offsetTop - element.scrollTop + element.clientTop) + position;
 
-	element = element.offsetParent;
+		element = element.offsetParent;
 
-	let moveTo = {x: xPos, y: yPos};
+		let moveTo = {x: xPos, y: yPos};
 
-	setTimeout(function() {
-		window.scrollTo(this.x, this.y);
-	}.bind(moveTo), time);
+		setTimeout(function() {
+			window.scrollTo(this.x, this.y);
+		}.bind(moveTo), time);
+	} else {
+		console.log(selector + ' not found');
+	}
 }

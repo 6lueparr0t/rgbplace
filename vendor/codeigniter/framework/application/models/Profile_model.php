@@ -286,10 +286,10 @@ class Profile_model extends CI_Model {
 
 		switch ($field) {
 		case 'post' :
-			$query = $this->db->query("SELECT @IDX := @IDX - 1 AS idx,
+			$query = $this->db->query("SELECT @IDX := @IDX + 1 AS idx,
 				total.uid, total.name, total.map, total.post, total.title, total.date
-				FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
-				WHERE user.{$where_field} = ? ORDER BY total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
+				FROM {$table}, (SELECT @IDX := ".($start)." ) idx
+				WHERE user.{$where_field} = ? ORDER BY idx DESC, total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
 
 			foreach ($query->result() as $key => $row) {
 				$tmp  = "<div class='tr'>";
@@ -305,10 +305,10 @@ class Profile_model extends CI_Model {
 			}
 			break;
 		case 'reply' : 
-			$query = $this->db->query("SELECT @IDX := @IDX - 1 AS idx,
+			$query = $this->db->query("SELECT @IDX := @IDX + 1 AS idx,
 				total.uid, total.name, total.map, total.post, total.reply, total.content, total.date
-				FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
-				WHERE user.{$where_field} = ? ORDER BY total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
+				FROM {$table}, (SELECT @IDX := ".($start)." ) idx
+				WHERE user.{$where_field} = ? ORDER BY idx DESC, total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
 
 			foreach ($query->result() as $key => $row) {
 				$tmp  = "<div class='tr'>";
@@ -326,10 +326,10 @@ class Profile_model extends CI_Model {
 			}
 			break;
 		case 'upload' :
-			$query = $this->db->query("SELECT @IDX := @IDX - 1 AS idx,
+			$query = $this->db->query("SELECT @IDX := @IDX + 1 AS idx,
 				total.uid, total.name, total.client_name, total.file_name, total.file_type, total.file_size, total.date
-				FROM {$table}, (SELECT @IDX := {$idx_start} ) idx
-				WHERE user.{$where_field} = ? ORDER BY total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
+				FROM {$table}, (SELECT @IDX := ".($start)." ) idx
+				WHERE user.{$where_field} = ? ORDER BY  idx DESC, total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
 
 			foreach ($query->result() as $key => $row) {
 				$tmp  = "<div class='tr'>";
@@ -347,6 +347,7 @@ class Profile_model extends CI_Model {
 			break;
 		}
 
+		//echo $this->db->last_query();
 		//####################################################################################################
 
 		return json_encode($ret);
@@ -378,36 +379,45 @@ class Profile_model extends CI_Model {
 	public function remove_info($field, $data) {
 		$table = 'total_'.$field;
 
-		$query = $this->db->query("DELETE FROM {$table} where uid = ? and map = ? and {$field} = ? ", array($data['uid'], $data['map'], $data['no']) );
+		if(strpos($data['uid'], '@') !== false) {
+			$info = explode('@', $data['uid']);
+			$uid_name = 'name';
+			$search = $info[1];
+		} else {
+			$uid_name = 'uid';
+			$search = $data['uid'];
+		}
+
+		$query = $this->db->query("DELETE FROM {$table} where {$uid_name} = ? and map = ? and {$field} = ? ", array($search, $data['map'], $data['no']) );
 
 		return $query;
 	}
 
 	public function message($type, $data = array('uid' => ''), $idx = null) {
-		$this->setting($uid, $name);
-
-		if(strpos($this->session->userdata('uid'), '@') !== false) {
-			$table = 'admin_info';
-			$field = 'name';
-		} else {
-			$table = 'user_info';
-			$field = 'uid';
-		}
-
 		switch($type) {
-
 		case 'add' :
+			if(strpos($data['uid'], '@') !== false) {
+				$info = explode('@', $data['uid']);
+				$table = 'admin_info';
+				$field = 'name';
+				$name = $info[1];
+			} else {
+				$table = 'user_info';
+				$field = 'uid';
+				$uid = $data['uid'];
+			}
+
 			// Insert
 			$msg = (array)json_decode($this->db->query("select msg from {$table} where {$field} = ? ", ${$field})->row()->msg)->total;
 
 			// 100건 넘으면 앞에서 부터 삭제
 			if(count($msg) > 100) {
-				$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[0]'), '{\"total\":[]}') where {$field} = ? ", $data['uid']);
+				$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[0]'), '{\"total\":[]}') where {$field} = ? ", ${$field});
 			}
 
 			$json = "{\"type\":\"{$data['type']}\", \"map\":\"{$data['map']}\", \"post\":\"{$data['post']}\", \"reply\":\"{$data['reply']}\", \"content\":\"{$data['content']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
 
-			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where {$field} = ? ", $data['uid']);
+			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where {$field} = ? ", ${$field});
 			break;
 
 		case 'remove' :
@@ -416,6 +426,16 @@ class Profile_model extends CI_Model {
 			break;
 
 		case 'show' :
+			$this->setting($uid, $name);
+
+			if($this->session->userdata('admin')) {
+				$table = 'admin_info';
+				$field = 'name';
+			} else {
+				$table = 'user_info';
+				$field = 'uid';
+			}
+
 			// Select
 			$msg = (array)json_decode($this->db->query("select msg from {$table} where {$field} = ? ", ${$field})->row()->msg)->total;
 
