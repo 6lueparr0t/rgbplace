@@ -747,6 +747,7 @@ class Map_model extends CI_Model {
 		$table_reply       = "map_{$map}_reply reply";
 		$table_total_reply = "total_reply total";
 
+		$post_before_remove = $this->post_select(null, $info)->row();
 		if($this->session->userdata('admin') === true) {
 			$query = "DELETE post.*, reply.*, total.* FROM {$table_post}
 				LEFT JOIN {$table_reply} ON reply.post = post.no
@@ -783,6 +784,7 @@ class Map_model extends CI_Model {
 			$data = array (
 				'map' => $map,
 				'no' => $no,
+				'uid' => $post_before_remove->uid
 			);
 			@$this->profile->remove_info('post', $data);
 		}
