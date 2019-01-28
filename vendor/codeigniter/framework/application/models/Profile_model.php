@@ -203,10 +203,10 @@ class Profile_model extends CI_Model {
 	public function select_info($data, $info) {
 
 		$field = $data['tab'];
-		$search['no'] = isset($data['no'])?$data['no']:0;
+		$search['no'] = isset($data['no'])?base64_decode( urldecode($data['no']):0;
 		$search['page'] = isset($data['page'])?$data['page']:0;
 
-		if(!isset($data['no']) && $this->session->userdata('admin') == true) {
+		if(!$search['no'] && $this->session->userdata('admin') == true) {
 			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN admin_info user ON user.name = total.name');
 		} else {
 			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN user_info user ON user.uid = total.uid');

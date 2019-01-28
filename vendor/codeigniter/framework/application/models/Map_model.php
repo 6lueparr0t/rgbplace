@@ -835,7 +835,8 @@ class Map_model extends CI_Model {
 				reply.depth8,
 				reply.depth9,
 				reply.depth10,
-				reply.ctim
+				reply.ctim,
+				reply.dtim
 
 			LIMIT {$start}, {$rows} ";
 
@@ -861,7 +862,8 @@ class Map_model extends CI_Model {
 					reply.depth8,
 					reply.depth9,
 					reply.depth10,
-					reply.ctim
+					reply.ctim,
+					reply.dtim
 
 					LIMIT {$start}, {$rows} ";
 
@@ -903,11 +905,11 @@ class Map_model extends CI_Model {
 
 			$reply_uid = $row->uid;
 
-			$name    = $row->name;
+			$name    = ($row->dtim)?' [ X ] ':$row->name;
 			$uno    = $row->uno;
 			$mention = ($row->mention)? "@".$row->mention:"";
 
-			$content = stripslashes(preg_replace('/\\\n/i','<br/>', htmlspecialchars($row->content )));
+			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', htmlspecialchars($row->content)));
 
 			$depth = [
 				$row->depth1, $row->depth2, $row->depth3,
@@ -958,7 +960,7 @@ class Map_model extends CI_Model {
 
 				$ret .= "<button class='reply {$btn_perm}'><i class='fa fa-reply' style='transform: rotate3d(1, 0, 0, 180deg);'></i></button>";
 
-				if($uid == $reply_uid || $admin ) {
+				if($uid == $reply_uid || $admin || !$row->dtim ) {
 					$reply_perm = "enable";
 				} else {
 					$reply_perm = "disable";
@@ -1070,6 +1072,20 @@ class Map_model extends CI_Model {
 		$update = $this->db->query("update {$table} set reply = {$count} where no = ?", $no);
 
 		return $update;
+	}
+
+	public function reply_relation ($table, $no, $post_no = null) {
+		//$this->monolog->debug('reply_select', print_r($data,1));
+		$table = $this->db->escape_str($table);
+		$select = $this->db->query("select count(*) as cnt from {$table} where relation = ? and post = ?", $no, $post_no);
+
+		if ($select->row()->cnt > 0) {
+			$ret = true;
+		} else {
+			$ret = false;
+		}
+
+		return $ret;
 	}
 
 	public function reply_select ($table, $no) {
@@ -1280,35 +1296,39 @@ class Map_model extends CI_Model {
 		$no = $data['no'];
 
 		$reply_before_update = $this->reply_select($table, $no);
-		if($this->session->userdata('admin') === true) {
-			$query = "update {$table}
-				set
-					content = ?
-				where
-					no = ?";
-			$values = array(
-				$content,
+		if(!reply_before_update['dtim']) {
+			if($this->session->userdata('admin') === true) {
+				$query = "update {$table}
+					set
+						content = ?
+					where
+						no = ?";
+				$values = array(
+					$content,
 
-				$no
-			);
-		} else {
-			$query = "update {$table}
-				set
-					content = ?
-				where
-					uid = ?
-					and no = ?";
-			$values = array(
-				$content,
+					$no
+				);
+			} else {
+				$query = "update {$table}
+					set
+						content = ?
+					where
+						uid = ?
+						and no = ?";
+				$values = array(
+					$content,
 
-				$this->session->userdata('uid'),
-				$no
-			);
-		}
+					$this->session->userdata('uid'),
+					$no
+				);
+			}
 
-		$back = $this->reply_getPageNum($table, $info[3], $no);
-		if($this->db->query($query, $values)) {
-			$ret = $back;
+			$back = $this->reply_getPageNum($table, $info[3], $no);
+			if($this->db->query($query, $values)) {
+				$ret = $back;
+			} else {
+				$ret = false;
+			}
 		} else {
 			$ret = false;
 		}
@@ -1329,7 +1349,7 @@ class Map_model extends CI_Model {
 
 	/*
 	 * ====================
-	 * Usage : $this->map->reply_delete ( [map code, post type, post number], link info )
+	 * Usage : $this->map->reply_delete ( [ host($info[0]), map code($info[1]), post type($info[2]), post number($info[3]) ], link info )
 	 * Desc : 
 	 * ====================
 	 */
@@ -1338,23 +1358,45 @@ class Map_model extends CI_Model {
 
 		$no = $data['no'];
 
-		$reply_before_remove = $this->reply_select($table, $no);
-		if($this->session->userdata('admin') === true) {
-			$query = "DELETE FROM {$table}
-					WHERE
-					no = ?";
+		if($this->reply_relation($table, $no, $info[3])) {
+			if($this->session->userdata('admin') === true) {
+				$query = "UPDATE {$table}
+						SET dtim = now()
+						WHERE
+						no = ?";
 
-			$values = array($no);
+				$values = array($no);
+			} else {
+				$query = "UPDATE {$table}
+						SET dtim = now()
+						WHERE
+							uid = ?
+							and no = ?";
+
+				$values = array(
+					$this->session->userdata('uid'),
+					$no
+				);
+			}
 		} else {
-			$query = "DELETE FROM {$table}
-					WHERE
-						uid = ?
-						and no = ?";
+			$reply_before_remove = $this->reply_select($table, $no);
+			if($this->session->userdata('admin') === true) {
+				$query = "DELETE FROM {$table}
+						WHERE
+						no = ?";
 
-			$values = array(
-				$this->session->userdata('uid'),
-				$no
-			);
+				$values = array($no);
+			} else {
+				$query = "DELETE FROM {$table}
+						WHERE
+							uid = ?
+							and no = ?";
+
+				$values = array(
+					$this->session->userdata('uid'),
+					$no
+				);
+			}
 		}
 
 		$back = $this->reply_getPageNum($table, $info[3], $no);
