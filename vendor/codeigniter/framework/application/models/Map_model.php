@@ -960,7 +960,7 @@ class Map_model extends CI_Model {
 
 				$ret .= "<button class='reply {$btn_perm}'><i class='fa fa-reply' style='transform: rotate3d(1, 0, 0, 180deg);'></i></button>";
 
-				if($uid == $reply_uid || $admin || !$row->dtim ) {
+				if(($uid == $reply_uid || $admin) && !$row->dtim ) {
 					$reply_perm = "enable";
 				} else {
 					$reply_perm = "disable";
