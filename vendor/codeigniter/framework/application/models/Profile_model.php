@@ -203,7 +203,7 @@ class Profile_model extends CI_Model {
 	public function select_info($data, $info) {
 
 		$field = $data['tab'];
-		$search['no'] = isset($data['no'])?base64_decode( urldecode($data['no']):0;
+		$search['no'] = isset($data['no'])?base64_decode( urldecode($data['no'])):0;
 		$search['page'] = isset($data['page'])?$data['page']:0;
 
 		if(!$search['no'] && $this->session->userdata('admin') == true) {
