@@ -1357,6 +1357,8 @@ class Map_model extends CI_Model {
 		$table = $this->db->escape_str("map_{$info[1]}_reply");
 
 		$no = $data['no'];
+		
+		$reply_before_remove = $this->reply_select($table, $no);
 
 		if($this->reply_relation($table, $no, $info[3])) {
 			if($this->session->userdata('admin') === true) {
@@ -1405,9 +1407,7 @@ class Map_model extends CI_Model {
 			$ret = false;
 		}
 
-		if ($ret) {
-			$reply_before_remove = $this->reply_select($table, $no);
-			
+		if ($ret) {			
             $data = array (
 				'map' => $info[1],
                 'no' => $no,
