@@ -1379,7 +1379,6 @@ class Map_model extends CI_Model {
 				);
 			}
 		} else {
-			$reply_before_remove = $this->reply_select($table, $no);
 			if($this->session->userdata('admin') === true) {
 				$query = "DELETE FROM {$table}
 						WHERE
@@ -1407,6 +1406,8 @@ class Map_model extends CI_Model {
 		}
 
 		if ($ret) {
+			$reply_before_remove = $this->reply_select($table, $no);
+			
             $data = array (
 				'map' => $info[1],
                 'no' => $no,
