@@ -1077,7 +1077,7 @@ class Map_model extends CI_Model {
 	public function reply_relation ($table, $no, $post_no = null) {
 		//$this->monolog->debug('reply_select', print_r($data,1));
 		$table = $this->db->escape_str($table);
-		$select = $this->db->query("select count(*) as cnt from {$table} where relation = ? and post = ?", $no, $post_no);
+		$select = $this->db->query("select count(*) as cnt from {$table} where relation = ? and post = ?", array($no, $post_no));
 
 		if ($select->row()->cnt > 0) {
 			$ret = true;
