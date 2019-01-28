@@ -907,7 +907,7 @@ class Map_model extends CI_Model {
 
 			$name    = ($row->dtim)?' [ X ] ':$row->name;
 			$uno    = $row->uno;
-			$mention = ($row->mention)? "@".$row->mention:"";
+			$mention = ($row->mention && !$row->dtim)? "@".$row->mention:"";
 
 			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', htmlspecialchars($row->content)));
 
