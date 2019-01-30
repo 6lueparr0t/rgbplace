@@ -112,7 +112,7 @@ class Profile_model extends CI_Model {
 		$admin = $this->session->userdata('admin');
 
 		$where_field = isset($data['no'])?'no':'uid';
-		$where_value = isset($data['no'])?$data['no']:$uid;
+		$where_value = isset($data['no'])?base64_decode( urldecode($data['no']) ):$uid;
 
 		if ($admin === true) {
 
