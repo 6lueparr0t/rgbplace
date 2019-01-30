@@ -171,6 +171,7 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 			if(confirm('계정을 삭제하시겠습니까? 계정 삭제 시, 게시물은 남아있을 수 있습니다. \n Delete Your Account? your post & reply will be remain')) {
 				data.push({
 					'info': __URL__,
+					'tab':(params.get('tab'))?params.get('tab'):0,
 					'no':(params.get('no'))?params.get('no'):0
 				});
 

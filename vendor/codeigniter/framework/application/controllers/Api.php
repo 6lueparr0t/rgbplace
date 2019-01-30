@@ -227,10 +227,13 @@ class Api extends CI_Controller {
 					$ret = $this->profile->update($data, $info);
 					break;
 				case 'delete':
-					if($data['tab'] === 'message') {
+					switch($data['tab']) {
+					case 'message' :
 						$ret = $this->profile->message('remove', null, $data['idx']);
-					} else {
+						break;
+					case 'info' :
 						$ret = $this->profile->delete($data, $info);
+						break;
 					}
 					break;
 				default :
