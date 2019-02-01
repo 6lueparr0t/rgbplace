@@ -1,9 +1,9 @@
 "use strict"
 
+const params = new URLSearchParams(window.location.search);
+
 let pswd = document.querySelector("#pswd");
 let conf = document.querySelector("#conf");
-
-let params = new URLSearchParams(window.location.search);
 
 function done (data) {
 	let num = data;

@@ -129,9 +129,7 @@ class Profile_model extends CI_Model {
 		} else {
 			$query = "DELETE user.*, conf.* FROM user_info user LEFT JOIN user_conf conf ON user.uid = conf.uid WHERE user.uid = ?";
 			$result = $this->db->query( $query, $uid );
-		}
 
-		if ($result && $where_field == 'uid') {
 			$config = ['admin', 'uid', 'name', 'signed_in'];
 			$this->session->unset_userdata($config);
 		}

@@ -187,10 +187,10 @@ class Sign extends CI_Controller {
 
 				// Make and decode POST request:
 				$recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
-				$recaptcha = json_decode($recaptcha);
+				$recaptcha = (array)json_decode($recaptcha);
 
 				// Take action based on the score returned:
-				if ($recaptcha->score >= 0.5) {
+				if (isset($recaptcha['score']) && $recaptcha['score'] >= 0.5) {
 					$this->sign->userMake($data);
 
 					$user = [
