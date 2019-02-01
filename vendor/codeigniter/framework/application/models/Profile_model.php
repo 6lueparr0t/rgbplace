@@ -280,15 +280,13 @@ class Profile_model extends CI_Model {
 		//####################################################################################################
 		
 		// list
-		$idx_start = $MAX_LIST_COUNT - ((($search['page']>0?$search['page']:1)-1)*LIST_ROWS_LIMIT) + 1; 
-
 		$ret['list'] = '';
 
 		switch ($field) {
 		case 'post' :
 			$query = $this->db->query("SELECT @IDX := @IDX + 1 AS idx,
 				total.uid, total.name, total.map, total.post, total.title, total.date
-				FROM {$table}, (SELECT @IDX := ".($start)." ) idx
+				FROM {$table}, (SELECT @IDX := 0 ) idx
 				WHERE user.{$where_field} = ? ORDER BY idx DESC, total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
 
 			foreach ($query->result() as $key => $row) {
@@ -307,7 +305,7 @@ class Profile_model extends CI_Model {
 		case 'reply' : 
 			$query = $this->db->query("SELECT @IDX := @IDX + 1 AS idx,
 				total.uid, total.name, total.map, total.post, total.reply, total.content, total.date
-				FROM {$table}, (SELECT @IDX := ".($start)." ) idx
+				FROM {$table}, (SELECT @IDX := 0 ) idx
 				WHERE user.{$where_field} = ? ORDER BY idx DESC, total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
 
 			foreach ($query->result() as $key => $row) {
@@ -328,7 +326,7 @@ class Profile_model extends CI_Model {
 		case 'upload' :
 			$query = $this->db->query("SELECT @IDX := @IDX + 1 AS idx,
 				total.uid, total.name, total.client_name, total.file_name, total.file_type, total.file_size, total.date
-				FROM {$table}, (SELECT @IDX := ".($start)." ) idx
+				FROM {$table}, (SELECT @IDX := 0 ) idx
 				WHERE user.{$where_field} = ? ORDER BY  idx DESC, total.no DESC LIMIT ".$this->db->escape_str($limit), $where_value);
 
 			foreach ($query->result() as $key => $row) {
