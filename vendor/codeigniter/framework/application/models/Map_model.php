@@ -1252,6 +1252,7 @@ class Map_model extends CI_Model {
 
 			if(isset($reply['uid'])) {
 				$data = array (
+					'sn' => $reply['sn'],
 					'uid' => $reply['uid'],
 					'type' => 'reply',
 					'map' => $info[1],
