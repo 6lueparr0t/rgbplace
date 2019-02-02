@@ -448,7 +448,11 @@ class Map_model extends CI_Model {
 
 		// permission check
 		$activate = "disable";
-		if($sn = $this->session->userdata('sn') && $user = $this->session->userdata('uid')) {
+
+		$sn = $this->session->userdata('sn');
+		$user = $this->session->userdata('uid');
+
+		if($sn && $user) {
 			$activate = "enable";
 			$history_table = $this->db->escape_str("map_{$map}_history");
 			$vote_result = $this->history_select($history_table, $sn, $user, 'post', $num);
