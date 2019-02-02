@@ -100,7 +100,7 @@ class Template {
 			$name = $this->CI->session->userdata('name');
 
 			echo "<div class='sign'>";
-			echo "<a href='/profile'>{$name}</a>";
+			echo "<a href='/profile?tab=info'>{$name}</a>";
 
 			if($this->CI->session->userdata('google')) {
 				echo "<div class='g-signin2' style='display:none;'></div>";

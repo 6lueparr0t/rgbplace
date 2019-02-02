@@ -448,10 +448,10 @@ class Map_model extends CI_Model {
 
 		// permission check
 		$activate = "disable";
-		if($user = $this->session->userdata('uid')) {
+		if($sn = $this->session->userdata('sn') && $user = $this->session->userdata('uid')) {
 			$activate = "enable";
 			$history_table = $this->db->escape_str("map_{$map}_history");
-			$vote_result = $this->history_select($history_table, $user, 'post', $num);
+			$vote_result = $this->history_select($history_table, $sn, $user, 'post', $num);
 
 			$result = $vote_result->result();
 			if( $vote_result->num_rows() > 0 ) {
@@ -465,7 +465,7 @@ class Map_model extends CI_Model {
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 			$no   = $row->no;
 			$uid  = $row->uid;
-			$uno   = $row->uno;
+			$sn   = $row->sn;
 			$title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $row->title))));
 			//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$row->content))), "<a><img><br><div><p><iframe>");
 			$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->content)), "<a><img><br><div><p><iframe>");
@@ -476,7 +476,7 @@ class Map_model extends CI_Model {
 			//."<span class='vote'>{$row->vote}</span>"
 			echo "<div class='post-info'>"
 				."<span class='name' >"
-					."<i class='fa fa-user'></i>".(($uno)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($uno) ) ."' target='_blank' > ".$row->name." </a>":$row->name)
+					."<i class='fa fa-user'></i>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' target='_blank' > ".$row->name." </a>":$row->name)
 				."</span>"
 				."<span class='hit'  ><i class='fa fa-eye'></i> {$row->hit} </span>"
 				."<span class='reply'><i class='far fa-comment-dots'></i> {$row->reply} </span>"
@@ -518,6 +518,8 @@ class Map_model extends CI_Model {
 	public function post_hit($data) {
 		$history_table = $this->db->escape_str("map_{$data['map']}_history");
 		$no = $this->db->escape_str($data['num']);
+
+		$sn = $this->session->userdata('sn');
 		$uid = $this->session->userdata('uid');
 
 		$query = "SELECT no FROM {$history_table} where uid=? and type='post' and relation=? and act='view' ";
@@ -526,10 +528,10 @@ class Map_model extends CI_Model {
 			$ret = true;
 		} else {
 			$insert = "INSERT INTO {$history_table}
-				( uid, type, relation, act)
+				( sn, uid, type, relation, act)
 				VALUES
-				( ?, 'post', ?, 'view')";
-			if( $uid && $this->db->query($insert, array($uid, $no)) ) {
+				( ?, ?, 'post', ?, 'view')";
+			if( $uid && $this->db->query($insert, array($sn, $uid, $no)) ) {
 				$update_table = $this->db->escape_str("map_{$data['map']}_post");
 				$update = "UPDATE {$update_table} SET hit = hit + 1  where no = ?";
 				$ret = $this->db->query($update, $no);
@@ -555,12 +557,12 @@ class Map_model extends CI_Model {
 		$no = $this->db->escape_str($info[3]);
 
 		if($option == 'vote') {
-			$field = 'post.up, post.down, post.type, user.no uno';
+			$field = 'post.sn, post.up, post.down, post.type, user.no';
 		} else {
-			$field = 'post.*, user.no uno';
+			$field = 'post.*';
 		}
 
-		$query = "SELECT {$field} FROM {$table} LEFT JOIN user_info user ON post.uid = user.uid where post.no='{$no}' and (post.dtim = 0 or post.dtim is null)";
+		$query = "SELECT {$field} FROM {$table} LEFT JOIN user_info user ON post.sn = user.no and post.uid = user.uid where post.no='{$no}' and (post.dtim = 0 or post.dtim is null)";
 
         if($this->db->simple_query($query)) {
 			$ret = $this->db->query($query);
@@ -598,6 +600,7 @@ class Map_model extends CI_Model {
 
 			$query = "INSERT INTO {$table}
 			(
+				sn,	
 				uid,
 				name,
 				title,
@@ -613,10 +616,12 @@ class Map_model extends CI_Model {
 				?,
 				?,
 				?,
+				?,
 				?
 			)";
 
 			$values = array(
+				$this->session->userdata('sn'),
 				$this->session->userdata('uid'),
 				$this->session->userdata('name'),
 				$title,
@@ -668,6 +673,7 @@ class Map_model extends CI_Model {
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword = implode('|',$keyword[1]);
 
+		$post_before_update = $this->post_select(null, $info)->row();
 		if($this->session->userdata('admin') === true) {
 			$query = "update {$table}
 				set
@@ -700,6 +706,7 @@ class Map_model extends CI_Model {
 				where
 					type = ?
 					and no = ?
+					and sn = ?
 					and uid = ?";
 
 			$values = array(
@@ -710,6 +717,7 @@ class Map_model extends CI_Model {
 
 				$type,
 				$no,
+				$this->session->userdata('sn'),
 				$this->session->userdata('uid')
 			);
 		}
@@ -723,7 +731,9 @@ class Map_model extends CI_Model {
 				'map' => $info[1],
 				'no' => $no,
 				'title' => $title,
-				'date' => date('Y-m-d H:i:s')
+				'date' => date('Y-m-d H:i:s'),
+				'sn' => $post_before_update->sn,
+				'uid' => $post_before_update->uid
 			);
 			@$this->profile->update_info('post', $data);
 		}
@@ -769,11 +779,13 @@ class Map_model extends CI_Model {
 				WHERE 
 				post.type = ? AND
 				post.no = ? AND
+				post.sn = ? AND
 				post.uid = ?";
 
 			$values = array(
 				$type,
 				$no,
+				$this->session->userdata('sn'),
 				$this->session->userdata('uid')
 			);
 		}
@@ -784,6 +796,7 @@ class Map_model extends CI_Model {
 			$data = array (
 				'map' => $map,
 				'no' => $no,
+				'sn' => $post_before_remove->sn,
 				'uid' => $post_before_remove->uid
 			);
 			@$this->profile->remove_info('post', $data);
@@ -821,7 +834,7 @@ class Map_model extends CI_Model {
 			$start = ($start<0)?0:$start;
 		}
 
-		$query = "SELECT @IDX := @IDX + 1 AS idx, reply.*, user.no uno FROM {$table} reply LEFT JOIN user_info user ON reply.uid = user.uid, (SELECT @IDX := 0 ) idx
+		$query = "SELECT @IDX := @IDX + 1 AS idx, reply.*, user.no sn FROM {$table} reply LEFT JOIN user_info user ON reply.uid = user.uid, (SELECT @IDX := 0 ) idx
 			where reply.post=?
 			order by
 				if(isnull(reply.follow), reply.no, reply.follow),
@@ -848,7 +861,7 @@ class Map_model extends CI_Model {
 			$start = ($start<0)?0:$start;
 			$search['page'] = 'last';
 
-			$query = "SELECT @IDX := @IDX + 1 AS idx, reply.*, user.no uno FROM {$table} reply LEFT JOIN user_info user ON reply.uid = user.uid, (SELECT @IDX := 0 ) idx
+			$query = "SELECT @IDX := @IDX + 1 AS idx, reply.*, user.no sn FROM {$table} reply LEFT JOIN user_info user ON reply.uid = user.uid, (SELECT @IDX := 0 ) idx
 				where reply.post=?
 				order by
 				if(isnull(reply.follow), reply.no, reply.follow),
@@ -906,7 +919,7 @@ class Map_model extends CI_Model {
 			$reply_uid = $row->uid;
 
 			$name    = ($row->dtim)?' [ X ] ':$row->name;
-			$uno    = $row->uno;
+			$sn      = $row->sn;
 			$mention = ($row->mention && !$row->dtim)? "@".$row->mention:"";
 
 			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', htmlspecialchars($row->content)));
@@ -931,7 +944,7 @@ class Map_model extends CI_Model {
 
 			$ret .= "<span class='no'>{$no}</span>";
 			$ret .= "<div class='head ".(($post_uid==$reply_uid)?'owner':'')."'> "
-				.(($uno)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($uno) ) ."' target='_blank' >".$name."</a>":$name)
+				.(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' target='_blank' >".$name."</a>":$name)
 				." <span class='date'>{$date} {$time}</span></div>";
 
 			$ret .= "<li class='content ".(($post_uid==$reply_uid)?'owner':'')."'>";
@@ -1111,9 +1124,13 @@ class Map_model extends CI_Model {
 		$reply['follow'] = ($result->follow)?$result->follow:$result->no;
 		$reply['post'] = $result->post;
 
+		$reply['sn'] = $result->sn;
 		$reply['uid'] = $result->uid;
+
 		$reply['up'] = $result->up;
 		$reply['down'] = $result->down;
+
+		$reply['dtim'] = $result->dtim;
 
 		return $reply;
 	}
@@ -1185,18 +1202,19 @@ class Map_model extends CI_Model {
 		//}
 
 		$depth_array[$depth] = 
-			$this->db->query("select count(no) cnt from {$table} where relation = ?", $no)->row()->cnt+1;
+			$this->db->query("select count(no) cnt from {$table} where relation = ? ", $no)->row()->cnt+1;
 
 		$content = $data['message'];
 
-		$query= "insert into {$table} (uid, name,
+		$query= "insert into {$table} (sn, uid, name,
 			content, mention, post,
 			follow, relation, depth1, depth2, depth3, depth4, depth5, depth6, depth7, depth8, depth9, depth10)
 
-			values(?, ?,
+			values(?, ?, ?,
 				?, ?, ?,
 				{$follow}, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		$values = array(
+			$this->session->userdata('sn'),
 			$this->session->userdata('uid'),
 			$this->session->userdata('name'),
 
@@ -1296,7 +1314,7 @@ class Map_model extends CI_Model {
 		$no = $data['no'];
 
 		$reply_before_update = $this->reply_select($table, $no);
-		if(!reply_before_update['dtim']) {
+		if(!$reply_before_update['dtim']) {
 			if($this->session->userdata('admin') === true) {
 				$query = "update {$table}
 					set
@@ -1314,10 +1332,12 @@ class Map_model extends CI_Model {
 						content = ?
 					where
 						uid = ?
+						and uid = ?
 						and no = ?";
 				$values = array(
 					$content,
 
+					$this->session->userdata('sn'),
 					$this->session->userdata('uid'),
 					$no
 				);
@@ -1337,11 +1357,13 @@ class Map_model extends CI_Model {
 			$data = array (
 				'map' => $info[1],
 				'no' => $no,
+                'sn' => $reply_before_update['sn'],
                 'uid' => $reply_before_update['uid'],
 				'content' => $content,
 				'date' => date('Y-m-d H:i:s')
 			);
-			@$this->profile->update_info('reply', $data);
+
+			$this->profile->update_info('reply', $data);
 		}
 
 		return $ret;
@@ -1372,10 +1394,12 @@ class Map_model extends CI_Model {
 				$query = "UPDATE {$table}
 						SET dtim = now()
 						WHERE
-							uid = ?
+							sn = ?
+							and uid = ?
 							and no = ?";
 
 				$values = array(
+					$this->session->userdata('sn'),
 					$this->session->userdata('uid'),
 					$no
 				);
@@ -1390,10 +1414,12 @@ class Map_model extends CI_Model {
 			} else {
 				$query = "DELETE FROM {$table}
 						WHERE
-							uid = ?
+							sn = ?
+							and uid = ?
 							and no = ?";
 
 				$values = array(
+					$this->session->userdata('sn'),
 					$this->session->userdata('uid'),
 					$no
 				);
@@ -1411,6 +1437,7 @@ class Map_model extends CI_Model {
             $data = array (
 				'map' => $info[1],
                 'no' => $no,
+                'sn' => $reply_before_remove['sn'],
                 'uid' => $reply_before_remove['uid'],
             );
             @$this->profile->remove_info('reply', $data);
@@ -1425,7 +1452,7 @@ class Map_model extends CI_Model {
 	 * Desc : insert or update 'history' table, and increase up, down column to 'post' 'reply' table
 	 * ====================
 	 */
-	public function history_select ($table, $uid, $type, $no, $act = null) {
+	public function history_select ($table, $sn, $uid, $type, $no, $act = null) {
 
 		if($act) {
 			// $query = "SELECT * FROM {$table} where uid=? and type=? and relation=? and act = ? ";
@@ -1433,14 +1460,15 @@ class Map_model extends CI_Model {
 						FROM {$table} a
 							left join {$table} b
 							on b.relation = a.relation and b.act = ?
-						where a.uid=?
+						where a.sn=?
+							and a.uid=?
 							and a.relation=?
 							and a.act = ?";
 			
-			$result = $this->db->query($query, array($act, $uid, $no, $act));
+			$result = $this->db->query($query, array($act, $sn, $uid, $no, $act));
 		} else {
-			$query = "SELECT * FROM {$table} where uid=? and type=? and relation=? and act in ('up','down','n', 'report') ";
-			$result = $this->db->query($query, array($uid, $type, $no));
+			$query = "SELECT * FROM {$table} where sn=? and uid=? and type=? and relation=? and act in ('up','down','n', 'report') ";
+			$result = $this->db->query($query, array($sn, $uid, $type, $no));
 		}
 
 		return $result;
@@ -1454,6 +1482,7 @@ class Map_model extends CI_Model {
 	 */
 	public function vote ($data, $info) {
 		$no = $this->db->escape_str($info[3]);
+		$sn = $this->session->userdata('sn');
 		$uid = $this->session->userdata('uid');
 		$level = $this->session->userdata('level');
 		$admin = $this->session->userdata('admin');
@@ -1464,7 +1493,7 @@ class Map_model extends CI_Model {
 		$history_table = $this->db->escape_str("map_{$info[1]}_history");
 		$update_table = $this->db->escape_str("map_{$info[1]}_{$type}");
 
-		$result = $this->history_select($history_table, $uid, $type, $no);
+		$result = $this->history_select($history_table, $sn, $uid, $type, $no);
 
 		if( $level > 10 || $admin === true ) { 
 			$point = 10;
@@ -1477,7 +1506,7 @@ class Map_model extends CI_Model {
 		switch($type) {
 		case 'post' :
 			$vote_info = $this->post_select($data, $info);
-			$post = null;
+			$post = $vote_info->row()->no;
 			$vote_uid = $vote_info->row()->uid;
 			break;
 		case 'reply' :
@@ -1518,10 +1547,10 @@ class Map_model extends CI_Model {
 			}
 		} else {
 			$query = "INSERT INTO {$history_table}
-				( uid, type, relation, post, act)
+				( sn, uid, type, relation, post, act)
 				VALUES
-				( ?, ?, ?, ?, ?)";
-			if( $this->db->query($query, array($uid, $type, $no, $post, $act)) ) {
+				( ?, ?, ?, ?, ?, ?)";
+			if( $this->db->query($query, array($sn, $uid, $type, $no, $post, $act)) ) {
 				$query = "UPDATE {$update_table} SET {$act} = {$act} + {$point}  where no = ?";
 				$ret = $this->db->query($query, $no);
 
@@ -1541,6 +1570,7 @@ class Map_model extends CI_Model {
 	 */
 	public function report ($data, $info) {
 		$no = $this->db->escape_str($info[3]);
+		$sn = $this->session->userdata('sn');
 		$uid = $this->session->userdata('uid');
 
 		$act = strtolower($this->db->escape_str($data['act']));
@@ -1550,7 +1580,7 @@ class Map_model extends CI_Model {
 		$reply_table = $this->db->escape_str("map_{$info[1]}_reply");
 		$update_table = $this->db->escape_str("user_info");
 
-		$result = $this->history_select($history_table, $uid, $type, $no, $act);
+		$result = $this->history_select($history_table, $sn, $uid, $type, $no, $act);
 
 		$reply_info = $this->reply_select($reply_table, $no);
 		if($uid == $reply_info['uid']) {
@@ -1561,11 +1591,11 @@ class Map_model extends CI_Model {
 
 		if($result->row()->cnt == 0) {
 			$query = "INSERT INTO {$history_table}
-				( uid, type, relation, post, act)
+				( sn, uid, type, relation, post, act)
 				VALUES
-				( ?, ?, ?, ?, ?)";
+				( ?, ?, ?, ?, ?, ?)";
 
-			if( $this->db->query($query, array($uid, $type, $no, $post, $act)) ) {
+			if( $this->db->query($query, array($sn, $uid, $type, $no, $post, $act)) ) {
 				$ret = true;
 			}
 		} else {

@@ -139,50 +139,53 @@ class Profile_model extends CI_Model {
 
 	public function add_post($data) {
 		$table = 'total_post';
-		$this->setting($uid, $name);
+		$this->setting($uid, $name, $sn);
 
 		$query = $this->db->query("INSERT INTO {$table}
 			(
+				`sn`,
 				`uid`,
 				`name`,
 				`post`,
 				`map`,
 				`title`
-			) VALUES (?, ?, ?, ?, ?);", array($uid, $name, $data['no'], $data['map'], $data['title']));
+			) VALUES (?, ?, ?, ?, ?, ?);", array($sn, $uid, $name, $data['no'], $data['map'], $data['title']));
 
 		return $query;
 	}
 
 	public function add_upload($data) {
 		$table = 'total_upload';
-		$this->setting($uid, $name);
+		$this->setting($uid, $name, $sn);
 
 		$query = $this->db->query("INSERT INTO {$table}
 		(
+			`sn`,
 			`uid`,
 			`name`,
 			`client_name`,
 			`file_name`,
 			`file_type`,
 			`file_size`
-		) VALUES (?, ?, ?, ?, ?, ?);", array($uid, $name, $data['client_name'], $data['file_name'], $data['file_type'], $data['file_size']) );
+		) VALUES (?, ?, ?, ?, ?, ?, ?);", array($sn, $uid, $name, $data['client_name'], $data['file_name'], $data['file_type'], $data['file_size']) );
 
 		return $query;
 	}
 
 	public function add_reply($data) {
 		$table = 'total_reply';
-		$this->setting($uid, $name);
+		$this->setting($uid, $name, $sn);
 
 		$query = $this->db->query("INSERT INTO {$table}
 		(
+			`sn`,
 			`uid`,
 			`name`,
 			`post`,
 			`reply`,
 			`map`,
 			`content`
-		) VALUES (?, ?, ?, ?, ?, ?);", array($uid, $name, $data['post'], $data['no'], $data['map'], $data['content']) );
+		) VALUES (?, ?, ?, ?, ?, ?, ?);", array($sn, $uid, $name, $data['post'], $data['no'], $data['map'], $data['content']) );
 
 		return $query;
 	}
@@ -205,12 +208,12 @@ class Profile_model extends CI_Model {
 		$search['page'] = isset($data['page'])?$data['page']:0;
 
 		if(!$search['no'] && $this->session->userdata('admin') == true) {
-			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN admin_info user ON user.name = total.name');
+			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN admin_info user ON user.name = total.name and user.no = total.sn');
 		} else {
-			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN user_info user ON user.uid = total.uid');
+			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN user_info user ON user.uid = total.uid and user.no = total.sn');
 		}
 
-		$this->setting($uid, $name);
+		$this->setting($uid, $name, $sn);
 
 		$where_field = ($search['no'])?'no':(($this->session->userdata('admin'))?'name':'uid');
 		$where_value = ($search['no'])?$search['no']:(($this->session->userdata('admin'))?$name:$uid);
@@ -353,20 +356,29 @@ class Profile_model extends CI_Model {
 	public function update_info($field, $data) {
 		$table = 'total_'.$field;
 
+		if(strpos($data['uid'], '@') !== false) {
+			$info = explode('@', $data['uid']);
+			$uid_name = 'name';
+			$name = $info[1];
+		} else {
+			$uid_name = 'uid';
+			$uid = $data['uid'];
+		}
+
 		if (isset($data['title'])) {
 			$query = $this->db->query("UPDATE {$table}
 				SET
 					title = ?,
-					date = ? where uid = ? and map = ? and post = ? ",
-			array($data['title'], $data['date'], $data['uid'], $data['map'], $data['no']) );
+					date = ? where sn = ? and {$uid_name} = ? and map = ? and post = ? ",
+			array($data['title'], $data['date'], $data['sn'], ${$uid_name}, $data['map'], $data['no']) );
 		}
 
 		if (isset($data['content'])) {
 			$query = $this->db->query("UPDATE {$table}
 				SET
 					content = ?,
-					date = ? where uid = ? and map = ? and reply = ? ",
-			array($data['content'], $data['date'], $data['uid'], $data['map'], $data['no']) );
+					date = ? where sn = ? and {$uid_name} = ? and map = ? and reply = ? ",
+			array($data['content'], $data['date'], $data['sn'], ${$uid_name}, $data['map'], $data['no']) );
 		}
 
 		return $query;
@@ -378,13 +390,13 @@ class Profile_model extends CI_Model {
 		if(strpos($data['uid'], '@') !== false) {
 			$info = explode('@', $data['uid']);
 			$uid_name = 'name';
-			$search = $info[1];
+			$name = $info[1];
 		} else {
 			$uid_name = 'uid';
-			$search = $data['uid'];
+			$uid = $data['uid'];
 		}
 
-		$query = $this->db->query("DELETE FROM {$table} where {$uid_name} = ? and map = ? and {$field} = ? ", array($search, $data['map'], $data['no']) );
+		$query = $this->db->query("DELETE FROM {$table} where sn = ? and {$uid_name} = ? and map = ? and {$field} = ? ", array($data['sn'], ${$uid_name}, $data['map'], $data['no']) );
 
 		return $query;
 	}
@@ -404,25 +416,35 @@ class Profile_model extends CI_Model {
 			}
 
 			// Insert
-			$msg = (array)json_decode($this->db->query("select msg from {$table} where {$field} = ? ", ${$field})->row()->msg)->total;
+			$msg = (array)json_decode($this->db->query("select msg from {$table} where no = ? and {$field} = ? ", array($data['sn'], ${$field}))->row()->msg)->total;
 
 			// 100건 넘으면 앞에서 부터 삭제
 			if(count($msg) > 100) {
-				$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[0]'), '{\"total\":[]}') where {$field} = ? ", ${$field});
+				$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[0]'), '{\"total\":[]}') where no = ? and {$field} = ? ", array($data['sn'], ${$field}));
 			}
 
 			$json = "{\"type\":\"{$data['type']}\", \"map\":\"{$data['map']}\", \"post\":\"{$data['post']}\", \"reply\":\"{$data['reply']}\", \"content\":\"{$data['content']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
 
-			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where {$field} = ? ", ${$field});
+			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where no = ? and {$field} = ? ", array($data['sn'], ${$field}));
 			break;
 
 		case 'remove' :
+			$this->setting($uid, $name, $sn);
+
+			if($this->session->userdata('admin')) {
+				$table = 'admin_info';
+				$field = 'name';
+			} else {
+				$table = 'user_info';
+				$field = 'uid';
+			}
+
 			// Delete
-			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[{$idx}]'), '{\"total\":[]}') where {$field} = ? ", ${$field});
+			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[{$idx}]'), '{\"total\":[]}') where no = ? and {$field} = ? ", array($sn, ${$field}));
 			break;
 
 		case 'show' :
-			$this->setting($uid, $name);
+			$this->setting($uid, $name, $sn);
 
 			if($this->session->userdata('admin')) {
 				$table = 'admin_info';
@@ -433,7 +455,7 @@ class Profile_model extends CI_Model {
 			}
 
 			// Select
-			$msg = (array)json_decode($this->db->query("select msg from {$table} where {$field} = ? ", ${$field})->row()->msg)->total;
+			$msg = (array)json_decode($this->db->query("select msg from {$table} where no = ? and {$field} = ? ", array($sn, ${$field}))->row()->msg)->total;
 
 			$ret['list'] = '';
 			for ( $i = count($msg)-1; $i >= 0; $i--) {
@@ -461,7 +483,7 @@ class Profile_model extends CI_Model {
 		return json_encode($ret);
 	}
 
-	function setting(&$uid, &$name) {
+	function setting(&$uid, &$name, &$sn = null) {
 		$admin = $this->session->userdata('admin');
 
 		if ($admin === true) {
@@ -472,6 +494,8 @@ class Profile_model extends CI_Model {
 			$uid = $this->session->userdata('uid');
 			$name = $this->session->userdata('name');
 		}
+
+		$sn = $this->session->userdata('sn');
 	}
 
 }

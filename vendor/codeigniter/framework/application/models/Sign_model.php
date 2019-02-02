@@ -30,6 +30,7 @@ class Sign_model extends CI_Model {
 				$this->db->query($query, array($atim, $uid));
 
 				return $result = [
+					'no'    => $row->no,
 					'name'  => $row->name,
 					'level' => $row->level,
 					'score' => $row->score,
@@ -65,6 +66,7 @@ class Sign_model extends CI_Model {
 				$this->db->query($query, array($uid[0], $uid[1]));
 
 				return $result = [
+					'no'   => $row->no,
 					'name' => $row->name,
 				];
 			} else {

@@ -75,10 +75,9 @@ class Sign extends CI_Controller {
 
 				$user = [
 					'admin'=> FALSE,
+					'sn' => $result['no'],
 					'uid'  => $data['uid'],
 					'name' => $result['name'],
-					'score'=> $result['score'],
-					//'map' => $result['map'],
 					'darkmode'=> $result['dark_sw'],
 					'signed_in' => TRUE
 				];
@@ -88,6 +87,7 @@ class Sign extends CI_Controller {
 
 				$admin = [
 					'admin'=> TRUE,
+					'sn' => $result['no'],
 					'uid'  => $data['uid'],
 					'name'  => $result['name'],
 					'signed_in' => TRUE
@@ -113,7 +113,7 @@ class Sign extends CI_Controller {
 
 	public function out()
 	{
-		$config = ['admin', 'uid', 'name', 'signed_in', 'google'];
+		$config = ['admin', 'sn', 'uid', 'name', 'signed_in', 'google'];
 		$this->session->unset_userdata($config);
 
 		header('Location: '.$_SERVER['HTTP_REFERER']);
@@ -171,7 +171,7 @@ class Sign extends CI_Controller {
 					$output['msg'] = "";
 				} else {
 					$output['valid'] = false;
-					$output['msg'] = "사용할 수 없는 아이디입니다.\nalready used Input ID.";
+					$output['msg'] = "{$data['uid']} : 사용할 수 없는 아이디입니다.\n{$data['uid']} : already used This ID.";
 				}
 
 				echo json_encode($output);
@@ -189,17 +189,11 @@ class Sign extends CI_Controller {
 				$recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
 				$recaptcha = (array)json_decode($recaptcha);
 
+				$score = @isset($recaptcha['score'])?$recaptcha['score']:0;
+
 				// Take action based on the score returned:
-				if (isset($recaptcha['score']) && $recaptcha['score'] >= 0.5) {
+				if ($score >= 0.5) {
 					$this->sign->userMake($data);
-
-					$user = [
-						'uid'  => $data['uid'],
-						'name'  => $data['name'],
-						'signed_in' => TRUE
-					];
-
-					$this->session->set_userdata($user);
 				} else {
 					$output['valid'] = false;
 					$output['msg'] = "로봇인가요?\nAre you bot?";
