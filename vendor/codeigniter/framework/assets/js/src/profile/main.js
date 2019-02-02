@@ -101,6 +101,8 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 				}, fail);
 				break;
 		}
+
+		return;
 	}
 
 	if (t.parentElement.className === 'profile-pagination') {
@@ -119,6 +121,24 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 					list.innerHTML = ret['list'];
 					page.innerHTML = ret['page'];
 				}, fail);
+
+		return;
+	}
+
+	if (t.classList.item(0) == 'delete-message') {
+
+		data.push({
+			'info': __URL__,
+			'tab':'message',
+			'idx':t.getAttribute('data-idx')
+		});
+
+		httpRequest('delete', '/api/request/profile', JSON.stringify(data),
+			() => {
+				document.querySelector(".message").click();
+			}, fail);
+
+		return;
 	}
 
 	switch(t.id) {

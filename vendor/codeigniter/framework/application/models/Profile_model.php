@@ -469,7 +469,8 @@ class Profile_model extends CI_Model {
 				$tmp.= "<div class='td font-normal'>";
 
 				$content = stripslashes( preg_replace('/\\\n/i','<br/>', htmlspecialchars($msg[$i]->content)) );
-				$tmp.= "<a href='/{$msg[$i]->map}/{$msg[$i]->post}?reply=y&no={$msg[$i]->reply}' target='_blank'>{$content}</a><br/>";
+				$tmp.= "<a href='/{$msg[$i]->map}/{$msg[$i]->post}?no={$msg[$i]->reply}' target='_blank'>{$content}</a>";
+				$tmp.= "<div class='delete-message fas fa-times' data-idx='{$i}' ></div><br/>";
 				$tmp.= "{$msg[$i]->date}<br/>";
 				$tmp.= "</div>";
 				$tmp.= "</div>";
