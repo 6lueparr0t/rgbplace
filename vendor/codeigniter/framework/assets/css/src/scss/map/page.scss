@@ -1,12 +1,12 @@
 #page{
 
+	a {
+		color:$oc-gray-9;
+	}
+
 	& #scene {
 		background : $oc-gray-9;
 		margin  : 2rem 1rem 1rem 1rem;
-
-		a {
-			color:$oc-gray-9;
-		}
 
 		& .title {
 			position: relative;
@@ -83,6 +83,7 @@
 				& tr {
 					& td:nth-child(1) {
 						font-size: .6rem;
+						font-weight:bold;
 						width: 4rem;
 					}
 				}
@@ -95,6 +96,15 @@
 						overflow: hidden; 
 						white-space: nowrap;
 						text-align:justify;
+
+						&:hover {
+							color:$oc-blue-7;
+							transition:all .2s ease;
+						}
+
+						&:active {
+							color:$oc-green-7;
+						}
 					}
 				}
 			}
@@ -152,7 +162,12 @@
 						& tr {
 							& td:nth-child(1) {
 								font-size: .6rem;
+								font-weight:bold;
 								width: 4rem;
+							}
+
+							& td:nth-child(2) {
+								width: 80%;
 							}
 						}
 
@@ -164,6 +179,15 @@
 								overflow: hidden; 
 								white-space: nowrap;
 								text-align:justify;
+
+								&:hover {
+									color:$oc-blue-7;
+									transition:all .2s ease;
+								}
+
+								&:active {
+									color:$oc-green-7;
+								}
 							}
 						}
 					}
