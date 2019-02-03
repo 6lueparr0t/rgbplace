@@ -218,6 +218,54 @@ class Sign extends CI_Controller {
 		redirect($this->input->server('http_referer'));
 	}
 
+	public function mailAuth() {
+		//mailtest. success complete
+		redirect('/');
+
+		$config = array (
+			'protocol' => 'sendmail',
+			'mailpath' => '/usr/sbin/sendmail',
+			'smtp_host' => "ssl://smtp.googlemail.com",
+			'smtp_port' => 465,
+			'smtp_user' => "rgbplace.system@gmail.com",
+			'smtp_pass' => "x",
+			'smtp_timeout' => 10,
+
+			'charset' => 'utf-8',
+			'wordwrap' => TRUE,
+			'mailtype' => "html",
+
+			'_bit_depths' => array('7bit', '8bit', 'base64'),
+			'_encoding' => 'base64',
+		);
+
+		$this->load->library('email', $config);
+		/* 메일전송 시작 */
+
+		$this->email->from('rgbplace.system@gmail.com', 'RGB place');
+		$this->email->to('daihyun99@gmail.com');
+		$this->email->reply_to('rgbplace.system@gmail.com', 'RGB place');
+
+		$this->email->subject("RGB place !");
+
+		$this->email->message('
+			<html>
+			<head>
+			<title>테스트 메일</title>
+			</head>
+			<body>
+				TEST
+			</body>
+			</html>
+			');
+
+		$this->email->send();
+
+		/* 전송 결과 로그 */
+		echo $this->email->print_debugger();
+		/* 메일전송 끝 */
+	}
+
 	function is_space($str)
 	{
 		return ( preg_match("/[^\S]/i", $str)) ? FALSE : TRUE;
