@@ -1,12 +1,16 @@
 #page{
 
 	a {
-		color:$oc-gray-9;
+		color:$oc-blue-7;
 	}
 
 	& #scene {
 		background : $oc-gray-9;
 		margin  : 2rem 1rem 1rem 1rem;
+
+		a {
+			color:$oc-gray-9;
+		}
 
 		& .title {
 			position: relative;
@@ -164,10 +168,6 @@
 								font-size: .6rem;
 								font-weight:bold;
 								width: 4rem;
-							}
-
-							& td:nth-child(2) {
-								width: 80%;
 							}
 						}
 

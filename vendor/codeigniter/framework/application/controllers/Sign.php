@@ -225,10 +225,10 @@ class Sign extends CI_Controller {
 		$config = array (
 			'protocol' => 'sendmail',
 			'mailpath' => '/usr/sbin/sendmail',
-			'smtp_host' => "ssl://smtp.googlemail.com",
-			'smtp_port' => 465,
-			'smtp_user' => "rgbplace.system@gmail.com",
-			'smtp_pass' => "x",
+			'smtp_host' => "smtp.mailgun.org",
+			'smtp_port' => 2525,
+			'smtp_user' => "postmaster@rgbplace.com",
+			'smtp_pass' => "6lueparr0t@gmail.com",
 			'smtp_timeout' => 10,
 
 			'charset' => 'utf-8',
@@ -242,9 +242,9 @@ class Sign extends CI_Controller {
 		$this->load->library('email', $config);
 		/* 메일전송 시작 */
 
-		$this->email->from('rgbplace.system@gmail.com', 'RGB place');
+		$this->email->from('admin@rgbplace.com', 'RGB place');
 		$this->email->to('daihyun99@gmail.com');
-		$this->email->reply_to('rgbplace.system@gmail.com', 'RGB place');
+		$this->email->reply_to('admin@rgbplace.com', 'RGB place');
 
 		$this->email->subject("RGB place !");
 
