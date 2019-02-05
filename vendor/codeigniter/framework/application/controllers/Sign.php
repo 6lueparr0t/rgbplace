@@ -182,7 +182,7 @@ class Sign extends CI_Controller {
 			if ($check === "") {
 				// Build POST request:
 				$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-				$recaptcha_secret = '6LftwYcUAAAAAKvG_NpHlJlfETPH8a7mPT1vrivf';
+				$recaptcha_secret = RECAPTCHA_SECRET;
 				$recaptcha_response = $this->input->post('recaptcha_response');
 
 				// Make and decode POST request:
@@ -225,10 +225,10 @@ class Sign extends CI_Controller {
 		$config = array (
 			'protocol' => 'sendmail',
 			'mailpath' => '/usr/sbin/sendmail',
-			'smtp_host' => "smtp.mailgun.org",
-			'smtp_port' => 2525,
-			'smtp_user' => "postmaster@rgbplace.com",
-			'smtp_pass' => "6lueparr0t@gmail.com",
+			'smtp_host' => SMTP_HOST,
+			'smtp_port' => SMTP_PORT,
+			'smtp_user' => SMTP_USER,
+			'smtp_pass' => SMTP_PASS,
 			'smtp_timeout' => 10,
 
 			'charset' => 'utf-8',

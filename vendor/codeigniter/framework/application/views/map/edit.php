@@ -9,9 +9,9 @@
 	<div class='code'>code</div>
 </div>
 
-<div class='editor' id='edit-content' name='edit-content' contenteditable='true'>
+<pre class='editor' id='edit-content' name='edit-content' contenteditable='true'>
 <?php echo $content; ?>
-</div>
+</pre>
 
 <textarea class='editor' id='edit-content-code' name='edit-content-code'>
 <?php echo $content; ?>

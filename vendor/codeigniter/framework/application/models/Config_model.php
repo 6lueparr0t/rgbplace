@@ -19,6 +19,14 @@ class Config_model extends CI_Model {
 		$query = "UPDATE user_info SET map = ? WHERE uid = ?";
 		$result = $this->db->query($query, array($data['map'], $data['uid']));
 
+		/*
+		if($this->db->affected_rows() > 0) {
+			$result = false; 	
+		} else {
+			$result = false; 
+		}
+		*/
+
 		return $result;
 	}
 

@@ -20,10 +20,17 @@ function stageSave() {
 	});
 
 	httpRequest('post', '/api/config/map/save', JSON.stringify(data), data => {
-		toast({
-			type: 'success',
-			title: "stage changed '"+__URL_ARRAY__[1]+"'"
-		});
+		if(data) {
+			toast({
+				type: 'success',
+				title: "stage changed '"+__URL_ARRAY__[1]+"'"
+			});
+		} else {
+			toast({
+				type: 'error',
+				title: "에러가 발생했습니다.\nerror occured!"
+			});
+		}
 	}, data => {
 		toast({
 			type: 'error',

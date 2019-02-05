@@ -85,44 +85,43 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 #PasswordHash.php constant
-//define("PBKDF2_HASH_ALGORITHM", "sha256");
-//define("PBKDF2_ITERATIONS", 10000);
-//define("PBKDF2_SALT_BYTE_SIZE", 24);
-//define("PBKDF2_HASH_BYTE_SIZE", 24);
+//define('PBKDF2_HASH_ALGORITHM', 'sha256');
+//define('PBKDF2_ITERATIONS', 10000);
+//define('PBKDF2_SALT_BYTE_SIZE', 24);
+//define('PBKDF2_HASH_BYTE_SIZE', 24);
 
-//define("HASH_SECTIONS", 4);
-//define("HASH_ALGORITHM_INDEX", 0);
-//define("HASH_ITERATION_INDEX", 1);
-//define("HASH_SALT_INDEX", 2);
-//define("HASH_PBKDF2_INDEX", 3);
+//define('HASH_SECTIONS', 4);
+//define('HASH_ALGORITHM_INDEX', 0);
+//define('HASH_ITERATION_INDEX', 1);
+//define('HASH_SALT_INDEX', 2);
+//define('HASH_PBKDF2_INDEX', 3);
 
-define("UPLOAD_PATH", "/upload/");
+define('UPLOAD_PATH', '/upload/');
 
-define("DEFAULT_MAP", "space");
+define('DEFAULT_MAP', 'space');
 
 /*##### POST  : pagination ##############*/
 
 //PAGINATION_COUNT => MINIMUM VALUE : 3, DEFAULT : 5
-define("PAGINATION_COUNT", 5);
+define('PAGINATION_COUNT', 5);
 
 //LIST_ROWS_LIMIT => MINIMUM VALUE : 1, DEFAULT : 20
-define("LIST_ROWS_LIMIT", 20);
+define('LIST_ROWS_LIMIT', 20);
 
 /*##### REPLY : pagination ##############*/
 
 //PAGINATION_COUNT => MINIMUM VALUE : 3
-define("REPLY_PAGINATION_COUNT", 9);
+define('REPLY_PAGINATION_COUNT', 9);
 
-//::TEMP:: => it can be customizing
 //LIST_ROWS_LIMIT => MINIMUM VALUE : 1
-define("REPLY_LIST_ROWS_LIMIT", 20);
+define('REPLY_LIST_ROWS_LIMIT', 20);
 /* !!!!! if you modify, codeigniter/framework/assets/js/comm/src/0.js check !!!!! */
 
 //['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
-define("TYPE_LIST", ['#', 'notice', 'best', 'free', 'info', 'game', 'food', 'life', 'news', 'public', 'dev']);
+define('TYPE_LIST', ['#', 'notice', 'best', 'free', 'info', 'game', 'food', 'life', 'news', 'public', 'dev']);
 
 define(
-	"LEVEL_BOUND"  ,
+	'LEVEL_BOUND'  ,
 	[ '0'  => -20  ,
 	  '1'  =>  20  ,
 	  '2'  =>  40  ,
@@ -137,7 +136,13 @@ define(
 	  '11' => 1000  ]
 );
 
-define("CIPHER_METHOD", "aes-128-gcm");
-define("CIPHER_KEY", "Have a nice Day!");
+define('CIPHER_METHOD', 'aes-128-gcm');
+define('CIPHER_KEY', 'Have a nice Day!');
 
-define("GOOGLE_API_KEY", "AIzaSyCLfqh2kzDo3DzclIyQ5IWF8GUjGwOyjnc");
+define('GOOGLE_API_KEY', 'AIzaSyCLfqh2kzDo3DzclIyQ5IWF8GUjGwOyjnc');
+define('RECAPTCHA_SECRET', '6LftwYcUAAAAAKvG_NpHlJlfETPH8a7mPT1vrivf');
+
+define('SMTP_HOST', 'smtp.mailgun.org');
+define('SMTP_PORT', '2525');
+define('SMTP_USER', 'postmaster@rgbplace.com');
+define('SMTP_PASS', '6lueparr0t@gmail.com');

@@ -1,5 +1,7 @@
 "use strict"
 
+var editor_position = '';
+
 /* ******************** Upload Event TOP ******************** */
 const state = document.querySelector("label[for='input_zone']");
 
@@ -242,6 +244,7 @@ function addFile(data) {
 					break;
 			}
 
+			//console.log(document.querySelector('#edit-content').innerText.match(/[^\n]*\n[^\n]*/gi).length);
 			document.querySelector('#edit-content').appendChild(tag);
 			document.querySelector('#edit-content').innerHTML += '<br/><br/>';
 
@@ -280,6 +283,10 @@ function tabChange (element) {
     element.classList.add('active');
 }
 
+document.querySelector("#edit").addEventListener("keydown", function(event) {
+	editor_position = window.getSelection();
+});
+
 document.querySelector("#edit").addEventListener("click", function(event) {
 	let t = event.target;
 	let editor, content;
@@ -289,6 +296,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 
 	let data = [];
 	//console.log(t);
+
 	switch(t.classList.item(0)) {
 		case 'view' :
 			if(t.classList[1] === undefined) {
@@ -301,11 +309,12 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				edit_content_code.classList.add('none');
 				edit_content_code.classList.remove('active');
 			}
+			return;
 			break;
 		case 'code' :
 			if(t.classList[1] === undefined) {
 				tabChange(t);
-				edit_content_code.value = edit_content.innerHTML;
+				edit_content_code.value = edit_content.innerHTML.replace(/\n*(<div>|<img)/gi, "\n$1");
 
 				edit_content_code.classList.remove('none');
 				edit_content_code.classList.add('active');
@@ -313,6 +322,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				edit_content.classList.add('none');
 				edit_content.classList.remove('active');
 			}
+			return;
 			break;
 		case 'add' :
 			data.push({
@@ -325,13 +335,18 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 			//console.log(data);
 			addFile(data);
 			move("#upload-list", -15, 0);
+			return;
 			break
 		case 'file' :
 			if(t.getAttribute('data-default-path') && t.getAttribute('data-file-name')) {
 				document.querySelector("#upload-preview-img").src = t.getAttribute('data-default-path') + t.getAttribute('data-file-name');
 			}
+			return;
 			break;
 	}
+
+	//console.log(window.getSelection());
+	editor_position = window.getSelection();
 
 	switch(t.id) {
 		case 'save' :
