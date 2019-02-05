@@ -1,6 +1,6 @@
 "use strict"
 
-var editor_position = '';
+//var editor_position = '';
 
 /* ******************** Upload Event TOP ******************** */
 const state = document.querySelector("label[for='input_zone']");
@@ -253,6 +253,7 @@ function addFile(data) {
 
 		} else {
 			document.querySelector('#edit-content').innerHTML += value;
+			//editor_position.anchorNode.innerHTML += value;
 
 			document.querySelector('#edit-content-code').value += value;
 		}
@@ -282,11 +283,11 @@ function tabChange (element) {
 
     element.classList.add('active');
 }
-
+/*
 document.querySelector("#edit").addEventListener("keydown", function(event) {
 	editor_position = window.getSelection();
 });
-
+*/
 document.querySelector("#edit").addEventListener("click", function(event) {
 	let t = event.target;
 	let editor, content;
@@ -345,8 +346,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 			break;
 	}
 
-	//console.log(window.getSelection());
-	editor_position = window.getSelection();
+	//editor_position = window.getSelection();
 
 	switch(t.id) {
 		case 'save' :
