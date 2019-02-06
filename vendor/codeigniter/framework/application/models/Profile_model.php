@@ -17,7 +17,7 @@ class Profile_model extends CI_Model {
 
 		if($no) {
 
-			$query = "SELECT * FROM user_info WHERE no = ? LIMIT 1";
+			$query = "SELECT * FROM user_info WHERE sn = ? LIMIT 1";
 			$find = $this->db->query($query, $no);
 
 		} else {
@@ -41,7 +41,7 @@ class Profile_model extends CI_Model {
 		$uid = $this->session->userdata('uid');
 		$admin = $this->session->userdata('admin');
 
-		$where_field = isset($data['no'])?'no':'uid';
+		$where_field = isset($data['no'])?'sn':'uid';
 		$where_value = isset($data['no'])?$data['no']:$uid;
 
 		if ($admin === true) {
@@ -111,7 +111,7 @@ class Profile_model extends CI_Model {
 		$uid = $this->session->userdata('uid');
 		$admin = $this->session->userdata('admin');
 
-		$where_field = isset($data['no'])?'no':'uid';
+		$where_field = isset($data['no'])?'sn':'uid';
 		$where_value = isset($data['no'])?base64_decode( urldecode($data['no']) ):$uid;
 
 		if ($admin === true) {
@@ -208,14 +208,14 @@ class Profile_model extends CI_Model {
 		$search['page'] = isset($data['page'])?$data['page']:0;
 
 		if(!$search['no'] && $this->session->userdata('admin') == true) {
-			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN admin_info user ON user.name = total.name and user.no = total.sn');
+			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN admin_info user ON user.name = total.name and user.sn = total.sn');
 		} else {
-			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN user_info user ON user.uid = total.uid and user.no = total.sn');
+			$table = $this->db->escape_str('total_'.$field.' total INNER JOIN user_info user ON user.uid = total.uid and user.sn = total.sn');
 		}
 
 		$this->setting($uid, $name, $sn);
 
-		$where_field = ($search['no'])?'no':(($this->session->userdata('admin'))?'name':'uid');
+		$where_field = ($search['no'])?'sn':(($this->session->userdata('admin'))?'name':'uid');
 		$where_value = ($search['no'])?$search['no']:(($this->session->userdata('admin'))?$name:$uid);
 
 		$start = (($search['page']>1)?$search['page']-1:0)*LIST_ROWS_LIMIT;
@@ -416,16 +416,16 @@ class Profile_model extends CI_Model {
 			}
 
 			// Insert
-			$msg = (array)json_decode($this->db->query("select msg from {$table} where no = ? and {$field} = ? ", array($data['sn'], ${$field}))->row()->msg)->total;
+			$msg = (array)json_decode($this->db->query("select msg from {$table} where sn = ? and {$field} = ? ", array($data['sn'], ${$field}))->row()->msg)->total;
 
 			// 100건 넘으면 앞에서 부터 삭제
 			if(count($msg) > 100) {
-				$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[0]'), '{\"total\":[]}') where no = ? and {$field} = ? ", array($data['sn'], ${$field}));
+				$update = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[0]'), '{\"total\":[]}') where sn = ? and {$field} = ? ", array($data['sn'], ${$field}));
 			}
 
 			$json = "{\"type\":\"{$data['type']}\", \"map\":\"{$data['map']}\", \"post\":\"{$data['post']}\", \"reply\":\"{$data['reply']}\", \"content\":\"{$data['content']}\", \"date\":\"".date('Y-m-d H:i:s')."\"}";
 
-			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where no = ? and {$field} = ? ", array($data['sn'], ${$field}));
+			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_MERGE(msg, JSON_QUERY('{\"total\":[".$json."]}', '$')), '{\"total\":[]}') where sn = ? and {$field} = ? ", array($data['sn'], ${$field}));
 			break;
 
 		case 'remove' :
@@ -440,7 +440,7 @@ class Profile_model extends CI_Model {
 			}
 
 			// Delete
-			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[{$idx}]'), '{\"total\":[]}') where no = ? and {$field} = ? ", array($sn, ${$field}));
+			$ret = $this->db->query("UPDATE {$table} SET msg = ifnull(JSON_REMOVE(msg, '$.total[{$idx}]'), '{\"total\":[]}') where sn = ? and {$field} = ? ", array($sn, ${$field}));
 			break;
 
 		case 'show' :
@@ -455,7 +455,7 @@ class Profile_model extends CI_Model {
 			}
 
 			// Select
-			$msg = (array)json_decode($this->db->query("select msg from {$table} where no = ? and {$field} = ? ", array($sn, ${$field}))->row()->msg)->total;
+			$msg = (array)json_decode($this->db->query("select msg from {$table} where sn = ? and {$field} = ? ", array($sn, ${$field}))->row()->msg)->total;
 
 			$ret['list'] = '';
 			for ( $i = count($msg)-1; $i >= 0; $i--) {

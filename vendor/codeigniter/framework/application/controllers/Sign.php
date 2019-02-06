@@ -75,9 +75,10 @@ class Sign extends CI_Controller {
 
 				$user = [
 					'admin'=> FALSE,
-					'sn' => $result['no'],
+					'sn' => $result['sn'],
 					'uid'  => $data['uid'],
 					'name' => $result['name'],
+					'stage' => $result['map'],
 					'darkmode'=> $result['dark_sw'],
 					'signed_in' => TRUE
 				];
@@ -87,9 +88,10 @@ class Sign extends CI_Controller {
 
 				$admin = [
 					'admin'=> TRUE,
-					'sn' => $result['no'],
+					'sn' => $result['sn'],
 					'uid'  => $data['uid'],
 					'name'  => $result['name'],
+					'stage' => $result['map'],
 					'signed_in' => TRUE
 				];
 				$this->session->set_userdata($admin);

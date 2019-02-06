@@ -387,6 +387,7 @@ class Api extends CI_Controller {
 						header('Content-Type: application/json; charset=UTF-8');
 						$ret = '회원가입 후 이용해주세요.<br/>Please Sign up<br/>*not google*';
 					} else {
+						$this->session->set_userdata( array('stage' => $data['map']) );
 						$ret = $this->conf->stageSave( array('map' => $data['map'], 'uid' => $this->session->userdata('uid')) );
 					}
 				} else {
