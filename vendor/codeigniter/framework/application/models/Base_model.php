@@ -56,25 +56,6 @@ class Base_model extends CI_Model {
 		return $data;
 	}
 
-	public function getStage($uid)
-	{
-		$data = [];
-
-		$query = "SELECT map FROM user_info WHERE uid='{$uid}'";
-		$find = $this->db->query($query);
-
-		if($find->num_rows() === 0 || $find->num_rows() > 1) {
-			$data['map'] = DEFAULT_MAP;
-
-			return $data;
-		}
-
-		foreach ($find->result() as $row) {
-			$data['map'] = $row->map;
-		}
-
-		return $data;
-	}
 /*
  *    public function menu($type)
  *    {
@@ -119,7 +100,7 @@ class Base_model extends CI_Model {
 	{
 		$data = "";
 
-		$query = "SELECT no, apikey FROM admin_info WHERE name = '{$name}' and apikey is not null and exp > atim LIMIT 1";
+		$query = "SELECT sn, apikey FROM admin_info WHERE name = '{$name}' and apikey is not null and exp > atim LIMIT 1";
 		$find = $this->db->query($query);
 
 		if($find->num_rows() !== 1) {

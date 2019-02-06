@@ -561,12 +561,12 @@ class Map_model extends CI_Model {
 		$no = $this->db->escape_str($info[3]);
 
 		if($option == 'vote') {
-			$field = 'post.sn, post.up, post.down, post.type, user.no';
+			$field = 'post.sn, post.up, post.down, post.type, user.sn';
 		} else {
 			$field = 'post.*';
 		}
 
-		$query = "SELECT {$field} FROM {$table} LEFT JOIN user_info user ON post.sn = user.no and post.uid = user.uid where post.no='{$no}' and (post.dtim = 0 or post.dtim is null)";
+		$query = "SELECT {$field} FROM {$table} LEFT JOIN user_info user ON post.sn = user.sn and post.uid = user.uid where post.no='{$no}' and (post.dtim = 0 or post.dtim is null)";
 
         if($this->db->simple_query($query)) {
 			$ret = $this->db->query($query);
@@ -838,7 +838,7 @@ class Map_model extends CI_Model {
 			$start = ($start<0)?0:$start;
 		}
 
-		$query = "SELECT @IDX := @IDX + 1 AS idx, reply.*, user.no sn FROM {$table} reply LEFT JOIN user_info user ON reply.uid = user.uid, (SELECT @IDX := 0 ) idx
+		$query = "SELECT @IDX := @IDX + 1 AS idx, reply.*, user.sn sn FROM {$table} reply LEFT JOIN user_info user ON reply.uid = user.uid, (SELECT @IDX := 0 ) idx
 			where reply.post=?
 			order by
 				if(isnull(reply.follow), reply.no, reply.follow),
@@ -865,7 +865,7 @@ class Map_model extends CI_Model {
 			$start = ($start<0)?0:$start;
 			$search['page'] = 'last';
 
-			$query = "SELECT @IDX := @IDX + 1 AS idx, reply.*, user.no sn FROM {$table} reply LEFT JOIN user_info user ON reply.uid = user.uid, (SELECT @IDX := 0 ) idx
+			$query = "SELECT @IDX := @IDX + 1 AS idx, reply.*, user.sn sn FROM {$table} reply LEFT JOIN user_info user ON reply.uid = user.uid, (SELECT @IDX := 0 ) idx
 				where reply.post=?
 				order by
 				if(isnull(reply.follow), reply.no, reply.follow),

@@ -10,12 +10,8 @@ class Stage extends CI_Controller {
 
 	public function index()
 	{
-		// bring data from user_info 'code' column
-		$uid = $this->session->userdata('uid');
-		$adm = $this->session->userdata('admin');
-		$map = $this->base->getStage($this->session->userdata('uid'))['map'];
-
-		if($uid && !$admin && $map) redirect($map);
+		$stage = $this->session->userdata('stage');
+		if($stage) redirect($stage);
 
 		redirect("/".DEFAULT_MAP);
 	}
