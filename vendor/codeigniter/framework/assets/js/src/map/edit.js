@@ -1,6 +1,7 @@
 "use strict"
 
-//var editor_position = '';
+var tab = 'view';
+var editor_position = document.querySelector('#edit-content');
 
 /* ******************** Upload Event TOP ******************** */
 const state = document.querySelector("label[for='input_zone']");
@@ -245,17 +246,22 @@ function addFile(data) {
 			}
 
 			//console.log(document.querySelector('#edit-content').innerText.match(/[^\n]*\n[^\n]*/gi).length);
-			document.querySelector('#edit-content').appendChild(tag);
-			document.querySelector('#edit-content').innerHTML += '<br/><br/>';
-
-			document.querySelector('#edit-content-code').value += str + '<br/><br/>';
+			//document.querySelector('#edit-content').appendChild(tag);
+			if(tab == 'view') {
+				editor_position.appendChild(tag);
+				document.querySelector('#edit-content').innerHTML += '<br/><br/>';
+			} else {
+				document.querySelector('#edit-content-code').value += str + '<br/><br/>';
+			}
 			//upload.push({'file_name':value['file_name'], 'file_type':value['file_type'], 'client_name':value['client_name'], 'file_size':value['file_size']});
 
 		} else {
-			document.querySelector('#edit-content').innerHTML += value;
-			//editor_position.anchorNode.innerHTML += value;
-
-			document.querySelector('#edit-content-code').value += value;
+			//document.querySelector('#edit-content').innerHTML += value;
+			if(tab == 'view') {
+				editor_position.innerHTML += value;
+			} else {
+				document.querySelector('#edit-content-code').value += value;
+			}
 		}
 		
 	});
@@ -283,11 +289,15 @@ function tabChange (element) {
 
     element.classList.add('active');
 }
-/*
-document.querySelector("#edit").addEventListener("keydown", function(event) {
-	editor_position = window.getSelection();
+
+document.querySelector("#edit-content").addEventListener("keydown", function(event) {
+	editor_position = window.getSelection().anchorNode;
 });
-*/
+
+document.querySelector("#edit-content").addEventListener("click", function(event) {
+	editor_position = window.getSelection().anchorNode;
+});
+
 document.querySelector("#edit").addEventListener("click", function(event) {
 	let t = event.target;
 	let editor, content;
@@ -296,11 +306,12 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 	let edit_content_code = document.querySelector('#edit-content-code');
 
 	let data = [];
-	//console.log(t);
 
 	switch(t.classList.item(0)) {
 		case 'view' :
 			if(t.classList[1] === undefined) {
+				tab = 'view';
+
 				tabChange(t);
 				edit_content.innerHTML = edit_content_code.value;
 
@@ -314,6 +325,8 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 			break;
 		case 'code' :
 			if(t.classList[1] === undefined) {
+				tab = 'code';
+
 				tabChange(t);
 				edit_content_code.value = edit_content.innerHTML.replace(/\n*(<div>|<img)/gi, "\n$1");
 
@@ -335,7 +348,6 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 
 			//console.log(data);
 			addFile(data);
-			move("#upload-list", -15, 0);
 			return;
 			break
 		case 'file' :
@@ -345,8 +357,6 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 			return;
 			break;
 	}
-
-	//editor_position = window.getSelection();
 
 	switch(t.id) {
 		case 'save' :
