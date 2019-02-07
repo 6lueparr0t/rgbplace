@@ -14,19 +14,9 @@ class Api_model extends CI_Model {
         parent::__construct();
     }
 
-	public function get ($data)
-	{
-	}
-
-	public function post ($data)
-	{
-	}
-
-	public function put ($data)
-	{
-	}
-
-	public function delete ($data)
-	{
+	public function googleSignUpAndLoginCheck ($data) {
+		//$data['uid'];
+		//$data['name'];
+		//$data['mail'];
 	}
 }

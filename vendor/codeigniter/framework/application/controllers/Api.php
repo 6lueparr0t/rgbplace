@@ -419,23 +419,34 @@ class Api extends CI_Controller {
 	public function google()
 	{
 		$method = $this->input->method();
+
+		$ret = false;
 		if($method == 'post') {
 			$data = (array)json_decode($this->input->raw_input_stream)[0];
 			
 			$name = explode(' ', $data['name']);
 			$uid = explode('@', $data['mail'])[0];
+			$mail = $data['mail'];
 
-			$googleUser = [
-				'uid'  => $uid,
-				'fullname' => $name,
-				'name'  => $uid,
-				'google' => TRUE,
-				'signed_in' => TRUE
-			];
+			$param = array(
+				'name' => $name,
+				'uid' => $uid,
+				'mail' => $mail
+			);
 
-			$this->session->set_userdata($googleUser);
+			if( $this->api->googleSignUpAndLoginCheck($param) ) {
+				$googleUser = [
+					'uid'  => $uid,
+					'fullname' => $name,
+					'name'  => $uid,
+					'google' => TRUE,
+					'signed_in' => TRUE
+				];
 
-			$ret = 'success';
+				$this->session->set_userdata($googleUser);
+
+				$ret = true;
+			}
 		}
 
 		echo json_encode($ret);
