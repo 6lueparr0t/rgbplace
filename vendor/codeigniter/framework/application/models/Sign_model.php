@@ -64,8 +64,7 @@ class Sign_model extends CI_Model {
 
 			return $result = [
 				'sn'   => $find->row()->sn,
-				'name' => $find->row()->name,
-				'map' => $find->row()->map,
+				'name' => $find->row()->name
 			];
 		} else {
 			//fail count increase
