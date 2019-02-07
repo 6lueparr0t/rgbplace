@@ -87,7 +87,7 @@ class Sign_model extends CI_Model {
 		$query = "SELECT uid FROM user_info WHERE uid = ? LIMIT 1";
 		$find = $this->db->query($query, $uid);
 
-		if($find->num_rows() ===0) {
+		if($find->num_rows() === 0) {
 			// use user_info, user_config
 			
 			$query = "INSERT INTO user_info (uid, name, pswd) VALUES (?, ?, ?)";
