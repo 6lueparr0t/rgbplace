@@ -91,7 +91,6 @@ class Sign extends CI_Controller {
 					'sn' => $result['sn'],
 					'uid'  => $data['uid'],
 					'name'  => $result['name'],
-					'stage' => $result['map'],
 					'signed_in' => TRUE
 				];
 				$this->session->set_userdata($admin);
