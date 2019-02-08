@@ -1500,9 +1500,11 @@ class Map_model extends CI_Model {
 
 		$result = $this->history_select($history_table, $sn, $uid, $type, $no);
 
-		if( $level > 10 || $admin === true ) { 
+		if( $admin === true ) { 
+			$point = 30;
+		} else if( $level > 10 ) {
 			$point = 10;
-		} else if( $level > 2 && $level < 10 ) {
+		} else if( $level > 2 ) {
 			$point = 2;
 		} else {
 			$point = 1;

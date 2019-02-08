@@ -341,11 +341,11 @@ class Template {
 			$global_address =  implode(", ", $global['address'] );
 
 			echo ("<div id='native-address'>");
-			echo ($native_address);
+			echo ("<a class='status type' href='/{$tab1}'>{$native_address}</a>");
 			echo ("</div>");
 
 			echo ("<div id='global-address'>");
-			echo ($global_address);
+			echo ("<a class='status type' href='/{$tab1}'>{$global_address}</a>");
 			echo ("</div>");
 		}
 
