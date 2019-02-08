@@ -56,6 +56,8 @@ class Sign_model extends CI_Model {
 		$query = "SELECT * FROM admin_info WHERE uid = ? AND name = ? AND fail < 5 LIMIT 1";
 		$find = $this->db->query($query, array($uid[0], $uid[1]));
 
+		if($find->num_rows() === 0) return false;
+
 		if(password_verify($pswd, base64_decode($find->row()->pswd))) {
 			//fail count init
 			$atim = date("Y-m-d H:i:s");
@@ -87,7 +89,7 @@ class Sign_model extends CI_Model {
 		$query = "SELECT uid FROM user_info WHERE uid = ? LIMIT 1";
 		$find = $this->db->query($query, $uid);
 
-		if($find->num_rows() ===0) {
+		if($find->num_rows() === 0) {
 			// use user_info, user_config
 			
 			$query = "INSERT INTO user_info (uid, name, pswd) VALUES (?, ?, ?)";

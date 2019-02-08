@@ -1,5 +1,8 @@
+
+var google = document.getElementById('google');
 var googleUser = {};
 var auth2;
+
 const startApp = function() {
 	gapi.load('auth2', function(){
 		// Retrieve the singleton for the GoogleAuth library and set up the client.
@@ -9,7 +12,7 @@ const startApp = function() {
 			// Request scopes in addition to 'profile' and 'email'
 			//scope: 'additional_scope'
 		});
-		attachSignin(document.getElementById('google'));
+		attachSignin(google);
 	});
 };
 
@@ -36,6 +39,17 @@ const signOut = () => {
 	});  
 }
 
+//if(google) google.addEventListener("click", () => {
+
+	//let data = [{
+		//name : 'Blue Parrot (6lueparr0t)',
+		//mail : '6lueparr0t@gmail.com'
+	//}];
+
+	//httpRequest('post', '/api/google', JSON.stringify(data), data => { location.reload(); }, data => { console.log(data); });
+
+//});
+
 !(() => {
-	startApp();
+	//startApp();
 })();

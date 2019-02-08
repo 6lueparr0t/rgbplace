@@ -30,10 +30,17 @@ if($this->session->userdata("admin") === false || $no) {
 				<div class='th'>Info</div>
 				<div class='td'>Level : {$level} / Score : {$score}</div>
 			</div>
+	");
+
+	if( !in_array($pswd, array('google')) ) {
+	echo ("
 			<div class='tr'>
-				<div class='th'>email</div>
-				<div class='td email'><input type='email' id='email' maxlength='400' value='{$email}' {$sw} /></div>
+				<div class='th'>mail</div>
+				<div class='td mail'><input type='email' id='mail' maxlength='400' value='{$mail}' {$sw} /></div>
 			</div>
+		");
+	}
+	echo ("
 			<div class='tr'>
 				<div class='th'>First Date</div>
 				<div class='td'>{$ctim}</div>
@@ -47,7 +54,7 @@ if($this->session->userdata("admin") === false || $no) {
 			</div>
 	");
 
-if($this->session->userdata("admin") === true || !$no) {
+if($this->session->userdata("admin") === true || (!$no && !in_array($pswd, array('google'))) ) {
 	echo("
 			<div class='tr'>
 				<div class='th'>Pass word</div>
