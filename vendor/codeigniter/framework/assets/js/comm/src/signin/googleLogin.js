@@ -51,5 +51,5 @@ const signOut = () => {
 //});
 
 !(() => {
-	//startApp();
+	startApp();
 })();
