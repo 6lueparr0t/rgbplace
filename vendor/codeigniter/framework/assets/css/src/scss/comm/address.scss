@@ -1,14 +1,30 @@
 .address {
 	text-align:center;
-	margin-top:2rem;
+	padding:2rem 0;
 	
 	#native-address {
 		font-family: 'dot';
 		font-size: 1.8rem;
+
+		a {
+			color:$oc-gray-9;
+
+			&:hover {
+				color:$oc-red-9;
+			}
+		}
 	}
 
 	#global-address {
 		font-family: 'pixel';
 		font-size: 1rem;
+
+		a {
+			color:$oc-gray-9;
+
+			&:hover {
+				color:$oc-red-9;
+			}
+		}
 	}
 }
