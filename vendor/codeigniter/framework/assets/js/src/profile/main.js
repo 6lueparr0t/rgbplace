@@ -143,10 +143,10 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 
 	switch(t.id) {
 		case 'save' :
-			if(validateName(document.querySelector('#name').value)) {
-				name = document.querySelector('#name').value;
+			if(validateName(document.querySelector('#name').value.trim())) {
+				name = document.querySelector('#name').value.trim();
 			} else {
-				alert('check your name style');
+				alert('닉네임을 확인해주세요.(공백, 따옴표[\'"] X)\ncheck your name style(space, quotation mark[\'"] X)');
 				break;
 			}
 
