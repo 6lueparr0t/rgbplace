@@ -27,9 +27,9 @@ class Profile_model extends CI_Model {
 				$query = "SELECT * FROM admin_info WHERE name = ? LIMIT 1";
 				$find = $this->db->query($query, $name);
 			} else {
-				$uid = $this->session->userdata('uid');
-				$query = "SELECT * FROM user_info WHERE uid = ? LIMIT 1";
-				$find = $this->db->query($query, $uid);
+				$sn = $this->session->userdata('sn');
+				$query = "SELECT * FROM user_info WHERE sn = ? LIMIT 1";
+				$find = $this->db->query($query, $sn);
 			}	
 
 		} 
@@ -65,8 +65,8 @@ class Profile_model extends CI_Model {
 					$set .= "name = '".$this->db->escape_str($data['name'])."', ";
 				}
 
-				if(isset($data['email']) && $data['email'] != '') {
-					$set .= "email = '".$this->db->escape_str($data['email'])."', ";
+				if(isset($data['mail']) && $data['mail'] != '') {
+					$set .= "mail = '".$this->db->escape_str($data['mail'])."', ";
 				}
 
 				if(isset($data['pswd']) && $data['pswd'] != '') {
@@ -80,15 +80,15 @@ class Profile_model extends CI_Model {
 		} else {
 			if(!$data['name']) return false;
 
-			//$query = "UPDATE user_info SET name = ?, email = ?, utim = now() WHERE uid = ? and DATE_FORMAT(utim , '%Y-%m-%d') < DATE_FORMAT(now(), '%Y-%m-%d')";
+			//$query = "UPDATE user_info SET name = ?, mail = ?, utim = now() WHERE uid = ? and DATE_FORMAT(utim , '%Y-%m-%d') < DATE_FORMAT(now(), '%Y-%m-%d')";
 
 			$set = '';
 			if(isset($data['name']) && $data['name'] != '') {
 				$set .= "name = '".$this->db->escape_str($data['name'])."', ";
 			}
 
-			if(isset($data['email']) && $data['email'] != '') {
-				$set .= "email = '".$this->db->escape_str($data['email'])."', ";
+			if(isset($data['mail']) && $data['mail'] != '') {
+				$set .= "mail = '".$this->db->escape_str($data['mail'])."', ";
 			}
 
 			if(isset($data['pswd']) && $data['pswd'] != '') {
@@ -99,7 +99,7 @@ class Profile_model extends CI_Model {
 			$result = $this->db->query( $query, $uid );
 		}
 
-		if($where_field == 'uid') {
+		if($result) {
 			$this->session->unset_userdata( array('name') );
 			$this->session->set_userdata( array('name' => $data['name']) );
 		}

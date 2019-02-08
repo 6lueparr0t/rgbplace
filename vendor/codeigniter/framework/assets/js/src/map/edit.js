@@ -9,12 +9,13 @@ const state = document.querySelector("label[for='input_zone']");
 let drop_zone = document.querySelector("#upload");
 let input_zone = document.querySelector("#input_zone");
 
-drop_zone.addEventListener("dragstart",	function () { dragstart_change() });
-drop_zone.addEventListener("dragover",	function () { dragover_change() });
-drop_zone.addEventListener("dragleave",	function () { dragleave_change() });
-drop_zone.addEventListener("dragend",	function () { dragend_clear() });
-drop_zone.addEventListener("drop",	function () { drop_upload() });
-input_zone.addEventListener("change",	function () { input_upload() });
+drop_zone.addEventListener("dragstart" , () => { dragstart_change() });
+drop_zone.addEventListener("dragover"  , () => { dragover_change()  });
+drop_zone.addEventListener("dragleave" , () => { dragleave_change() });
+drop_zone.addEventListener("dragend"   , () => { dragend_clear()    });
+drop_zone.addEventListener("drop"      , () => { drop_upload()      });
+
+input_zone.addEventListener("change"   , () => { input_upload()     });
 
 function dragstart_change() {
 	//console.log("dragOver");
@@ -371,7 +372,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				data.push({
 					'info': __URL__,
 					'title': document.querySelector('#edit-title').value,
-					'content': content
+					'content': content.replace(/\n/gi, '')
 				});
 
 				let mode = ({value:'post'}).value;

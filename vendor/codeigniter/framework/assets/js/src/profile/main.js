@@ -25,12 +25,12 @@ function validateName(name) {
 	return result;
 }
 
-function validateEmail(email) {
+function validateEmail(mail) {
 
 	let result = false;
-	if(email.length < 400) {
+	if(mail.length < 400) {
 		let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		result = re.test(String(email).toLowerCase());
+		result = re.test(String(mail).toLowerCase());
 	}
 
 	return result;
@@ -64,7 +64,7 @@ function tabChange (tab) {
 document.querySelector("#profile").addEventListener("click", function(event) {
 	let t = event.target;
 
-	let name = '', email = '', pswd_conf = '';
+	let name = '', mail = '', pswd_conf = '';
 	let data = [];
 
 	if(t.parentElement.className == 'tab') {
@@ -150,16 +150,16 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 				break;
 			}
 
-			if(document.querySelector('#email') != null) {
-				if(validateEmail(document.querySelector('#email').value)) {
-					email = document.querySelector('#email').value;
+			if(document.querySelector('#mail') != null) {
+				if(validateEmail(document.querySelector('#mail').value)) {
+					mail = document.querySelector('#mail').value;
 				} else {
-					alert('check your email pattern');
+					alert('check your mail pattern');
 					break;
 				}
 			}
 
-			if(pswd.value || conf.value) {
+			if((pswd && conf) && (pswd.value || conf.value)) {
 				if(pswd.value != conf.value) {
 					conf.reportValidity();
 					break;
@@ -174,11 +174,11 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 			}
 
 			data.push({
-				'info': __URL__,
-				'no':(params.get('no'))?params.get('no'):0,
-				'name': name,
-				'email': email,
-				'pswd': pswd_conf
+				'info' : __URL__,
+				'no'   : (params.get('no'))?params.get('no'):0,
+				'name' : name,
+				'mail' : mail,
+				'pswd' : pswd_conf
 			});
 
 			//console.log(data);
