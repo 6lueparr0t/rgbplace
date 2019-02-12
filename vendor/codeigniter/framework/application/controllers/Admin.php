@@ -40,9 +40,9 @@ class Admin extends CI_Controller {
 		$this->root->sview("admin/map");
 	}
 
-	public function watchdog()
+	public function say()
 	{
-		$this->root->sview("admin/watchdog");
+		$this->root->sview("admin/say");
 	}
 
 /*
