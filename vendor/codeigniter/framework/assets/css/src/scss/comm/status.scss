@@ -59,7 +59,8 @@
 			}
 
 			&.db,
-			&.map {
+			&.map,
+			&.say {
 				color:$oc-gray-2;
 			}
 		}
