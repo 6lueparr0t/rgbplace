@@ -2,14 +2,14 @@
 
 var loc = window.location;
 var uri = 'ws:';
-var port = ':1213';
+var port = ':1323';
 
 if (loc.protocol === 'https:') {
 	uri = 'wss:';
 }
-uri += '//' + loc.host + port + '/ws';
+uri += '//' + loc.host + port + '/say';
 
-console.log(uri);
+//console.log(uri);
 
 var ws = new WebSocket(uri)
 
