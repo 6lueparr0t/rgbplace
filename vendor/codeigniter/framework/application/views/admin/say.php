@@ -3,6 +3,7 @@
 <div class='say'>
 	<input type='text' id='message' />
 	<button id='send'>Send</button>
+	<button id='ajax'>AJAX Send</button>
 </div>
 
 <?php $this->root->end($path); ?>

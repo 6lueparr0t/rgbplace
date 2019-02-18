@@ -11,6 +11,7 @@ import (
 // User
 type User struct {
   Sn string `json:"sn" form:"sn"`
+	Uid string `json:"uid" form:"uid"`
 }
 
 // Handler
