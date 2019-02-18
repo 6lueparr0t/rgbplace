@@ -7,7 +7,7 @@ var port = ':1323';
 if (loc.protocol === 'https:') {
 	uri = 'wss:';
 }
-uri += '//' + loc.host + port + '/say';
+uri += '//' + loc.host + port + '/push';
 
 //console.log(uri);
 
@@ -31,11 +31,16 @@ document.querySelector("#send").addEventListener("click", (event) => {
 	ws.send(msg);
 });
 
-/*
-function success (data) {
+document.querySelector("#ajax").addEventListener("click", (event) => {
+	let data = [];
 
-}
-*/
+	data.push({
+		'sn': atob(user.sn),
+		'uid': user.uid
+	});
+
+	httpRequest('POST', '/api/push/message', JSON.stringify(data), data => console.log(data), null);
+});
 
 !(() => {
 	//console.log('test');
