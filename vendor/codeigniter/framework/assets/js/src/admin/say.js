@@ -35,11 +35,12 @@ document.querySelector("#ajax").addEventListener("click", (event) => {
 	let data = [];
 
 	data.push({
-		'sn': atob(user.sn),
+		'info': __URL__,
+		'sn': user.sn,
 		'uid': user.uid
 	});
 
-	httpRequest('POST', '/api/push/message', JSON.stringify(data), data => console.log(data), null);
+	httpRequest('POST', '/api/push/test', JSON.stringify(data), data => {}, null);
 });
 
 !(() => {
