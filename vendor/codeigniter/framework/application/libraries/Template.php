@@ -66,7 +66,7 @@ class Template {
 			"})(window,document,'script','dataLayer','GTM-59R2NC9');</script>".
 			"<!-- End Google Tag Manager -->");
 
-		echo(" <script> var user = { sn : '".base64_encode($this->CI->session->userdata('sn')?$this->CI->session->userdata('sn'):0)."', uid : '".($this->CI->session->userdata('uid')?$this->CI->session->userdata('uid'):'')."' }; </script> ");
+		echo("<script>var user={sn:'".base64_encode($this->CI->session->userdata('sn')?$this->CI->session->userdata('sn'):0)."',uid:'".base64_encode($this->CI->session->userdata('uid')?$this->CI->session->userdata('uid'):'')."'};</script>");
 
 		echo("</head>");
 

@@ -370,20 +370,26 @@ class Api extends CI_Controller {
 
 	public function push ($type = null, $act = null) {
 		$method = $this->input->method();
-		if($method == 'get') {
-			$data = $this->input->get();
-		} else {
-			$data = (array)json_decode($this->input->raw_input_stream)[0];
-		}
+		$data = (array)json_decode($this->input->raw_input_stream)[0];
 
-		$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-		$host = $_SERVER['HTTP_HOST'];
+		if(!$data) redirect("/");
+        $data = $this->db->escape_str($data);
+        $info = explode('/', $this->db->escape_str($data['info']));
+        unset($data['info']);
 
+		// act : uni, multi, broad
+		// mode : uni, multi, broad
+		// recv : id1, 'id1|id2', ''
+		// map : map1, 'map1|map2', ''
+		// post : post number, ''
 		switch($type) {
-		case 'message' :
-			$sp = $this->websocket_open($protocol.$host.':1323/push');
-			$msg = $data['sn'].$data['uid'];
-			$this->websocket_write($sp, $msg);
+		case 'test' :
+			$data['act'] = 'alert';
+			$data['mode'] = 'broad';
+			$data['map' ] = $info[1];
+			$data['recv'] = '';
+			$data['msg' ] = 'test';
+			$this->push->send(json_encode($data));
 			break;
 		}
 
@@ -508,55 +514,4 @@ class Api extends CI_Controller {
 		curl_close($curl);
 		return $result;
 	}
-
-	// Reference : https://github.com/paragi/PHP-websocket-client/blob/master/websocket_client.php
-	function websocket_open($url){
-		$key=base64_encode(uniqid());
-		$query=parse_url($url);
-		$header="GET /push HTTP/1.1\r\n"
-			."pragma: no-cache\r\n"
-			."cache-control: no-cache\r\n"
-			."Upgrade: WebSocket\r\n"
-			."Connection: Upgrade\r\n"
-			."Host: ".$query['host'].":".$query['port']."\r\n"
-			."Sec-WebSocket-Key: $key\r\n"
-			."Sec-WebSocket-Version: 13\r\n"
-			."\r\n";
-		$sp=fsockopen($query['host'],$query['port'], $errno, $errstr,1);
-		if(!$sp) die("Unable to connect to server ".$url);
-		// Ask for connection upgrade to websocket
-		fwrite($sp,$header);
-		stream_set_timeout($sp,5);
-		$reaponse_header=fread($sp, 1024);
-		if(!strpos($reaponse_header," 101 ")
-			|| !strpos($reaponse_header,'Sec-WebSocket-Accept: ')){
-			die("Server did not accept to upgrade connection to websocket"
-				.$reaponse_header);
-		}
-		return $sp;
-	}
-
-	function websocket_write($sp, $data,$final=true){
-		// Assamble header: FINal 0x80 | Opcode 0x02
-		$header=chr(($final?0x80:0) | 0x02); // 0x02 binary
-
-		// Mask 0x80 | payload length (0-125)
-		if(strlen($data)<126) $header.=chr(0x80 | strlen($data));
-		elseif (strlen($data)<0xFFFF) $header.=chr(0x80 | 126) . pack("n",strlen($data));
-		elseif(PHP_INT_SIZE>4) // 64 bit
-			$header.=chr(0x80 | 127) . pack("Q",strlen($data));
-		else  // 32 bit (pack Q dosen't work)
-			$header.=chr(0x80 | 127) . pack("N",0) . pack("N",strlen($data));
-
-		// Add mask
-		$mask=pack("N",rand(1,0x7FFFFFFF));
-		$header.=$mask;
-
-		// Mask application data.
-		for($i = 0; $i < strlen($data); $i++)
-			$data[$i]=chr(ord($data[$i]) ^ ord($mask[$i % 4]));
-
-		return fwrite($sp,$header.$data);
-	}
-
 }
