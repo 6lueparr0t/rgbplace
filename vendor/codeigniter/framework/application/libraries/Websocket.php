@@ -40,6 +40,8 @@ class Websocket {
 	function websocket_open($url){
 		$key=base64_encode(uniqid());
 		$query=parse_url($url);
+		$scheme=($query['scheme']==='https')?'tls://':'';
+
 		$header="GET {$query['path']} HTTP/1.1\r\n"
 			."pragma: no-cache\r\n"
 			."cache-control: no-cache\r\n"
@@ -49,16 +51,18 @@ class Websocket {
 			."Sec-WebSocket-Key: $key\r\n"
 			."Sec-WebSocket-Version: 13\r\n"
 			."\r\n";
-		$sp=fsockopen($query['host'],$query['port'], $errno, $errstr,1);
+
+		$sp=fsockopen($scheme.$query['host'],$query['port'], $errno, $errstr,1);
 		if(!$sp) die("Unable to connect to server ".$url);
+
 		// Ask for connection upgrade to websocket
 		fwrite($sp,$header);
 		stream_set_timeout($sp,5);
-		$reaponse_header=fread($sp, 1024);
-		if(!strpos($reaponse_header," 101 ")
-			|| !strpos($reaponse_header,'Sec-WebSocket-Accept: ')){
+		$response_header=fread($sp, 1024);
+		if(!strpos($response_header," 101 ")
+			|| !strpos($response_header,'Sec-WebSocket-Accept: ')){
 			die("Server did not accept to upgrade connection to websocket"
-				.$reaponse_header);
+				.$response_header);
 		}
 		return $sp;
 	}

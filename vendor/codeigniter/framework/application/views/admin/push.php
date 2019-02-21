@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common(); ?>
 <?
 if($mode==="run") {
-    system("pkill push; go/push > /dev/null 2>/dev/null &");
+    shell_exec("pkill push; go/push > /dev/null 2>/dev/null &");
     redirect('/admin/push');
 }
 
