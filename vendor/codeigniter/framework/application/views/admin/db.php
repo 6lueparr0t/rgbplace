@@ -1,15 +1,16 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common(); ?>
 <?
-if($method==="clear") {
+if($mode==="clear") {
 	shell_exec("cat /dev/null > log/db");
+	redirect('/admin/db');
 }
 
-if($method==="backup") {
+if($mode==="backup") {
 	shell_exec("shell/backup");
 	redirect('/admin/db');
 }
 
-if($method==="restore") {
+if($mode==="restore") {
 	shell_exec("shell/restore");
 	redirect('/admin/db');
 }
