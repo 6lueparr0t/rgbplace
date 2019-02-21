@@ -29,9 +29,9 @@ class Admin extends CI_Controller {
 		$this->root->sview("admin/info");
 	}
 
-	public function db($method="")
+	public function db($mode="")
 	{
-		$data['method'] = $method;
+		$data['mode'] = $mode;
 		$this->root->sview("admin/db", $data);
 	}
 
@@ -40,9 +40,10 @@ class Admin extends CI_Controller {
 		$this->root->sview("admin/map");
 	}
 
-	public function say()
+	public function push($mode="")
 	{
-		$this->root->sview("admin/say");
+		$data['mode'] = $mode;
+		$this->root->sview("admin/push", $data);
 	}
 
 /*

@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 mysql -u root -p home --password='6lueparr0t@gmail.com' < assets/sql/database.sql
 
