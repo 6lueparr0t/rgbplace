@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"strconv"
 
 	"github.com/gorilla/websocket"
 )
@@ -98,6 +99,7 @@ func (c *Client) writePump() {
 			if err != nil {
 				return
 			}
+
 			w.Write(message)
 
 			// Add queued chat messages to the current websocket message.
@@ -119,6 +121,21 @@ func (c *Client) writePump() {
 	}
 }
 
+func (c *Client) sendClients() {
+
+	w, err := c.conn.NextWriter(websocket.TextMessage)
+	if err != nil {
+		return
+	}
+
+	w.Write( []byte(`{"count":`+strconv.Itoa(len(c.hub.clients))+`}`) )
+
+	if err := w.Close(); err != nil {
+		return
+	}
+
+}
+
 // serve handles websocket requests from the peer.
 func serve(hub *Hub, w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
@@ -129,8 +146,11 @@ func serve(hub *Hub, w http.ResponseWriter, r *http.Request) {
 	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
 	client.hub.register <- client
 
+	go client.sendClients()
+
 	// Allow collection of memory referenced by the caller by doing all work in
 	// new goroutines.
 	go client.writePump()
 	go client.readPump()
+
 }

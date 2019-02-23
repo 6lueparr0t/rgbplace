@@ -1,5 +1,10 @@
 package main
 
+import (
+    //"strconv"
+)
+
+
 // Hub maintains the set of active clients and broadcasts messages to the
 // clients.
 type Hub struct {
@@ -30,7 +35,23 @@ func (h *Hub) run() {
 		select {
 		case client := <-h.register:
 			h.clients[client] = true
+			//for client := range h.clients {
+				//select {
+				//case client.send <- []byte(`{"count":`+strconv.Itoa(len(h.clients))+`}`):
+				//default:
+					//close(client.send)
+					//delete(h.clients, client)
+				//}
+			//}
 		case client := <-h.unregister:
+			//for client := range h.clients {
+				//select {
+				//case client.send <- []byte(`{"count":`+strconv.Itoa(len(h.clients)-1)+`}`):
+				//default:
+					//close(client.send)
+					//delete(h.clients, client)
+				//}
+			//}
 			if _, ok := h.clients[client]; ok {
 				delete(h.clients, client)
 				close(client.send)
