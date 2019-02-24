@@ -74,10 +74,6 @@ class Template {
 		echo("<body class='{$darkmode}'>");
 /* ---------------------------------------------------------------------- */
 
-		echo "<div class='counter'>
-			<i class='fas fa-child'></i> : <span id='counter'> </span>
-		</div>";
-
 		echo ("<div id='sign'>");
 		// Sign in check
 		if(!$sign) {
@@ -122,6 +118,10 @@ class Template {
 			}
 		}
 		echo ("</div>");
+
+		echo "<div class='counter'>
+			<i class='fas fa-child'></i> : <span id='counter'> </span>
+		</div>";
 
 		echo("<div id='logo'>");
 		echo("<a href='".base_url().DEFAULT_MAP."'>");
