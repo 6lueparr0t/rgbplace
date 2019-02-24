@@ -7,7 +7,7 @@ var port = ':1323';
 if (loc.protocol === 'https:') {
 	uri = 'wss:';
 }
-uri += '//' + loc.host + port + '/push';
+uri += '//' + loc.hostname + port + '/push';
 
 //console.log(uri);
 
@@ -18,7 +18,7 @@ ws.onopen = function() {
 }
 
 ws.onmessage = function(event) {
-	alert(event.data);
+	console.log(event.data);
 	//var out = document.getElementById('output');
 	//out.innerHTML += event.data + '<br>';
 	//console.log(event);

@@ -377,7 +377,7 @@ class Api extends CI_Controller {
         $info = explode('/', $this->db->escape_str($data['info']));
         unset($data['info']);
 
-		// act : uni, multi, broad
+		// act : alert, noti
 		// mode : uni, multi, broad
 		// recv : id1, 'id1|id2', ''
 		// map : map1, 'map1|map2', ''
@@ -388,7 +388,7 @@ class Api extends CI_Controller {
 			$data['mode'] = 'broad';
 			$data['map' ] = $info[1];
 			$data['recv'] = '';
-			$data['msg' ] = 'test';
+			$data['data'] = 'test';
 			$this->push->send(json_encode($data));
 			break;
 		}

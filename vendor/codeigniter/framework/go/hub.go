@@ -1,7 +1,7 @@
 package main
 
 import (
-    //"strconv"
+	"strconv"
 )
 
 
@@ -35,14 +35,14 @@ func (h *Hub) run() {
 		select {
 		case client := <-h.register:
 			h.clients[client] = true
-			//for client := range h.clients {
-				//select {
-				//case client.send <- []byte(`{"count":`+strconv.Itoa(len(h.clients))+`}`):
-				//default:
-					//close(client.send)
-					//delete(h.clients, client)
-				//}
-			//}
+			for client := range h.clients {
+				select {
+				case client.send <- []byte(`{"act":"noti", "mode":"count", "data":`+strconv.Itoa(len(h.clients))+`}`):
+				default:
+					close(client.send)
+					delete(h.clients, client)
+				}
+			}
 		case client := <-h.unregister:
 			//for client := range h.clients {
 				//select {
