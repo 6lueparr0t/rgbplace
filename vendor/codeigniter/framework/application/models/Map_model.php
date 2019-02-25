@@ -926,7 +926,9 @@ class Map_model extends CI_Model {
 			$sn      = $row->sn;
 			$mention = ($row->mention && !$row->dtim)? "@".$row->mention:"";
 
-			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', htmlspecialchars($row->content)));
+			//$row->content = preg_replace('/!\[(img)\]\[(.*)\]/', '<img src=\'$2\' />', $row->content);
+			$row->content = preg_replace('/!\[link\]\[(.*)\]/', '<a href=\'$1\' target=\'_blank\'>$1</a>', $row->content);
+			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', $row->content));
 
 			$depth = [
 				$row->depth1, $row->depth2, $row->depth3,
