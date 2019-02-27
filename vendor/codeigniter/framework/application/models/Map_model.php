@@ -585,12 +585,14 @@ class Map_model extends CI_Model {
 	 */
 	public function post_insert ($data, $info)
 	{
+		$title = htmlspecialchars($data['title']);
+		$content = $data['content'];
+		if(!$title || !$content) return false;
+
 		if( !in_array($info[2], array("best", "notice")) || $this->session->userdata('admin')) {
 			$table = $this->db->escape_str("map_{$info[1]}_post");
 			$type = $info[2];
 
-			$title = htmlspecialchars($data['title']);
-			$content = $data['content'];
 			//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 			preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
@@ -666,6 +668,8 @@ class Map_model extends CI_Model {
 		$title = htmlspecialchars($data['title']);
 		//$content = htmlspecialchars($data['content']);
 		$content = $data['content'];
+		if(!$title || !$content) return false;
+
 		//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
