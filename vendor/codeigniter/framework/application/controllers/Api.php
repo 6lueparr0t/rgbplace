@@ -386,9 +386,10 @@ class Api extends CI_Controller {
 		case 'test' :
 			$data['act'] = 'alert';
 			$data['mode'] = 'broad';
-			$data['map' ] = $info[1];
 			$data['recv'] = '';
-			$data['data'] = 'test';
+			$data['map' ] = $info[1];
+			$data['msg'] = 'test';
+			$data['key' ] = WS_KEY;
 			$this->push->send(json_encode($data));
 			break;
 		}

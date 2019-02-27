@@ -36,14 +36,15 @@ func (h *Hub) run() {
 		case client := <-h.register:
 			h.clients[client] = true
 			for client := range h.clients {
-				client.send <- []byte(`{"act":"noti", "mode":"count", "data":`+strconv.Itoa(len(h.clients))+`}`)
+				client.count <- []byte(`{"act":"noti", "mode":"count", "data":`+strconv.Itoa(len(h.clients))+`}`)
 			}
 		case client := <-h.unregister:
 			for client := range h.clients {
-				client.send <- []byte(`{"act":"noti", "mode":"count", "data":`+strconv.Itoa(len(h.clients)-1)+`}`)
+				client.count <- []byte(`{"act":"noti", "mode":"count", "data":`+strconv.Itoa(len(h.clients)-1)+`}`)
 			}
 			if _, ok := h.clients[client]; ok {
 				delete(h.clients, client)
+				close(client.count)
 				close(client.send)
 			}
 		case message := <-h.broadcast:
