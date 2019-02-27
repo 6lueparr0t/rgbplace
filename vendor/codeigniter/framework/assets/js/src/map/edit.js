@@ -274,13 +274,22 @@ function addFile(data) {
 
 function done (data) {
 	let num = data;
-	alert('등록 완료\nSave and Post Done!');
-	redirect(num);
+	Swal.fire({
+		type: 'success',
+		title: 'Done',
+		html: '등록 완료<br/>Save and Post Done!',
+	}).then((result) => {
+		redirect(num);
+	});
 }
 
 function fail (data) {
 	console.log(data);
-	alert('session lost. sign in please.');
+	Swal.fire({
+		type: 'error',
+		title: 'Fail',
+		html: 'session lost. sign in please.',
+	})
 }
 
 function tabChange (element) {
@@ -301,7 +310,7 @@ document.querySelector("#edit-content").addEventListener("click", function(event
 
 document.querySelector("#edit").addEventListener("click", function(event) {
 	let t = event.target;
-	let editor, content;
+	let title, editor, content;
 
 	let edit_content = document.querySelector('#edit-content');
 	let edit_content_code = document.querySelector('#edit-content-code');
@@ -361,24 +370,50 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 
 	switch(t.id) {
 		case 'save' :
-			if(confirm('등록 하시겠습니까?\nAre you sure you want to post it?')) {
-				editor = document.querySelector('.editor.active');
-				if(editor.id == 'edit-content') {
-					content = editor.innerHTML;
-				} else {
-					content = editor.value;
-				}
-
-				data.push({
-					'info': __URL__,
-					'title': document.querySelector('#edit-title').value,
-					'content': content.replace(/\n/gi, '')
-				});
-
-				let mode = ({value:'post'}).value;
-
-				httpRequest(mode, '/api/request/edit/save', JSON.stringify(data), done, fail);
+			title = document.querySelector('#edit-title');
+			if(!title.value) {
+				title.setCustomValidity('제목을 입력해주세요.\nPlease Input Title');
+				title.reportValidity();
+				return false;;
 			}
+
+			editor = document.querySelector('.editor.active');
+			if(editor.id == 'edit-content') {
+				content = editor.innerHTML;
+			} else {
+				content = editor.value;
+			}
+
+			if(!content) {
+				Swal.fire({
+					type: 'error',
+					title: 'Oops...',
+					html: '내용을 입력해주세요.<br/>Please Input Content.'
+				})
+				return false;
+			}
+
+			Swal.fire({
+				title: 'Are you sure?',
+				html: "등록 하시겠습니까?<br/>Are you sure you want to post it?",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes!'
+			}).then((result) => {
+				if(result.value && title && content) {
+					data.push({
+						'info': __URL__,
+						'title': document.querySelector('#edit-title').value,
+						'content': content.replace(/\n/gi, '')
+					});
+
+					let mode = ({value:'post'}).value;
+
+					httpRequest(mode, '/api/request/edit/save', JSON.stringify(data), done, fail);
+				}
+			});
 			break;
 		case 'cancel' :
 			back();
