@@ -1,10 +1,11 @@
 package main
 
 import (
-	"bytes"
-	"log"
+	"encoding/json"
 	"net/http"
+	"bytes"
 	"time"
+	"log"
 	//"strconv"
 
 	"github.com/gorilla/websocket"
@@ -48,6 +49,15 @@ type Client struct {
 	send chan []byte
 }
 
+type Data struct {
+    Act  string `json:"act"`
+	Mode string `json:"mode"`
+	Recv string `json:"recv"`
+	Map  string `json:"map"`
+	Post string `json:"post"`
+	Key  string `json:"key"`
+}
+
 // readPump pumps messages from the websocket connection to the hub.
 //
 // The application runs readPump in a per-connection goroutine. The application
@@ -70,7 +80,19 @@ func (c *Client) readPump() {
 			break
 		}
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
-		c.hub.broadcast <- message
+
+		// act : alert, noti
+		// mode : uni, multi, broad
+		// recv : id1, 'id1|id2', ''
+		// map : map1, 'map1|map2', ''
+		// post : post number, ''
+		// key : WS_KEY
+
+		data := Data{}
+		json.Unmarshal([]byte(message), &data)
+		if data.Key == "$GLY%P!\DEyRa*fajGwS?<l3%|Il.1IlfQW" {
+			c.hub.broadcast <- message
+		}
 	}
 }
 

@@ -136,6 +136,8 @@ define(
 	  '11' => 1000  ]
 );
 
+define('WS_KEY', '$GLY%P!\DEyRa*fajGwS?<l3%|Il.1IlfQW');
+
 define('CIPHER_METHOD', 'aes-128-gcm');
 define('CIPHER_KEY', 'Have a nice Day!');
 
