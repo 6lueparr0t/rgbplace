@@ -25,10 +25,13 @@ ws.onmessage = (event) => {
 			//push['map'] push['post'] push['reply'] push['recv'] push['data']
 			switch (push['mode']) {
 				case 'uni' :
+					console.log(push['msg']);
 					break;
 				case 'multi' :
+					console.log(push['msg']);
 					break;
 				case 'broad' :
+					console.log(push['msg']);
 					break;
 			}
 			break;

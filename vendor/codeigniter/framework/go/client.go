@@ -47,7 +47,17 @@ type Client struct {
 
 	// Buffered channel of outbound messages.
 	send chan []byte
+
+	count chan []byte
 }
+
+// act : alert, noti
+// mode : uni, multi, broad
+// recv : id1, 'id1|id2', ''
+// map : map1, 'map1|map2', ''
+// post : post number, ''
+// data : ...
+// key : WS_KEY
 
 type Data struct {
     Act  string `json:"act"`
@@ -55,6 +65,7 @@ type Data struct {
 	Recv string `json:"recv"`
 	Map  string `json:"map"`
 	Post string `json:"post"`
+	Msg  string `json:"msg"`
 	Key  string `json:"key"`
 }
 
@@ -81,17 +92,10 @@ func (c *Client) readPump() {
 		}
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
 
-		// act : alert, noti
-		// mode : uni, multi, broad
-		// recv : id1, 'id1|id2', ''
-		// map : map1, 'map1|map2', ''
-		// post : post number, ''
-		// key : WS_KEY
-
 		data := Data{}
 		json.Unmarshal([]byte(message), &data)
-		if data.Key == "$GLY%P!\DEyRa*fajGwS?<l3%|Il.1IlfQW" {
-			data.Key := ""
+		if data.Key == "$GLY%P!DEyRa*fajGwS?<l3%|Il.1IlfQW" {
+			data.Key = ""
 			message, _ := json.Marshal(data)
 			c.hub.broadcast <- message
 		}
@@ -111,6 +115,31 @@ func (c *Client) writePump() {
 	}()
 	for {
 		select {
+		case message, ok := <-c.count:
+			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
+			if !ok {
+				// The hub closed the channel.
+				c.conn.WriteMessage(websocket.CloseMessage, []byte{})
+				return
+			}
+
+			w, err := c.conn.NextWriter(websocket.TextMessage)
+			if err != nil {
+				return
+			}
+
+			w.Write(message)
+
+			// Add queued chat messages to the current websocket message.
+			n := len(c.send)
+			for i := 0; i < n; i++ {
+				w.Write(newline)
+				w.Write(<-c.count)
+			}
+
+			if err := w.Close(); err != nil {
+				return
+			}
 		case message, ok := <-c.send:
 			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
 			if !ok {
@@ -169,7 +198,7 @@ func serve(hub *Hub, w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
+	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256), count: make(chan []byte, 256)}
 	client.hub.register <- client
 
 	//go client.sendClients()

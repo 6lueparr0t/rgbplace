@@ -388,8 +388,8 @@ class Api extends CI_Controller {
 			$data['mode'] = 'broad';
 			$data['recv'] = '';
 			$data['map' ] = $info[1];
-			$data['data'] = 'test';
-			$data['key' ] = WS_KEY
+			$data['msg'] = 'test';
+			$data['key' ] = WS_KEY;
 			$this->push->send(json_encode($data));
 			break;
 		}
