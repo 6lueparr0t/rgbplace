@@ -91,6 +91,8 @@ func (c *Client) readPump() {
 		data := Data{}
 		json.Unmarshal([]byte(message), &data)
 		if data.Key == "$GLY%P!\DEyRa*fajGwS?<l3%|Il.1IlfQW" {
+			data.Key := ""
+			message, _ := json.Marshal(data)
 			c.hub.broadcast <- message
 		}
 	}
