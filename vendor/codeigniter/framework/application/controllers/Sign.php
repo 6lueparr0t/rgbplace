@@ -14,7 +14,9 @@ class Sign extends CI_Controller {
 		if($this->session->userdata('signed_in')) {
 			redirect('/');
 		} else {
-			$this->root->view("sign/main");
+			//회원가입 임시 제한
+			redirect('/');
+			//$this->root->view("sign/main");
 		}
 	}
 
