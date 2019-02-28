@@ -471,8 +471,12 @@ class Map_model extends CI_Model {
 			$uid  = $row->uid;
 			$sn   = $row->sn;
 			$title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $row->title))));
+
 			//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$row->content))), "<a><img><br><div><p><iframe>");
 			$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->content)), "<a><img><br><div><p><iframe>");
+
+			$content = preg_replace('/!\[img\]\[(.*)\]/', '<img src=\'$1\' />', $content);
+			$content = preg_replace('/!\[link\]\[(.*)\]/', '<a href=\'$1\' target=\'_blank\'>$1</a>', $content);
 
 			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
 			echo "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
@@ -526,6 +530,11 @@ class Map_model extends CI_Model {
 		$sn = $this->session->userdata('sn');
 		$uid = $this->session->userdata('uid');
 
+		$update_table = $this->db->escape_str("map_{$data['map']}_post");
+		$update = "UPDATE {$update_table} SET hit = hit + 1  where no = ?";
+		$ret = $this->db->query($update, $no);
+
+		/*
 		$query = "SELECT no FROM {$history_table} where uid=? and type='post' and relation=? and act='view' ";
 
 		if($this->db->query($query, array($uid, $no))->num_rows() > 0) {
@@ -543,6 +552,7 @@ class Map_model extends CI_Model {
 				$ret = false;
 			}
 		}
+		*/
 
 		return $ret;
 	}

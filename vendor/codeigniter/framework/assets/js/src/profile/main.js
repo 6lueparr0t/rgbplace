@@ -125,6 +125,35 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 		return;
 	}
 
+	if (t.classList.item(0) == 'copy') {
+		let clip = t.firstElementChild;
+		clip.style.display='block';
+
+		if(document.body.createTextRange) {
+
+			let range = document.body.createTextRange();
+			range.moveToElementText(clip);
+			range.select();
+			document.execCommand("Copy");
+			alert("Copied");
+			document.selection.empty();
+
+		} else if(window.getSelection) {
+
+			let selection = window.getSelection();
+			let range = document.createRange();
+			range.selectNodeContents(clip);
+			selection.removeAllRanges();
+			selection.addRange(range);
+			document.execCommand("Copy");
+			alert("Copied");
+			selection.removeAllRanges();
+
+		}
+
+		clip.style.display='none';
+	}
+
 	if (t.classList.item(0) == 'delete-message') {
 
 		data.push({
