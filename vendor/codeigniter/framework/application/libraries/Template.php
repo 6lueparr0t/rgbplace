@@ -83,7 +83,8 @@ class Template {
 				.form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10]);
 
 			echo "<button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign In </button>";
-			echo "<button type='button' id='logout' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button><br/>";
+			//회원가입 임시 제한
+			//echo "<button type='button' id='logout' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button><br/>";
 
 			// Google Sign-in Tag
 			//echo "<div id='google' class='g-signin2' data-onsuccess='onSignIn' data-width='164' data-height='20' data-longtitle='true' > </div>";
