@@ -334,6 +334,15 @@ class Profile_model extends CI_Model {
 				$tmp  = "<div class='tr'>";
 				$tmp .= "<div class='td center width-50'>{$row->idx}</div>";
 				$tmp .= "<div class='td'>";
+				$tmp .= "<div class='img'>";
+				$tmp .= "<img src='/upload/{$row->file_name}' alt='{$row->client_name}'/><br/>";
+				$tmp .= "<i class='copy far fa-copy'>
+					<div contenteditable='true' style='display:none;'>&lt;img src=\"/upload/{$row->file_name}\" alt=\"{$row->client_name}\" /&gt;</div>
+					</i>";
+				$tmp .= "<i class='copy fas fa-link'>
+					<div contenteditable='true' style='display:none;'>![img][/upload/{$row->file_name}]</div>
+					</i>";
+				$tmp .= "</div>";
 				$tmp .= "<a href='/upload/{$row->file_name}' target='_blank'>{$row->client_name}</a><br/>";
 				$tmp .= "{$row->file_type}<br/>";
 				$tmp .= "{$row->file_size} KB<br/>";

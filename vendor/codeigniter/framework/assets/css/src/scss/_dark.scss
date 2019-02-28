@@ -15,7 +15,7 @@ body.dark {
 			background-color: $oc-gray-7;
 			color:$oc-gray-0 !important;
 
-			& input[type=checkbox]:checked~ul label.switch, & input[type=checkbox]:checked~ul label.switch {
+			& input[type=checkbox]:checked~ul label, & input[type=checkbox]:checked~ul label.switch {
 				background-color: $oc-gray-8;
 				color:$oc-gray-0;
 			}
@@ -36,6 +36,12 @@ body.dark {
 		& #map-result li {
 			background-color: $oc-gray-9 !important;
 			color: $oc-gray-0 !important;
+		}
+	}
+
+	.address {
+		& #native-address a, & #global-address a {
+			color:$oc-gray-0;
 		}
 	}
 
@@ -152,15 +158,24 @@ body.dark {
 			background-color: $oc-gray-9;
 		}
 
-		& .page .table .td input {
-			background-color: black;
-			color:$oc-gray-0;
-
-			&:disabled {
+		& .page .table .td {
+			& input {
 				background-color: black;
-				color:$oc-gray-7;
+				color:$oc-gray-0;
+
+				&:disabled {
+					background-color: black;
+					color:$oc-gray-7;
+				}
+			}
+
+			& i:hover {
+				background: $oc-gray-0;
+				color: $oc-gray-9;
+				transition: all .1s ease;
 			}
 		}
+
 	}
 
 	#upload-list .table .upload-list-result ul.file-list li:hover {
