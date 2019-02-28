@@ -1212,7 +1212,7 @@ class Map_model extends CI_Model {
 		//}
 
 		$depth_array[$depth] = 
-			$this->db->query("select count(no) cnt from {$table} where relation = ? ", $no)->row()->cnt+1;
+			$this->db->query("select count(no) cnt from {$table} where post = ? ", $post_no)->row()->cnt+1;
 
 		$content = $data['message'];
 
