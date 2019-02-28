@@ -336,11 +336,11 @@ class Profile_model extends CI_Model {
 				$tmp .= "<div class='td'>";
 				$tmp .= "<div class='img'>";
 				$tmp .= "<img src='/upload/{$row->file_name}' alt='{$row->client_name}'/><br/>";
-				$tmp .= "<i class='copy far fa-copy'>
-					<div contenteditable='true' style='display:none;'>&lt;img src=\"/upload/{$row->file_name}\" alt=\"{$row->client_name}\" /&gt;</div>
+				$tmp .= "<i class='copy fas fa-code'>
+					<input style='display:none;' value='&lt;img src=\"/upload/{$row->file_name}\" alt=\"{$row->client_name}\" /&gt;' />
 					</i>";
 				$tmp .= "<i class='copy fas fa-link'>
-					<div contenteditable='true' style='display:none;'>![img][/upload/{$row->file_name}]</div>
+					<input style='display:none;' value='![img][/upload/{$row->file_name}]' />
 					</i>";
 				$tmp .= "</div>";
 				$tmp .= "<a href='/upload/{$row->file_name}' target='_blank'>{$row->client_name}</a><br/>";
