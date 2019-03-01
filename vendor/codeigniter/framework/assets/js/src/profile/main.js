@@ -48,6 +48,15 @@ function passwordCheck () {
 	this.reportValidity();
 }
 
+function popup (src, alt) {
+	Swal.fire({
+		title: alt,
+		imageUrl: src,
+		imageAlt: alt,
+		animation:false
+	})
+}
+
 window.onpopstate = event => (event.state)? tabChange(event.state.tab):history.go(-1);
 
 function tabChange (tab) {
@@ -130,9 +139,13 @@ document.querySelector("#profile").addEventListener("click", function(event) {
         clip.style.display='block';
         clip.select();
         document.execCommand("Copy");
+
+		let tooltip = t.querySelector('.tooltip');
+		tooltip.style.animation='fadeInOut 2s ease-out 1';
+		tooltip.style.WebkitAnimation='fadeInOut 2s ease-out 1';
+		setTimeout(function () { this.style.animation=''; this.style.WebkitAnimation=''; }.bind(tooltip), 2000);
+		
         clip.style.display='none';
-
-
 	}
 
 	if (t.classList.item(0) == 'delete-message') {
