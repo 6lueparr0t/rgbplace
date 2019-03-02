@@ -155,6 +155,14 @@ class Sign_model extends CI_Model {
 		return true;
 	}
 
+	public function mailCount()
+	{
+		$query = "SELECT count(mail) cnt from mail_log where DATE_FORMAT(ctim, '%Y%m') = DATE_FORMAT(now(), '%Y%m')";
+		$find = $this->db->query($query);
+
+		return $find->row()->cnt;
+	}
+
 	public function sessionChk()
 	{
 
