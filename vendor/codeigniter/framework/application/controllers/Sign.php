@@ -15,8 +15,7 @@ class Sign extends CI_Controller {
 			redirect('/');
 		} else {
 			//회원가입 임시 제한
-			redirect('/');
-			//$this->root->view("sign/main");
+			$this->root->view("sign/main");
 		}
 	}
 
@@ -127,6 +126,7 @@ class Sign extends CI_Controller {
 		if (
 			!$this->input->post('uid')
 			|| !$this->input->post('name')
+			|| !$this->input->post('mail')
 			|| !$this->input->post('pswd')
 			|| !$this->input->post('conf')
 		) redirect("/");
@@ -135,12 +135,17 @@ class Sign extends CI_Controller {
 				[
 					'field' => 'uid',
 					'label' => 'Uid',
-					'rules' => 'trim|alpha_dash|min_length[6]|max_length[100]|required'
+					'rules' => 'trim|alpha_dash|min_length[6]|max_length[255]|required'
 				],
 				[
 					'field' => 'name',
 					'label' => 'Nick Name',
 					'rules' => 'trim|callback_is_space|min_length[2]|max_length[20]|required'
+				],
+				[
+					'field' => 'mail',
+					'label' => 'mail',
+					'rules' => 'trim|callback_is_space|min_length[2]|max_length[255]|required'
 				],
 				[
 					'field' => 'pswd',
@@ -165,7 +170,11 @@ class Sign extends CI_Controller {
 
 			$data['uid'] = $this->input->post('uid');
 			$data['name']= $this->input->post('name');
-			$data['pswd']= $this->input->post('pswd');
+
+			$data['mail']= $this->input->post('mail');
+			$data['code']= $this->input->post('code');
+
+		 	$data['pswd']= $this->input->post('pswd');
 			$data['conf']= $this->input->post('conf');
 
 			if ($check === "check") {
@@ -177,10 +186,14 @@ class Sign extends CI_Controller {
 					$output['msg'] = "{$data['uid']} : 사용할 수 없는 아이디입니다.\n{$data['uid']} : already used This ID.";
 				}
 
+				if ($this->session->tempdata('code') != $data['code']) {
+					$output['valid'] = false;
+					$output['msg'] = "인증 코드를 확인해주세요.\nCheck your Auth Code.";
+				}
 				echo json_encode($output);
 
 				return true;
-			} 
+			}
 
 			if ($check === "") {
 				// Build POST request:
@@ -198,11 +211,7 @@ class Sign extends CI_Controller {
 				if ($score >= 0.5) {
 					$this->sign->userMake($data);
 				} else {
-					$output['valid'] = false;
-					$output['msg'] = "로봇인가요?\nAre you bot?";
-
-					echo json_encode($output);
-
+					echo ("<script>alert('로봇인가요?\nAre you bot?')history.go(-1);</script>");
 					return false;
 				}
 			}
@@ -223,7 +232,11 @@ class Sign extends CI_Controller {
 
 	public function mailAuth() {
 		//mailtest. success complete
-		redirect('/');
+		//redirect('/');
+		$data = (array)json_decode($this->input->raw_input_stream);
+
+		$data['code'] = random_int(100000, 999999);
+		$this->session->set_tempdata('code', $data['code'], 60*60);
 
 		$config = array (
 			'protocol' => 'sendmail',
@@ -246,27 +259,35 @@ class Sign extends CI_Controller {
 		/* 메일전송 시작 */
 
 		$this->email->from('admin@rgbplace.com', 'RGB place');
-		$this->email->to('daihyun99@gmail.com');
+		$this->email->to($data['mail']);
 		$this->email->reply_to('admin@rgbplace.com', 'RGB place');
 
-		$this->email->subject("RGB place !");
+		$this->email->subject("RGB Place - Authentication Code");
 
-		$this->email->message('
+		$this->email->message("
 			<html>
 			<head>
-			<title>테스트 메일</title>
+			<title>RGB Place</title>
 			</head>
 			<body>
-				TEST
+				인증번호 숫자 6자리를 입력해 주세요<br/>
+				Please enter the six-digit authentication code number<br/><br/>
+
+				Auth-Code : {$data['code']}
 			</body>
 			</html>
-			');
+		");
 
 		$this->email->send();
+		$this->sign->mailLog($data);
 
 		/* 전송 결과 로그 */
-		echo $this->email->print_debugger();
+		//echo $this->email->print_debugger();
+		echo true;
+
+
 		/* 메일전송 끝 */
+
 	}
 
 	function is_space($str)
