@@ -233,6 +233,10 @@ class Sign extends CI_Controller {
 	public function mailAuth() {
 		//mailtest. success complete
 		//redirect('/');
+		if($this->sign->mailCount() >= 9000) {
+			echo json_encode(array('send' => 'over'));
+			return true;
+		}
 		$data = (array)json_decode($this->input->raw_input_stream);
 
 		$data['code'] = random_int(100000, 999999);
@@ -279,11 +283,10 @@ class Sign extends CI_Controller {
 		");
 
 		$this->email->send();
-		$this->sign->mailLog($data);
+		echo json_encode(array('send' => $this->sign->mailLog($data)));
 
 		/* 전송 결과 로그 */
 		//echo $this->email->print_debugger();
-		echo true;
 
 
 		/* 메일전송 끝 */

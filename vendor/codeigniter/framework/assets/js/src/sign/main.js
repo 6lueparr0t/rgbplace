@@ -56,43 +56,54 @@ function sendCode() {
 
 	if (!x) {
 
-		httpRequest('POST', '/sign/mailAuth', JSON.stringify(data), data => {
+		httpRequest('POST', '/sign/mailAuth', JSON.stringify(data), ret => {
 
-			Swal.fire({
-				type: 'success',
-				title: 'Send Successfully!',
-				text: 'Check Your MailBox and Input Auth Code in an hour.'
-			})
+			if(ret['send'] == true) {
+				Swal.fire({
+					type: 'success',
+					title: 'Send Successfully!',
+					text: 'Check Your MailBox and Input Auth Code in an hour.'
+				})
 
-			clearInterval(x);
+				clearInterval(x);
 
-			// Set the date we're counting down to
-			let countDownDate = new Date().getTime() + (60 * 60 * 1000) + 1000;
+				// Set the date we're counting down to
+				let countDownDate = new Date().getTime() + (60 * 60 * 1000) + 1000;
 
-			// Update the count down every 1 second
-			x = setInterval(function() {
+				// Update the count down every 1 second
+				x = setInterval(function() {
 
-				// Get todays date and time
-				let now = new Date().getTime();
+					// Get todays date and time
+					let now = new Date().getTime();
 
-				// Find the distance between now and the count down date
-				let distance = countDownDate - now;
+					// Find the distance between now and the count down date
+					let distance = countDownDate - now;
 
-				// Time calculations for days, hours, minutes and seconds
-				let minutes = Math.floor((distance % (1000 * 60 * 61)) / (1000 * 60));
-				let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+					// Time calculations for days, hours, minutes and seconds
+					let minutes = Math.floor((distance % (1000 * 60 * 61)) / (1000 * 60));
+					let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-				// Output the result in an element with id="demo"
-				document.getElementsByName("mail")[0].disabled = true;
-				document.getElementsByName("code")[0].placeholder = 'E-mail Auth Code - ' + minutes.pad(2) + ":" + seconds.pad(2);
+					// Output the result in an element with id="demo"
+					document.getElementsByName("mail")[0].disabled = true;
+					document.getElementsByName("code")[0].placeholder = 'E-mail Auth Code - ' + minutes.pad(2) + ":" + seconds.pad(2);
 
-				// If the count down is over, write some text 
-				if (distance < 0) {
-					clearInterval(x);
-					x = null;
-					document.getElementsByName("code")[0].placeholder = "E-mail Auth Code - EXPIRED";
-				}
-			}, 500);
+					// If the count down is over, write some text 
+					if (distance < 0) {
+						clearInterval(x);
+						x = null;
+						document.getElementsByName("code")[0].placeholder = "E-mail Auth Code - EXPIRED";
+					}
+				}, 500);
+
+			} else if(ret['send'] == 'over') {
+
+				Swal.fire({
+					type: 'info',
+					title: 'Email exceeded sending limit',
+					text: 'Please contact us. (admin@rgbplace.com)'
+				})
+
+			}
 
 		}, null);
 
