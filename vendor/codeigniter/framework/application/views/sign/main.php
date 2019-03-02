@@ -14,7 +14,7 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 	// #### setting 'Sign Up' Form
 	echo form_open('sign/up', ['class' => 'sign', 'name' => 'sign-up', 'id' => 'sign-up'])
 		."<input class='info' name='uid' type='text' placeholder='ID' required='true' minlength=6 maxlength=100 pattern='[0-9A-Za-z_-]+' title='영문 대소문자, 숫자_- 만 가능합니다.' />"
-		."<input class='info' name='name' type='text' placeholder='Nick Name' required='true' minlength=2 maxlength=20 pattern= '^.{1,20}[^\s\x22\x27](?!.*[\s\x22\x27])'title='2 ~ 20자 이상만 가능하고, 공백과 따옴표는 사용할
+		."<input class='info' name='name' type='text' placeholder='Nick Name' required='true' minlength=2 maxlength=20 pattern= '^.{1,20}[^\s\\x22\\x27](?!.*[\s\\x22\\x27])'title='2 ~ 20자 이상만 가능하고, 공백과 따옴표는 사용할
  수 없습니다.' />";
 
 
