@@ -82,9 +82,10 @@ class Sign_model extends CI_Model {
 
 	public function userMake($data)
 	{
-		$uid = $data['uid'];
-		$name= $data['name'];
-		$pswd= base64_encode(password_hash($data['pswd'], PASSWORD_DEFAULT, ['cost' => 12]));
+		$uid  = $data['uid'];
+		$name = $data['name'];
+		$mail = $data['mail'];
+		$pswd = base64_encode(password_hash($data['pswd'], PASSWORD_DEFAULT, ['cost' => 12]));
 
 		$query = "SELECT uid FROM user_info WHERE uid = ? LIMIT 1";
 		$find = $this->db->query($query, $uid);
@@ -92,8 +93,8 @@ class Sign_model extends CI_Model {
 		if($find->num_rows() === 0) {
 			// use user_info, user_config
 			
-			$query = "INSERT INTO user_info (uid, name, pswd) VALUES (?, ?, ?)";
-			$this->db->query($query, array($uid, $name, $pswd));
+			$query = "INSERT INTO user_info (uid, name, mail, pswd) VALUES (?, ?, ?, ?)";
+			$this->db->query($query, array($uid, $name, $mail, $pswd));
 
 			$query = "INSERT INTO user_conf (uid) VALUES (?)";
 			$this->db->query($query, $uid);
@@ -144,6 +145,14 @@ class Sign_model extends CI_Model {
 		}
 		
 		return false;
+	}
+
+	public function mailLog($data)
+	{
+		$query = "INSERT INTO mail_log (mail, code) VALUES (?, ?)";
+		$this->db->query($query, array($data['mail'], $data['code']));
+
+		return true;
 	}
 
 	public function sessionChk()
