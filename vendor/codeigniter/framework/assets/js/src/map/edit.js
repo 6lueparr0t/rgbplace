@@ -340,7 +340,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				tab = 'code';
 
 				tabChange(t);
-				edit_content_code.value = edit_content.innerHTML.replace(/\n*(<div>|<img)/gi, "\n$1");
+				edit_content_code.value = edit_content.innerHTML.replace(/\n*(<\/?div|<img)/gi, "\n$1");
 
 				edit_content_code.classList.remove('none');
 				edit_content_code.classList.add('active');
