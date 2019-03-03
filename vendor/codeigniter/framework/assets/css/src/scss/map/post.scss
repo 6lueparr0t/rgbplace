@@ -79,6 +79,12 @@
 			}
 
 		}
+
+		#post-content {
+			& * {
+				max-width:100%;
+			}
+		}
 	}
 
 	.button-group {
