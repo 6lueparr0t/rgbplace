@@ -88,6 +88,8 @@ function drop_upload() {
 			state.classList.add("drop_it");
 
 			addFile(data);
+			addList(data);
+			input_zone.value = '';
 		} else {
 			//We reached our target server, but it returned an error
 			console.log(this.status);
