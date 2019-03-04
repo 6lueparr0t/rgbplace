@@ -137,7 +137,7 @@
 		}
 	}
 
-	.type.game {
+	.type.play {
 		@include status-arrow ($oc-gray-7, $oc-lime-4);
 		select {
 			color:black;
@@ -177,7 +177,7 @@
 		}
 	}                                               
                                                     
-	.type.public {                                      
+	.type.sponsor {                                      
 		@include status-arrow ($oc-gray-7, $oc-red-6);
 		select {
 			color:black;
@@ -217,8 +217,8 @@
 		}
 	}
 
-	.type.life {                                      
-		@include status-arrow ($oc-gray-7, $oc-pink-4);
+	.type.daily {                                      
+		@include status-arrow ($oc-gray-7, $oc-indigo-5);
 		select {
 			color:black;
 		}
@@ -229,11 +229,11 @@
 		}
 
 		&.num {
-			@include status-arrow ($oc-gray-7, $oc-pink-2);
+			@include status-arrow ($oc-gray-7, $oc-indigo-5);
 		}
 
 		&.act {
-			@include status-arrow (white, $oc-pink-1);
+			@include status-arrow (white, $oc-indigo-1);
 		}
 	}
 
