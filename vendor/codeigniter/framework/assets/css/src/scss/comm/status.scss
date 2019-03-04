@@ -85,7 +85,7 @@
 		@include status-arrow ($oc-gray-9, $oc-gray-2);
 	}
 
-	.type.notice, .type.free, .type.info {
+	.type.notice, .type.free {
 		@include status-arrow (white, $oc-gray-7);
 		select {
 			color:white;
@@ -115,6 +115,26 @@
 		}
 	}
 
+	.type.sponsor {                                      
+		@include status-arrow ($oc-gray-7, $oc-red-6);
+		select {
+			color:black;
+		}
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			//z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-red-4);
+		}
+
+		&.act {
+			@include status-arrow (white, $oc-red-2);
+		}
+	}
+
 	.type.best{
 		@include status-arrow ($oc-gray-7, $oc-yellow-4);
 		select {
@@ -134,6 +154,66 @@
 
 		&.act {
 			@include status-arrow (white, $oc-yellow-1);
+		}
+	}
+
+	.type.trip {
+		@include status-arrow ($oc-gray-7, $oc-cyan-3);
+		select {
+			color:black;
+		}
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			//z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-cyan-3);
+		}
+
+		&.act {
+			@include status-arrow (white, $oc-cyan-1);
+		}
+	}                                               
+                                                    
+	.type.food {                                      
+		@include status-arrow ($oc-gray-7, $oc-orange-5);
+		select {
+			color:black;
+		}
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			//z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-orange-3);
+		}
+
+		&.act {
+			@include status-arrow (white, $oc-orange-1);
+		}
+	}
+
+	.type.daily {                                      
+		@include status-arrow ($oc-gray-7, $oc-indigo-3);
+		select {
+			color:black;
+		}
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			//z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-indigo-3);
+		}
+
+		&.act {
+			@include status-arrow (white, $oc-indigo-1);
 		}
 	}
 
@@ -157,6 +237,26 @@
 		}
 	}                                               
                                                     
+	.type.romance {
+		@include status-arrow ($oc-gray-7, $oc-pink-4);
+		select {
+			color:black;
+		}
+
+		&.none {
+			@include status-arrow ($oc-gray-9, $oc-gray-2);
+			//z-index:-1;
+		}
+
+		&.num {
+			@include status-arrow ($oc-gray-7, $oc-pink-2);
+		}
+
+		&.act {
+			@include status-arrow (white, $oc-pink-1);
+		}
+	}                                               
+                                                    
 	.type.news {                                    
 		@include status-arrow ($oc-gray-7, $oc-blue-4);
 		select {
@@ -177,66 +277,6 @@
 		}
 	}                                               
                                                     
-	.type.sponsor {                                      
-		@include status-arrow ($oc-gray-7, $oc-red-6);
-		select {
-			color:black;
-		}
-
-		&.none {
-			@include status-arrow ($oc-gray-9, $oc-gray-2);
-			//z-index:-1;
-		}
-
-		&.num {
-			@include status-arrow ($oc-gray-7, $oc-red-4);
-		}
-
-		&.act {
-			@include status-arrow (white, $oc-red-2);
-		}
-	}
-
-	.type.food {                                      
-		@include status-arrow ($oc-gray-7, $oc-orange-5);
-		select {
-			color:black;
-		}
-
-		&.none {
-			@include status-arrow ($oc-gray-9, $oc-gray-2);
-			//z-index:-1;
-		}
-
-		&.num {
-			@include status-arrow ($oc-gray-7, $oc-orange-3);
-		}
-
-		&.act {
-			@include status-arrow (white, $oc-orange-1);
-		}
-	}
-
-	.type.daily {                                      
-		@include status-arrow ($oc-gray-7, $oc-indigo-5);
-		select {
-			color:black;
-		}
-
-		&.none {
-			@include status-arrow ($oc-gray-9, $oc-gray-2);
-			//z-index:-1;
-		}
-
-		&.num {
-			@include status-arrow ($oc-gray-7, $oc-indigo-5);
-		}
-
-		&.act {
-			@include status-arrow (white, $oc-indigo-1);
-		}
-	}
-
 	.type.dev {                                      
 		@include status-arrow ($oc-gray-7, $oc-cyan-3);
 		select {

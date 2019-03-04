@@ -205,29 +205,19 @@
 
 	}
 
+	& #sponsor {
+		background : linear-gradient(315deg, $oc-red-6 3%, $oc-gray-7 3%);
+		color      : $oc-red-6;
+	}
+
 	& #best {
 		background : linear-gradient(315deg, $oc-yellow-4 3%, $oc-gray-7 3%);
 		color      : $oc-yellow-4;
 	}
 
-	& #info, & #free {
-		background : linear-gradient(315deg, $oc-gray-9 3%, white 3%);
-		color      : $oc-gray-9;
-	}
-
-	& #game {
-		background : linear-gradient(315deg, $oc-lime-4 3%, $oc-gray-7 3%);
-		color      : $oc-lime-4;
-	}
-
-	& #news {
-		background : linear-gradient(315deg, $oc-blue-4 3%, $oc-gray-7 3%);
-		color      : $oc-blue-4;
-	}
-
-	& #public {
-		background : linear-gradient(315deg, $oc-red-6 3%, $oc-gray-7 3%);
-		color      : $oc-red-6;
+	& #trip {
+		background : linear-gradient(315deg, $oc-cyan-3 3%, $oc-gray-7 3%);
+		color      : $oc-cyan-3;
 	}
 
 	& #food {
@@ -235,15 +225,36 @@
 		color      : $oc-orange-5;
 	}
 
-	& #life {
+	& #daily {
+		background : linear-gradient(315deg, $oc-indigo-4 3%, $oc-gray-7 3%);
+		color      : $oc-indigo-4;
+	}
+
+	& #play {
+		background : linear-gradient(315deg, $oc-lime-4 3%, $oc-gray-7 3%);
+		color      : $oc-lime-4;
+	}
+
+	& #romance {
 		background : linear-gradient(315deg, $oc-pink-4 3%, $oc-gray-7 3%);
 		color      : $oc-pink-4;
+	}
+
+	& #news {
+		background : linear-gradient(315deg, $oc-blue-4 3%, $oc-gray-7 3%);
+		color      : $oc-blue-4;
 	}
 
 	& #dev {
 		background : linear-gradient(315deg, $oc-green-4 3%, $oc-gray-7 3%);
 		color      : $oc-green-4;
 	}
+
+	& #free {
+		background : linear-gradient(315deg, $oc-gray-9 3%, white 3%);
+		color      : $oc-gray-9;
+	}
+
 
 	//	& #travel {
 	//		background : linear-gradient(315deg, $oc-violet-3 3%, $oc-gray-7 3%);

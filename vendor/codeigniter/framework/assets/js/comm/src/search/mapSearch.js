@@ -76,14 +76,41 @@ function mapSearch (recv) {
 	request.send();
 }
 
+var list = null;
+var seq = -1;
+
 if (mapSearchBtn) mapSearchBtn.addEventListener("click", function() { mapSearchToggle.checked = false; mapSearch(mapSearchBox); });
 if (mapSearchBox) mapSearchBox.addEventListener("keyup", function(e) {
 	if(mapSearchBox.value == "") {
 		mapSearchToggle.checked = false;
 		mapSearchResult.innerHTML = "<a href='#'><li>No Results</li></a>";
 	}
-	//if(e.keyCode == "13") {
+
+	if( !(e.keyCode >= 37 && e.keyCode <= 40) && e.keyCode != 13 ) {
 		mapSearchToggle.checked = true;
-		mapSearch(this)
-	//}
+		mapSearch(this);
+		list = mapSearchResult.parentElement.firstChild.children;
+		seq = -1;
+	}
+});
+
+if (mapSearchBox) mapSearchBox.addEventListener("keydown", function(e) {
+
+	switch (e.keyCode) {
+		case 38: //up
+			list[(seq<=0)?0:seq].firstChild.className = "";
+			seq = (seq <= 0)?list.length-1:seq-1;
+			list[seq].firstChild.className = "active";
+			break;
+		case 40: //down
+			list[(seq<=0)?0:seq].firstChild.className = "";
+			seq = (seq >= list.length-1)?0:seq+1;
+			list[seq].firstChild.className = "active";
+			break;
+		case 13:
+			document.location.href = list[seq].href;
+			break;
+	}
+
+
 });
