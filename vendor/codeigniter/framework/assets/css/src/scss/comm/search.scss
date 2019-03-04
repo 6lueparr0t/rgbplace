@@ -44,7 +44,7 @@
 			border-left: 1px solid black;
 			border-right: 1px solid black;
 
-			&:hover, &.highlight {
+			&:hover, &.active {
 				background : $oc-gray-7 !important;
 				color      : $oc-gray-0 !important;
 			}

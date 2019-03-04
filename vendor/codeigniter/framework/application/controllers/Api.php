@@ -187,7 +187,7 @@ class Api extends CI_Controller {
 					$result = $this->map->post_select(null, $info, 'vote');
 					$ret = $result->result()[0]->{$data['act']};
 
-					if($ret > 20 && in_array($result->result()[0]->type, array('free', 'info')) ) {
+					if($ret >= 30 && in_array($result->result()[0]->type, array('trip', 'food', 'daily', 'play', 'romance', 'news', 'dev')) ) {
 						$this->map->move_to_best($data, $info);
 					}	
 				}
