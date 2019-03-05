@@ -186,9 +186,9 @@ class Sign extends CI_Controller {
 					$output['msg'] = "{$data['uid']} : 사용할 수 없는 아이디입니다.\n{$data['uid']} : already used This ID.";
 				}
 
-				if ($this->session->tempdata('code') != $data['code']) {
+				if ($this->session->tempdata('mail') != $data['mail'] || $this->session->tempdata('code') != $data['code']) {
 					$output['valid'] = false;
-					$output['msg'] = "인증 코드를 확인해주세요.\nCheck your Auth Code.";
+					$output['msg'] = "인증된 메일과 코드를 확인해주세요.\nCheck your Auth-Mail and Auth-Code.";
 				}
 				echo json_encode($output);
 
@@ -241,6 +241,7 @@ class Sign extends CI_Controller {
 
 		$data['code'] = random_int(100000, 999999);
 		$this->session->set_tempdata('code', $data['code'], 60*60);
+		$this->session->set_tempdata('mail', $data['mail'], 60*60);
 
 		$config = array (
 			'protocol' => 'sendmail',
