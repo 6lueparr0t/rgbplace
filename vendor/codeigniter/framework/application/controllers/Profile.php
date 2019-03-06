@@ -26,9 +26,9 @@ class Profile extends CI_Controller {
 		}
 	}
 
-	public function config()
+	public function _config()
 	{
 		//set config
-		$this->root->view("profile/config");
+		//$this->root->view("profile/config");
 	}
 }

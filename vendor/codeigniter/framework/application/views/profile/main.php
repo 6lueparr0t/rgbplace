@@ -117,18 +117,18 @@ echo("
 	</div>
 <?php
 	if(!$no) {
-echo("<div id='message-area' class='page none'>");
-echo("	<div class='table'>");
-echo("		<div class='tr'>");
-echo("			<div class='th center'>No</div>");
-echo("			<div class='th center'>Map</div>");
-echo("			<div class='th center'>Info</div>");
-echo("		</div>");
-echo("		<div id='message-list'class='tr-group'>");
-echo("		</div>");
-echo("	</div>");
-echo("	<div id='message-page' class='page'></div>");
-echo("</div>");
+		echo("<div id='message-area' class='page none'>
+			<div class='table'>
+				<div class='tr'>
+					<div class='th center'>No</div>
+					<div class='th center'>Map</div>
+					<div class='th center'>Info</div>
+				</div>
+				<div id='message-list'class='tr-group'>
+				</div>
+			</div>
+			<div id='message-page' class='page'></div>
+		</div>");
 	}
 ?>
 </div>
