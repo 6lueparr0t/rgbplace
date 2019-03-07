@@ -197,6 +197,7 @@ class Map_model extends CI_Model {
 		// title list
 		foreach ($find->result() as $key => $row) {
 			$no = $row->no;
+			$sn = $row->sn;
 
 			$replyCount = ($row->reply > 0)?"<a href='/{$map}/{$row->type}/{$row->no}{$param}'> <i class='far fa-comment-dots'></i> {$row->reply}</a>":"";
 
@@ -223,7 +224,7 @@ class Map_model extends CI_Model {
 					.$reply
 				."</td>"
 				."<td class='hit'>{$row->hit}</td>"
-				."<td class='name'>{$row->name}</td>"
+				."<td class='name'>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' target='_blank' > ".$row->name." </a>":$row->name)."</td>"
 				."<td class='date' title='{$date} {$time}'>{$date}</td>"
 				."</tr>";
 		}

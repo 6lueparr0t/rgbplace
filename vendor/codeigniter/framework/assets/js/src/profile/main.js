@@ -13,8 +13,17 @@ function done (data) {
 }
 
 function fail (data) {
-	//console.log(data);
-	alert('fail');
+	console.log(data);
+	alert('Fail');
+}
+
+function updateFail (data) {
+	console.log(data);
+	Swal.fire({
+		type: 'error',
+		title: 'Update Fail',
+		html: data.responseText
+	})
 }
 
 function validateName(name) {
@@ -25,7 +34,7 @@ function validateName(name) {
 	return result;
 }
 
-function validateEmail(mail) {
+function validateMail(mail) {
 
 	let result = false;
 	if(mail.length < 400) {
@@ -57,6 +66,81 @@ function popup (src, alt) {
 	})
 }
 
+let x;
+function sendCode() {
+
+	let mail = document.querySelector("#mail").value;
+
+	let check = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	if( check.test(String(mail).toLowerCase()) === false ) {
+		Swal.fire({
+			type: 'error',
+			title: 'Check Your Mail..',
+			text: 'Please enter a valid Mail address'
+		})
+
+		return true;
+	}
+
+	let data = {'mail':mail};
+
+	if (!x) {
+
+		httpRequest('POST', '/sign/mailAuth', JSON.stringify(data), ret => {
+
+			if(ret['send'] == true) {
+				Swal.fire({
+					type: 'success',
+					title: 'Send Successfully!',
+					text: 'Check Your MailBox and Input Auth Code in an hour.'
+				})
+
+				clearInterval(x);
+				document.querySelector(".code").parentElement.className = 'tr';
+
+				// Set the date we're counting down to
+				let countDownDate = new Date().getTime() + (60 * 60 * 1000) + 1000;
+
+				// Update the count down every 1 second
+				x = setInterval(function() {
+
+					// Get todays date and time
+					let now = new Date().getTime();
+
+					// Find the distance between now and the count down date
+					let distance = countDownDate - now;
+
+					// Time calculations for days, hours, minutes and seconds
+					let minutes = Math.floor((distance % (1000 * 60 * 61)) / (1000 * 60));
+					let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+					// Output the result in an element with id="demo"
+					document.querySelector("#mail").disabled = true;
+					document.querySelector("#code").placeholder = 'Expiry Time - ' + minutes.pad(2) + ":" + seconds.pad(2);
+
+					// If the count down is over, write some text
+					if (distance < 0) {
+						clearInterval(x);
+						x = null;
+						document.getElementsByName("code")[0].placeholder = "Expiry Time - EXPIRED";
+					}
+				}, 500);
+
+			} else if(ret['send'] == 'over') {
+
+				Swal.fire({
+					type: 'info',
+					title: 'Mail exceeded sending limit',
+					text: 'Please contact us. (admin@rgbplace.com)'
+				})
+
+			}
+
+		}, null);
+
+	}
+}
+
 window.onpopstate = event => (event.state)? tabChange(event.state.tab):history.go(-1);
 
 function tabChange (tab) {
@@ -73,7 +157,7 @@ function tabChange (tab) {
 document.querySelector("#profile").addEventListener("click", function(event) {
 	let t = event.target;
 
-	let name = '', mail = '', pswd_conf = '';
+	let name = '', mail = '', code = 0, pswd_conf = '';
 	let data = [];
 
 	if(t.parentElement.className == 'tab') {
@@ -146,6 +230,8 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 		setTimeout(function () { this.style.animation=''; this.style.WebkitAnimation=''; }.bind(tooltip), 2000);
 		
         clip.style.display='none';
+
+		return;
 	}
 
 	if (t.classList.item(0) == 'delete-message') {
@@ -174,8 +260,9 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 			}
 
 			if(document.querySelector('#mail') != null) {
-				if(validateEmail(document.querySelector('#mail').value)) {
+				if(validateMail(document.querySelector('#mail').value)) {
 					mail = document.querySelector('#mail').value;
+					code = document.querySelector("#code").value;
 				} else {
 					alert('check your mail pattern');
 					break;
@@ -201,11 +288,12 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 				'no'   : (params.get('no'))?params.get('no'):0,
 				'name' : name,
 				'mail' : mail,
+				'code' : code,
 				'pswd' : pswd_conf
 			});
 
 			//console.log(data);
-			httpRequest('put', '/api/request/profile/save', JSON.stringify(data), done, fail);
+			httpRequest('put', '/api/request/profile/save', JSON.stringify(data), done, updateFail);
 			break;
 		case 'cancel' :
 			back();
@@ -222,6 +310,10 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 				httpRequest('delete', '/api/request/profile', JSON.stringify(data), ret => {alert('Bye Bye Badman !'); back(); }, fail);
 			}
 			break;
+		case 'check' :
+			sendCode();
+			break;
+
 	}
 });
 

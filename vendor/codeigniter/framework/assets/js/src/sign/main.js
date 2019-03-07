@@ -31,11 +31,6 @@ function passwordCheck () {
     }
 }
 
-Number.prototype.pad = function(size) {
-	let sign = Math.sign(this) === -1 ? '-' : '';
-	return sign + new Array(size).concat([Math.abs(this)]).join('0').slice(-size);
-}
-
 let x;
 function sendCode() {
 
@@ -45,8 +40,8 @@ function sendCode() {
 	if( check.test(String(mail).toLowerCase()) === false ) {
 		Swal.fire({
 			type: 'error',
-			title: 'Check Your Email..',
-			text: 'Please enter a valid Email address'
+			title: 'Check Your Mail..',
+			text: 'Please enter a valid Mail address'
 		})
 
 		return true;
@@ -85,13 +80,13 @@ function sendCode() {
 
 					// Output the result in an element with id="demo"
 					document.getElementsByName("mail")[0].disabled = true;
-					document.getElementsByName("code")[0].placeholder = 'E-mail Auth Code - ' + minutes.pad(2) + ":" + seconds.pad(2);
+					document.getElementsByName("code")[0].placeholder = 'Mail Auth Code - ' + minutes.pad(2) + ":" + seconds.pad(2);
 
 					// If the count down is over, write some text 
 					if (distance < 0) {
 						clearInterval(x);
 						x = null;
-						document.getElementsByName("code")[0].placeholder = "E-mail Auth Code - EXPIRED";
+						document.getElementsByName("code")[0].placeholder = "Mail Auth Code - EXPIRED";
 					}
 				}, 500);
 
@@ -99,7 +94,7 @@ function sendCode() {
 
 				Swal.fire({
 					type: 'info',
-					title: 'Email exceeded sending limit',
+					title: 'Mail exceeded sending limit',
 					text: 'Please contact us. (admin@rgbplace.com)'
 				})
 
