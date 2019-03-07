@@ -275,7 +275,7 @@ class Api extends CI_Controller {
 				$_FILES['userfile']['size']= $files['userfile']['size'][$i];
 
 				$this->load->library('upload', $config);
-				$this->upload->initialize($config);
+				//$this->upload->initialize($config);
 				if(!$this->upload->do_upload())
 				{
 					array_push($data, $this->upload->display_errors());
