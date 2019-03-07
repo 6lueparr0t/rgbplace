@@ -20,11 +20,11 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 
 	echo "<br/>";
 	echo "<div class='mail-group'>"
-		."<input class='mail' name='mail' type='email' placeholder='E-mail' required='true' minlength=2 maxlength=255 />"
+		."<input class='mail' name='mail' type='email' placeholder='Mail' required='true' minlength=2 maxlength=255 />"
 		."<input class='check' name='check' type='button' value='check' onclick='sendCode();'/>"
 		."</div>";
 
-	echo "<input class='info' name='code' type='text' placeholder='E-mail Auth Code - 60:00' required='true' minlength=6 maxlength=6 pattern='^.{1,6}[0-9]+' title='숫자만 입력 가능합니다.' />";
+	echo "<input class='info' name='code' type='text' placeholder='Mail Auth Code - 60:00' required='true' minlength=6 maxlength=6 pattern='^.{1,6}[0-9]+' title='숫자만 입력 가능합니다.' />";
 	echo "<br/>";
 
 
