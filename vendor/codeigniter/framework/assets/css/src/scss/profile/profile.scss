@@ -18,6 +18,10 @@
 
 			.tr {
 				display:table-row;
+
+				&.hidden {
+					display:none !important;
+				}
 			}
 
 			.tr-group {
@@ -26,10 +30,10 @@
 
 			.th {
 				display:table-cell;
-				padding:1rem;
+				padding:0 1rem;
 
 				@media screen and ($width-name : $target-width) {
-					padding: .4rem;
+					padding:0 .4rem;
 					word-break: break-word;
 				}
 
@@ -42,6 +46,14 @@
 				&.center {
 					text-align:center;
 				}
+
+				input[name='check'] {
+					margin: 2px 0 0 5px;
+					border-radius: 0.25rem;
+					background-color:$oc-green-6;
+					color:white;
+				}
+
 			}
 
 			.td {
@@ -73,16 +85,25 @@
 					font-family: "normal";
 				}
 
-				&.name, &.mail, &.pswd, &.conf {
+				&.name, &.mail, &.code, &.pswd, &.conf {
 					font-family: "normal";
+					display: flex;
 					padding: 0;
+
+					&.enabled {
+						background:$oc-orange-0;
+					}
 
 					input {
 						border: none;
 						font-size: 1.2rem;
 						padding: .78rem 1rem;
-						width: 80%;
 						font-family: "normal";
+						flex-grow:10;
+
+						&[enabled] {
+							background:$oc-orange-0;
+						}
 
 						&:disabled {
 							background-color: white;

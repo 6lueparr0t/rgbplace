@@ -87,7 +87,13 @@ class Profile_model extends CI_Model {
 				$set .= "name = '".$this->db->escape_str($data['name'])."', ";
 			}
 
-			if(isset($data['mail']) && $data['mail'] != '') {
+			if( (isset($data['mail']) && $data['mail'] != '') && (isset($data['code']) && $data['code'] != 0) ) {
+				if ($this->session->tempdata('mail') != $data['mail'] || $this->session->tempdata('code') != $data['code']) {
+                    $ret['valid'] = false;
+					$ret['msg'] = "인증된 메일과 코드를 확인해주세요.<br/>Check your Auth-Mail and Auth-Code.";
+
+					return $ret;
+                }
 				$set .= "mail = '".$this->db->escape_str($data['mail'])."', ";
 			}
 
@@ -102,9 +108,15 @@ class Profile_model extends CI_Model {
 		if($result) {
 			$this->session->unset_userdata( array('name') );
 			$this->session->set_userdata( array('name' => $data['name']) );
+
+			$this->session->unset_tempdata('mail');
+			$this->session->unset_tempdata('code');
+
+			$ret['valid'] = true;
+			$ret['msg'] = "";
 		}
 
-		return $result;
+		return $ret;
 	}
 
 	public function delete($data) {

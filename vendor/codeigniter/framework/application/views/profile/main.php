@@ -35,8 +35,17 @@ if($this->session->userdata("admin") === false || $no) {
 	if( !in_array($pswd, array('google')) ) {
 	echo ("
 			<div class='tr'>
-				<div class='th'>mail</div>
-				<div class='td mail'><input type='email' id='mail' maxlength='400' value='{$mail}' {$sw} /></div>
+				<div class='th'>mail".(($sw=='enabled')?"<input type='button' id='check' name='check' value='check'/>":"")."
+				</div>
+				<div class='td mail {$sw}'>
+					<input type='email' id='mail' name='mail' maxlength='400' value='{$mail}' {$sw}/>
+				</div>
+			</div>
+			<div class='tr hidden'>
+				<div class='th'>Auth Code</div>
+				<div class='td code'>
+					<input type='text' id='code' name='code' placeholder='Expiry Time - 60:00' required='true' minlength=6 maxlength=6 pattern='^.{1,6}[0-9]+' title='숫자만 입력 가능합니다.' />
+				</div>
 			</div>
 		");
 	}
@@ -117,18 +126,20 @@ echo("
 	</div>
 <?php
 	if(!$no) {
-		echo("<div id='message-area' class='page none'>
-			<div class='table'>
-				<div class='tr'>
-					<div class='th center'>No</div>
-					<div class='th center'>Map</div>
-					<div class='th center'>Info</div>
-				</div>
-				<div id='message-list'class='tr-group'>
-				</div>
+echo("
+	<div id='message-area' class='page none'>
+		<div class='table'>
+			<div class='tr'>
+				<div class='th center'>No</div>
+				<div class='th center'>Map</div>
+				<div class='th center'>Info</div>
 			</div>
-			<div id='message-page' class='page'></div>
-		</div>");
+			<div id='message-list'class='tr-group'>
+			</div>
+		</div>
+		<div id='message-page' class='page'></div>
+	</div>
+");
 	}
 ?>
 </div>

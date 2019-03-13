@@ -224,7 +224,14 @@ class Api extends CI_Controller {
 					break;
 				case 'put':
 				case 'update':
-					$ret = $this->profile->update($data, $info);
+					$check = $this->profile->update($data, $info);
+					if($check['valid']) {
+						$ret = true;
+					} else {
+						header('HTTP/1.1 401 Unauthorized');
+						header('Content-Type: application/json; charset=UTF-8');
+						$ret = $check['msg'];
+					}
 					break;
 				case 'delete':
 					switch($data['tab']) {
@@ -274,8 +281,8 @@ class Api extends CI_Controller {
 				$_FILES['userfile']['error']= $files['userfile']['error'][$i];
 				$_FILES['userfile']['size']= $files['userfile']['size'][$i];
 
-				$this->load->library('upload', $config);
 				$this->upload->initialize($config);
+
 				if(!$this->upload->do_upload())
 				{
 					array_push($data, $this->upload->display_errors());
