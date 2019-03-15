@@ -189,6 +189,7 @@ function addList(data) {
 		tag += "data-size='"+value['file_size']+"' ";
 		tag += "data-datetime='"+value['datetime']+"'>";
 		tag += value['client_name'];
+		tag += "<span class='del fas fa-trash-alt'></span>";
 		tag += "<span class='add fas fa-check'></span>";
 		tag += "</li>";
 
@@ -270,6 +271,18 @@ function addFile(data) {
 	});
 
 	//document.querySelector('#edit-upload').value = 'Z'+window.btoa(JSON.stringify(upload));
+}
+
+function delFile(data) {
+
+	let target = {
+		'file_name' : data.getAttribute('data-file-name'),
+		'client_name' :data.getAttribute('data-client-name')
+	};
+
+	httpRequest('post', '/api/remove', JSON.stringify(target), () => {}, fail);
+
+	return true;
 }
 
 /* ******************** Upload Event END ******************** */
@@ -362,6 +375,9 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 			addFile(data);
 			return;
 			break
+		case 'del' :
+			if(delFile(t.parentElement)) t.parentElement.remove();
+			break;
 		case 'file' :
 			if(t.getAttribute('data-default-path') && t.getAttribute('data-file-name')) {
 				document.querySelector("#upload-preview-img").src = t.getAttribute('data-default-path') + t.getAttribute('data-file-name');

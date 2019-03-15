@@ -267,7 +267,7 @@ class Sign extends CI_Controller {
 		$this->email->to($data['mail']);
 		$this->email->reply_to('admin@rgbplace.com', 'RGB place');
 
-		$this->email->subject("RGB Place - Authentication Code");
+		$this->email->subject("RGB Place - 인증번호(Auth-Code) 안내 메일입니다.");
 
 		$this->email->message("
 			<html>
@@ -275,7 +275,7 @@ class Sign extends CI_Controller {
 			<title>RGB Place</title>
 			</head>
 			<body>
-				인증번호 숫자 6자리를 입력해 주세요<br/>
+				인증번호 숫자 6자리를 입력해 주세요.<br/>
 				Please enter the six-digit authentication code number<br/><br/>
 
 				Auth-Code : {$data['code']}

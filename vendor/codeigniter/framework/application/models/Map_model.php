@@ -85,7 +85,7 @@ class Map_model extends CI_Model {
 			echo "<tr>"
 					."<td class='date'>".date("Y-m-d", strtotime($row->ctim))."</td>"
 					."<td class='title'><div><a href='/{$map}/{$row->type}/{$row->no}'>{$title}</a></div></td>"
-					."<td class='reply count'>[<a href='/{$map}/{$row->type}/{$row->no}#reply'>{$row->reply}</a>]</td>"
+					."<td class='reply count'><a href='/{$map}/{$row->type}/{$row->no}#reply'>[{$row->reply}]</a></td>"
 			."</tr>";
 
 			//$data['title'][$key]   = $row->title;
@@ -624,9 +624,11 @@ class Map_model extends CI_Model {
 				content,
 				type,
 				tag,
-				keyword
+				keyword,
+				upload
 			)
 			VALUES (
+				?,
 				?,
 				?,
 				?,
@@ -645,11 +647,13 @@ class Map_model extends CI_Model {
 				$content,
 				$type,
 				$tag,
-				$keyword
+				$keyword,
+				$this->session->userdata('upload')
 			);
 
 			$this->db->query($query, $values);
 			$ret = $this->db->insert_id();
+			if($ret) $this->session->unset_userdata('upload');
 
 			$data = array (
 				'map' => $info[1],
@@ -699,7 +703,8 @@ class Map_model extends CI_Model {
 					title = ?,
 					content = ?,
 					tag = ?,
-					keyword = ?
+					keyword = ?,
+					upload = ?
 
 				where
 					type = ?
@@ -710,6 +715,7 @@ class Map_model extends CI_Model {
 				$content,
 				$tag,
 				$keyword,
+				$this->session->userdata('upload'),
 
 				$type,
 				$no,
@@ -720,7 +726,9 @@ class Map_model extends CI_Model {
 					title = ?,
 					content = ?,
 					tag = ?,
-					keyword = ?
+					keyword = ?,
+					upload = ?
+
 
 				where
 					type = ?
@@ -733,6 +741,7 @@ class Map_model extends CI_Model {
 				$content,
 				$tag,
 				$keyword,
+				$this->session->userdata('upload'),
 
 				$type,
 				$no,
@@ -742,7 +751,8 @@ class Map_model extends CI_Model {
 		}
 
 		if($this->db->query($query, $values)) {
-			$ret = $no;	
+			$ret = $no;
+			$this->session->unset_userdata('upload');
 		}
 
 		if ($ret) {
