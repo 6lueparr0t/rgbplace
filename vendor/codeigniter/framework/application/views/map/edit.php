@@ -19,11 +19,31 @@
 
 <div id='upload-list'>
 	<div id='upload-list-toggle'>Upload List <i id='upload-list-switch' class="fa fa-caret-down"></i></div>
-	<div class='upload-list group close'>
+	<div class='upload-list group'>
 		<div class='upload-list table'>
 			<div class='upload-list-result'>
-				<ul class='file-list no-file'>
-					<li class='file'>No File.</li>
+				<ul class='file-list'>
+<?php
+$upload = json_decode($this->session->userdata('upload'), true);
+
+if(isset($upload['total']) && count($upload) > 0) {
+	foreach($upload['total'] as $key => $val) {
+		echo "<li class='file' "
+			."data-default-path='".$val['default_path']."' "
+			."data-file-name='".$val['file_name']."' "
+			."data-client-name='".$val['client_name']."' "
+			."data-file-type='".$val['file_type']."' "
+			."data-size='".$val['file_size']."' "
+			."data-datetime='".$val['datetime']."'>"
+			.$val['client_name']
+			."<span class='del fas fa-trash-alt'></span>"
+			."<span class='add fas fa-check'></span>"
+			."</li>";
+	}
+} else {
+	echo "<li class='file'>No File.</li>";
+}
+?>
 				</ul>
 			</div>
 			<div class='upload-preview'>
@@ -33,10 +53,10 @@
 	</div>
 </div>
 
-<? echo form_open('', ['class' => 'upload', 'name' => 'upload', 'id' => 'upload']); ?>
+<?php echo form_open('', ['class' => 'upload', 'name' => 'upload', 'id' => 'upload']); ?>
   <label for="input_zone" class="drop_wait"></label>
   <input type="file" id="input_zone" name="userfile[]" accept="audio/*,video/*,image/*" multiple />
-<? echo form_close(); ?>
+<?php echo form_close(); ?>
 
 <div class="button-group">
 	<div class='enable' id='save' name='save'>SAVE</div>

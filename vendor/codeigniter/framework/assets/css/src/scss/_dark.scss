@@ -7,6 +7,10 @@ body.dark {
 		color:white;
 	}
 
+	#page .type .type-row .type-col .type-list .page tr td a {
+		color:$oc-gray-2 !important;
+	}
+
 	#menu {
 		background-color: $oc-gray-7;
 		color:$oc-gray-0;
