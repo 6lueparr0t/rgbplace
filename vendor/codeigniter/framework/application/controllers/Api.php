@@ -290,7 +290,7 @@ class Api extends CI_Controller {
 
 					$upload['total'][] = $data[$i];
 
-					//$this->profile->add_upload($data[$i]);
+					$this->profile->add_upload($data[$i]);
 				}
 			}
 
