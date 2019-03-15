@@ -78,8 +78,6 @@ class Api extends CI_Controller {
 		case 'edit':
 			if($this->session->userdata('signed_in')) {
 				switch($this->session->userdata('mode')) {
-				case 'get' :
-					break;
 				case 'post' :
 					//save
 					$ret = $this->map->post_insert($data, $info);
@@ -89,10 +87,6 @@ class Api extends CI_Controller {
 				case 'update':
 					$ret = $this->map->post_update($data, $info);
 					$this->session->unset_userdata(['mode']);
-					break;
-				case 'delete':
-					break;
-				default :
 					break;
 				}
 			} else {
@@ -274,6 +268,9 @@ class Api extends CI_Controller {
 			$files = $_FILES;
 			$data = [];
 			$count = count($_FILES['userfile']['name']);
+
+			$upload = json_decode($this->session->userdata('upload'), true);
+
 			for($i=0; $i<$count; $i++) {
 				$_FILES['userfile']['name']= $files['userfile']['name'][$i];
 				$_FILES['userfile']['type']= $files['userfile']['type'][$i];
@@ -283,8 +280,7 @@ class Api extends CI_Controller {
 
 				$this->upload->initialize($config);
 
-				if(!$this->upload->do_upload())
-				{
+				if(!$this->upload->do_upload()) {
 					array_push($data, $this->upload->display_errors());
 				} else {
 					array_push($data, $this->upload->data());
@@ -292,15 +288,38 @@ class Api extends CI_Controller {
 					$data[$i]['default_path'] = UPLOAD_PATH;
 					$data[$i]['datetime'] = date('Y-m-d H:i:s');
 
-					$this->profile->add_upload($data[$i]);
-				}
+					$upload['total'][] = $data[$i];
 
+					//$this->profile->add_upload($data[$i]);
+				}
 			}
+
+			$this->session->set_userdata('upload', json_encode($upload));
+
 		} else {
 			$data = 'session lost. sign in please.';
 		}
 
 		echo json_encode($data);
+	}
+
+	public function remove() {
+		if ($this->session->userdata('signed_in') === true) {
+			//$data = json_decode($this->input->post(), true);
+			$target = json_decode($this->input->raw_input_stream, true);
+			$upload = json_decode($this->session->userdata('upload'), true);
+
+			$key = array_search($target['file_name'], array_column($upload['total'], 'file_name'));
+			unset($upload['total'][$key]);
+
+			//
+			// UPLOAD FILE REMOVE CODE HERE
+			//
+
+			$this->session->set_userdata('upload', json_encode($upload));
+
+			echo true;
+		}
 	}
 
 	public function geocode() {

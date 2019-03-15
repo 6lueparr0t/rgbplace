@@ -164,10 +164,27 @@
 						width   : 90%;
 
 						& tr {
+							& td {
+								a {
+									color:$oc-gray-9 !important;
+
+									&:hover {
+										color:$oc-blue-7 !important;
+									}
+								}
+							}
+
 							& td:nth-child(1) {
 								font-size: .6rem;
 								font-weight:bold;
 								width: 4rem;
+							}
+
+							& td.reply.count {
+								a {
+									color:$oc-red-6 !important;
+									font-size: 0.8rem;
+								}
 							}
 						}
 
