@@ -276,6 +276,7 @@ function addFile(data) {
 function delFile(data) {
 
 	let target = {
+		'info': __URL__,
 		'file_name' : data.getAttribute('data-file-name'),
 		'client_name' :data.getAttribute('data-client-name')
 	};
@@ -376,7 +377,8 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 			return;
 			break
 		case 'del' :
-			if(delFile(t.parentElement)) t.parentElement.remove();
+			delFile(t.parentElement);
+			t.parentElement.remove();
 			break;
 		case 'file' :
 			if(t.getAttribute('data-default-path') && t.getAttribute('data-file-name')) {
