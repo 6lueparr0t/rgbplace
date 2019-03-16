@@ -337,9 +337,9 @@ class Api extends CI_Controller {
 
 			$this->session->set_userdata('upload', json_encode($upload));
 
-			if($info[3] > 0) {
+			//if($info[3] > 0) {
 				$this->api->postUploadInfoUpdate($info);
-			}
+			//}
 
 			echo true;
 		}

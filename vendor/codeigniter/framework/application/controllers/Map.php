@@ -103,7 +103,8 @@ class Map extends CI_Controller {
 		$data['content'] = "";
 		//$data['upload'] = "[]";
 
-		$this->session->unset_userdata('upload'); 
+		$this->session->unset_userdata('upload');
+
 		if($num > 0) {
 			$info = [null, $map, $type, $num];
 			$ret = $this->map->post_select(null, $info);
