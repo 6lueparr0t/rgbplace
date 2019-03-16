@@ -53,4 +53,81 @@ class Api_model extends CI_Model {
 			return false;
 		}
 	}
+
+	public function searchUploadFile($file_name) {
+
+		$query = "SELECT file_name FROM total_upload WHERE sn = ? AND file_name = ? LIMIT 1";
+		$find = $this->db->query($query, array($this->session->userdata('sn'), $file_name) );
+
+		if($find->num_rows() === 1) {
+			$searchFileName = $find->row()->file_name;
+		}
+
+		return (isset($searchFileName))?$searchFileName:'';
+
+	}
+
+	public function deleteUploadFile($searchFileName) {
+
+		$query = "DELETE FROM total_upload WHERE sn = ? AND file_name = ?";
+		$result = $this->db->query($query, array($this->session->userdata('sn'), $file_name) );
+
+		return $result;
+
+	}
+
+	public function postUploadInfoUpdate ($info)
+	{
+		$table = $this->db->escape_str("map_{$info[1]}_post");
+		$type = $info[2];
+		$no = $info[3];
+
+		if($this->session->userdata('admin') === true) {
+			$query = "update {$table}
+				set
+					upload = ?
+
+				where
+					type = ?
+					and no = ?";
+
+			$values = array(
+				$this->session->userdata('upload'),
+
+				$type,
+				$no,
+			);
+		} else {
+			$query = "update {$table}
+				set
+					upload = ?
+
+
+				where
+					type = ?
+					and no = ?
+					and sn = ?
+					and uid = ?";
+
+			$values = array(
+				$this->session->userdata('upload'),
+
+				$type,
+				$no,
+				$this->session->userdata('sn'),
+				$this->session->userdata('uid')
+			);
+		}
+
+		//echo $query;
+		//print_r($values);
+		//exit();
+
+		if($this->db->query($query, $values)) {
+			$ret = $no;
+			$this->session->unset_userdata('upload');
+		}
+
+		return $ret;
+	}
 }

@@ -305,18 +305,41 @@ class Api extends CI_Controller {
 
 	public function remove() {
 		if ($this->session->userdata('signed_in') === true) {
-			//$data = json_decode($this->input->post(), true);
-			$target = json_decode($this->input->raw_input_stream, true);
-			$upload = json_decode($this->session->userdata('upload'), true);
-
-			$key = array_search($target['file_name'], array_column($upload['total'], 'file_name'));
-			unset($upload['total'][$key]);
 
 			//
 			// UPLOAD FILE REMOVE CODE HERE
 			//
 
+			$target = json_decode($this->input->raw_input_stream, true);
+			$info = explode('/', $this->db->escape_str($target['info']));
+			unset($target['info']);
+
+			$searchFileName = $this->api->searchUploadFile($target['file_name']);
+
+			if(isset($searchFileName) && $searchFileName != '') {
+				unlink('upload/'.$searchFileName);
+				$this->api->deleteUploadFile($searchFileName);
+			}
+
+			$upload = json_decode($this->session->userdata('upload'), true);
+
+			foreach($upload['total'] as $key => $val) {
+				if($val['file_name'] == $target['file_name']) {
+					$target_key = $key;
+				}
+			}
+
+			unset($upload['total'][$target_key]);
+
+			//echo ('<pre>');
+			//print_r($upload['total']);
+			//echo ('<pre>');
+
 			$this->session->set_userdata('upload', json_encode($upload));
+
+			if($info[3] > 0) {
+				$this->api->postUploadInfoUpdate($info);
+			}
 
 			echo true;
 		}
