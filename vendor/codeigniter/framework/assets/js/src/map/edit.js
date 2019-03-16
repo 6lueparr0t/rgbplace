@@ -177,7 +177,7 @@ function addList(data) {
 	if(list.classList.contains('no-file')) {
 		list.classList.remove('no-file');
 		list.innerHTML = '';
-		document.querySelector("#upload-list-toggle").click();
+		//document.querySelector("#upload-list-toggle").click();
 	}
 
 	data.forEach(function(value, key) {
