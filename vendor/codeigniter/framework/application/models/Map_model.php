@@ -640,7 +640,7 @@ class Map_model extends CI_Model {
 			)";
 
 			$values = array(
-				$this->session->userdata('sn'),
+				($this->session->userdata('admin')===true)?null:$this->session->userdata('sn'),
 				$this->session->userdata('uid'),
 				$this->session->userdata('name'),
 				$title,
