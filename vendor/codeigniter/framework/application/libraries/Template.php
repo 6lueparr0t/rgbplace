@@ -36,7 +36,7 @@ class Template {
 		$this->CI->load->view($path, $data);
 	}
 
-	public function start()
+	public function start($pageName = '')
 	{
 
 		$sign=$this->CI->session->userdata('signed_in');
@@ -51,7 +51,7 @@ class Template {
 		//content='width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes'
 		echo("<meta name='viewport' content='width=device-width'/>");
 
-		echo("<title>RGB place</title>");
+		echo("<title>".(($pageName === '')?"RGB place":$pageName)."</title>");
 
 		echo("<link rel='icon' href='data:;base64,iVBORw0KGgo='>");
 		echo("<link rel='stylesheet' href='/assets/ext/sweetalert2.min.css'/>");
