@@ -419,7 +419,7 @@ class Map_model extends CI_Model {
 	 * Desc : get 'post'
 	 * ====================
 	 */
-	public function post ($map, $type, $num)
+	public function post ($map, $type, $num, &$pageName)
 	{
 		$data = [];
 
@@ -464,14 +464,15 @@ class Map_model extends CI_Model {
 			}
 		}
 
-		echo "<div class='post'>";
+		$ret = '';
+		$ret .= "<div class='post'>";
 		foreach ($find->result() as $key => $row) {
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 			$no   = $row->no;
 			$uid  = $row->uid;
 			$sn   = $row->sn;
-			$title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $row->title))));
+			$pageName = $title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $row->title))));
 
 			//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$row->content))), "<a><img><br><div><p><iframe>");
 			$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->content)), "<a><img><br><div><p><iframe>");
@@ -479,11 +480,11 @@ class Map_model extends CI_Model {
 			$content = preg_replace('/!\[img\]\[(.*)\]/', '<img src=\'$1\' />', $content);
 			$content = preg_replace('/!\[link\]\[(.*)\]/', '<a href=\'$1\' target=\'_blank\'>$1</a>', $content);
 
-			echo "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
-			echo "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
+			$ret .= "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
+			$ret .= "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
 
 			//."<span class='vote'>{$row->vote}</span>"
-			echo "<div class='post-info'>"
+			$ret .= "<div class='post-info'>"
 				."<span class='name' >"
 					."<i class='fa fa-user'></i>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' target='_blank' > ".$row->name." </a>":$row->name)
 				."</span>"
@@ -493,21 +494,21 @@ class Map_model extends CI_Model {
 			."</div>"
 			."<div id='post-content'>{$content}</div>";
 
-			echo "<div class='vote button-group'>"
+			$ret .= "<div class='vote button-group'>"
 				."<span class='null'></span>"
 				."<div class='far fa-thumbs-up post-up {$activate} {$vote['up']}'> {$row->up} </div>"
 				."<div class='far fa-thumbs-down post-down {$activate} {$vote['down']}'> {$row->down} </div>"
 				."<span class='null'></span>"
 				."</div>";
 		}
-		echo "</div>";
+		$ret .= "</div>";
 
 		// permission check
 		$activate = "disable";
 		if ( ($user === $uid && !in_array($find->row()->type, array('best', 'notice')) ) || $this->session->userdata('admin')) $activate = "enable";
 
 		// modify + delete button
-		echo "<div class='button-group'>"
+		$ret .= "<div class='button-group'>"
 			."<span class='null'></span>"
 			."<a class='edit {$activate}' href='/{$map}/{$type}/{$no}/edit'><span>edit</span></a>"
 			."<span class='delete {$activate}' >delete</span>"
@@ -515,7 +516,7 @@ class Map_model extends CI_Model {
 
 		$this->session->set_userdata(array('post_uid' => $uid));
 
-		return true;
+		return $ret;
 	}
 
 	/*
