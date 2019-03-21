@@ -21,8 +21,9 @@
 		cursor:pointer;
 
 		&.drop_wait {
+			top:1rem;
 			&::after {
-				@include upload_content("Choose \a\a or \a\a Drag & Drop your files");
+				@include upload_content("Click or Drag & Drop\a\a(Maximum number of files 20 And Max file Size 20M)");
 				cursor : pointer;
 				white-space : pre-wrap;
 			}

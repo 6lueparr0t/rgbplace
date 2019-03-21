@@ -174,26 +174,29 @@ function addList(data) {
 	//console.log(data);
 	let list = document.querySelector('.file-list');
 
-	if(list.classList.contains('no-file')) {
-		list.classList.remove('no-file');
-		list.innerHTML = '';
-		//document.querySelector("#upload-list-toggle").click();
-	}
-
 	data.forEach(function(value, key) {
-		tag = "<li class='file' ";
-		tag += "data-default-path='"+value['default_path']+"' ";
-		tag += "data-file-name='"+value['file_name']+"' ";
-		tag += "data-client-name='"+value['client_name']+"' ";
-		tag += "data-file-type='"+value['file_type']+"' ";
-		tag += "data-size='"+value['file_size']+"' ";
-		tag += "data-datetime='"+value['datetime']+"'>";
-		tag += value['client_name'];
-		tag += "<span class='del fas fa-trash-alt'></span>";
-		tag += "<span class='add fas fa-check'></span>";
-		tag += "</li>";
+		if( value['file_name'] != undefined ) {
 
-		list.innerHTML += tag;
+			if(list.classList.contains('no-file')) {
+				list.classList.remove('no-file');
+				list.innerHTML = '';
+				//document.querySelector("#upload-list-toggle").click();
+			}
+
+			tag = "<li class='file' ";
+			tag += "data-default-path='"+value['default_path']+"' ";
+			tag += "data-file-name='"+value['file_name']+"' ";
+			tag += "data-client-name='"+value['client_name']+"' ";
+			tag += "data-file-type='"+value['file_type']+"' ";
+			tag += "data-size='"+value['file_size']+"' ";
+			tag += "data-datetime='"+value['datetime']+"'>";
+			tag += value['client_name'];
+			tag += "<span class='del fas fa-trash-alt'></span>";
+			tag += "<span class='add fas fa-check'></span>";
+			tag += "</li>";
+
+			list.innerHTML += tag;
+		}
 	});
 }
 
