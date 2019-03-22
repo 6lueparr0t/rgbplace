@@ -3,7 +3,8 @@
 	@media screen and ($width-name : $target-width) {
 		font-size:1rem;
 	}
-	margin: 2rem 0;
+	max-width:1280px;
+	margin: 2rem auto;
 
 	.no-list {
 		font-family:"pixel";
