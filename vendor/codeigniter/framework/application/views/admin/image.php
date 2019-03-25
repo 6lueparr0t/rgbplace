@@ -8,7 +8,7 @@ $end = ($end>0)?$end:10;
 
 exec("ls -t ./upload", $output, $status);
 
-echo count($output);
+echo "<div class='count'>Count : ".count($output)."</div>";
 
 if(!$status) {
 	foreach($output as $key => $file) {
