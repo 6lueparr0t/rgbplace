@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common(); ?>
-<?
+<?php
 if($mode==="clear") {
 	shell_exec("cat /dev/null > log/db");
 	redirect('/admin/db');
@@ -17,10 +17,10 @@ if($mode==="restore") {
 ?>
 
 <pre>
-<? system("cat log/db") ?>
+<?php system("cat log/db") ?>
 </pre>
 
-<?
+<?php
 
 echo form_open('admin/db/backup', ['name' => 'backup', 'id' => 'backup'])
 	.('<input type="submit" value="backup" />')

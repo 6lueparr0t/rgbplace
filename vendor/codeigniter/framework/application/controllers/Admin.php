@@ -46,6 +46,11 @@ class Admin extends CI_Controller {
 		$this->root->sview("admin/push", $data);
 	}
 
+	public function image()
+	{
+		$this->root->sview("admin/image")
+	}
+
 /*
  * ########################################
  *				Example	[exam]
