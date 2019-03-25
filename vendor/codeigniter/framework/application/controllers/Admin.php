@@ -46,6 +46,14 @@ class Admin extends CI_Controller {
 		$this->root->sview("admin/push", $data);
 	}
 
+	public function image()
+	{
+		$data['start'] = $this->input->get('start');
+		$data['end'] = $this->input->get('end');
+
+		$this->root->sview("admin/image", $data);
+	}
+
 /*
  * ########################################
  *				Example	[exam]
