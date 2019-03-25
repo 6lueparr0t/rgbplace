@@ -65,7 +65,8 @@
 
 			&.db,
 			&.map,
-			&.push {
+			&.push,
+			&.image	{
 				color:$oc-gray-2;
 			}
 		}
