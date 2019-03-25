@@ -237,7 +237,13 @@ class Sign extends CI_Controller {
 			echo json_encode(array('send' => 'over'));
 			return true;
 		}
+
 		$data = (array)json_decode($this->input->raw_input_stream);
+
+		if($this->sign->mailValid($data) === false) {
+			echo json_encode(array('send' => 'already'));
+			return true;
+		}
 
 		$data['code'] = random_int(100000, 999999);
 		$this->session->set_tempdata('code', $data['code'], 60*60);
