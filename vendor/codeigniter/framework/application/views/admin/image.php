@@ -1,14 +1,23 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common(); ?>
-<?
 
-$dir = opendir("./upload");
+<div class='image'>
+<?php
 
-while(($file = readdir($dir)) !== false) {
-    if ($file == '.' || $file == '..') continue;
+$start = ($start>0)?$start:0;
+$end = ($end>0)?$end:10;
 
-    echo "<img src='/upload/".$file."' />";
+exec("ls -t ./upload", $output, $status);
+
+echo count($output);
+
+if(!$status) {
+	foreach($output as $key => $file) {
+		if($key >= $start && $key < $end) {
+			echo "<img src='/upload/".$file."' width='200' height='200' />";
+		}
+	}
 }
 
-closedir($dir);
 ?>
+</div>
 <?php $this->root->end($path); ?>

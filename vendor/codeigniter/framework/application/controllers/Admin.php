@@ -48,7 +48,10 @@ class Admin extends CI_Controller {
 
 	public function image()
 	{
-		$this->root->sview("admin/image")
+		$data['start'] = $this->input->get('start');
+		$data['end'] = $this->input->get('end');
+
+		$this->root->sview("admin/image", $data);
 	}
 
 /*
