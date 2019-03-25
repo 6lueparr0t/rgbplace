@@ -147,6 +147,20 @@ class Sign_model extends CI_Model {
 		return false;
 	}
 
+	public function mailValid($data)
+	{
+		$mail = $data['mail'];
+
+		$query = "SELECT mail FROM user_info WHERE mail = ? LIMIT 1";
+		$find = $this->db->query($query, $mail);
+
+		if($find->num_rows() === 0) {
+			return true;
+		}
+		
+		return false;
+	}
+
 	public function mailLog($data)
 	{
 		$query = "INSERT INTO mail_log (mail, code) VALUES (?, ?)";

@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common(); ?>
-<?
+<?php
 if($mode==="run") {
     shell_exec("pkill push; go/push > /dev/null 2>/dev/null &");
     redirect('/admin/push');
@@ -15,7 +15,7 @@ if($mode==="kill") {
 <input type="button" value="run" onclick="location.href='/admin/push/run';" /> <input type="button" value="kill" onclick="location.href='/admin/push/kill';" />
 
 <pre>
-<? system("pwd; ps -ef | grep 'go/push'") ?>
+<?php system("pwd; ps -ef | grep 'go/push'") ?>
 </pre>
 
 <br/>
