@@ -134,7 +134,14 @@ function sendCode() {
 					text: 'Please contact us. (admin@rgbplace.com)'
 				})
 
-			}
+			} else if(ret['send'] == 'already') {
+
+                Swal.fire({
+                    type: 'info',
+                    title: 'Send Failed',
+                    text: 'Your Mail Already used.'
+                })
+            }
 
 		}, null);
 
