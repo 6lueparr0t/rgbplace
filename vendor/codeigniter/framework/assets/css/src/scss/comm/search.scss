@@ -29,8 +29,8 @@
 	border-bottom : 0 !important;
 
 	&:hover {
-		background : $oc-gray-2 !important;
-		color      : $oc-gray-9 !important;
+		background : $oc-gray-2;
+		color      : $oc-gray-9;
 	}
 
 	& a {
@@ -39,14 +39,14 @@
 		& li {
 			font-family: 'normal';
 			padding       : 1.2rem;
-			background    : $oc-gray-0 !important;
+			background    : $oc-gray-0;
 
 			border-left: 1px solid black;
 			border-right: 1px solid black;
 
 			&:hover, &.active {
-				background : $oc-gray-7 !important;
-				color      : $oc-gray-0 !important;
+				background : $oc-gray-7;
+				color      : $oc-gray-0;
 			}
 		}
 	}

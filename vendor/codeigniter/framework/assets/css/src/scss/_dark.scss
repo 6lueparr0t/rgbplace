@@ -7,6 +7,7 @@ body.dark {
 		color:white;
 	}
 
+	#page .notice .type-list .page tr td a,
 	#page .type .type-row .type-col .type-list .page tr td a {
 		color:$oc-gray-2 !important;
 	}
@@ -40,6 +41,11 @@ body.dark {
 		& #map-result li {
 			background-color: $oc-gray-9 !important;
 			color: $oc-gray-0 !important;
+
+			&:hover, &.active {
+                background-color : $oc-gray-0 !important;
+                color      : $oc-gray-7 !important;
+            }
 		}
 	}
 
@@ -159,16 +165,16 @@ body.dark {
 
 	#profile {
 		& .page .table .th {
-			background-color: $oc-gray-9;
+			background-color: $oc-gray-9 !important;
 		}
 
 		& .page .table .td {
 			& input {
-				background-color: black;
+				background-color: black !important;
 				color:$oc-gray-0;
 
 				&:disabled {
-					background-color: black;
+					background-color: black !important;
 					color:$oc-gray-7;
 				}
 			}
