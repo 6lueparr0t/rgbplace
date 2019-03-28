@@ -141,9 +141,10 @@ class Template {
 
 		/* Google Sign-in js */
 		echo "<script src='https://apis.google.com/js/api:client.js'></script>";
+		echo "<script src='/assets/ext/sweetalert2.min.js'></script>";
+		
 		echo "<script src='/assets/js/comm/common.min.js'></script>"
-		."<script src='/assets/js/dist/{$path}.min.js'></script>"
-		."<script src='/assets/ext/sweetalert2.min.js'></script>";
+		."<script src='/assets/js/dist/{$path}.min.js'></script>";
 
 		echo("
 <div id='footer'>
