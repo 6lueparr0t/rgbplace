@@ -158,6 +158,11 @@ body.dark {
 		& .search-select .search-select-list {
 			border: 1px solid $oc-gray-6;
 
+			& ul li label input[type=checkbox]:checked~span {
+				background-color: $oc-gray-0;
+				color: $oc-gray-9;
+			}
+
 			& ul li label span {
 				border: 1px solid $oc-gray-6;
 			}
