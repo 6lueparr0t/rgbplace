@@ -148,7 +148,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 				//message  = reply.querySelector("ul .content .text").value;
 				//.replace(/<img src=\"(.*)\".*?>/gm, "![img][$1]")
 				message  = reply.querySelector("ul .content .text").innerHTML
-					.replace(/<a href=\"(.*)\" target=\"(.*)\">.*<\/a>/gm, "![link][$1]")
+					.replace(/<a href=\"(.*)\" target=\"(.*)\">.*<\/a>/gm, "$1")
 					.replace(/<br\s*\/?>/mg,"\n");
 				reply.querySelector("ul").classList.toggle('hide');
 				mode = 'UPDATE';
