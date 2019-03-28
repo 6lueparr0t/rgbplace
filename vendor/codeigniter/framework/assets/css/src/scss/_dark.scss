@@ -41,6 +41,11 @@ body.dark {
 		& #map-result li {
 			background-color: $oc-gray-9 !important;
 			color: $oc-gray-0 !important;
+
+			&:hover, &.active {
+                background-color : $oc-gray-0 !important;
+                color      : $oc-gray-7 !important;
+            }
 		}
 	}
 
