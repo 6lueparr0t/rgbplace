@@ -950,10 +950,10 @@ class Map_model extends CI_Model {
 
 			$name    = ($row->dtim)?' [ X ] ':$row->name;
 			$sn      = $row->sn;
-			$mention = ($row->mention && !$row->dtim)? "@".$row->mention:"";
+			$mention = ($row->mention && !$row->dtim)? "<b class='mention'>@".$row->mention."</b>":"";
 
 			//$row->content = preg_replace('/!\[(img)\]\[(.*)\]/', '<img src=\'$2\' />', $row->content);
-			$row->content = preg_replace('/!\[link\]\[(.*)\]/', '<a href=\'$1\' target=\'_blank\'>$1</a>', $row->content);
+			$row->content = preg_replace('/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/', '<a href=\'$1\' target=\'_blank\'>$1</a>', $row->content);
 			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', $row->content));
 
 			$depth = [
@@ -989,7 +989,7 @@ class Map_model extends CI_Model {
 			$ret .= "</span>";
 			/* depth arrow output : end */
 
-			$ret .= "<b class='mention'>{$mention}</b> <span class='text'>{$content}</span></li>";
+			$ret .= "{$mention}<span class='text'>{$content}</span></li>";
 
 			// reply info start
 			$ret .= "<div class='reply-info'>";
