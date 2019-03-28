@@ -106,7 +106,7 @@
 
 					& td.reply.count {
 						a {
-							color:$oc-red-6;
+							color:$oc-red-6 !important;
 							font-size: 0.8rem;
 						}
 					}
@@ -189,7 +189,7 @@
 									color:$oc-gray-9;
 
 									&:hover {
-										color:$oc-blue-7;
+										color:$oc-blue-7 !important;
 									}
 								}
 							}
@@ -202,7 +202,7 @@
 
 							& td.reply.count {
 								a {
-									color:$oc-red-6;
+									color:$oc-red-6 !important;
 									font-size: 0.8rem;
 								}
 							}
@@ -218,12 +218,12 @@
 								text-align:justify;
 
 								&:hover {
-									color:$oc-blue-7;
+									color:$oc-blue-7 !important;
 									transition:all .2s ease;
 								}
 
 								&:active {
-									color:$oc-green-7;
+									color:$oc-green-7 !important;
 								}
 							}
 						}
