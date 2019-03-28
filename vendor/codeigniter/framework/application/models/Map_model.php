@@ -532,9 +532,15 @@ class Map_model extends CI_Model {
 		$sn = $this->session->userdata('sn');
 		$uid = $this->session->userdata('uid');
 
-		$update_table = $this->db->escape_str("map_{$data['map']}_post");
-		$update = "UPDATE {$update_table} SET hit = hit + 1  where no = ?";
-		$ret = $this->db->query($update, $no);
+		if( !@array_key_exists($no, $this->session->tempdata('view')) ) {
+			$update_table = $this->db->escape_str("map_{$data['map']}_post");
+			$update = "UPDATE {$update_table} SET hit = hit + 1  where no = ?";
+			$ret = $this->db->query($update, $no);
+
+			$view_array = $this->session->tempdata('view');
+
+			$view_array[$no] = true;
+			$this->session->set_tempdata('view', $view_array, 60*60*24);
 
 		/*
 		$query = "SELECT no FROM {$history_table} where uid=? and type='post' and relation=? and act='view' ";
@@ -554,9 +560,10 @@ class Map_model extends CI_Model {
 				$ret = false;
 			}
 		}
-		*/
+		 */
+		}
 
-		return $ret;
+		return (isset($ret)?$ret:false);
 	}
 
 
