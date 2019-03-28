@@ -90,10 +90,10 @@
 				& tr {
 					& td {
 						a {
-							color:$oc-gray-9 !important;
+							color:$oc-gray-9;
 
 							&:hover {
-								color:$oc-blue-7 !important;
+								color:$oc-blue-7;
 							}
 						}
 					}
@@ -106,7 +106,7 @@
 
 					& td.reply.count {
 						a {
-							color:$oc-red-6 !important;
+							color:$oc-red-6;
 							font-size: 0.8rem;
 						}
 					}
@@ -186,10 +186,10 @@
 						& tr {
 							& td {
 								a {
-									color:$oc-gray-9 !important;
+									color:$oc-gray-9;
 
 									&:hover {
-										color:$oc-blue-7 !important;
+										color:$oc-blue-7;
 									}
 								}
 							}
@@ -202,7 +202,7 @@
 
 							& td.reply.count {
 								a {
-									color:$oc-red-6 !important;
+									color:$oc-red-6;
 									font-size: 0.8rem;
 								}
 							}
