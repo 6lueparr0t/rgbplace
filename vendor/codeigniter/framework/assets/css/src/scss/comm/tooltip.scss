@@ -31,6 +31,7 @@
 		margin-top: -3rem;
 		padding: 0 .4rem !important;
 		display: inline-flex;
+		line-height: 1.2rem;
 
 		@media screen and ($width-name : $target-width) {
 			margin: 0 -6rem;
@@ -40,7 +41,7 @@
 		&:after {
 			content: "";
 			right: 34%;
-			top: 32px;
+			top: 20px;
 			border-left: 10px solid transparent;
 			border-right: 10px solid transparent;
 			border-top: 10px solid #212529;
