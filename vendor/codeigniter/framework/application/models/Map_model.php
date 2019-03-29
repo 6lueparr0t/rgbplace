@@ -1371,7 +1371,7 @@ class Map_model extends CI_Model {
 					set
 						content = ?
 					where
-						uid = ?
+						sn = ?
 						and uid = ?
 						and no = ?";
 				$values = array(
