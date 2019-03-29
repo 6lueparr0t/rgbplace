@@ -30,3 +30,11 @@ console.log(
 	'color: #339af0;font-size:2rem;font-weight:bold',
 	'color: #000000;font-size:2rem;font-weight:bold'
 );
+
+var toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    background: (document.querySelector('body').classList.contains('dark'))?'#495057':'#fff',
+    showConfirmButton: false,
+    timer: 2000
+});

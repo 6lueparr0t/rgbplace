@@ -53,6 +53,14 @@ function darkModeOnOff() {
 		httpRequest('post', '/api/config/dark', JSON.stringify(data), data => {}, null);
 	}
 
+	toast = Swal.mixin({
+		toast: true,
+		position: 'bottom-end',
+		background: (document.querySelector('body').classList.contains('dark'))?'#495057':'#fff',
+		showConfirmButton: false,
+		timer: 2000
+	});
+
 }
 
 if (favorite) favorite.addEventListener("click", stageSave);
