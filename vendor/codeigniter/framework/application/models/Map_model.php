@@ -490,7 +490,7 @@ class Map_model extends CI_Model {
 				."</span>"
 				."<span class='hit'  ><i class='fa fa-eye'></i> {$row->hit} </span>"
 				."<span class='reply'><i class='far fa-comment-dots'></i> {$row->reply} </span>"
-				."<div class='link'><span id='link-copy'>".base_url()."{$map}/{$no}</span></div>"
+				."<div class='link'><span id='link-copy'>".base_url()."{$map}/{$no}</span><span class='tooltip post-link' style='display:none;'>copied</span></div>"
 			."</div>"
 			."<div id='post-content'>{$content}</div>";
 
