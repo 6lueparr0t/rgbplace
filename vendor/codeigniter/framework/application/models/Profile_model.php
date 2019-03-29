@@ -353,7 +353,7 @@ class Profile_model extends CI_Model {
 					<span class='tooltip'>copied!</span>
 					</i>";
 				$tmp .= "<i class='copy fas fa-link'>
-					<input style='display:none;' value='![img][/upload/{$row->file_name}]' />
+					<input style='display:none;' value='![img](/upload/{$row->file_name})' />
 					<span class='tooltip'>copied!</span>
 					</i>";
 				$tmp .= "</div>";
