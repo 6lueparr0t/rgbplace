@@ -48,9 +48,9 @@ body.dark {
 			color: $oc-gray-0 !important;
 
 			&:hover, &.active {
-                background-color : $oc-gray-0 !important;
-                color      : $oc-gray-7 !important;
-            }
+				background-color : $oc-gray-0 !important;
+				color      : $oc-gray-7 !important;
+			}
 		}
 	}
 
@@ -199,9 +199,6 @@ body.dark {
 				transition: all .1s ease;
 			}
 
-			.img i .tooltip {
-				color: $oc-gray-0;
-			}
 		}
 
 	}
@@ -218,5 +215,15 @@ body.dark {
 		& .swal2-title {
 			color : $oc-gray-0;
 		}
-}
+	}
+
+	.tooltip {
+		background-color:$oc-gray-0;
+		color:black;
+		border: 4px solid $oc-gray-0;
+
+		&:after {
+			border-bottom: 10px solid $oc-gray-0;
+		}
+	}
 }

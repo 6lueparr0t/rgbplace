@@ -267,10 +267,13 @@ document.querySelector("body").addEventListener("click", function(event) {
 				break;
 			}
 
-			toast({
-				type: 'success',
-				title: "링크가 복사되었습니다.\nlink was copied."
-			});
+			let tooltip = t.nextSibling;
+			showTooltip(tooltip, 'fadeInOutUp');
+
+			//toast({
+				//type: 'success',
+				//title: "링크가 복사되었습니다.\nlink was copied."
+			//});
 
 			break;
 	}
