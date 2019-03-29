@@ -31,6 +31,7 @@
 			.th {
 				display:table-cell;
 				padding:0 1rem;
+				line-height:2rem;
 
 				@media screen and ($width-name : $target-width) {
 					padding:0 .4rem;
@@ -247,12 +248,12 @@
 		float:right;
 		cursor:pointer;
 		border-radius: 100%;
-		padding: .2rem .3rem;
+		padding: .2rem .34rem .34rem .4rem;
 
 		&:hover {
 			background: $oc-red-6;
 			color: white;
-			transition:all .1s ease;
+			transition:all .2s ease-out;
 		}
 	}
 }
