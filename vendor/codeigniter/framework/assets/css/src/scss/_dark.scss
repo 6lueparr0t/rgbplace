@@ -180,7 +180,7 @@ body.dark {
 
 		& .page .table .td {
 			& input {
-				background-color: black !important;
+				background-color: $oc-gray-7 !important;
 				color:$oc-gray-0;
 
 				&:disabled {
