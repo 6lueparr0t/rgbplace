@@ -232,8 +232,8 @@ document.querySelector("#profile").addEventListener("click", function(event) {
         document.execCommand("Copy");
 
 		let tooltip = t.querySelector('.tooltip');
-		if(tooltip.style.display != 'block') {
-			tooltip.style.display='block';
+		if(tooltip.style.display != 'initial') {
+			tooltip.style.display='initial';
 			tooltip.style.animation='fadeInOut 2s ease-out 1';
 			tooltip.style.WebkitAnimation='fadeInOut 2s ease-out 1';
 
