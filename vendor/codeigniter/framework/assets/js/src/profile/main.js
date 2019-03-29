@@ -234,9 +234,10 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 		let tooltip = t.querySelector('.tooltip');
 		tooltip.style.animation='fadeInOut 2s ease-out 1';
 		tooltip.style.WebkitAnimation='fadeInOut 2s ease-out 1';
+
 		setTimeout(function () { this.style.animation=''; this.style.WebkitAnimation=''; }.bind(tooltip), 2000);
-		
-        clip.style.display='none';
+
+		clip.style.display='none';
 
 		return;
 	}
