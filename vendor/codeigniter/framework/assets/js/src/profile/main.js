@@ -232,17 +232,7 @@ document.querySelector("#profile").addEventListener("click", function(event) {
         document.execCommand("Copy");
 
 		let tooltip = t.querySelector('.tooltip');
-		if(tooltip.style.display != 'initial') {
-			tooltip.style.display='initial';
-			tooltip.style.animation='fadeInOut 2s ease-out 1';
-			tooltip.style.WebkitAnimation='fadeInOut 2s ease-out 1';
-
-			setTimeout(function () {
-				this.style.animation='';
-				this.style.WebkitAnimation='';
-				this.style.display='none';
-			}.bind(tooltip), 2000);
-		}
+		showTooltip(tooltip, 'fadeInOutDown');
 
 		clip.style.display='none';
 

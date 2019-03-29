@@ -41,3 +41,37 @@
 		opacity: 1;
 	}
 }
+
+@include keyframes(fadeInOut) {
+	0%, 100% {
+		opacity: 0;
+	}
+
+	20%, 80% {
+		opacity: 1;
+	}
+}
+
+@include keyframes(fadeInOutUp) {
+	0%, 100% {
+		opacity: 0;
+		margin-top: -2rem;
+	}
+
+	10%, 90% {
+		opacity: 1;
+		margin-top: -3rem;
+	}
+}
+
+@include keyframes(fadeInOutDown) {
+	0%, 100% {
+		opacity: 0;
+		margin-top:0rem;
+	}
+
+	10%, 90% {
+		opacity: 1;
+		margin-top:1.2rem;
+	}
+}
