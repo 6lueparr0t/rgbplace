@@ -32,7 +32,7 @@ if($this->session->userdata("admin") === false || $no) {
 			</div>
 	");
 
-	if( !in_array($pswd, array('google')) ) {
+	if( !in_array($pswd, array('google')) && !$no ) {
 	echo ("
 			<div class='tr'>
 				<div class='th'>mail".(($sw=='enabled')?"<input type='button' id='check' name='check' value='check'/>":"")."
