@@ -178,9 +178,12 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 			'page':(params.get('page'))?'&page='+params.get('page'):''
 		}
 
+		console.log(history.state);
 		switch(data['tab']) {
 			case 'info' :
-				history.pushState({tab: data['tab']}, '', '?tab='+data['tab']+search['no']);
+				if ( history.state == null || history.state.tab != data['tab'] ) {
+					history.pushState({tab: data['tab']}, '', '?tab='+data['tab']+search['no']);
+				}
 				tabChange(data['tab']);
 				break;
 			case 'upload' :
@@ -188,7 +191,9 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 			case 'reply' :
 			case 'message' :
 			case 'report' :
-				history.pushState({tab: data['tab']}, '', '?tab='+data['tab']+search['no']+search['page']);
+				if ( history.state == null || history.state.tab != data['tab'] ) {
+					history.pushState({tab: data['tab']}, '', '?tab='+data['tab']+search['no']+search['page']);
+				}
 				tabChange(data['tab']);
 
 				httpRequest('get', '/api/request/profile?info='+data['info']+'&tab='+data['tab']+search['no']+search['page'], null,

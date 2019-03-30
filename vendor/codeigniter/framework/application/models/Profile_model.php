@@ -307,7 +307,7 @@ class Profile_model extends CI_Model {
 				$tmp .= "<div class='td center width-50'>{$row->idx}</div>";
 				$tmp .= "<div class='td center width-50'>{$row->map}</div>";
 				$tmp .= "<div class='td'>";
-				$tmp .= "<a href='/{$row->map}/{$row->post}' target='_blank'>{$row->title}</a><br/>";
+				$tmp .= "<a href='/{$row->map}/{$row->post}'>{$row->title}</a><br/>";
 				$tmp .= "{$row->date}<br/>";
 				$tmp .= "</div>";
 				$tmp .= "</div>";

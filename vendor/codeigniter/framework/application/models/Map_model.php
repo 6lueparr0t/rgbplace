@@ -224,7 +224,7 @@ class Map_model extends CI_Model {
 					.$reply
 				."</td>"
 				."<td class='hit'>{$row->hit}</td>"
-				."<td class='name'>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' target='_blank' > ".$row->name." </a>":$row->name)."</td>"
+				."<td class='name'>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' > ".$row->name." </a>":$row->name)."</td>"
 				."<td class='date' title='{$date} {$time}'>{$date}</td>"
 				."</tr>";
 		}
@@ -486,7 +486,7 @@ class Map_model extends CI_Model {
 			//."<span class='vote'>{$row->vote}</span>"
 			$ret .= "<div class='post-info'>"
 				."<span class='name' >"
-					."<i class='fa fa-user'></i>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' target='_blank' > ".$row->name." </a>":$row->name)
+					."<i class='fa fa-user'></i>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' > ".$row->name." </a>":$row->name)
 				."</span>"
 				."<span class='hit'  ><i class='fa fa-eye'></i> {$row->hit} </span>"
 				."<span class='reply'><i class='far fa-comment-dots'></i> {$row->reply} </span>"
@@ -983,7 +983,7 @@ class Map_model extends CI_Model {
 
 			$ret .= "<span class='no'>{$no}</span>";
 			$ret .= "<div class='head ".(($post_uid==$reply_uid)?'owner':'')."'> "
-				.(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' target='_blank' >".$name."</a>":$name)
+				.(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' >".$name."</a>":$name)
 				." <span class='date'>{$date} {$time}</span></div>";
 
 			$ret .= "<li class='content ".(($post_uid==$reply_uid)?'owner':'')."'>";
