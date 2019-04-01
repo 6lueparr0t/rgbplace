@@ -323,13 +323,15 @@ class Api extends CI_Controller {
 
 			$upload = json_decode($this->session->userdata('upload'), true);
 
-			foreach($upload['total'] as $key => $val) {
-				if($val['file_name'] == $target['file_name']) {
-					$target_key = $key;
+			if(is_array($upload) === true) {
+				foreach($upload['total'] as $key => $val) {
+					if($val['file_name'] == $target['file_name']) {
+						$target_key = $key;
+					}
 				}
-			}
 
-			unset($upload['total'][$target_key]);
+				unset($upload['total'][$target_key]);
+			}
 
 			//echo ('<pre>');
 			//print_r($upload['total']);
