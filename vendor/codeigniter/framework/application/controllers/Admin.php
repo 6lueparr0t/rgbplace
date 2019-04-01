@@ -86,6 +86,21 @@ class Admin extends CI_Controller {
 		$log->error('I am error', array('productId' => 123));
 	}
 
+	public function doctrine()
+	{
+		//include_once APPPATH.'models/Entities/Admin_info.php';
+		$em = $this->doctrine->em;
+
+		$product = $em->find('Admin_info', 1);
+
+		if ($product === null) {
+			echo "No product found.\n";
+			exit(1);
+		}
+
+		echo sprintf("%s\n", $product->getName());
+	}
+
 	public function animation()
 	{
 		$this->root->sview("admin/example/animation");
@@ -113,24 +128,7 @@ class Admin extends CI_Controller {
 		$this->root->sview("admin/example/socket_alert");
 	}
 
-	public function doctrine()
-	{
-		//include_once APPPATH.'models/Entities/Admin_info.php';
-		//require '../../autoload.php';
-		$em = $this->doctrine->em;
-
-		$product = $em->find('Admin_info', 1);
-
-		if ($product === null) {
-			echo "No product found.\n";
-			exit(1);
-		}
-
-		echo sprintf("%s\n", $product->getName());
-
-	}
-
-	/*
+/*
  * ########################################
  *					Process
  * ########################################

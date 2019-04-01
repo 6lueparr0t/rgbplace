@@ -21,8 +21,14 @@ function postSearch (recv) {
 		}
 	}
 
-	//console.log(where);
-	redirect ('list?search='+recv.trim()+'&'+where);
+	if(recv.trim()) {
+		if(where === '') where='title=y&content=y';
+
+		//console.log(where);
+		redirect ('list?search='+recv.trim()+'&'+where);
+	} else {
+		redirect ('list');
+	}
 }
 
 if (postSearchBtn)postSearchBtn.addEventListener("click", function() {
