@@ -62,14 +62,6 @@ class Map extends CI_Controller {
 
 		$data['search']['page'   ] = urldecode($this->input->get('page'));
 
-		// Map_model, search list ['title', 'content', 'reply', 'name', 'tag', 'date'];
-		$data['search']['title'  ] = urldecode($this->input->get('title'));
-		$data['search']['content'] = urldecode($this->input->get('content'));
-		$data['search']['reply'  ] = urldecode($this->input->get('reply'));
-		$data['search']['name'   ] = urldecode($this->input->get('name'));
-		$data['search']['tag'    ] = urldecode($this->input->get('tag'));
-		$data['search']['date'   ] = urldecode($this->input->get('date'));
-
 		$this->root->view("map/list", $data);
 	}
 

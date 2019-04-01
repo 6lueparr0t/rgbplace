@@ -97,7 +97,7 @@ class ComposerStaticInit1530de62e14254406aa5d058ea96a133
     );
 
     public static $fallbackDirsPsr4 = array (
-        0 => __DIR__ . '/..' . '/codeigniter/framework/application/models/Entities',
+        0 => __DIR__ . '/..' . '/codeigniter/framework/application/models/entity',
     );
 
     public static $prefixesPsr0 = array (
