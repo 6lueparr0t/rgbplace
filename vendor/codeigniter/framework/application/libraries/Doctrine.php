@@ -29,7 +29,7 @@ class Doctrine {
 		$config = new Configuration;
 		$cache = new ArrayCache;
 		$config->setMetadataCacheImpl($cache);
-		$driverImpl = $config->newDefaultAnnotationDriver(array(APPPATH.'models/Entities'));
+		$driverImpl = $config->newDefaultAnnotationDriver(array(APPPATH.'models/entity'));
 		$config->setMetadataDriverImpl($driverImpl);
 		$config->setQueryCacheImpl($cache);
 
