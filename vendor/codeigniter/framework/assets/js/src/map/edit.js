@@ -255,8 +255,12 @@ function addFile(data) {
 			//console.log(document.querySelector('#edit-content').innerText.match(/[^\n]*\n[^\n]*/gi).length);
 			//document.querySelector('#edit-content').appendChild(tag);
 			if(tab == 'view') {
+				if(editor_position.tagName === undefined) editor_position = editor_position.parentElement;
+				console.log(editor_position);
+				console.log(tag);
+				editor_position.appendChild(document.createElement("br"));
 				editor_position.appendChild(tag);
-				document.querySelector('#edit-content').innerHTML += '<br/><br/>';
+				//document.querySelector('#edit-content').innerHTML += '<br/><br/>';
 			} else {
 				document.querySelector('#edit-content-code').value += str + '<br/><br/>';
 			}

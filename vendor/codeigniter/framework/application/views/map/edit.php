@@ -26,21 +26,21 @@
 $upload = json_decode($this->session->userdata('upload'), true);
 
 if(isset($upload['total']) && count($upload) > 0) {
+	echo "<ul class='file-list'>";
 	foreach($upload['total'] as $key => $val) {
-		echo "<ul class='file-list'>"
-				."<li class='file' "
-					."data-default-path='".$val['default_path']."' "
-					."data-file-name='".$val['file_name']."' "
-					."data-client-name='".$val['client_name']."' "
-					."data-file-type='".$val['file_type']."' "
-					."data-size='".$val['file_size']."' "
-					."data-datetime='".$val['datetime']."'>"
-					.$val['client_name']
-					."<span class='del fas fa-trash-alt'></span>"
-					."<span class='add fas fa-check'></span>"
-				."</li>"
-			."</ul>";
+		echo "<li class='file' "
+			."data-default-path='".$val['default_path']."' "
+			."data-file-name='".$val['file_name']."' "
+			."data-client-name='".$val['client_name']."' "
+			."data-file-type='".$val['file_type']."' "
+			."data-size='".$val['file_size']."' "
+			."data-datetime='".$val['datetime']."'>"
+			.$val['client_name']
+			."<span class='del fas fa-trash-alt'></span>"
+			."<span class='add fas fa-check'></span>"
+			."</li>";
 	}
+	echo "</ul>";
 } else {
 	echo "<ul class='file-list no-file'>"
 			."<li class='file'>No File.</li>"

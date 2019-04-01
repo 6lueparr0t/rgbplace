@@ -67,7 +67,7 @@ class Api_model extends CI_Model {
 
 	}
 
-	public function deleteUploadFile($searchFileName) {
+	public function deleteUploadFile($file_name) {
 
 		$query = "DELETE FROM total_upload WHERE sn = ? AND file_name = ?";
 		$result = $this->db->query($query, array($this->session->userdata('sn'), $file_name) );
