@@ -478,7 +478,7 @@ class Map_model extends CI_Model {
 			$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->content)), "<a><img><br><div><p><iframe>");
 
 			$content = preg_replace('/!\[img\]\((.*)\)/', '<img src=\'$1\' />', $content);
-			$content = preg_replace('/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/', '<a href=\'$1\' target=\'_blank\'>$1</a>', $content);
+			$content = preg_replace('/[\s](https?:[/|.|\w|\s|-]*\.\S+)/', '<a href=\'$1\' target=\'_blank\'>$1</a>', $content);
 
 			$ret .= "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
 			$ret .= "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
