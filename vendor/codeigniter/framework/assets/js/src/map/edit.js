@@ -14,7 +14,11 @@ var simplemde = new SimpleMDE({
 			title: "Insert Image",
 		},
 		"table", "horizontal-rule", "|", "preview", "side-by-side", "fullscreen"
-	]
+	],
+	renderingConfig : {
+		singleLineBreaks :  false ,
+		codeSyntaxHighlighting :  true ,
+	},
 });
 
 var editor_position = document.querySelector('.CodeMirror-line');
@@ -350,12 +354,8 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				return false;;
 			}
 
-			editor = document.querySelector('.editor.active');
-			if(editor.id == 'edit-content') {
-				content = editor.innerHTML;
-			} else {
-				content = editor.value;
-			}
+			editor = document.querySelector('#edit-content-code');
+			content = editor.value;
 
 			if(!content) {
 				Swal.fire({
@@ -379,7 +379,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 					data.push({
 						'info': __URL__,
 						'title': document.querySelector('#edit-title').value,
-						'content': content.replace(/\n/gi, '')
+						'content': content
 					});
 
 					let mode = ({value:'post'}).value;
