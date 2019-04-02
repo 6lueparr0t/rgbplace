@@ -1,22 +1,26 @@
 #edit {
 
 	margin:1rem 0;
-	text-align:center;
+	//text-align:center;
 
 	.none {
 		display:none;
 	}
 
-	#edit-title {
-		border:1px solid $oc-gray-6;
-		width: 96%;
-		@media screen and ($width-name : $target-width) {
-			width: 90%;
+	.edit-title {
+		text-align:center;
+
+		#edit-title {
+			border:1px solid $oc-gray-6;
+			width: 96%;
+			@media screen and ($width-name : $target-width) {
+				width: 90%;
+			}
+			height:2rem;
+			padding:1rem;
+			margin:1rem auto;
+			font-size:2rem;
 		}
-		height:2rem;
-		padding:1rem;
-		margin:1rem auto;
-		font-size:2rem;
 	}
 
 	#edit-content {
