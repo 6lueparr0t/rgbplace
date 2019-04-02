@@ -19,8 +19,8 @@ func main() {
 	})
 
 	//!! live directory permission check !!
-	err := http.ListenAndServeTLS(*addr, "/etc/letsencrypt/live/rgbplace.com/fullchain.pem", "/etc/letsencrypt/live/rgbplace.com/privkey.pem", nil)
-	//err := http.ListenAndServe(*addr, nil)
+	//err := http.ListenAndServeTLS(*addr, "/etc/letsencrypt/live/rgbplace.com/fullchain.pem", "/etc/letsencrypt/live/rgbplace.com/privkey.pem", nil)
+	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
 		log.Fatal("ListenAndServeTLS: ", err)
 		//log.Fatal("ListenAndServe: ", err)

@@ -477,8 +477,8 @@ class Map_model extends CI_Model {
 			//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$row->content))), "<a><img><br><div><p><iframe>");
 			$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->content)), "<a><img><br><div><p><iframe>");
 
-			$content = preg_replace('/!\[img\]\((.*)\)/', '<img src=\'$1\' />', $content);
-			$content = preg_replace('/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/', '<a href=\'$1\' target=\'_blank\'>$1</a>', $content);
+			$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $content);
+			$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
 
 			$ret .= "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
 			$ret .= "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
@@ -959,8 +959,8 @@ class Map_model extends CI_Model {
 			$sn      = $row->sn;
 			$mention = ($row->mention && !$row->dtim)? "<b class='mention'>@".$row->mention."</b>":"";
 
-			//$row->content = preg_replace('/!\[(img)\]\[(.*)\]/', '<img src=\'$2\' />', $row->content);
-			$row->content = preg_replace('/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/', '<a href=\'$1\' target=\'_blank\'>$1</a>', $row->content);
+			//$row->content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $row->content);
+			$row->content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $row->content);
 			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', $row->content));
 
 			$depth = [
