@@ -1,0 +1,13 @@
+{
+	"require": {
+		"codeigniter/framework": "^3.1",
+		"monolog/monolog": "^1.22",
+		"doctrine/orm": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"": "vendor/codeigniter/framework/application/models/entity"
+		}
+	}
+
+}

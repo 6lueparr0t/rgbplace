@@ -1,0 +1,60 @@
+#menu-map {
+	padding : .5rem 0 !important;
+	#map-search-box {
+		width         : 65%;
+		transform     : translateX(6px);
+		border-radius : 4rem;
+		border        : none;
+		padding       : .67rem;
+	}
+
+	#map-search-button {
+		color     : black;
+		transform : translate(-125%,10%);
+	}
+
+	.fa.fa-caret-up {
+		top:1rem !important;
+		margin: 0 !important;
+	}
+
+	.fa.fa-caret-down {
+		top:1rem !important;
+		margin: 0 !important;
+	}
+}
+
+#map-result {
+	padding       : 0 !important;
+	border-bottom : 0 !important;
+
+	&:hover {
+		background : $oc-gray-2;
+		color      : $oc-gray-9;
+	}
+
+	& a {
+		padding : 0;
+		font-size : 11px;
+		& li {
+			font-family: 'normal';
+			padding       : 1.2rem;
+			background    : $oc-gray-0;
+
+			border-left: 1px solid black;
+			border-right: 1px solid black;
+
+			&:hover, &.active {
+				background : $oc-gray-7;
+				color      : $oc-gray-0;
+			}
+		}
+	}
+
+	.org {
+	}
+
+	.rev {
+		display:none;
+	}
+}

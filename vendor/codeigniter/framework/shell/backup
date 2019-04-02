@@ -1,0 +1,6 @@
+#!/bin/bash
+#echo 'DROP DATABASE IF EXISTS `home`;' > assets/sql/database.sql
+#mysqldump  --routines --triggers --databases --no-data home -u root --password="6lueparr0t@gmail.com" >> assets/sql/database.sql
+mysqldump  --routines --triggers --databases home -u root --password="6lueparr0t@gmail.com" >> assets/sql/database.sql
+
+echo "Back Up : `date +%Y%m%d\ %H:%M:%S`" >> log/db

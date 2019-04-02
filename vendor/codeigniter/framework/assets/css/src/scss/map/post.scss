@@ -1,0 +1,199 @@
+#post {
+	max-width:1280px;
+	margin: 1rem auto;
+
+	.no-post {
+		font-size : 2rem;
+		padding: 2rem;
+		text-align:center;
+	}
+	.post {
+		font-size : 1rem;
+		//padding: 0 1rem;
+
+		word-break: normal;
+		word-wrap: break-word;
+
+		line-height: 2rem;
+
+		.post-title {
+			margin: 2rem 0;
+			font-size: 2.5rem;
+
+			@media screen and ($width-name : $target-width) {
+				font-size: 1.5rem;
+			}
+
+			a {
+				color : black;
+				&:hover {
+					color : $oc-gray-6;
+				}
+			}
+		}
+
+		.post-date {
+			font-size: 1rem;
+
+			@media screen and ($width-name : $target-width) {
+				font-size: .8rem;
+			}
+		}
+
+		.post-info {
+			font-size: 1rem;
+			margin: .5rem 0 2rem 0;
+			padding-bottom:.5rem;
+			border-bottom:1px solid $oc-gray-9;
+
+			@media screen and ($width-name : $target-width) {
+				font-size: .8rem;
+			}
+
+			span {
+				padding-right : 1rem;
+
+				i {
+					padding-right:.5rem;
+				}
+
+			}
+
+			.reply {
+			}
+
+			.hit {
+			}
+
+			.name {
+				color:black;
+			}
+
+			.link{
+				text-align:right;
+				padding-top: 1rem;
+
+				#link-copy {
+					padding:0;
+					cursor:pointer;
+				}
+			}
+
+		}
+
+		#post-content {
+			font-family: monospace;
+			
+			& * {
+				max-width:100%;
+			}
+		}
+	}
+
+	.button-group {
+		font-family: "pixel";
+		margin: 2.5rem 0 0 0;
+		width:100%;
+		@include flex ();
+		@include user-select('none');
+
+		text-align:center;
+
+		span.null {
+			flex-grow:8;
+		}
+
+		.post-up {
+			padding: .5rem 1rem;
+			border-radius: .25rem;
+			flex-grow:2;
+			margin: 0 1rem;
+			border: 1px solid $oc-gray-9;
+			cursor:pointer;
+
+			&:hover, &.active {
+				border: 1px solid $oc-red-9;
+				color: white;
+				background-color: $oc-red-8;
+				transition:all .1s ease-out;
+			}
+
+			&.disable:hover {
+				@include animation('shake .5s linear');
+            }
+		}
+
+		.post-down {
+			padding: .5rem 1rem;
+			border-radius: .25rem;
+			flex-grow:2;
+			margin: 0 1rem;
+			border: 1px solid $oc-gray-9;
+			cursor:pointer;
+
+			&:hover, &.active {
+				border: 1px solid $oc-blue-9;
+				color: white;
+				background-color: $oc-blue-8;
+				transition:all .1s ease-out;
+			}
+
+			&.disable:hover {
+				@include animation('shake .5s linear');
+            }
+		}
+
+		.edit {
+			color : black;
+			padding: .5rem 1rem;
+			border-radius : .25rem;
+			flex-grow:1;
+			margin:0 1rem;
+
+			&.enable {
+				border: 1px solid $oc-teal-9;
+				background-color: $oc-teal-9;
+				color:white;
+				&:hover {
+					background-color: white;
+					color: $oc-teal-9;
+					transition:all .1s ease-out;
+				}
+			}
+
+			&.disable {
+				border: 1px solid $oc-green-2;
+				pointer-events: none;
+				cursor: default;
+				color : $oc-green-2;
+			}
+		}
+
+		.delete {
+			color : black;
+			padding: .5rem 1rem;
+			border-radius : .25rem;
+			flex-grow:1;
+			margin:0 1rem;
+
+			&.enable {
+				border: 1px solid $oc-red-9;
+				background-color: $oc-red-9;
+				color:white;
+				&:hover {
+					background-color: white;
+					color: $oc-red-9;
+					transition:all .1s ease-out;
+				}
+			}
+
+			&.disable {
+				border: 1px solid $oc-red-2;
+				pointer-events: none;
+				cursor: default;
+				color : $oc-red-2;
+			}
+		}
+
+	}
+}

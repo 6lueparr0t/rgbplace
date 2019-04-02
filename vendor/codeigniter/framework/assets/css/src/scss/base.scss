@@ -1,0 +1,44 @@
+@font-face {
+	font-family: 'logo';
+	src: url("/assets/css/fonts/04b_20__.ttf") format('truetype'), url("/assets/css/fonts/04b_20__.woff") format('woff');
+}
+
+@font-face {
+	font-family: 'pixel';
+	src: url("/assets/css/fonts/slkscr.ttf") format('truetype'), url("/assets/css/fonts/slkscr.woff") format('woff');
+}
+
+@font-face {
+	font-family: 'dot';
+	src: url("/assets/css/fonts/DungGeunMo.ttf") format('truetype'), url("/assets/css/fonts/DungGeunMo.woff") format('woff');
+}
+
+@font-face {
+	font-family: 'normal';
+	src: url("/assets/css/fonts/NanumBarunGothic.ttf") format('truetype'), url("/assets/css/fonts/NanumBarunGothic.woff") format('woff');
+}
+
+body {
+  font-family: "normal";
+  font-size:1rem;
+  overflow-y: scroll;
+  transition: all .2s ease-out;
+}
+
+a {
+  color : $oc-blue-6;
+  text-decoration : none !important;
+
+  &:link {
+    //background-color: transparent !important;
+    background-color: transparent;
+  }
+
+  &:hover {
+    color : $oc-red-6;
+    }
+
+  &:active {
+    color : $oc-green-6;
+    }
+}

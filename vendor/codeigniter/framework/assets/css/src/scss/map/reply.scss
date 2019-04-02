@@ -1,0 +1,312 @@
+@mixin reply($num) {
+	border-bottom:1px solid $oc-gray-5;
+	//padding: .5rem 0;
+	//margin: .5rem 0;
+	//padding:1rem 0 .4rem 0;
+
+	ul {
+		margin: 1rem 0;
+
+		span.no {
+			display:none;
+		}
+
+		div.head {
+			margin-bottom:1rem;
+
+			a {
+				color:black;
+			}
+
+			&.owner {
+				color:$oc-green-9;
+
+				a {
+					color:$oc-green-9;
+				}
+
+			}
+
+			span.date {
+				font-size:.6rem;
+			}
+		}
+
+		li {
+			@include flex ();
+
+			&.content {
+				font-size:1rem;
+				margin-bottom:1rem;
+				white-space: pre-line;
+				line-height: 1.8rem;
+
+				font-family: monospace;
+
+				&.owner {
+					color:$oc-green-9;
+				}
+			}
+		}
+
+		.reply-info {
+
+			margin-top:1rem;
+
+			.depth {
+				display:none;
+			}
+
+			.follow {
+				display:none;
+			}
+		}
+
+	}
+
+	.func {
+		@include flex ();
+		button {
+			font-size: .8rem;
+			padding: .4rem 1rem;
+			border: 1px solid $oc-gray-9;
+			border-radius: .25rem;
+			background:white;
+			margin:0 .2rem;
+			flex-grow: 2;
+			cursor:pointer;
+
+			&.modify {
+				flex-grow: 1;
+			}
+
+			&.delete {
+				flex-grow: 1;
+			}
+
+			&.report {
+				flex-grow: 1;
+			}
+
+			&:hover {
+				background-color: $oc-gray-9;
+				color:white;
+				transition:all .1s ease-out;
+			}
+
+			&.reply-up {
+				color:$oc-red-6 !important;
+			}
+
+			&.reply-down {
+				color:$oc-blue-6 !important;
+			}
+		}
+
+		.disable {
+			border: 1px solid $oc-gray-4; 
+			pointer-events: none;
+			cursor: default;
+			color: $oc-gray-4;
+		}
+	}
+}
+
+
+#reply {
+	max-width:1280px;
+    margin: auto;
+
+	min-height    : 100px;
+	border-top    : 1px solid $oc-gray-9;
+	border-bottom : 1px solid $oc-gray-9;
+	display: grid;
+
+	.reply-root{
+		//margin:.5rem;
+		//padding:1rem 0;
+
+		.mention {
+			color:black;
+			background-color:$oc-yellow-3;
+			display: table;
+			margin-right: .5rem;
+		}
+
+		ul {
+			list-style: none;
+			padding-left: 0;
+
+			&.hide {
+				display:none;
+			}
+
+			li {
+			}
+
+			@for $i from 0 through 10 {
+				li.depth-#{$i} {
+					@include reply(1);
+				}
+			}
+		}
+
+		.reply-addon {
+			margin-top: 1rem;
+
+			&.hide {
+				display:none;
+			}
+
+			.reply-box {
+				font-family:'normal';
+
+				font-size:1.4rem;
+				padding:1rem;
+				min-height: 10rem;
+				line-height:2.4rem;
+				//height:100%;
+				width:96.75%;
+				border: 1px solid $oc-gray-9;
+
+				white-space: pre-line;
+
+				@media screen and ($width-name : $target-width) {
+					width:90%;
+				}
+
+				&:active,
+				&:focus{
+					border: 1px solid $oc-gray-9;
+				}
+
+			}
+
+			.reply-button-group {
+				font-family:'pixel';
+				text-align:center;
+				@include flex ();
+				@include user-select('none');
+
+				.reply-button {
+					margin-top       : .5rem;
+					margin-bottom    : 1rem;
+					margin-right     : .5rem;
+					color            : white;
+					padding          : .5rem 1rem;
+					border-radius    : .25rem;
+					flex-grow             : 2;
+					cursor           : pointer;
+					border           : 1px solid $oc-blue-6;
+					background-color : $oc-blue-6;
+					max-height       : 1.4rem;
+					line-height      : 1.4rem;
+
+					display         : flex;
+					justify-content : center; /* align horizontal */
+					align-items     : center; /* align vertical */
+
+					@media screen and ($width-name : $target-width) {
+						font-size : .8rem;
+					}
+
+					&.send {
+						font-family:pixel, 'Font Awesome 5 free';
+
+						&:hover {
+							background-color:white;
+							color:$oc-blue-6;
+							transition:all .1s ease-out;
+						}
+
+						&.to {
+							border : 1px solid $oc-gray-7;
+							background-color:$oc-gray-7;
+							color:white;
+
+							&:hover {
+								background-color:white;
+								color:$oc-gray-7;
+								transition:all .1s ease-out;
+							}
+						}
+
+					}
+
+					&.yes {
+						display:none;
+						flex-grow: 1;
+						&.to {
+							border : 1px solid $oc-green-7;
+							background-color:$oc-green-7;
+							color:white;
+
+							&:hover {
+								background-color:white;
+								color:$oc-green-7;
+								transition:all .1s ease-out;
+							}
+						}
+						&:hover {
+							background-color:white;
+							color:$oc-blue-6;
+							transition:all .1s ease-out;
+						}
+					}
+
+					&.no {
+						display:none;
+						flex-grow: 1;
+						&.to {
+							border : 1px solid $oc-red-7;
+							background-color:$oc-red-7;
+							color:white;
+
+							&:hover {
+								background-color:white;
+								color:$oc-red-7;
+								transition:all .1s ease-out;
+							}
+						}
+						&:hover {
+							background-color:white;
+							color:$oc-blue-6;
+							transition:all .1s ease-out;
+						}
+					}
+
+					&.cancel {
+						border : 1px solid $oc-gray-6;
+						background-color:$oc-gray-6;
+
+						&:hover {
+							background-color:white;
+							color:$oc-gray-6;
+							transition:all .1s ease-out;
+						}
+					}
+				}
+			}
+		}
+
+		.reply-pagination {
+			font-family: pixel;
+			flex-grow:10;
+			text-align:center;
+			margin: .5rem 1rem;
+			@include user-select('none');
+
+			span {
+				cursor:pointer;
+				padding: .5rem 1rem;
+
+				&.active {
+					color:$oc-gray-0;
+					background-color:$oc-gray-9;
+					border-radius:0.5rem;
+				}
+			}
+		}
+	}
+
+}

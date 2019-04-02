@@ -1,0 +1,165 @@
+body {
+    background: #eee;
+}
+
+a {
+    color: #4c6ef5;
+    text-decoration: none !important;
+}
+
+a:link {
+    background-color: transparent;
+}
+
+a:hover {
+    color: #4c6ef5;
+}
+
+a:active {
+    color: #4c6ef5;
+}
+
+.main {
+    font-size: 4rem;
+    padding: 4rem 0;
+    color: black;
+    text-align: center;
+}
+
+.list {
+    text-align: center;
+    width: 100%;
+    margin: auto;
+}
+
+.list-row {
+    list-style: none;
+    padding: 0;
+}
+
+.list-row li {
+    border-bottom: 1px solid black;
+    display: flex;
+    padding: .5rem 0;
+}
+
+.list-row li span.no-0 {
+    flex: 1;
+}
+
+.list-row li span.no-1 {
+    flex: 2;
+}
+
+.list-row li span.no-2 {
+    flex: 3;
+}
+
+.list-row li span.no-3 {
+    flex: 4;
+}
+
+.list-row li span.no-4 {
+    flex: 5;
+}
+
+.list-row li span.no-5 {
+    flex: 6;
+}
+
+.list-row li span.name {
+    flex: 1;
+}
+
+.list-row li span.title {
+    flex: 7;
+}
+
+.list-row li span.datetime {
+    font-size: 12px;
+    flex: 1;
+}
+
+.action {
+    display: flex;
+}
+
+.action a {
+    flex: 1;
+    text-align: center;
+    border:1px solid black;
+}
+
+.pagination {
+    list-style: none;
+    display: flex;
+    margin:1rem 0;
+}
+
+.pagination a {
+    text-align: center;
+    width: 50px;
+    flex: 1;
+}
+
+.write, .modify, .follow {
+    display: grid;
+    width: 100%;
+    margin: auto;
+}
+
+.write div, .modify div, .follow div {
+    display: flex;
+}
+
+.write div input, .modify div input, .follow div input {
+}
+
+.write div input#name, .modify div input#name, .follow div input#name {
+    margin-right: .5rem;
+    width: 100px;
+}
+
+.write div input#title, .modify div input#title, .follow div input#title {
+    margin-left: .5rem;
+    flex: 1;
+}
+
+.write textarea, .modify textarea, .follow textarea {
+    height: 400px;
+    width: 99%;
+    margin: 1rem 0;
+}
+
+.write-button {
+    display:flex;
+}
+
+.write-button input[type=submit] {
+    flex:9;
+    margin-right:.5rem;
+}
+
+.write-button input[type=button] {
+    flex:1;
+    margin-left:.5rem;
+}
+
+.post li {
+    list-style: none;
+}
+
+.post li ul {
+    padding: 0;
+}
+
+.post li ul li {
+    border: 1px solid black;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.post li ul li.content {
+    border: 1px solid black;
+    min-height: 200px;
+}
