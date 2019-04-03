@@ -122,6 +122,24 @@ body.dark {
 			background-color: $oc-gray-9;
 			color: $oc-gray-0;
 		}
+
+		.editor-toolbar {
+			background-color: #263238;
+
+			& a {
+				color : #fff;
+			}
+		}
+
+		.CodeMirror {
+    		background-color:#263238;
+    		color:#e9eded
+		}
+
+		.editor-statusbar {
+			background: #263238;
+			color: #e9eded;
+		}
 	}
 
 	#list {
