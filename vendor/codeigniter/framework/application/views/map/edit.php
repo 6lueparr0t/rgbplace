@@ -1,16 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
+<link rel='stylesheet' href='/assets/ext/simplemde.min.css'/>
+<script src='/assets/ext/simplemde.min.js'></script>
+
 <div id='edit'>
 
 <!-- map/edit/<?=$map?>/<?=$type?>/<?=$num?> -->
-<input type='text' id='edit-title' name='edit-title' value="<?php echo $title; ?>" />
-
-<div class='tab'>
-	<div class='view'>view</div>
-	<div class='code'>code</div>
-</div>
-
-<div class='editor' id='edit-content' name='edit-content' contenteditable='true'>
-<?php echo $content; ?>
+<div class='edit-title'>
+	<input type='text' id='edit-title' name='edit-title' value="<?php echo $title; ?>" />
 </div>
 
 <textarea class='editor' id='edit-content-code' name='edit-content-code'>
@@ -24,8 +20,7 @@
 			<div class='upload-list-result'>
 <?php
 $upload = json_decode($this->session->userdata('upload'), true);
-
-if(isset($upload['total']) && count($upload) > 0) {
+if(isset($upload['total']) && count($upload['total']) > 0) {
 	echo "<ul class='file-list'>";
 	foreach($upload['total'] as $key => $val) {
 		echo "<li class='file' "
@@ -43,7 +38,7 @@ if(isset($upload['total']) && count($upload) > 0) {
 	echo "</ul>";
 } else {
 	echo "<ul class='file-list no-file'>"
-			."<li class='file'>No File.</li>"
+		."<li class='file'>No File.</li>"
 		."</ul>";
 }
 ?>

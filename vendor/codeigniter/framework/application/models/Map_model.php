@@ -466,41 +466,43 @@ class Map_model extends CI_Model {
 
 		$ret = '';
 		$ret .= "<div class='post'>";
-		foreach ($find->result() as $key => $row) {
-			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
-			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
-			$no   = $row->no;
-			$uid  = $row->uid;
-			$sn   = $row->sn;
-			$pageName = $title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $row->title))));
 
-			//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$row->content))), "<a><img><br><div><p><iframe>");
-			$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->content)), "<a><img><br><div><p><iframe>");
+		$date = ($find->row()->utim <= $find->row()->ctim)? date("Y-m-d", strtotime($find->row()->ctim)) : date("Y-m-d", strtotime($find->row()->utim));
+		$time = ($find->row()->utim <= $find->row()->ctim)? date("H:i:s", strtotime($find->row()->ctim)) : date("H:i:s", strtotime($find->row()->utim));
+		$no   = $find->row()->no;
+		$uid  = $find->row()->uid;
+		$sn   = $find->row()->sn;
+		$pageName = $title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $find->row()->title))));
 
-			$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $content);
-			$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
+		//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content))), "<a><img><br><div><p><iframe>");
+		$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><br><div><p><iframe>");
+		//$content = $find->row()->content;
 
-			$ret .= "<div class='post-title'><a href='/{$map}/{$row->type}/{$no}'>{$title}</a></div>";
-			$ret .= "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
+		//$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $content);
+		//$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
 
-			//."<span class='vote'>{$row->vote}</span>"
-			$ret .= "<div class='post-info'>"
-				."<span class='name' >"
-					."<i class='fa fa-user'></i>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' > ".$row->name." </a>":$row->name)
-				."</span>"
-				."<span class='hit'  ><i class='fa fa-eye'></i> {$row->hit} </span>"
-				."<span class='reply'><i class='far fa-comment-dots'></i> {$row->reply} </span>"
-				."<div class='link'><span id='link-copy'>".base_url()."{$map}/{$no}</span><span class='tooltip post-link' style='display:none;'>copied</span></div>"
+
+		$ret .= "<div class='post-title'><a href='/{$map}/{$find->row()->type}/{$no}'>{$title}</a></div>";
+		$ret .= "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
+
+		//."<span class='vote'>{$find->row()->vote}</span>"
+		$Parsedown = new Parsedown();
+		$ret .= "<div class='post-info'>"
+			."<span class='name' >"
+			."<i class='fa fa-user'></i>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' > ".$find->row()->name." </a>":$find->row()->name)
+			."</span>"
+			."<span class='hit'  ><i class='fa fa-eye'></i> {$find->row()->hit} </span>"
+			."<span class='reply'><i class='far fa-comment-dots'></i> {$find->row()->reply} </span>"
+			."<div class='link'><span id='link-copy'>".base_url()."{$map}/{$no}</span><span class='tooltip post-link' style='display:none;'>copied</span></div>"
 			."</div>"
-			."<div id='post-content'>{$content}</div>";
+			."<div id='post-content'>".$Parsedown->text($content)."</div>";
 
-			$ret .= "<div class='vote button-group'>"
-				."<span class='null'></span>"
-				."<div class='far fa-thumbs-up post-up {$activate} {$vote['up']}'> {$row->up} </div>"
-				."<div class='far fa-thumbs-down post-down {$activate} {$vote['down']}'> {$row->down} </div>"
-				."<span class='null'></span>"
-				."</div>";
-		}
+		$ret .= "<div class='vote button-group'>"
+			."<span class='null'></span>"
+			."<div class='far fa-thumbs-up post-up {$activate} {$vote['up']}'> {$find->row()->up} </div>"
+			."<div class='far fa-thumbs-down post-down {$activate} {$vote['down']}'> {$find->row()->down} </div>"
+			."<span class='null'></span>"
+			."</div>";
 		$ret .= "</div>";
 
 		// permission check
@@ -613,6 +615,7 @@ class Map_model extends CI_Model {
 			$type = $info[2];
 
 			//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
+			$content = str_replace('\n', PHP_EOL, $data['content']);
 
 			preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
 			preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
@@ -690,7 +693,7 @@ class Map_model extends CI_Model {
 
 		$title = htmlspecialchars($data['title']);
 		//$content = htmlspecialchars($data['content']);
-		$content = $data['content'];
+		$content = str_replace('\n', PHP_EOL, $data['content']);
 		if(!$title || !$content) return false;
 
 		//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
