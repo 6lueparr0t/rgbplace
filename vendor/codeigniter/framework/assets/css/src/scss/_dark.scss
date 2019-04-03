@@ -150,6 +150,10 @@ body.dark {
 			color: $oc-gray-0;
 		}
 
+		.editor-toolbar.disabled-for-preview a:not(.no-disable) {
+			color:#5a5a5a !important;
+		}
+
 		.editor-statusbar {
 			background: #263238;
 			color: #e9eded;
