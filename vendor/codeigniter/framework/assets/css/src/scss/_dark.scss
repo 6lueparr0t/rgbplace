@@ -138,7 +138,17 @@ body.dark {
 
 		.CodeMirror {
     		background-color:#263238;
-    		color:#e9eded
+    		color:#e9eded;
+
+			.CodeMirror-code {
+				.cm-string {
+					color: $oc-blue-3;
+				}
+
+				.cm-attribute {
+					color : $oc-violet-4;
+				}
+			}
 		}
 
 		.CodeMirror-cursor {
