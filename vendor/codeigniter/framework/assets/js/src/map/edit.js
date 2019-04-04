@@ -1,5 +1,7 @@
 "use strict"
 
+window.addEventListener("beforeunload", onUnload);
+
 var simplemde = new SimpleMDE({
 	element: document.getElementById("edit-content-code"),
 	forceSync: true,

@@ -1,82 +1,89 @@
 #sign-up {
-	margin-top:2rem;
+  margin-top: 2rem;
 
-	.info {
-		display:block;
-		margin:1rem auto;
-		padding:.5rem;
-		width: 80%;
-		max-width:800px;
-		height: 3rem;
-		font-size:1.5rem;
-		border-radius: .8rem;
+  .input-box {
+    display: flex;
+    width: 80%;
+    max-width: 820px;
+    margin: 1rem auto;
 
-		border:1px solid black;
 
-		&:focus{
-			outline:none;
-		}
-	}
+    .info {
+      /* display: block; */
+      /* margin: 1rem auto; */
+      /* padding: .5rem; */
+      /* flex: 1; */
+      /* max-width: 800px; */
+      /* height: 3rem; */
+      /* font-size: 1.5rem; */
+      /* border-radius: .8rem; */
+      /* border: 1px solid #000; */
 
-	.mail-group {
-		display:flex;
-		width: 80%;
-		max-width:820px;
-		margin:1rem auto;
+      height: 3rem;
+      font-size: 1.5rem;
+      padding: .5rem;
+      border-radius: .8rem;
+      border: 1px solid black;
+      width: 100%;
 
-		.mail {
-			flex-grow:99;
-			height: 3rem;
-			font-size:1.5rem;
-			padding:.5rem;
-			border-radius: .8rem;
-			border:1px solid black;
+      &:focus {
+        outline: none;
+      }
+    }
 
-			&:disabled {
-				background:$oc-gray-3;
-			}
-		}
+    .mail {
+      flex: 12 1 0%;
+      height: 3rem;
+      font-size: 1.5rem;
+      padding: .5rem;
+      border-radius: .8rem;
+      border: 1px solid black;
 
-		.check {
-			background: $oc-gray-3;
-			color: $oc-gray-9;
-			flex-grow:1;
-			height: 4.146rem;
-			font-size:1.5rem;
-			padding:.5rem;
-			margin: auto 0 auto 1rem;
-			border-radius: .8rem;
-			border:none;
+      &:disabled {
+        background: $oc-gray-3;
+      }
+    }
 
-			&:hover{
-				background: $oc-gray-7;
-				color: $oc-gray-0;
-			}
-			&:focus{
-				outline:none;
-			}
-		}
-	}
+    .check {
+      background: $oc-gray-3;
+      color: $oc-gray-9;
+      flex-grow: 1;
+      height: 4.146rem;
+      font-size: 1.5rem;
+      padding: .5rem;
+      margin-left: 1rem;
+      border-radius: .8rem;
+      border: none;
 
-	& button[type='submit'] {
-		background: $oc-gray-3;
-		color: $oc-gray-9;
-		display:block;
-		border:none;
-		margin:4rem auto 0 auto;
-		padding:.5rem;
-		width: 50%;
-		max-width:800px;
-		height: 3rem;
-		font-size:1.5rem;
-		border-radius: .8rem;
+      &:hover {
+        background: $oc-gray-7;
+        color: $oc-gray-0;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 
-		&:hover{
-			background: $oc-gray-7;
-			color: $oc-gray-0;
-		}
-		&:focus{
-			outline:none;
-		}
-	}
+  & button[type='submit'] {
+    background: $oc-gray-3;
+    color: $oc-gray-9;
+    display: block;
+    border: none;
+    margin: 4rem auto 0 auto;
+    padding: .5rem;
+    width: 50%;
+    max-width: 800px;
+    height: 3rem;
+    font-size: 1.5rem;
+    border-radius: .8rem;
+
+    &:hover {
+      background: $oc-gray-7;
+      color: $oc-gray-0;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
 }
