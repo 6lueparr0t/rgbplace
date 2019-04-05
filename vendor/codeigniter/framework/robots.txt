@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+User-agent: BaiDuSpider
+Disallow: / 
+
+User-agent: MJ12bot
+Disallow: / 
+
+Sitemap: https://rgbplace.com/sitemaps/index.xml
