@@ -960,7 +960,7 @@ class Map_model extends CI_Model {
 
 			$name    = ($row->dtim)?' [ X ] ':$row->name;
 			$sn      = $row->sn;
-			$mention = ($row->mention && !$row->dtim)? "<b class='mention'> @".$row->mention." </b> ":"";
+			$mention = ($row->mention && !$row->dtim)? "<b class='mention'> @".$row->mention." </b>":"";
 
 			//$row->content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $row->content);
 			$row->content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $row->content);
@@ -994,12 +994,12 @@ class Map_model extends CI_Model {
 			/* depth arrow output : top */
 			$ret .= "<span name='space' id='space'>";
 			for($i=0; $i<$depth_no; $i++) {
-				$ret .= "<i class='fa fa-reply' style='transform: rotate3d(0, 0, -1, 180deg);'></i>";
+				$ret .= "<i class='fa fa-reply'></i>";
 			}
 			$ret .= "</span>";
 			/* depth arrow output : end */
 
-			$ret .= "<span class='text'>{$mention}{$content}</span></li>";
+			$ret .= "{$mention}<span class='text'>{$content}</span></li>";
 
 			// reply info start
 			$ret .= "<div class='reply-info'>";
