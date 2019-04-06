@@ -1,29 +1,9 @@
 "use strict"
 
-window.addEventListener("beforeunload", onUnload);
+//window.addEventListener("beforeunload", onUnload);
 
-var simplemde = new SimpleMDE({
-	element: document.getElementById("edit-content-code"),
-	forceSync: true,
-	spellChecker: false,
-	toolbar: ["bold", "italic", "heading", "clean-block", "|", "quote", "unordered-list", "ordered-list", "|", "link",
-		{
-			name: "upload",
-			action: function customFunction(editor){
-				document.querySelector('#input_zone').click();
-			},
-			className: "fa fa-picture-o",
-			title: "Insert Image",
-		},
-		"table", "horizontal-rule", "|", "preview", "side-by-side", "fullscreen"
-	],
-	renderingConfig : {
-		singleLineBreaks :  false ,
-		codeSyntaxHighlighting :  true ,
-	},
-});
-
-var editor_position = document.querySelector('.CodeMirror-line');
+var tab = 'view';
+var editor_position = document.querySelector('#edit-content');
 //console.log(editor_position);
 
 /* ******************** Upload Event TOP ******************** */
@@ -225,40 +205,74 @@ function addList(data) {
 
 function addFile(data) {
 
-	let code = '';
+	let tag = '';
+	let str = '';
 	//let upload = JSON.parse(window.atob(document.querySelector('#edit-upload').value.substr(1)));
 	//console.log(data);
 
 	data.forEach(function(value, key) {
 		if(value['file_name']) {
 			console.log(value['file_name']);
-			code='';
+			tag='';
+			str='';
 
 			switch (value['file_type'].split('/')[0]) {
 				case 'image' :
-					code = "<img style='max-width:100%;' src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
+					tag = document.createElement('IMG');
+					tag.style.maxWidth = "100%";
+
+					tag.setAttribute('src', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<img style='max-width:100%;' src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
 					break;
 				case 'audio' :
-					code = "<audio controls src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
+					tag = document.createElement('AUDIO');
+					tag.setAttribute('controls', 'controls');
+
+					tag.setAttribute('src', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<audio controls src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
 					break;
 				case 'video' :
-					code = "<video controls src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
+					tag = document.createElement('VIDEO');
+					tag.setAttribute('controls', 'controls');
+
+					tag.setAttribute('src', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<video controls src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
 					break;
 				default :
-					code = "<a href='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"' download />";
+					tag = document.createElement('A');
+					tag.setAttribute('download', '');
+
+					tag.setAttribute('href', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<a href='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"' download />";
 					break;
 			}
 
 			//console.log(document.querySelector('#edit-content').innerText.match(/[^\n]*\n[^\n]*/gi).length);
 			//document.querySelector('#edit-content').appendChild(tag);
-			simplemde.codemirror.setSelection(editor_position, editor_position);
-			simplemde.codemirror.replaceSelection(code);
+			if(tab == 'view') {
+				if(editor_position.tagName === undefined) editor_position = editor_position.parentElement;
+				console.log(editor_position);
+				console.log(tag);
+				editor_position.appendChild(document.createElement("br"));
+				editor_position.appendChild(tag);
+				//document.querySelector('#edit-content').innerHTML += '<br/><br/>';
+			} else {
+				document.querySelector('#edit-content-code').value += str;
+			}
 			//document.querySelector('#edit-content').innerHTML += '<br/><br/>';
 			//upload.push({'file_name':value['file_name'], 'file_type':value['file_type'], 'client_name':value['client_name'], 'file_size':value['file_size']});
 
 		} else {
-			//document.querySelector('#edit-content').innerHTML += value;
-			editor_position.innerHTML += value;
+			document.querySelector('#edit-content').innerHTML += str;
+			//editor_position.innerHTML += value;
 		}
 		
 	});
@@ -309,20 +323,53 @@ function tabChange (element) {
     element.classList.add('active');
 }
 
-document.querySelector("#edit").addEventListener("keydown", function(event) {
-	editor_position = simplemde.codemirror.getCursor();
+document.querySelector("#edit-content").addEventListener("keydown", function(event) {
+	editor_position = window.getSelection().anchorNode;
+});
+
+document.querySelector("#edit-content").addEventListener("click", function(event) {
+	editor_position = window.getSelection().anchorNode;
 });
 
 document.querySelector("#edit").addEventListener("click", function(event) {
 	let t = event.target;
 	let title, editor, content;
 
+	let edit_content = document.querySelector('#edit-content');
+	let edit_content_code = document.querySelector('#edit-content-code');
+
 	let data = [];
 
 	switch(t.classList.item(0)) {
-		case 'CodeMirror-line' :
-			editor_position = simplemde.codemirror.getCursor();
+		case 'view' :
+			if(t.classList[1] === undefined) {
+				tab = 'view';
+
+				tabChange(t);
+				edit_content.innerHTML = edit_content_code.value;
+
+				edit_content.classList.remove('none');
+				edit_content.classList.add('active');
+
+				edit_content_code.classList.add('none');
+				edit_content_code.classList.remove('active');
+			}
+			return;
 			break;
+		case 'code' :
+			if(t.classList[1] === undefined) {
+				tab = 'code';
+
+				tabChange(t);
+				edit_content_code.value = edit_content.innerHTML.replace(/\n*(<\/?div|<img)/gi, "\n$1");
+
+				edit_content_code.classList.remove('none');
+				edit_content_code.classList.add('active');
+
+				edit_content.classList.add('none');
+				edit_content.classList.remove('active');
+			}
+			return;
 		case 'add' :
 			data.push({
 				'default_path' : t.parentElement.getAttribute('data-default-path'),
@@ -409,6 +456,5 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 });
 
 !function() {
-    //document.querySelector(".view").click();
-
+	document.querySelector(".view").click();
 }();
