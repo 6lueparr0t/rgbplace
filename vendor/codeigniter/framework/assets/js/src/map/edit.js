@@ -24,7 +24,7 @@ var simplemde = new SimpleMDE({
 });
 
 var editor_position = document.querySelector('.CodeMirror-line');
-console.log(editor_position);
+//console.log(editor_position);
 
 /* ******************** Upload Event TOP ******************** */
 const state = document.querySelector("label[for='input_zone']");
