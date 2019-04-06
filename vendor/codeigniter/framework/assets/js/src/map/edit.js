@@ -403,8 +403,12 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				return false;;
 			}
 
-			editor = document.querySelector('#edit-content-code');
-			content = editor.value;
+			editor = document.querySelector('.editor.active');
+			if(editor.id == 'edit-content') {
+				content = editor.innerHTML;
+			} else {
+				content = editor.value;
+			}
 
 			if(!content) {
 				Swal.fire({
