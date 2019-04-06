@@ -1,6 +1,6 @@
 "use strict"
 
-//window.addEventListener("beforeunload", onUnload);
+window.addEventListener("beforeunload", onUnload);
 
 var tab = 'view';
 var editor_position = document.querySelector('#edit-content');
@@ -296,6 +296,7 @@ function delFile(data) {
 /* ******************** Upload Event END ******************** */
 
 function done (data) {
+	window.removeEventListener("beforeunload", onUnload);
 	let num = data;
 	Swal.fire({
 		type: 'success',
