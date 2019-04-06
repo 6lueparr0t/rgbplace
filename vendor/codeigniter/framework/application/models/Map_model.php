@@ -960,7 +960,7 @@ class Map_model extends CI_Model {
 
 			$name    = ($row->dtim)?' [ X ] ':$row->name;
 			$sn      = $row->sn;
-			$mention = ($row->mention && !$row->dtim)? "<b class='mention'>@".$row->mention."</b> ":"";
+			$mention = ($row->mention && !$row->dtim)? "<b class='mention'> @".$row->mention." </b> ":"";
 
 			//$row->content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $row->content);
 			$row->content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $row->content);
