@@ -104,8 +104,8 @@ class Map extends CI_Controller {
 			if( ( $ret->row()->uid == $this->session->userdata('uid') && !in_array($type, array("best", "notice")) ) || $this->session->userdata('admin')) {
 				//$data['mode'] = 'update';
 				$this->session->set_userdata(['mode' => 'put']);
-				$data['title'] = stripslashes(preg_replace('/\\\n/i','\n',$ret->row()->title));
-				$data['content'] = stripslashes( preg_replace('/\\\n/i','<br/>', htmlspecialchars($ret->row()->content) ) );
+				$data['title'] = stripslashes($ret->row()->title);
+				$data['content'] = stripslashes( preg_replace('/\n/i','<br/>', htmlspecialchars($ret->row()->content) ) );
 
 				$this->session->set_userdata('upload', $ret->row()->upload); 
 
