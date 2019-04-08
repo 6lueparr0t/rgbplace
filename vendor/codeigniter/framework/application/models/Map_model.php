@@ -210,7 +210,7 @@ class Map_model extends CI_Model {
 
 			$up = ($row->up>0)?(($row->up>10)?"<span class='up'>+ {$row->up}</span>":"+ {$row->up}"):"";
 
-			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->title)), "<a><img><br><div><p><iframe>")."</a> {$replyCount} {$up}";
+			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->title)) )."</a> {$replyCount} {$up}";
 			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
 			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
 
@@ -472,11 +472,12 @@ class Map_model extends CI_Model {
 		$no   = $find->row()->no;
 		$uid  = $find->row()->uid;
 		$sn   = $find->row()->sn;
-		$pageName = $title = xss_clean(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','\n', $find->row()->title))));
+		$pageName = $title = xss_clean(htmlspecialchars_decode(stripslashes($find->row()->title)));
 
 		//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content))), "<a><img><br><div><p><iframe>");
-		$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><br><div><p><iframe>");
-		//$content = $find->row()->content;
+		//$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><video><audio><br><div><p><iframe>");
+		/*$content = preg_replace('/(<br[\s]*\/?>)/', PHP_EOL, htmlspecialchars_decode($find->row()->content));*/
+		$content = strip_tags(stripslashes($find->row()->content), "<a><img><video><audio><br><div><p><iframe>");
 
 		//$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $content);
 		//$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
@@ -618,12 +619,13 @@ class Map_model extends CI_Model {
 			$content = str_replace('\n', PHP_EOL, $data['content']);
 
 			preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
-			preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
+			preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
 
 			//$tag[0] => array : [tag], $tag[1] => array : tag 
 			$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
 			//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
+			$keyword[1] = array_diff($keyword[1], array(''));
 			$keyword = implode('|',$keyword[1]);
 
 			$query = "INSERT INTO {$table}
@@ -699,12 +701,13 @@ class Map_model extends CI_Model {
 		//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
-		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
+		preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
 
 		//$tag[0] => array : [tag], $tag[1] => array : tag 
 		$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
+		$keyword[1] = array_diff($keyword[1], array(''));
 		$keyword = implode('|',$keyword[1]);
 
 		$post_before_update = $this->post_select(null, $info)->row();
@@ -963,8 +966,11 @@ class Map_model extends CI_Model {
 			$mention = ($row->mention && !$row->dtim)? "<b class='mention'> @".$row->mention." </b>":"";
 
 			//$row->content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $row->content);
-			$row->content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $row->content);
-			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', $row->content));
+			//$row->content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $row->content);
+
+			$row->content = preg_replace('/((https?|chrome):\/\/[^\s$.?#].[^\s]*)/m', '<a href="$1" target="_blank">$1</a>', $row->content);
+
+			$content = ($row->dtim)?' [ Removed ] ':$row->content;
 
 			$depth = [
 				$row->depth1, $row->depth2, $row->depth3,

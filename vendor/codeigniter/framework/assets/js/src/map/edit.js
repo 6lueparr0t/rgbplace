@@ -344,31 +344,37 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 	switch(t.classList.item(0)) {
 		case 'view' :
 			if(t.classList[1] === undefined) {
-				tab = 'view';
+				tab = t.classList.item(0);
 
 				tabChange(t);
-				edit_content.innerHTML = edit_content_code.value;
+				edit_content.innerHTML = edit_content_code.value.replace(/\n/g, '<br/>');
 
-				edit_content.classList.remove('none');
 				edit_content.classList.add('active');
+				edit_content.classList.remove('none');
+				edit_content.parentElement.classList.remove('none');
 
 				edit_content_code.classList.add('none');
 				edit_content_code.classList.remove('active');
+				edit_content_code.parentElement.classList.add('none');
+
 			}
 			return;
 			break;
 		case 'code' :
 			if(t.classList[1] === undefined) {
-				tab = 'code';
+				tab = t.classList.item(0);
 
 				tabChange(t);
-				edit_content_code.value = edit_content.innerHTML.replace(/\n*(<\/?div|<img)/gi, "\n$1");
-
-				edit_content_code.classList.remove('none');
-				edit_content_code.classList.add('active');
+				edit_content_code.value = edit_content.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
 
 				edit_content.classList.add('none');
 				edit_content.classList.remove('active');
+				edit_content.parentElement.classList.add('none');
+
+				edit_content_code.classList.add('active');
+				edit_content_code.classList.remove('none');
+				edit_content_code.parentElement.classList.remove('none');
+
 			}
 			return;
 		case 'add' :
@@ -406,7 +412,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 
 			editor = document.querySelector('.editor.active');
 			if(editor.id == 'edit-content') {
-				content = editor.innerHTML;
+				content = editor.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
 			} else {
 				content = editor.value;
 			}

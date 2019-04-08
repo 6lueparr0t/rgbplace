@@ -12,13 +12,15 @@
 	<div class='code'>code</div>
 </div>
 
-<div class='editor' id='edit-content' name='edit-content' contenteditable='true'>
-<?php echo $content; ?>
-</div>
+<div class='editor-group'>
+	<div>
+		<div class="editor" id='edit-content' name='edit-content' contenteditable='true'><?php echo $content; ?></div>
+	</div>
 
-<textarea class='editor' id='edit-content-code' name='edit-content-code'>
-<?php echo $content; ?>
-</textarea>
+	<div>
+		<textarea class="editor" id='edit-content-code' name='edit-content-code'><?php echo $content; ?></textarea>
+	</div>
+</div>
 
 <div id='upload-list'>
 	<div id='upload-list-toggle'>Upload List <i id='upload-list-switch' class="fa fa-caret-down"></i></div>
