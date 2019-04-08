@@ -412,9 +412,11 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 			if(editor.id == 'edit-content') {
 				// remove div tag
 				//.replace(/\<[\/\s]*?div[\/\s]*?\>/g, '')
-				content = editor.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
+				//content = editor.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
+				content = editor.innerHTML;
 			} else {
-				content = editor.value;
+				//content = editor.value;
+				content = editor.value.replace(/\n/g, '<br/>');
 			}
 
 			if(!content) {
