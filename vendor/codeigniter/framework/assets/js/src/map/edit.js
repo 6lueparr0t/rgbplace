@@ -259,8 +259,6 @@ function addFile(data) {
 			//document.querySelector('#edit-content').appendChild(tag);
 			if(tab == 'view') {
 				if(editor_position.tagName === undefined) editor_position = editor_position.parentElement;
-				console.log(editor_position);
-				console.log(tag);
 				editor_position.appendChild(document.createElement("br"));
 				editor_position.appendChild(tag);
 				//document.querySelector('#edit-content').innerHTML += '<br/><br/>';
@@ -412,9 +410,13 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 
 			editor = document.querySelector('.editor.active');
 			if(editor.id == 'edit-content') {
-				content = editor.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
+				// remove div tag
+				//.replace(/\<[\/\s]*?div[\/\s]*?\>/g, '')
+				//content = editor.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
+				content = editor.innerHTML;
 			} else {
-				content = editor.value;
+				//content = editor.value;
+				content = editor.value.replace(/\n/g, '<br/>');
 			}
 
 			if(!content) {
