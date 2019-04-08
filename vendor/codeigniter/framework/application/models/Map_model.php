@@ -699,12 +699,13 @@ class Map_model extends CI_Model {
 		//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
-		preg_match_all("/#(.[^\s#]*)/m", strip_tags($data['content']), $keyword);
+		preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
 
 		//$tag[0] => array : [tag], $tag[1] => array : tag 
 		$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
+		$keyword[1] = array_diff($keyword[1], "");
 		$keyword = implode('|',$keyword[1]);
 
 		$post_before_update = $this->post_select(null, $info)->row();
@@ -963,7 +964,10 @@ class Map_model extends CI_Model {
 			$mention = ($row->mention && !$row->dtim)? "<b class='mention'> @".$row->mention." </b>":"";
 
 			//$row->content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $row->content);
-			$row->content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $row->content);
+			//$row->content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $row->content);
+
+			$row->content = preg_replace('/(https?|chrome):\/\/[^\s$.?#].[^\s]*/gm', '<a href="$1" target="_blank">$1</a>', $row->content);
+
 			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', $row->content));
 
 			$depth = [
