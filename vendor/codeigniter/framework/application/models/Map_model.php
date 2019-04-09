@@ -976,8 +976,8 @@ class Map_model extends CI_Model {
 			$row->content = preg_replace('/((https?|chrome):\/\/[^\s$.?#].[^\s]*)/m', '<a href="$1" target="_blank">$1</a>', $row->content);
 			//$row->content = preg_replace('/\\\n/', PHP_EOL, $row->content);
 
-			//$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', $row->content));
-			$content = ($row->dtim)?' [ Removed ] ':preg_replace('/\\\n/', PHP_EOL, $row->content);
+			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', $row->content));
+			//$content = ($row->dtim)?' [ Removed ] ':preg_replace('/\\\n/', PHP_EOL, $row->content);
 
 			$depth = [
 				$row->depth1, $row->depth2, $row->depth3,
