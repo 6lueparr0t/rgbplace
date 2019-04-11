@@ -224,7 +224,7 @@ class Map_model extends CI_Model {
 					.$reply
 				."</td>"
 				."<td class='hit'>{$row->hit}</td>"
-				."<td class='name'>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' > ".$row->name." </a>":$row->name)."</td>"
+				."<td class='name'>".(($sn)?"<a class='name ".(($this->session->userdata('signed_in')===true)?"enable":"disable")."' href='/profile?tab=info&no=". (($this->session->userdata('signed_in')===true)?urlencode( base64_encode($sn) ):"") ."' > ".$row->name." </a>":$row->name)."</td>"
 				."<td class='date' title='{$date} {$time}'>{$date}</td>"
 				."</tr>";
 		}
@@ -495,7 +495,7 @@ class Map_model extends CI_Model {
 		//."<span class='vote'>{$find->row()->vote}</span>"
 		$ret .= "<div class='post-info'>"
 			."<span class='name' >"
-			."<i class='fa fa-user'></i>".(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' > ".$find->row()->name." </a>":$find->row()->name)
+			."<i class='fa fa-user'></i>".(($sn)?"<a class='name ".(($this->session->userdata('signed_in')===true)?"enable":"disable")."' href='/profile?tab=info&no=". (($this->session->userdata('signed_in')===true)?urlencode( base64_encode($sn) ):"") ."' > ".$find->row()->name." </a>":$find->row()->name)
 			."</span>"
 			."<span class='hit'  ><i class='fa fa-eye'></i> {$find->row()->hit} </span>"
 			."<span class='reply'><i class='far fa-comment-dots'></i> {$find->row()->reply} </span>"
@@ -999,7 +999,7 @@ class Map_model extends CI_Model {
 
 			$ret .= "<span class='no'>{$no}</span>";
 			$ret .= "<div class='head ".(($post_uid==$reply_uid)?'owner':'')."'> "
-				.(($sn)?"<a class='name' href='/profile?tab=info&no=". urlencode( base64_encode($sn) ) ."' >".$name."</a>":$name)
+				.(($sn)?"<a class='name ".(($this->session->userdata('signed_in')===true)?"enable":"disable")."' href='/profile?tab=info&no=". (($this->session->userdata('signed_in')===true)?urlencode( base64_encode($sn) ):"") ."' >".$name."</a>":$name)
 				." <span class='date'>{$date} {$time}</span></div>";
 
 			$ret .= "<li class='content ".(($post_uid==$reply_uid)?'owner':'')."'>";
@@ -1523,7 +1523,7 @@ class Map_model extends CI_Model {
 			
 			$result = $this->db->query($query, array($act, $sn, $uid, $no, $act));
 		} else {
-			$query = "SELECT * FROM {$table} where sn=? and uid=? and type=? and relation=? and act in ('up','down','n', 'report') ";
+			$query = "SELECT * FROM {$table} where sn=? and uid=? and type=? and relation=? and act in ('up', 'down', '-', 'report') ";
 			$result = $this->db->query($query, array($sn, $uid, $type, $no));
 		}
 
@@ -1576,7 +1576,7 @@ class Map_model extends CI_Model {
 
 		if($result->num_rows() > 0) {
 			if (!is_null($result->row()->utim)) {
-				$query = "UPDATE {$history_table} SET act=?, ctim=now(), utim=NULL where uid=? and type=? and relation=? and act='n'";
+				$query = "UPDATE {$history_table} SET act=?, ctim=now(), utim=NULL where uid=? and type=? and relation=? and act='-'";
 				if( $this->db->query($query, array($act, $uid, $type, $no)) ) {
 					$query = "UPDATE {$update_table} SET {$act} = {$act} + {$point}  where no = ?";
 					$ret = $this->db->query($query, $no);
@@ -1588,8 +1588,8 @@ class Map_model extends CI_Model {
 				}
 			} else {
 				$act_check = $result->result();
-				if($act == $act_check[0]->act && $act_check[0]->act != 'n') {
-					$query = "UPDATE {$history_table} SET act='n', utim=now() where uid=? and type=? and relation=? and act=?";
+				if($act == $act_check[0]->act && $act_check[0]->act != '-') {
+					$query = "UPDATE {$history_table} SET act='-', utim=now() where uid=? and type=? and relation=? and act=?";
 					if( $this->db->query($query, array($uid, $type, $no, $act)) ) {
 						$query = "UPDATE {$update_table} SET {$act} = {$act} - {$point}  where no = ?";
 						$ret = $this->db->query($query, $no);
