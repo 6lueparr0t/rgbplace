@@ -308,8 +308,8 @@ function successPostVote (data) {
 		document.querySelector(".post-"+this.act+".enable").innerHTML = " "+data+" ";
 		document.querySelector(".post-"+this.act+".enable").classList.toggle('active');
 
-		let type = ['free', 'info']
-		if(type.includes(__URL_ARRAY__[2]) && data>20) {
+		let type = ['trip', 'food', 'daily', 'play', 'romance', 'news', 'dev']
+		if(type.includes(__URL_ARRAY__[2]) && data>20 && this.act === 'up') {
 			alert('😎');
 			redirect(__URL_ARRAY__[3], 'best');
 		}
