@@ -12,17 +12,23 @@
 	<div id='info-area' class='page none'>
 <?
 $sw = ($no && $this->session->userdata("admin") == false)?'disabled':'enabled';
+echo("<div class='table'>");
+
+if( !$no ) {
+	echo ("
+		<div class='tr'>
+			<div class='th'>uid</div>
+			<div class='td' id='uid'>{$uid}</div>
+		</div>
+	");
+}
+
 echo("
-		<div class='table'>
-			<div class='tr'>
-				<div class='th'>uid</div>
-				<div class='td' id='uid'>{$uid}</div>
-			</div>
-			<div class='tr'>
-				<div class='th'>Name</div>
-				<div class='td name'><input type='text' id='name' maxlength='20' value='{$name}' {$sw} /></div>
-			</div>
-			");
+	<div class='tr'>
+		<div class='th'>Name</div>
+		<div class='td name'><input type='text' id='name' maxlength='20' value='{$name}' {$sw} /></div>
+	</div>
+");
 
 if($this->session->userdata("admin") === false || $no) {
 	echo ("
