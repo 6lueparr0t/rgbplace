@@ -14,7 +14,7 @@
 $sw = ($no && $this->session->userdata("admin") == false)?'disabled':'enabled';
 echo("<div class='table'>");
 
-if( !$no ) {
+if( $this->session->userdata("admin") === true || !$no ) {
 	echo ("
 		<div class='tr'>
 			<div class='th'>uid</div>
