@@ -7,8 +7,13 @@ let conf = document.querySelector("#conf");
 
 function done (data) {
 	let num = data;
-	alert('수정되었습니다.\nDone !');
-	location.reload();
+	Swal.fire({
+        type: 'success',
+        title: 'Success',
+        html: '수정되었습니다.<br/>Update Done !'
+    }).then((result) => {
+		location.reload();
+    });
 	//redirect(num);
 }
 
@@ -271,10 +276,22 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 
 			if(document.querySelector('#mail') != null) {
 				if(validateMail(document.querySelector('#mail').value)) {
+					if(document.querySelector('#mail').value != document.querySelector('#mail').getAttribute('data-restore') && document.querySelector("#code").value == '') {
+						Swal.fire({
+							type: 'warning',
+							title: 'Update Fail',
+							html: '<input class="check" type="button" value="check"> 버튼을 눌러 이메일 검증을 해주세요.<br/><br/>please <input class="check" type="button" value="check"> button click and input Auth-Code.'
+						})
+						break;
+					}
 					mail = document.querySelector('#mail').value;
 					code = document.querySelector("#code").value;
 				} else {
-					alert('check your mail pattern');
+					Swal.fire({
+						type: 'warning',
+						title: 'Update Fail',
+						html: '메일을 확인해주세요.<br/>check your mail pattern'
+					})
 					break;
 				}
 			}
@@ -302,11 +319,16 @@ document.querySelector("#profile").addEventListener("click", function(event) {
 				'pswd' : pswd_conf
 			});
 
-			//console.log(data);
 			httpRequest('put', '/api/request/profile/save', JSON.stringify(data), done, updateFail);
 			break;
-		case 'cancel' :
-			back();
+		case 'reset' :
+			document.querySelector('#name').value = document.querySelector('#name').getAttribute('data-restore');
+			document.querySelector('#mail').value = document.querySelector('#mail').getAttribute('data-restore');
+			document.querySelector('#mail').removeAttribute('disabled'); clearInterval(x); x = undefined;
+			document.querySelector(".code").value = '';
+			document.querySelector(".code").parentElement.className = 'tr hidden';
+			pswd.value='';
+			conf.value='';
 			break;
 		case 'delete' :
 			if(confirm('계정을 삭제하시겠습니까? 계정 삭제 시, 게시물은 남아있을 수 있습니다. \n Delete Your Account? your post & reply will be remain')) {

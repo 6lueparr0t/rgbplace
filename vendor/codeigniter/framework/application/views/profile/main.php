@@ -26,7 +26,7 @@ if( $this->session->userdata("admin") === true || !$no ) {
 echo("
 	<div class='tr'>
 		<div class='th'>Name</div>
-		<div class='td name'><input type='text' id='name' maxlength='20' value='{$name}' {$sw} /></div>
+		<div class='td name'><input type='text' id='name' maxlength='20' value='{$name}' data-restore='{$name}' {$sw} /></div>
 	</div>
 ");
 
@@ -41,10 +41,10 @@ if($this->session->userdata("admin") === false || $no) {
 	if( !in_array($pswd, array('google')) && !$no ) {
 	echo ("
 			<div class='tr'>
-				<div class='th'>mail".(($sw=='enabled')?"<input type='button' id='check' name='check' value='check'/>":"")."
+				<div class='th'>mail".(($sw=='enabled')?"<input type='button' class='check' id='check' name='check' value='check'/>":"")."
 				</div>
 				<div class='td mail {$sw}'>
-					<input type='email' id='mail' name='mail' maxlength='400' value='{$mail}' {$sw}/>
+					<input type='email' id='mail' name='mail' maxlength='400' value='{$mail}' data-restore='{$mail}' {$sw}/>
 				</div>
 			</div>
 			<div class='tr hidden'>
@@ -89,7 +89,7 @@ if($this->session->userdata("admin") === true || (!$no && !in_array($pswd, array
 echo("
 		<div class='button-group'>
 			<div class='{$sw}' id='save' name='save'>SAVE</div>
-			<div class='{$sw}' id='cancel' name='cancel'>CANCEL</div>
+			<div class='{$sw}' id='reset' name='reset'>RESET</div>
 			<div class='{$sw}' id='delete' name='delete'>DEL</div>
 		</div>
 ");

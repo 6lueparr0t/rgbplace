@@ -4,9 +4,16 @@
         display:none;
     }
 
+	.check {
+		margin: 2px 5px 0 5px;
+		border-radius: 0.25rem;
+		background-color:$oc-green-6;
+		border-color:$oc-green-7;
+		color:white;
+	}
+
 	font-family: "pixel";
 	font-size: 1rem;
-
 
 	.page {
 		.table {
@@ -46,14 +53,6 @@
 
 				&.center {
 					text-align:center;
-				}
-
-				input[name='check'] {
-					margin: 2px 0 0 5px;
-					border-radius: 0.25rem;
-					background-color:$oc-green-6;
-					border-color:$oc-green-7;
-					color:white;
 				}
 
 			}
@@ -176,7 +175,7 @@
 				}
 			}
 
-			&#cancel {
+			&#reset{
 				flex-grow:49;
 
 				&.enabled {
