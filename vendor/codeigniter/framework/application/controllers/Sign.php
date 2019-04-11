@@ -252,10 +252,10 @@ class Sign extends CI_Controller {
 		$config = array (
 			'protocol' => 'sendmail',
 			'mailpath' => '/usr/sbin/sendmail',
-			//'smtp_host' => SMTP_HOST,
-			//'smtp_port' => SMTP_PORT,
-			//'smtp_user' => SMTP_USER,
-			//'smtp_pass' => SMTP_PASS,
+			'smtp_host' => SMTP_HOST,
+			'smtp_port' => SMTP_PORT,
+			'smtp_user' => SMTP_USER,
+			'smtp_pass' => SMTP_PASS,
 			'smtp_timeout' => 10,
 
 			'charset' => 'utf-8',
