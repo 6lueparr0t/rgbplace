@@ -59,7 +59,8 @@ class Template {
         ."<meta property='og:description' content='RGBplace : 지역 기반 커뮤니티'/>";
 
         echo "<title>".(($pageName === '')?"RGB place":$pageName)."</title>"
-        ."<link rel='icon' href='data:;base64,iVBORw0KGgo='>"
+        //."<link rel='icon' href='data:;base64,iVBORw0KGgo='>"
+		."<link rel='icon' href='/assets/img/favicon.ico'>"
         ."<link rel='stylesheet' href='/assets/ext/sweetalert2.min.css'/>"
         ."<link rel='stylesheet' href='/assets/css/dist/style.min.css'/>";
 
