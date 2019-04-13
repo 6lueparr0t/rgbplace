@@ -15,10 +15,10 @@
 			color:white;
 			font-size:2.4rem;
 			line-height:1.2rem;
-			text-shadow: 4px 4px $oc-gray-7;
+			text-shadow: 4px 0 $oc-gray-7;
 
 			@media screen and ($width-name : $target-width) {
-				font-size:1.4rem;
+				font-size:1rem;
 			}
 		}
 
@@ -56,9 +56,10 @@
 			max-width: initial;
     		margin-top: -3.2rem;
 
-			background-size: contain !important;
+			background-size: auto 100%!important;
 			background-repeat: no-repeat !important;
 			background-position: center !important;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 			&:after {
 				content:" ";
