@@ -31,7 +31,7 @@ ws.onmessage = (event) => {
 					console.log(push['msg']);
 					break;
 				case 'broad' :
-					console.log(push['msg']);
+					alert(push['msg']);
 					break;
 			}
 			break;
