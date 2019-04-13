@@ -15,7 +15,12 @@ class Profile extends CI_Controller {
 			$no = base64_decode( urldecode($this->input->get('no')) );
 			$data = $this->profile->info($no);
 			if(!$data) {
-				redirect("/");
+				echo <<<EOD
+<script>
+alert('이미 탈퇴한 회원입니다.\\nalready removed account');
+location.replace(document.referrer);
+</script>
+EOD;
 			} else {
 				$data['no'] = $no;
 				$this->root->view("profile/main", $data);
