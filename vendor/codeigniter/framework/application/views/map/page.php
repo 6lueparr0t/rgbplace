@@ -11,7 +11,7 @@
 	  <div class='title <?php echo ($title)?'':'no-title'; ?>'>
         <?php echo ($title)?$title:'&nbsp;'; ?></div>
 	  </a>
-	  <img src="<?php echo $scene?>" />
+	  <div class='main' style="background-image:url('<?php echo $scene?>');"></div>
   </div>
 
   <div class='notice'>

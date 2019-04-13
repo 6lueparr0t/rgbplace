@@ -12,14 +12,21 @@
 		margin  : 2rem 1rem 1rem 1rem;
 
 		a {
-			color:$oc-gray-9;
+			color:white;
+			font-size:2.4rem;
+			line-height:1.2rem;
+			text-shadow: 4px 4px $oc-gray-7;
+
+			@media screen and ($width-name : $target-width) {
+				font-size:1.4rem;
+			}
 		}
 
 		& .title {
 			position: relative;
 			//left: 50%;
 			//transform: translate(-50%, 0%);
-			background-color: rgba(255,255,255,0.6);
+			//background-color: rgba(255,255,255,0.6);
 			width: 100%;
 			text-align: center;
 			padding: 1rem 0;
@@ -32,9 +39,15 @@
 			&.no-title {
 				background-color: rgba(255,255,255,0);
 			}
+
+			top:500px;
+
+			@media screen and ($width-name : $target-width) {
+				top:12rem;
+			}
 		}
 
-		& img {
+		& .main {
 			display: block;
 			margin: auto;
 			height: 600px;
@@ -43,9 +56,42 @@
 			max-width: initial;
     		margin-top: -3.2rem;
 
+			background-size: contain !important;
+			background-repeat: no-repeat !important;
+			background-position: center !important;
+
+			&:after {
+				content:" ";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+
+				background-image:
+				//https://larsenwork.com/easing-gradients/
+				  linear-gradient(
+					to bottom,
+					hsla(0, 0%, 0%, 0) 0%,
+					hsla(0, 0%, 0%, 0.01) 8.1%,
+					hsla(0, 0%, 0%, 0.037) 15.5%,
+					hsla(0, 0%, 0%, 0.079) 22.5%,
+					hsla(0, 0%, 0%, 0.133) 29%,
+					hsla(0, 0%, 0%, 0.197) 35.3%,
+					hsla(0, 0%, 0%, 0.268) 41.2%,
+					hsla(0, 0%, 0%, 0.342) 47.1%,
+					hsla(0, 0%, 0%, 0.418) 52.9%,
+					hsla(0, 0%, 0%, 0.492) 58.8%,
+					hsla(0, 0%, 0%, 0.563) 64.7%,
+					hsla(0, 0%, 0%, 0.627) 71%,
+					hsla(0, 0%, 0%, 0.681) 77.5%,
+					hsla(0, 0%, 0%, 0.723) 84.5%,
+					hsla(0, 0%, 0%, 0.75) 91.9%,
+					hsla(0, 0%, 0%, 0.76) 100%
+				  );
+			}
+
 			@media screen and ($width-name : $target-width) {
-				display: table;
-				margin: auto;
 				max-width:100%;
 				height:16rem;
 			}
