@@ -25,7 +25,7 @@ const attachSignin = element => {
 				mail : profile.getEmail()
 			}];
 
-			httpRequest('post', '/oauth2/google', JSON.stringify(data), data => { location.reload(); }, data => { console.log(data); });
+			httpRequest('post', '/oauth/google', JSON.stringify(data), data => { location.reload(); }, data => { console.log(data); });
 
 		}, function(error) {
 			//console.log(JSON.stringify(error, undefined, 2));
