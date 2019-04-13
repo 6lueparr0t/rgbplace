@@ -926,17 +926,17 @@
     },
     {
         "name": "erusev/parsedown",
-        "version": "v1.7.2",
-        "version_normalized": "1.7.2.0",
+        "version": "1.7.3",
+        "version_normalized": "1.7.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/erusev/parsedown.git",
-            "reference": "d60bcdc46978357759ecb13cb4b078da783f8faf"
+            "reference": "6d893938171a817f4e9bc9e86f2da1e370b7bcd7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/erusev/parsedown/zipball/d60bcdc46978357759ecb13cb4b078da783f8faf",
-            "reference": "d60bcdc46978357759ecb13cb4b078da783f8faf",
+            "url": "https://api.github.com/repos/erusev/parsedown/zipball/6d893938171a817f4e9bc9e86f2da1e370b7bcd7",
+            "reference": "6d893938171a817f4e9bc9e86f2da1e370b7bcd7",
             "shasum": ""
         },
         "require": {
@@ -946,7 +946,7 @@
         "require-dev": {
             "phpunit/phpunit": "^4.8.35"
         },
-        "time": "2019-03-17T17:19:46+00:00",
+        "time": "2019-03-17T18:48:37+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1103,17 +1103,17 @@
     },
     {
         "name": "symfony/console",
-        "version": "v4.2.4",
-        "version_normalized": "4.2.4.0",
+        "version": "v4.2.5",
+        "version_normalized": "4.2.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/console.git",
-            "reference": "9dc2299a016497f9ee620be94524e6c0af0280a9"
+            "reference": "24206aff3efe6962593297e57ef697ebb220e384"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/9dc2299a016497f9ee620be94524e6c0af0280a9",
-            "reference": "9dc2299a016497f9ee620be94524e6c0af0280a9",
+            "url": "https://api.github.com/repos/symfony/console/zipball/24206aff3efe6962593297e57ef697ebb220e384",
+            "reference": "24206aff3efe6962593297e57ef697ebb220e384",
             "shasum": ""
         },
         "require": {
@@ -1142,7 +1142,7 @@
             "symfony/lock": "",
             "symfony/process": ""
         },
-        "time": "2019-02-23T15:17:42+00:00",
+        "time": "2019-04-01T07:32:59+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

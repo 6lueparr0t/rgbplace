@@ -9,14 +9,18 @@ document.querySelector("#send").addEventListener("click", (event) => {
 
 document.querySelector("#ajax").addEventListener("click", (event) => {
 	let data = [];
+	let msg = document.querySelector("#message").value;
 
 	data.push({
+		'act': 'alert',
+		'mode': 'broad',
+		'msg': msg,
 		'info': __URL__,
 		'sn': user.sn,
 		'uid': user.uid
 	});
 
-	httpRequest('POST', '/api/push/test', JSON.stringify(data), data => {}, null);
+	httpRequest('POST', '/push/send/test', JSON.stringify(data), data => {}, null);
 });
 
 !(() => {

@@ -314,11 +314,16 @@ class Api extends CI_Controller {
 			$info = explode('/', $this->db->escape_str($target['info']));
 			unset($target['info']);
 
-			$searchFileName = $this->api->searchUploadFile($target['file_name']);
+			if($this->session->userdata('admin') === true ) {
+				unlink('upload/'.$target['file_name']);
+				$this->api->deleteUploadFile($target['file_name']);
+			} else {
+				$searchFileName = $this->api->searchUploadFile($target['file_name']);
 
-			if(isset($searchFileName) && $searchFileName != '') {
-				unlink('upload/'.$searchFileName);
-				$this->api->deleteUploadFile($searchFileName);
+				if(isset($searchFileName) && $searchFileName != '') {
+					unlink('upload/'.$searchFileName);
+					$this->api->deleteUploadFile($searchFileName);
+				}
 			}
 
 			$upload = json_decode($this->session->userdata('upload'), true);
@@ -419,35 +424,6 @@ class Api extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	public function push ($type = null, $act = null) {
-		$method = $this->input->method();
-		$data = (array)json_decode($this->input->raw_input_stream)[0];
-
-		if(!$data) redirect("/");
-        $data = $this->db->escape_str($data);
-        $info = explode('/', $this->db->escape_str($data['info']));
-        unset($data['info']);
-
-		// act : alert, noti
-		// mode : uni, multi, broad
-		// recv : id1, 'id1|id2', ''
-		// map : map1, 'map1|map2', ''
-		// post : post number, ''
-		switch($type) {
-		case 'test' :
-			$data['act'] = 'alert';
-			$data['mode'] = 'broad';
-			$data['recv'] = '';
-			$data['map' ] = $info[1];
-			$data['msg'] = 'test';
-			$data['key' ] = WS_KEY;
-			$this->push->send(json_encode($data));
-			break;
-		}
-
-		echo json_encode(true);
-	}
-
 	public function config ($type = null, $act = null) {
 		$method = $this->input->method();
 		if($method == 'get') {
@@ -485,42 +461,6 @@ class Api extends CI_Controller {
 				}
 			}	
 			break;
-		}
-
-		echo json_encode($ret);
-	}
-
-	public function google()
-	{
-		$method = $this->input->method();
-
-		$ret = false;
-		if($method == 'post') {
-			$data = (array)json_decode($this->input->raw_input_stream)[0];
-			
-			//$name = explode(' ', $data['name']);
-			$uid = explode('@', $data['mail'])[0];
-			$mail = $data['mail'];
-
-			$param = array(
-				'name' => $uid,
-				'mail' => $mail
-			);
-
-			if( $ret = $this->api->googleSignUpAndLoginCheck($param) ) {
-				$googleUser = [
-					'sn'        => $ret['sn'],
-					'uid'       => $mail,
-					'name'      => $ret['name'],
-					'admin'     => FALSE,
-					'google'    => TRUE,
-					'signed_in' => TRUE
-				];
-
-				$this->session->set_userdata($googleUser);
-
-				$ret = true;
-			}
 		}
 
 		echo json_encode($ret);
