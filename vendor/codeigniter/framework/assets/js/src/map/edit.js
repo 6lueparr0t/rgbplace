@@ -354,6 +354,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				//edit_content.innerHTML = edit_content_code.value.replace(/\n/g, '<br/>');
 				edit_content.classList.toggle('none');
 				edit_content.parentElement.classList.toggle('none');
+				sync();
 			}
 			return;
 			break;
@@ -365,6 +366,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				//edit_content_code.value = edit_content.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
 				edit_content_view.classList.toggle('none');
 				edit_content_view.parentElement.classList.toggle('none');
+				sync();
 			}
 			return;
 		case 'add' :
