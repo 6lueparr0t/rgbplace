@@ -105,7 +105,7 @@ class Map extends CI_Controller {
 				//$data['mode'] = 'update';
 				$this->session->set_userdata(['mode' => 'put']);
 				$data['title'] = stripslashes($ret->row()->title);
-				$data['content'] = stripslashes( preg_replace('/\n/i','<br/>', htmlspecialchars($ret->row()->content) ) );
+				$data['content'] = strip_tags(stripslashes($ret->row()->content), "<a><img><video><audio><br><p><div><span><iframe>");
 
 				$this->session->set_userdata('upload', $ret->row()->upload); 
 

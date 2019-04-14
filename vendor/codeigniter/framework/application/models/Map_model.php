@@ -485,7 +485,7 @@ class Map_model extends CI_Model {
 		 */
 		//$content = stripslashes( preg_replace('/\n/i','<br/>', htmlspecialchars($find->row()->content) ) );
 
-		//$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $content);
+		$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$2" alt="$1" />', $content);
 		//$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
 
 

@@ -2,7 +2,7 @@
 
 window.addEventListener("beforeunload", onUnload);
 
-var tab = 'view';
+var tab = 'code';
 var editor_position = document.querySelector('#edit-content');
 //console.log(editor_position);
 
@@ -224,7 +224,8 @@ function addFile(data) {
 					tag.setAttribute('src', value['default_path']+value['file_name']);
 					tag.setAttribute('alt', value['client_name']);
 
-					str = "<img style='max-width:100%;' src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
+					//str = "<img style='max-width:100%;' src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
+					str = "!["+value['client_name']+"]("+value['default_path']+value['file_name']+")";
 					break;
 				case 'audio' :
 					tag = document.createElement('AUDIO');
@@ -257,20 +258,19 @@ function addFile(data) {
 
 			//console.log(document.querySelector('#edit-content').innerText.match(/[^\n]*\n[^\n]*/gi).length);
 			//document.querySelector('#edit-content').appendChild(tag);
-			if(tab == 'view') {
+			//if(tab == 'code') {
 				if(editor_position.tagName === undefined) editor_position = editor_position.parentElement;
 				editor_position.appendChild(document.createElement("br"));
-				editor_position.appendChild(tag);
+				//editor_position.appendChild(tag);
+				editor_position.innerHTML += str;
+				sync();
 				//document.querySelector('#edit-content').innerHTML += '<br/><br/>';
-			} else {
-				document.querySelector('#edit-content-code').value += str;
-			}
+			//} else {
+				//document.querySelector('#edit-content-code').value += str;
+			//}
 			//document.querySelector('#edit-content').innerHTML += '<br/><br/>';
 			//upload.push({'file_name':value['file_name'], 'file_type':value['file_type'], 'client_name':value['client_name'], 'file_size':value['file_size']});
 
-		} else {
-			document.querySelector('#edit-content').innerHTML += str;
-			//editor_position.innerHTML += value;
 		}
 		
 	});
@@ -314,14 +314,6 @@ function fail (data) {
 	})
 }
 
-function tabChange (element) {
-    document.querySelectorAll('.tab div').forEach(function (element) {
-        element.classList.remove('active');
-    });
-
-    element.classList.add('active');
-}
-
 document.querySelector("#edit-content").addEventListener("keydown", function(event) {
 	editor_position = window.getSelection().anchorNode;
 });
@@ -330,49 +322,49 @@ document.querySelector("#edit-content").addEventListener("click", function(event
 	editor_position = window.getSelection().anchorNode;
 });
 
+let edit_content = document.querySelector('#edit-content');
+let edit_content_view = document.querySelector('#edit-content-view');
+let edit_content_code = document.querySelector('#edit-content-code');
+
+function sync() {
+	edit_content_code.innerHTML = edit_content.innerHTML;
+
+	if(!edit_content_view.classList.contains('none')) {
+		edit_content_view.innerHTML = edit_content_code.value.replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />');
+	}
+}
+
+edit_content.onkeydown = edit_content.onkeyup = (e) => {
+	sync();
+};
+
+
 document.querySelector("#edit").addEventListener("click", function(event) {
 	let t = event.target;
 	let title, editor, content;
 
-	let edit_content = document.querySelector('#edit-content');
-	let edit_content_code = document.querySelector('#edit-content-code');
-
 	let data = [];
 
 	switch(t.classList.item(0)) {
-		case 'view' :
-			if(t.classList[1] === undefined) {
+		case 'code' :
+			if(!edit_content_view.classList.contains('none')) {
 				tab = t.classList.item(0);
+				t.classList.toggle('active');
 
-				tabChange(t);
-				edit_content.innerHTML = edit_content_code.value.replace(/\n/g, '<br/>');
-
-				edit_content.classList.add('active');
-				edit_content.classList.remove('none');
-				edit_content.parentElement.classList.remove('none');
-
-				edit_content_code.classList.add('none');
-				edit_content_code.classList.remove('active');
-				edit_content_code.parentElement.classList.add('none');
-
+				//edit_content.innerHTML = edit_content_code.value.replace(/\n/g, '<br/>');
+				edit_content.classList.toggle('none');
+				edit_content.parentElement.classList.toggle('none');
 			}
 			return;
 			break;
-		case 'code' :
-			if(t.classList[1] === undefined) {
+		case 'view' :
+			if(!edit_content.classList.contains('none')) {
 				tab = t.classList.item(0);
+				t.classList.toggle('active');
 
-				tabChange(t);
-				edit_content_code.value = edit_content.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
-
-				edit_content.classList.add('none');
-				edit_content.classList.remove('active');
-				edit_content.parentElement.classList.add('none');
-
-				edit_content_code.classList.add('active');
-				edit_content_code.classList.remove('none');
-				edit_content_code.parentElement.classList.remove('none');
-
+				//edit_content_code.value = edit_content.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
+				edit_content_view.classList.toggle('none');
+				edit_content_view.parentElement.classList.toggle('none');
 			}
 			return;
 		case 'add' :
@@ -408,16 +400,18 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				return false;;
 			}
 
-			editor = document.querySelector('.editor.active');
-			if(editor.id == 'edit-content') {
-				// remove div tag
-				//.replace(/\<[\/\s]*?div[\/\s]*?\>/g, '')
-				//content = editor.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
-				content = editor.innerHTML;
-			} else {
-				//content = editor.value;
-				content = editor.value.replace(/\n/g, '<br/>');
-			}
+			//editor = document.querySelector('.editor.active');
+			//console.log(editor);
+			//if(editor.id == 'edit-content') {
+				//// remove div tag
+				////.replace(/\<[\/\s]*?div[\/\s]*?\>/g, '')
+				////content = editor.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
+				//content = editor.innerHTML;
+			//} else {
+				////content = editor.value;
+				//content = editor.value.replace(/\n/g, '<br/>');
+			//}
+			content = edit_content_code.value;
 
 			if(!content) {
 				Swal.fire({
@@ -469,5 +463,6 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 });
 
 !function() {
-	document.querySelector(".view").click();
+	//document.querySelector(".code").click();
+	sync();
 }();
