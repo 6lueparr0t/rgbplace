@@ -8,17 +8,17 @@
 
 <div class='tab'>
 	<div class='code active'>code</div>
-	<div class='view active'>view</div>
+	<div class='view'>view</div>
 </div>
 
 <div class='editor-group'>
-	<div>
+	<div class=''>
 		<div class="editor" id='edit-content' name='edit-content' contenteditable='true'><?php echo $content; ?></div>
 		<textarea class="editor" id='edit-content-code' name='edit-content-code'></textarea>
 	</div>
 
-	<div>
-        <div class="editor" id='edit-content-view'></div>
+	<div class='none'>
+        <div class="editor none" id='edit-content-view'></div>
 	</div>
 </div>
 
