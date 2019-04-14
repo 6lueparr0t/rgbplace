@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
-
 <div id='edit'>
 
 <!-- map/edit/<?=$map?>/<?=$type?>/<?=$num?> -->
@@ -8,17 +7,18 @@
 </div>
 
 <div class='tab'>
-	<div class='view'>view</div>
-	<div class='code'>code</div>
+	<div class='code active'>code</div>
+	<div class='view active'>view</div>
 </div>
 
 <div class='editor-group'>
 	<div>
 		<div class="editor" id='edit-content' name='edit-content' contenteditable='true'><?php echo $content; ?></div>
+		<textarea class="editor" id='edit-content-code' name='edit-content-code'></textarea>
 	</div>
 
 	<div>
-		<textarea class="editor" id='edit-content-code' name='edit-content-code'><?php echo $content; ?></textarea>
+        <div class="editor" id='edit-content-view'></div>
 	</div>
 </div>
 
