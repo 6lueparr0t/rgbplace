@@ -624,11 +624,10 @@ class Map_model extends CI_Model {
 			$content = str_replace('\n', PHP_EOL, $data['content']);
 
 			preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
-			preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
-
 			//$tag[0] => array : [tag], $tag[1] => array : tag 
 			$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
+			preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
 			//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 			$keyword[1] = array_diff($keyword[1], array(''));
 			$keyword = implode('|',$keyword[1]);
@@ -706,11 +705,10 @@ class Map_model extends CI_Model {
 		//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
-		preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
-
 		//$tag[0] => array : [tag], $tag[1] => array : tag 
 		$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
+		preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword[1] = array_diff($keyword[1], array(''));
 		$keyword = implode('|',$keyword[1]);
