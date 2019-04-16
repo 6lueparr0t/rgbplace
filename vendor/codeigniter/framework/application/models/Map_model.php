@@ -173,7 +173,7 @@ class Map_model extends CI_Model {
 		if($search_list) {
 			$where .= " and (".implode(' or ', $search_list).")";
 		} else {
-			$query_for_notice = "SELECT post.* FROM {$table} where type='".$this->db->escape_str($type)."' and sn is null and keyword like 'notice%'";
+			$query_for_notice = "SELECT post.* FROM {$table} where type='".$this->db->escape_str($type)."' and sn is null and keyword like 'notice%' ORDER BY no desc";
 			$notice = $this->db->query($query_for_notice);
 		}
 
