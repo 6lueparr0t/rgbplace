@@ -300,7 +300,7 @@ function done (data) {
 		type: 'success',
 		title: 'Done',
 		html: '등록 완료<br/>Save and Post Done!',
-	}).then((result) => {
+	}).then(function (result) {
 		redirect(num);
 	});
 }
@@ -432,7 +432,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				confirmButtonColor: '#3085d6',
 				cancelButtonColor: '#d33',
 				confirmButtonText: 'Yes!'
-			}).then((result) => {
+			}).then(function (result) {
 				if(result.value && title && content) {
 					data.push({
 						'info': __URL__,

@@ -11,7 +11,7 @@ function done (data) {
         type: 'success',
         title: 'Success',
         html: '수정되었습니다.<br/>Update Done !'
-    }).then((result) => {
+    }).then( function (result) {
 		location.reload();
     });
 	//redirect(num);
