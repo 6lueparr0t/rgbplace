@@ -78,8 +78,8 @@ class Template {
         echo "</head>";
 
         $darkmode = ($this->CI->session->userdata('darkmode')==='on')?'dark':'';
-	echo "<body class='{$darkmode}'>";
-	echo '<!-- Google Tag Manager (noscript) -->
+		echo "<body class='{$darkmode}'>";
+		echo '<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59R2NC9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->';
