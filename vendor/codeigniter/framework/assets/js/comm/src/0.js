@@ -1,7 +1,7 @@
 "use strict"
 
 let onUnload = function () {
-    event.returnValue = 1;
+    event.returnValue = ' ';
 }
 
 // ["127.0.0.1", "space", "best", "1"]
