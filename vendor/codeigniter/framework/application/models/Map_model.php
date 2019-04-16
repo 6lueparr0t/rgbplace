@@ -64,7 +64,7 @@ class Map_model extends CI_Model {
 
 		$table = $this->db->escape_str("map_{$map}_post");
 
-		$query = "SELECT * FROM {$table} where type='{$type}' ORDER BY no desc LIMIT ".$this->db->escape_str($limit);
+		$query = "SELECT * FROM {$table} where type='{$type}' and (sn is not null or keyword not like 'notice%') ORDER BY no desc LIMIT ".$this->db->escape_str($limit);
 		if($this->db->simple_query($query)) {
 			$find = $this->db->query($query, $type);
 		} else {
@@ -116,7 +116,7 @@ class Map_model extends CI_Model {
 		$category = ['search', 'title', 'content', 'reply', 'name', 'keyword', 'ctim'];
 		$search_list = [];
 
-		$where = "post.type='".$this->db->escape_str($type)."'";
+		$where = "post.type='".$this->db->escape_str($type)."' and (post.sn is not null or post.keyword not like 'notice%')";
 
 		for($i=0; $i<count($category); $i++) {
 			if(array_key_exists($category[$i], $search) && $search[$category[$i]]) {
@@ -170,7 +170,12 @@ class Map_model extends CI_Model {
 			$field = '';
 		}
 
-		if($search_list) $where .= " and (".implode(' or ', $search_list).")";
+		if($search_list) {
+			$where .= " and (".implode(' or ', $search_list).")";
+		} else {
+			$query_for_notice = "SELECT post.* FROM {$table} where sn is null and keyword like 'notice%'";
+			$notice = $this->db->query($query_for_notice);
+		}
 
 		//$where .= " and title like '%{$search['title']}%' ";
 
@@ -195,40 +200,12 @@ class Map_model extends CI_Model {
 		}
 
 		// title list
-		foreach ($find->result() as $key => $row) {
-			$no = $row->no;
-			$sn = $row->sn;
-
-			$replyCount = ($row->reply > 0)?"<a href='/{$map}/{$row->type}/{$row->no}{$param}'> <i class='far fa-comment-dots'></i> {$row->reply}</a>":"";
-
-			if(isset($row->reply_no) && isset($row->reply_content)) {
-				$param2 = "&no={$row->reply_no}";
-				$reply = "<a href='/{$map}/{$row->type}/{$row->no}{$param}{$param2}'>{$row->reply_content}</a>";
-			} else {
-				$reply = '';
-			}
-
-			$up = ($row->up>0)?(($row->up>10)?"<span class='up'>+ {$row->up}</span>":"+ {$row->up}"):"";
-
-			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->title)) )."</a> {$replyCount} {$up}";
-			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
-			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
-
-			$toggle = "<div class='toggle'><span class='toggle-name'>{$row->name}</span> <span class='toggle-date'>{$date} {$time}</span></div>";
-
-			echo "<tr class='list-row'>"
-				."<td class='no'>{$row->no}</td>"
-				."<td class='title'>"
-					.xss_clean($title)
-					.$toggle
-					.$reply
-				."</td>"
-				."<td class='hit'>{$row->hit}</td>"
-				."<td class='name'>".(($sn)?"<a class='name ".(($this->session->userdata('signed_in')===true)?"enable":"disable")."' href='/profile?tab=info&no=". (($this->session->userdata('signed_in')===true)?urlencode( base64_encode($sn) ):"") ."' > ".$row->name." </a>":$row->name)."</td>"
-				."<td class='date' title='{$date} {$time}'>{$date}</td>"
-				."</tr>";
+		if(isset($notice)) {
+			@$this->list_row ($notice, $map, $param, $param2, true);
 		}
 
+		// title list
+		@$this->list_row ($find, $map, $param, $param2);
 
 		// ****************
 		// button group TOP
@@ -303,6 +280,44 @@ class Map_model extends CI_Model {
 
 		return true;
 	}
+
+	private function list_row ($list, $map, $param, $param2='', $is_notice=false) {
+		foreach ($list->result() as $key => $row) {
+			$no = (($is_notice===true)?'NOTICE':$row->no);
+			$sn = $row->sn;
+
+			$replyCount = ($row->reply > 0)?"<a href='/{$map}/{$row->type}/{$row->no}{$param}'> <i class='far fa-comment-dots'></i> {$row->reply}</a>":"";
+
+			if(isset($row->reply_no) && isset($row->reply_content)) {
+				$param2 = "&no={$row->reply_no}";
+				$reply = "<a href='/{$map}/{$row->type}/{$row->no}{$param}{$param2}'>{$row->reply_content}</a>";
+			} else {
+				$reply = '';
+			}
+
+			$up = ($row->up>0)?(($row->up>10)?"<span class='up'>+ {$row->up}</span>":"+ {$row->up}"):"";
+
+			$title = "<a href='/{$map}/{$row->type}/{$row->no}{$param}'>".strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$row->title)) )."</a> {$replyCount} {$up}";
+			$date = ($row->utim <= $row->ctim)? date("Y-m-d", strtotime($row->ctim)) : date("Y-m-d", strtotime($row->utim));
+			$time = ($row->utim <= $row->ctim)? date("H:i:s", strtotime($row->ctim)) : date("H:i:s", strtotime($row->utim));
+
+			$toggle = "<div class='toggle'><span class='toggle-name'>{$row->name}</span> <span class='toggle-date'>{$date} {$time}</span></div>";
+
+			echo "<tr class='list-row ".(($is_notice===true)?"notice":null)."'>"
+				."<td class='no'>{$no}</td>"
+				."<td class='title'>"
+				.xss_clean($title)
+				.$toggle
+				.$reply
+				."</td>"
+				."<td class='hit'>{$row->hit}</td>"
+				."<td class='name'>".(($sn)?"<a class='name ".(($this->session->userdata('signed_in')===true)?"enable":"disable")."' href='/profile?tab=info&no=". (($this->session->userdata('signed_in')===true)?urlencode( base64_encode($sn) ):"") ."' > ".$row->name." </a>":$row->name)."</td>"
+				."<td class='date' title='{$date} {$time}'>{$date}</td>"
+				."</tr>";
+		}
+	}
+
+
 
 	/*
 	 * ====================
@@ -624,11 +639,10 @@ class Map_model extends CI_Model {
 			$content = str_replace('\n', PHP_EOL, $data['content']);
 
 			preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
-			preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
-
 			//$tag[0] => array : [tag], $tag[1] => array : tag 
 			$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
+			preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
 			//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 			$keyword[1] = array_diff($keyword[1], array(''));
 			$keyword = implode('|',$keyword[1]);
@@ -706,11 +720,10 @@ class Map_model extends CI_Model {
 		//$upload = strip_tags(base64_decode(substr($data['upload'],1)));
 
 		preg_match_all("/\[(.*)\]/", strip_tags($data['title']), $tag);
-		preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
-
 		//$tag[0] => array : [tag], $tag[1] => array : tag 
 		$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
+		preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword[1] = array_diff($keyword[1], array(''));
 		$keyword = implode('|',$keyword[1]);
