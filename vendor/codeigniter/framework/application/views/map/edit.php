@@ -1,4 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
+<link rel="stylesheet" href="/assets/ext/easymde.min.css">
+<script src="/assets/ext/easymde.min.js"></script>
+
 <div id='edit'>
 
 <!-- map/edit/<?=$map?>/<?=$type?>/<?=$num?> -->
@@ -6,21 +9,9 @@
 	<input type='text' id='edit-title' name='edit-title' value="<?php echo $title; ?>" />
 </div>
 
-<div class='tab'>
-	<div class='code active'>code</div>
-	<div class='view'>view</div>
-</div>
-
-<div class='editor-group'>
-	<div class=''>
-		<div class="editor" id='edit-content' name='edit-content' contenteditable='true'><?php echo $content; ?></div>
-		<textarea class="editor" id='edit-content-code' name='edit-content-code'></textarea>
-	</div>
-
-	<div class='none'>
-        <div class="editor none" id='edit-content-view'></div>
-	</div>
-</div>
+<textarea class='editor' id='edit-content-code' name='edit-content-code'>
+<?php echo $content; ?>
+</textarea>
 
 <div id='upload-list'>
 	<div id='upload-list-toggle'>Upload List <i id='upload-list-switch' class="fa fa-caret-down"></i></div>
