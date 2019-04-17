@@ -492,7 +492,7 @@ class Map_model extends CI_Model {
 		$ret .= "<div class='post-title'><a href='/{$map}/{$find->row()->type}/{$no}'>{$title}</a></div>";
 		$ret .= "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
 
-		$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><br><div><p><iframe>");
+		$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><br><div><p><span><iframe>");
 		$content = preg_replace('/#([^\s#]{1,})/', '<code>#$1</code>', $content);
 
 		//."<span class='vote'>{$find->row()->vote}</span>"
