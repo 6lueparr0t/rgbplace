@@ -126,6 +126,15 @@ body.dark {
 
 	#list {
 		& .list .list-row {
+
+			&.notice {
+				color:$oc-red-8;
+
+				& .title a, & .name {
+					color:$oc-red-8;
+				}
+			}
+
 			&:hover {
 				background: $oc-gray-8;
 			}
