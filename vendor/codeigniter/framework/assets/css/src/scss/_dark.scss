@@ -122,10 +122,69 @@ body.dark {
 			background-color: $oc-gray-9;
 			color: $oc-gray-0;
 		}
+
+		.editor-toolbar {
+			background-color: #263238;
+
+			& a, & button {
+				color : #fff;
+
+				&.active, &:hover {
+					background: #e9eded;
+					color:#263238;
+				}
+			}
+		}
+
+		.CodeMirror {
+			background-color:#263238;
+			color:#e9eded;
+
+			.CodeMirror-code {
+				.cm-string {
+					color: $oc-blue-3;
+				}
+
+				.cm-attribute {
+					color : $oc-violet-4;
+				}
+			}
+		}
+
+		span.CodeMirror-selectedtext {
+			color:$oc-gray-9;
+		}
+
+		.CodeMirror-cursor {
+			border-left: 1px solid #e9eded;
+		}
+
+		.editor-preview pre, .editor-preview-side pre, .editor-preview-active, .editor-preview-active-side {
+			background: $oc-gray-9;
+			color: $oc-gray-0;
+		}
+
+		.editor-toolbar.disabled-for-preview a:not(.no-disable) {
+			color:#5a5a5a !important;
+		}
+
+		.editor-statusbar {
+			background: #263238;
+			color: #e9eded;
+		}
 	}
 
 	#list {
 		& .list .list-row {
+
+			&.notice {
+				color:$oc-red-8;
+
+				& .title a, & .name {
+					color:$oc-red-8;
+				}
+			}
+
 			&:hover {
 				background: $oc-gray-8;
 			}

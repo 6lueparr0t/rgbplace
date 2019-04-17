@@ -29,8 +29,8 @@ function replyTemplate(no, mode, message) {
 }
 
 //reply Paging Process
-function getReplyPaging(page) {
-	httpRequest('GET', '/api/request/reply?info='+__URL__+'&page='+page, null, refresh.bind(this), fail.bind(this));
+function getReplyPaging(page, no=null) {
+	httpRequest('GET', '/api/request/reply?info='+__URL__+'&page='+page, null, refresh.bind(no), fail.bind(no));
 }
 
 function replyBoxToggle (state) {
@@ -173,6 +173,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			if(confirm("삭제 ㄱㄱ?\nRemove this reply?")) {
 				reply = t.parentElement.parentElement.parentElement.parentElement;
 
+				let reply_previous = (reply.previousSibling)?reply.previousSibling.querySelector("ul .no").innerHTML:null;
 				no = reply.querySelector("ul .no").innerHTML;
 				mode = 'DELETE';
 
@@ -181,7 +182,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 					'no': no
 				});
 
-				httpRequest(mode, '/api/request/reply', JSON.stringify(data), success.bind(this), fail.bind(this));
+				httpRequest(mode, '/api/request/reply', JSON.stringify(data), success.bind(reply_previous), fail.bind(this));
 			}
 
 			break;
@@ -225,7 +226,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			
 			//console.log(data);
 
-			httpRequest(mode, '/api/request/reply', JSON.stringify(data), success.bind(this), fail.bind(this));
+			httpRequest(mode, '/api/request/reply', JSON.stringify(data), success.bind(null), fail.bind(this));
 
 			break;
 
@@ -285,7 +286,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 function success (data) {
 	//console.log(data);
 	//httpRequest('GET', '/api/request/reply?page='+this.page+'&info='+__URL__, null, refresh.bind(this), fail.bind(this));
-	getReplyPaging(data);
+	getReplyPaging(data, this);
 }
 
 function successDelete (data) {

@@ -228,7 +228,7 @@ class Map_model extends CI_Model {
 			}
 		}
 		
-		echo "<a class='edit {$activate}' href='/{$map}/{$type}/0/edit'><span>EDIT</span></a>";
+		echo "<a class='edit {$activate}' href='/{$map}/{$type}/0/edit'><span>write</span></a>";
 		echo "</div>";
 		// ****************
 		// button group END
@@ -489,25 +489,14 @@ class Map_model extends CI_Model {
 		$sn   = $find->row()->sn;
 		$pageName = $title = xss_clean(htmlspecialchars_decode(stripslashes($find->row()->title)));
 
-		//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content))), "<a><img><br><div><p><iframe>");
-		//$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><video><audio><br><div><p><iframe>");
-		/*$content = preg_replace('/(<br[\s]*\/?>)/', PHP_EOL, htmlspecialchars_decode($find->row()->content));*/
-		//$Parsedown = new Parsedown();
-		//$content = $Parsedown->text(strip_tags(stripslashes($find->row()->content)));
-		$content = strip_tags(stripslashes($find->row()->content), "<a><img><video><audio><br><p><div><span><iframe>");
-		/*
-		 *$content = preg_replace('/(<br[\s]*\/?>)/', PHP_EOL, $find->row()->content);
-		 */
-		//$content = stripslashes( preg_replace('/\n/i','<br/>', htmlspecialchars($find->row()->content) ) );
-
-		$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$2" alt="$1" />', $content);
-		//$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
-
-
 		$ret .= "<div class='post-title'><a href='/{$map}/{$find->row()->type}/{$no}'>{$title}</a></div>";
 		$ret .= "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
 
+		$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><br><div><p><iframe>");
+		$content = preg_replace('/#([^\s#]{1,})/', '<code>#$1</code>', $content);
+
 		//."<span class='vote'>{$find->row()->vote}</span>"
+		$Parsedown = new Parsedown();
 		$ret .= "<div class='post-info'>"
 			."<span class='name' >"
 			."<i class='fa fa-user'></i>".(($sn)?"<a class='name ".(($this->session->userdata('signed_in')===true)?"enable":"disable")."' href='/profile?tab=info&no=". (($this->session->userdata('signed_in')===true)?urlencode( base64_encode($sn) ):"") ."' > ".$find->row()->name." </a>":$find->row()->name)
@@ -516,7 +505,7 @@ class Map_model extends CI_Model {
 			."<span class='reply'><i class='far fa-comment-dots'></i> {$find->row()->reply} </span>"
 			."<div class='link'><span id='link-copy'>".base_url()."{$map}/{$no}</span><span class='tooltip post-link' style='display:none;'>copied</span></div>"
 			."</div>"
-			."<div id='post-content'>".$content."</div>";
+			."<div id='post-content'>".$Parsedown->text($content)."</div>";
 
 		$ret .= "<div class='vote button-group'>"
 			."<span class='null'></span>"
@@ -723,7 +712,7 @@ class Map_model extends CI_Model {
 		//$tag[0] => array : [tag], $tag[1] => array : tag 
 		$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
-		preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
+		preg_match_all("/#([^\s#]{1,})/m", strip_tags($data['content']), $keyword);
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword[1] = array_diff($keyword[1], array(''));
 		$keyword = implode('|',$keyword[1]);
@@ -986,10 +975,10 @@ class Map_model extends CI_Model {
 			//$row->content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $row->content);
 			//$row->content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $row->content);
 
-			$row->content = preg_replace('/((https?|chrome):\/\/[^\s$.?#].[^\s]*)/m', '<a href="$1" target="_blank">$1</a>', $row->content);
-			//$row->content = preg_replace('/\\\n/', PHP_EOL, $row->content);
+			$row->content = preg_replace('/\\\n/', PHP_EOL, $row->content);
+			$row->content = preg_replace('/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/', '<a href="$1" target="_blank">$1</a>', $row->content);
 
-			$content = ($row->dtim)?' [ Removed ] ':stripslashes(preg_replace('/\\\n/i','<br/>', $row->content));
+			$content = ($row->dtim)?' [ Removed ] ':$row->content;
 			//$content = ($row->dtim)?' [ Removed ] ':preg_replace('/\\\n/', PHP_EOL, $row->content);
 
 			$depth = [
@@ -1361,11 +1350,7 @@ class Map_model extends CI_Model {
 					where
 						reply.no=? ";
 
-		if( $this->db->simple_query($query, array($post_no, $no)) ) {
-			$ret = ceil($this->db->query($query, array($post_no, $no))->row()->idx/REPLY_LIST_ROWS_LIMIT);
-		} else {
-			$ret = true;
-		}
+		$ret = ceil($this->db->query($query, array($post_no, $no))->row()->idx/REPLY_LIST_ROWS_LIMIT);
 
 		return $ret;
 	}
