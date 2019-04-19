@@ -489,14 +489,28 @@ class Map_model extends CI_Model {
 		$sn   = $find->row()->sn;
 		$pageName = $title = xss_clean(htmlspecialchars_decode(stripslashes($find->row()->title)));
 
+		//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content))), "<a><img><br><div><p><iframe>");
+		//$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><video><audio><br><div><p><iframe>");
+		/*$content = preg_replace('/(<br[\s]*\/?>)/', PHP_EOL, htmlspecialchars_decode($find->row()->content));*/
+		//$Parsedown = new Parsedown();
+		//$content = $Parsedown->text(strip_tags(stripslashes($find->row()->content)));
+		$content = strip_tags(stripslashes($find->row()->content), "<a><img><video><audio><br><p><div><span><iframe>");
+		/*
+		 *$content = preg_replace('/(<br[\s]*\/?>)/', PHP_EOL, $find->row()->content);
+		 */
+		//$content = stripslashes( preg_replace('/\n/i','<br/>', htmlspecialchars($find->row()->content) ) );
+
+		$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$2" alt="$1" />', $content);
+		//$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
+		$content = preg_replace('/#([^\s#]{1,})/', '<code>#$1</code>', $content);
+
 		$ret .= "<div class='post-title'><a href='/{$map}/{$find->row()->type}/{$no}'>{$title}</a></div>";
 		$ret .= "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
 
-		$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><br><div><p><span><iframe>");
-		$content = preg_replace('/#([^\s#]{1,})/', '<code>#$1</code>', $content);
+		//$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><br><div><p><span><iframe>");
 
 		//."<span class='vote'>{$find->row()->vote}</span>"
-		$Parsedown = new Parsedown();
+		//$Parsedown = new Parsedown();
 		$ret .= "<div class='post-info'>"
 			."<span class='name' >"
 			."<i class='fa fa-user'></i>".(($sn)?"<a class='name ".(($this->session->userdata('signed_in')===true)?"enable":"disable")."' href='/profile?tab=info&no=". (($this->session->userdata('signed_in')===true)?urlencode( base64_encode($sn) ):"") ."' > ".$find->row()->name." </a>":$find->row()->name)
@@ -505,7 +519,7 @@ class Map_model extends CI_Model {
 			."<span class='reply'><i class='far fa-comment-dots'></i> {$find->row()->reply} </span>"
 			."<div class='link'><span id='link-copy'>".base_url()."{$map}/{$no}</span><span class='tooltip post-link' style='display:none;'>copied</span></div>"
 			."</div>"
-			."<div id='post-content'>".$Parsedown->text($content)."</div>";
+			."<div id='post-content'>".$content."</div>";
 
 		$ret .= "<div class='vote button-group'>"
 			."<span class='null'></span>"
