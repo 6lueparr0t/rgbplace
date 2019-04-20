@@ -118,27 +118,22 @@ body.dark {
 			color: $oc-gray-0;
 		}
 
-		& #edit-content, & #edit-content-code {
+		& #edit-content-code {
 			background-color: $oc-gray-9;
 			color: $oc-gray-0;
-		}
-
-		.editor-toolbar {
-			background-color: #263238;
-
-			& a, & button {
-				color : #fff;
-
-				&.active, &:hover {
-					background: #e9eded;
-					color:#263238;
-				}
-			}
 		}
 
 		.CodeMirror {
 			background-color:#263238;
 			color:#e9eded;
+
+			.CodeMirror-gutters {
+				background-color: $oc-gray-7;
+			}
+
+			.CodeMirror-linenumbers {
+				color: $oc-gray-9;
+			}
 
 			.CodeMirror-code {
 				.cm-string {
@@ -149,6 +144,7 @@ body.dark {
 					color : $oc-violet-4;
 				}
 			}
+
 		}
 
 		span.CodeMirror-selectedtext {
@@ -157,20 +153,6 @@ body.dark {
 
 		.CodeMirror-cursor {
 			border-left: 1px solid #e9eded;
-		}
-
-		.editor-preview pre, .editor-preview-side pre, .editor-preview-active, .editor-preview-active-side {
-			background: $oc-gray-9;
-			color: $oc-gray-0;
-		}
-
-		.editor-toolbar.disabled-for-preview a:not(.no-disable) {
-			color:#5a5a5a !important;
-		}
-
-		.editor-statusbar {
-			background: #263238;
-			color: #e9eded;
 		}
 	}
 

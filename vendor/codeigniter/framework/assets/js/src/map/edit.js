@@ -2,33 +2,45 @@
 
 window.addEventListener("beforeunload", onUnload);
 
-var easymde = new EasyMDE({
-	element: document.getElementById("edit-content-code"),
-	forceSync: true,
-	spellChecker: false,
-	toolbar: ["bold", "italic", "heading", "clean-block", "|", "quote", "unordered-list", "ordered-list", "|", "link",
-		{
-			name: "upload",
-			action: function customFunction(editor){
-				document.querySelector('#input_zone').click();
-			},
-			className: "fa fa-picture-o",
-			title: "Insert Image",
-		},
-		"table", "horizontal-rule", "|", "preview", "side-by-side", "fullscreen"
-	],
-	renderingConfig : {
-		singleLineBreaks :  false ,
-		codeSyntaxHighlighting :  true ,
-	},
-});
-
-
 var tab = 'code';
 //var editor_position = document.querySelector('#edit-content');
-var editor_position = document.querySelector('.CodeMirror-line');
+//var editor_position = document.querySelector('.CodeMirror-line');
 
-//console.log(editor_position);
+let title = document.querySelector('#edit-title');
+let edit_content_code = document.querySelector('#edit-content-code');
+let edit_content_view = document.querySelector('#edit-content-view');
+
+const editor = CodeMirror.fromTextArea(document.querySelector('#edit-content-code'), {
+	lineNumbers: true,
+    styleActiveLine: true,
+    matchBrackets: true,
+	lineWrapping: true,
+});
+
+editor.on('cursorActivity', (e) => {
+	sync();
+	//document.querySelector('#edit-content-view div').children[editor.getCursor().line].scrollIntoView(false);
+});
+
+editor.on('scroll', (e) => {
+	let h = editor.getScrollInfo();
+	let per = (h.top / (h.height - h.clientHeight)) * 100;
+
+	//console.log((per/100) * (h.height - h.clientHeight));
+	//console.log((per/100)*(edit_content_view.scrollHeight));
+	//edit_content_view.scrollTo(0, (per/100)*(edit_content_view.height - edit_content_view.clientHeight));
+	edit_content_view.scrollTo(0, (per/100)*(edit_content_view.scrollHeight));
+});
+
+window.onresize = () => {
+	if(edit_content_view.classList.contains('none') === false) {
+		editor.setSize((title.clientWidth/2)+"px", "42rem");
+		//console.log((title.clientWidth/2)+"px");
+	} else {
+		editor.setSize((title.clientWidth)+"px", "42rem");
+		//console.log((title.clientWidth)+"px");
+	}
+};
 
 /* ******************** Upload Event TOP ******************** */
 const state = document.querySelector("label[for='input_zone']");
@@ -229,45 +241,63 @@ function addList(data) {
 
 function addFile(data) {
 
-	let code = '';
+	let tag, str, doc, cursor;
+
 	//let upload = JSON.parse(window.atob(document.querySelector('#edit-upload').value.substr(1)));
 	//console.log(data);
 
 	data.forEach(function(value, key) {
 		if(value['file_name']) {
 			console.log(value['file_name']);
-			code='';
 
 			switch (value['file_type'].split('/')[0]) {
 				case 'image' :
-					code = "<img style='max-width:100%;' src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
+					tag = document.createElement('IMG');
+					tag.style.maxWidth = "100%";
+
+					tag.setAttribute('src', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					//str = "<img style='max-width:100%;' src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
+					str = "!["+value['client_name']+"]("+value['default_path']+value['file_name']+")";
 					break;
 				case 'audio' :
-					code = "<audio controls src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
+					tag = document.createElement('AUDIO');
+					tag.setAttribute('controls', 'controls');
+
+					tag.setAttribute('src', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<audio controls src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
 					break;
 				case 'video' :
-					code = "<video controls src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
+					tag = document.createElement('VIDEO');
+					tag.setAttribute('controls', 'controls');
+
+					tag.setAttribute('src', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<video controls src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
 					break;
 				default :
-					code = "<a href='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"' download />";
+					tag = document.createElement('A');
+					tag.setAttribute('download', '');
+
+					tag.setAttribute('href', value['default_path']+value['file_name']);
+					tag.setAttribute('alt', value['client_name']);
+
+					str = "<a href='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"' download />";
 					break;
 			}
 
-			//console.log(document.querySelector('#edit-content').innerText.match(/[^\n]*\n[^\n]*/gi).length);
-			//document.querySelector('#edit-content').appendChild(tag);
-			easymde.codemirror.setSelection(editor_position, editor_position);
-			easymde.codemirror.replaceSelection(code);
-			//document.querySelector('#edit-content').innerHTML += '<br/><br/>';
-			//upload.push({'file_name':value['file_name'], 'file_type':value['file_type'], 'client_name':value['client_name'], 'file_size':value['file_size']});
+			doc = editor.getDoc();
+			cursor = doc.getCursor();
 
-		} else {
-			//document.querySelector('#edit-content').innerHTML += value;
-			editor_position.innerHTML += value;
+			doc.replaceRange(str, cursor);
+			sync();
 		}
 
 	});
-
-	//document.querySelector('#edit-upload').value = 'Z'+window.btoa(JSON.stringify(upload));
 }
 
 function delFile(data) {
@@ -306,20 +336,48 @@ function fail (data) {
 	})
 }
 
-document.querySelector("#edit").addEventListener("keydown", function(event) {
-	editor_position = easymde.codemirror.getCursor();
-});
+function sync(e) {
+	if(!edit_content_view.classList.contains('none')) {
+		//edit_content_view.innerHTML = editor.getValue().replace(/\n/g, '<br/>').replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />');
+		edit_content_view.innerHTML = marked(editor.getValue().replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />'));
+	}
+}
 
 document.querySelector("#edit").addEventListener("click", function(event) {
 	let t = event.target;
-	let title, editor, content;
+	let content;
 
 	let data = [];
 
 	switch(t.classList.item(0)) {
-		case 'CodeMirror-line' :
-			editor_position = easymde.codemirror.getCursor();
-			break;
+		case 'code' :
+			if(!edit_content_view.classList.contains('none')) {
+				tab = t.classList.item(0);
+				t.classList.toggle('active');
+
+				//edit_content.innerHTML = edit_content_code.value.replace(/\n/g, '<br/>');
+				edit_content_code.classList.toggle('none');
+				edit_content_code.parentElement.classList.toggle('none');
+
+				window.onresize();
+				editor.refresh();
+				sync();
+			}
+			return;
+		case 'view' :
+			if(!edit_content_code.classList.contains('none')) {
+				tab = t.classList.item(0);
+				t.classList.toggle('active');
+
+				//edit_content_code.value = edit_content.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
+				edit_content_view.classList.toggle('none');
+				edit_content_view.parentElement.classList.toggle('none');
+
+				window.onresize();
+				editor.refresh();
+				sync();
+			}
+			return;
 		case 'add' :
 			data.push({
 				'default_path' : t.parentElement.getAttribute('data-default-path'),
@@ -346,15 +404,24 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 
 	switch(t.id) {
 		case 'save' :
-			title = document.querySelector('#edit-title');
 			if(!title.value) {
 				title.setCustomValidity('제목을 입력해주세요.\nPlease Input Title');
 				title.reportValidity();
-				return false;;
+				return false;
 			}
 
-			editor = document.querySelector('#edit-content-code');
-			content = editor.value;
+			//editor = document.querySelector('.editor.active');
+			//console.log(editor);
+			//if(editor.id == 'edit-content') {
+				//// remove div tag
+				////.replace(/\<[\/\s]*?div[\/\s]*?\>/g, '')
+				////content = editor.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
+				//content = editor.innerHTML;
+			//} else {
+				////content = editor.value;
+				//content = editor.value.replace(/\n/g, '<br/>');
+			//}
+			content = editor.getValue();
 
 			if(!content) {
 				Swal.fire({
@@ -377,7 +444,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				if(result.value && title && content) {
 					data.push({
 						'info': __URL__,
-						'title': document.querySelector('#edit-title').value,
+						'title': title.value,
 						'content': content
 					});
 
@@ -407,4 +474,6 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 
 !function() {
 	//document.querySelector(".code").click();
+	window.onresize();
+	sync();
 }();

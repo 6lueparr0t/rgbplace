@@ -259,7 +259,7 @@ class Api extends CI_Controller {
 			$this->load->library('upload');
 
 			$config['upload_path'] = './upload';
-			$config['allowed_types'] = 'gif|png|jpg|jpeg|bmp|txt|mp4|mp3|wmv|wav';
+			$config['allowed_types'] = 'gif|png|jpg|jpeg|bmp|txt|mp4|mp3|wmv|wav|webm';
 			$config['encrypt_name'] = true;
 			$config['file_ext_tolower'] = true;
 			$config['max_size']      = '102400';

@@ -92,7 +92,7 @@
 
 	.button-group {
 		font-family: "pixel";
-		margin: 2.5rem 0 0 0;
+		margin: 2.5rem 0;
 		width:100%;
 		@include flex ();
 		@include user-select('none');

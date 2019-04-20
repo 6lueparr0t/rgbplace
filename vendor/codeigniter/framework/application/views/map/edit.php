@@ -1,6 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
-<link rel="stylesheet" href="/assets/ext/easymde.min.css">
-<script src="/assets/ext/easymde.min.js"></script>
+<link rel='stylesheet' href='/assets/ext/codemirror.css'/>
+<script src='/assets/ext/codemirror.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 
 <div id='edit'>
 
@@ -9,9 +11,20 @@
 	<input type='text' id='edit-title' name='edit-title' value="<?php echo $title; ?>" />
 </div>
 
-<textarea class='editor' id='edit-content-code' name='edit-content-code'>
-<?php echo $content; ?>
-</textarea>
+<div class='tab'>
+	<div class='code active'>code</div>
+	<div class='view'>view</div>
+</div>
+
+<div class='editor-group'>
+	<div class=''>
+		<textarea class="editor" id='edit-content-code' name='edit-content-code'><?php echo $content; ?></textarea>
+	</div>
+
+	<div class='none'>
+        <div class="editor none" id='edit-content-view'></div>
+	</div>
+</div>
 
 <div id='upload-list'>
 	<div id='upload-list-toggle'>Upload List <i id='upload-list-switch' class="fa fa-caret-down"></i></div>

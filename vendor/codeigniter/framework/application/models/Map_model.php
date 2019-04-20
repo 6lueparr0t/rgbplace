@@ -489,11 +489,27 @@ class Map_model extends CI_Model {
 		$sn   = $find->row()->sn;
 		$pageName = $title = xss_clean(htmlspecialchars_decode(stripslashes($find->row()->title)));
 
+		/* $content grave .. */
+		//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content))), "<a><img><br><div><p><iframe>");
+		//$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><video><audio><br><div><p><iframe>");
+		/*$content = preg_replace('/(<br[\s]*\/?>)/', PHP_EOL, htmlspecialchars_decode($find->row()->content));*/
+		//$content = $Parsedown->text(strip_tags(stripslashes($find->row()->content)));
+		//$content = strip_tags(stripslashes($find->row()->content), "<a><img><video><audio><br><p><div><span><iframe>");
+		/*
+		 *$content = preg_replace('/(<br[\s]*\/?>)/', PHP_EOL, $find->row()->content);
+		 */
+		//$content = stripslashes( preg_replace('/\n/i','<br/>', htmlspecialchars($find->row()->content) ) );
+
+		$content = strip_tags(stripslashes($find->row()->content), "<a><img><video><audio><br><p><div><span><iframe>");
+
+		$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$2" alt="$1" />', $content);
+		//$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
+		$content = preg_replace('/#([^\s#]{1,})/', '<code>#$1</code>', $content);
+
 		$ret .= "<div class='post-title'><a href='/{$map}/{$find->row()->type}/{$no}'>{$title}</a></div>";
 		$ret .= "<div class='post-date' ><i class='fa fa-clock-o'></i> {$date} {$time} </div>";
 
-		$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><br><div><p><span><iframe>");
-		$content = preg_replace('/#([^\s#]{1,})/', '<code>#$1</code>', $content);
+		//$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><br><div><p><span><iframe>");
 
 		//."<span class='vote'>{$find->row()->vote}</span>"
 		$Parsedown = new Parsedown();
