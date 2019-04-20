@@ -3,10 +3,21 @@
 window.addEventListener("beforeunload", onUnload);
 
 var tab = 'code';
-var editor_position = document.querySelector('#edit-content');
+//var editor_position = document.querySelector('#edit-content');
 //var editor_position = document.querySelector('.CodeMirror-line');
 
-//console.log(editor_position);
+let edit_content_code = document.querySelector('#edit-content-code');
+let edit_content_view = document.querySelector('#edit-content-view');
+
+const editor = CodeMirror.fromTextArea(document.querySelector('#edit-content-code'), {
+	lineNumbers: true,
+    styleActiveLine: true,
+    matchBrackets: true,
+	lineWrapping: true,
+});
+
+editor.on('keydown', sync);
+editor.on('keyup', sync);
 
 /* ******************** Upload Event TOP ******************** */
 const state = document.querySelector("label[for='input_zone']");
@@ -207,8 +218,7 @@ function addList(data) {
 
 function addFile(data) {
 
-	let tag = '';
-	let str = '';
+	let tag, str, doc, cursor;
 
 	//let upload = JSON.parse(window.atob(document.querySelector('#edit-upload').value.substr(1)));
 	//console.log(data);
@@ -216,7 +226,6 @@ function addFile(data) {
 	data.forEach(function(value, key) {
 		if(value['file_name']) {
 			console.log(value['file_name']);
-			code='';
 
 			switch (value['file_type'].split('/')[0]) {
 				case 'image' :
@@ -258,25 +267,14 @@ function addFile(data) {
 					break;
 			}
 
-			//console.log(document.querySelector('#edit-content').innerText.match(/[^\n]*\n[^\n]*/gi).length);
-			//document.querySelector('#edit-content').appendChild(tag);
-			//if(tab == 'code') {
-				if(editor_position.tagName === undefined) editor_position = editor_position.parentElement;
-				editor_position.appendChild(document.createElement("br"));
-				//editor_position.appendChild(tag);
-				editor_position.innerHTML += str;
-				sync();
-				//document.querySelector('#edit-content').innerHTML += '<br/><br/>';
-			//} else {
-				//document.querySelector('#edit-content-code').value += str;
-			//}
-			//document.querySelector('#edit-content').innerHTML += '<br/><br/>';
-			//upload.push({'file_name':value['file_name'], 'file_type':value['file_type'], 'client_name':value['client_name'], 'file_size':value['file_size']});
+			doc = editor.getDoc();
+			cursor = doc.getCursor();
+
+			doc.replaceRange(str, cursor);
+			sync();
 		}
 
 	});
-
-	//document.querySelector('#edit-upload').value = 'Z'+window.btoa(JSON.stringify(upload));
 }
 
 function delFile(data) {
@@ -315,33 +313,15 @@ function fail (data) {
 	})
 }
 
-document.querySelector("#edit-content").addEventListener("keydown", function(event) {
-	editor_position = window.getSelection().anchorNode;
-});
-
-document.querySelector("#edit-content").addEventListener("click", function(event) {
-	editor_position = window.getSelection().anchorNode;
-});
-
-let edit_content = document.querySelector('#edit-content');
-let edit_content_view = document.querySelector('#edit-content-view');
-let edit_content_code = document.querySelector('#edit-content-code');
-
-function sync() {
-	edit_content_code.innerHTML = edit_content.innerHTML;
-
+function sync(e) {
 	if(!edit_content_view.classList.contains('none')) {
-		edit_content_view.innerHTML = edit_content_code.value.replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />');
+		edit_content_view.innerHTML = editor.getValue().replace(/\n/g, '<br/>').replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />');
 	}
 }
 
-edit_content.onkeydown = edit_content.onkeyup = (e) => {
-	sync();
-};
-
 document.querySelector("#edit").addEventListener("click", function(event) {
 	let t = event.target;
-	let title, editor, content;
+	let title, content;
 
 	let data = [];
 
@@ -352,13 +332,13 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				t.classList.toggle('active');
 
 				//edit_content.innerHTML = edit_content_code.value.replace(/\n/g, '<br/>');
-				edit_content.classList.toggle('none');
-				edit_content.parentElement.classList.toggle('none');
+				edit_content_code.classList.toggle('none');
+				edit_content_code.parentElement.classList.toggle('none');
 				sync();
 			}
 			return;
 		case 'view' :
-			if(!edit_content.classList.contains('none')) {
+			if(!edit_content_code.classList.contains('none')) {
 				tab = t.classList.item(0);
 				t.classList.toggle('active');
 
@@ -412,7 +392,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				////content = editor.value;
 				//content = editor.value.replace(/\n/g, '<br/>');
 			//}
-			content = edit_content_code.value;
+			content = editor.getValue();
 
 			if(!content) {
 				Swal.fire({

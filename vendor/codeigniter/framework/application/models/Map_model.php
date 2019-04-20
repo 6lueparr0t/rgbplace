@@ -489,16 +489,19 @@ class Map_model extends CI_Model {
 		$sn   = $find->row()->sn;
 		$pageName = $title = xss_clean(htmlspecialchars_decode(stripslashes($find->row()->title)));
 
+		/* $content grave .. */
 		//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content))), "<a><img><br><div><p><iframe>");
 		//$content = strip_tags(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content)), "<a><img><video><audio><br><div><p><iframe>");
 		/*$content = preg_replace('/(<br[\s]*\/?>)/', PHP_EOL, htmlspecialchars_decode($find->row()->content));*/
 		//$Parsedown = new Parsedown();
 		//$content = $Parsedown->text(strip_tags(stripslashes($find->row()->content)));
-		$content = strip_tags(stripslashes($find->row()->content), "<a><img><video><audio><br><p><div><span><iframe>");
+		//$content = strip_tags(stripslashes($find->row()->content), "<a><img><video><audio><br><p><div><span><iframe>");
 		/*
 		 *$content = preg_replace('/(<br[\s]*\/?>)/', PHP_EOL, $find->row()->content);
 		 */
 		//$content = stripslashes( preg_replace('/\n/i','<br/>', htmlspecialchars($find->row()->content) ) );
+
+		$content = strip_tags(stripslashes(preg_replace('/\n/i','<br/>', $find->row()->content)), "<a><img><video><audio><br><p><div><span><iframe>");
 
 		$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$2" alt="$1" />', $content);
 		//$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);

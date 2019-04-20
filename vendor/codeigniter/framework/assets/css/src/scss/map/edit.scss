@@ -32,19 +32,13 @@
 
 		div {
 			flex: 1 0 0%;
-			overflow-x:hidden;
 
-			#edit-content {
-				display:inline-block;
-				border:1px solid  $oc-gray-6;
-				min-height:40rem;
+			.CodeMirror {
 				height:40rem;
-				padding:1rem;
-				text-align:justify;
-				line-height: 2rem;
-				resize: both;
-				overflow: auto;
-				width: calc(100% - 2.2rem);
+
+				.CodeMirror-selected {
+					background: $oc-gray-6;
+				}
 			}
 
 			#edit-content-code {
@@ -54,12 +48,11 @@
 			#edit-content-view {
 				border:1px solid  $oc-gray-6;
 				min-height:40rem;
-				height:40rem;
+				overflow:auto;
 				padding:1rem;
 				text-align:justify;
 				line-height: 2rem;
 				resize: both;
-				overflow: auto;
 				width: calc(100% - 2.2rem);
 
 				font-size:1.2rem;

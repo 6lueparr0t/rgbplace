@@ -1,4 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
+<link rel='stylesheet' href='/assets/ext/codemirror.css'/>
+<script src='/assets/ext/codemirror.js'></script>
 
 <div id='edit'>
 
@@ -14,8 +16,7 @@
 
 <div class='editor-group'>
 	<div class=''>
-		<div class="editor" id='edit-content' name='edit-content' contenteditable='true'><?php echo $content; ?></div>
-		<textarea class="editor" id='edit-content-code' name='edit-content-code'></textarea>
+		<textarea class="editor" id='edit-content-code' name='edit-content-code'><?php echo $content; ?></textarea>
 	</div>
 
 	<div class='none'>
