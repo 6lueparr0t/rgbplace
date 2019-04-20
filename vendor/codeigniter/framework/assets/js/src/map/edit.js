@@ -6,6 +6,7 @@ var tab = 'code';
 //var editor_position = document.querySelector('#edit-content');
 //var editor_position = document.querySelector('.CodeMirror-line');
 
+let title = document.querySelector('#edit-title');
 let edit_content_code = document.querySelector('#edit-content-code');
 let edit_content_view = document.querySelector('#edit-content-view');
 
@@ -16,8 +17,30 @@ const editor = CodeMirror.fromTextArea(document.querySelector('#edit-content-cod
 	lineWrapping: true,
 });
 
-editor.on('keydown', sync);
-editor.on('keyup', sync);
+editor.on('cursorActivity', (e) => {
+	sync();
+	//document.querySelector('#edit-content-view div').children[editor.getCursor().line].scrollIntoView(false);
+});
+
+editor.on('scroll', (e) => {
+	let h = editor.getScrollInfo();
+	let per = (h.top / (h.height - h.clientHeight)) * 100;
+
+	//console.log((per/100) * (h.height - h.clientHeight));
+	//console.log((per/100)*(edit_content_view.scrollHeight));
+	//edit_content_view.scrollTo(0, (per/100)*(edit_content_view.height - edit_content_view.clientHeight));
+	edit_content_view.scrollTo(0, (per/100)*(edit_content_view.scrollHeight));
+});
+
+window.onresize = () => {
+	if(edit_content_view.classList.contains('none') === false) {
+		editor.setSize((title.clientWidth/2)+"px", "42rem");
+		//console.log((title.clientWidth/2)+"px");
+	} else {
+		editor.setSize((title.clientWidth)+"px", "42rem");
+		//console.log((title.clientWidth)+"px");
+	}
+};
 
 /* ******************** Upload Event TOP ******************** */
 const state = document.querySelector("label[for='input_zone']");
@@ -315,13 +338,14 @@ function fail (data) {
 
 function sync(e) {
 	if(!edit_content_view.classList.contains('none')) {
-		edit_content_view.innerHTML = editor.getValue().replace(/\n/g, '<br/>').replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />');
+		//edit_content_view.innerHTML = editor.getValue().replace(/\n/g, '<br/>').replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />');
+		edit_content_view.innerHTML = marked(editor.getValue().replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />'));
 	}
 }
 
 document.querySelector("#edit").addEventListener("click", function(event) {
 	let t = event.target;
-	let title, content;
+	let content;
 
 	let data = [];
 
@@ -334,6 +358,9 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				//edit_content.innerHTML = edit_content_code.value.replace(/\n/g, '<br/>');
 				edit_content_code.classList.toggle('none');
 				edit_content_code.parentElement.classList.toggle('none');
+
+				window.onresize();
+				editor.refresh();
 				sync();
 			}
 			return;
@@ -345,6 +372,9 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				//edit_content_code.value = edit_content.innerHTML.replace(/(<br[\s]*\/?>)/g, '\n');
 				edit_content_view.classList.toggle('none');
 				edit_content_view.parentElement.classList.toggle('none');
+
+				window.onresize();
+				editor.refresh();
 				sync();
 			}
 			return;
@@ -374,7 +404,6 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 
 	switch(t.id) {
 		case 'save' :
-			title = document.querySelector('#edit-title');
 			if(!title.value) {
 				title.setCustomValidity('제목을 입력해주세요.\nPlease Input Title');
 				title.reportValidity();
@@ -415,7 +444,7 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 				if(result.value && title && content) {
 					data.push({
 						'info': __URL__,
-						'title': document.querySelector('#edit-title').value,
+						'title': title.value,
 						'content': content
 					});
 
@@ -445,5 +474,6 @@ document.querySelector("#edit").addEventListener("click", function(event) {
 
 !function() {
 	//document.querySelector(".code").click();
+	window.onresize();
 	sync();
 }();

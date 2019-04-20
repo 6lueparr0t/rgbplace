@@ -1,6 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
 <link rel='stylesheet' href='/assets/ext/codemirror.css'/>
 <script src='/assets/ext/codemirror.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 
 <div id='edit'>
 
