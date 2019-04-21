@@ -35,9 +35,11 @@ editor.on('scroll', (e) => {
 window.onresize = () => {
 	if(edit_content_view.classList.contains('none') === false) {
 		editor.setSize((title.clientWidth/2)+"px", "42rem");
+		edit_content_view.parentElement.style.width = (title.clientWidth/2)+"px";
 		//console.log((title.clientWidth/2)+"px");
 	} else {
 		editor.setSize((title.clientWidth)+"px", "42rem");
+		edit_content_view.parentElement.style.width = (title.clientWidth)+"px";
 		//console.log((title.clientWidth)+"px");
 	}
 };
