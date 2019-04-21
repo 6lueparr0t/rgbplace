@@ -991,10 +991,14 @@ class Map_model extends CI_Model {
 			//$row->content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$1" alt="$2" />', $row->content);
 			//$row->content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $row->content);
 
-			$row->content = preg_replace('/\\\n/', PHP_EOL, $row->content);
-			$row->content = preg_replace('/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/', '<a href="$1" target="_blank">$1</a>', $row->content);
 
-			$content = ($row->dtim)?' [ Removed ] ':$row->content;
+			if($row->dtim) {
+				$content = ' [ Removed ] ';
+			} else {
+				$row->content = preg_replace('/\\\n/', PHP_EOL, $row->content);
+				$row->content = preg_replace('/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/', '<a href="$1" target="_blank">$1</a>', $row->content);
+				$content = stripslashes($row->content);
+			}
 			//$content = ($row->dtim)?' [ Removed ] ':preg_replace('/\\\n/', PHP_EOL, $row->content);
 
 			$depth = [
