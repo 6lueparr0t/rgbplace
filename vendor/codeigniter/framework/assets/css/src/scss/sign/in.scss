@@ -1,0 +1,81 @@
+#sign { 
+	position: relative;
+	top:.5rem;
+	height: 5rem;
+	text-align:right;
+	font-size:1.2rem;
+
+	input[name='uid'] {
+		width:10%;	
+		@media screen and ($width-name : $target-width) {
+			width:20%;	
+		}
+	}
+
+	input[name='pswd'] {
+		width:10%;	
+		@media screen and ($width-name : $target-width) {
+			width:20%;	
+		}
+	}
+
+	& button{
+		background: $oc-gray-2;
+		&:hover{
+			background: $oc-gray-4;
+		}
+		color: $oc-gray-9;
+		border: none;
+		height: 1.5rem;
+		font-size: 1rem;
+		border-radius: .4rem;
+		cursor:pointer;
+
+		margin-left: .5rem;
+
+	}
+}
+
+#gSignInWrapper {
+	width:100%;
+
+	#google {
+		display: inline-block;
+		position: relative;
+		top: .3rem;
+		border:1px solid $oc-gray-9;
+		border-radius: .25rem;
+		@include user-select('none');
+		background-color:white !important;
+		color:black !important;
+		height:2.4rem;
+		width:100%;
+		max-width: 300px;
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		span{
+			&.icon {
+				background: url(https://developers.google.com/identity/images/g-logo.png) transparent 0px 100% no-repeat;
+				vertical-align: middle;
+				width: 2rem;
+				height: 2.1rem;
+				background-size: 30px;
+				position: absolute;
+				left:100px;
+			}
+
+			&.buttonText {
+				//font-family: pixel;
+				position: inherit;
+				top:10px;
+				vertical-align: bottom;
+				padding-left: 2rem;
+				font-size: 1rem;
+				//font-weight: 700;
+			}
+		}
+	}
+}

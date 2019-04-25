@@ -88,39 +88,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         echo "<div id='sign'>";
         // Sign in check
         if(!$sign) {
-            // #### setting 'Sign In' Form
-            echo form_open('sign/in', ['class' => 'sign', 'name' => 'sign-in', 'id' => 'sign-in'])
-                .form_input('uid', '', ['placeholder' => 'ID', 'required' => 'true', 'minlength' => 6])
-                .form_password('pswd', '', ['placeholder' => 'Password', 'required' => 'true', 'minlength' => 10]);
-
-            echo "<button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign In </button>";
             //회원가입 임시 제한
-            echo "<button type='button' id='logout' onClick=\"location.href='/sign'\"> <i class='fa fa-user-plus'></i> Sign Up </button><br/>";
-
-            // Google Sign-in Tag
-            echo '<div id="gSignInWrapper">'
-            .'<div id="google" class="customGPlusSignIn">'
-            .'<span class="icon"></span>'
-            .'<span class="buttonText">Google</span>'
-            .'</div>'
-            .'</div>';
-            echo form_close();
+            echo "<button type='button' onClick=\"location.href='/sign'\"> Login </button>";
 
         } else {
             // #### setting 'Sign Out'
 
             $name = $this->CI->session->userdata('name');
 
-            echo "<div class='sign'>";
             echo "<a href='/profile?tab=info'>{$name}</a>";
 
             if($this->CI->session->userdata('google')) {
                 echo "<div class='g-signin2' style='display:none;'></div>";
-                echo "<button onclick='signOut();document.location.href=\"/sign/out\";'> <i class='fas fa-sign-out-alt'></i> Sign Out </button>";
+                echo "<button onclick='signOut();document.location.href=\"/sign/out\";'> Logout </button>";
             } else {
-                echo "<button onclick='document.location.href=\"/sign/out\";'> <i class='fas fa-sign-out-alt'></i> Sign Out </button>";
+                echo "<button onclick='document.location.href=\"/sign/out\";'> Logout </button>";
             }
-            echo "</div>";
 
             if($admin === TRUE) {
                 $apikey = $this->CI->base->setAdminApiKey($name);
