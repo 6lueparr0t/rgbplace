@@ -89,7 +89,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Sign in check
         if(!$sign) {
             //회원가입 임시 제한
-            echo "<button type='button' onClick=\"location.href='/sign'\"> Login </button>";
+            echo "<button type='button' onClick=\"location.href='/sign'\"> Sign in </button>";
 
         } else {
             // #### setting 'Sign Out'
@@ -100,9 +100,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             if($this->CI->session->userdata('google')) {
                 echo "<div class='g-signin2' style='display:none;'></div>";
-                echo "<button onclick='signOut();document.location.href=\"/sign/out\";'> Logout </button>";
+                echo "<button onclick='signOut();document.location.href=\"/sign/out\";'> Sign out </button>";
             } else {
-                echo "<button onclick='document.location.href=\"/sign/out\";'> Logout </button>";
+                echo "<button onclick='document.location.href=\"/sign/out\";'> Sign out </button>";
             }
 
             if($admin === TRUE) {
