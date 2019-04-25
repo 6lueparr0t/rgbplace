@@ -22,7 +22,7 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 		."<div class='info-box'><input class='info' name='uid' type='text' placeholder='ID' required='true' minlength=6 maxlength=100/></div>"
 		."<div class='info-box'><input class='info' name='pswd' type='password' placeholder='Password' required='true' minlength=10 maxlength=255 /></div>";
 
-	echo "<div class='info-box'><button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign In </button></div>";
+	echo "<div class='info-box'><button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign in </button></div>";
 
 	// Google Sign-in Tag
 	echo '<div class="info-box"><div id="gSignInWrapper">'
@@ -62,7 +62,7 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 		."<input type='hidden' name='recaptcha_response' id='recaptchaResponse' />";
 
 	echo "<div class='info-box'><button type='submit'>"
-			."<i class='fas fa-user-plus'></i>&nbsp;&nbsp;Sign Up"
+			."<i class='fas fa-user-plus'></i>&nbsp;&nbsp;Sign up"
 		."</button></div>";
 	echo form_close();
 ?>
