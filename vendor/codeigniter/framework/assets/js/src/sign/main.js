@@ -2,8 +2,47 @@
 
 let signup = document.querySelector("#sign-up");
 let signUpConf = document.querySelector("#sign-up input[name='conf']");
+let signin = document.querySelector("#sign-in");
 
-window.addEventListener("beforeunload", onUnload);
+function signInCheck (recv) {
+    let form = new FormData(recv);
+
+    let request = new XMLHttpRequest();
+    let data = "";
+
+    request.open('post', '/sign/in/check', true);
+
+    request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+            // Success!
+            data = JSON.parse(this.response);
+            if(data.valid) {
+                recv.submit();
+            } else {
+                 alert(data.msg);
+            }
+            // console.log(data);
+        } else {
+            // We reached our target server, but it returned an error
+            // console.log(this.status);
+        }
+    };
+
+    request.onprogress = function() {
+        //console.log("event.lengthComputable:"+event.lengthComputable);
+        //console.log("event.loaded:"+event.loaded);
+        //console.log("event.total:"+event.total);
+    };
+
+
+    request.onerror = function() {
+        // There was a connection error of some sort
+    };
+
+    request.send(form);
+}
+
+//window.addEventListener("beforeunload", onUnload);
 
 function signUpCheck (recv) {
 
@@ -51,6 +90,8 @@ function sendCode() {
 
 	if (!x) {
 
+		document.querySelector("[name='check']").classList.add('none');
+		document.querySelector("[name='code']").classList.remove('none');
 		httpRequest('POST', '/sign/mailAuth', JSON.stringify(data), ret => {
 
 			if(ret['send'] == true) {
@@ -80,13 +121,13 @@ function sendCode() {
 
 					// Output the result in an element with id="demo"
 					document.getElementsByName("mail")[0].disabled = true;
-					document.getElementsByName("code")[0].placeholder = 'Mail Auth Code - ' + minutes.pad(2) + ":" + seconds.pad(2);
+					document.getElementsByName("code")[0].placeholder = 'Mail Auth-Code - ' + minutes.pad(2) + ":" + seconds.pad(2);
 
 					// If the count down is over, write some text 
 					if (distance < 0) {
 						clearInterval(x);
 						x = null;
-						document.getElementsByName("code")[0].placeholder = "Mail Auth Code - EXPIRED";
+						document.getElementsByName("code")[0].placeholder = "Mail Auth-Code - EXPIRED";
 					}
 				}, 500);
 
@@ -112,5 +153,6 @@ function sendCode() {
 	}
 }
 
+if (signin) signin.addEventListener("submit", function () { event.preventDefault(); signInCheck(signin); });
 if (signup) signup.addEventListener("submit", function () { event.preventDefault(); signUpCheck(signup); });
 if (signUpConf) signUpConf.addEventListener("input", passwordCheck);

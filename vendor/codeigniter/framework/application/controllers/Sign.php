@@ -110,7 +110,8 @@ class Sign extends CI_Controller {
 
 		//echo ("<script>setTimeout(function(){history.go(-1);},3000);</script>");
 		
-		header('Location: '.$_SERVER['HTTP_REFERER']);
+		//header('Location: '.$_SERVER['HTTP_REFERER']);
+		header('Location: '.$this->input->post('http_referer'));
 	}
 
 	public function out()
