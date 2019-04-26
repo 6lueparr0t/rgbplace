@@ -118,7 +118,8 @@ define('REPLY_LIST_ROWS_LIMIT', 20);
 /* !!!!! if you modify, codeigniter/framework/assets/js/comm/src/0.js check !!!!! */
 
 //['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
-define('TYPE_LIST', ['#', 'notice', 'sponsor', 'best', 'trip', 'food', 'daily', 'play', 'news', 'dev', 'free']);
+// modify controllers/Api.php , assets/js/src/map/post.js
+define('TYPE_LIST', ['#', 'notice', 'event', 'best', 'trip', 'food', 'daily', 'play', 'news', 'dev', 'free']);
 
 define(
 	'LEVEL_BOUND'  ,
