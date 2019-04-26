@@ -1,27 +1,3 @@
-.sign-table {
-	display:table;
-	width:100%;
-
-	.sign-row {
-		display:table-row;
-
-		@media screen and ($width-name : $target-width) {
-			display : block;
-		}
-
-		.sign-cell {
-			display:table-cell;
-			text-align:center;
-			vertical-align:middle;
-
-			@media screen and ($width-name : $target-width) {
-				display : block;
-			}
-
-		}
-	}
-}
-
 .sign {
 	//margin-top: 2rem;
 
@@ -72,8 +48,8 @@
 		}
 
 		.check {
-			background: $oc-green-7 !important;
-			color: $oc-green-0 !important;
+			background: $oc-green-7;
+			color: $oc-green-0;
 			height: 2.4rem;
 			font-size: 1rem;
 			padding: .5rem;
@@ -83,8 +59,8 @@
 			width: 100%;
 
 			&:hover {
-				background: $oc-green-9 !important;
-				color: $oc-green-0 !important;
+				background: $oc-green-6;
+				color: $oc-green-0;
 			}
 			&:focus {
 				outline: none;
