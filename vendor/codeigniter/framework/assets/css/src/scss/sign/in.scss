@@ -43,9 +43,11 @@
 
 	#google {
 		top: .3rem;
-		border: 1px solid $oc-gray-9;
 		border-radius: .25rem;
 		background-color: #d95339;
+		&:hover {
+			background-color: #e95339;
+		}
 		color: #fff;
 		line-height: 1.4rem;
 		/* width: 100%; */

@@ -12,7 +12,7 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 <div class='sign-table'>
   <div class='sign-row'>
 	<div class='sign-cell'>
-		<div style='width: 100px;'></div>
+		<div class='space'></div>
 	</div>
 	<div class='sign-cell'>
 <?php
@@ -37,8 +37,8 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 
 ?>
     </div>
-	<div class='sign-cell'>
-		<div>or</div>
+	<div class='sign-cell divider'>
+		<div class='or'>or</div>
 	</div>
     <div class='sign-cell'>
 <?php
@@ -69,7 +69,7 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 ?>
     </div>
 	<div class='sign-cell'>
-		<div style='width: 100px;'></div>
+		<div class='space'></div>
 	</div>
   </div>
 </div>

@@ -283,4 +283,13 @@ body.dark {
 	blockquote {
 		color: $oc-gray-5;
 	}
+
+	.sign-table .sign-row .sign-cell.divider {
+
+		border : 1px solid $oc-gray-8;
+
+		& .or {
+			background-color : black;
+		}
+	}
 }

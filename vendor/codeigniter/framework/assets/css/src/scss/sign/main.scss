@@ -1,0 +1,59 @@
+.sign-table {
+	display:table;
+	width:100%;
+
+	.sign-row {
+		display:table-row;
+
+		@media screen and ($width-name : $target-width) {
+			display : block;
+		}
+
+		.sign-cell {
+			display:table-cell;
+			text-align:center;
+			vertical-align:middle;
+
+			@media screen and ($width-name : $target-width) {
+				display : block;
+			}
+
+			.space {
+				width:150px;
+			}
+
+			&.divider {
+				position: absolute;
+				border: 1px solid $oc-gray-2;
+				width: 0;
+				height: 400px;
+
+				@media screen and ($width-name : $target-width) {
+					position: initial;
+					width: 80%;
+					height: 0;
+					margin:2rem auto;
+				}
+
+				.or {
+					position: absolute;
+					top: 50%;
+					z-index: 5;
+					background: white;
+					transform: translateX(-8px);
+
+					@media screen and ($width-name : $target-width) {
+						background: white;
+						top: initial;
+						left: 48%;
+						transform: translateY(-9px);
+						width: 30px;
+						height: 20px;
+						text-align:center;
+					}
+				}
+			}
+
+		}
+	}
+}
