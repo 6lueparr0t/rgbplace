@@ -84,8 +84,48 @@
 				font-size: .8rem;
 
 				.bolder {
-					font-weight:bold;
+					font-weight:bolder;
 				}
+			}
+		}
+	}
+}
+
+#kakao {
+	width:100%;
+
+	top: .3rem;
+	border-radius: .25rem;
+	background-color: #f7e318;
+	&:hover {
+		background-color: #ffed31;
+	}
+	color:$oc-gray-9;
+	line-height: 1.4rem;
+	/* width: 100%; */
+	max-width: 300px;
+	text-align: center;
+	padding: .5rem 1rem;
+
+	@include user-select('none');
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	svg {
+		vertical-align:middle;
+		font-size: 1.4rem;
+	}
+
+	div {
+		&.buttonText {
+			display: inline-block;
+			margin-left: 1rem;
+			font-size: .8rem;
+
+			.bolder {
+				font-weight:bolder;
 			}
 		}
 	}

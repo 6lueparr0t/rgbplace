@@ -25,7 +25,7 @@ const attachSignin = element => {
 				mail : profile.getEmail()
 			}];
 
-			httpRequest('post', '/oauth/google', JSON.stringify(data), data => { location.reload(); }, data => { console.log(data); });
+			httpRequest('post', '/oauth/google', JSON.stringify(data), data => { location.replace(document.querySelector("input[name='http_referer']").value); }, data => { console.log(data); });
 
 		}, function(error) {
 			//console.log(JSON.stringify(error, undefined, 2));
@@ -46,7 +46,7 @@ const signOut = () => {
 		//mail : '6lueparr0t@gmail.com'
 	//}];
 
-	//httpRequest('post', '/api/google', JSON.stringify(data), data => { location.reload(); }, data => { console.log(data); });
+	//httpRequest('post', '/oauth/google', JSON.stringify(data), data => { location.reload(); }, data => { console.log(data); });
 
 //});
 

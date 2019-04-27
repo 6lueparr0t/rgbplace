@@ -54,6 +54,48 @@ class Api_model extends CI_Model {
 		}
 	}
 
+	public function kakaoSignUpAndLoginCheck ($data) {
+		//$data['uid'];
+		//$data['name'];
+		//$data['mail'];
+
+		$query = "SELECT user.*, conf.* FROM user_info user INNER JOIN user_conf conf ON user.uid = conf.uid WHERE user.uid = ? AND user.pswd = 'kakao' LIMIT 1";
+		$find = $this->db->query($query, $data['uid']);
+
+		if($find->num_rows() === 1) {
+
+			$ret = array(
+				'sn' => $find->row()->sn,
+				'uid' => $data['uid'],
+				'name' => $find->row()->name,
+			);
+
+			$atim = date("Y-m-d H:i:s");
+            $query = "UPDATE user_info SET fail = 0, atim = ? WHERE sn = ?";
+			$this->db->query($query, array($atim, $ret['sn']));
+
+			return $ret;
+		} else if($find->num_rows() === 0) {
+			// use user_info, user_config
+			
+			$query = "INSERT INTO user_info (uid, name, pswd) VALUES (?, ?, ?)";
+			$this->db->query($query, array($data['uid'], $data['name'], 'kakao') );
+
+			$ret = array(
+				'sn' => $this->db->insert_id(),
+				'uid' => $data['uid'],
+				'name' => $data['name'],
+			);
+
+			$query = "INSERT INTO user_conf (uid) VALUES (?)";
+			$this->db->query($query, $data['uid']);
+
+			return $ret;
+		} else {
+			return false;
+		}
+	}
+
 	public function searchUploadFile($file_name) {
 
 		$query = "SELECT file_name FROM total_upload WHERE sn = ? AND file_name = ? LIMIT 1";
