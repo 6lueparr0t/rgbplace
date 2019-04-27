@@ -38,7 +38,7 @@ if($this->session->userdata("admin") === false || $no) {
 			</div>
 	");
 
-	if( !in_array($pswd, array('google')) && !$no ) {
+	if( !in_array($pswd, OAUTH_LIST) && !$no ) {
 	echo ("
 			<div class='tr'>
 				<div class='th'>mail".(($sw=='enabled')?"<input type='button' class='check' id='check' name='check' value='check'/>":"")."
@@ -69,7 +69,7 @@ if($this->session->userdata("admin") === false || $no) {
 			</div>
 	");
 
-if($this->session->userdata("admin") === true || (!$no && !in_array($pswd, array('google'))) ) {
+if($this->session->userdata("admin") === true || (!$no && !in_array($pswd, OAUTH_LIST)) ) {
 	echo("
 			<div class='tr'>
 				<div class='th'>Pass word</div>

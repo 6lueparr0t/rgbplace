@@ -98,12 +98,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             echo "<a href='/profile?tab=info'>{$name}</a>";
 
-            if($this->CI->session->userdata('google')) {
-                echo "<div class='g-signin2' style='display:none;'></div>";
-                echo "<button onclick='signOut();document.location.href=\"/sign/out\";'> Sign out </button>";
-            } else {
-                echo "<button onclick='document.location.href=\"/sign/out\";'> Sign out </button>";
-            }
+			switch($this->CI->session->userdata('oauth')) {
+			case 'google' :
+				echo "<div class='g-signin2' style='display:none;'></div>";
+				echo "<button onclick='signOut();document.location.href=\"/sign/out\";'> Sign out </button>";
+				break;
+			case 'kakao' :
+			default :
+				echo "<button onclick='document.location.href=\"/sign/out\";'> Sign out </button>";
+				break;
+			}
 
             if($admin === TRUE) {
                 $apikey = $this->CI->base->setAdminApiKey($name);
