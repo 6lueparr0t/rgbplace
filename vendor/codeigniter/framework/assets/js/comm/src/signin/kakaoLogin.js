@@ -1,8 +1,7 @@
+Kakao.init('9135b26ea16bc5992bc76c59b9b32873');
 var kakao = document.getElementById('kakao');
 
 if(kakao) kakao.addEventListener("click", () => {
-	Kakao.init('9135b26ea16bc5992bc76c59b9b32873');
-
 	// 로그인 창을 띄웁니다.
 	Kakao.Auth.login({
 		success: function(authObj) {
