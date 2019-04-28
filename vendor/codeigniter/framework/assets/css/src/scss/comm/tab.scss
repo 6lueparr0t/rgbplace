@@ -9,6 +9,7 @@
 
 		@media screen and ($width-name : $target-width) {
 			padding: 1rem 0;
+			font-size:.4rem;
 		}
 
 		flex-grow:1;
@@ -30,7 +31,13 @@
 				font-family: 'Font Awesome 5 Free';
 				font-weight: 900;
 				content: "\f00c";
+				transform: scale(.8);
 				margin-left: 5px;
+				@media screen and ($width-name : $target-width) {
+					margin-left: 0;
+					transform: scale(.6);
+				}
+
 				position: absolute;
 			}
 
