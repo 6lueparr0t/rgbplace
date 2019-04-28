@@ -67,7 +67,6 @@ window.addEventListener('load', function () {
 				error();
 			};
 
-			request.onprogress = progress;
 			request.send(JSON.stringify(data));
 		} else {
 			console.log("callback 처리에 실패하였습니다.");
