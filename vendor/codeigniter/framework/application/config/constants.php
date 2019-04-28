@@ -150,4 +150,4 @@ define('SMTP_PORT', '2525');
 define('SMTP_USER', 'postmaster@rgbplace.com');
 define('SMTP_PASS', '6lueparr0t@gmail.com');
 
-define('OAUTH_LIST', ['google', 'kakao']);
+define('OAUTH_LIST', ['google', 'kakao', 'naver']);
