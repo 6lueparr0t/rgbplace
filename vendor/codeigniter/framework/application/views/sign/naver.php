@@ -57,7 +57,7 @@ window.addEventListener('load', function () {
 				if (this.status >= 200 && this.status < 400) {
 					ret = JSON.parse(this.response);
 					// Success!
-					location.replace('/');
+					location.replace('<?php echo $this->session->userdata('http_referer'); ?>');
 				} else {
 					// fail..
 					console.log(this);

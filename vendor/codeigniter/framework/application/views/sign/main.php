@@ -20,7 +20,7 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 <?php
 	// #### setting 'Sign In' Form
 	echo form_open('sign/in', ['class' => 'sign', 'name' => 'sign-in', 'id' => 'sign-in'])
-		."<input type='hidden' name='http_referer' value='".@(($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'/sign')."'/>"
+		."<input type='hidden' name='http_referer' value='".@(($this->session->userdata('http_referer'))?$this->session->userdata('http_referer'):'/sign')."'/>"
 		."<div class='info-box'><input class='info' name='uid' type='text' placeholder='ID' required='true' minlength=6 maxlength=100/></div>"
 		."<div class='info-box'><input class='info' name='pswd' type='password' placeholder='Password' required='true' minlength=10 maxlength=255 /></div>";
 
