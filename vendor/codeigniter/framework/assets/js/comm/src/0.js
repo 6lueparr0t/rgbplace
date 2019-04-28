@@ -15,11 +15,13 @@ window.addEventListener("drop",function(){ event.preventDefault(); });
 document.querySelector("body").addEventListener("click", function(event) {
 	let t = event.target;
 	//console.log(t);
-	if (t.className.search("menu") == -1 && t.className.search("switch") == -1 && t.className.search("status") == -1 && t.nodeName != 'I') {
-		let menu = document.querySelectorAll("input[class='menu']");
-		[].filter.call( menu, function( el ) {
-			el.checked = false;
-		});
+	if(typeof t.className.search === 'function') {
+		if (t.className.search("menu") == -1 && t.className.search("switch") == -1 && t.className.search("status") == -1 && t.nodeName != 'I') {
+			let menu = document.querySelectorAll("input[class='menu']");
+			[].filter.call( menu, function( el ) {
+				el.checked = false;
+			});
+		}
 	}
 });
 

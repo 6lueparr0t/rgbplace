@@ -64,13 +64,53 @@ class Oauth extends CI_Controller {
 				'name' => $name
 			);
 
-			if( $ret = $this->api->kakaoSignUpAndLoginCheck($param) ) {
+			if( $ret = $this->api->signUpAndLoginCheck($param, 'kakao') ) {
 				$kakaoUser = [
 					'sn'        => $ret['sn'],
 					'uid'       => $ret['uid'],
 					'name'      => $ret['name'],
 					'admin'     => FALSE,
 					'oauth'    => 'kakao',
+					'signed_in' => TRUE
+				];
+
+				$this->session->set_userdata($kakaoUser);
+
+				$ret = true;
+			}
+		}
+
+		echo json_encode($data);
+	}
+
+	public function naverLoginCallBack()
+	{
+		$this->root->view("sign/naverLoginCallBack");
+	}
+
+	public function naver()
+	{
+		$method = $this->input->method();
+
+		$ret = false;
+		if($method == 'post') {
+			$data = (array)json_decode($this->input->raw_input_stream)[0];
+
+			$uid = $data['uid'];
+			$name = $data['name'];
+
+			$param = array(
+				'uid' => $uid,
+				'name' => $name
+			);
+
+			if( $ret = $this->api->signUpAndLoginCheck($param, 'naver') ) {
+				$naverUser = [
+					'sn'        => $ret['sn'],
+					'uid'       => $ret['uid'],
+					'name'      => $ret['name'],
+					'admin'     => FALSE,
+					'oauth'    => 'naver',
 					'signed_in' => TRUE
 				];
 
