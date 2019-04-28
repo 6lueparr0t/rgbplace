@@ -114,7 +114,7 @@ class Oauth extends CI_Controller {
 					'signed_in' => TRUE
 				];
 
-				$this->session->set_userdata($kakaoUser);
+				$this->session->set_userdata($naverUser);
 
 				$ret = true;
 			}
