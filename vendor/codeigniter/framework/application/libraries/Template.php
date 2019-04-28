@@ -104,6 +104,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				echo "<button onclick='signOut();document.location.href=\"/sign/out\";'> Sign out </button>";
 				break;
 			case 'kakao' :
+			case 'naver' :
 			default :
 				echo "<button onclick='document.location.href=\"/sign/out\";'> Sign out </button>";
 				break;
