@@ -119,7 +119,7 @@ class Oauth extends CI_Controller {
 				$ret = true;
 			}
 		}
-
+		$this->session->unset_userdata('http_referer');
 		echo json_encode($data);
 	}
 

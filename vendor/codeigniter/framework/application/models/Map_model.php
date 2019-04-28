@@ -64,7 +64,7 @@ class Map_model extends CI_Model {
 
 		$table = $this->db->escape_str("map_{$map}_post");
 
-		$query = "SELECT * FROM {$table} where type='{$type}' and (sn is not null or keyword not like 'notice%') ORDER BY no desc LIMIT ".$this->db->escape_str($limit);
+		$query = "SELECT * FROM {$table} where type='{$type}' and (uid not like 'admin@%' or keyword not like 'notice%') ORDER BY no desc LIMIT ".$this->db->escape_str($limit);
 		if($this->db->simple_query($query)) {
 			$find = $this->db->query($query, $type);
 		} else {
@@ -116,7 +116,7 @@ class Map_model extends CI_Model {
 		$category = ['search', 'title', 'content', 'reply', 'name', 'keyword', 'ctim'];
 		$search_list = [];
 
-		$where = "post.type='".$this->db->escape_str($type)."' and (post.sn is not null or post.keyword not like 'notice%')";
+		$where = "post.type='".$this->db->escape_str($type)."' and (post.uid not like 'admin@%' or post.keyword not like 'notice%')";
 
 		for($i=0; $i<count($category); $i++) {
 			if(array_key_exists($category[$i], $search) && $search[$category[$i]]) {
@@ -173,7 +173,7 @@ class Map_model extends CI_Model {
 		if($search_list) {
 			$where .= " and (".implode(' or ', $search_list).")";
 		} else {
-			$query_for_notice = "SELECT post.* FROM {$table} where type='".$this->db->escape_str($type)."' and sn is null and keyword like 'notice%' ORDER BY no desc";
+			$query_for_notice = "SELECT post.* FROM {$table} where type='".$this->db->escape_str($type)."' and uid like 'admin@%' and keyword like 'notice%' ORDER BY no desc";
 			$notice = $this->db->query($query_for_notice);
 		}
 
