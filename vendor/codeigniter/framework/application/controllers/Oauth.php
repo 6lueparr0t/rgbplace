@@ -85,7 +85,7 @@ class Oauth extends CI_Controller {
 
 	public function naverLoginCallBack()
 	{
-		$this->root->view("sign/naverLoginCallBack");
+		$this->root->view('sign/naver');
 	}
 
 	public function naver()
