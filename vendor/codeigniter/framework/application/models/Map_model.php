@@ -677,7 +677,7 @@ class Map_model extends CI_Model {
 			)";
 
 			$values = array(
-				($this->session->userdata('admin')===true)?null:$this->session->userdata('sn'),
+				$this->session->userdata('sn'),
 				$this->session->userdata('uid'),
 				$this->session->userdata('name'),
 				$title,
@@ -801,6 +801,7 @@ class Map_model extends CI_Model {
 				'sn' => $post_before_update->sn,
 				'uid' => $post_before_update->uid
 			);
+
 			@$this->profile->update_info('post', $data);
 		}
 
