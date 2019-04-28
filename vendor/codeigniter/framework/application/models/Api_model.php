@@ -54,13 +54,13 @@ class Api_model extends CI_Model {
 		}
 	}
 
-	public function kakaoSignUpAndLoginCheck ($data) {
+	public function signUpAndLoginCheck ($data, $oauth = '') {
 		//$data['uid'];
 		//$data['name'];
 		//$data['mail'];
 
-		$query = "SELECT user.*, conf.* FROM user_info user INNER JOIN user_conf conf ON user.uid = conf.uid WHERE user.uid = ? AND user.pswd = 'kakao' LIMIT 1";
-		$find = $this->db->query($query, $data['uid']);
+		$query = "SELECT user.*, conf.* FROM user_info user INNER JOIN user_conf conf ON user.uid = conf.uid WHERE user.uid = ? AND user.pswd = ? LIMIT 1";
+		$find = $this->db->query($query, array($data['uid'], $oauth));
 
 		if($find->num_rows() === 1) {
 
@@ -79,7 +79,7 @@ class Api_model extends CI_Model {
 			// use user_info, user_config
 			
 			$query = "INSERT INTO user_info (uid, name, pswd) VALUES (?, ?, ?)";
-			$this->db->query($query, array($data['uid'], $data['name'], 'kakao') );
+			$this->db->query($query, array($data['uid'], $data['name'], $oauth) );
 
 			$ret = array(
 				'sn' => $this->db->insert_id(),

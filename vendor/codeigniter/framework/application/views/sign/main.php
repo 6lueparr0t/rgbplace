@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src='//www.google.com/recaptcha/api.js?render=6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM'></script>
 <script>
@@ -19,7 +20,7 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 <?php
 	// #### setting 'Sign In' Form
 	echo form_open('sign/in', ['class' => 'sign', 'name' => 'sign-in', 'id' => 'sign-in'])
-		."<input type='hidden' name='http_referer' value='{$_SERVER['HTTP_REFERER']}'/>"
+		."<input type='hidden' name='http_referer' value='".@(($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'/sign')."'/>"
 		."<div class='info-box'><input class='info' name='uid' type='text' placeholder='ID' required='true' minlength=6 maxlength=100/></div>"
 		."<div class='info-box'><input class='info' name='pswd' type='password' placeholder='Password' required='true' minlength=10 maxlength=255 /></div>";
 
@@ -35,9 +36,18 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 
 	// Kakao Sign-in Tag
 	echo '<div class="info-box">'
-		.'<div id="kakao" class="">'
+		.'<div id="kakao" class=" ">'
 		.'<svg preserveAspectRatio="xMidYMid meet" width="1em" height="1em" viewBox="0 0 200.000000 184.000000" ><g transform="translate(0,184) scale(0.1,-0.1)" fill="#000000" stroke="none"> <path d="M772 1806 c-346 -66 -618 -271 -720 -544 -19 -52 -26 -92 -30 -182 -5 -139 9 -207 70 -330 35 -69 60 -102 138 -180 58 -58 122 -110 163 -134 81 -46 79 -23 18 -248 -32 -122 -37 -150 -26 -164 7 -11 19 -15 29 -11 10 4 106 67 214 140 l197 133 70 -8 c223 -26 514 40 706 161 344 216 465 573 305 897 -80 160 -219 289 -410 380 -157 74 -259 96 -471 100 -125 2 -202 -1 -253 -10z"/> </g> </svg>'
 		.'<div class="buttonText">Sign in with <span class="bolder">KAKAO<span></div>'
+		.'</div>'
+		.'</div>';
+
+	// Naver Sign-in Tag
+	echo '<div class="info-box">'
+		.'<div id="naverIdLogin"></div>'
+		.'<div id="naver" class="">'
+		.'<svg preserveAspectRatio="xMidYMid meet" width="1em" height="1em" viewBox="0 0 510.000000 474.000000"><g transform="translate(0.000000,474.000000) scale(0.100000,-0.100000)" fill="#FFFFFF" stroke="none"> <path d="M0 2370 l0 -2370 920 0 920 0 2 1002 3 1001 714 -1001 714 -1002 914 0 913 0 0 2370 0 2370 -910 0 -910 0 -2 -1048 -3 -1047 -710 1017 c-390 560 -714 1031 -720 1048 l-9 30 -918 0 -918 0 0 -2370z"/> </g> </svg>'
+		.'<div class="buttonText">Sign in with <span class="bolder">Naver<span></div>'
 		.'</div>'
 		.'</div>';
 

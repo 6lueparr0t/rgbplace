@@ -130,3 +130,43 @@
 		}
 	}
 }
+
+#naver {
+	width:100%;
+
+	top: .3rem;
+	border-radius: .25rem;
+	background-color: #1ec800;
+	&:hover {
+		background-color: #20db00;
+	}
+	color:white;
+	line-height: 1.4rem;
+	/* width: 100%; */
+	max-width: 300px;
+	text-align: center;
+	padding: .5rem 1rem;
+
+	@include user-select('none');
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	svg {
+		vertical-align:middle;
+		font-size: 1.4rem;
+	}
+
+	div {
+		&.buttonText {
+			display: inline-block;
+			margin-left: 1.4rem;
+			font-size: .8rem;
+
+			.bolder {
+				font-weight:bolder;
+			}
+		}
+	}
+}
