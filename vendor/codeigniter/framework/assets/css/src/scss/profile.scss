@@ -43,6 +43,8 @@
 				@media screen and ($width-name : $target-width) {
 					padding:0 .4rem;
 					word-break: break-word;
+					line-height: 1rem;
+					font-size: .8rem;
 				}
 
 				text-align:right;
@@ -63,7 +65,7 @@
 				text-align:left;
 
 				@media screen and ($width-name : $target-width) {
-					padding: .2rem;
+					padding: .5rem .4rem;
 					word-break: break-word;
 				}
 
@@ -95,12 +97,17 @@
 						background:$oc-orange-0;
 					}
 
-					input {
+					& input {
 						border: none;
 						font-size: 1.2rem;
 						padding: .78rem 1rem;
 						font-family: "normal";
 						flex-grow:10;
+
+						@media screen and ($width-name : $target-width) {
+							width:100%;
+							padding: .5rem .4rem;
+						}
 
 						&[enabled] {
 							background:$oc-orange-0;
