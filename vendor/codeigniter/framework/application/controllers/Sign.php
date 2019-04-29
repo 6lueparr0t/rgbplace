@@ -14,7 +14,7 @@ class Sign extends CI_Controller {
 		if($this->session->userdata('signed_in')) {
 			redirect('/');
 		} else {
-			$this->session->set_userdata(array('http_referer' => (isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:null) );
+			$this->session->set_userdata(array('http_referer' => (isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:null) ));
 			//회원가입 임시 제한
 			$this->root->view("sign/main");
 		}
