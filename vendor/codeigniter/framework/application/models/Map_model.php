@@ -303,7 +303,7 @@ class Map_model extends CI_Model {
 
 			$toggle = "<div class='toggle'><span class='toggle-name'>{$row->name}</span> <span class='toggle-date'>{$date} {$time}</span></div>";
 
-			echo "<tr class='list-row ".(($is_notice===true)?"notice":null)."'>"
+			echo "<tr class='list-row".(($is_notice===true)?" notice":null).(($this->uri->segment(3, 0)==$no)?" active":null)."'>"
 				."<td class='no'>{$no}</td>"
 				."<td class='title'>"
 				.xss_clean($title)
@@ -434,7 +434,7 @@ class Map_model extends CI_Model {
 	 * Desc : get 'post'
 	 * ====================
 	 */
-	public function post ($map, $type, $num, &$pageName)
+	public function post ($map, $type, $num, &$pageName, &$keyword)
 	{
 		$data = [];
 
@@ -487,7 +487,9 @@ class Map_model extends CI_Model {
 		$no   = $find->row()->no;
 		$uid  = $find->row()->uid;
 		$sn   = $find->row()->sn;
+
 		$pageName = $title = xss_clean(htmlspecialchars_decode(stripslashes($find->row()->title)));
+		$keyword = explode('|', $find->row()->keyword);
 
 		/* $content grave .. */
 		//$content = strip_tags(htmlspecialchars_decode(stripslashes(preg_replace('/\\\n/','<br/>',$find->row()->content))), "<a><img><br><div><p><iframe>");
@@ -523,12 +525,14 @@ class Map_model extends CI_Model {
 			."</div>"
 			."<div id='post-content'>".$Parsedown->text($content)."</div>";
 
-		$ret .= "<div class='vote button-group'>"
-			."<span class='null'></span>"
-			."<div class='far fa-thumbs-up post-up {$activate} {$vote['up']}'> {$find->row()->up} </div>"
-			."<div class='far fa-thumbs-down post-down {$activate} {$vote['down']}'> {$find->row()->down} </div>"
-			."<span class='null'></span>"
-			."</div>";
+		if(array_search('no_vote', $keyword) === false) {
+			$ret .= "<div class='vote button-group'>"
+				."<span class='null'></span>"
+				."<div class='far fa-thumbs-up post-up {$activate} {$vote['up']}'> {$find->row()->up} </div>"
+				."<div class='far fa-thumbs-down post-down {$activate} {$vote['down']}'> {$find->row()->down} </div>"
+				."<span class='null'></span>"
+				."</div>";
+		}
 		$ret .= "</div>";
 
 		// permission check
@@ -647,7 +651,7 @@ class Map_model extends CI_Model {
 			//$tag[0] => array : [tag], $tag[1] => array : tag 
 			$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
-			preg_match_all("/#([^\s#]*)/m", strip_tags($data['content']), $keyword);
+			preg_match_all("/#([^\s#\\x5c\/]{1,})/m", strip_tags($data['content']), $keyword);
 			//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 			$keyword[1] = array_diff($keyword[1], array(''));
 			$keyword = implode('|',$keyword[1]);
@@ -728,7 +732,7 @@ class Map_model extends CI_Model {
 		//$tag[0] => array : [tag], $tag[1] => array : tag 
 		$tag = @($tag[1][0])?strtolower($tag[1][0]):"";
 
-		preg_match_all("/#([^\s#]{1,})/m", strip_tags($data['content']), $keyword);
+		preg_match_all('/#([^\s#\\x5c\/]{1,})/m', strip_tags($data['content']), $keyword);
 		//$keyworkd[0] => array : #keyword, $keyworkd[1] => array : keyword
 		$keyword[1] = array_diff($keyword[1], array(''));
 		$keyword = implode('|',$keyword[1]);

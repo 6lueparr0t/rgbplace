@@ -9,9 +9,7 @@
 </head>
 
 <body>
-
-	네이버 아이디로 로그인 중입니다 ..<br/>
-	Sign in with Naver ID ..
+	Loading ...
 
 	<!-- (1) LoginWithNaverId Javscript SDK -->
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>

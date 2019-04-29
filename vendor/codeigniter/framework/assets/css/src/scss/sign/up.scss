@@ -58,6 +58,8 @@
 			border: none;
 			width: 100%;
 
+			cursor:pointer;
+
 			&:hover {
 				background: $oc-blue-6;
 				color: $oc-green-0;
@@ -80,6 +82,7 @@
 		height: 2.4rem;
 		font-size: 1rem;
 		border-radius: .4rem;
+		cursor:pointer;
 
 		&:hover {
 			background: $oc-gray-7;
