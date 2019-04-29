@@ -43,9 +43,11 @@ class Oauth extends CI_Controller {
 
 				$ret = true;
 			}
-		}
 
-		echo json_encode($ret);
+			echo json_encode($ret);
+		} else {
+			redirect('/sign');
+		}
 	}
 
 	public function kakao()
@@ -78,9 +80,11 @@ class Oauth extends CI_Controller {
 
 				$ret = true;
 			}
-		}
 
-		echo json_encode($data);
+			echo json_encode($data);
+		} else {
+			redirect('/sign');
+		}
 	}
 
 	public function naverLoginCallBack()
@@ -118,9 +122,12 @@ class Oauth extends CI_Controller {
 
 				$ret = true;
 			}
+
+			$this->session->unset_userdata('http_referer');
+			echo json_encode($data);
+		} else {
+			redirect('/sign');
 		}
-		$this->session->unset_userdata('http_referer');
-		echo json_encode($data);
 	}
 
 }
