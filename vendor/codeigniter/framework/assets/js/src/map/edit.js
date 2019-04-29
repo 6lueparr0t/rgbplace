@@ -7,6 +7,7 @@ var tab = 'code';
 //var editor_position = document.querySelector('.CodeMirror-line');
 
 let title = document.querySelector('#edit-title');
+let edit_width = document.querySelector('.tab');
 let edit_content_code = document.querySelector('#edit-content-code');
 let edit_content_view = document.querySelector('#edit-content-view');
 
@@ -34,12 +35,12 @@ editor.on('scroll', (e) => {
 
 window.onresize = () => {
 	if(edit_content_view.classList.contains('none') === false) {
-		editor.setSize((title.clientWidth/2)+"px", "42rem");
-		edit_content_view.parentElement.style.width = (title.clientWidth/2)+"px";
+		editor.setSize((edit_width.clientWidth/2)+"px", "42rem");
+		edit_content_view.parentElement.style.width = (edit_width.clientWidth/2)+"px";
 		//console.log((title.clientWidth/2)+"px");
 	} else {
-		editor.setSize((title.clientWidth)+"px", "42rem");
-		edit_content_view.parentElement.style.width = (title.clientWidth)+"px";
+		editor.setSize("100%", "42rem");
+		edit_content_view.parentElement.style.width ="100%";
 		//console.log((title.clientWidth)+"px");
 	}
 };
