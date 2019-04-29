@@ -273,11 +273,6 @@ document.querySelector("body").addEventListener("click", function(event) {
 			let tooltip = t.nextSibling;
 			showTooltip(tooltip, 'fadeInOutUp');
 
-			//toast({
-				//type: 'success',
-				//title: "링크가 복사되었습니다.\nlink was copied."
-			//});
-
 			break;
 	}
 
@@ -344,7 +339,9 @@ function fail (data) {
 
 	let param = (no)?'&no='+no:'';
 
-	httpRequest('GET', '/api/request/reply?info='+__URL__+param, null, refresh.bind(no), fail.bind(this));
+	if(document.querySelector("#reply").className != 'no_reply') {
+		httpRequest('GET', '/api/request/reply?info='+__URL__+param, null, refresh.bind(no), fail.bind(this));
+	}
 
 }();
 

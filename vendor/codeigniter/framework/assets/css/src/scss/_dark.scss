@@ -164,11 +164,23 @@ body.dark {
 
 				& .title a, & .name {
 					color:$oc-red-8;
+
+					&:hover {
+						color:$oc-red-6;
+					}
+				}
+			}
+
+			&.active {
+				background-color:$oc-gray-9;
+
+				&:hover {
+					background-color:$oc-gray-8;
 				}
 			}
 
 			&:hover {
-				background: $oc-gray-8;
+				background: $oc-gray-9;
 			}
 
 			& .title a {

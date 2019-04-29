@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); $content = $this->map->post($map, $type, $num, $pageName); $this->root->start($pageName); $this->root->common(); ?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); $content = $this->map->post($map, $type, $num, $pageName, $keyword); $this->root->start($pageName); $this->root->common(); ?>
 
 <!-- map/post/<?=$map?>/<?=$type?>/<?=$num?> -->
 
@@ -15,12 +15,8 @@ if(!$content) {
 ?>
 </div>
 
-<div id='reply'>
+<div id='reply' class='<?php echo ((array_search('no_reply',$keyword))?'no_reply':null); ?>'>
 <div class='reply-root'>
-<?
-//$this->map->reply($map, $type, $num);
-echo $this->map->replyBox();
-?>
 </div>
 </div>
 

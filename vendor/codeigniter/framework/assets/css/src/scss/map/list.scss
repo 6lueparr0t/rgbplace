@@ -50,6 +50,18 @@
 
 				& .title a, & .name {
 					color:$oc-red-8;
+
+					&:hover {
+						color:$oc-red-6;
+					}
+				}
+			}
+
+			&.active {
+				background-color:$oc-gray-2;
+
+				&:hover {
+					background-color:$oc-gray-3;
 				}
 			}
 
