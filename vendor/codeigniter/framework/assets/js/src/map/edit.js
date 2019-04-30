@@ -39,8 +39,8 @@ window.onresize = () => {
 		edit_content_view.parentElement.style.width = (edit_width.clientWidth/2)+"px";
 		//console.log((title.clientWidth/2)+"px");
 	} else {
-		editor.setSize("100%", "42rem");
-		edit_content_view.parentElement.style.width ="100%";
+		editor.setSize(edit_width.clientWidth, "42rem");
+		edit_content_view.parentElement.style.width = edit_width.clientWidth;
 		//console.log((title.clientWidth)+"px");
 	}
 };
