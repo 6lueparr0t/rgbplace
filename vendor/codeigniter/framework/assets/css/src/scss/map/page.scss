@@ -19,6 +19,7 @@
 
 			@media screen and ($width-name : $target-width) {
 				font-size:1rem;
+				text-shadow: 2px 0 $oc-gray-7;
 			}
 		}
 
@@ -106,7 +107,6 @@
 			text-align       : center;
 			background-color : $oc-gray-8;
 			color            : white;
-			text-align       : center;
 			display          : block;
 			padding          : .5rem 0;
 			border-radius    : .25rem;

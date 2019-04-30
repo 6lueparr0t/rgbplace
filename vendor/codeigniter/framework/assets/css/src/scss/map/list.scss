@@ -48,6 +48,10 @@
 			&.notice {
 				color:$oc-red-8;
 
+				& .no {
+					font-size:.2rem;
+				}
+
 				& .title a, & .name {
 					color:$oc-red-8;
 
