@@ -525,7 +525,7 @@ class Map_model extends CI_Model {
 			."</div>"
 			."<div id='post-content'>".$Parsedown->text($content)."</div>";
 
-		if(array_search('no_vote', $keyword) === false) {
+		if(in_array('no_vote', $keyword) === false) {
 			$ret .= "<div class='vote button-group'>"
 				."<span class='null'></span>"
 				."<div class='far fa-thumbs-up post-up {$activate} {$vote['up']}'> {$find->row()->up} </div>"

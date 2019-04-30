@@ -15,7 +15,7 @@ if(!$content) {
 ?>
 </div>
 
-<div id='reply' class='<?php echo ((array_search('no_reply',$keyword))?'no_reply':null); ?>'>
+<div id='reply' class='<?php echo ((in_array('no_reply',$keyword))?'no_reply':null); ?>'>
 <div class='reply-root'>
 </div>
 </div>
