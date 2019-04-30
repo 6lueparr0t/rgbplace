@@ -121,10 +121,10 @@ class Map_model extends CI_Model {
 		for($i=0; $i<count($category); $i++) {
 			if(array_key_exists($category[$i], $search) && $search[$category[$i]]) {
 				$key = $category[$i];
-				$value = $this->db->escape_like_str($search[$key]);
+				$value = $this->db->escape_str($search[$key]);
 
 				if($key == 'search') {
-					$search['search'] = $this->db->escape_like_str($search['search']);
+					$search['search'] = $this->db->escape_str($search['search']);
 					$search_param[] = "{$key}={$value}";
 					continue;
 				}
