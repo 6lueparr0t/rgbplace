@@ -89,7 +89,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Sign in check
         if(!$sign) {
             //회원가입 임시 제한
-            echo "<button type='button' onClick=\"location.href='/sign'\"> Sign in </button>";
+			echo "<button id='sign-btn' type='button' onClick=\"location.href='/sign'\"> Sign in </button>";
 
         } else {
             // #### setting 'Sign Out'
