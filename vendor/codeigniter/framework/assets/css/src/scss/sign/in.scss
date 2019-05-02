@@ -3,7 +3,7 @@
 	top:.5rem;
 	height: 5rem;
 	text-align:right;
-	font-size:1.2rem;
+	font-size:1.4rem;
 
 	input[name='uid'] {
 		width:10%;	
@@ -27,14 +27,37 @@
 		}
 		color: $oc-gray-9;
 		border: none;
-		height: 1.5rem;
 		//padding:.6rem;
-		font-size: 1rem;
+		font-size: 1.2rem;
 		border-radius: .2rem;
 		cursor:pointer;
 
-		margin-left: .5rem;
+		//margin-left: .5rem;
 
+	}
+
+	.alert {
+		margin: 0 1.8rem 0 1rem;
+		font-size: 1.6rem;
+		cursor:pointer;
+
+		span {
+			@include user-select('none');
+			font-size: .8rem;
+			border-radius: 100%;
+			color: white;
+			padding: .2rem .4rem;
+			transform: translate(-8px,12px);
+			position: absolute;
+
+			&.show {
+				background: red;
+			}
+
+			&.nobody {
+				background: black;
+			}
+		}
 	}
 }
 

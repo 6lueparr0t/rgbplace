@@ -41,7 +41,7 @@ if($this->session->userdata("admin") === false || $no) {
 	if( !in_array($pswd, OAUTH_LIST) && !$no ) {
 	echo ("
 			<div class='tr'>
-				<div class='th'>mail".(($sw=='enabled')?"<input type='button' class='check' id='check' name='check' value='check'/>":"")."
+				<div class='th'>mail".(($sw=='enabled')?"<input type='button' class='check' id='check' name='check' value='check' />":"")."
 				</div>
 				<div class='td mail {$sw}'>
 					<input type='email' id='mail' name='mail' maxlength='400' value='{$mail}' data-restore='{$mail}' {$sw}/>
@@ -73,11 +73,11 @@ if($this->session->userdata("admin") === true || (!$no && !in_array($pswd, OAUTH
 	echo("
 			<div class='tr'>
 				<div class='th'>Pass word</div>
-				<div class='td pswd'><input type='password' id='pswd' maxlength='255' value=''/></div>
+				<div class='td pswd'><input type='password' id='pswd' maxlength='255' value='' autocomplete='new-password' /></div>
 			</div>
 			<div class='tr'>
 				<div class='th'>Confirm</div>
-				<div class='td conf'><input type='password' id='conf' maxlength='255' value=''/></div>
+				<div class='td conf'><input type='password' id='conf' maxlength='255' value='' autocomplete='new-password' /></div>
 			</div>
 	");
 }

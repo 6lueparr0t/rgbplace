@@ -9,12 +9,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Template {
 
-    protected $CI;
+	protected $CI;
+	//Doctrine ORM
+	protected $em;
 
     public function __construct()
     {
         $this->CI =& get_instance();
-        $this->CI->allow=array('');
+		$this->CI->allow=array('');
+		$this->CI->load->library('doctrine');
+		$this->em = $this->CI->doctrine->em;
     }
 
     public function sview($path, $data = [])
@@ -36,7 +40,6 @@ class Template {
 
     public function start($pageName = '')
     {
-
         $sign=$this->CI->session->userdata('signed_in');
         $admin=$this->CI->session->userdata('admin');
 
@@ -95,8 +98,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // #### setting 'Sign Out'
 
             $name = $this->CI->session->userdata('name');
+			$sn = $this->CI->session->userdata('sn');
+
+			if($admin === true) {
+				$msg = $this->em->find('Admin_info', $sn)->getMsgCount();
+			} else {
+				$msg = $this->em->find('User_info', $sn)->getMsgCount();
+			}
 
             echo "<a href='/profile?tab=info'>{$name}</a>";
+            echo "<div class='alert far fa-comment-dots' onclick='location.href=\"/profile?tab=message\"'>"."<span class='badge ".(($msg>0)?'show':'nobody')."'>{$msg}</span>"."</div>";
 
 			switch($this->CI->session->userdata('oauth')) {
 			case 'google' :
@@ -217,7 +228,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         echo "<label class='menu' id='menu-map' for='map-search'>"
-        ."<input class='menu' type='text' id='map-search-box' placeholder='Map Search'/><i class='fa fa-search' id='map-search-button'></i>"
+        ."<input class='menu' type='text' id='map-search-box' placeholder='Map Search' autocomplete='nope' /><i class='fa fa-search' id='map-search-button'></i>"
         ."<input class='menu' type='checkbox' id='map-search' />"
         ."<i class='open fa fa-caret-up'></i>"
         ."<i class='close fa fa-caret-down'></i>"

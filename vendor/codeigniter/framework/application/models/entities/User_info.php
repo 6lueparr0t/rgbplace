@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @Entity @Table(name="admin_info")
+ * @Entity @Table(name="user_info")
  **/
 
-class Admin_info {
+class User_info {
 
 	/** @Id @Column(type="integer") @GeneratedValue **/
     private $sn;
