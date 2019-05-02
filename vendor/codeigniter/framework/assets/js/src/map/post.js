@@ -226,7 +226,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			
 			//console.log(data);
 
-			httpRequest(mode, '/api/request/reply', JSON.stringify(data), success.bind(null), fail.bind(this));
+			httpRequest(mode, '/api/request/reply', JSON.stringify(data), success.bind(null), fail.bind(message));
 
 			break;
 
@@ -326,8 +326,10 @@ function refresh (data) {
 }
 
 function fail (data) {
-	let e = document.querySelector("#login");
+	let e = this;
+
 	//console.log(data.responseText);
+
 	e.setCustomValidity(data.responseText);
 	e.reportValidity();
 }
