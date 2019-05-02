@@ -1375,9 +1375,13 @@ class Map_model extends CI_Model {
 					where
 						reply.no=? ";
 
-		$ret = ceil($this->db->query($query, array($post_no, $no))->row()->idx/REPLY_LIST_ROWS_LIMIT);
+		$find = $this->db->query($query, array($post_no, $no));
 
-		return $ret;
+		if($find->num_rows() === 0) {
+			return false;
+		} else {
+			return ceil($find->row()->idx/REPLY_LIST_ROWS_LIMIT);
+		}
 	}
 
 	/*
