@@ -75,5 +75,5 @@
 	</div>
 </div>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_API_KEY; ?>&libraries=places&callback=googleMap"></script>
 <?php $this->root->end($path); ?>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_API_KEY; ?>&libraries=places&callback=googleMap"></script>
