@@ -154,7 +154,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		echo "<script src='https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js'></script>";
 
 		/* Google Sign-in js */
-		echo "<script src='https://apis.google.com/js/api:client.js'></script>"
+		echo "<script src='https://apis.google.com/js/api:client.js'></script>";
         echo "<script src='/assets/js/comm/common.min.js'></script>"
         ."<script src='/assets/js/dist/{$path}.min.js'></script>";
 
