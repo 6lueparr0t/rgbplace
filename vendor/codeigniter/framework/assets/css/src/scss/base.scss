@@ -49,3 +49,7 @@ blockquote {
 	color: $oc-gray-7;
 	border-left: 0.3rem solid $oc-red-9;
 }
+
+[contenteditable=true]:empty:before{
+    content: attr(placeholder);
+}

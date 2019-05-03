@@ -140,8 +140,8 @@ function successGeolocation(data) {
 	   ]
 	*/
 
-	document.querySelector('#geolocation-list-ko').innerHTML = getResultList(data.ko.results, 'geo');
-	document.querySelector('#geolocation-list-en').innerHTML = getResultList(data.en.results, 'geo');
+	document.querySelector('#geolocation-list-ko').innerHTML = getResultList(data.ko.results, 'geo', 'ko');
+	document.querySelector('#geolocation-list-en').innerHTML = getResultList(data.en.results, 'geo', 'en');
 
 	document.querySelector('#creation').classList.remove('none');
 
@@ -173,7 +173,7 @@ function successDestruction(data) {
 	httpRequest('GET', '/api/request/map?info='+__URL__, null, successNavigation, null);
 }
 
-function getResultList(data, type) {
+function getResultList(data, type, custom) {
 	let country, code;
 	let result = '';
 
@@ -216,7 +216,14 @@ function getResultList(data, type) {
 
 	}
 
-	result += '<div class=\'row\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'\' data-id=\'\' contenteditable=\'true\'>Custom Input ..</div>';
+	switch(custom) {
+		case 'ko' :
+			result += '<div class=\'row custom-'+custom+'\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'[]\' data-id=\'\' contenteditable=\'true\' placeholder=\'ex)대한민국/서울특별시/동작구/흑석동\'></div>';
+			break;
+		case 'en' :
+			result += '<div class=\'row custom-'+custom+'\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'[]\' data-id=\'\' contenteditable=\'true\' placeholder=\'ex)Heukseok-dong/Dongjak-gu/Seoul/South Korea/\'></div>';
+			break;
+	}
 
 	return result;
 }
@@ -248,6 +255,9 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 				element.classList.remove('selected');
 			});
 			t.classList.toggle('selected');
+
+			if(t.classList.value.includes('custom')) {
+			}
 			break;
 		case 'creation' :
 			tabChange(t);
@@ -310,9 +320,21 @@ document.querySelector(".admin").addEventListener("click", function(event) {
 			longitude = document.querySelector("#geolocation-submit-custom-lng").value;
 
 			document.querySelectorAll('.row.selected').forEach(function(element) {
+
 				country.push(element.dataset.country);
 				code = element.dataset.code;
-				address.push(JSON.parse(element.dataset.array));
+
+				switch (element.classList.item(1)) {
+					case 'custom-ko':
+						address.push(element.innerHTML.split('/').reverse());
+						break;
+					case 'custom-en':
+						address.push(element.innerHTML.split('/'));
+						break;
+					default:
+						address.push(JSON.parse(element.dataset.array));
+						break;
+				}
 			});
 
 			data = {
