@@ -218,10 +218,10 @@ function getResultList(data, type, custom) {
 
 	switch(custom) {
 		case 'ko' :
-			result += '<div class=\'row custom-'+custom+'\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'[]\' data-id=\'\' contenteditable=\'true\' placeholder=\'ex)대한민국/서울특별시/동작구/흑석동\'></div>';
+			result += '<div class=\'row custom-'+custom+'\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'[]\' data-id=\'\' contenteditable=\'true\' placeholder=\'Custom Input .. ex) 대한민국/서울특별시/동작구/흑석동\'></div>';
 			break;
 		case 'en' :
-			result += '<div class=\'row custom-'+custom+'\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'[]\' data-id=\'\' contenteditable=\'true\' placeholder=\'ex)Heukseok-dong/Dongjak-gu/Seoul/South Korea/\'></div>';
+			result += '<div class=\'row custom-'+custom+'\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'[]\' data-id=\'\' contenteditable=\'true\' placeholder=\'Custom Input .. ex) Heukseok-dong/Dongjak-gu/Seoul/South Korea/\'></div>';
 			break;
 	}
 
