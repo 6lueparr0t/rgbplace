@@ -216,6 +216,8 @@ function getResultList(data, type) {
 
 	}
 
+	result += '<div class=\'row\' data-country=\''+country+'\' data-code=\''+code+'\'  data-array=\'\' data-id=\'\' contenteditable=\'true\'>Custom Input ..</div>';
+
 	return result;
 }
 
