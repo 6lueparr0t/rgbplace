@@ -101,11 +101,23 @@
 			}
 
 			&.reply-up {
-				color:$oc-red-6 !important;
+				color:$oc-red-6;
+
+				&:hover {
+					background-color:$oc-red-6;
+					color:white;
+					border: 1px solid $oc-red-9;
+				}
 			}
 
 			&.reply-down {
-				color:$oc-blue-6 !important;
+				color:$oc-blue-6;
+
+				&:hover {
+					background-color:$oc-blue-6;
+					color:white;
+					border: 1px solid $oc-blue-9;
+				}
 			}
 		}
 
