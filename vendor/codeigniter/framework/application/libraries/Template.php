@@ -111,8 +111,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 			switch($this->CI->session->userdata('oauth')) {
 			case 'google' :
-				echo "<div class='g-signin2' style='display:none;'></div>";
+				echo "<div id='googleSignOut' class='g-signin2' style='display:none;'></div>";
 				echo "<button onclick='signOut();document.location.href=\"/sign/out\";'> Sign out </button>";
+				/* Google Sign-in js */
+                echo "<script src='https://apis.google.com/js/api:client.js'></script>";
 				break;
 			case 'kakao' :
 			case 'naver' :
@@ -153,8 +155,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		//Include a polyfill for ES6 Promises (optional) for IE11
 		echo "<script src='https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js'></script>";
 
-		/* Google Sign-in js */
-		echo "<script src='https://apis.google.com/js/api:client.js'></script>";
         echo "<script src='/assets/js/comm/common.min.js'></script>"
         ."<script src='/assets/js/dist/{$path}.min.js'></script>";
 
