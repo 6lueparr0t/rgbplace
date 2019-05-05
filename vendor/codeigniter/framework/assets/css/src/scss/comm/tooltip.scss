@@ -7,10 +7,29 @@
 	border-radius: 6px;
 	z-index: 1;
 	position: absolute;
-	margin: .4rem -2.2rem;
+	margin: 1.2rem -2.2rem .4rem -2.2rem;
 	font-size: 1rem;
 	padding: .4rem !important;
-	margin-top: 1.2rem;
+
+	&.sign-in {
+		margin: 2.2rem -2.2rem .4rem -3.4rem;
+		padding: .2rem!important;
+		font-size: .6rem;
+
+		&:after {
+			content: "";
+			width: 0px;
+			height: 0px;
+			position: absolute;
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid $oc-gray-9;
+			right: 20%;
+			top: -20px;
+			border-radius: 50%;
+		}
+	}
 
 	&:after {
 		content: "";

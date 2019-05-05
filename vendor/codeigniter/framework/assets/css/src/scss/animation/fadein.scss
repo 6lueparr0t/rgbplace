@@ -75,3 +75,15 @@
 		margin-top:1.2rem;
 	}
 }
+
+@include keyframes(fadeInOutDownForSignIn) {
+	0%, 100% {
+		opacity: 0;
+		margin-top:1.2rem;
+	}
+
+	10%, 90% {
+		opacity: 1;
+		margin-top:2.2rem;
+	}
+}
