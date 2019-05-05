@@ -82,6 +82,10 @@
 			flex-grow: 2;
 			cursor:pointer;
 
+			@media screen and ($width-name : $target-width) {
+				padding: .2rem;
+			}
+
 			&.modify {
 				flex-grow: 1;
 			}
