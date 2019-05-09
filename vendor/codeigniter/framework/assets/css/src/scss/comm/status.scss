@@ -199,7 +199,7 @@
 	}
 
 	.type.daily {                                      
-		@include status-arrow ($oc-gray-7, $oc-indigo-3);
+		@include status-arrow ($oc-gray-7, $oc-indigo-4);
 		select {
 			color:black;
 		}
