@@ -195,17 +195,17 @@ class Map_model extends CI_Model {
 				."<th>Date</th>"
 			."</tr>";
 
-		if($find->num_rows() === 0) {
-			echo "<tr><td class='no-list' colspan=5>No List</td></tr>";
-		}
-
 		// title list
 		if(isset($notice)) {
 			@$this->list_row ($notice, $map, $param, $param2, true);
 		}
 
 		// title list
-		@$this->list_row ($find, $map, $param, $param2);
+		if($find->num_rows() === 0) {
+			echo "<tr><td class='no-list' colspan=5>No List</td></tr>";
+		} else {
+			@$this->list_row ($find, $map, $param, $param2);
+		}
 
 		// ****************
 		// button group TOP
