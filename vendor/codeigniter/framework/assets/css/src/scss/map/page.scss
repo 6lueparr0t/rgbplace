@@ -151,10 +151,14 @@
 						width: 4rem;
 					}
 
-					& td.reply.count {
-						a {
-							color:$oc-red-6 !important;
-							font-size: 0.8rem;
+					& td.reply {
+						white-space: nowrap;
+
+						&.count {
+							a {
+								color:$oc-red-6 !important;
+								font-size: 0.8rem;
+							}
 						}
 					}
 				}
@@ -247,10 +251,14 @@
 								width: 4rem;
 							}
 
-							& td.reply.count {
-								a {
-									color:$oc-red-6 !important;
-									font-size: 0.8rem;
+							& td.reply {
+								white-space: nowrap;
+						
+								&.count {
+									a {
+										color:$oc-red-6 !important;
+										font-size: 0.8rem;
+									}
 								}
 							}
 						}
