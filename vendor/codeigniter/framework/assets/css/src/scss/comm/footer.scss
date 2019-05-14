@@ -12,19 +12,28 @@
 		font-size:1rem;
 		font-weight:bold;
 
-		a.page {
-			color:$oc-blue-4;
+		a.mail {
+			color:$oc-red-5;
 
 			&:hover {
-				color:$oc-blue-2;
+				color:$oc-red-4;
+			}
+			
+		}
+		
+		a.git {
+			color:$oc-green-6;
+
+			&:hover {
+				color:$oc-green-4;
 			}
 		}
 
-		a.mail {
-			color:$oc-red-7;
+		a.blog {
+			color:$oc-blue-5;
 
 			&:hover {
-				color:$oc-red-5;
+				color:$oc-blue-4;
 			}
 		}
 	}

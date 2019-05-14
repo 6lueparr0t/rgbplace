@@ -162,7 +162,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         echo "<div id='footer'>"
         ."Suggestion"
         ."<div class='link'>"
-        ."<a class='page' href='http://git.rgbplace.com' target='_blank'>page</a> / ".safe_mailto('admin@rgbplace.com', 'mail', array('class'=>'mail'))
+        .safe_mailto('admin@rgbplace.com', 'mail', array('class'=>'mail'))." / <a class='git' href='http://git.rgbplace.com'>git</a> / <a class='blog' href='https://blog.rgbplace.com'>blog</a>"
         ."</div>"
         ."</div>";
 
