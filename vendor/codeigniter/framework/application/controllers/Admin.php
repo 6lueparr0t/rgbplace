@@ -113,6 +113,11 @@ class Admin extends CI_Controller {
 		$this->root->sview('admin/example/generate_hash', $data);
 	}
 
+	public function db_password()
+	{
+		$this->root->sview('admin/example/db_password');
+	}
+
 	public function restful()
 	{
 		$this->root->sview("admin/example/restful");

@@ -151,3 +151,10 @@ define('SMTP_USER', 'postmaster@rgbplace.com');
 define('SMTP_PASS', '6lueparr0t@gmail.com');
 
 define('OAUTH_LIST', ['google', 'kakao', 'naver']);
+
+//DB PASSWORD
+define('DB_PASSWORD', hex2bin('99C93BAB786DDA9D2764D50FF06C7DE5A4215BB460ED592C04247ECB741BAB8A'));
+define('DB_METHOD', 'aes-128-gcm');
+define('DB_KEY', hex2bin('9671bd33cccfcf99726a0179725dcee6'));
+define('DB_IV', hex2bin('e164a5428083bc338ee3fe9c'));
+define('DB_TAG', hex2bin('0325f182361626a93361d5d77f1c1de5'));
