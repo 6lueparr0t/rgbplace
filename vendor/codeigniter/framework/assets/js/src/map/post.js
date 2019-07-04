@@ -212,6 +212,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			if(!message.value) {
 				message.setCustomValidity('😳💬');
 				message.reportValidity();
+				setTimeout(function () { this.setCustomValidity(""); }.bind(message), 3000);
 				break;
 			}
 
