@@ -212,7 +212,7 @@ document.querySelector("body").addEventListener("click", function(event) {
 			if(!message.value) {
 				message.setCustomValidity('😳💬');
 				message.reportValidity();
-				setTimeout(function () { this.setCustomValidity(""); }.bind(message), 3000);
+				setTimeout(function () { this.setCustomValidity(""); }.bind(message), 1000);
 				break;
 			}
 
@@ -333,6 +333,7 @@ function fail (data) {
 
 	e.setCustomValidity(data.responseText);
 	e.reportValidity();
+	setTimeout(function () { this.setCustomValidity(""); }.bind(e), 1000);
 }
 
 //when start, get reply
