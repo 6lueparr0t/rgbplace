@@ -262,7 +262,8 @@ function addFile(data) {
 					tag.setAttribute('alt', value['client_name']);
 
 					//str = "<img style='max-width:100%;' src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
-					str = "!["+value['client_name']+"]("+value['default_path']+value['file_name']+")";
+					//str = "!["+value['client_name']+"]("+value['default_path']+value['file_name']+")";
+					str = "<img src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"' width='100%' height='100%' />";
 					break;
 				case 'audio' :
 					tag = document.createElement('AUDIO');

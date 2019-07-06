@@ -61,6 +61,10 @@
 				width: calc(100% - 2.2rem);
 
 				font-size:1.2rem;
+
+				img {
+					max-width:100%;
+				}
 			}
 		}
 	}
