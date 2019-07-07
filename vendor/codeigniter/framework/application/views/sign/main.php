@@ -26,7 +26,7 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 		."<div class='info-box'><input class='info' name='uid' type='text' placeholder='ID' required='true' minlength=6 maxlength=100/></div>"
 		."<div class='info-box'><input class='info' name='pswd' type='password' placeholder='Password' required='true' minlength=10 maxlength=255 /></div>";
 
-	echo "<div class='info-box'><button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign in </button></div>";
+	echo "<div class='info-box'><button type='submit' id='login' onclick='this.setCustomValidity(\"\")'> <i class='fas fa-sign-in-alt'></i> Sign in </button><a href='/sign/find'>Forgot Your Password ?</a></div>";
 
 	// Google Sign-in Tag
 	echo '<div class="info-box"><div id="gSignInWrapper">'
@@ -75,7 +75,7 @@ grecaptcha.execute('6LftwYcUAAAAAMPx9v768MNJyjbkcBEM36o6J0sM', {action: 'homepag
 
 	echo "<div class='info-box'>"
 		."<input class='check' name='check' type='button' value='send mail code' onclick='sendCode();'/>"
-		."<input class='info none' name='code' type='text' placeholder='Mail Auth-Code - 60:00' required='true' minlength=6 maxlength=6 pattern='^.{1,6}[0-9]+' title='숫자만 입력 가능합니다.' />"
+		."<input class='info' name='code' type='text' placeholder='Auth-Code 60:00' required='true' minlength=6 maxlength=6 pattern='^.{1,6}[0-9]+' title='숫자만 입력 가능합니다.' />"
 		."</div>";
 
 

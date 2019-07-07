@@ -23,10 +23,14 @@
 			padding: .5rem;
 			border-radius: .4rem;
 			border: 1px solid black;
-			width: 100%;
+			width: 300px;
 
 			&:focus {
 				outline: none;
+			}
+
+			&[name='code'] {
+				width:50%;
 			}
 		}
 
@@ -56,7 +60,7 @@
 			//margin-left: 1rem;
 			border-radius: .4rem;
 			border: none;
-			width: 100%;
+			width: 50%;
 
 			cursor:pointer;
 

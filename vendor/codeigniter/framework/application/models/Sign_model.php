@@ -95,11 +95,12 @@ class Sign_model extends CI_Model {
 			
 			$query = "INSERT INTO user_info (uid, name, mail, pswd) VALUES (?, ?, ?, ?)";
 			$this->db->query($query, array($uid, $name, $mail, $pswd));
+			$sn = $this->db->insert_id();
 
 			$query = "INSERT INTO user_conf (uid) VALUES (?)";
 			$this->db->query($query, $uid);
 
-			return true;
+			return $sn;
 		}
 		
 		return false;
@@ -156,6 +157,8 @@ class Sign_model extends CI_Model {
 
 		if($find->num_rows() === 0) {
 			return true;
+		} else if($find->num_rows() === 1 && $data['find'] === true) {
+			return true;
 		}
 		
 		return false;
@@ -175,6 +178,26 @@ class Sign_model extends CI_Model {
 		$find = $this->db->query($query);
 
 		return $find->row()->cnt;
+	}
+
+	public function passwordChange($data)
+	{
+		$mail = $data['mail'];
+		$pswd = base64_encode(password_hash($data['pswd'], PASSWORD_DEFAULT, ['cost' => 12]));
+
+		$query = "SELECT sn, uid FROM user_info WHERE mail = ? LIMIT 1";
+		$find = $this->db->query($query, $mail);
+
+		if($find->num_rows() === 1) {
+			// use user_info, user_config
+
+			$query = "UPDATE user_info SET pswd = ? WHERE uid = ?";
+			$this->db->query($query, array($pswd, $find->row()->uid));
+
+			return $find->row()->sn;
+		}
+		
+		return false;
 	}
 
 	public function sessionChk()
