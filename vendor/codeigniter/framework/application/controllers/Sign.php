@@ -20,6 +20,17 @@ class Sign extends CI_Controller {
 		}
 	}
 
+	public function find()
+	{
+		if($this->session->userdata('signed_in')) {
+			redirect('/');
+		} else {
+			$this->session->set_userdata(array('http_referer' => (isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:null) ));
+			//회원가입 임시 제한
+			$this->root->view("sign/find");
+		}
+	}
+
 	public function in($check="")
 	{
 		if(!$this->input->post('uid') || !$this->input->post('pswd')) redirect("/");
@@ -207,13 +218,115 @@ class Sign extends CI_Controller {
 				$recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
 				$recaptcha = (array)json_decode($recaptcha);
 
-				$score = @isset($recaptcha['score'])?$recaptcha['score']:0;
+				$score = @isset($recaptcha['score'])?$recaptcha['score']:1;
 
 				// Take action based on the score returned:
 				if ($score >= 0.5) {
-					$this->sign->userMake($data);
+					$sn = $this->sign->userMake($data);
 				} else {
 					echo ("<script>alert('로봇인가요?\nAre you bot?')history.go(-1);</script>");
+					return false;
+				}
+			}
+		//validation === false
+		} else if($check === "check") {
+			$output['valid'] = false;
+			$output['msg'] = "잘못된 정보입니다.\ncheck your account.";
+
+			echo json_encode($output);
+
+			return false;
+		}
+
+		//세션 생성 후 종료, front에서 redirect 하여 갱신
+		//echo ("<script>setTimeout(function(){history.go(-1);},3000);</script>");
+
+		$user = [
+			'admin'=> FALSE,
+			'sn' => $sn,
+			'uid'  => $data['uid'],
+			'name' => $data['name'],
+			'stage' => '',
+			'darkmode'=> 0,
+			'signed_in' => TRUE
+		];
+
+		$this->session->set_userdata($user);
+
+		redirect($this->input->server('http_referer'));
+	}
+
+	public function change($check="")
+	{
+		if (
+			!$this->input->post('mail')
+			|| !$this->input->post('pswd')
+			|| !$this->input->post('conf')
+		) redirect("/");
+
+		$config = [
+				[
+					'field' => 'mail',
+					'label' => 'mail',
+					'rules' => 'trim|callback_is_space|min_length[2]|max_length[255]|required'
+				],
+				[
+					'field' => 'pswd',
+					'label' => 'PassWord',
+					'rules' => 'trim|min_length[10]|max_length[255]|required',
+					'errors' => [
+						'required' => 'You must provide a %s.',
+					]
+				],
+				[
+					'field' => 'conf',
+					'label' => 'Confirm Password',
+					'rules' => 'trim|min_length[10]|max_length[255]|required|matches[pswd]'
+				]
+			];
+
+		//uid, pswd 검증 코드
+		$this->form_validation->set_rules($config);
+		$validation = $this->form_validation->run();
+
+		if ($validation) {
+
+			$data['mail']= $this->input->post('mail');
+			$data['code']= $this->input->post('code');
+
+		 	$data['pswd']= $this->input->post('pswd');
+			$data['conf']= $this->input->post('conf');
+
+			if ($check === "check") {
+				if ($this->session->tempdata('mail') != $data['mail'] || $this->session->tempdata('code') != $data['code']) {
+					$output['valid'] = false;
+					$output['msg'] = "인증된 메일과 코드를 확인해주세요.\nCheck your Auth-Mail and Auth-Code.";
+				} else {
+					$output['valid'] = true;
+					$output['msg'] = "";
+				}
+				echo json_encode($output);
+
+				return true;
+			}
+
+			if ($check === "") {
+				// Build POST request:
+				$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+				$recaptcha_secret = RECAPTCHA_SECRET;
+				$recaptcha_response = $this->input->post('recaptcha_response');
+
+				// Make and decode POST request:
+				$recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+				$recaptcha = (array)json_decode($recaptcha);
+
+				$score = @isset($recaptcha['score'])?$recaptcha['score']:1;
+
+				// Take action based on the score returned:
+				if ($score >= 0.5) {
+					$sn = $this->sign->passwordChange($data);
+				} else {
+					echo ("<script>$score alert('로봇인가요?\nAre you bot?')history.go(-1);</script>");
 					return false;
 				}
 			}

@@ -1,22 +1,22 @@
 "use strict";
 
-let signup = document.querySelector("#sign-up");
-let signUpConf = document.querySelector("#sign-up input[name='conf']");
-let signin = document.querySelector("#sign-in");
+let signChg = document.querySelector("#sign-change");
+let signChgConf = document.querySelector("#sign-change input[name='conf']");
 
-function signInCheck (recv) {
+function signChgCheck (recv) {
     let form = new FormData(recv);
 
     let request = new XMLHttpRequest();
     let data = "";
 
-    request.open('post', '/sign/in/check', true);
+    request.open('post', '/sign/change/check', true);
 
     request.onload = function() {
         if (this.status >= 200 && this.status < 400) {
             // Success!
             data = JSON.parse(this.response);
             if(data.valid) {
+				alert('변경 완료. password change success.');
                 recv.submit();
             } else {
                  alert(data.msg);
@@ -42,28 +42,8 @@ function signInCheck (recv) {
     request.send(form);
 }
 
-//window.addEventListener("beforeunload", onUnload);
-
-function signUpCheck (recv) {
-
-	let form = new FormData(recv);
-
-	httpRequest('POST', '/sign/up/check', form, successSignUp.bind(recv), null);
-}
-
-function successSignUp(data) {
-	// Success!
-	if(data.valid) {
-		//console.log('this.submit();');
-		if(confirm('계속 진행하시겠습니까? 진행 후 회원가입 및 로그인 처리가 완료됩니다.\nConfirm. if you can exit, sign up success')) this.submit();
-	} else {
-		alert(data.msg);
-	}
-	// console.log(data);
-}
-
 function passwordCheck () {
-    if (this.value != document.querySelector('#sign-up input[name=\'pswd\']').value) {
+    if (this.value != document.querySelector('#sign-change input[name=\'pswd\']').value) {
         this.setCustomValidity('패스워드를 확인해주세요.\nPlease Check your Password.');
     } else {
         this.setCustomValidity('');
@@ -86,7 +66,7 @@ function sendCode() {
 		return true;
 	}
 
-	let data = {'mail':mail};
+	let data = {'mail':mail, 'find':true};
 
 	if (!x) {
 
@@ -138,12 +118,12 @@ function sendCode() {
 					text: 'Please contact us. (admin@rgbplace.com)'
 				})
 
-			} else if(ret['send'] == 'already') {
+			} else {
 
 				Swal.fire({
 					type: 'info',
 					title: 'Send Failed',
-					text: 'Your Mail Already used.'
+					text: 'Not Found Your Mail Address.'
 				})
 			}
 
@@ -152,6 +132,5 @@ function sendCode() {
 	}
 }
 
-if (signin) signin.addEventListener("submit", function () { event.preventDefault(); signInCheck(signin); });
-if (signup) signup.addEventListener("submit", function () { event.preventDefault(); signUpCheck(signup); });
-if (signUpConf) signUpConf.addEventListener("input", passwordCheck);
+if (signChg) signChg.addEventListener("submit", function () { event.preventDefault(); signChgCheck(signChg); });
+if (signChgConf) signChgConf.addEventListener("input", passwordCheck);
