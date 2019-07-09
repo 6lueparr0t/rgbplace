@@ -20,19 +20,18 @@ const editor = CodeMirror.fromTextArea(document.querySelector('#edit-content-cod
 
 editor.on('cursorActivity', (e) => {
 	sync();
-	edit_content_view.scrollTo(0, editor.getCursor().line/editor.lineCount()*100);
+	edit_content_view.scrollTo(0, (editor.getCursor().line/editor.lineCount()) * edit_content_view.scrollHeight);
 	//document.querySelector('#edit-content-view div').children[editor.getCursor().line].scrollIntoView(false);
 });
 
+/*
 editor.on('scroll', (e) => {
 	let h = editor.getScrollInfo();
 	let per = (h.top / (h.height - h.clientHeight)) * 100;
 
-	//console.log((per/100) * (h.height - h.clientHeight));
-	//console.log((per/100)*(edit_content_view.scrollHeight));
-	//edit_content_view.scrollTo(0, (per/100)*(edit_content_view.height - edit_content_view.clientHeight));
 	edit_content_view.scrollTo(0, (per/100)*(edit_content_view.scrollHeight));
 });
+*/
 
 window.onresize = () => {
 	if(edit_content_view.classList.contains('none') === false) {
