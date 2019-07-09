@@ -20,6 +20,7 @@ const editor = CodeMirror.fromTextArea(document.querySelector('#edit-content-cod
 
 editor.on('cursorActivity', (e) => {
 	sync();
+	edit_content_view.scrollTo(0, editor.getCursor().line/editor.lineCount()*100);
 	//document.querySelector('#edit-content-view div').children[editor.getCursor().line].scrollIntoView(false);
 });
 
