@@ -99,19 +99,20 @@ func (c *Client) readPump() {
 		data := Data{}
 		json.Unmarshal([]byte(message), &data)
 		// if not broadcast (mode multi), add watcher(here) and send message c.hub.multicast (and modify hub.go)
-		if data.Key == "$GLY%P!DEyRa*fajGwS?<l3%|Il.1IlfQW" && data.Mode == "broad" {
-			message, _ := json.Marshal(data)
-			c.hub.broadcast <- message
-		}
-
-		if data.Key == "$GLY%P!DEyRa*fajGwS?<l3%|Il.1IlfQW" && data.Mode == "multi" {
-			if data.Act == "open" {
-				c.hub.watcher <- c
-				c.hub.target <- data.Info
-			} else {
+		if data.Key == "$GLY%P!DEyRa*fajGwS?<l3%|Il.1IlfQW" {
+			data.Key = ""
+			if data.Mode == "broad" {
 				message, _ := json.Marshal(data)
-				c.hub.multicast <- message
-				c.hub.target <- data.Info
+				c.hub.broadcast <- message
+			} else if data.Mode == "multi" {
+				if data.Act == "open" {
+					c.hub.watcher <- c
+					c.hub.target <- data.Info
+				} else {
+					message, _ := json.Marshal(data)
+					c.hub.multicast <- message
+					c.hub.target <- data.Info
+				}
 			}
 		}
 	}
