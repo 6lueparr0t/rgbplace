@@ -49,6 +49,8 @@ type Client struct {
 	send chan []byte
 
 	count chan []byte
+
+	ip string
 }
 
 // act : alert, noti
@@ -63,6 +65,7 @@ type Data struct {
     Act  string `json:"act"`
 	Mode string `json:"mode"`
 	Recv string `json:"recv"`
+	Info string `json:"info"`
 	Map  string `json:"map"`
 	Post string `json:"post"`
 	Msg  string `json:"msg"`
@@ -77,6 +80,7 @@ type Data struct {
 func (c *Client) readPump() {
 	defer func() {
 		c.hub.unregister <- c
+		c.hub.closer <- c
 		c.conn.Close()
 	}()
 	c.conn.SetReadLimit(maxMessageSize)
@@ -94,10 +98,22 @@ func (c *Client) readPump() {
 
 		data := Data{}
 		json.Unmarshal([]byte(message), &data)
+		// if not broadcast (mode multi), add watcher(here) and send message c.hub.multicast (and modify hub.go)
 		if data.Key == "$GLY%P!DEyRa*fajGwS?<l3%|Il.1IlfQW" {
 			data.Key = ""
-			message, _ := json.Marshal(data)
-			c.hub.broadcast <- message
+			if data.Mode == "broad" {
+				message, _ := json.Marshal(data)
+				c.hub.broadcast <- message
+			} else if data.Mode == "multi" {
+				if data.Act == "open" {
+					c.hub.watcher <- c
+					c.hub.target <- data.Info
+				} else {
+					message, _ := json.Marshal(data)
+					c.hub.multicast <- message
+					c.hub.target <- data.Info
+				}
+			}
 		}
 	}
 }
@@ -198,7 +214,7 @@ func serve(hub *Hub, w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256), count: make(chan []byte, 256)}
+	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256), count: make(chan []byte, 256), ip : r.RemoteAddr}
 	client.hub.register <- client
 
 	//go client.sendClients()
