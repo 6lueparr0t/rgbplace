@@ -24,7 +24,6 @@ database/tmp/*
 log/*
 
 # IDE Files
-#-------------------------
 /nbproject/
 .idea/*
 
@@ -34,3 +33,12 @@ log/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
+
+# Mac OS
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Dependency directories
+node_modules/
+jspm_packages/
