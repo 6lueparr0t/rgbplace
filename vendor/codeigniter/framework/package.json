@@ -17,7 +17,7 @@
     "gulp-sass": "^3.2.1",
     "gulp-sass-glob": "^1.1.0",
     "gulp-wait2": "^0.0.5",
-    "npm": "^6.10.0",
+    "npm": "^6.10.2",
     "open-color": "^1.7.0",
     "sweetalert2": "^7.33.1",
     "yargs": "^6.6.0"
