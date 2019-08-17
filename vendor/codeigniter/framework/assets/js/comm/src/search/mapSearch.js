@@ -88,7 +88,7 @@ if (mapSearchBox) mapSearchBox.addEventListener("keyup", function(e) {
 
 	// https://developer.mozilla.org/en-US/docs/Web/API/Document/keydown_event
 	//if( !(e.isComposing || e.keyCode === 229)) {
-		if( !(e.keyCode >= 37 && e.keyCode <= 40) && e.keyCode != 13 ) {
+		if( !(e.keyCode == 38 || e.keyCode == 40) && e.keyCode != 13 ) {
 			mapSearchToggle.checked = true;
 			mapSearch(this);
 			list = mapSearchResult.parentElement.firstChild.children;
@@ -111,8 +111,10 @@ if (mapSearchBox) mapSearchBox.addEventListener("keydown", function(e) {
 			list[seq].firstChild.className = "active";
 			break;
 		case 13:
-			if(list[seq].href !== undefined) {
+			try {
 				document.location.href = list[seq].href;
+			} catch (e) {
+				mapSearch(this);
 			}
 			break;
 	}
