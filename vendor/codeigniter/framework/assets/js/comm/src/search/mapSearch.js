@@ -86,12 +86,15 @@ if (mapSearchBox) mapSearchBox.addEventListener("keyup", function(e) {
 		mapSearchResult.innerHTML = "<a href='#'><li>No Results</li></a>";
 	}
 
-	if( !(e.keyCode >= 37 && e.keyCode <= 40) && e.keyCode != 13 ) {
-		mapSearchToggle.checked = true;
-		mapSearch(this);
-		list = mapSearchResult.parentElement.firstChild.children;
-		seq = -1;
-	}
+	// https://developer.mozilla.org/en-US/docs/Web/API/Document/keydown_event
+	//if( !(e.isComposing || e.keyCode === 229)) {
+		if( !(e.keyCode >= 37 && e.keyCode <= 40) && e.keyCode != 13 ) {
+			mapSearchToggle.checked = true;
+			mapSearch(this);
+			list = mapSearchResult.parentElement.firstChild.children;
+			seq = -1;
+		}
+	//}
 });
 
 if (mapSearchBox) mapSearchBox.addEventListener("keydown", function(e) {
@@ -108,7 +111,9 @@ if (mapSearchBox) mapSearchBox.addEventListener("keydown", function(e) {
 			list[seq].firstChild.className = "active";
 			break;
 		case 13:
-			document.location.href = list[seq].href;
+			if(list[seq].href !== undefined) {
+				document.location.href = list[seq].href;
+			}
 			break;
 	}
 
