@@ -87,25 +87,25 @@ if (mapSearchBox) mapSearchBox.addEventListener("keyup", function(e) {
 	}
 
 	// https://developer.mozilla.org/en-US/docs/Web/API/Document/keydown_event
-	if( !(e.isComposing || e.keyCode === 229)) {
+	//if( !(e.isComposing || e.keyCode === 229)) {
 		if( !(e.keyCode >= 37 && e.keyCode <= 40) && e.keyCode != 13 ) {
 			mapSearchToggle.checked = true;
 			mapSearch(this);
 			list = mapSearchResult.parentElement.firstChild.children;
 			seq = -1;
 		}
-	}
+	//}
 });
 
 if (mapSearchBox) mapSearchBox.addEventListener("keydown", function(e) {
 
 	switch (e.keyCode) {
-		case 40: //down
+		case 38: //up
 			list[(seq<=0)?0:seq].firstChild.className = "";
 			seq = (seq <= 0)?list.length-1:seq-1;
 			list[seq].firstChild.className = "active";
 			break;
-		case 38: //up
+		case 40: //down
 			list[(seq<=0)?0:seq].firstChild.className = "";
 			seq = (seq >= list.length-1)?0:seq+1;
 			list[seq].firstChild.className = "active";
