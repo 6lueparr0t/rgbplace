@@ -504,8 +504,8 @@ class Map_model extends CI_Model {
 
 		$content = strip_tags(stripslashes($find->row()->content), "<a><img><video><audio><br><p><div><span><iframe><hr>");
 
-		$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
-		$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$2" alt="$1" />', $content); // <div>![...](...)</div> => <div><img ~~ /></div>
+		//$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
+		//$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$2" alt="$1" />', $content); // <div>![...](...)</div> => <div><img ~~ /></div>
 		$content = preg_replace('/(\r\n)?---\r\n/', '<hr>', $content); // --- => <hr>		
 		$content = preg_replace('/#([^\s#]{1,})/', '<code>#$1</code>', $content);
 
