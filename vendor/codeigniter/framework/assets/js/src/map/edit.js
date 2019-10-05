@@ -263,7 +263,7 @@ function addFile(data) {
 
 					//str = "<img style='max-width:100%;' src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"'/>";
 					//str = "!["+value['client_name']+"]("+value['default_path']+value['file_name']+")";
-					str = "<img src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"' width='100%' height='100%' />";
+					str = "<img src='"+value['default_path']+value['file_name']+"' alt='"+value['client_name']+"' />";
 					break;
 				case 'audio' :
 					tag = document.createElement('AUDIO');
@@ -343,7 +343,7 @@ function fail (data) {
 function sync(e) {
 	if(!edit_content_view.classList.contains('none')) {
 		//edit_content_view.innerHTML = editor.getValue().replace(/\n/g, '<br/>').replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />');
-		edit_content_view.innerHTML = marked(editor.getValue().replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />'));
+		edit_content_view.innerHTML = marked(editor.getValue().replace(/(?:<iframe[^>]*)(?:(?:\/>)|(?:>.*?<\/iframe>))/g, '<div class="iframe"></div>'));
 	}
 }
 
