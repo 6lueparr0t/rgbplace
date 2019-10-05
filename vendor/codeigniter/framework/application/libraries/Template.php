@@ -235,7 +235,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         ."<i class='close fa fa-caret-down'></i>"
         ."<ul>"
         ."<label class='menu' id='map-result' for=''>"
-        ."<a href='#'><li>No Results</li></a>"
+        ."<a href='/space/notice/1'><li>모든 지역 보기(View All List of Places)</li></a>"
         ."</label>"
         ."</ul>"
         ."</label>"

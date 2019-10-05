@@ -64,7 +64,16 @@
 
 				img {
 					max-width:100%;
+					margin: 0 auto;
 					display:block;
+				}
+
+				.iframe {
+					width: 300px;
+					background: $oc-gray-6;
+					padding: 6rem 0rem;
+					text-align: center;
+					color: white;
 				}
 			}
 		}

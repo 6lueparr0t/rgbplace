@@ -54,6 +54,7 @@ function mapSearch (recv) {
 				lists  = "<a href='#'><li>No Results</li></a>";
 			}
 
+			lists  += "<a href='/space/notice/1'><li>모든 지역 보기(View All List of Places)</li></a>";
 			//console.log(lists);
 			mapSearchResult.innerHTML = lists;
 		} else {
