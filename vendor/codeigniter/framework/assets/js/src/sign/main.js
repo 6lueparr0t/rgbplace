@@ -4,7 +4,30 @@ let signup = document.querySelector("#sign-up");
 let signUpConf = document.querySelector("#sign-up input[name='conf']");
 let signin = document.querySelector("#sign-in");
 
+var decodeEntities = (function() {
+	// this prevents any overhead from creating the object each time
+	var element = document.createElement('div');
+
+	function decodeHTMLEntities (str) {
+		if(str && typeof str === 'string') {
+			// strip script/html tags
+			str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+			str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+				element.innerHTML = str;
+				str = element.textContent;
+				element.textContent = '';
+			}
+
+		return btoa(str);
+	}
+
+	return decodeHTMLEntities;
+})();
+
 function signInCheck (recv) {
+
+	let encryption = new Encryption();
+	recv.querySelector("input[name=pswd]").value = encryption.encrypt(recv.querySelector("input[name=pswd]").value, decodeEntities(__k__));
     let form = new FormData(recv);
 
     let request = new XMLHttpRequest();
@@ -19,7 +42,8 @@ function signInCheck (recv) {
             if(data.valid) {
                 recv.submit();
             } else {
-                 alert(data.msg);
+				alert(data.msg);
+				recv.querySelector("input[name=pswd]").value = "";
             }
             // console.log(data);
         } else {

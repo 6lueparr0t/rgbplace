@@ -44,7 +44,7 @@ class Sign extends CI_Controller {
 				[
 					'field' => 'pswd',
 					'label' => 'PassWord',
-					'rules' => 'trim|min_length[10]|max_length[255]|required',
+					'rules' => 'trim|min_length[10]|required',
 					'errors' => [
 						'required' => 'You must provide a %s.',
 					],

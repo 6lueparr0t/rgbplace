@@ -1,4 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start(); $this->root->common();?>
+
+<script src="/assets/ext/crypto-js.js"></script>
+<script src="/assets/ext/encryption.js"></script>
+
 <!-- /* Google Sign-in js */ -->
 <script src='https://apis.google.com/js/api:client.js'></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
