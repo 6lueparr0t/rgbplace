@@ -9,20 +9,72 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Sign_model extends CI_Model {
 
+	protected $encryptMethod = 'AES-256-CBC';
+
     public function __construct()
     {
         parent::__construct();
+	}
+
+	/**
+     * Get encrypt method length number (128, 192, 256).
+     *
+     * @return integer.
+     */
+    protected function encryptMethodLength()
+    {
+        $number = filter_var($this->encryptMethod, FILTER_SANITIZE_NUMBER_INT);
+        return intval(abs($number));
+    }// encryptMethodLength
+    /**
+     * Set encryption method.
+     *
+     * @link http://php.net/manual/en/function.openssl-get-cipher-methods.php Available methods.
+     * @param string $cipherMethod
+     */
+    public function setCipherMethod($cipherMethod)
+    {
+        $this->encryptMethod = $cipherMethod;
+    }// setCipherMethod
+	
+    /**
+     * Decrypt string.
+     *
+     * @link https://stackoverflow.com/questions/41222162/encrypt-in-php-openssl-and-decrypt-in-javascript-cryptojs Reference.
+     * @param string $encryptedString The encrypted string that is base64 encode.
+     * @param string $key The key.
+     * @return mixed Return original string value. Return null for failure get salt, iv.
+     */
+    public function decrypt($encryptedString, $key)
+    {
+        $json = json_decode(base64_decode($encryptedString), true);
+        try {
+            $salt = hex2bin($json["salt"]);
+            $iv = hex2bin($json["iv"]);
+        } catch (Exception $e) {
+            return null;
+        }
+        $cipherText = base64_decode($json['ciphertext']);
+        $iterations = intval(abs($json['iterations']));
+        if ($iterations <= 0) {
+            $iterations = 999;
+        }
+        $hashKey = hash_pbkdf2('sha512', $key, $salt, $iterations, ($this->encryptMethodLength() / 4));
+        unset($iterations, $json, $salt);
+        $decrypted= openssl_decrypt($cipherText , $this->encryptMethod, hex2bin($hashKey), OPENSSL_RAW_DATA, $iv);
+        unset($cipherText, $hashKey, $iv);
+        return $decrypted;
     }
 
 	public function userCheck($data)
 	{
 		$uid = $data['uid'];
-		$pswd= $data['pswd'];
+		$pswd= $this->decrypt($data['pswd'], base64_encode(CIPHER_KEY));
 
 		$query = "SELECT user.*, conf.* FROM user_info user INNER JOIN user_conf conf ON user.uid = conf.uid WHERE user.uid = ? AND user.fail < 20 LIMIT 1";
 		$find = $this->db->query($query, $uid);
 
-		if(password_verify($pswd,  base64_decode($find->row()->pswd))) {
+		if(password_verify($pswd,  @base64_decode($find->row()->pswd))) {
 			//fail count init
 			$atim = date("Y-m-d H:i:s");
 			$query = "UPDATE user_info SET fail = 0, atim = ? WHERE uid = ?";
@@ -51,14 +103,14 @@ class Sign_model extends CI_Model {
 	public function adminCheck($data)
 	{
 		$uid = explode("@", $data['uid']);
-		$pswd= $data['pswd'];
+		$pswd= $this->decrypt($data['pswd'], base64_encode(CIPHER_KEY));
 
 		$query = "SELECT * FROM admin_info WHERE uid = ? AND name = ? AND fail < 5 LIMIT 1";
 		$find = $this->db->query($query, array($uid[0], $uid[1]));
 
 		if($find->num_rows() === 0) return false;
 
-		if(password_verify($pswd, base64_decode($find->row()->pswd))) {
+		if(password_verify($pswd, @base64_decode($find->row()->pswd))) {
 			//fail count init
 			$atim = date("Y-m-d H:i:s");
 			$query = "UPDATE admin_info SET fail = 0, atim='{$atim}' WHERE uid = ? AND name = ?";
