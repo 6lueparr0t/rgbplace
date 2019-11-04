@@ -91,28 +91,6 @@ class Sign_model extends CI_Model {
 		return base64_encode(json_encode($output));
 	}// encrypt
 
-	/**
-	 * Get encrypt method length number (128, 192, 256).
-	 *
-	 * @return integer.
-	 */
-	protected function encryptMethodLength()
-	{
-		$number = filter_var($this->encryptMethod, FILTER_SANITIZE_NUMBER_INT);
-		return intval(abs($number));
-	}// encryptMethodLength
-
-	/**
-	 * Set encryption method.
-	 *
-	 * @link http://php.net/manual/en/function.openssl-get-cipher-methods.php Available methods.
-	 * @param string $cipherMethod
-	 */
-	public function setCipherMethod($cipherMethod)
-	{
-		$this->encryptMethod = $cipherMethod;
-	}// setCipherMethod
-
 	public function userCheck($data)
 	{
 		$uid = $data['uid'];
