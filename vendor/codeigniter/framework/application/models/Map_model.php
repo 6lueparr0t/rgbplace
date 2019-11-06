@@ -267,7 +267,7 @@ class Map_model extends CI_Model {
 				</ul>
 			</label>
 		</div>";
-		echo "<input type='search' id='search-input' value='".$this->input->get('search')."' placeholder='Search ..'/>";
+		echo "<input type='search' id='search-input' value='".htmlspecialchars($this->input->get('search'), ENT_QUOTES | ENT_HTML5)."' placeholder='Search ..'/>";
 		echo "<div id='search-button' class='fa fa-search'></div>";
 		echo "<span class='null'></span>";
 

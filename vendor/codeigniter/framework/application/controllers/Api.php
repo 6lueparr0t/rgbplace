@@ -47,7 +47,7 @@ class Api extends CI_Controller {
 	public function search() {
         if($this->input->get('keyword')) {
             $data   = ['keyword' => $this->input->get('keyword')];
-            $output = $this->base->getMap($data['keyword']);
+            $output = $this->base->getMap(htmlspecialchars($data['keyword'], ENT_QUOTES | ENT_HTML5));
         }
 
         if(empty($output)) $output = null;
