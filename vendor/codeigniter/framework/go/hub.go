@@ -2,6 +2,8 @@ package main
 
 import (
 	"strconv"
+	"strings"
+	//"log"
 )
 
 
@@ -22,7 +24,7 @@ type Hub struct {
 	unregister chan *Client
 
 	// Registered clients.
-	clients map[*Client]bool
+	clients map[*Client]string
 
 
 	// Watcher requests from the clients. (map & post)
@@ -45,7 +47,7 @@ func newHub() *Hub {
 
 		register:   make(chan *Client),
 		unregister: make(chan *Client),
-		clients:    make(map[*Client]bool),
+		clients:    make(map[*Client]string),
 
 		watcher:    make(chan *Client),
 		closer:     make(chan *Client),
@@ -58,13 +60,14 @@ func (h *Hub) run() {
 	for {
 		select {
 		case client := <-h.register:
-			h.clients[client] = true
+			//log.Println(unique(h.clients))
+			h.clients[client] = strings.Split(client.ip, ":")[0]
 			for client := range h.clients {
-				client.count <- []byte(`{"act":"noti", "mode":"count", "data":`+strconv.Itoa(len(h.clients))+`}`)
+				client.count <- []byte(`{"act":"noti", "mode":"count", "data":`+strconv.Itoa(len(unique(h.clients)))+`}`)
 			}
 		case client := <-h.unregister:
 			for client := range h.clients {
-				client.count <- []byte(`{"act":"noti", "mode":"count", "data":`+strconv.Itoa(len(h.clients)-1)+`}`)
+				client.count <- []byte(`{"act":"noti", "mode":"count", "data":`+strconv.Itoa(len(unique(h.clients))-1)+`}`)
 			}
 			if _, ok := h.clients[client]; ok {
 				delete(h.clients, client)
