@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); $content = $this->map->post($map, $type, $num, $pageName, $keyword); $this->root->start($pageName); $this->root->common(); ?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start($pageTitle); $this->root->common(); ?>
 
 <!-- map/post/<?=$map?>/<?=$type?>/<?=$num?> -->
 
@@ -6,12 +6,8 @@
 </div>
 
 <div id='post'>
-<?
-if(!$content) {
-	redirect("/{$map}/{$type}/list");
-} else {
-	echo $content;
-}
+<?php
+echo $content;
 ?>
 </div>
 
@@ -21,7 +17,7 @@ if(!$content) {
 </div>
 
 <div id='list'>
-<?
+<?php
 $page = $this->input->get('page', TRUE);
 $search  = $this->input->get('search', TRUE);
 
