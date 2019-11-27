@@ -6,7 +6,7 @@
 </div>
 
 <div id="list">
-<?
+<?php
 $page    = $this->input->get('page', TRUE);
 $search  = $this->input->get('search', TRUE);
 

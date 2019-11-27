@@ -10,7 +10,7 @@
 ?>
 	</div>
 	<div id='info-area' class='page none'>
-<?
+<?php
 $sw = ($no && $this->session->userdata("admin") == false)?'disabled':'enabled';
 echo("<div class='table'>");
 

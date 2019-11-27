@@ -25,7 +25,7 @@
   </div>
   
   <div class='type'> <!-- type start -->
-<?
+<?php
 
 $type = TYPE_LIST;
 

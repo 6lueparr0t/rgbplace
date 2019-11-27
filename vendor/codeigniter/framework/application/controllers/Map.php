@@ -73,9 +73,17 @@ class Map extends CI_Controller {
 		$data['type'] = strtolower($type);
 		$data['num' ] = $num;
 
-		$this->map->post_hit($data);
+		$data['content'] = $this->map->post($data['map'], $data['type'], $data['num'], $pageName, $keyword);
+		if(isset($data['content']) && $data['content'])  {
+			$this->map->post_hit($data);
 
-		$this->root->view("map/post", $data);
+			$data['pageTitle'] = $pageName;
+			$data['keyword'] = $keyword;
+
+			$this->root->view("map/post", $data);
+		} else {
+			redirect("/{$map}/{$type}/list");
+		}
 	}
 
 	public function edit($map, $type, $num = 0)
