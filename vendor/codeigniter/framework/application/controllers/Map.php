@@ -113,7 +113,7 @@ class Map extends CI_Controller {
 				//$data['mode'] = 'update';
 				$this->session->set_userdata(['mode' => 'put']);
 				$data['title'] = stripslashes($ret->row()->title);
-				$data['content'] = strip_tags(stripslashes($ret->row()->content), "<a><img><video><audio><br><p><div><span><iframe>");
+				$data['content'] = htmlspecialchars(stripslashes($ret->row()->content), ENT_QUOTES | ENT_HTML5);
 
 				$this->session->set_userdata('upload', $ret->row()->upload); 
 
