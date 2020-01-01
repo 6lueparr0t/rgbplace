@@ -348,15 +348,13 @@ class Profile_model extends CI_Model {
 				$tmp .= "<div class='td'>";
 				$tmp .= "<div class='img'>";
 				$tmp .= "<img src='/upload/{$row->file_name}' alt='{$row->client_name}' onclick='popup(\"/upload/{$row->file_name}\", \"{$row->client_name}\")' /><br/>";
-				$tmp .= "<i class='copy fas fa-code'>
-					<input style='display:none;' value='&lt;img src=\"".base_url()."upload/{$row->file_name}\" alt=\"{$row->client_name}\" /&gt;' />
-					<span class='tooltip' style='display:none;'>copied</span>
-					</i>";
+				$tmp .= "<i class='copy fas fa-code'>".
+					"<input style='display:none;' value='&lt;img src=\"".base_url()."upload/{$row->file_name}\" alt=\"{$row->client_name}\" /&gt;' />".
+					"</i>";
 				//<input style='display:none;' value='![{$row->client_name}][".base_url()."upload/{$row->file_name}]' />
-				$tmp .= "<i class='copy fas fa-link'>
-					<input style='display:none;' value='".base_url()."upload/{$row->file_name}' />
-					<span class='tooltip' style='display:none;'>copied</span>
-					</i>";
+				$tmp .= "<i class='copy fas fa-link'>".
+					"<input style='display:none;' value='".base_url()."upload/{$row->file_name}' />".
+					"</i>";
 				$tmp .= "</div>";
 				$tmp .= "<a href='/upload/{$row->file_name}' target='_blank'>{$row->client_name}</a><br/>";
 				$tmp .= "{$row->file_type}<br/>";

@@ -67,12 +67,12 @@
 @include keyframes(fadeInOutDown) {
 	0%, 100% {
 		opacity: 0;
-		margin-top:0rem;
+		margin-top:0;
 	}
 
 	10%, 90% {
 		opacity: 1;
-		margin-top:2.6rem;
+		margin-top:40px;
 	}
 }
 
