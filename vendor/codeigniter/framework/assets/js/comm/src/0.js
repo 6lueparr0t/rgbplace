@@ -7,7 +7,7 @@ let onUnload = function () {
 // ["127.0.0.1", "space", "best", "1"]
 var __URL__ = (window.location.hostname + window.location.pathname);
 var __URL_ARRAY__ = __URL__.split("/");
-var __REPLY_LIST_ROWS_LIMIT__ = 20;
+var __REPLY_LIST_ROWS_LIMIT__ = 40;
 var __k__ = (() => {
 	//<![CDATA[
 	let k = '';

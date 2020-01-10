@@ -114,7 +114,7 @@ define('LIST_ROWS_LIMIT', 20);
 define('REPLY_PAGINATION_COUNT', 9);
 
 //LIST_ROWS_LIMIT => MINIMUM VALUE : 1
-define('REPLY_LIST_ROWS_LIMIT', 20);
+define('REPLY_LIST_ROWS_LIMIT', 40);
 /* !!!!! if you modify, codeigniter/framework/assets/js/comm/src/0.js check !!!!! */
 
 //['best', 'free', 'info', 'photo', 'food', 'life', 'news', 'dev', 'public'];
