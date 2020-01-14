@@ -48,12 +48,15 @@ class Sign_model extends CI_Model {
      */
     public function decrypt($encryptedString, $key)
     {
-        $json = json_decode(base64_decode($encryptedString), true);
+		$json = json_decode(base64_decode($encryptedString), true);
+		if(!isset($json["salt"]) || !isset($json["iv"]) || !isset($json['ciphertext']) || !isset($json['iterations'])) {
+			return false;
+		}
         try {
             $salt = hex2bin($json["salt"]);
             $iv = hex2bin($json["iv"]);
         } catch (Exception $e) {
-            return null;
+            return false;
         }
         $cipherText = base64_decode($json['ciphertext']);
         $iterations = intval(abs($json['iterations']));
@@ -95,6 +98,7 @@ class Sign_model extends CI_Model {
 	{
 		$uid = $data['uid'];
 		$pswd= $this->decrypt($data['pswd'], base64_encode(CIPHER_KEY));
+		if(!$pswd) return false;
 
 		$query = "SELECT user.*, conf.* FROM user_info user INNER JOIN user_conf conf ON user.uid = conf.uid WHERE user.uid = ? AND user.fail < 20 LIMIT 1";
 		$find = $this->db->query($query, $uid);
