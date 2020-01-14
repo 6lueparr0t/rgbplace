@@ -59,7 +59,7 @@ class Api extends CI_Controller {
 		if($method == 'get') {
 			$data = $this->input->get();
 		} else {
-			$data = (array)json_decode($this->input->raw_input_stream)[0];
+			$data = json_decode($this->input->raw_input_stream, true)[0];
 		}
 
 		if(!$data) redirect("/");

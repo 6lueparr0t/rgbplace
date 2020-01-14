@@ -176,6 +176,6 @@ function sendCode() {
 	}
 }
 
-if (signin) signin.addEventListener("submit", function () { event.preventDefault(); signInCheck(signin); });
+if (signin) signin.addEventListener("submit", function () { event.preventDefault(); setTimeout(function() {signInCheck(signin);}, 500) });
 if (signup) signup.addEventListener("submit", function () { event.preventDefault(); signUpCheck(signup); });
 if (signUpConf) signUpConf.addEventListener("input", passwordCheck);
