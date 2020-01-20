@@ -44,6 +44,7 @@ class Template {
         $admin=$this->CI->session->userdata('admin');
         
         
+        
         /* ---------------------------------------------------------------------- */
         echo "<!DOCTYPE html>"
         ."<html lang='en'>"
