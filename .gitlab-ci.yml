@@ -3,6 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - echo "Deploy Start"
+    - echo "Deploy Start Test"
   tags:
     - deploy
