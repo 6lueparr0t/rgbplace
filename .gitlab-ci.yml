@@ -4,6 +4,7 @@ deploy-to-server:
   only:
     - master
   script:
+    - echo "Deploy Start"
     - cd /var/www/html
     - git add -A 
     - git stash
