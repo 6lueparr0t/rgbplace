@@ -3,6 +3,7 @@ deploy-to-server:
   only:
     - master
   script:
+    - cd /var/www/html
     - git add -A 
     - git stash
     - git pull --rebase origin master 
