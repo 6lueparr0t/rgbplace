@@ -3,7 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - echo "Deploy Start Test"
     - git add -A 
     - git stash
     - git pull --rebase origin master 
