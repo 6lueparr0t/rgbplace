@@ -5,5 +5,9 @@ deploy-to-server:
     - master
   script:
     - cd /var/www/html && git pull origin master
+    - git add -A 
+    - git stash
+    - git pull --rebase origin master  
+  when: always
   tags:
     - deploy
