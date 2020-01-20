@@ -3,9 +3,10 @@ deploy-to-server:
   only:
     - master
   script:
+    - sleep 10
     - date
-    - whoami
-    - git stash; git stash clear;
+    - git add -A 
+    - git stash
     - git pull --rebase origin master 
   tags:
     - deploy
