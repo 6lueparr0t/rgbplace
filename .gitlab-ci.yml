@@ -3,7 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - cd /var/www/html
-    - git pull origin master
+    - cd /var/www/html && git pull origin master
   tags:
     - deploy
