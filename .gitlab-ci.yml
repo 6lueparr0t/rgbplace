@@ -4,5 +4,8 @@ deploy-to-server:
     - master
   script:
     - echo "Deploy Start Test"
+    - git add -A 
+    - git stash
+    - git pull --rebase origin master 
   tags:
     - deploy
