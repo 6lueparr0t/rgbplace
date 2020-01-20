@@ -5,10 +5,10 @@ deploy-to-server:
     - master
   script:
     - echo "Deploy Start"
-    - cd /var/www/html
-    - git add -A 
-    - git stash
-    - git pull --rebase origin master  
+      #    - cd /var/www/html
+      #    - git add -A 
+      #    - git stash
+      #    - git pull --rebase origin master  
   when: always
   tags:
     - deploy
