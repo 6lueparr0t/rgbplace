@@ -3,6 +3,7 @@ deploy-to-server:
   only:
     - master
   script:
+    - echo "Deploy"
     - whoami
     - git stash; git stash clear;
     - git pull --rebase origin master 
