@@ -42,7 +42,9 @@ class Template {
     {
         $sign=$this->CI->session->userdata('signed_in');
         $admin=$this->CI->session->userdata('admin');
-
+        
+        
+        
         /* ---------------------------------------------------------------------- */
         echo "<!DOCTYPE html>"
         ."<html lang='en'>"
