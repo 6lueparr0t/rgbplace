@@ -5,8 +5,7 @@ deploy-to-server:
   script:
     - pwd
     - whoami
-    - git add -A 
-    - git stash
+    - git stash; git stash clear;
     - git pull --rebase origin master 
   tags:
     - deploy
