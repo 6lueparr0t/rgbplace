@@ -3,7 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - pwd
     - whoami
     - git stash; git stash clear;
     - git pull --rebase origin master 
