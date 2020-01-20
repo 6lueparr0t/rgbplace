@@ -3,6 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - echo "Hello, World!"
+    - cd /var/www/html && git pull origin master
   tags:
     - deploy
