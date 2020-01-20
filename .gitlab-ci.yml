@@ -3,13 +3,6 @@ deploy-to-server:
   only:
     - master
   script:
-    - sleep 10
     - date
-<<<<<<< HEAD
-=======
-    - git add -A 
-    - git stash
-    - git pull --rebase origin master 
->>>>>>> 1e7d5569e6ec1ae38cb07a1ab7c57aff2141b48f
   tags:
     - deploy
