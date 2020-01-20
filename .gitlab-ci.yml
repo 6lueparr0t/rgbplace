@@ -1,0 +1,9 @@
+deploy-to-server:
+  stage: deploy
+  only:
+    - master
+  script:
+    - cihome
+    - git pull origin master
+  tags:
+    - deploy
