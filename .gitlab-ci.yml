@@ -3,7 +3,7 @@ deploy-to-server:
   only:
     - master
   script:
-    - cihome
+    - cd /var/www/html
     - git pull origin master
   tags:
     - deploy
