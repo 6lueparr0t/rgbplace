@@ -509,7 +509,8 @@ class Map_model extends CI_Model {
 
 		//$content = preg_replace('/\[(.*)\]\((.*)\)/', '<a href="$2" target="_blank">$1</a>', $content);
 		//$content = preg_replace('/!\[(.*)\]\((.*)\)/', '<img src="$2" alt="$1" />', $content); // <div>![...](...)</div> => <div><img ~~ /></div>
-		$content = preg_replace('/(\r\n)?---\r\n/', '<hr>', $content); // --- => <hr>		
+		$content = preg_replace('/\n/i','<br/>', $content);
+		$content = preg_replace('/(\r\n)?---\r\n/', '<hr>', $content); // --- => <hr>
 		$content = preg_replace('/#([^\s#]{1,})/', '<code>#$1</code>', $content);
 
 		$ret .= "<div class='post-title'><a href='/{$map}/{$find->row()->type}/{$no}'>{$title}</a></div>";
