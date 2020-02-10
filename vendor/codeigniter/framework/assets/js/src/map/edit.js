@@ -343,7 +343,7 @@ function fail (data) {
 function sync(e) {
 	if(!edit_content_view.classList.contains('none')) {
 		//edit_content_view.innerHTML = editor.getValue().replace(/\n/g, '<br/>').replace(/!\[(.*)\]\((.*)\)/g, '<img src="$2" alt="$1" />');
-		edit_content_view.innerHTML = marked(editor.getValue().replace(/(?:<iframe[^>]*)(?:(?:\/>)|(?:>.*?<\/iframe>))/g, '<div class="iframe"></div>'));
+		edit_content_view.innerHTML = marked(editor.getValue().replace(/\n/g, '<br/>').replace(/(?:<iframe[^>]*)(?:(?:\/>)|(?:>.*?<\/iframe>))/g, '<div class="iframe"></div>'));
 	}
 }
 
