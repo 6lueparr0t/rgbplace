@@ -20,8 +20,13 @@ const editor = CodeMirror.fromTextArea(document.querySelector('#edit-content-cod
 
 editor.on('cursorActivity', (e) => {
 	sync();
-	edit_content_view.scrollTo(0, (editor.getCursor().line/editor.lineCount()) * edit_content_view.scrollHeight);
-	//document.querySelector('#edit-content-view div').children[editor.getCursor().line].scrollIntoView(false);
+	//
+	// image issue, comment out
+	//
+	//edit_content_view.scrollTo(0, (editor.getCursor().line/editor.lineCount()) * edit_content_view.scrollHeight);
+	//
+	// not use
+	////document.querySelector('#edit-content-view div').children[editor.getCursor().line].scrollIntoView(false);
 });
 
 /*

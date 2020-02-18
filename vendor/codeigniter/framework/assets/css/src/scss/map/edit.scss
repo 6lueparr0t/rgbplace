@@ -56,11 +56,15 @@
 				overflow:auto;
 				padding:1rem;
 				text-align:justify;
-				line-height: 1rem;
+				line-height: 1.4rem;
 				resize: both;
 				width: calc(100% - 2.2rem);
 
 				font-size:1.2rem;
+
+				* {
+					margin : 0;
+				}
 
 				img {
 					max-width:100%;
