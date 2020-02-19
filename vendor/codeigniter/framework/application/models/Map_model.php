@@ -535,8 +535,8 @@ class Map_model extends CI_Model {
 			."<div class='link'><span id='link-copy'>".base_url()."{$map}/{$no}</span><span class='tooltip post-link' style='display:none;'>copied</span></div>"
 			."</div>"
 			//."<div id='post-content'>".$Parsedown->text($content)."</div>"
-			."<div id='post-content hidden'>".$content."</div>"
-			."<div id='post-content marked'></div>";
+			."<div id='post-content' class='hidden'>".$content."</div>"
+			."<div id='post-content' class='marked'></div>";
 
 		if(in_array('no_vote', $keyword) === false) {
 			$ret .= "<div class='vote button-group'>"
