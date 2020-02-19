@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); $this->root->start($pageTitle); $this->root->common(); ?>
-
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <!-- map/post/<?=$map?>/<?=$type?>/<?=$num?> -->
 
 <div id="notice">

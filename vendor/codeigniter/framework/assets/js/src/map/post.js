@@ -347,5 +347,8 @@ function fail (data) {
 		httpRequest('GET', '/api/request/reply?info='+__URL__+param, null, refresh.bind(no), fail.bind(this));
 	}
 
+	document.querySelector(".post-content.marked").innerHTML =
+		marked(document.querySelector(".post-content.hidden").innerHTML.replace(/\n/g, '<br>'));
+
 }();
 
