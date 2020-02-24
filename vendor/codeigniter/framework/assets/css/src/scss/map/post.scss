@@ -88,8 +88,9 @@
 				display:none;
 			}
 
-			& * {
+			&.marked * {
 				max-width:100%;
+				margin:0 1rem;
 			}
 
 			& img {
