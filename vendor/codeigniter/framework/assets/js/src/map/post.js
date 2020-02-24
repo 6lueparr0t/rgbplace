@@ -348,7 +348,7 @@ function fail (data) {
 	}
 
 	document.querySelector("#post-content.marked").innerHTML =
-		marked(document.querySelector("#post-content.hidden").innerHTML.replace(/\n/g, '<br>'));
+		marked(document.querySelector("#post-content.hidden").innerHTML.replace(/\n/g, '<br>\n\r'));
 
 }();
 
