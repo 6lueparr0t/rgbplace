@@ -86,16 +86,19 @@
 				display:none;
 			}
 
-			&.marked * {
-				max-width:100%;
-				margin:1rem 0;
+			&.marked {
+				* {
+					max-width:100%;
+					margin:1rem 0;
+				}
+
+				img {
+					max-width:100%;
+					margin: 0 auto;
+					display: block;
+				}
 			}
 
-			& img {
-				max-width:100%;
-				margin: 0 auto;
-    			display: block;
-			}
 		}
 	}
 
