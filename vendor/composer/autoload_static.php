@@ -116,16 +116,6 @@ class ComposerStaticInit1530de62e14254406aa5d058ea96a133
         0 => __DIR__ . '/..' . '/codeigniter/framework/application/models/entities',
     );
 
-    public static $prefixesPsr0 = array (
-        'P' => 
-        array (
-            'Parsedown' => 
-            array (
-                0 => __DIR__ . '/..' . '/erusev/parsedown',
-            ),
-        ),
-    );
-
     public static $classMap = array (
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     );
@@ -136,7 +126,6 @@ class ComposerStaticInit1530de62e14254406aa5d058ea96a133
             $loader->prefixLengthsPsr4 = ComposerStaticInit1530de62e14254406aa5d058ea96a133::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit1530de62e14254406aa5d058ea96a133::$prefixDirsPsr4;
             $loader->fallbackDirsPsr4 = ComposerStaticInit1530de62e14254406aa5d058ea96a133::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1530de62e14254406aa5d058ea96a133::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit1530de62e14254406aa5d058ea96a133::$classMap;
 
         }, null, ClassLoader::class);
