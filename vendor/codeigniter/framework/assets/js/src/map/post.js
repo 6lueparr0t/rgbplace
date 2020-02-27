@@ -305,7 +305,7 @@ function successPostVote (data) {
 		document.querySelector(".post-"+this.act+".enable").innerHTML = " "+data+" ";
 		document.querySelector(".post-"+this.act+".enable").classList.toggle('active');
 
-		let type = ['trip', 'food', 'daily', 'play', 'romance', 'news', 'dev']
+		let type = ['free']
 		if(type.includes(__URL_ARRAY__[2]) && data>20 && this.act === 'up') {
 			alert('😎');
 			redirect(__URL_ARRAY__[3], 'best');
