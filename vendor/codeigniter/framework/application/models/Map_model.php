@@ -577,7 +577,7 @@ class Map_model extends CI_Model {
 		$sn = $this->session->userdata('sn');
 		$uid = $this->session->userdata('uid');
 
-		if( !@array_key_exists($data['map'].'_'.$no, $this->session->tempdata('view')) ) {
+		if( !is_null($this->session->tempdata('view')) && !@array_key_exists($data['map'].'_'.$no, $this->session->tempdata('view')) ) {
 			$update_table = $this->db->escape_str("map_{$data['map']}_post");
 			$update = "UPDATE {$update_table} SET hit = hit + 1  where no = ?";
 			$ret = $this->db->query($update, $no);
@@ -1162,7 +1162,7 @@ class Map_model extends CI_Model {
 		return $ret;
 	}
 
-	public function reply_count_update ($command='up', $info)
+	public function reply_count_update ($command='up', $info='')
 	{
 		$table = $this->db->escape_str("map_{$info[1]}_post");
 		$no = $info[3];
