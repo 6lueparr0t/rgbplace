@@ -30,8 +30,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 #$config['base_url'] = 'http://35.240.191.79/';
 #$config['base_url'] = 'http://35.243.77.252/';
 #$config['base_url'] = 'http://127.0.0.1:3000';
-$config['base_url'] = 'https://rgbplace.com';
-#$config['base_url'] = '';
+#$config['base_url'] = 'https://rgbplace.com';
+$config['base_url'] = 'http://local.rgbplace.com';
 
 /*
 |--------------------------------------------------------------------------
