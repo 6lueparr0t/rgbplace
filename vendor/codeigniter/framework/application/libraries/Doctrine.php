@@ -27,11 +27,11 @@ class Doctrine {
 
 		// Set up caches
 		$config = new Configuration;
-		$cache = new ArrayCache;
-		$config->setMetadataCacheImpl($cache);
+		//$cache = new ArrayCache;
+		//$config->setMetadataCacheImpl($cache);
 		$driverImpl = $config->newDefaultAnnotationDriver(array(APPPATH.'models/entity'));
 		$config->setMetadataDriverImpl($driverImpl);
-		$config->setQueryCacheImpl($cache);
+		//$config->setQueryCacheImpl($cache);
 
 		// Proxy configuration
 		$config->setProxyDir(APPPATH.'/models/proxies');
