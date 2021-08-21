@@ -1,8 +1,0 @@
-deploy-to-server:
-  stage: deploy
-  only:
-    - master
-  script:
-    - date
-  tags:
-    - deploy
