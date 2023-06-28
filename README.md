@@ -9,8 +9,8 @@
 - GulpJS 를 사용하여 Vanilla JS 와 Scss 로 프론트 설계 (초기에 리액트를 적용해보려고 했으나 필요성에 의문을 가짐)
 - OAuth 2.0 (네이버, 카카오, 구글) 로그인
 - 구글맵을 활용한 위치기반 서비스 제공 ~~하려고 했으나, 과금이 무서워 제한적 사용~~
-- Websocket 연동하여 실시간 접속 및 알림(미구현)
-- CodeMirror 를 사용하여 MarkDown 에디터 직접 구현 (velog 에서 아이디어 참고함)
+- Golang 으로 Websocket 제작, 실시간 접속(구현) 및 알림(부분구현)
+- CodeMirror 를 사용하여 MarkDown 에디터 직접 구현 (velog 아이디어 참고)
 - [push state](https://blog.rgbplace.com/321) 를 부분 적용함
 
 ### 작업 후기
