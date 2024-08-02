@@ -20,8 +20,8 @@
 
 - **스택**: Vanilla JS, Scss, GulpJS
 - **디자인**:
-  - Vanilla JS와 Scss 사용: 초기에는 React를 고려했으나, 프로젝트 규모 및 복잡성으로 인해 필요성이 낮다고 판단하여 Vanilla JS와 Scss로 설계
-  - 빌드 툴: GulpJS를 사용하여 빌드 및 배포 프로세스 자동화
+  - Vanilla JS와 Scss 사용
+  - GulpJS를 사용하여 빌드 및 배포 프로세스 자동화
 
 ### OAuth 2.0 로그인
 
@@ -43,7 +43,6 @@
 ### Markdown 에디터
 
 - **스택**: CodeMirror
-- **설명**: velog를 참고하여 Markdown 에디터를 직접 구현하여 사용자들이 포맷된 글을 작성할 수 있도록 함
 
 ### Push State
 
